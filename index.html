@@ -317,6 +317,39 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .rate-warn-lbl{font-family:var(--fm);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a5200;font-weight:500;margin-bottom:.4rem;}
 .rate-warn-msg{font-size:.85rem;color:#5a3c00;line-height:1.65;}
 .back-btn{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem 1rem;border:1.5px solid var(--rule);border-radius:6px;background:var(--white);color:var(--muted);font-family:var(--fm);font-size:.6rem;letter-spacing:.08em;cursor:pointer;transition:all .2s;text-transform:uppercase;}
+
+/* ── STYLED CHECKBOXES ── */
+.ack-wrap{display:flex;flex-direction:column;gap:.5rem;margin:1rem 0;}
+.ack-row{display:flex;align-items:flex-start;gap:.75rem;padding:.9rem 1.1rem;border:1.5px solid var(--rule);border-radius:8px;background:var(--white);cursor:pointer;transition:all .25s;}
+.ack-row:hover{border-color:var(--teal);background:var(--teal-light);}
+.ack-row.checked{border-color:var(--emerald);background:var(--emerald-light);}
+.ack-box{width:22px;height:22px;border-radius:5px;border:2px solid var(--rule);background:var(--white);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:all .2s;}
+.ack-row.checked .ack-box{background:var(--emerald);border-color:var(--emerald);}
+.ack-check-icon{display:none;color:var(--white);font-size:13px;font-weight:700;line-height:1;}
+.ack-row.checked .ack-check-icon{display:block;}
+.ack-text{font-size:.875rem;color:var(--ink);line-height:1.6;flex:1;}
+.ack-row.checked .ack-text{color:var(--emerald-dim);font-weight:500;}
+.ack-status{font-family:var(--fm);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;margin-top:.25rem;display:block;}
+.ack-row.checked .ack-status{color:var(--emerald-mid);}
+.ack-row:not(.checked) .ack-status{color:var(--muted);}
+
+/* ── LISTING REFERENCE PANEL ── */
+.lrp{background:var(--white);border:1.5px solid var(--teal-muted);border-radius:10px;overflow:hidden;margin:1rem 0 1.5rem;}
+.lrp-header{background:var(--teal-light);padding:.75rem 1.1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--teal-muted);}
+.lrp-title{font-family:var(--fm);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-dim);font-weight:500;}
+.lrp-platform{display:inline-flex;align-items:center;gap:.35rem;background:var(--teal);color:var(--white);font-family:var(--fm);font-size:.55rem;letter-spacing:.08em;padding:.2rem .6rem;border-radius:3px;}
+.lrp-toggle{font-family:var(--fm);font-size:.58rem;letter-spacing:.08em;color:var(--teal-dim);cursor:pointer;border:none;background:none;padding:.2rem .5rem;border-radius:3px;transition:all .15s;}
+.lrp-toggle:hover{background:var(--teal-muted);}
+.lrp-body{padding:1.1rem;}
+.lrp-open-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--midnight);color:var(--white);padding:.55rem 1.1rem;border-radius:6px;font-family:var(--fb);font-size:.8rem;font-weight:500;text-decoration:none;margin-bottom:1rem;transition:all .2s;}
+.lrp-open-btn:hover{background:var(--midnight-lt);transform:translateY(-1px);}
+.lrp-guide-title{font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-dim);margin-bottom:.6rem;display:block;}
+.lrp-fields{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;}
+@media(max-width:560px){.lrp-fields{grid-template-columns:1fr;}}
+.lrp-field{background:var(--slate-bg);border-radius:6px;padding:.65rem .85rem;}
+.lrp-field-name{font-family:var(--fm);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--midnight);font-weight:500;display:block;margin-bottom:.2rem;}
+.lrp-field-loc{font-size:.78rem;color:var(--muted);line-height:1.45;}
+.lrp-field-loc strong{color:var(--teal-dim);}
 .back-btn:hover{border-color:var(--midnight);color:var(--midnight);background:var(--slate-surface);}
 .gate-back-row{display:flex;align-items:center;margin-bottom:1.25rem;}
 .dl-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1.1rem;background:var(--emerald);color:var(--white);border:none;border-radius:6px;font-family:var(--fb);font-size:.78rem;font-weight:500;cursor:pointer;transition:all .2s;}
@@ -454,7 +487,16 @@ footer strong{color:rgba(220,232,235,1.0);}
         <div class="dr"></div>
         <div class="ds"><span class="dn">Section 6 of 6 — Data Accuracy Waiver</span><div class="dh">Your Responsibility for Input Accuracy</div><div class="db">The accuracy of this analysis depends entirely on the accuracy of the information you provide. If you enter incorrect, incomplete, or false information — whether intentionally or unintentionally — the analysis will produce inaccurate results. By accepting these terms, you acknowledge that the accuracy of your results is your responsibility. The developer and operator bear no liability for inaccuracies resulting from information you provided that was incorrect, incomplete, or false.</div></div>
       </div>
-      <label class="cl"><input type="checkbox" id="g1c" disabled onchange="updG1()"><span>I have read and understood all six sections. I confirm the property I am analyzing is in Miami-Dade County. I understand this tool produces educational estimates — not professional advice. I accept full responsibility for the accuracy of information I provide.</span></label>
+      <div class="ack-wrap">
+        <div class="ack-row" id="g1-ack-row" onclick="toggleAck('g1c','g1-ack-row',updG1)" style="pointer-events:none;opacity:.5;">
+          <div class="ack-box"><span class="ack-check-icon">✓</span></div>
+          <div class="ack-text">
+            I have read and understood all six sections. I confirm the property I am analyzing is in Miami-Dade County. I understand this tool produces educational estimates — not professional advice. I accept full responsibility for the accuracy of information I provide.
+            <span class="ack-status" id="g1-ack-status">Tap to accept</span>
+          </div>
+        </div>
+      </div>
+      <input type="checkbox" id="g1c" style="display:none;" onchange="updG1()">
       <button class="btn btn-tl btn-fw" id="g1b" disabled onclick="show('t')">I Accept — Continue to Tier Selection</button>
     </div>
   </div>
@@ -503,7 +545,39 @@ footer strong{color:rgba(220,232,235,1.0);}
       <div class="fs">
         <div class="fst">Property Information</div>
         <div class="fg">
-          <div class="ff ffu"><label>Property Address (Miami-Dade County Only)</label><input type="text" id="fa" placeholder="e.g. 452 SE 20th Dr, Homestead, FL 33033"></div>
+          <!-- LISTING REFERENCE INPUTS -->
+          <div class="ff ffu">
+            <label>Property Address (Miami-Dade County Only)</label>
+            <input type="text" id="fa" placeholder="e.g. 452 SE 20th Dr, Homestead, FL 33033">
+          </div>
+          <div class="ff">
+            <label>MLS Number (Optional)</label>
+            <input type="text" id="f-mls" placeholder="e.g. A11963558" oninput="updLRP()">
+            <div class="fn">Enter the MLS # from any listing platform to see a copy guide</div>
+          </div>
+          <div class="ff">
+            <label>Listing URL (Optional)</label>
+            <input type="text" id="f-url" placeholder="e.g. zillow.com/homes/..." oninput="updLRP()">
+            <div class="fn">Paste from Zillow, Redfin, Realtor.com, Homes.com, or Trulia</div>
+          </div>
+
+          <!-- LISTING REFERENCE PANEL -->
+          <div class="ff ffu" id="lrp-wrap" style="display:none;">
+            <div class="lrp" id="lrp">
+              <div class="lrp-header">
+                <div style="display:flex;align-items:center;gap:.6rem;">
+                  <span class="lrp-title">Listing Reference Guide</span>
+                  <span class="lrp-platform" id="lrp-platform">Detecting...</span>
+                </div>
+                <button class="lrp-toggle" onclick="toggleLRP()" id="lrp-toggle-btn">Hide Panel ▲</button>
+              </div>
+              <div id="lrp-body" class="lrp-body">
+                <div id="lrp-open-wrap"></div>
+                <span class="lrp-guide-title">Where to find each HomeTrue field on this listing:</span>
+                <div class="lrp-fields" id="lrp-fields"></div>
+              </div>
+            </div>
+          </div>
           <div class="ff"><label>Purchase Price ($)</label><input type="number" id="fp" placeholder="399000" min="50000"></div>
           <div class="ff"><label>Down Payment</label><select id="fd"><option value="">Select</option><option value="3">3% — Conventional</option><option value="3.5">3.5% — FHA</option><option value="5">5%</option><option value="10">10%</option><option value="20">20% — No PMI</option></select></div>
           <div class="ff"><label>Year Built</label><input type="number" id="fb2" placeholder="1995" min="1900" max="2026"></div>
@@ -552,7 +626,16 @@ footer strong{color:rgba(220,232,235,1.0);}
           <div id="ipb-s" style="display:none;margin-top:1rem;">
             <div class="fc" style="margin-bottom:.6rem;"><strong>Scroll through the full acknowledgment to accept:</strong></div>
             <div class="pbs" id="pbb" onscroll="chkPB()">You have indicated that you do not have a confirmed homeowners insurance quote for this property. Without a confirmed quote, the insurance component of this analysis is an estimate only. In the current South Florida insurance market, estimates can differ from actual quotes by $200 to $400 per month. This represents a potential variance of $2,400 to $4,800 per year in your actual annual housing cost. This variance is material and may significantly affect your affordability assessment. By accepting this acknowledgment, you confirm you understand the insurance figure is an estimate, that it may be materially incorrect, and that you will obtain an actual quote from a Florida-licensed independent broker before making any financial commitment.</div>
-            <label class="cl"><input type="checkbox" id="pbc" disabled onchange="updIBtn()"><span>I understand the insurance estimate may differ from my actual quote by $200–$400/month. I will obtain an actual quote before any financial commitment.</span></label>
+            <div class="ack-wrap">
+              <div class="ack-row" id="pb-ack-row" onclick="toggleAck('pbc','pb-ack-row',updIBtn)" style="pointer-events:none;opacity:.5;" id="pb-ack-row">
+                <div class="ack-box"><span class="ack-check-icon">✓</span></div>
+                <div class="ack-text">
+                  I understand the insurance estimate may differ from my actual quote by $200–$400/month. I will obtain an actual quote before any financial commitment.
+                  <span class="ack-status" id="pb-ack-status">Scroll through the acknowledgment above to unlock</span>
+                </div>
+              </div>
+            </div>
+            <input type="checkbox" id="pbc" style="display:none;" onchange="updIBtn()">
           </div>
         </div>
         <div id="it3" style="display:none;"><div class="ff"><label>Confirmed Monthly Insurance Quote ($) — Required at Tier 3</label><input type="number" id="fit3" placeholder="285" min="50"><div class="fn">Confirmed quote required. No estimate at Tier 3.</div></div></div>
@@ -586,7 +669,16 @@ footer strong{color:rgba(220,232,235,1.0);}
       <h1 class="gt">Your analysis is ready.<br>One final confirmation.</h1>
       <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.5rem;">Review the five confirmations before your analysis is released.</p>
       <div id="g3c"></div>
-      <label class="cl"><input type="checkbox" id="g3cb" onchange="updG3()"><span>I confirm all five statements above. I understand my tier, accuracy level, and which inputs are estimated. I accept this as an educational estimate — not professional financial advice. I am ready to receive my analysis.</span></label>
+      <div class="ack-wrap">
+        <div class="ack-row" id="g3-ack-row" onclick="toggleAck('g3cb','g3-ack-row',updG3)">
+          <div class="ack-box"><span class="ack-check-icon">✓</span></div>
+          <div class="ack-text">
+            I confirm all five statements above. I understand my tier, accuracy level, and which inputs are estimated. I accept this as an educational estimate — not professional financial advice. I am ready to receive my analysis.
+            <span class="ack-status" id="g3-ack-status">Tap to confirm</span>
+          </div>
+        </div>
+      </div>
+      <input type="checkbox" id="g3cb" style="display:none;" onchange="updG3()">
       <button class="btn btn-em btn-fw" id="g3b" disabled onclick="genAnalysis()">I Accept — Generate My Analysis</button>
     </div>
   </div>
@@ -642,8 +734,22 @@ function startOver(){
   show('w');
 }
 
-function chkG1(){const b=document.getElementById('g1s');if(b.scrollHeight-b.scrollTop<=b.clientHeight+40){S.g1s=true;document.getElementById('g1c').disabled=false;}}
-function updG1(){document.getElementById('g1b').disabled=!document.getElementById('g1c').checked;}
+function chkG1(){
+  const b=document.getElementById('g1s');
+  if(b.scrollHeight-b.scrollTop<=b.clientHeight+40){
+    S.g1s=true;
+    const cb=document.getElementById('g1c');
+    if(cb) cb.disabled=false;
+    const row=document.getElementById('g1-ack-row');
+    const status=document.getElementById('g1-ack-status');
+    if(row){row.style.pointerEvents='auto';row.style.opacity='1';}
+    if(status) status.textContent='Tap to accept';
+  }
+}
+function updG1(){
+  const cb=document.getElementById('g1c');
+  document.getElementById('g1b').disabled=!(cb&&cb.checked);
+}
 
 function selTier(n){
   S.tier=n;
@@ -674,7 +780,14 @@ function selIns(p){
   updIBtn();
 }
 
-function chkPB(){const b=document.getElementById('pbb');if(b.scrollHeight-b.scrollTop<=b.clientHeight+20)document.getElementById('pbc').disabled=false;}
+function chkPB(){
+  const b=document.getElementById('pbb');
+  if(b.scrollHeight-b.scrollTop<=b.clientHeight+20){
+    const cb=document.getElementById('pbc');
+    if(cb) cb.disabled=false;
+    unlockPathBAck();
+  }
+}
 
 function updIBtn(){
   const t=S.tier;
@@ -757,7 +870,10 @@ function bG3(){
   ];
   document.getElementById('g3c').innerHTML=cs.map((c,i)=>`<div class="cc"><span class="ccn">Confirmation ${i+1} of 5 — ${c[0]}</span><p class="ccb">${c[1]}</p></div>`).join('');
 }
-function updG3(){document.getElementById('g3b').disabled=!document.getElementById('g3cb').checked;}
+function updG3(){
+  const cb=document.getElementById('g3cb');
+  document.getElementById('g3b').disabled=!(cb&&cb.checked);
+}
 
 function bAnalysis(i,isDemo){
   const tl={1:'Tier 1 — Pre-Offer',2:'Tier 2 — Active Offer',3:'Tier 3 — Under Contract'}[i.tier];
@@ -960,6 +1076,186 @@ const RATE_RANGES = {
   'fair':       { min: 6.875,max: 7.25, label: '640–679 Fair' },
 };
 
+// ══════════════════════════
+// FEATURE B — STYLED ACK TOGGLE
+// ══════════════════════════
+function toggleAck(cbId, rowId, callback) {
+  const cb = document.getElementById(cbId);
+  const row = document.getElementById(rowId);
+  if (!cb || !row) return;
+  // Check if this ack is locked (Path B scroll not done)
+  if (row.style.pointerEvents === 'none') return;
+  cb.checked = !cb.checked;
+  const statusEl = row.querySelector('.ack-status');
+  if (cb.checked) {
+    row.classList.add('checked');
+    if (statusEl) statusEl.textContent = '✓ Accepted';
+  } else {
+    row.classList.remove('checked');
+    if (statusEl) {
+      if (cbId === 'g1c') statusEl.textContent = 'Tap to accept';
+      else if (cbId === 'g3cb') statusEl.textContent = 'Tap to confirm';
+      else statusEl.textContent = 'Tap to acknowledge';
+    }
+  }
+  if (callback) callback();
+}
+
+function unlockPathBAck() {
+  const row = document.getElementById('pb-ack-row');
+  const status = document.getElementById('pb-ack-status');
+  if (row) {
+    row.style.pointerEvents = 'auto';
+    row.style.opacity = '1';
+    // Add click handler properly
+    row.onclick = () => toggleAck('pbc', 'pb-ack-row', updIBtn);
+  }
+  if (status) status.textContent = 'Tap to acknowledge';
+}
+
+// ══════════════════════════
+// FEATURE A — LISTING REFERENCE PANEL
+// ══════════════════════════
+const PLATFORM_DATA = {
+  zillow: {
+    name: 'Zillow',
+    fields: [
+      { name: 'Purchase Price', loc: 'Large display at top of listing — "List price"' },
+      { name: 'HOA Fee', loc: 'Under <strong>Monthly cost</strong> section → "HOA dues"' },
+      { name: 'Year Built', loc: '<strong>Overview</strong> tab → "Year built"' },
+      { name: 'Construction Type', loc: '<strong>Facts & features</strong> → "Construction" or "Exterior"' },
+      { name: 'Roof Type', loc: '<strong>Facts & features</strong> → "Roof" under Exterior section' },
+      { name: 'Roof Year', loc: '<strong>Facts & features</strong> → "Roof age" or "Roof replaced"' },
+      { name: 'Hurricane Shutters', loc: '<strong>Facts & features</strong> → search "shutter" in features list' },
+      { name: 'Flood Zone', loc: '<strong>Facts & features</strong> → "Flood factor" or check FEMA at msc.fema.gov' },
+    ]
+  },
+  redfin: {
+    name: 'Redfin',
+    fields: [
+      { name: 'Purchase Price', loc: 'Bold price display at top — "List price"' },
+      { name: 'HOA Fee', loc: '<strong>Payment calculator</strong> section → "HOA dues" or listing details' },
+      { name: 'Year Built', loc: '<strong>Property details</strong> → "Year built"' },
+      { name: 'Construction Type', loc: '<strong>Property details</strong> → "Construction materials"' },
+      { name: 'Roof Type', loc: '<strong>Property details</strong> → "Roof" under Building info' },
+      { name: 'Roof Year', loc: '<strong>Property details</strong> → "Roof year" if listed' },
+      { name: 'Hurricane Shutters', loc: '<strong>Property details</strong> → search "shutter" in features' },
+      { name: 'Flood Zone', loc: '<strong>Flood risk</strong> section near bottom of listing' },
+    ]
+  },
+  realtor: {
+    name: 'Realtor.com',
+    fields: [
+      { name: 'Purchase Price', loc: 'Top of listing — "List price"' },
+      { name: 'HOA Fee', loc: '<strong>Property details</strong> → "HOA fee" under Financial section' },
+      { name: 'Year Built', loc: '<strong>Property details</strong> → "Year built"' },
+      { name: 'Construction Type', loc: '<strong>Property details</strong> → "Construction" under Building' },
+      { name: 'Roof Type', loc: '<strong>Property details</strong> → "Roof description"' },
+      { name: 'Roof Year', loc: '<strong>Property details</strong> → "Roof year" if available' },
+      { name: 'Hurricane Shutters', loc: '<strong>Property details</strong> → search "shutter" in features list' },
+      { name: 'Flood Zone', loc: '<strong>Neighborhood</strong> section → "Flood risk" or use msc.fema.gov' },
+    ]
+  },
+  homes: {
+    name: 'Homes.com',
+    fields: [
+      { name: 'Purchase Price', loc: 'Top of listing — "Listing price"' },
+      { name: 'HOA Fee', loc: '<strong>Home details</strong> → "HOA fee" under Costs section' },
+      { name: 'Year Built', loc: '<strong>Home details</strong> → "Year built"' },
+      { name: 'Construction Type', loc: '<strong>Home details</strong> → "Construction type" if listed' },
+      { name: 'Roof Type', loc: '<strong>Home details</strong> → "Roof type" under Exterior' },
+      { name: 'Roof Year', loc: '<strong>Home details</strong> → "Roof year" if available' },
+      { name: 'Hurricane Shutters', loc: '<strong>Home details</strong> → search "shutter" in features' },
+      { name: 'Flood Zone', loc: 'Check FEMA flood map at msc.fema.gov with the property address' },
+    ]
+  },
+  trulia: {
+    name: 'Trulia',
+    fields: [
+      { name: 'Purchase Price', loc: 'Top of listing — "List price"' },
+      { name: 'HOA Fee', loc: '<strong>Home facts</strong> → "HOA fee" if applicable' },
+      { name: 'Year Built', loc: '<strong>Home facts</strong> → "Year built"' },
+      { name: 'Construction Type', loc: '<strong>Home facts</strong> → "Construction" under Features' },
+      { name: 'Roof Type', loc: '<strong>Home facts</strong> → "Roof" if listed' },
+      { name: 'Roof Year', loc: '<strong>Home facts</strong> → "Roof year" if available' },
+      { name: 'Hurricane Shutters', loc: '<strong>Home facts</strong> → search "shutter" in features list' },
+      { name: 'Flood Zone', loc: '<strong>Neighborhood</strong> → "Flood risk score" or use msc.fema.gov' },
+    ]
+  },
+  generic: {
+    name: 'MLS Listing',
+    fields: [
+      { name: 'Purchase Price', loc: 'List price displayed at top of the listing' },
+      { name: 'HOA Fee', loc: 'Usually under "Financial details", "Monthly costs", or "HOA" section' },
+      { name: 'Year Built', loc: 'Under "Property details", "Building info", or "Overview"' },
+      { name: 'Construction Type', loc: 'Under "Exterior features" or "Building details" — look for CBS, Frame, Block' },
+      { name: 'Roof Type', loc: 'Under "Exterior" or "Building details" — look for Tile, Shingle, Metal' },
+      { name: 'Roof Year', loc: 'Under "Updates", "Improvements", or "Exterior details"' },
+      { name: 'Hurricane Shutters', loc: 'Search "shutter" in the full features list or remarks section' },
+      { name: 'Flood Zone', loc: 'Verify at msc.fema.gov — enter the exact property address' },
+    ]
+  }
+};
+
+function detectPlatform(url) {
+  if (!url) return 'generic';
+  const u = url.toLowerCase();
+  if (u.includes('zillow')) return 'zillow';
+  if (u.includes('redfin')) return 'redfin';
+  if (u.includes('realtor.com')) return 'realtor';
+  if (u.includes('homes.com')) return 'homes';
+  if (u.includes('trulia')) return 'trulia';
+  return 'generic';
+}
+
+function updLRP() {
+  const mls = document.getElementById('f-mls').value.trim();
+  const url = document.getElementById('f-url').value.trim();
+  const wrap = document.getElementById('lrp-wrap');
+  const platformEl = document.getElementById('lrp-platform');
+  const openWrap = document.getElementById('lrp-open-wrap');
+  const fieldsEl = document.getElementById('lrp-fields');
+
+  if (!mls && !url) {
+    wrap.style.display = 'none';
+    return;
+  }
+
+  wrap.style.display = 'block';
+  const pKey = detectPlatform(url);
+  const pData = PLATFORM_DATA[pKey];
+
+  // Platform badge
+  platformEl.textContent = pData.name;
+
+  // Open listing button
+  if (url) {
+    const fullUrl = url.startsWith('http') ? url : 'https://' + url;
+    openWrap.innerHTML = `<a href="${fullUrl}" target="_blank" class="lrp-open-btn">↗ Open ${pData.name} Listing in New Tab</a>`;
+  } else {
+    openWrap.innerHTML = mls
+      ? `<div style="font-family:var(--fm);font-size:.62rem;color:var(--teal-dim);margin-bottom:.75rem;padding:.5rem .75rem;background:var(--teal-light);border-radius:6px;">MLS # <strong>${mls}</strong> — paste the listing URL above to open it directly</div>`
+      : '';
+  }
+
+  // Field guide
+  fieldsEl.innerHTML = pData.fields.map(f => `
+    <div class="lrp-field">
+      <span class="lrp-field-name">${f.name}</span>
+      <span class="lrp-field-loc">${f.loc}</span>
+    </div>
+  `).join('');
+}
+
+function toggleLRP() {
+  const body = document.getElementById('lrp-body');
+  const btn = document.getElementById('lrp-toggle-btn');
+  if (!body || !btn) return;
+  const hidden = body.style.display === 'none';
+  body.style.display = hidden ? 'block' : 'none';
+  btn.textContent = hidden ? 'Hide Panel ▲' : 'Show Panel ▼';
+}
+
 function chkRateDisc() {
   const rateEl = document.getElementById('f-rate-opt');
   const creditEl = document.getElementById('fcr');
@@ -1013,7 +1309,7 @@ function goBack(targetScreen) {
 
 function saveInputState() {
   // Capture all current field values into S.savedFields
-  const fields = ['fa','fp','fd','fb2','fcon','frt','fry','fsh','fh','ffl','fil','fih','fcr','fpr','f-rate-opt','fic','fit3','flr','fcp'];
+  const fields = ['fa','fp','fd','fb2','fcon','frt','fry','fsh','fh','ffl','fil','fih','fcr','fpr','f-rate-opt','fic','fit3','flr','fcp','f-mls','f-url'];
   S.savedFields = S.savedFields || {};
   fields.forEach(id => {
     const el = document.getElementById(id);
