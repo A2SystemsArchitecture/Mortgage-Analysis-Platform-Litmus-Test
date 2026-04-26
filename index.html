@@ -355,6 +355,23 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .dl-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1.1rem;background:var(--emerald);color:var(--white);border:none;border-radius:6px;font-family:var(--fb);font-size:.78rem;font-weight:500;cursor:pointer;transition:all .2s;}
 .dl-btn:hover{background:var(--emerald-dim);transform:translateY(-1px);box-shadow:0 4px 12px rgba(46,125,82,.3);}
 .dl-btn-outline{background:transparent;color:var(--emerald);border:1.5px solid var(--emerald);}
+/* ── RATE CONTEXT BOX ── */
+.rcb{background:var(--midnight);border-radius:10px;padding:1.5rem 1.75rem;margin:1.5rem 0;position:relative;overflow:hidden;}
+.rcb::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(0,151,167,.12),transparent 60%);}
+.rcb-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;margin-bottom:1rem;position:relative;}
+.rcb-title{font-family:var(--fm);font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal-mid);}
+.rcb-badge{display:inline-flex;align-items:center;gap:.3rem;padding:.3rem .85rem;border-radius:20px;font-family:var(--fm);font-size:.62rem;font-weight:500;letter-spacing:.05em;}
+.rcb-badge.high{background:rgba(198,40,40,.2);color:#ff8a80;border:1px solid rgba(198,40,40,.3);}
+.rcb-badge.above{background:rgba(255,152,0,.2);color:#ffcc80;border:1px solid rgba(255,152,0,.3);}
+.rcb-badge.average{background:rgba(0,151,167,.2);color:var(--teal-mid);border:1px solid rgba(0,151,167,.3);}
+.rcb-badge.favorable{background:rgba(46,125,82,.2);color:#81c784;border:1px solid rgba(46,125,82,.3);}
+.rcb-context{font-size:.85rem;color:rgba(200,218,222,.9);line-height:1.75;margin-bottom:1.1rem;position:relative;}
+.rcb-savings{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;position:relative;}
+@media(max-width:480px){.rcb-savings{grid-template-columns:1fr;}}
+.rcb-save-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.85rem 1rem;}
+.rcb-save-lbl{font-family:var(--fm);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(176,190,197,.6);display:block;margin-bottom:.3rem;}
+.rcb-save-val{font-family:var(--fd);font-size:1.3rem;font-weight:900;color:var(--emerald-mid);display:block;}
+.rcb-save-sub{font-size:.72rem;color:rgba(176,190,197,.6);margin-top:.2rem;}
 
 /* ── QUESTION LIBRARY ── */
 .ql-wrap{background:var(--slate-bg);min-height:100vh;}
@@ -1309,6 +1326,7 @@ function bAnalysis(i,isDemo){
     </tbody>
   </table>
   <div class="pb2"><span class="pbl">Recommended Budget Planning Number</span><div class="pbn">${fmt(i.pn)} / month</div><p class="pbd">Midpoint between scenarios. Year 1 runs closer to ${fmt(i.ty1)}/mo taxes. From Year 2, Homestead Exemption saves ${fmt(i.ty1-i.ty2)}/month — file immediately after closing.</p></div>
+  ${buildRateContext(i)}
   <h3 style="font-family:var(--fd);font-size:1.1rem;margin:1.5rem 0 .75rem;color:var(--midnight);">DTI Analysis · Income Range ${fmt(i.ilo)}–${fmt(i.ihi)}/mo</h3>
   <div class="dt">${dtis.map(d=>`<div class="dr2"><span class="drl">${d[0]}</span><span class="${d[2]}">${d[1]} — ${d[2]==='do'?'Healthy':d[2]==='dw'?'Tight / Qualifiable':'Near Ceiling'}</span></div>`).join('')}</div>
   <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button></div>
@@ -2220,6 +2238,82 @@ function affToAnalysis() {
 // ══════════════════════════════════════
 // PRIORITY 1 — CLOSING COST ESTIMATOR
 // ══════════════════════════════════════
+function buildRateContext(inp) {
+  const rate = inp.br;
+  const loan = inp.loan;
+
+  // Historical context — 30-year fixed average reference points
+  // Source: Freddie Mac PMMS historical data
+  const hist = {
+    allTimeLow: 2.65,   // Jan 2021
+    preCovid:   3.75,   // 2019 average
+    tenYrAvg:   4.50,   // 2013-2023 average
+    current:    MKT.fm, // 6.23% verified April 25 2026
+    crisisHigh: 8.50,   // Late 2023 peak
+    historicHigh: 18.6  // 1981 peak
+  };
+
+  // Determine rate environment
+  let badge, badgeClass, context;
+
+  if (rate <= 4.0) {
+    badge = '🟢 Historically Favorable';
+    badgeClass = 'favorable';
+    context = `At ${rate.toFixed(2)}%, you are borrowing at a rate well below the 10-year historical average of approximately 4.50%. Rates this low have been rare in modern mortgage history — the all-time low was ${hist.allTimeLow}% in January 2021. If rates in this range are available to you, they represent a genuinely favorable borrowing environment by any historical measure.`;
+  } else if (rate <= 5.5) {
+    badge = '🟢 Favorable';
+    badgeClass = 'favorable';
+    context = `At ${rate.toFixed(2)}%, you are borrowing below the 10-year historical average of approximately 4.50–5.00%. This rate environment is favorable compared to most of the past decade and significantly below the 2023 peak of 8.50%. Buyers who locked rates in this range in prior cycles generally made sound long-term decisions.`;
+  } else if (rate <= 6.5) {
+    badge = '🟡 Above Recent Averages';
+    badgeClass = 'above';
+    context = `At ${rate.toFixed(2)}%, the current rate environment is above the pre-pandemic 2019 average of approximately 3.75% and above the 10-year average of approximately 4.50%. However, it remains well below the 2023 peak of 8.50% and far below the historical high of 18.6% in 1981. In the full sweep of mortgage history, rates in the mid-6% range are elevated compared to the last decade but are not historically extreme. Many buyers today are purchasing with the expectation of refinancing if rates decline meaningfully — though no prediction about future rates is possible or implied.`;
+  } else if (rate <= 7.5) {
+    badge = '🔴 Elevated';
+    badgeClass = 'high';
+    context = `At ${rate.toFixed(2)}%, you are borrowing at a rate elevated above both recent averages and the long-term historical median. The 10-year average is approximately 4.50% and the pre-pandemic average was closer to 3.75%. Rates in this range add meaningful cost to your monthly payment and total interest paid. At this rate level, shopping multiple lenders aggressively — 4 to 5 lenders minimum — is especially important since rate spread between lenders can be 0.25% to 0.50% on the same day for the same borrower profile.`;
+  } else {
+    badge = '🔴 Historically High';
+    badgeClass = 'high';
+    context = `At ${rate.toFixed(2)}%, you are in rate territory not commonly seen since the early 2000s. The long-term historical average is approximately 4.50–5.00% and the pre-pandemic average was closer to 3.75%. At this level, the total interest cost over 30 years increases substantially. Shopping multiple lenders aggressively is critical — rate differences of 0.25% to 0.50% on a loan of this size represent thousands of dollars annually.`;
+  }
+
+  // Calculate savings from 1% rate decrease
+  const lowerRate = Math.max(rate - 1.0, 2.5);
+  const currentPI = cPI(loan, rate);
+  const lowerPI = cPI(loan, lowerRate);
+  const monthlySavings = currentPI - lowerPI;
+  const annualSavings = monthlySavings * 12;
+  const thirtyYrSavings = monthlySavings * 360;
+
+  // Calculate savings from 0.5% decrease
+  const halfRate = Math.max(rate - 0.5, 2.5);
+  const halfPI = cPI(loan, halfRate);
+  const halfMonthlySavings = currentPI - halfPI;
+
+  return `
+    <div class="rcb">
+      <div class="rcb-header">
+        <span class="rcb-title">Rate Environment Context · ${MKT.fm}% Current Market</span>
+        <span class="rcb-badge ${badgeClass}">${badge}</span>
+      </div>
+      <p class="rcb-context">${context}</p>
+      <div class="rcb-savings">
+        <div class="rcb-save-card">
+          <span class="rcb-save-lbl">If rates drop 0.50% — to ${halfRate.toFixed(2)}%</span>
+          <span class="rcb-save-val">${fmt(halfMonthlySavings)}/mo</span>
+          <div class="rcb-save-sub">${fmt(halfMonthlySavings * 12)}/year · ${fmt(halfMonthlySavings * 360)} over 30 years</div>
+        </div>
+        <div class="rcb-save-card">
+          <span class="rcb-save-lbl">If rates drop 1.00% — to ${lowerRate.toFixed(2)}%</span>
+          <span class="rcb-save-val">${fmt(monthlySavings)}/mo</span>
+          <div class="rcb-save-sub">${fmt(annualSavings)}/year · ${fmt(thirtyYrSavings)} over 30 years</div>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 function buildClosingCosts(inp) {
   const p = inp.price;
   const loan = inp.loan;
