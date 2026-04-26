@@ -790,12 +790,18 @@ footer strong{color:rgba(220,232,235,1.0);}
             <div class="fn">If you have a quoted rate from a lender, enter it here. It will override the market range for both best and worst case scenarios.</div>
             <div id="rate-disc-warn" style="display:none; margin-top:.6rem;">
               <div class="rate-warn-box">
-                <div class="rate-warn-lbl">⚠ Rate & Credit Score Discrepancy</div>
+                <div class="rate-warn-lbl">⚠ Rate &amp; Credit Score Discrepancy</div>
                 <div id="rate-disc-msg" class="rate-warn-msg"></div>
-                <label class="cl" style="margin-top:.75rem;">
-                  <input type="checkbox" id="rate-disc-ack" onchange="updIBtn()">
-                  <span>I understand my entered rate is higher than my credit score typically qualifies for. I will shop additional lenders before committing.</span>
-                </label>
+                <div class="ack-wrap" style="margin-top:.75rem;">
+                  <div class="ack-row" id="rate-disc-ack-row" onclick="toggleRateAck()">
+                    <div class="ack-box"><span class="ack-check-icon">✓</span></div>
+                    <div class="ack-text">
+                      <span id="rate-disc-ack-text">I have read the discrepancy warning above and understand the implications for my analysis.</span>
+                      <span class="ack-status" id="rate-disc-ack-status">Tap to acknowledge</span>
+                    </div>
+                  </div>
+                </div>
+                <input type="checkbox" id="rate-disc-ack" style="display:none;" onchange="updIBtn()">
               </div>
             </div>
           </div>
@@ -987,10 +993,10 @@ function updIBtn(){
   const t=S.tier;
   let ok=!!(document.getElementById('fa').value.trim()&&document.getElementById('fp').value&&document.getElementById('fd').value);
   if(t===2){if(!S.ins)ok=false;if(S.ins==='b'&&!document.getElementById('pbc').checked)ok=false;}
-  // Rate discrepancy — if warning visible, ack required
-  const warnEl=document.getElementById('rate-disc-warn');
-  const ackEl=document.getElementById('rate-disc-ack');
-  if(warnEl&&warnEl.style.display==='block'&&ackEl&&!ackEl.checked) ok=false;
+  // Rate discrepancy — if warning visible, styled ack required
+  const rdWarn=document.getElementById('rate-disc-warn');
+  const rdAck=document.getElementById('rate-disc-ack');
+  if(rdWarn&&rdWarn.style.display==='block'&&rdAck&&!rdAck.checked) ok=false;
   document.getElementById('ib').disabled=!ok;
 }
 
@@ -1098,11 +1104,12 @@ function bAnalysis(i,isDemo){
   const irw=i.ix?`<span style="color:var(--warn);font-style:italic;">Excluded</span>`:`<span class="${i.ic?'bv':'wv'}">${fmt(i.wi)}</span>${i.il==='ESTIMATED'?'<span class="utag">EST</span>':'<span class="ctag">CONF</span>'}`;
   const bars=[6.00,6.23,6.33,6.50,6.75].map(r=>{const pi=cPI(i.loan,r);const pct=Math.round((r-5.5)/(7.5-5.5)*100);return`<div class="br"><span class="brl">${r}%</span><div class="btr"><div class="bf" style="width:${pct}%"></div></div><span class="bv2">${fmt(pi)}/mo</span></div>`;}).join('');
   const dtis=[
-    [`Best ${fmt(i.bt)} at ${fmt(i.ilo)}/mo`,(i.bt/i.ilo*100).toFixed(1)+'%',i.bt/i.ilo<.36?'do':'dw'],
-    [`Best ${fmt(i.bt)} at ${fmt(i.ihi)}/mo`,(i.bt/i.ihi*100).toFixed(1)+'%','do'],
-    [`Planning ${fmt(i.pn)} at ${fmt(i.ilo)}/mo`,(i.pn/i.ilo*100).toFixed(1)+'%',i.pn/i.ilo<.40?'dw':'dd'],
-    [`Worst ${fmt(i.wt)} at ${fmt(i.ilo)}/mo`,(i.wt/i.ilo*100).toFixed(1)+'%',i.wt/i.ilo<.43?'dw':'dd'],
-    [`Worst ${fmt(i.wt)} at ${fmt(i.ihi)}/mo`,(i.wt/i.ihi*100).toFixed(1)+'%',i.wt/i.ihi<.36?'do':'dw'],
+    [`Best case ${fmt(i.bt)} at ${fmt(i.ilo)}/mo`,(i.bt/i.ilo*100).toFixed(1)+'%',i.bt/i.ilo<.36?'do':'dw'],
+    [`Best case ${fmt(i.bt)} at ${fmt(i.ihi)}/mo`,(i.bt/i.ihi*100).toFixed(1)+'%',i.bt/i.ihi<.36?'do':'dw'],
+    [`Planning ${fmt(i.pn)} at ${fmt(i.ilo)}/mo`,(i.pn/i.ilo*100).toFixed(1)+'%',i.pn/i.ilo<.36?'do':i.pn/i.ilo<.43?'dw':'dd'],
+    [`Planning ${fmt(i.pn)} at ${fmt(i.ihi)}/mo`,(i.pn/i.ihi*100).toFixed(1)+'%',i.pn/i.ihi<.36?'do':i.pn/i.ihi<.43?'dw':'dd'],
+    [`Worst case ${fmt(i.wt)} at ${fmt(i.ilo)}/mo`,(i.wt/i.ilo*100).toFixed(1)+'%',i.wt/i.ilo<.36?'do':i.wt/i.ilo<.43?'dw':'dd'],
+    [`Worst case ${fmt(i.wt)} at ${fmt(i.ihi)}/mo`,(i.wt/i.ihi*100).toFixed(1)+'%',i.wt/i.ihi<.36?'do':i.wt/i.ihi<.43?'dw':'dd'],
   ];
   const ck=[
     "Get actual homeowners insurance quotes from a Florida-licensed independent broker — not an online estimator.",
@@ -1148,7 +1155,7 @@ function bAnalysis(i,isDemo){
     </tbody>
   </table>
   <div class="pb2"><span class="pbl">Recommended Budget Planning Number</span><div class="pbn">${fmt(i.pn)} / month</div><p class="pbd">Midpoint between scenarios. Year 1 runs closer to ${fmt(i.ty1)}/mo taxes. From Year 2, Homestead Exemption saves ${fmt(i.ty1-i.ty2)}/month — file immediately after closing.</p></div>
-  <h3 style="font-family:var(--fd);font-size:1.1rem;margin:1.5rem 0 .75rem;color:var(--midnight);">DTI Analysis · Income ${fmt(i.ilo)}–${fmt(i.ihi)}/mo</h3>
+  <h3 style="font-family:var(--fd);font-size:1.1rem;margin:1.5rem 0 .75rem;color:var(--midnight);">DTI Analysis · Income Range ${fmt(i.ilo)}–${fmt(i.ihi)}/mo</h3>
   <div class="dt">${dtis.map(d=>`<div class="dr2"><span class="drl">${d[0]}</span><span class="${d[2]}">${d[1]} — ${d[2]==='do'?'Healthy':d[2]==='dw'?'Tight / Qualifiable':'Near Ceiling'}</span></div>`).join('')}</div>
   <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button></div>
 </div></div>
@@ -1471,12 +1478,37 @@ function toggleLRP() {
   btn.textContent = hidden ? 'Hide Panel ▲' : 'Show Panel ▼';
 }
 
+function toggleRateAck() {
+  const cb = document.getElementById('rate-disc-ack');
+  const row = document.getElementById('rate-disc-ack-row');
+  const status = document.getElementById('rate-disc-ack-status');
+  if (!cb || !row) return;
+  cb.checked = !cb.checked;
+  if (cb.checked) {
+    row.classList.add('checked');
+    if (status) status.textContent = '✓ Acknowledged';
+  } else {
+    row.classList.remove('checked');
+    if (status) status.textContent = 'Tap to acknowledge';
+  }
+  updIBtn();
+}
+
+function resetRateAck() {
+  const cb = document.getElementById('rate-disc-ack');
+  const row = document.getElementById('rate-disc-ack-row');
+  const status = document.getElementById('rate-disc-ack-status');
+  if (cb) cb.checked = false;
+  if (row) row.classList.remove('checked');
+  if (status) status.textContent = 'Tap to acknowledge';
+}
+
 function chkRateDisc() {
   const rateEl = document.getElementById('f-rate-opt');
   const creditEl = document.getElementById('fcr');
   const warnEl = document.getElementById('rate-disc-warn');
   const msgEl = document.getElementById('rate-disc-msg');
-  const ackEl = document.getElementById('rate-disc-ack');
+  const ackTextEl = document.getElementById('rate-disc-ack-text');
   if (!rateEl || !creditEl || !warnEl) return;
 
   const enteredRate = parseFloat(rateEl.value);
@@ -1485,30 +1517,32 @@ function chkRateDisc() {
 
   if (!enteredRate || isNaN(enteredRate)) {
     warnEl.style.display = 'none';
-    if (ackEl) ackEl.checked = false;
+    resetRateAck();
     updIBtn();
     return;
   }
 
   // Warning fires in BOTH directions:
-  // 1. Rate too LOW for credit score — claiming a rate better than credit qualifies for
-  // 2. Rate too HIGH for credit score — accepting a worse rate than credit deserves
+  // 1. Rate too LOW — claiming a rate better than credit score qualifies for
+  // 2. Rate too HIGH — accepting a worse rate than credit score deserves
   const tooLow = enteredRate < range.min - 0.125;
   const tooHigh = enteredRate > range.max + 0.25;
 
   if (tooLow) {
-    const msg = `Your ${range.label} credit score typically qualifies for rates between ${range.min.toFixed(2)}–${range.max.toFixed(2)}% in the current market. The rate you entered (${enteredRate.toFixed(2)}%) is lower than what this credit tier normally receives. Please verify this rate with your lender — it may reflect a rate buydown, special program, or a data entry error. Proceeding with an inaccurate rate will produce an inaccurate analysis.`;
+    const msg = `Your ${range.label} credit score typically qualifies for rates between ${range.min.toFixed(2)}–${range.max.toFixed(2)}% in the current market. The rate you entered (${enteredRate.toFixed(2)}%) is lower than what this credit tier normally receives. Please verify this rate with your lender — it may reflect a rate buydown, a special program, or a data entry error. Proceeding with an inaccurate rate will produce an inaccurate analysis.`;
     msgEl.textContent = msg;
+    if (ackTextEl) ackTextEl.textContent = 'I understand my entered rate is unusually low for my credit tier. I have verified this rate with my lender and confirm it is accurate.';
     warnEl.style.display = 'block';
-    if (ackEl) ackEl.checked = false;
+    resetRateAck();
   } else if (tooHigh) {
     const msg = `Your ${range.label} credit score qualifies for rates between ${range.min.toFixed(2)}–${range.max.toFixed(2)}% in the current market. The rate you entered (${enteredRate.toFixed(2)}%) is significantly higher than your qualifying range. Consider shopping additional lenders before committing — a 0.50% rate difference on a $400,000 loan adds over $120/month to your payment.`;
     msgEl.textContent = msg;
+    if (ackTextEl) ackTextEl.textContent = 'I understand my entered rate is higher than my credit score typically qualifies for. I will shop additional lenders before committing to this rate.';
     warnEl.style.display = 'block';
-    if (ackEl) ackEl.checked = false;
+    resetRateAck();
   } else {
     warnEl.style.display = 'none';
-    if (ackEl) ackEl.checked = false;
+    resetRateAck();
   }
   updIBtn();
 }
