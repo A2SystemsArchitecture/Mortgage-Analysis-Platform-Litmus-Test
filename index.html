@@ -355,6 +355,57 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .dl-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1.1rem;background:var(--emerald);color:var(--white);border:none;border-radius:6px;font-family:var(--fb);font-size:.78rem;font-weight:500;cursor:pointer;transition:all .2s;}
 .dl-btn:hover{background:var(--emerald-dim);transform:translateY(-1px);box-shadow:0 4px 12px rgba(46,125,82,.3);}
 .dl-btn-outline{background:transparent;color:var(--emerald);border:1.5px solid var(--emerald);}
+
+/* ── QUESTION LIBRARY ── */
+.ql-wrap{background:var(--slate-bg);min-height:100vh;}
+.ql-stage-tabs{display:flex;border-bottom:2px solid var(--rule);background:var(--white);position:sticky;top:0;z-index:50;overflow-x:auto;}
+.ql-stage-tab{padding:.85rem 1.4rem;font-family:var(--fm);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border:none;background:none;color:var(--muted);border-bottom:3px solid transparent;transition:all .2s;white-space:nowrap;flex-shrink:0;}
+.ql-stage-tab.ql-t1.active{color:var(--teal-dim);border-bottom-color:var(--teal);}
+.ql-stage-tab.ql-t2.active{color:var(--indigo-dim);border-bottom-color:var(--indigo);}
+.ql-stage-tab.ql-t3.active{color:var(--emerald-dim);border-bottom-color:var(--emerald);}
+.ql-stage{display:none;}
+.ql-stage.active{display:block;}
+.ql-category{background:var(--white);border:1px solid var(--rule);border-radius:10px;overflow:hidden;margin-bottom:1rem;}
+.ql-cat-header{padding:1rem 1.25rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:background .2s;user-select:none;}
+.ql-cat-header:hover{background:var(--slate-bg);}
+.ql-cat-title{font-family:var(--fd);font-size:1rem;font-weight:700;color:var(--midnight);}
+.ql-cat-count{font-family:var(--fm);font-size:.58rem;letter-spacing:.1em;color:var(--muted);margin-right:.75rem;}
+.ql-cat-arrow{font-size:.75rem;color:var(--muted);transition:transform .2s;}
+.ql-cat-header.open .ql-cat-arrow{transform:rotate(180deg);}
+.ql-cat-body{display:none;border-top:1px solid var(--rule);}
+.ql-cat-body.open{display:block;}
+.ql-question{padding:1.1rem 1.25rem;border-bottom:1px solid var(--rule);}
+.ql-question:last-child{border-bottom:none;}
+.ql-q-text{font-size:.9rem;font-weight:500;color:var(--midnight);line-height:1.5;margin-bottom:.6rem;}
+.ql-q-why{font-size:.78rem;color:var(--muted);line-height:1.55;margin-bottom:.5rem;}
+.ql-q-answers{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.6rem;}
+@media(max-width:560px){.ql-q-answers{grid-template-columns:1fr;}}
+.ql-q-good{background:var(--emerald-light);border-left:3px solid var(--emerald);border-radius:0 4px 4px 0;padding:.55rem .75rem;}
+.ql-q-bad{background:var(--error-lt);border-left:3px solid var(--error);border-radius:0 4px 4px 0;padding:.55rem .75rem;}
+.ql-answer-lbl{font-family:var(--fm);font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:.2rem;}
+.ql-q-good .ql-answer-lbl{color:var(--emerald-dim);}
+.ql-q-bad .ql-answer-lbl{color:var(--error);}
+.ql-answer-text{font-size:.75rem;line-height:1.5;}
+.ql-q-good .ql-answer-text{color:var(--emerald-dim);}
+.ql-q-bad .ql-answer-text{color:var(--error);}
+.ql-tag{display:inline-flex;align-items:center;gap:.25rem;padding:.15rem .5rem;border-radius:3px;font-family:var(--fm);font-size:.52rem;letter-spacing:.08em;text-transform:uppercase;margin-right:.35rem;margin-bottom:.4rem;}
+.ql-tag-md{background:var(--teal-light);color:var(--teal-dim);border:1px solid var(--teal-muted);}
+.ql-tag-exp{background:var(--indigo-light);color:var(--indigo-dim);border:1px solid var(--indigo-muted);}
+.ql-tag-legal{background:var(--error-lt);color:var(--error);border:1px solid rgba(198,40,40,.3);}
+.ql-exp-category .ql-cat-header{border-left:3px solid var(--indigo);}
+.ql-exp-category{border-color:var(--indigo-muted);}
+.ql-gate-wrap{max-width:620px;margin:0 auto;padding:3rem 1.5rem;}
+.ql-first-q{background:var(--white);border:1.5px solid var(--rule);border-radius:10px;padding:2rem;text-align:center;margin-top:1rem;}
+.ql-path-btns{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem;}
+.ql-path-btn{border-radius:8px;padding:1.25rem;cursor:pointer;transition:all .2s;border:2px solid var(--rule);background:var(--white);text-align:left;}
+.ql-path-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(26,35,50,.1);}
+.ql-path-btn.ftb{border-top:3px solid var(--teal);}
+.ql-path-btn.expb{border-top:3px solid var(--indigo);}
+.ql-path-lbl{font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:.4rem;}
+.ftb .ql-path-lbl{color:var(--teal-mid);}
+.expb .ql-path-lbl{color:var(--indigo-mid);}
+.ql-path-title{font-family:var(--fd);font-size:1.05rem;font-weight:700;color:var(--midnight);display:block;margin-bottom:.35rem;}
+.ql-path-desc{font-size:.78rem;color:var(--muted);line-height:1.5;}
 .dl-btn-outline:hover{background:var(--emerald-light);}
 
 /* ── AFFORDABILITY CALCULATOR ── */
@@ -477,6 +528,11 @@ footer strong{color:rgba(220,232,235,1.0);}
         <span style="font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal-mid);margin-bottom:.5rem;display:block;">Option C</span>
         <span style="font-family:var(--fd);font-size:1.15rem;font-weight:700;color:var(--midnight);display:block;margin-bottom:.4rem;">What Can I Afford?</span>
         <p style="font-size:.82rem;color:var(--muted);line-height:1.55;">Not sure what price range to target? Enter your income, savings, and credit score. HomeTrue tells you your realistic purchase range before you start shopping.</p>
+      </div>
+      <div class="aff-card" onclick="show('ql')" style="margin-bottom:1.25rem;border-top-color:var(--indigo);" onmouseover="this.style.boxShadow='0 10px 30px rgba(69,39,160,.15)'" onmouseout="this.style.boxShadow=''">
+        <span style="font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--indigo-mid);margin-bottom:.5rem;display:block;">Option D</span>
+        <span style="font-family:var(--fd);font-size:1.15rem;font-weight:700;color:var(--midnight);display:block;margin-bottom:.4rem;">Prepare for Your Meetings</span>
+        <p style="font-size:.82rem;color:var(--muted);line-height:1.55;">Know exactly what to ask your realtor, lender, and title company at every stage. Stage-specific question library with context on what good answers look like — and what deflection sounds like.</p>
       </div>
       <div class="nt nt-tl"><span class="nl nl-tl">Miami-Dade County Only</span><p>This tool is calibrated exclusively for Miami-Dade County properties. Using it outside Miami-Dade will produce inaccurate results.</p></div>
       <div style="margin-top:2rem;background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:1.25rem;">
@@ -645,6 +701,102 @@ footer strong{color:rgba(220,232,235,1.0);}
 
 <!-- SHARE TOAST -->
 <div class="share-toast" id="share-toast">✓ Analysis link copied to clipboard</div>
+
+<!-- QUESTION LIBRARY -->
+<div id="sql" class="screen">
+  <div class="mh">
+    <div class="mh-tag">Miami-Dade County · Buyer Question Library</div>
+    <h1>Home<span class="tr">True</span></h1>
+    <div class="mh-rule"></div>
+    <div class="mh-sub">Questions that put you in control of every professional conversation</div>
+  </div>
+  <div class="vs">Miami-Dade County · <span>General Educational Resource — Not Legal or Financial Advice</span></div>
+
+  <!-- GATE: First-time buyer question -->
+  <div id="ql-gate" class="ql-gate-wrap">
+    <div class="gate-back-row"><button class="back-btn" onclick="show('w')">← Back</button></div>
+    <div class="ae tl" style="margin-bottom:.4rem;">Before We Begin</div>
+    <h2 style="font-family:var(--fd);font-size:1.8rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.75rem;color:var(--midnight);">Is this your first<br>home purchase?</h2>
+    <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.5rem;line-height:1.7;">Your answer helps us present the most relevant context alongside each question. All questions are available to every buyer.</p>
+    <div class="ql-path-btns">
+      <div class="ql-path-btn ftb" onclick="qlSelectPath('first')">
+        <span class="ql-path-lbl">Yes</span>
+        <span class="ql-path-title">First-Time Buyer</span>
+        <p class="ql-path-desc">This is my first home purchase. I want straightforward guidance on what to ask and why.</p>
+      </div>
+      <div class="ql-path-btn expb" onclick="qlSelectPath('experienced')">
+        <span class="ql-path-lbl">No</span>
+        <span class="ql-path-title">Experienced Buyer</span>
+        <p class="ql-path-desc">I have purchased property before. I want the full library including more advanced questions.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PATH A: First-time buyer acknowledgment -->
+  <div id="ql-ftb-gate" style="display:none;" class="ql-gate-wrap">
+    <div class="gate-back-row"><button class="back-btn" onclick="qlBack()">← Back</button></div>
+    <div class="ae tl" style="margin-bottom:.4rem;">Educational Resource Acknowledgment</div>
+    <h2 style="font-family:var(--fd);font-size:1.6rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.75rem;color:var(--midnight);">One quick acknowledgment</h2>
+    <div class="nt nt-tl" style="margin-bottom:1.25rem;">
+      <span class="nl nl-tl">What This Question Library Is</span>
+      <p>The questions below are general educational resources for homebuyers in Miami-Dade County. They are not legal advice, real estate advice, or financial advice. They are not tailored to your specific situation, property, or transaction. These questions are provided solely to help you have more informed conversations with licensed professionals.</p>
+    </div>
+    <div class="ack-wrap">
+      <div class="ack-row" id="ql-ftb-ack-row" onclick="toggleAck('ql-ftb-cb','ql-ftb-ack-row',qlFTBCheck)">
+        <div class="ack-box"><span class="ack-check-icon">✓</span></div>
+        <div class="ack-text">I understand these questions are general educational resources — not professional advice. I will consult licensed professionals for guidance specific to my situation.
+          <span class="ack-status" id="ql-ftb-status">Tap to accept</span>
+        </div>
+      </div>
+    </div>
+    <input type="checkbox" id="ql-ftb-cb" style="display:none;">
+    <button class="btn btn-tl btn-fw" id="ql-ftb-btn" disabled onclick="qlOpenLibrary('first')">Open Question Library →</button>
+  </div>
+
+  <!-- PATH B: Experienced buyer full friction gate -->
+  <div id="ql-exp-gate" style="display:none;" class="ql-gate-wrap">
+    <div class="gate-back-row"><button class="back-btn" onclick="qlBack()">← Back</button></div>
+    <div class="ae in" style="margin-bottom:.4rem;">Experienced Buyer — Important Notice</div>
+    <h2 style="font-family:var(--fd);font-size:1.6rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.75rem;color:var(--midnight);">Please read carefully<br>before proceeding</h2>
+    <div class="sp" style="border-left-color:var(--indigo);color:var(--indigo-dim);background:var(--indigo-light);">↓ &nbsp;Scroll through the complete notice to unlock acceptance</div>
+    <div class="sb" id="ql-exp-scroll" onscroll="chkQLExpScroll()" style="height:280px;">
+      <div style="font-size:.875rem;line-height:1.8;color:var(--ink);">
+        <p style="margin-bottom:1rem;">The questions in this library are general educational resources. They are not legal advice, tax advice, real estate advice, or financial advice. They are not tailored to your specific transaction, financial situation, or legal circumstances.</p>
+        <p style="margin-bottom:1rem;">Experienced homebuyers may be navigating complex situations — simultaneous sales and purchases, investment considerations, tax implications, estate planning, or existing mortgage obligations — that require individualized professional guidance that this library cannot provide.</p>
+        <p style="margin-bottom:1rem;">Certain questions in this library — specifically those touching tax implications, ownership structure, estate planning, 1031 exchanges, and simultaneous sale and purchase contingencies — are marked with a <strong>Consult Licensed Professional</strong> notice. This notice means the subject matter of the question requires guidance from a licensed real estate attorney, tax professional, or financial advisor before you act on any answer you receive.</p>
+        <p style="margin-bottom:1rem;">No question in this library is a substitute for consultation with a licensed real estate attorney, tax professional, mortgage broker, or financial advisor. The presence of a question in this library does not imply that asking it will produce any particular outcome or that any particular answer is correct for your situation.</p>
+        <p>By proceeding, you acknowledge that these questions are a starting point for professional conversations — not a replacement for them — and that HomeTrue bears no liability for decisions made based on information gathered through the use of this question library.</p>
+      </div>
+    </div>
+    <div class="ack-wrap" style="margin-top:1rem;">
+      <div class="ack-row" id="ql-exp-ack-row" onclick="toggleAck('ql-exp-cb','ql-exp-ack-row',qlExpCheck)" style="pointer-events:none;opacity:.5;">
+        <div class="ack-box"><span class="ack-check-icon">✓</span></div>
+        <div class="ack-text">I have read and understood the complete notice above. I acknowledge these questions are general educational resources, not professional advice, and that I will consult licensed professionals for guidance specific to my situation and transaction.
+          <span class="ack-status" id="ql-exp-status">Scroll through the notice above to unlock</span>
+        </div>
+      </div>
+    </div>
+    <input type="checkbox" id="ql-exp-cb" style="display:none;">
+    <button class="btn btn-in btn-fw" id="ql-exp-btn" disabled onclick="qlOpenLibrary('experienced')">I Accept — Open Question Library →</button>
+  </div>
+
+  <!-- LIBRARY CONTENT -->
+  <div id="ql-library" style="display:none;">
+    <div class="ql-stage-tabs">
+      <button class="ql-stage-tab ql-t1 active" onclick="showQLStage(1,this)">Stage 1 — Pre-Offer</button>
+      <button class="ql-stage-tab ql-t2" onclick="showQLStage(2,this)">Stage 2 — Active Offer</button>
+      <button class="ql-stage-tab ql-t3" onclick="showQLStage(3,this)">Stage 3 — Under Contract</button>
+    </div>
+    <div class="cw" style="padding-top:1.5rem;">
+      <div id="ql-stage-1" class="ql-stage active"></div>
+      <div id="ql-stage-2" class="ql-stage"></div>
+      <div id="ql-stage-3" class="ql-stage"></div>
+      <div style="text-align:center;margin:2rem 0;">
+        <button class="dl-btn" onclick="downloadQLPDF()">↓ Download Question Guide PDF</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- GATE 1 -->
 <div id="sg1" class="screen">
@@ -889,6 +1041,7 @@ footer strong{color:rgba(220,232,235,1.0);}
       <button class="at atw" onclick="showTab('w',this)">§ Worst Case</button>
       <button class="at" id="tab-cc-btn" onclick="showTab('cc',this)" style="color:var(--muted);">§ Closing Costs</button>
       <button class="at" id="tab-hg-btn" onclick="showTab('hg',this)" style="color:var(--muted);">§ Homestead Guide</button>
+      <button class="at" id="tab-ql-btn" onclick="showTab('ql-tab',this)" style="color:var(--muted);">§ Questions to Ask</button>
     </div>
     <div class="nav-btns">
       <button class="btn btn-sm btn-ol" onclick="startOver()">← Start Over</button>
@@ -915,6 +1068,7 @@ footer strong{color:rgba(220,232,235,1.0);}
   <div id="ac"></div>
   <div id="tab-cc" class="as" style="display:none;"></div>
   <div id="tab-hg" class="as" style="display:none;"></div>
+  <div id="tab-ql-tab" class="as" style="display:none;"></div>
   <footer id="af"></footer>
 </div>
 
@@ -2572,6 +2726,284 @@ function downloadCompPDF() {
   downloadPDF();
 }
 
+
+// ══════════════════════════════════════
+// QUESTION LIBRARY — GATE LOGIC
+// ══════════════════════════════════════
+let QL = { path: null, stage: 1 };
+
+function qlSelectPath(path) {
+  QL.path = path;
+  document.getElementById('ql-gate').style.display = 'none';
+  if (path === 'first') {
+    document.getElementById('ql-ftb-gate').style.display = 'block';
+  } else {
+    document.getElementById('ql-exp-gate').style.display = 'block';
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function qlBack() {
+  document.getElementById('ql-ftb-gate').style.display = 'none';
+  document.getElementById('ql-exp-gate').style.display = 'none';
+  document.getElementById('ql-library').style.display = 'none';
+  document.getElementById('ql-gate').style.display = 'block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function qlFTBCheck() {
+  const cb = document.getElementById('ql-ftb-cb');
+  document.getElementById('ql-ftb-btn').disabled = !(cb && cb.checked);
+}
+
+function qlExpCheck() {
+  const cb = document.getElementById('ql-exp-cb');
+  document.getElementById('ql-exp-btn').disabled = !(cb && cb.checked);
+}
+
+function chkQLExpScroll() {
+  const b = document.getElementById('ql-exp-scroll');
+  if (b.scrollHeight - b.scrollTop <= b.clientHeight + 30) {
+    const row = document.getElementById('ql-exp-ack-row');
+    const status = document.getElementById('ql-exp-status');
+    if (row) { row.style.pointerEvents='auto'; row.style.opacity='1'; }
+    if (status) status.textContent = 'Tap to accept';
+  }
+}
+
+function qlOpenLibrary(path) {
+  document.getElementById('ql-ftb-gate').style.display = 'none';
+  document.getElementById('ql-exp-gate').style.display = 'none';
+  document.getElementById('ql-library').style.display = 'block';
+  buildQLStages(path);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function showQLStage(n, btn) {
+  document.querySelectorAll('.ql-stage').forEach(s => s.classList.remove('active'));
+  document.getElementById('ql-stage-' + n).classList.add('active');
+  document.querySelectorAll('.ql-stage-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  QL.stage = n;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function toggleQLCat(id) {
+  const body = document.getElementById('cat-body-' + id);
+  const header = document.getElementById('cat-header-' + id);
+  if (!body || !header) return;
+  body.classList.toggle('open');
+  header.classList.toggle('open');
+}
+
+function buildQLStages(path) {
+  [1, 2, 3].forEach(n => {
+    const stageKey = 'stage' + n;
+    const stageData = QL_DATA[stageKey];
+    const el = document.getElementById('ql-stage-' + n);
+    if (!el) return;
+    let html = '';
+    stageData.categories.forEach((cat) => {
+      const isExp = cat.exp;
+      const catClass = isExp ? 'ql-category ql-exp-category' : 'ql-category';
+      const catId = cat.id + '-' + path;
+      let qsHtml = '';
+      cat.questions.forEach((q) => {
+        const tags = [];
+        if (q.md) tags.push('<span class="ql-tag ql-tag-md">Miami-Dade</span>');
+        if (isExp) tags.push('<span class="ql-tag ql-tag-exp">Experienced Buyer</span>');
+        if (q.legal) tags.push('<span class="ql-tag ql-tag-legal">Consult Licensed Professional</span>');
+        qsHtml += `<div class="ql-question">
+          <div style="margin-bottom:.4rem;">${tags.join('')}</div>
+          <div class="ql-q-text">${q.q}</div>
+          <div class="ql-q-why"><strong>Why this matters:</strong> ${q.why}</div>
+          <div class="ql-q-answers">
+            <div class="ql-q-good"><span class="ql-answer-lbl">Good Answer</span><span class="ql-answer-text">${q.good}</span></div>
+            <div class="ql-q-bad"><span class="ql-answer-lbl">Deflecting Answer</span><span class="ql-answer-text">${q.bad}</span></div>
+          </div>
+        </div>`;
+      });
+      html += `<div class="${catClass}">
+        <div class="ql-cat-header" id="cat-header-${catId}" onclick="toggleQLCat('${catId}')">
+          <div>${isExp ? '<span class="ql-tag ql-tag-exp" style="margin-bottom:.3rem;display:inline-flex;">Experienced Buyer</span><br>' : ''}<span class="ql-cat-title">${cat.title}</span></div>
+          <div style="display:flex;align-items:center;"><span class="ql-cat-count">${cat.questions.length} questions</span><span class="ql-cat-arrow">▼</span></div>
+        </div>
+        <div class="ql-cat-body" id="cat-body-${catId}">${qsHtml}</div>
+      </div>`;
+    });
+    el.innerHTML = html;
+  });
+}
+
+function buildQLTabContent() {
+  return `<div class="cw" style="padding-top:1.5rem;">
+    <div class="ae in" style="margin-bottom:.4rem;">Section VI</div>
+    <h2 class="at2">Questions to Ask Your Professionals</h2>
+    <div class="ar"></div>
+    <div class="nt nt-indigo" style="margin-bottom:1.5rem;">
+      <span class="nl nl-in">Educational Resource — Not Professional Advice</span>
+      <p>The questions below are general educational resources to help you have more informed conversations with your realtor, lender, title company, and insurance broker. They are not legal, financial, or real estate advice. They are not tailored to your specific situation. For the complete library with all stages and buyer paths, use the <strong>Prepare for Your Meetings</strong> option on the welcome screen.</p>
+    </div>
+    <div style="text-align:center;margin:1.5rem 0;">
+      <button class="btn btn-in" onclick="show('ql')" style="margin-right:.75rem;">Open Full Question Library →</button>
+      <button class="dl-btn" onclick="downloadQLPDF()">↓ Download Question Guide PDF</button>
+    </div>
+  </div>`;
+}
+
+function downloadQLPDF() {
+  if (typeof window.jspdf === 'undefined') {
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    script.onload = () => buildQLPDF();
+    script.onerror = () => alert('PDF library failed to load. Please check your internet connection.');
+    document.head.appendChild(script);
+  } else { buildQLPDF(); }
+}
+
+function buildQLPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+  const W = 210, M = 18, CW = W - M * 2;
+  function addFooter() {
+    const ph = 297;
+    doc.setDrawColor(200,215,220); doc.setLineWidth(.3); doc.line(M,ph-16,W-M,ph-16);
+    doc.setTextColor(120,140,150); doc.setFontSize(6.5); doc.setFont('helvetica','normal');
+    doc.text('HomeTrue · Miami-Dade County · General Educational Resource — Not Legal, Financial, or Real Estate Advice', M, ph-10);
+    doc.text('Consult licensed professionals for guidance specific to your situation and transaction.', M, ph-5);
+  }
+  function addQ(q, y, color) {
+    if (y > 262) { doc.addPage(); y = 20; addFooter(); }
+    doc.setFontSize(8.5); doc.setFont('helvetica','bold'); doc.setTextColor(26,35,50);
+    const qLines = doc.splitTextToSize(q.q, CW);
+    doc.text(qLines, M, y); y += qLines.length * 5 + 2;
+    doc.setFontSize(7.5); doc.setFont('helvetica','normal'); doc.setTextColor(80,100,110);
+    const whyLines = doc.splitTextToSize('Why: ' + q.why, CW);
+    doc.text(whyLines, M, y); y += whyLines.length * 4.5 + 2;
+    const gLines = doc.splitTextToSize('Good: ' + q.good, CW/2-3);
+    doc.setFillColor(232,245,238); doc.rect(M,y-2,CW/2-3,gLines.length*4.5+4,'F');
+    doc.setTextColor(27,94,56); doc.setFontSize(7); doc.text(gLines,M+2,y+1);
+    const bLines = doc.splitTextToSize('Deflecting: ' + q.bad, CW/2-3);
+    doc.setFillColor(255,235,235); doc.rect(M+CW/2+3,y-2,CW/2-3,bLines.length*4.5+4,'F');
+    doc.setTextColor(198,40,40); doc.text(bLines,M+CW/2+5,y+1);
+    y += Math.max(gLines.length,bLines.length)*4.5+8;
+    doc.setDrawColor(207,216,220); doc.setLineWidth(.2); doc.line(M,y-4,W-M,y-4);
+    return y;
+  }
+  const stages = [
+    {key:'stage1',title:'Stage 1 — Pre-Offer',color:[0,131,143]},
+    {key:'stage2',title:'Stage 2 — Active Offer',color:[69,39,160]},
+    {key:'stage3',title:'Stage 3 — Under Contract',color:[46,125,82]},
+  ];
+  stages.forEach((stage,si) => {
+    if (si > 0) doc.addPage();
+    doc.setFillColor(26,35,50); doc.rect(0,0,W,28,'F');
+    doc.setTextColor(255,255,255); doc.setFontSize(16); doc.setFont('helvetica','bold');
+    doc.text('Home',M,14); const hw=doc.getTextWidth('Home');
+    doc.setTextColor(stage.color[0],stage.color[1],stage.color[2]); doc.text('True',M+hw,14);
+    doc.setTextColor(200,218,222); doc.setFontSize(8); doc.setFont('helvetica','normal');
+    doc.text('Buyer Question Library · Miami-Dade County',M,21);
+    doc.setFillColor(stage.color[0],stage.color[1],stage.color[2]);
+    doc.roundedRect(W-M-60,6,60,8,1,1,'F');
+    doc.setTextColor(255,255,255); doc.setFontSize(7);
+    doc.text(stage.title.toUpperCase(),W-M-30,11.5,{align:'center'});
+    addFooter();
+    let y = 36;
+    const data = QL_DATA[stage.key];
+    data.categories.forEach(cat => {
+      if (y > 260) { doc.addPage(); y=20; addFooter(); }
+      doc.setFontSize(10); doc.setFont('helvetica','bold');
+      doc.setTextColor(stage.color[0],stage.color[1],stage.color[2]);
+      doc.text(cat.title,M,y);
+      doc.setDrawColor(stage.color[0],stage.color[1],stage.color[2]);
+      doc.setLineWidth(.4); doc.line(M,y+2,W-M,y+2); y+=8;
+      cat.questions.forEach(q => { y = addQ(q,y,stage.color); }); y+=4;
+    });
+  });
+  doc.save('HomeTrue-Buyer-Question-Guide-Miami-Dade.pdf');
+}
+
+
+const QL_DATA = {
+  stage1: { title:'Pre-Offer', categories: [
+    { id:'s1-realtor', title:'Questions for Your Realtor', exp:false, questions:[
+      { q:'How long has this property been on the market, and has the price been reduced?', why:'Days on market and price history reveal seller motivation. A property sitting 60+ days or with multiple price cuts gives you negotiating leverage.', good:'Gives you exact days on market and full price history without prompting.', bad:'Vague about timeline or dismisses the question — "it\'s a great deal regardless."', md:false, legal:false },
+      { q:'What is the seller\'s situation — are they motivated, relocated, or under any time pressure?', why:'Understanding seller motivation helps you structure an offer. A seller who needs to close quickly may accept less. One who is not in a hurry may not.', good:'Provides context about the seller\'s circumstances and how that might affect offer strategy.', bad:'Refuses to share any information or deflects entirely.', md:false, legal:false },
+      { q:'What have comparable properties sold for in this neighborhood in the last 90 days?', why:'Comparable sales are the only objective measure of whether a list price is fair. Never make an offer without seeing recent comps.', good:'Provides a comparative market analysis with actual sold prices, square footage, and days on market.', bad:'Only shows active listings, not sold properties — active listings are asking prices, not reality.', md:false, legal:false },
+      { q:'Are there any known issues with this property — past flood claims, permit violations, or HOA disputes?', why:'Florida requires disclosure of known material defects. Your realtor should know the disclosure history and flag red flags before you invest time in an offer.', good:'Reviews the seller\'s disclosure document with you and flags anything requiring further investigation.', bad:'Says "you\'ll see everything in the disclosure" without actually walking you through it.', md:true, legal:false },
+      { q:'What is the HOA\'s current reserve fund status and has it passed its Structural Integrity Reserve Study?', why:'Post-Surfside legislation (SB 4D) requires Florida HOAs of 3+ stories to complete a Structural Integrity Reserve Study and fund reserves. An underfunded HOA means potential special assessments after you close.', good:'Confirms the HOA has completed its reserve study and provides the current reserve fund percentage.', bad:'Doesn\'t know what a reserve study is or dismisses the question.', md:true, legal:false },
+      { q:'Has this property been used as a short-term rental and does the HOA permit short-term rentals?', why:'Short-term rental history affects property condition and HOA relationships. Many Miami-Dade HOAs now prohibit Airbnb-style rentals. Know this upfront.', good:'Confirms rental history and provides the HOA\'s current policy on short-term rentals.', bad:'Unsure and doesn\'t offer to find out.', md:true, legal:false },
+    ]},
+    { id:'s1-lender', title:'Questions for Your Lender', exp:false, questions:[
+      { q:'What loan programs am I eligible for and which produces the lowest total cost of borrowing?', why:'Different loan programs — conventional, FHA, VA, USDA — have different down payment requirements, PMI structures, and total costs. Lenders do not always volunteer the best option.', good:'Walks you through at least two or three options with total cost comparisons.', bad:'Immediately steers you to one product without discussing alternatives.', md:false, legal:false },
+      { q:'What is the annual percentage rate (APR) — not just the interest rate — on this loan?', why:'APR includes fees that the interest rate alone does not. Two loans with the same interest rate can have very different APRs. APR is the honest comparison number.', good:'Provides both the interest rate and APR and explains what fees are included.', bad:'Only quotes the interest rate and minimizes the APR question.', md:false, legal:false },
+      { q:'What is your exact PMI rate for my credit score and down payment, and which PMI provider are you using?', why:'PMI rates vary significantly by lender and provider. You have the right to know the exact rate before committing.', good:'Provides the exact PMI rate as a percentage of loan amount and identifies the PMI provider.', bad:'Gives a vague estimate or says you\'ll see it in the Loan Estimate.', md:false, legal:false },
+      { q:'Can I get a Loan Estimate document today so I can compare your offer with other lenders?', why:'A Loan Estimate is a standardized RESPA-required federal document that makes lender comparison meaningful. Any lender who resists is not acting in your interest.', good:'Provides the Loan Estimate promptly and encourages you to compare.', bad:'Delays, adds conditions, or discourages comparison shopping.', md:false, legal:false },
+      { q:'What credit score threshold would improve my rate and is there anything I can do before application to reach it?', why:'A 20-point credit score improvement can move you into a better rate tier. A good lender tells you honestly what threshold matters and what actions could help.', good:'Identifies the specific score threshold for a better rate and provides concrete actionable steps.', bad:'Says your credit is fine and moves on without addressing the question.', md:false, legal:false },
+    ]},
+    { id:'s1-insurance', title:'Questions for Your Insurance Broker', exp:false, questions:[
+      { q:'Are you an independent broker representing multiple carriers, or a captive agent representing one company?', why:'Independent brokers shop multiple carriers. Captive agents can only offer one company\'s products. In South Florida\'s current insurance market, shopping multiple carriers is essential.', good:'Confirms they are independent and names the carriers they work with.', bad:'Vague about their arrangement or only mentions one carrier.', md:true, legal:false },
+      { q:'What wind mitigation credit is available for this property and have you seen the wind mitigation inspection report?', why:'Wind mitigation credits for hurricane-resistant features can reduce your premium significantly. If no inspection exists, ask about getting one before binding coverage.', good:'Reviews or requests the wind mitigation report and quantifies the credit impact on your premium.', bad:'Quotes a premium without mentioning wind mitigation at all.', md:true, legal:false },
+      { q:'What is the hurricane deductible on this policy and how is it calculated?', why:'Florida insurance policies have a separate hurricane deductible — typically 2–5% of insured value — that applies to hurricane claims. This is separate from your standard deductible and can be very large.', good:'States the exact hurricane deductible percentage, calculates the dollar amount, confirms it applies per occurrence.', bad:'Only mentions the standard deductible and doesn\'t address hurricane deductible separately.', md:true, legal:false },
+      { q:'Does this policy include replacement cost coverage or actual cash value coverage for the structure?', why:'Replacement cost coverage pays to rebuild at current prices. Actual cash value deducts depreciation. For a home the difference can be hundreds of thousands of dollars after a major loss.', good:'Confirms replacement cost for structure and explains the contents coverage basis with examples.', bad:'Uses the terms interchangeably or doesn\'t address the distinction.', md:false, legal:false },
+      { q:'What does the standard homeowners policy exclude regarding flood and what are my flood insurance options?', why:'Standard homeowners policies in Florida explicitly exclude flood damage. Flood insurance is separate. Many buyers discover this exclusion only after a claim.', good:'Clearly states the flood exclusion, confirms the property\'s flood zone, and provides flood insurance options and pricing.', bad:'Doesn\'t raise the flood exclusion unless you ask.', md:true, legal:false },
+    ]},
+    { id:'s1-exp', title:'For Experienced Buyers', exp:true, questions:[
+      { q:'If I am selling my current primary residence, what are the tax implications of the timing between my sale and this purchase?', why:'The Section 121 exclusion allows up to $250,000 ($500,000 married) in capital gains exclusion on a primary residence sale, but timing and residency requirements apply.', good:'Acknowledges the question and refers you to a CPA or tax attorney for guidance specific to your situation.', bad:'Gives you a confident answer without recommending professional tax guidance.', md:false, legal:true },
+      { q:'How should I structure the ownership of this property given my estate planning and asset protection goals?', why:'Ownership structure affects probate, inheritance, liability exposure, and Homestead Exemption eligibility in Florida. The wrong structure has significant legal and financial consequences.', good:'Refers you to a Florida real estate attorney for ownership structure guidance before you close.', bad:'Advises you on ownership structure without a legal background or referral.', md:true, legal:true },
+      { q:'If I am carrying a mortgage on another property simultaneously, how does that affect my DTI qualification?', why:'Carrying two mortgages — even temporarily — affects your DTI ratio. Some lenders have departure residence policies. Understanding this before you apply prevents surprises.', good:'Explains exactly how your existing mortgage obligation is treated in the DTI calculation and whether a departure residence exception applies.', bad:'Vague about how the existing mortgage factors in or says "we\'ll figure it out."', md:false, legal:false },
+    ]},
+  ]},
+  stage2: { title:'Active Offer', categories: [
+    { id:'s2-realtor', title:'Questions for Your Realtor', exp:false, questions:[
+      { q:'What contingencies should be in this offer and which ones is the seller likely to push back on?', why:'Contingencies protect you — inspection, financing, and appraisal contingencies are primary. In a competitive market sellers may resist them. Know which are negotiable before you sign.', good:'Walks you through each contingency, its purpose, and current market dynamics around each one.', bad:'Recommends waiving contingencies without explaining the specific risk of each waiver.', md:false, legal:false },
+      { q:'What is the seller\'s preferred closing timeline and how does that affect my offer competitiveness?', why:'Matching the seller\'s preferred timeline can make an offer more competitive without changing price. This is a negotiating tool most buyers never use.', good:'Has confirmed the seller\'s preferred timeline and explains how it affects your offer strategy.', bad:'Hasn\'t asked the listing agent or dismisses timeline as irrelevant.', md:false, legal:false },
+      { q:'Has the property been inspected recently and are there known material defects in the seller\'s disclosure?', why:'Florida requires sellers to disclose known material defects. Review the seller\'s disclosure before making an offer — not after.', good:'Provides the seller\'s disclosure document and walks you through any flagged items.', bad:'Says you\'ll get the disclosure after your offer is accepted — that is backwards.', md:true, legal:false },
+      { q:'What is the listing agent\'s communication style and how quickly are offers being reviewed?', why:'How quickly you respond and how professionally your offer is presented matters. Understanding the listing agent\'s process helps you move at the right speed.', good:'Has spoken with the listing agent directly and can tell you the review timeline.', bad:'Hasn\'t spoken with the listing agent and is working from the listing alone.', md:false, legal:false },
+    ]},
+    { id:'s2-lender', title:'Questions for Your Lender', exp:false, questions:[
+      { q:'Can you provide a pre-approval letter — not just a pre-qualification — today?', why:'Pre-qualification is a soft estimate. Pre-approval involves verified income, assets, and credit. Sellers treat pre-approval significantly more seriously. In a competitive market a pre-qualification letter can cost you the deal.', good:'Provides a full pre-approval letter based on verified documentation.', bad:'Offers a pre-qualification letter and calls it "essentially the same thing."', md:false, legal:false },
+      { q:'What is your realistic timeline from contract to closing and what could extend it?', why:'Lender timelines vary. A lender who promises 21 days but delivers 45 days can jeopardize your contract. Understanding realistic timelines lets you negotiate appropriate closing dates.', good:'Gives you a realistic timeline based on current volume and identifies the most common causes of delay.', bad:'Promises a fast timeline without acknowledging what could extend it.', md:false, legal:false },
+      { q:'If I lock my rate today, what are the lock period options and what happens if closing extends beyond the lock period?', why:'Rate lock extensions cost money — typically 0.125% to 0.25% per extension period. Understanding this before you lock prevents a surprise charge if closing is delayed.', good:'Explains lock period options, extension costs, and what scenarios typically trigger extensions.', bad:'Says "don\'t worry about it, we\'ll extend it" without addressing the cost.', md:false, legal:false },
+      { q:'What documentation will you need immediately after offer acceptance and what most commonly causes delays on the borrower\'s side?', why:'Lender delays are often caused by documentation gaps — missing tax returns, unexplained deposits, employment verification delays. Knowing what to prepare in advance prevents last-minute scrambles.', good:'Provides a complete document checklist and identifies items most commonly missing.', bad:'Says "we\'ll let you know what we need" without a proactive list.', md:false, legal:false },
+    ]},
+    { id:'s2-title', title:'Questions for Your Title Company', exp:false, questions:[
+      { q:'What does the title search reveal and are there any open liens, judgments, or encumbrances on this property?', why:'Open permits, code violations, IRS liens, HOA liens, and contractor liens can all transfer to the new owner if not cleared at closing.', good:'Provides the preliminary title report and explains every item on it, including anything needing to be cleared before closing.', bad:'Says everything is fine without showing you the actual report.', md:true, legal:false },
+      { q:'Are there any open permits on this property and have all prior permits been properly closed?', why:'Open permits in Miami-Dade County are a known issue. Work done without permits or with permits never closed can require the new owner to bring work up to code at their expense after closing.', good:'Runs a permit search through Miami-Dade\'s permit database and reports any open or expired permits.', bad:'Doesn\'t mention permits unless you ask.', md:true, legal:false },
+      { q:'Do I need both a lender\'s title insurance policy and an owner\'s title insurance policy, and what does each cover?', why:'Lender\'s title insurance protects the lender — not you. Owner\'s title insurance protects your ownership interest permanently for a one-time premium. In Florida the cost is modest relative to the protection.', good:'Clearly explains the distinction, confirms the lender\'s policy is required, and recommends the owner\'s policy with a specific dollar amount.', bad:'Only mentions the lender\'s policy or makes the owner\'s policy sound optional and unimportant.', md:true, legal:false },
+      { q:'Who is responsible for each closing cost line item in a typical Miami-Dade transaction — buyer or seller?', why:'Florida has specific customs around who pays what at closing. Documentary stamp taxes on the deed are typically paid by the seller in Miami-Dade. Knowing this helps you evaluate whether your contract reflects standard practice.', good:'Walks through a standard closing cost allocation for Miami-Dade County, line by line.', bad:'Says it depends on the contract without explaining the local custom baseline.', md:true, legal:false },
+    ]},
+    { id:'s2-exp', title:'For Experienced Buyers', exp:true, questions:[
+      { q:'If my current home has not sold yet, what bridge financing or contingency options exist and what is the cost and risk of each?', why:'Simultaneous sale-purchase timing is one of the most complex situations in residential real estate. Bridge loans, sale contingencies, and leaseback arrangements all carry different risks and costs.', good:'Explains at least two options with real cost estimates and identifies which is most common in the current market.', bad:'Pushes you toward waiving the sale contingency without fully explaining the financial risk of carrying two mortgages.', md:false, legal:true },
+      { q:'Does this contract include a financing contingency that protects my earnest money if I am unable to obtain financing?', why:'Without a financing contingency, you can lose your earnest money if your loan falls through. Understanding what you are waiving is essential.', good:'Confirms the financing contingency is in the contract, explains what triggers it, and identifies the specific timeline.', bad:'Recommends waiving it to be competitive without quantifying your earnest money at risk.', md:false, legal:false },
+      { q:'What is the appraisal contingency structure and what happens if the property appraises below the purchase price?', why:'If the property appraises below your offer, your lender will only lend based on the appraised value. You either make up the difference in cash, renegotiate, or walk away.', good:'Explains the appraisal gap scenario, your options in each outcome, and the current market\'s typical approach.', bad:'Says "the appraisal will be fine" without addressing what happens if it isn\'t.', md:false, legal:false },
+    ]},
+  ]},
+  stage3: { title:'Under Contract', categories: [
+    { id:'s3-lender', title:'Questions for Your Lender', exp:false, questions:[
+      { q:'Can I review my Loan Estimate and Closing Disclosure side by side to confirm nothing has changed?', why:'The Closing Disclosure must be provided at least three business days before closing. Comparing it to your Loan Estimate reveals any fees that changed. You have the right to question any change.', good:'Provides both documents and walks you through any differences proactively.', bad:'Sends the Closing Disclosure close to the deadline and discourages comparison.', md:false, legal:false },
+      { q:'What is my exact cash to close figure and in what form must those funds be delivered?', why:'Cash to close must be delivered as wire transfer or certified funds. Wire instructions must be verified directly with your title company by phone — not email — to avoid wire fraud.', good:'Provides the exact amount, acceptable payment methods, and instructs you to verify wire instructions directly with the title company by phone.', bad:'Sends wire instructions by email without instructing you to verify by phone — the primary vector for closing wire fraud.', md:true, legal:false },
+      { q:'Is my rate still locked and is there any risk of the lock expiring before closing?', why:'Rate locks expire. If your closing is delayed and your lock expires, you may be re-locked at a higher rate. Confirm your lock expiration date before closing day.', good:'Confirms the lock expiration date and tells you what happens and at what cost if extension is needed.', bad:'Says the rate is fine without confirming the lock expiration date.', md:false, legal:false },
+      { q:'What is my first mortgage payment date and where do I send it?', why:'Mortgages are frequently sold to servicers. Knowing your first payment date, the amount, and where to send it before closing day prevents a missed payment.', good:'Confirms the first payment date, the servicer\'s payment address, and whether online payment is available.', bad:'Says you\'ll receive a welcome letter from the servicer without confirming the first payment date.', md:false, legal:false },
+    ]},
+    { id:'s3-title', title:'Questions for Your Title Company', exp:false, questions:[
+      { q:'Has every item from the preliminary title report been cleared and are there any outstanding issues that could delay closing?', why:'Title issues discovered late can delay or kill a closing. Confirm the title is clear at least one week before your scheduled closing date.', good:'Confirms a clear title with no outstanding issues at least 5–7 business days before closing.', bad:'Won\'t confirm title status until the day of closing.', md:false, legal:false },
+      { q:'What is the exact closing time, location, and what documents do I need to bring?', why:'Florida closings require a government-issued photo ID, certified funds or wire confirmation, and any documents your lender requests. Arriving unprepared can delay closing.', good:'Provides a complete checklist of what to bring, confirms time and location at least 48 hours in advance.', bad:'Says "just show up" without a preparation checklist.', md:false, legal:false },
+      { q:'How do I verify your wire instructions to protect myself from wire fraud?', why:'Closing wire fraud is a significant and growing crime in Florida real estate. You must verify wire instructions by calling the title company at a number you found independently — not one provided in an email.', good:'Proactively provides their verified phone number for wire instruction confirmation and warns you never to wire based on email instructions alone.', bad:'Only sends wire instructions by email without instructing you to verify by phone.', md:true, legal:false },
+    ]},
+    { id:'s3-insurance', title:'Questions for Your Insurance Broker', exp:false, questions:[
+      { q:'Is my homeowners insurance policy bound and will the declarations page be delivered to my lender before closing?', why:'Your lender requires proof of insurance before funding the loan. If the declarations page isn\'t delivered on time, closing can be delayed.', good:'Confirms the policy is bound, the declarations page is ready, and offers to send it directly to your lender.', bad:'Says it will be ready without confirming lender delivery.', md:false, legal:false },
+      { q:'Does my policy include loss of use coverage and how much would it provide if I was displaced from the home?', why:'Loss of use coverage pays for temporary housing if your home becomes uninhabitable after a covered loss. In South Florida after a major hurricane this coverage is critically important.', good:'Confirms the loss of use coverage amount and the number of months it covers.', bad:'Doesn\'t mention loss of use coverage or is vague about the amount.', md:true, legal:false },
+      { q:'How do I file a claim and what is the claims process if I need it in the first year?', why:'You should understand your claims process before you need it. Knowing the claims hotline, documentation requirements, and typical timeline reduces stress if something happens.', good:'Provides the claims hotline, explains the first steps after a loss, and describes the documentation you\'d need.', bad:'Says "just call us" without walking you through the process.', md:false, legal:false },
+    ]},
+    { id:'s3-exp', title:'For Experienced Buyers', exp:true, questions:[
+      { q:'If I am in a 1031 exchange, have all identification and exchange deadlines been met and confirmed in writing?', why:'A 1031 exchange has rigid IRS deadlines — 45 days to identify replacement property and 180 days to close. Missing either deadline disqualifies the exchange and triggers capital gains tax.', good:'Confirms all deadlines in writing with exact dates and confirms the qualified intermediary has the exchange funds.', bad:'Verbal confirmation only without written documentation of deadline compliance.', md:false, legal:true },
+      { q:'Has my estate planning attorney reviewed the ownership structure and vesting on the deed before closing?', why:'How your name appears on the deed has permanent legal and estate planning consequences. Changing vesting after closing requires a new deed and additional costs.', good:'Confirms you have reviewed vesting with your estate planning attorney and the deed reflects your intended ownership structure.', bad:'Defaults to the most common vesting without asking about your estate planning situation.', md:true, legal:true },
+      { q:'What is the process for canceling my Homestead Exemption on my prior primary residence if I am moving from another Florida property?', why:'Claiming Homestead on two Florida properties simultaneously — even unintentionally during a transition — can result in back taxes, penalties, and interest on the improperly claimed exemption.', good:'Knows the process for canceling prior Homestead and confirms you understand the timeline for doing so.', bad:'Focuses only on filing the new Homestead without addressing the prior exemption.', md:true, legal:true },
+    ]},
+  ]},
+};
+
 function showTab(t,btn){
   // Hide all standard analysis sections
   document.querySelectorAll('#sa .as').forEach(s=>{s.classList.remove('v');s.style.display='none';});
@@ -2586,6 +3018,15 @@ function showTab(t,btn){
     if(ccTab){ccTab.style.display='block';}
   } else if(t==='hg'){
     if(hgTab){hgTab.style.display='block';}
+  } else if(t==='ql-tab'){
+    const qlTab=document.getElementById('tab-ql-tab');
+    if(qlTab){
+      qlTab.style.display='block';
+      // Build inline QL tab content if not already built
+      if(!qlTab.innerHTML.trim()){
+        qlTab.innerHTML = buildQLTabContent();
+      }
+    }
   } else {
     const id=t==='c'?'tc':t==='b'?'tb2':'tw';
     const el=document.getElementById(id);
