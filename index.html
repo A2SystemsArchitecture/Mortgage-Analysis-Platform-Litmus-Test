@@ -356,9 +356,57 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
   </div>
 </div>
 
-<!-- DEMO -->
+<!-- DEMO CHOICE -->
 <div id="sdm" class="screen">
-  <div class="dmb">DEMO MODE — Sample Property: 1234 Brickell Bay Dr, Miami FL 33131 (Fictional)<button onclick="show('w')">Analyze My Property →</button></div>
+  <div class="mh">
+    <div class="mh-tag">Demo Mode · Fictional Property</div>
+    <h1>Home<span class="tr">True</span></h1>
+    <div class="mh-rule"></div>
+    <div class="mh-sub">See a completed analysis before entering your own property</div>
+  </div>
+  <div class="vs">Sample Property: <span>1234 Brickell Bay Dr, Miami FL 33131 (Fictional — Not Real)</span></div>
+  <div class="c">
+    <div style="max-width:600px;margin:0 auto;padding:3rem 0;">
+      <div class="ae tl" style="margin-bottom:.4rem;">Choose Your Demo</div>
+      <h2 style="font-family:var(--fd);font-size:1.8rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.75rem;color:var(--midnight);">Where are you in<br>your home search?</h2>
+      <p style="color:var(--muted);margin-bottom:2rem;font-size:.9rem;line-height:1.75;">Select the demo that matches your current situation. HomeTrue meets you where you are — not where the broker wants you to be.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:2rem;">
+
+        <div style="background:var(--white);border:2px solid var(--teal-muted);border-radius:10px;padding:1.75rem;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;" onclick="loadDemo(1)" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 10px 30px rgba(0,131,143,.15)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--teal);"></div>
+          <div style="font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal-mid);margin-bottom:.5rem;display:block;">Tier 1 Demo</div>
+          <div style="font-family:var(--fd);font-size:1.15rem;font-weight:700;color:var(--midnight);margin-bottom:.4rem;">I'm Still Browsing</div>
+          <p style="font-size:.82rem;color:var(--muted);line-height:1.55;margin-bottom:1rem;">Haven't made an offer yet. Just trying to understand what this home would actually cost me every month.</p>
+          <div style="background:var(--teal-light);border-radius:6px;padding:.75rem 1rem;">
+            <div style="font-family:var(--fm);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--teal-dim);margin-bottom:.3rem;">What you'll see</div>
+            <div style="font-size:.78rem;color:var(--teal-dim);line-height:1.6;">Best &amp; worst case monthly totals · Tax reassessment detail · DTI analysis · Pre-offer checklist · Insurance excluded with honest caveat</div>
+          </div>
+        </div>
+
+        <div style="background:var(--white);border:2px solid var(--indigo-muted);border-radius:10px;padding:1.75rem;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;" onclick="loadDemo(2)" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 10px 30px rgba(69,39,160,.15)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--indigo);"></div>
+          <div style="font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--indigo-mid);margin-bottom:.5rem;display:block;">Tier 2 Demo</div>
+          <div style="font-family:var(--fd);font-size:1.15rem;font-weight:700;color:var(--midnight);margin-bottom:.4rem;">I Have an Offer In</div>
+          <p style="font-size:.82rem;color:var(--muted);line-height:1.55;margin-bottom:1rem;">Offer is in or coming soon. I need precise numbers with insurance included before I commit.</p>
+          <div style="background:var(--indigo-light);border-radius:6px;padding:.75rem 1rem;">
+            <div style="font-family:var(--fm);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--indigo-dim);margin-bottom:.3rem;">What you'll see</div>
+            <div style="font-size:.78rem;color:var(--indigo-dim);line-height:1.6;">Everything in Tier 1 · Insurance estimate included · PMI removal timeline · Rate sensitivity analysis · Hidden closing costs</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="text-align:center;">
+        <button class="btn btn-ol" onclick="show('w')" style="font-size:.8rem;">← Back to Welcome</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DEMO ANALYSIS -->
+<div id="sdma" class="screen">
+  <div class="dmb" id="dmb-label">DEMO MODE — 1234 Brickell Bay Dr, Miami FL 33131 (Fictional)<button onclick="show('w')">Analyze My Property →</button></div>
   <div id="dmw"></div>
 </div>
 
@@ -548,7 +596,7 @@ const MKT={rv:"Friday, April 25, 2026 · 11:52 AM ET",ov:"April 2026",fm:6.23,br
 let S={tier:null,ins:null,g1s:false,pbs:false,inp:{}};
 
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('s'+id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
-function startDemo(){bDemo();show('dm');}
+function startDemo(){show('dm');}
 function startG1(){show('g1');}
 function startOver(){
   S={tier:null,ins:null,g1s:false,pbs:false,inp:{}};
@@ -815,19 +863,41 @@ function bAnalysis(i,isDemo){
   document.getElementById('af').innerHTML=`HomeTrue · Miami-Dade County Only · ${tl} · Rate verified ${MKT.rv}<br>Tax figures based on ${fmt(i.price)} purchase price · Flood insurance included · Test Phase — Attorney Review Pending<br>This analysis is an educational tool. Not financial, legal, or real estate advice.`;
 }
 
-function bDemo(){
-  const d={address:"1234 Brickell Bay Dr, Miami, FL 33131 (DEMO — Fictional Property)",price:460000,dpct:3,damt:13800,loan:446200,byr:2008,rage:10,rtp:'tile',con:'cbs',sht:true,hoa:185,fld:'x',ilo:10000,ihi:13000,pri:true,crd:'excellent',br:6.00,wr:6.75,bpi:cPI(446200,6.00),wpi:cPI(446200,6.75),ty1:Math.round(460000*.013/12),ty2:Math.round(410000*.013/12),bi:240,wi:420,il:'ESTIMATED',ic:false,ix:false,bp:134,wp:210,fb:42,fw:85,ep:89,tier:2};
-  d.bt=d.bpi+d.ty2+d.hoa+d.bi+d.bp+d.fb;
-  d.wt=d.wpi+d.ty1+d.hoa+d.wi+d.wp+d.fw+d.ep;
-  d.pn=Math.round((d.bt+d.wt)/2/50)*50;
-  bAnalysis(d,true);
+function loadDemo(tier){
+  const base={address:"1234 Brickell Bay Dr, Miami, FL 33131 (DEMO — Fictional Property)",price:460000,dpct:3,damt:13800,loan:446200,byr:2008,rage:10,rtp:'tile',con:'cbs',sht:true,hoa:185,fld:'x',ilo:10000,ihi:13000,pri:true,crd:'excellent',br:6.00,wr:6.75};
+  base.bpi=cPI(base.loan,base.br);
+  base.wpi=cPI(base.loan,base.wr);
+  base.ty1=Math.round(460000*.013/12);
+  base.ty2=Math.round(410000*.013/12);
+  base.tier=tier;
+
+  if(tier===1){
+    // Tier 1 — insurance excluded
+    base.bi=0;base.wi=0;base.il='EXCLUDED';base.ic=false;base.ix=true;
+    base.bp=134;base.wp=210;base.fb=42;base.fw=85;base.ep=89;
+    base.bt=base.bpi+base.ty2+base.hoa+base.bp+base.fb;
+    base.wt=base.wpi+base.ty1+base.hoa+base.wp+base.fw+base.ep;
+  } else {
+    // Tier 2 — insurance estimated
+    base.bi=240;base.wi=420;base.il='ESTIMATED';base.ic=false;base.ix=false;
+    base.bp=134;base.wp=210;base.fb=42;base.fw=85;base.ep=89;
+    base.bt=base.bpi+base.ty2+base.hoa+base.bi+base.bp+base.fb;
+    base.wt=base.wpi+base.ty1+base.hoa+base.wi+base.wp+base.fw+base.ep;
+  }
+  base.pn=Math.round((base.bt+base.wt)/2/50)*50;
+
+  const lbl=document.getElementById('dmb-label');
+  if(lbl) lbl.innerHTML=`DEMO MODE · Tier ${tier} · 1234 Brickell Bay Dr, Miami FL 33131 (Fictional)<button onclick="show('w')">Analyze My Property →</button>`;
+
+  bAnalysis(base,true);
   const w=document.getElementById('dmw');
   const mh=document.getElementById('amh').innerHTML;
   const ac=document.getElementById('ac').innerHTML;
   const af=document.getElementById('af').innerHTML;
-  w.innerHTML=`<div id="amh">${mh}</div><div class="vs">Rate verified:<span>${MKT.rv}</span></div><nav class="an"><div class="ats"><button class="at atc active" onclick="showDT('c',this)">§ Comparison</button><button class="at atb" onclick="showDT('b',this)">§ Best Case</button><button class="at atw" onclick="showDT('w',this)">§ Worst Case</button></div></nav><div id="ac">${ac}</div><footer>${af}</footer>`;
+  w.innerHTML=`<div id="amh">${mh}</div><div class="vs">Rate verified:<span>${MKT.rv}</span>&nbsp;·&nbsp;Tax:<span>${MKT.ov}</span>&nbsp;·&nbsp;Flood:<span>${MKT.ov}</span></div><nav class="an"><div class="ats"><button class="at atc active" onclick="showDT('c',this)">§ Comparison</button><button class="at atb" onclick="showDT('b',this)">§ Best Case</button><button class="at atw" onclick="showDT('w',this)">§ Worst Case</button></div><div class="nav-btns"><button class="btn btn-sm btn-ol" onclick="show('dm')">← Choose Demo</button><button class="btn btn-sm btn-tl" onclick="show('w')">Analyze My Property →</button></div></nav><div id="ac">${ac}</div><footer>${af}</footer>`;
   w.querySelectorAll('.as').forEach(s=>s.classList.remove('v'));
   const tc=w.querySelector('#tc');if(tc)tc.classList.add('v');
+  show('dma');
 }
 
 function showDT(t,btn){
