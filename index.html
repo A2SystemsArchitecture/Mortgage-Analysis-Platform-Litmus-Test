@@ -2006,8 +2006,8 @@ function calcAffordability() {
   const priceHigh = priceFromPayment(maxMoHigh);
   const priceMid = Math.round((priceLow + priceHigh) / 2 / 5000) * 5000;
 
-  const moLow = calcPI(priceLow * (1 - dpPct/100), rate) + (priceLow - 50000) * 0.013/12 + 280 + 55;
-  const moHigh = calcPI(priceHigh * (1 - dpPct/100), rate) + priceHigh * 0.013/12 + 300 + 75;
+  const moLow = cPI(priceLow * (1 - dpPct/100), rate) + (priceLow - 50000) * 0.013/12 + 280 + 55;
+  const moHigh = cPI(priceHigh * (1 - dpPct/100), rate) + priceHigh * 0.013/12 + 300 + 75;
 
   document.getElementById('aff-price-low').textContent = fmt(priceLow);
   document.getElementById('aff-price-high').textContent = fmt(priceHigh);
