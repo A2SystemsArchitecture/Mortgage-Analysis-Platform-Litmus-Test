@@ -4,1996 +4,824 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HomeTrue — Miami-Dade Mortgage Analysis</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Mono:wght@300;400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --ink: #0d0d0d;
-  --paper: #f7f4ef;
-  --cream: #faf8f4;
-  --gold: #c9a84c;
-  --gold-dim: #8a6f2e;
-  --gold-lt: #fdf8ed;
-  --best: #1e5c3e;
-  --best-mid: #2e7d52;
-  --best-lt: #eaf4ee;
-  --worst: #7a1f1f;
-  --worst-mid: #a83030;
-  --worst-lt: #fdeaea;
-  --accent: #1a3a5c;
-  --accent-lt: #e8f0f8;
-  --muted: #7a756e;
-  --rule: #ddd9d0;
-  --white: #ffffff;
-  --warn: #7a5c00;
-  --warn-lt: #fff9e6;
+  --slate-bg:#eceff1;--slate-surface:#e0e7ea;--slate:#b0bec5;--slate-dim:#90a4ae;
+  --midnight:#1a2332;--midnight-mid:#243042;--midnight-lt:#2e3d52;
+  --teal:#00838f;--teal-mid:#0097a7;--teal-light:#e0f7fa;--teal-dim:#006670;--teal-muted:#b2ebf2;
+  --indigo:#4527a0;--indigo-mid:#5e35b1;--indigo-light:#ede7f6;--indigo-dim:#311b92;--indigo-muted:#d1c4e9;
+  --emerald:#2e7d52;--emerald-mid:#388e5e;--emerald-light:#e8f5ee;--emerald-dim:#1b5e38;--emerald-muted:#c8e6d4;
+  --ink:#1a2332;--white:#ffffff;--muted:#546e7a;--rule:#cfd8dc;
+  --warn:#6d4c00;--warn-lt:#fff8e6;--error:#c62828;--error-lt:#ffebee;
+  --fd:'Fraunces',serif;--fm:'DM Mono',monospace;--fb:'Plus Jakarta Sans',sans-serif;
 }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--slate-bg);color:var(--ink);font-family:var(--fb);font-weight:300;min-height:100vh;line-height:1.65;}
+.screen{display:none;min-height:100vh;}
+.screen.active{display:block;animation:fi .3s ease;}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
-* { margin:0; padding:0; box-sizing:border-box; }
+/* MASTHEAD */
+.mh{background:var(--midnight);padding:3.5rem 2rem 3rem;text-align:center;position:relative;overflow:hidden;}
+.mh::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(0,151,167,.12),transparent 60%),radial-gradient(ellipse at 80% 50%,rgba(46,125,82,.08),transparent 60%);}
+.mh-tag{font-family:var(--fm);font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--teal-mid);margin-bottom:1rem;position:relative;}
+.mh h1{font-family:var(--fd);font-size:clamp(2.8rem,7vw,4.5rem);font-weight:900;color:var(--white);line-height:1;letter-spacing:-.03em;position:relative;}
+.mh h1 .tr{color:var(--emerald-mid);}
+.mh-rule{width:2.5rem;height:2px;background:linear-gradient(90deg,var(--teal-mid),var(--emerald-mid));margin:1.25rem auto;position:relative;}
+.mh-sub{font-family:var(--fm);font-size:.68rem;color:rgba(176,190,197,.5);letter-spacing:.12em;position:relative;}
+.scope-b{display:inline-block;background:rgba(0,131,143,.15);border:1px solid rgba(0,151,167,.3);color:var(--teal-mid);font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;padding:.3rem 1rem;border-radius:2px;margin-top:1rem;position:relative;}
 
-body {
-  background: var(--paper);
-  color: var(--ink);
-  font-family: 'Outfit', sans-serif;
-  font-weight: 300;
-  min-height: 100vh;
-  line-height: 1.65;
-}
+/* VERIFIED STRIP */
+.vs{background:var(--midnight-lt);padding:.6rem 1.5rem;display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap;font-family:var(--fm);font-size:.58rem;letter-spacing:.08em;color:rgba(176,190,197,.5);}
+.vs span{color:var(--teal-mid);}
 
-/* ── TYPOGRAPHY ── */
-.serif { font-family: 'Cormorant Garamond', serif; }
-.mono  { font-family: 'DM Mono', monospace; }
+/* GATE LAYOUT */
+.gw{background:var(--slate-bg);min-height:100vh;}
+.gh{background:var(--midnight);padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;}
+.gl{font-family:var(--fd);font-size:1.5rem;font-weight:900;color:var(--white);letter-spacing:-.02em;}
+.gl .tr{color:var(--emerald-mid);}
+.gs{font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;color:rgba(176,190,197,.4);}
+.gb{padding:3rem 1.5rem;max-width:680px;margin:0 auto;}
 
-/* ── SCREENS ── */
-.screen { display:none; min-height:100vh; }
-.screen.active { display:block; }
+/* PROGRESS */
+.pw{display:flex;align-items:center;margin-bottom:2rem;}
+.ps{display:flex;flex-direction:column;align-items:center;flex:1;position:relative;}
+.ps::after{content:'';position:absolute;top:14px;left:50%;width:100%;height:2px;background:var(--rule);z-index:0;}
+.ps:last-child::after{display:none;}
+.pd{width:28px;height:28px;border-radius:50%;background:var(--slate-surface);border:2px solid var(--rule);display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-size:.65rem;color:var(--muted);position:relative;z-index:1;transition:all .3s;}
+.pd.act{background:var(--teal);border-color:var(--teal);color:var(--white);}
+.pd.don{background:var(--emerald);border-color:var(--emerald);color:var(--white);}
+.pl{font-family:var(--fm);font-size:.55rem;letter-spacing:.08em;color:var(--muted);margin-top:.4rem;text-align:center;white-space:nowrap;}
 
-/* ── MASTHEAD ── */
-.masthead {
-  background: var(--ink);
-  padding: 3rem 2rem 2.5rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.masthead::before {
-  content:'';
-  position:absolute;
-  inset:0;
-  background: repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 40px,
-    rgba(201,168,76,0.03) 40px,
-    rgba(201,168,76,0.03) 41px
-  );
-}
-.masthead-tag {
-  font-family:'DM Mono',monospace;
-  font-size:0.6rem;
-  letter-spacing:0.3em;
-  text-transform:uppercase;
-  color:var(--gold);
-  margin-bottom:0.75rem;
-}
-.masthead h1 {
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(2.5rem,6vw,4rem);
-  font-weight:700;
-  color:var(--white);
-  line-height:1.05;
-  letter-spacing:-0.02em;
-  margin-bottom:0.5rem;
-}
-.masthead-rule {
-  width:3rem; height:2px;
-  background:var(--gold);
-  margin:1rem auto;
-}
-.masthead-sub {
-  font-family:'DM Mono',monospace;
-  font-size:0.7rem;
-  color:rgba(255,255,255,0.4);
-  letter-spacing:0.12em;
-}
+/* GATE TYPOGRAPHY */
+.ge{font-family:var(--fm);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-mid);margin-bottom:.5rem;}
+.gt{font-family:var(--fd);font-size:clamp(1.8rem,4vw,2.6rem);font-weight:700;line-height:1.1;margin-bottom:.75rem;letter-spacing:-.02em;color:var(--midnight);}
 
-/* ── SCOPE BADGE ── */
-.scope-badge {
-  display:inline-block;
-  background:var(--gold);
-  color:var(--ink);
-  font-family:'DM Mono',monospace;
-  font-size:0.6rem;
-  font-weight:500;
-  letter-spacing:0.15em;
-  text-transform:uppercase;
-  padding:0.3rem 0.9rem;
-  border-radius:2px;
-  margin-top:1rem;
-}
+/* SCROLL BOX */
+.sb{background:var(--white);border:1px solid var(--rule);border-radius:8px;height:360px;overflow-y:scroll;padding:2rem;margin:1.25rem 0;box-shadow:inset 0 2px 8px rgba(26,35,50,.04);}
+.sb::-webkit-scrollbar{width:4px;}
+.sb::-webkit-scrollbar-track{background:var(--slate-surface);}
+.sb::-webkit-scrollbar-thumb{background:var(--teal);border-radius:2px;}
+.sp{display:flex;align-items:center;gap:.5rem;background:var(--teal-light);border-left:3px solid var(--teal);padding:.65rem 1rem;font-family:var(--fm);font-size:.65rem;color:var(--teal-dim);letter-spacing:.08em;border-radius:0 4px 4px 0;margin-bottom:1rem;}
+.ds{margin-bottom:1.75rem;}
+.ds:last-child{margin-bottom:0;}
+.dn{font-family:var(--fm);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-mid);display:block;margin-bottom:.3rem;}
+.dh{font-family:var(--fd);font-size:1.1rem;font-weight:600;color:var(--midnight);margin-bottom:.5rem;}
+.db{font-size:.875rem;line-height:1.75;}
+.dr{height:1px;background:var(--rule);margin:1.5rem 0;}
 
-/* ── CONTAINERS ── */
-.container { max-width:760px; margin:0 auto; padding:2.5rem 1.5rem; }
-.container-wide { max-width:1000px; margin:0 auto; padding:2.5rem 1.5rem; }
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.85rem 2rem;border:none;border-radius:6px;font-family:var(--fb);font-size:.9rem;font-weight:500;cursor:pointer;transition:all .2s;letter-spacing:.01em;}
+.btn-mn{background:var(--midnight);color:var(--white);}
+.btn-mn:hover:not(:disabled){background:var(--midnight-lt);transform:translateY(-1px);box-shadow:0 4px 16px rgba(26,35,50,.2);}
+.btn-tl{background:var(--teal);color:var(--white);}
+.btn-tl:hover:not(:disabled){background:var(--teal-dim);transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,131,143,.3);}
+.btn-in{background:var(--indigo);color:var(--white);}
+.btn-in:hover:not(:disabled){background:var(--indigo-dim);transform:translateY(-1px);}
+.btn-em{background:var(--emerald);color:var(--white);}
+.btn-em:hover:not(:disabled){background:var(--emerald-dim);transform:translateY(-1px);box-shadow:0 4px 16px rgba(46,125,82,.3);}
+.btn-ol{background:transparent;color:var(--midnight);border:1.5px solid var(--midnight);}
+.btn-ol:hover{background:var(--midnight);color:var(--white);}
+.btn:disabled{background:var(--rule);color:var(--muted);cursor:not-allowed;transform:none;box-shadow:none;}
+.btn-fw{width:100%;}
+.btn-sm{padding:.45rem 1rem;font-size:.78rem;}
 
-/* ── GATE SCREENS ── */
-.gate-wrap {
-  background:var(--cream);
-  min-height:100vh;
-}
-.gate-header {
-  background:var(--ink);
-  padding:1.5rem 2rem;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-.gate-logo {
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.4rem;
-  font-weight:700;
-  color:var(--white);
-  letter-spacing:-0.01em;
-}
-.gate-logo span { color:var(--gold); }
-.gate-step {
-  font-family:'DM Mono',monospace;
-  font-size:0.6rem;
-  letter-spacing:0.15em;
-  color:rgba(255,255,255,0.4);
-}
+/* NOTICES */
+.nt{border-radius:0 6px 6px 0;padding:1.1rem 1.4rem;margin:1.1rem 0;}
+.nt-tl{background:var(--teal-light);border-left:4px solid var(--teal);}
+.nt-in{background:var(--indigo-light);border-left:4px solid var(--indigo);}
+.nt-em{background:var(--emerald-light);border-left:4px solid var(--emerald);}
+.nt-wn{background:var(--warn-lt);border-left:4px solid var(--warn);}
+.nl{font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;font-weight:500;display:block;margin-bottom:.35rem;}
+.nl-tl{color:var(--teal-dim);}
+.nl-in{color:var(--indigo-dim);}
+.nl-em{color:var(--emerald-dim);}
+.nl-wn{color:var(--warn);}
+.nt p{font-size:.875rem;line-height:1.65;}
 
-.gate-body { padding:3rem 1.5rem; max-width:680px; margin:0 auto; }
+/* TIER CARDS */
+.tcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1rem;margin:1.5rem 0;}
+.tc{background:var(--white);border:2px solid var(--rule);border-radius:10px;padding:1.5rem;cursor:pointer;transition:all .2s;position:relative;overflow:hidden;}
+.tc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--rule);transition:background .2s;}
+.tc:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(26,35,50,.1);}
+.tc.s1::before{background:var(--teal);}
+.tc.s1{border-color:var(--teal-muted);background:var(--teal-light);}
+.tc.s2::before{background:var(--indigo);}
+.tc.s2{border-color:var(--indigo-muted);background:var(--indigo-light);}
+.tc.s3::before{background:var(--emerald);}
+.tc.s3{border-color:var(--emerald-muted);background:var(--emerald-light);}
+.tck{position:absolute;top:.75rem;right:.75rem;width:1.4rem;height:1.4rem;border-radius:50%;display:none;align-items:center;justify-content:center;font-size:.65rem;color:var(--white);font-weight:700;}
+.tc.s1 .tck{display:flex;background:var(--teal);}
+.tc.s2 .tck{display:flex;background:var(--indigo);}
+.tc.s3 .tck{display:flex;background:var(--emerald);}
+.tn{font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;color:var(--muted);display:block;margin-bottom:.35rem;}
+.tna{font-family:var(--fd);font-size:1.2rem;font-weight:700;color:var(--midnight);display:block;margin-bottom:.2rem;}
+.ta{font-family:var(--fm);font-size:.62rem;display:block;margin-bottom:.5rem;}
+.tc.s1 .ta{color:var(--teal-dim);}
+.tc.s2 .ta{color:var(--indigo-dim);}
+.tc.s3 .ta{color:var(--emerald-dim);}
+.td{font-size:.8rem;color:var(--muted);line-height:1.5;}
 
-.gate-eyebrow {
-  font-family:'DM Mono',monospace;
-  font-size:0.6rem;
-  letter-spacing:0.2em;
-  text-transform:uppercase;
-  color:var(--gold);
-  margin-bottom:0.5rem;
-}
-.gate-title {
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(1.8rem,4vw,2.8rem);
-  font-weight:700;
-  line-height:1.1;
-  margin-bottom:1rem;
-  letter-spacing:-0.02em;
-}
+/* FORM */
+.fs{margin-bottom:2.5rem;}
+.fst{font-family:var(--fd);font-size:1.2rem;font-weight:700;color:var(--midnight);padding-bottom:.6rem;border-bottom:2px solid var(--midnight);margin-bottom:1.25rem;}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+@media(max-width:560px){.fg{grid-template-columns:1fr;}}
+.ff{display:flex;flex-direction:column;gap:.3rem;}
+.ffu{grid-column:1/-1;}
+label{font-family:var(--fm);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+input,select{padding:.7rem .9rem;border:1.5px solid var(--rule);border-radius:6px;font-family:var(--fb);font-size:.9rem;color:var(--midnight);background:var(--white);transition:border-color .15s,box-shadow .15s;appearance:none;}
+input:focus,select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,151,167,.1);}
+.fn{font-size:.72rem;color:var(--muted);line-height:1.45;}
+.fc{background:var(--warn-lt);border-left:3px solid var(--warn);padding:.65rem .9rem;border-radius:0 4px 4px 0;font-size:.75rem;color:var(--warn);line-height:1.5;}
+.ip{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin:.5rem 0;}
+.ipa{border:1.5px solid var(--rule);border-radius:8px;padding:1rem;cursor:pointer;transition:all .2s;background:var(--white);}
+.ipa:hover{border-color:var(--indigo-mid);}
+.ipa.sel{border-color:var(--indigo);background:var(--indigo-light);}
+.ipl{font-family:var(--fm);font-size:.58rem;letter-spacing:.1em;color:var(--indigo-mid);display:block;margin-bottom:.25rem;}
+.ipt{font-size:.88rem;font-weight:600;color:var(--midnight);display:block;margin-bottom:.2rem;}
+.ipd{font-size:.75rem;color:var(--muted);line-height:1.4;}
+.pbs{background:var(--white);border:1px solid var(--rule);border-radius:6px;height:160px;overflow-y:scroll;padding:1.1rem;margin:.6rem 0;font-size:.82rem;line-height:1.7;}
+.pbs::-webkit-scrollbar{width:3px;}
+.pbs::-webkit-scrollbar-thumb{background:var(--indigo);border-radius:2px;}
+.cl{display:flex;align-items:flex-start;gap:.7rem;cursor:pointer;font-size:.875rem;color:var(--ink);font-family:var(--fb);text-transform:none;letter-spacing:0;line-height:1.6;margin:1rem 0;}
+.cl input[type="checkbox"]{width:18px;height:18px;flex-shrink:0;margin-top:2px;accent-color:var(--teal);padding:0;border-radius:3px;}
 
-/* ── SCROLL BOX ── */
-.scroll-box {
-  background:var(--white);
-  border:1px solid var(--rule);
-  border-radius:6px;
-  height:360px;
-  overflow-y:scroll;
-  padding:2rem;
-  margin:1.5rem 0;
-  position:relative;
-  scroll-behavior:smooth;
-}
-.scroll-box::-webkit-scrollbar { width:4px; }
-.scroll-box::-webkit-scrollbar-track { background:var(--rule); }
-.scroll-box::-webkit-scrollbar-thumb { background:var(--gold); border-radius:2px; }
+/* WELCOME CARDS */
+.wcs{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin:2rem 0;}
+@media(max-width:500px){.wcs{grid-template-columns:1fr;}}
+.wc{background:var(--white);border:1.5px solid var(--rule);border-radius:10px;padding:1.75rem;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;}
+.wc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.wc.dm::before{background:linear-gradient(90deg,var(--teal),var(--emerald));}
+.wc.st::before{background:var(--midnight);}
+.wc:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(26,35,50,.1);}
+.wct{font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem;display:block;}
+.dm .wct{color:var(--teal-mid);}
+.st .wct{color:var(--muted);}
+.wcn{font-family:var(--fd);font-size:1.15rem;font-weight:700;color:var(--midnight);display:block;margin-bottom:.4rem;}
+.wcd{font-size:.82rem;color:var(--muted);line-height:1.55;}
 
-.scroll-instruction {
-  background:var(--warn-lt);
-  border:1px solid rgba(122,92,0,0.2);
-  border-left:4px solid var(--warn);
-  border-radius:0 4px 4px 0;
-  padding:0.75rem 1rem;
-  font-family:'DM Mono',monospace;
-  font-size:0.7rem;
-  color:var(--warn);
-  letter-spacing:0.08em;
-  margin-bottom:1rem;
-  display:flex;
-  align-items:center;
-  gap:0.5rem;
-}
+/* ANALYSIS NAV */
+.an{background:var(--white);border-bottom:1px solid var(--rule);position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;box-shadow:0 2px 12px rgba(26,35,50,.06);}
+.ats{display:flex;overflow-x:auto;}
+.at{padding:1rem 1.4rem;font-family:var(--fm);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border:none;background:none;color:var(--muted);border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;}
+.at:hover{color:var(--midnight);}
+.at.atc.active{color:var(--teal-dim);border-bottom-color:var(--teal);}
+.at.atb.active{color:var(--emerald-dim);border-bottom-color:var(--emerald);}
+.at.atw.active{color:var(--indigo-dim);border-bottom-color:var(--indigo);}
+.as{display:none;}
+.as.v{display:block;animation:fi .25s ease;}
 
-/* Disclosure sections inside scroll box */
-.disc-section { margin-bottom:1.75rem; }
-.disc-section:last-child { margin-bottom:0; }
-.disc-num {
-  font-family:'DM Mono',monospace;
-  font-size:0.58rem;
-  letter-spacing:0.2em;
-  color:var(--gold);
-  text-transform:uppercase;
-  display:block;
-  margin-bottom:0.3rem;
-}
-.disc-heading {
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.15rem;
-  font-weight:700;
-  color:var(--ink);
-  margin-bottom:0.5rem;
-}
-.disc-body {
-  font-size:0.88rem;
-  color:var(--ink);
-  line-height:1.7;
-}
-.disc-rule { height:1px; background:var(--rule); margin:1.5rem 0; }
+/* CONTAINERS */
+.c{max-width:780px;margin:0 auto;padding:2.5rem 1.5rem;}
+.cw{max-width:1020px;margin:0 auto;padding:2.5rem 1.5rem;}
 
-/* ── BUTTONS ── */
-.btn {
-  display:inline-block;
-  padding:0.85rem 2rem;
-  border:none;
-  border-radius:4px;
-  font-family:'Outfit',sans-serif;
-  font-size:0.9rem;
-  font-weight:500;
-  cursor:pointer;
-  transition:all 0.2s;
-  letter-spacing:0.02em;
-}
-.btn-primary {
-  background:var(--ink);
-  color:var(--white);
-}
-.btn-primary:hover:not(:disabled) { background:#2a2a2a; transform:translateY(-1px); }
-.btn-primary:disabled {
-  background:var(--rule);
-  color:var(--muted);
-  cursor:not-allowed;
-  transform:none;
-}
-.btn-gold {
-  background:var(--gold);
-  color:var(--ink);
-  font-weight:600;
-}
-.btn-gold:hover:not(:disabled) { background:#b8932a; transform:translateY(-1px); }
-.btn-gold:disabled {
-  background:var(--rule);
-  color:var(--muted);
-  cursor:not-allowed;
-}
-.btn-outline {
-  background:transparent;
-  color:var(--ink);
-  border:1.5px solid var(--ink);
-}
-.btn-outline:hover { background:var(--ink); color:var(--white); }
-.btn-sm { padding:0.5rem 1.25rem; font-size:0.8rem; }
-.btn-full { width:100%; text-align:center; }
+/* ANALYSIS COMPONENTS */
+.ae{font-family:var(--fm);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.4rem;}
+.ae.tl{color:var(--teal-mid);}
+.ae.em{color:var(--emerald-mid);}
+.ae.in{color:var(--indigo-mid);}
+.at2{font-family:var(--fd);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;line-height:1.15;color:var(--midnight);margin-bottom:.4rem;}
+.ar{height:1px;background:var(--rule);margin:1.25rem 0 2rem;}
 
-/* ── NOTICE BOXES ── */
-.notice {
-  border-radius:0 6px 6px 0;
-  padding:1.25rem 1.5rem;
-  margin:1.25rem 0;
-}
-.notice-gold { background:var(--gold-lt); border-left:4px solid var(--gold); }
-.notice-worst { background:var(--worst-lt); border-left:4px solid var(--worst); }
-.notice-best { background:var(--best-lt); border-left:4px solid var(--best); }
-.notice-accent { background:var(--accent-lt); border-left:4px solid var(--accent); }
-.notice-warn { background:var(--warn-lt); border-left:4px solid var(--warn); }
-.notice-label {
-  font-family:'DM Mono',monospace;
-  font-size:0.6rem;
-  letter-spacing:0.15em;
-  text-transform:uppercase;
-  font-weight:500;
-  display:block;
-  margin-bottom:0.4rem;
-}
-.notice-label.gold { color:var(--gold-dim); }
-.notice-label.worst { color:var(--worst-mid); }
-.notice-label.best { color:var(--best-mid); }
-.notice-label.accent { color:var(--accent); }
-.notice-label.warn { color:var(--warn); }
-.notice p { font-size:0.875rem; color:var(--ink); line-height:1.65; }
+/* SCENARIO CARDS */
+.scs{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin:1.25rem 0;}
+@media(max-width:520px){.scs{grid-template-columns:1fr;}}
+.sc{border-radius:8px;padding:1.75rem;position:relative;overflow:hidden;}
+.sc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.scb{background:var(--emerald-light);border:1px solid var(--emerald-muted);}
+.scb::before{background:var(--emerald);}
+.scw{background:var(--indigo-light);border:1px solid var(--indigo-muted);}
+.scw::before{background:var(--indigo);}
+.scl{font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;display:block;margin-bottom:.5rem;}
+.scb .scl{color:var(--emerald-mid);}
+.scw .scl{color:var(--indigo-mid);}
+.sct{font-family:var(--fd);font-size:2.6rem;font-weight:900;line-height:1;margin-bottom:.2rem;}
+.scb .sct{color:var(--emerald);}
+.scw .sct{color:var(--indigo);}
+.scs2{font-family:var(--fm);font-size:.62rem;color:var(--muted);margin-bottom:1rem;}
+.scr{display:inline-block;padding:.2rem .65rem;border-radius:3px;font-family:var(--fm);font-size:.68rem;font-weight:500;color:var(--white);}
+.scb .scr{background:var(--emerald);}
+.scw .scr{background:var(--indigo);}
 
-/* ── TIER SELECTOR ── */
-.tier-cards {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:1rem;
-  margin:1.5rem 0;
-}
-.tier-card {
-  background:var(--white);
-  border:2px solid var(--rule);
-  border-radius:8px;
-  padding:1.5rem;
-  cursor:pointer;
-  transition:all 0.2s;
-  position:relative;
-}
-.tier-card:hover { border-color:var(--gold); transform:translateY(-2px); box-shadow:0 4px 20px rgba(0,0,0,0.08); }
-.tier-card.selected { border-color:var(--gold); background:var(--gold-lt); }
-.tier-card.selected::before {
-  content:'✓';
-  position:absolute;
-  top:0.75rem; right:0.75rem;
-  width:1.5rem; height:1.5rem;
-  background:var(--gold);
-  color:var(--ink);
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:0.7rem;
-  font-weight:700;
-  line-height:1.5rem;
-  text-align:center;
-}
-.tier-num {
-  font-family:'DM Mono',monospace;
-  font-size:0.6rem;
-  letter-spacing:0.15em;
-  color:var(--muted);
-  display:block;
-  margin-bottom:0.4rem;
-}
-.tier-name {
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.25rem;
-  font-weight:700;
-  color:var(--ink);
-  display:block;
-  margin-bottom:0.3rem;
-}
-.tier-acc {
-  font-family:'DM Mono',monospace;
-  font-size:0.65rem;
-  color:var(--gold-dim);
-  display:block;
-  margin-bottom:0.5rem;
-}
-.tier-desc { font-size:0.8rem; color:var(--muted); line-height:1.5; }
+/* DELTA */
+.db2{background:var(--midnight);border-radius:8px;padding:1.5rem 2rem;display:flex;justify-content:space-around;align-items:center;flex-wrap:wrap;gap:1rem;margin:1.5rem 0;position:relative;overflow:hidden;}
+.db2::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(0,151,167,.1),transparent 70%);}
+.di{text-align:center;position:relative;}
+.dn2{font-family:var(--fd);font-size:1.8rem;font-weight:900;color:var(--teal-mid);display:block;}
+.dl{font-family:var(--fm);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(176,190,197,.45);}
 
-/* ── FORM ── */
-.form-section { margin-bottom:2.5rem; }
-.form-section-title {
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.3rem;
-  font-weight:700;
-  color:var(--ink);
-  padding-bottom:0.5rem;
-  border-bottom:2px solid var(--ink);
-  margin-bottom:1.25rem;
-}
-.form-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:1rem;
-}
-@media(max-width:560px) { .form-grid { grid-template-columns:1fr; } }
-.form-grid-3 { grid-template-columns:1fr 1fr 1fr; }
-@media(max-width:680px) { .form-grid-3 { grid-template-columns:1fr; } }
+/* PLANNING */
+.pb2{background:var(--white);border:1px solid var(--rule);border-left:4px solid var(--teal);border-radius:0 8px 8px 0;padding:1.5rem 2rem;margin:1.5rem 0;}
+.pbl{font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal-dim);display:block;margin-bottom:.35rem;}
+.pbn{font-family:var(--fd);font-size:2rem;font-weight:900;color:var(--midnight);}
+.pbd{font-size:.85rem;color:var(--muted);margin-top:.35rem;line-height:1.6;}
 
-.field { display:flex; flex-direction:column; gap:0.35rem; }
-.field-full { grid-column:1/-1; }
-label {
-  font-family:'DM Mono',monospace;
-  font-size:0.65rem;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  color:var(--muted);
-}
-input, select {
-  padding:0.7rem 0.9rem;
-  border:1.5px solid var(--rule);
-  border-radius:4px;
-  font-family:'Outfit',sans-serif;
-  font-size:0.9rem;
-  color:var(--ink);
-  background:var(--white);
-  transition:border-color 0.15s;
-  appearance:none;
-}
-input:focus, select:focus {
-  outline:none;
-  border-color:var(--gold);
-}
-.field-note {
-  font-size:0.72rem;
-  color:var(--muted);
-  line-height:1.4;
-}
-.field-caveat {
-  background:var(--warn-lt);
-  border:1px solid rgba(122,92,0,0.2);
-  border-left:3px solid var(--warn);
-  padding:0.6rem 0.8rem;
-  border-radius:0 4px 4px 0;
-  font-size:0.75rem;
-  color:var(--warn);
-  line-height:1.5;
-}
+/* TABLES */
+.ct{width:100%;border-collapse:collapse;font-size:.875rem;margin:1.25rem 0;}
+.ct th{font-family:var(--fm);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;padding:.65rem 1rem;text-align:left;border-bottom:2px solid var(--midnight);}
+.ct th:nth-child(2){color:var(--emerald);}
+.ct th:nth-child(3){color:var(--indigo);}
+.ct th:nth-child(4){color:var(--teal-mid);}
+.ct td{padding:.7rem 1rem;border-bottom:1px solid var(--rule);font-weight:300;}
+.ct tr:hover td{background:rgba(0,151,167,.03);}
+.ct .tr2 td{font-family:var(--fd);font-size:1.1rem;font-weight:700;border-top:2px solid var(--midnight);border-bottom:none;padding-top:.9rem;}
+.rl{font-weight:500;color:var(--midnight);}
+.rn{font-size:.68rem;color:var(--muted);display:block;font-weight:300;}
+.bv{color:var(--emerald);font-weight:500;}
+.wv{color:var(--indigo);font-weight:500;}
+.dv{color:var(--teal-mid);font-family:var(--fm);font-size:.75rem;}
+.bt{width:100%;border-collapse:collapse;font-size:.875rem;margin:1.25rem 0;}
+.bt th{font-family:var(--fm);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;padding:.55rem .9rem;text-align:left;color:var(--muted);border-bottom:1px solid var(--rule);}
+.bt td{padding:.65rem .9rem;border-bottom:1px solid var(--rule);font-weight:300;}
+.bt .tt{font-weight:600;font-size:1rem;border-top:2px solid var(--midnight);border-bottom:none;}
+.bt .nt2{font-family:var(--fm);font-size:.62rem;color:var(--muted);}
 
-/* Insurance path selector */
-.ins-paths { display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin:0.5rem 0; }
-.ins-path {
-  border:1.5px solid var(--rule);
-  border-radius:6px;
-  padding:1rem;
-  cursor:pointer;
-  transition:all 0.2s;
-  background:var(--white);
-}
-.ins-path:hover { border-color:var(--accent); }
-.ins-path.selected { border-color:var(--accent); background:var(--accent-lt); }
-.ins-path-label {
-  font-family:'DM Mono',monospace;
-  font-size:0.6rem;
-  letter-spacing:0.12em;
-  color:var(--accent);
-  display:block;
-  margin-bottom:0.3rem;
-}
-.ins-path-title { font-size:0.88rem; font-weight:600; color:var(--ink); display:block; margin-bottom:0.25rem; }
-.ins-path-desc { font-size:0.75rem; color:var(--muted); line-height:1.4; }
+/* STATS */
+.sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin:1.5rem 0;}
+.stc{background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:1.25rem;}
+.stc.e{border-top:3px solid var(--emerald);}
+.stc.i{border-top:3px solid var(--indigo);}
+.stc.t{border-top:3px solid var(--teal);}
+.sl{font-family:var(--fm);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:.3rem;}
+.sv{font-family:var(--fd);font-size:1.8rem;font-weight:900;color:var(--midnight);line-height:1;}
+.sn{font-size:.7rem;color:var(--muted);margin-top:.25rem;line-height:1.4;}
 
-/* Path B scroll acknowledgment */
-.pathb-scroll {
-  background:var(--white);
-  border:1px solid var(--rule);
-  border-radius:6px;
-  height:180px;
-  overflow-y:scroll;
-  padding:1.25rem;
-  margin:0.75rem 0;
-  font-size:0.82rem;
-  line-height:1.7;
-  color:var(--ink);
-}
-.pathb-scroll::-webkit-scrollbar { width:3px; }
-.pathb-scroll::-webkit-scrollbar-thumb { background:var(--worst); }
+/* DTI */
+.dt{background:var(--white);border:1px solid var(--rule);border-radius:8px;overflow:hidden;margin:1.25rem 0;}
+.dr2{display:flex;justify-content:space-between;align-items:center;padding:.6rem 1.1rem;border-bottom:1px solid var(--rule);font-size:.84rem;flex-wrap:wrap;gap:.25rem;}
+.dr2:last-child{border-bottom:none;}
+.drl{color:var(--muted);font-weight:300;}
+.do{color:var(--emerald);font-weight:500;font-family:var(--fm);font-size:.75rem;}
+.dw{color:var(--warn);font-weight:500;font-family:var(--fm);font-size:.75rem;}
+.dd{color:var(--indigo);font-weight:500;font-family:var(--fm);font-size:.75rem;}
 
-/* ── DATA VERIFIED STRIP ── */
-.verified-strip {
-  background:var(--ink);
-  color:rgba(255,255,255,0.5);
-  padding:0.5rem 1.5rem;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:2rem;
-  flex-wrap:wrap;
-  font-family:'DM Mono',monospace;
-  font-size:0.58rem;
-  letter-spacing:0.1em;
-}
-.verified-strip span { color:var(--gold); }
+/* PMI TIMELINE */
+.pt{background:var(--emerald-light);border-radius:8px;padding:1.5rem;margin:1.25rem 0;}
+.ptl{font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--emerald-dim);margin-bottom:1rem;}
+.pp{display:flex;gap:1rem;padding:.5rem 0;border-bottom:1px dashed var(--emerald-muted);}
+.pp:last-child{border-bottom:none;}
+.py{font-family:var(--fm);font-size:.62rem;color:var(--emerald-dim);font-weight:500;width:3.5rem;flex-shrink:0;padding-top:.1rem;}
+.pd2{font-size:.82rem;line-height:1.55;}
 
-/* ── ANALYSIS OUTPUT ── */
-.analysis-wrap { background:var(--paper); min-height:100vh; }
+/* RATE BARS */
+.rb{background:var(--indigo-light);border-radius:8px;padding:1.5rem;margin:1.25rem 0;}
+.rbl{font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--indigo-dim);margin-bottom:1.25rem;}
+.br{display:flex;align-items:center;gap:.75rem;margin-bottom:.7rem;}
+.brl{font-family:var(--fm);font-size:.62rem;color:var(--muted);width:2.5rem;flex-shrink:0;}
+.btr{flex:1;height:7px;background:rgba(69,39,160,.12);border-radius:3px;overflow:hidden;}
+.bf{height:100%;background:var(--indigo-mid);border-radius:3px;}
+.bv2{font-family:var(--fm);font-size:.68rem;color:var(--indigo-dim);font-weight:500;width:5rem;text-align:right;flex-shrink:0;}
 
-.analysis-nav {
-  background:var(--cream);
-  border-bottom:1px solid var(--rule);
-  position:sticky;
-  top:0;
-  z-index:100;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 1.5rem;
-}
-.analysis-tabs { display:flex; }
-.analysis-tab {
-  padding:1rem 1.5rem;
-  font-family:'DM Mono',monospace;
-  font-size:0.65rem;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  cursor:pointer;
-  border:none;
-  background:none;
-  color:var(--muted);
-  border-bottom:2px solid transparent;
-  transition:all 0.2s;
-  white-space:nowrap;
-}
-.analysis-tab:hover { color:var(--ink); }
-.analysis-tab.active-compare { color:var(--gold-dim); border-bottom-color:var(--gold); }
-.analysis-tab.active-best { color:var(--best); border-bottom-color:var(--best); }
-.analysis-tab.active-worst { color:var(--worst); border-bottom-color:var(--worst); }
+/* TWO COL */
+.tc2{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:1.25rem 0;}
+@media(max-width:580px){.tc2{grid-template-columns:1fr;}}
+.ci{background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:1.25rem;}
+.cit{font-family:var(--fd);font-size:1rem;font-weight:700;margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid var(--rule);}
+.cit.e{color:var(--emerald);}
+.cit.t{color:var(--teal-dim);}
+.cb{display:flex;gap:.4rem;margin-bottom:.4rem;font-size:.82rem;line-height:1.5;}
+.cb::before{content:'→';color:var(--teal-mid);flex-shrink:0;font-family:var(--fm);font-size:.68rem;margin-top:.15rem;}
 
-.analysis-section { display:none; }
-.analysis-section.visible { display:block; }
+/* HIDDEN COSTS */
+.hg{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.25rem 0;}
+@media(max-width:520px){.hg{grid-template-columns:1fr;}}
+.hc2{background:var(--white);border:1px solid var(--rule);border-left:3px solid var(--indigo-mid);border-radius:0 8px 8px 0;padding:1.1rem 1.25rem;}
+.hcl{font-family:var(--fm);font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:var(--indigo-mid);display:block;margin-bottom:.3rem;}
+.hcv{font-family:var(--fd);font-size:1.3rem;font-weight:700;color:var(--midnight);display:block;margin-bottom:.2rem;}
+.hcd{font-size:.75rem;color:var(--muted);line-height:1.5;}
 
-/* Stat grid */
-.stat-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-  gap:1rem;
-  margin:1.5rem 0;
-}
-.stat-card {
-  background:var(--white);
-  border:1px solid var(--rule);
-  border-radius:6px;
-  padding:1.25rem;
-}
-.stat-card.g { border-top:3px solid var(--best); }
-.stat-card.r { border-top:3px solid var(--worst); }
-.stat-card.d { border-top:3px solid var(--gold); }
-.stat-lbl {
-  font-family:'DM Mono',monospace;
-  font-size:0.58rem;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  color:var(--muted);
-  display:block;
-  margin-bottom:0.3rem;
-}
-.stat-val {
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.75rem;
-  font-weight:700;
-  color:var(--ink);
-  line-height:1;
-}
-.stat-note { font-size:0.7rem; color:var(--muted); margin-top:0.25rem; line-height:1.4; }
+/* CHECKLIST */
+.ck{background:var(--midnight);border-radius:8px;padding:2rem;margin:1.25rem 0;}
+.ckt{font-family:var(--fd);font-size:1.2rem;color:var(--teal-mid);margin-bottom:1.25rem;}
+.cki{display:flex;gap:.75rem;margin-bottom:.6rem;font-size:.83rem;color:rgba(176,190,197,.82);line-height:1.55;}
+.ckn{font-family:var(--fm);font-size:.6rem;color:var(--emerald-mid);flex-shrink:0;padding-top:.15rem;}
 
-/* Comparison table */
-.comp-table {
-  width:100%;
-  border-collapse:collapse;
-  font-size:0.875rem;
-  margin:1.25rem 0;
-}
-.comp-table th {
-  font-family:'DM Mono',monospace;
-  font-size:0.6rem;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  padding:0.7rem 1rem;
-  text-align:left;
-  border-bottom:2px solid var(--ink);
-}
-.comp-table th:nth-child(2) { color:var(--best); }
-.comp-table th:nth-child(3) { color:var(--worst); }
-.comp-table th:nth-child(4) { color:var(--gold-dim); }
-.comp-table td {
-  padding:0.75rem 1rem;
-  border-bottom:1px solid var(--rule);
-  font-weight:300;
-}
-.comp-table tr:hover td { background:rgba(0,0,0,0.015); }
-.comp-table .total-row td {
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.1rem;
-  font-weight:700;
-  border-top:2px solid var(--ink);
-  border-bottom:none;
-  padding-top:0.9rem;
-}
-.best-v { color:var(--best); font-weight:500; }
-.worst-v { color:var(--worst); font-weight:500; }
-.diff-v { color:var(--gold-dim); font-family:'DM Mono',monospace; font-size:0.78rem; }
-.comp-table .row-lbl { font-weight:500; }
-.comp-table .row-note { font-size:0.72rem; color:var(--muted); display:block; font-weight:300; }
+/* TAGS */
+.utag{display:inline-block;background:var(--warn-lt);border:1px solid var(--warn);color:var(--warn);font-family:var(--fm);font-size:.52rem;letter-spacing:.06em;padding:.1rem .35rem;border-radius:2px;margin-left:.35rem;vertical-align:middle;}
+.ctag{display:inline-block;background:var(--emerald-light);border:1px solid var(--emerald-muted);color:var(--emerald-dim);font-family:var(--fm);font-size:.52rem;letter-spacing:.06em;padding:.1rem .35rem;border-radius:2px;margin-left:.35rem;vertical-align:middle;}
 
-/* Delta banner */
-.delta-banner {
-  background:var(--ink);
-  border-radius:6px;
-  padding:1.5rem 2rem;
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:1rem;
-  margin:1.5rem 0;
-}
-.delta-item { text-align:center; }
-.delta-num {
-  font-family:'Cormorant Garamond',serif;
-  font-size:1.8rem;
-  font-weight:700;
-  color:var(--gold);
-  display:block;
-}
-.delta-lbl {
-  font-family:'DM Mono',monospace;
-  font-size:0.58rem;
-  letter-spacing:0.1em;
-  text-transform:uppercase;
-  color:rgba(255,255,255,0.4);
-}
+/* DEMO BANNER */
+.dmb{background:var(--teal);color:var(--white);text-align:center;padding:.6rem 1rem;font-family:var(--fm);font-size:.62rem;letter-spacing:.08em;}
+.dmb button{background:var(--white);color:var(--teal-dim);border:none;padding:.2rem .7rem;border-radius:3px;font-family:var(--fm);font-size:.6rem;cursor:pointer;margin-left:1rem;font-weight:500;}
 
-/* Scenario cards */
-.scenario-cards {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:1.25rem;
-  margin:1.25rem 0;
-}
-@media(max-width:560px) { .scenario-cards { grid-template-columns:1fr; } }
-.sc-card {
-  border-radius:6px;
-  padding:1.75rem;
-}
-.sc-card.best { background:var(--best-lt); border:1px solid rgba(30,92,62,0.2); }
-.sc-card.worst { background:var(--worst-lt); border:1px solid rgba(122,31,31,0.2); }
-.sc-lbl {
-  font-family:'DM Mono',monospace;
-  font-size:0.58rem;
-  letter-spacing:0.15em;
-  text-transform:uppercase;
-  display:block;
-  margin-bottom:0.5rem;
-}
-.best .sc-lbl { color:var(--best-mid); }
-.worst .sc-lbl { color:var(--worst-mid); }
-.sc-total {
-  font-family:'Cormorant Garamond',serif;
-  font-size:2.5rem;
-  font-weight:700;
-  line-height:1;
-  margin-bottom:0.25rem;
-}
-.best .sc-total { color:var(--best); }
-.worst .sc-total { color:var(--worst); }
-.sc-sub { font-family:'DM Mono',monospace; font-size:0.65rem; color:var(--muted); margin-bottom:1rem; }
-.sc-rate {
-  display:inline-block;
-  padding:0.2rem 0.6rem;
-  border-radius:3px;
-  font-family:'DM Mono',monospace;
-  font-size:0.7rem;
-  font-weight:500;
-}
-.best .sc-rate { background:var(--best); color:var(--white); }
-.worst .sc-rate { background:var(--worst); color:var(--white); }
+/* CONF CARDS */
+.cc{background:var(--white);border:1px solid var(--rule);border-left:3px solid var(--teal);border-radius:0 6px 6px 0;padding:1rem 1.25rem;margin-bottom:.6rem;}
+.ccn{font-family:var(--fm);font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal-mid);display:block;margin-bottom:.25rem;}
+.ccb{font-size:.85rem;line-height:1.65;}
 
-/* Planning box */
-.planning-box {
-  background:var(--gold-lt);
-  border:1px solid rgba(201,168,76,0.3);
-  border-left:4px solid var(--gold);
-  border-radius:0 6px 6px 0;
-  padding:1.5rem 2rem;
-  margin:1.5rem 0;
-}
-.planning-lbl {
-  font-family:'DM Mono',monospace;
-  font-size:0.6rem;
-  letter-spacing:0.15em;
-  text-transform:uppercase;
-  color:var(--gold-dim);
-  display:block;
-  margin-bottom:0.4rem;
-}
-.planning-num {
-  font-family:'Cormorant Garamond',serif;
-  font-size:2rem;
-  font-weight:700;
-  color:var(--ink);
-}
-.planning-desc { font-size:0.85rem; color:var(--muted); margin-top:0.35rem; line-height:1.55; }
-
-/* Breakdown table */
-.breakdown-table {
-  width:100%;
-  border-collapse:collapse;
-  font-size:0.875rem;
-  margin:1.25rem 0;
-}
-.breakdown-table th {
-  font-family:'DM Mono',monospace;
-  font-size:0.58rem;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  padding:0.6rem 0.9rem;
-  text-align:left;
-  color:var(--muted);
-  border-bottom:1px solid var(--rule);
-}
-.breakdown-table td {
-  padding:0.7rem 0.9rem;
-  border-bottom:1px solid var(--rule);
-  font-weight:300;
-}
-.breakdown-table .total-td {
-  font-weight:600;
-  font-size:1rem;
-  border-top:2px solid var(--ink);
-  border-bottom:none;
-}
-.breakdown-table .note-td {
-  font-family:'DM Mono',monospace;
-  font-size:0.65rem;
-  color:var(--muted);
-}
-.unconfirmed-tag {
-  display:inline-block;
-  background:var(--warn-lt);
-  border:1px solid var(--warn);
-  color:var(--warn);
-  font-family:'DM Mono',monospace;
-  font-size:0.55rem;
-  letter-spacing:0.08em;
-  padding:0.1rem 0.4rem;
-  border-radius:2px;
-  margin-left:0.4rem;
-  vertical-align:middle;
-}
-
-/* PMI timeline */
-.pmi-timeline { background:var(--best-lt); border-radius:6px; padding:1.5rem; margin:1.25rem 0; }
-.pmi-timeline-lbl {
-  font-family:'DM Mono',monospace;
-  font-size:0.6rem;
-  letter-spacing:0.15em;
-  text-transform:uppercase;
-  color:var(--best);
-  margin-bottom:1rem;
-}
-.pmi-step { display:flex; gap:1rem; padding:0.5rem 0; border-bottom:1px dashed rgba(30,92,62,0.2); }
-.pmi-step:last-child { border-bottom:none; }
-.pmi-yr { font-family:'DM Mono',monospace; font-size:0.65rem; color:var(--best); font-weight:500; width:3.5rem; flex-shrink:0; padding-top:0.1rem; }
-.pmi-desc { font-size:0.82rem; line-height:1.55; }
-
-/* Rate bars */
-.rate-bars { background:var(--worst-lt); border-radius:6px; padding:1.5rem; margin:1.25rem 0; }
-.rate-bars-lbl {
-  font-family:'DM Mono',monospace;
-  font-size:0.6rem;
-  letter-spacing:0.15em;
-  text-transform:uppercase;
-  color:var(--worst-mid);
-  margin-bottom:1.25rem;
-}
-.bar-row { display:flex; align-items:center; gap:0.75rem; margin-bottom:0.75rem; }
-.bar-rate { font-family:'DM Mono',monospace; font-size:0.65rem; color:var(--muted); width:2.5rem; flex-shrink:0; }
-.bar-track { flex:1; height:7px; background:rgba(122,31,31,0.12); border-radius:2px; overflow:hidden; }
-.bar-fill { height:100%; background:var(--worst-mid); border-radius:2px; }
-.bar-val { font-family:'DM Mono',monospace; font-size:0.68rem; color:var(--worst); font-weight:500; width:5rem; text-align:right; flex-shrink:0; }
-
-/* Checklist */
-.checklist { background:var(--ink); border-radius:6px; padding:2rem; margin:1.25rem 0; }
-.checklist-title { font-family:'Cormorant Garamond',serif; font-size:1.2rem; color:var(--gold); margin-bottom:1.25rem; }
-.check-item { display:flex; gap:0.75rem; margin-bottom:0.6rem; font-size:0.83rem; color:rgba(255,255,255,0.82); line-height:1.55; }
-.check-num { font-family:'DM Mono',monospace; font-size:0.62rem; color:var(--gold); flex-shrink:0; padding-top:0.15rem; }
-
-/* Two col */
-.two-col { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin:1.25rem 0; }
-@media(max-width:600px) { .two-col { grid-template-columns:1fr; } }
-.col-inner { background:var(--white); border:1px solid var(--rule); border-radius:6px; padding:1.25rem; }
-.col-title { font-family:'Cormorant Garamond',serif; font-size:1rem; font-weight:700; margin-bottom:0.75rem; padding-bottom:0.4rem; border-bottom:1px solid var(--rule); }
-.col-title.g { color:var(--best); border-bottom-color:rgba(30,92,62,0.2); }
-.col-title.r { color:var(--worst); border-bottom-color:rgba(122,31,31,0.2); }
-.col-bul { display:flex; gap:0.4rem; margin-bottom:0.4rem; font-size:0.82rem; line-height:1.5; }
-.col-bul::before { content:'→'; color:var(--muted); flex-shrink:0; font-family:'DM Mono',monospace; font-size:0.7rem; margin-top:0.15rem; }
-
-/* DTI table */
-.dti-table { background:var(--white); border:1px solid var(--rule); border-radius:6px; overflow:hidden; margin:1.25rem 0; }
-.dti-row { display:flex; justify-content:space-between; align-items:center; padding:0.6rem 1rem; border-bottom:1px solid var(--rule); font-size:0.85rem; flex-wrap:wrap; gap:0.25rem; }
-.dti-row:last-child { border-bottom:none; }
-.dti-row-lbl { color:var(--muted); font-weight:300; }
-.dti-ok { color:var(--best); font-weight:500; font-family:'DM Mono',monospace; font-size:0.78rem; }
-.dti-warn { color:var(--warn); font-weight:500; font-family:'DM Mono',monospace; font-size:0.78rem; }
-.dti-bad { color:var(--worst); font-weight:500; font-family:'DM Mono',monospace; font-size:0.78rem; }
-
-/* Hidden costs */
-.hidden-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1.25rem 0; }
-@media(max-width:560px) { .hidden-grid { grid-template-columns:1fr; } }
-.hidden-card {
-  background:var(--white);
-  border:1px solid var(--rule);
-  border-left:3px solid var(--worst-mid);
-  border-radius:0 6px 6px 0;
-  padding:1.1rem 1.25rem;
-}
-.hc-lbl { font-family:'DM Mono',monospace; font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--worst-mid); display:block; margin-bottom:0.3rem; }
-.hc-val { font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-weight:700; color:var(--ink); display:block; margin-bottom:0.25rem; }
-.hc-desc { font-size:0.75rem; color:var(--muted); line-height:1.5; }
-
-/* Section titles in analysis */
-.a-eyebrow { font-family:'DM Mono',monospace; font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:0.4rem; }
-.a-eyebrow.g { color:var(--best); }
-.a-eyebrow.r { color:var(--worst); }
-.a-eyebrow.d { color:var(--gold-dim); }
-.a-title { font-family:'Cormorant Garamond',serif; font-size:clamp(1.5rem,3vw,2rem); font-weight:700; line-height:1.15; margin-bottom:0.4rem; }
-.a-rule { height:1px; background:var(--rule); margin:1.25rem 0 2rem; }
-
-/* Tier badge */
-.tier-badge {
-  display:inline-block;
-  padding:0.25rem 0.75rem;
-  border-radius:3px;
-  font-family:'DM Mono',monospace;
-  font-size:0.6rem;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  font-weight:500;
-  margin-left:0.75rem;
-  vertical-align:middle;
-}
-.tier-badge.t1 { background:#e8eef8; color:var(--accent); }
-.tier-badge.t2 { background:var(--gold-lt); color:var(--gold-dim); }
-.tier-badge.t3 { background:var(--best-lt); color:var(--best); }
-
-/* Demo mode banner */
-.demo-banner {
-  background:var(--accent);
-  color:var(--white);
-  text-align:center;
-  padding:0.6rem 1rem;
-  font-family:'DM Mono',monospace;
-  font-size:0.65rem;
-  letter-spacing:0.1em;
-}
-.demo-banner button {
-  background:var(--gold);
-  color:var(--ink);
-  border:none;
-  padding:0.25rem 0.75rem;
-  border-radius:3px;
-  font-family:'DM Mono',monospace;
-  font-size:0.6rem;
-  cursor:pointer;
-  margin-left:1rem;
-  font-weight:500;
-}
-
-/* Footer */
-footer {
-  background:var(--ink);
-  color:rgba(255,255,255,0.35);
-  text-align:center;
-  padding:2rem 1.5rem;
-  font-family:'DM Mono',monospace;
-  font-size:0.6rem;
-  letter-spacing:0.07em;
-  line-height:2;
-}
-
-/* Progress dots */
-.progress-dots { display:flex; gap:0.4rem; justify-content:center; margin-bottom:1.5rem; }
-.dot { width:6px; height:6px; border-radius:50%; background:var(--rule); transition:background 0.2s; }
-.dot.active { background:var(--gold); }
-.dot.done { background:var(--best); }
-
-/* Separator */
-.sep { height:1px; background:var(--rule); margin:2rem 0; }
-
-/* Ins confirmed tag */
-.ins-confirmed {
-  display:inline-block;
-  background:var(--best-lt);
-  border:1px solid var(--best);
-  color:var(--best);
-  font-family:'DM Mono',monospace;
-  font-size:0.55rem;
-  letter-spacing:0.08em;
-  padding:0.1rem 0.4rem;
-  border-radius:2px;
-  margin-left:0.4rem;
-  vertical-align:middle;
-}
-
-@media(max-width:480px) {
-  .delta-banner { flex-direction:column; gap:1.25rem; }
-  .analysis-tab { padding:0.8rem 0.75rem; font-size:0.58rem; }
-}
+footer{background:var(--midnight);color:rgba(176,190,197,.35);text-align:center;padding:2rem 1.5rem;font-family:var(--fm);font-size:.58rem;letter-spacing:.07em;line-height:2.2;}
+@media(max-width:460px){.db2{flex-direction:column;}.at{padding:.75rem .8rem;font-size:.56rem;}.ip{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════
-     SCREEN 0 — WELCOME / DEMO CHOICE
-═══════════════════════════════════════════ -->
-<div id="screen-welcome" class="screen active">
-  <div class="masthead">
-    <div class="masthead-tag">Miami-Dade County · Independent Buyer Tool</div>
-    <h1 class="serif">Home<span style="color:var(--gold)">True</span></h1>
-    <div class="masthead-rule"></div>
-    <div class="masthead-sub">Honest mortgage analysis. No pressure. No agenda.</div>
-    <div class="scope-badge">Miami-Dade County Only · Test Phase</div>
+<!-- WELCOME -->
+<div id="sw" class="screen active">
+  <div class="mh">
+    <div class="mh-tag">Miami-Dade County · Independent Buyer Tool</div>
+    <h1>Home<span class="tr">True</span></h1>
+    <div class="mh-rule"></div>
+    <div class="mh-sub">Honest mortgage analysis. No pressure. No agenda.</div>
+    <div class="scope-b">Miami-Dade County Only · Test Phase</div>
   </div>
-
-  <div class="verified-strip">
-    Rate data last verified: <span>Friday, April 25, 2026 · 11:52 AM ET</span>
-    &nbsp;·&nbsp; Tax rate verified: <span>April 2026</span>
-    &nbsp;·&nbsp; Flood zone data: <span>April 2026</span>
-    &nbsp;·&nbsp; Source: <span>Freddie Mac PMMS</span>
-  </div>
-
-  <div class="container">
-    <div style="max-width:560px; margin:0 auto; padding:3rem 0;">
-      <div class="masthead-tag" style="color:var(--gold-dim); margin-bottom:0.5rem;">Welcome</div>
-      <h2 class="serif" style="font-size:2rem; font-weight:700; margin-bottom:1rem; letter-spacing:-0.02em;">Before we begin</h2>
-      <p style="color:var(--muted); margin-bottom:2rem; font-size:0.95rem; line-height:1.7;">This tool gives you an honest, unbiased analysis of the full monthly cost of buying a home — best case and worst case — before you commit to anything. No realtor pressure. No broker estimates designed to look manageable.</p>
-
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:2rem;">
-        <div style="background:var(--white); border:1px solid var(--rule); border-radius:6px; padding:1.5rem; cursor:pointer; transition:all 0.2s; border-top:3px solid var(--gold);" onclick="startDemo()" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
-          <div class="mono" style="font-size:0.58rem; letter-spacing:0.15em; color:var(--gold-dim); text-transform:uppercase; margin-bottom:0.5rem;">Option A</div>
-          <div class="serif" style="font-size:1.1rem; font-weight:700; margin-bottom:0.4rem;">See a Demo First</div>
-          <div style="font-size:0.8rem; color:var(--muted); line-height:1.5;">Walk through a completed analysis on a sample property. See exactly what you'll get before entering your own home.</div>
-        </div>
-        <div style="background:var(--white); border:1px solid var(--rule); border-radius:6px; padding:1.5rem; cursor:pointer; transition:all 0.2s; border-top:3px solid var(--ink);" onclick="startGate1()" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">
-          <div class="mono" style="font-size:0.58rem; letter-spacing:0.15em; color:var(--muted); text-transform:uppercase; margin-bottom:0.5rem;">Option B</div>
-          <div class="serif" style="font-size:1.1rem; font-weight:700; margin-bottom:0.4rem;">Analyze My Property</div>
-          <div style="font-size:0.8rem; color:var(--muted); line-height:1.5;">Go straight to your analysis. You'll review and accept the terms, then enter your property details.</div>
-        </div>
+  <div class="vs">Rate verified:<span>Friday, April 25, 2026 · 11:52 AM ET</span>&nbsp;·&nbsp;Tax rate:<span>April 2026</span>&nbsp;·&nbsp;Flood:<span>April 2026</span>&nbsp;·&nbsp;Source:<span>Freddie Mac PMMS</span></div>
+  <div class="c">
+    <div style="max-width:560px;margin:0 auto;padding:3rem 0;">
+      <div class="ae tl" style="margin-bottom:.4rem;">Welcome</div>
+      <h2 style="font-family:var(--fd);font-size:2rem;font-weight:700;letter-spacing:-.02em;margin-bottom:1rem;color:var(--midnight);">Before we begin</h2>
+      <p style="color:var(--muted);margin-bottom:2rem;font-size:.95rem;line-height:1.75;">This tool gives you an honest, unbiased analysis of the full monthly cost of buying a home — best case and worst case — before you commit to anything. No realtor pressure. No broker estimates designed to look manageable.</p>
+      <div class="wcs">
+        <div class="wc dm" onclick="startDemo()"><span class="wct">Option A</span><span class="wcn">See a Demo First</span><p class="wcd">Walk through a completed analysis on a sample property before entering your own.</p></div>
+        <div class="wc st" onclick="startG1()"><span class="wct">Option B</span><span class="wcn">Analyze My Property</span><p class="wcd">Go straight to your analysis. Review terms, enter your property, receive your results.</p></div>
       </div>
-
-      <div class="notice notice-worst">
-        <span class="notice-label worst">Miami-Dade County Only</span>
-        <p>This tool is calibrated exclusively for properties in Miami-Dade County, Florida. Using it for properties outside Miami-Dade will produce inaccurate results.</p>
+      <div class="nt nt-tl"><span class="nl nl-tl">Miami-Dade County Only</span><p>This tool is calibrated exclusively for Miami-Dade County properties. Using it outside Miami-Dade will produce inaccurate results.</p></div>
+      <div style="margin-top:2rem;background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:1.25rem;">
+        <div style="font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem;">Analysis Color Guide</div>
+        <div style="display:flex;flex-direction:column;gap:.5rem;">
+          <div style="display:flex;align-items:center;gap:.75rem;font-size:.82rem;"><div style="width:12px;height:12px;border-radius:50%;background:var(--teal);flex-shrink:0;"></div><span><strong>Teal</strong> — Tier 1 Pre-Offer · Calm preparation</span></div>
+          <div style="display:flex;align-items:center;gap:.75rem;font-size:.82rem;"><div style="width:12px;height:12px;border-radius:50%;background:var(--indigo);flex-shrink:0;"></div><span><strong>Indigo</strong> — Tier 2 Active Offer · Wisdom and commitment</span></div>
+          <div style="display:flex;align-items:center;gap:.75rem;font-size:.82rem;"><div style="width:12px;height:12px;border-radius:50%;background:var(--emerald);flex-shrink:0;"></div><span><strong>Emerald</strong> — Tier 3 Under Contract · Success and completion</span></div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     SCREEN 0B — DEMO MODE
-═══════════════════════════════════════════ -->
-<div id="screen-demo" class="screen">
-  <div class="demo-banner">
-    DEMO MODE — Sample Property: 1234 Brickell Bay Dr, Miami FL 33131 (Fictional)
-    <button onclick="exitDemo()">Analyze My Property →</button>
-  </div>
-  <div id="demo-analysis-wrap"></div>
+<!-- DEMO -->
+<div id="sdm" class="screen">
+  <div class="dmb">DEMO MODE — Sample Property: 1234 Brickell Bay Dr, Miami FL 33131 (Fictional)<button onclick="show('sw')">Analyze My Property →</button></div>
+  <div id="dmw"></div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     SCREEN 1 — GATE 1: ENTRY DISCLOSURE
-═══════════════════════════════════════════ -->
-<div id="screen-gate1" class="screen">
-  <div class="gate-wrap">
-    <div class="gate-header">
-      <div class="gate-logo">Home<span>True</span></div>
-      <div class="gate-step mono">Step 1 of 4 — Terms & Scope</div>
-    </div>
-    <div class="gate-body">
-      <div class="progress-dots">
-        <div class="dot active" id="dot1"></div>
-        <div class="dot" id="dot2"></div>
-        <div class="dot" id="dot3"></div>
-        <div class="dot" id="dot4"></div>
+<!-- GATE 1 -->
+<div id="sg1" class="screen">
+  <div class="gw">
+    <div class="gh"><div class="gl">Home<span class="tr">True</span></div><div class="gs">Step 1 of 4 — Terms &amp; Scope</div></div>
+    <div class="gb">
+      <div class="pw">
+        <div class="ps"><div class="pd act" id="pd1">1</div><div class="pl">Terms</div></div>
+        <div class="ps"><div class="pd" id="pd2">2</div><div class="pl">Tier</div></div>
+        <div class="ps"><div class="pd" id="pd3">3</div><div class="pl">Details</div></div>
+        <div class="ps"><div class="pd" id="pd4">4</div><div class="pl">Confirm</div></div>
       </div>
-      <div class="gate-eyebrow">Disclosure · Gate 1 of 3</div>
-      <h1 class="gate-title serif">Before we begin,<br>please read carefully.</h1>
-      <p style="color:var(--muted); font-size:0.9rem; margin-bottom:1rem;">Scroll through the complete disclosure below. The acceptance button will unlock once you've read everything.</p>
-
-      <div class="scroll-instruction">
-        <span>↓</span> Scroll through all sections to unlock acceptance
+      <div class="ge">Disclosure · Gate 1 of 3</div>
+      <h1 class="gt">Before we begin,<br>please read carefully.</h1>
+      <p style="color:var(--muted);font-size:.9rem;margin-bottom:1rem;">Scroll through the complete disclosure. The acceptance button unlocks once you've read everything.</p>
+      <div class="sp">↓ &nbsp;Scroll through all six sections to unlock acceptance</div>
+      <div class="sb" id="g1s" onscroll="chkG1()">
+        <div class="ds"><span class="dn">Section 1 of 6</span><div class="dh">What This Tool Is</div><div class="db">HomeTrue is an educational mortgage analysis framework. It produces a structured best-case and worst-case scenario analysis of the estimated monthly costs associated with purchasing a specific residential property in Miami-Dade County, Florida. It is designed to help you understand the full range of your potential monthly financial commitment before making a purchase decision — with no sales pressure and no agenda.</div></div>
+        <div class="dr"></div>
+        <div class="ds"><span class="dn">Section 2 of 6</span><div class="dh">What This Tool Is Not</div><div class="db">This tool does not constitute financial advice, legal advice, real estate advice, or mortgage advice. It is not a substitute for consultation with a licensed mortgage broker, real estate attorney, realtor, or insurance professional. The analysis it produces is an educational estimate — not a guarantee, projection, or professional assessment. No output from this tool should be used as the sole basis for any financial decision.</div></div>
+        <div class="dr"></div>
+        <div class="ds"><span class="dn">Section 3 of 6</span><div class="dh">Geographic Scope — Miami-Dade County Only</div><div class="db">This tool is calibrated exclusively for properties located in Miami-Dade County, Florida. All financial assumptions, property tax rates, insurance cost ranges, flood zone frameworks, and legislative references are specific to Miami-Dade County. Using this tool for properties outside Miami-Dade County will produce inaccurate results. By proceeding, you confirm the property you are analyzing is in Miami-Dade County.</div></div>
+        <div class="dr"></div>
+        <div class="ds"><span class="dn">Section 4 of 6</span><div class="dh">Accuracy Levels by Tier</div><div class="db">This tool operates at three tiers. Tier 1 Pre-Offer: 85–90% accuracy. Tier 2 Active Offer: 92–95% accuracy, requiring a confirmed insurance quote or an acknowledged estimate with quantified variance disclosure. Tier 3 Under Contract: 95–98% accuracy, requiring all confirmed inputs including a locked Loan Estimate. Accuracy decreases when inputs are estimated. Your analysis displays which inputs are confirmed and which are estimated.</div></div>
+        <div class="dr"></div>
+        <div class="ds"><span class="dn">Section 5 of 6</span><div class="dh">Data Currency &amp; Verification Schedule</div><div class="db">Mortgage rate data is updated every Friday by 12:00 PM Eastern Time based on the Freddie Mac Primary Mortgage Market Survey published that same Thursday. In the event of a missed Friday update, data will be refreshed by Saturday 12:00 PM Eastern Time. All other financial inputs are verified on the first Friday of each month by 12:00 PM Eastern Time.</div></div>
+        <div class="dr"></div>
+        <div class="ds"><span class="dn">Section 6 of 6 — Data Accuracy Waiver</span><div class="dh">Your Responsibility for Input Accuracy</div><div class="db">The accuracy of this analysis depends entirely on the accuracy of the information you provide. If you enter incorrect, incomplete, or false information — whether intentionally or unintentionally — the analysis will produce inaccurate results. By accepting these terms, you acknowledge that the accuracy of your results is your responsibility. The developer and operator bear no liability for inaccuracies resulting from information you provided that was incorrect, incomplete, or false.</div></div>
       </div>
-
-      <div class="scroll-box" id="gate1-scroll" onscroll="checkGate1Scroll()">
-        <div class="disc-section">
-          <span class="disc-num">Section 1 of 6</span>
-          <div class="disc-heading serif">What This Tool Is</div>
-          <div class="disc-body">HomeTrue is an educational mortgage analysis framework. It produces a structured best-case and worst-case scenario analysis of the estimated monthly costs associated with purchasing a specific residential property in Miami-Dade County, Florida. It is designed to help you understand the full range of your potential monthly financial commitment before making a purchase decision — with no sales pressure and no agenda.</div>
-        </div>
-        <div class="disc-rule"></div>
-        <div class="disc-section">
-          <span class="disc-num">Section 2 of 6</span>
-          <div class="disc-heading serif">What This Tool Is Not</div>
-          <div class="disc-body">This tool does not constitute financial advice, legal advice, real estate advice, or mortgage advice. It is not a substitute for consultation with a licensed mortgage broker, real estate attorney, realtor, or insurance professional. The analysis it produces is an educational estimate — not a guarantee, projection, or professional assessment. No output from this tool should be used as the sole basis for any financial decision.</div>
-        </div>
-        <div class="disc-rule"></div>
-        <div class="disc-section">
-          <span class="disc-num">Section 3 of 6</span>
-          <div class="disc-heading serif">Geographic Scope — Miami-Dade County Only</div>
-          <div class="disc-body">This tool is calibrated exclusively for properties located in Miami-Dade County, Florida. All financial assumptions, property tax rates, insurance cost ranges, flood zone frameworks, and legislative references are specific to Miami-Dade County. Using this tool for properties located outside Miami-Dade County will produce inaccurate results. By proceeding, you confirm that the property you are analyzing is located in Miami-Dade County, Florida.</div>
-        </div>
-        <div class="disc-rule"></div>
-        <div class="disc-section">
-          <span class="disc-num">Section 4 of 6</span>
-          <div class="disc-heading serif">Accuracy Levels</div>
-          <div class="disc-body">This tool operates at three accuracy tiers. Tier 1 (Pre-Offer) carries an accuracy target of 85–90% when all required inputs are confirmed. Tier 2 (Active Offer) carries an accuracy target of 92–95% when all required inputs are confirmed, including a real homeowners insurance quote or an acknowledged estimate with a quantified variance disclosure. Tier 3 (Under Contract) carries an accuracy target of 95–98% when all required inputs are confirmed including a locked Loan Estimate from your lender. Accuracy decreases when inputs are estimated. Your analysis will display which inputs are confirmed and which are estimated.</div>
-        </div>
-        <div class="disc-rule"></div>
-        <div class="disc-section">
-          <span class="disc-num">Section 5 of 6</span>
-          <div class="disc-heading serif">Data Currency & Verification Schedule</div>
-          <div class="disc-body">Mortgage rate data is updated every Friday by 12:00 PM Eastern Time based on the Freddie Mac Primary Mortgage Market Survey published that same Thursday. In the event of a missed Friday update, data will be refreshed by Saturday 12:00 PM Eastern Time and any analysis generated during that window will display a pending-verification notice. All other financial inputs — property tax rates, flood zone status, insurance market conditions, and PMI ranges — are verified and updated on the first Friday of each month by 12:00 PM Eastern Time. The date and time of the most recent verification is displayed on every output.</div>
-        </div>
-        <div class="disc-rule"></div>
-        <div class="disc-section">
-          <span class="disc-num">Section 6 of 6 — Data Accuracy Waiver</span>
-          <div class="disc-heading serif">Your Responsibility for Input Accuracy</div>
-          <div class="disc-body">The accuracy of this analysis depends entirely on the accuracy of the information you provide. If you enter incorrect, incomplete, or false information — whether intentionally or unintentionally — the analysis will produce inaccurate results. By accepting these terms, you acknowledge that the accuracy of your results is your responsibility. The developer and operator of this tool bear no liability for inaccuracies in your analysis that result from information you provided that was incorrect, incomplete, or false. This waiver applies regardless of whether the inaccuracy in your provided information was intentional, negligent, or the result of honest mistake.</div>
-        </div>
-      </div>
-
-      <div style="margin-top:1.5rem;">
-        <label style="display:flex; align-items:flex-start; gap:0.75rem; cursor:pointer; margin-bottom:1rem; font-size:0.875rem; color:var(--ink); font-family:'Outfit',sans-serif; text-transform:none; letter-spacing:0;">
-          <input type="checkbox" id="gate1-check" style="width:18px; height:18px; flex-shrink:0; margin-top:2px; accent-color:var(--gold); border:1.5px solid var(--rule);" disabled onchange="updateGate1Btn()">
-          <span>I have read and understood all six sections above. I confirm the property I am analyzing is in Miami-Dade County. I understand this tool produces educational estimates — not professional advice. I accept full responsibility for the accuracy of information I provide.</span>
-        </label>
-        <button class="btn btn-gold btn-full" id="gate1-btn" disabled onclick="proceedToTierSelect()">
-          I Accept — Continue to Tier Selection
-        </button>
-      </div>
+      <label class="cl"><input type="checkbox" id="g1c" disabled onchange="updG1()"><span>I have read and understood all six sections. I confirm the property I am analyzing is in Miami-Dade County. I understand this tool produces educational estimates — not professional advice. I accept full responsibility for the accuracy of information I provide.</span></label>
+      <button class="btn btn-tl btn-fw" id="g1b" disabled onclick="show('st')">I Accept — Continue to Tier Selection</button>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     SCREEN 2 — TIER SELECTION
-═══════════════════════════════════════════ -->
-<div id="screen-tier" class="screen">
-  <div class="gate-wrap">
-    <div class="gate-header">
-      <div class="gate-logo">Home<span>True</span></div>
-      <div class="gate-step mono">Step 2 of 4 — Select Your Tier</div>
-    </div>
-    <div class="gate-body">
-      <div class="progress-dots">
-        <div class="dot done"></div>
-        <div class="dot active"></div>
-        <div class="dot"></div>
-        <div class="dot"></div>
+<!-- TIER SELECT -->
+<div id="st" class="screen">
+  <div class="gw">
+    <div class="gh"><div class="gl">Home<span class="tr">True</span></div><div class="gs">Step 2 of 4 — Select Your Tier</div></div>
+    <div class="gb">
+      <div class="pw">
+        <div class="ps"><div class="pd don">✓</div><div class="pl">Terms</div></div>
+        <div class="ps"><div class="pd act">2</div><div class="pl">Tier</div></div>
+        <div class="ps"><div class="pd">3</div><div class="pl">Details</div></div>
+        <div class="ps"><div class="pd">4</div><div class="pl">Confirm</div></div>
       </div>
-      <div class="gate-eyebrow">Analysis Tier</div>
-      <h1 class="gate-title serif">Where are you in<br>the buying process?</h1>
-      <p style="color:var(--muted); font-size:0.9rem; margin-bottom:1.5rem;">Select the tier that matches your current stage. Your tier determines which inputs are required and what accuracy level your analysis carries.</p>
-
-      <div class="tier-cards">
-        <div class="tier-card" id="tier-1" onclick="selectTier(1)">
-          <span class="tier-num mono">Tier 1</span>
-          <span class="tier-name serif">Pre-Offer</span>
-          <span class="tier-acc mono">85–90% Accuracy</span>
-          <p class="tier-desc">Still evaluating. Haven't made an offer yet. Insurance is excluded with a full caveat — estimated numbers only.</p>
-        </div>
-        <div class="tier-card" id="tier-2" onclick="selectTier(2)">
-          <span class="tier-num mono">Tier 2</span>
-          <span class="tier-name serif">Active Offer</span>
-          <span class="tier-acc mono">92–95% Accuracy</span>
-          <p class="tier-desc">Offer is in or imminent. Insurance: provide a real quote (Path A) or acknowledge the estimate variance (Path B).</p>
-        </div>
-        <div class="tier-card" id="tier-3" onclick="selectTier(3)">
-          <span class="tier-num mono">Tier 3</span>
-          <span class="tier-name serif">Under Contract</span>
-          <span class="tier-acc mono">95–98% Accuracy</span>
-          <p class="tier-desc">Contract signed. Closing approaching. All inputs must be confirmed — rate lock, insurance quote, and Loan Estimate required.</p>
-        </div>
+      <div class="ge">Analysis Tier</div>
+      <h1 class="gt">Where are you in<br>the buying process?</h1>
+      <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.5rem;">Select the tier that matches your current stage.</p>
+      <div class="tcs">
+        <div class="tc" id="tc1" onclick="selTier(1)"><div class="tck">✓</div><span class="tn">Tier 1</span><span class="tna">Pre-Offer</span><span class="ta">85–90% Accuracy</span><p class="td">Still evaluating. Haven't made an offer. Insurance excluded with full caveat.</p></div>
+        <div class="tc" id="tc2" onclick="selTier(2)"><div class="tck">✓</div><span class="tn">Tier 2</span><span class="tna">Active Offer</span><span class="ta">92–95% Accuracy</span><p class="td">Offer in or imminent. Insurance: confirmed quote or acknowledged estimate.</p></div>
+        <div class="tc" id="tc3" onclick="selTier(3)"><div class="tck">✓</div><span class="tn">Tier 3</span><span class="tna">Under Contract</span><span class="ta">95–98% Accuracy</span><p class="td">Contract signed. All inputs confirmed — rate lock and insurance quote required.</p></div>
       </div>
-
-      <button class="btn btn-gold btn-full" id="tier-btn" disabled onclick="proceedToInputs()" style="margin-top:1rem;">
-        Continue with Selected Tier
-      </button>
+      <button class="btn btn-fw btn-mn" id="tb" disabled onclick="procInputs()" style="margin-top:1rem;">Continue with Selected Tier</button>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     SCREEN 3 — PROPERTY INPUTS
-═══════════════════════════════════════════ -->
-<div id="screen-inputs" class="screen">
-  <div class="gate-wrap">
-    <div class="gate-header">
-      <div class="gate-logo">Home<span>True</span></div>
-      <div class="gate-step mono" id="inputs-step-label">Step 3 of 4 — Property Details</div>
-    </div>
-    <div class="gate-body" style="max-width:720px;">
-      <div class="progress-dots">
-        <div class="dot done"></div>
-        <div class="dot done"></div>
-        <div class="dot active"></div>
-        <div class="dot"></div>
+<!-- INPUTS -->
+<div id="si" class="screen">
+  <div class="gw">
+    <div class="gh"><div class="gl">Home<span class="tr">True</span></div><div class="gs" id="isl">Step 3 of 4 — Property Details</div></div>
+    <div class="gb" style="max-width:720px;">
+      <div class="pw">
+        <div class="ps"><div class="pd don">✓</div><div class="pl">Terms</div></div>
+        <div class="ps"><div class="pd don">✓</div><div class="pl">Tier</div></div>
+        <div class="ps"><div class="pd act">3</div><div class="pl">Details</div></div>
+        <div class="ps"><div class="pd">4</div><div class="pl">Confirm</div></div>
       </div>
-      <div class="gate-eyebrow" id="inputs-eyebrow">Property & Buyer Details</div>
-      <h1 class="gate-title serif" style="font-size:1.8rem;">Enter your property<br>and financial details</h1>
-      <p style="color:var(--muted); font-size:0.875rem; margin-bottom:2rem;">All fields are required unless marked optional. The accuracy of your analysis depends on the accuracy of what you enter here.</p>
-
-      <!-- PROPERTY SECTION -->
-      <div class="form-section">
-        <div class="form-section-title serif">Property Information</div>
-        <div class="form-grid">
-          <div class="field field-full">
-            <label>Property Address (Miami-Dade County Only)</label>
-            <input type="text" id="f-address" placeholder="e.g. 452 SE 20th Dr, Homestead, FL 33033">
-          </div>
-          <div class="field">
-            <label>Purchase Price</label>
-            <input type="number" id="f-price" placeholder="399000" min="50000" max="5000000">
-          </div>
-          <div class="field">
-            <label>Down Payment %</label>
-            <select id="f-down">
-              <option value="">Select</option>
-              <option value="3">3% — Conventional</option>
-              <option value="3.5">3.5% — FHA</option>
-              <option value="5">5%</option>
-              <option value="10">10%</option>
-              <option value="20">20% — No PMI</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Year Built</label>
-            <input type="number" id="f-built" placeholder="1995" min="1900" max="2026">
-          </div>
-          <div class="field">
-            <label>Construction Type</label>
-            <select id="f-construction">
-              <option value="">Select</option>
-              <option value="cbs">CBS — Concrete Block (Best insurance tier)</option>
-              <option value="wood">Wood Frame (Higher insurance cost)</option>
-              <option value="unknown">Unknown</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Roof Type</label>
-            <select id="f-roof-type">
-              <option value="">Select</option>
-              <option value="tile">Tile / Flat Tile / Barrel (Best)</option>
-              <option value="asphalt">Asphalt Shingle</option>
-              <option value="unknown">Unknown</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Roof Year / Last Replaced</label>
-            <input type="number" id="f-roof-year" placeholder="2020" min="1970" max="2026">
-            <div class="field-note">Leave blank if unknown — we'll use worst-case insurance assumption</div>
-          </div>
-          <div class="field">
-            <label>Hurricane Shutters?</label>
-            <select id="f-shutters">
-              <option value="yes">Yes — Listed in property features</option>
-              <option value="no">No / Unknown</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>HOA Monthly Fee ($)</label>
-            <input type="number" id="f-hoa" placeholder="214" min="0">
-          </div>
-          <div class="field">
-            <label>Flood Zone (check msc.fema.gov)</label>
-            <select id="f-flood">
-              <option value="x">Zone X — Voluntary flood insurance</option>
-              <option value="ae">Zone AE — Lender required</option>
-              <option value="unknown">Unknown — I'll verify</option>
-            </select>
-          </div>
+      <div class="ge">Property &amp; Buyer Details</div>
+      <h1 class="gt" style="font-size:1.8rem;">Enter your property<br>and financial details</h1>
+      <p style="color:var(--muted);font-size:.875rem;margin-bottom:2rem;">The accuracy of your analysis depends on the accuracy of what you enter here.</p>
+      <div class="fs">
+        <div class="fst">Property Information</div>
+        <div class="fg">
+          <div class="ff ffu"><label>Property Address (Miami-Dade County Only)</label><input type="text" id="fa" placeholder="e.g. 452 SE 20th Dr, Homestead, FL 33033"></div>
+          <div class="ff"><label>Purchase Price ($)</label><input type="number" id="fp" placeholder="399000" min="50000"></div>
+          <div class="ff"><label>Down Payment</label><select id="fd"><option value="">Select</option><option value="3">3% — Conventional</option><option value="3.5">3.5% — FHA</option><option value="5">5%</option><option value="10">10%</option><option value="20">20% — No PMI</option></select></div>
+          <div class="ff"><label>Year Built</label><input type="number" id="fb2" placeholder="1995" min="1900" max="2026"></div>
+          <div class="ff"><label>Construction Type</label><select id="fcon"><option value="cbs">CBS — Concrete Block</option><option value="wood">Wood Frame</option><option value="unknown">Unknown</option></select></div>
+          <div class="ff"><label>Roof Type</label><select id="frt"><option value="tile">Tile / Flat Tile / Barrel</option><option value="asphalt">Asphalt Shingle</option><option value="unknown">Unknown</option></select></div>
+          <div class="ff"><label>Roof Year Replaced</label><input type="number" id="fry" placeholder="2020" min="1970" max="2026"><div class="fn">Leave blank if unknown</div></div>
+          <div class="ff"><label>Hurricane Shutters?</label><select id="fsh"><option value="yes">Yes — Listed in features</option><option value="no">No / Unknown</option></select></div>
+          <div class="ff"><label>HOA Monthly Fee ($)</label><input type="number" id="fh" placeholder="214" min="0"></div>
+          <div class="ff"><label>Flood Zone (msc.fema.gov)</label><select id="ffl"><option value="x">Zone X — Voluntary</option><option value="ae">Zone AE — Lender required</option><option value="unknown">Unknown</option></select></div>
         </div>
       </div>
-
-      <!-- BUYER SECTION -->
-      <div class="form-section">
-        <div class="form-section-title serif">Your Financial Profile</div>
-        <div class="form-grid">
-          <div class="field">
-            <label>Gross Monthly Income — Low End ($)</label>
-            <input type="number" id="f-income-low" placeholder="10000" min="1000">
-          </div>
-          <div class="field">
-            <label>Gross Monthly Income — High End ($)</label>
-            <input type="number" id="f-income-high" placeholder="13000" min="1000">
-          </div>
-          <div class="field">
-            <label>Credit Score Range</label>
-            <select id="f-credit">
-              <option value="excellent">760+ Excellent</option>
-              <option value="very-good">720–759 Very Good</option>
-              <option value="good">680–719 Good</option>
-              <option value="fair">640–679 Fair</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Is This Your Primary Residence?</label>
-            <select id="f-primary">
-              <option value="yes">Yes — Primary residence long-term</option>
-              <option value="no">No — Investment or short-term hold</option>
-            </select>
-          </div>
+      <div class="fs">
+        <div class="fst">Your Financial Profile</div>
+        <div class="fg">
+          <div class="ff"><label>Gross Monthly Income — Low ($)</label><input type="number" id="fil" placeholder="10000" min="1000"></div>
+          <div class="ff"><label>Gross Monthly Income — High ($)</label><input type="number" id="fih" placeholder="13000" min="1000"></div>
+          <div class="ff"><label>Credit Score Range</label><select id="fcr"><option value="excellent">760+ Excellent</option><option value="very-good">720–759 Very Good</option><option value="good">680–719 Good</option><option value="fair">640–679 Fair</option></select></div>
+          <div class="ff"><label>Primary Residence?</label><select id="fpr"><option value="yes">Yes — Primary long-term</option><option value="no">No — Investment</option></select></div>
         </div>
       </div>
-
-      <!-- TIER-SPECIFIC: INSURANCE -->
-      <div class="form-section" id="ins-section">
-        <div class="form-section-title serif">Homeowners Insurance</div>
-        <div id="ins-tier1-notice" style="display:none;">
-          <div class="notice notice-warn">
-            <span class="notice-label warn">Tier 1 — Insurance Excluded</span>
-            <p>Homeowners insurance is not included in your Tier 1 Pre-Offer analysis. In the current South Florida market, insurance for a property of this type typically ranges from <strong>$230–$500/month</strong> — a potential variance of up to <strong>$270/month</strong> that is not reflected in your monthly total. Obtain an actual quote from a Florida-licensed independent insurance broker before making any financial commitment.</p>
+      <div class="fs" id="ins-sec">
+        <div class="fst">Homeowners Insurance</div>
+        <div id="it1" style="display:none;"><div class="nt nt-wn"><span class="nl nl-wn">Tier 1 — Insurance Excluded</span><p>Insurance not included. South Florida range: <strong>$230–$500/month</strong>. Potential variance up to <strong>$270/month</strong> not in your totals. Obtain an actual quote before any financial commitment.</p></div></div>
+        <div id="it2" style="display:none;">
+          <p style="font-size:.875rem;color:var(--muted);margin-bottom:1rem;">You are at Tier 2. Choose your insurance path:</p>
+          <div class="ip">
+            <div class="ipa" id="ipa" onclick="selIns('a')"><span class="ipl">Path A — Preferred</span><span class="ipt">I have a confirmed quote</span><span class="ipd">Enter your actual quote. Full Tier 2 accuracy achieved.</span></div>
+            <div class="ipa" id="ipb" onclick="selIns('b')"><span class="ipl">Path B — Acknowledged Estimate</span><span class="ipt">No quote yet</span><span class="ipd">Proceed with estimate. Requires acknowledgment of variance.</span></div>
+          </div>
+          <div id="ipa-f" style="display:none;margin-top:1rem;"><div class="ff"><label>Confirmed Monthly Insurance Quote ($)</label><input type="number" id="fic" placeholder="285" min="50"></div></div>
+          <div id="ipb-s" style="display:none;margin-top:1rem;">
+            <div class="fc" style="margin-bottom:.6rem;"><strong>Scroll through the full acknowledgment to accept:</strong></div>
+            <div class="pbs" id="pbb" onscroll="chkPB()">You have indicated that you do not have a confirmed homeowners insurance quote for this property. Without a confirmed quote, the insurance component of this analysis is an estimate only. In the current South Florida insurance market, estimates can differ from actual quotes by $200 to $400 per month. This represents a potential variance of $2,400 to $4,800 per year in your actual annual housing cost. This variance is material and may significantly affect your affordability assessment. By accepting this acknowledgment, you confirm you understand the insurance figure is an estimate, that it may be materially incorrect, and that you will obtain an actual quote from a Florida-licensed independent broker before making any financial commitment.</div>
+            <label class="cl"><input type="checkbox" id="pbc" disabled onchange="updIBtn()"><span>I understand the insurance estimate may differ from my actual quote by $200–$400/month. I will obtain an actual quote before any financial commitment.</span></label>
           </div>
         </div>
-        <div id="ins-tier2-section" style="display:none;">
-          <p style="font-size:0.875rem; color:var(--muted); margin-bottom:1rem;">You are at Tier 2. Choose your insurance path:</p>
-          <div class="ins-paths">
-            <div class="ins-path" id="ins-path-a" onclick="selectInsPath('a')">
-              <span class="ins-path-label mono">Path A — Preferred</span>
-              <span class="ins-path-title">I have a confirmed quote</span>
-              <span class="ins-path-desc">Enter your actual quote from a Florida-licensed broker. Full Tier 2 accuracy achieved.</span>
-            </div>
-            <div class="ins-path" id="ins-path-b" onclick="selectInsPath('b')">
-              <span class="ins-path-label mono">Path B — Acknowledged Estimate</span>
-              <span class="ins-path-title">I don't have a quote yet</span>
-              <span class="ins-path-desc">Proceed with an estimated range. Requires active acknowledgment of the variance.</span>
-            </div>
-          </div>
-          <div id="ins-path-a-input" style="display:none; margin-top:1rem;">
-            <div class="field">
-              <label>Confirmed Monthly Insurance Quote ($)</label>
-              <input type="number" id="f-ins-confirmed" placeholder="285" min="50">
-              <div class="field-note">Enter the monthly figure from your Florida-licensed broker quote</div>
-            </div>
-          </div>
-          <div id="ins-path-b-scroll" style="display:none; margin-top:1rem;">
-            <div class="field-caveat" style="margin-bottom:0.75rem;">
-              <strong>Scroll through the full acknowledgment below before accepting:</strong>
-            </div>
-            <div class="pathb-scroll" id="pathb-scroll-box" onscroll="checkPathBScroll()">
-              You have indicated that you do not have a confirmed homeowners insurance quote for this property. Without a confirmed quote, the insurance component of this analysis is an estimate only. In the current South Florida insurance market, estimates for a property with this construction profile can differ from actual quotes by $200 to $400 per month. This represents a potential variance of $2,400 to $4,800 per year in your actual annual housing cost. This variance is material and may significantly affect your affordability assessment. By accepting this acknowledgment, you confirm that you understand the insurance figure shown in your analysis is an estimate, that the estimate may be materially incorrect, and that you will obtain an actual quote from a Florida-licensed independent insurance broker before making any financial commitment to this property. Failure to obtain an actual quote before making a financial commitment is solely your responsibility. The developer and operator of this tool bear no liability for financial decisions made based on an estimated insurance figure.
-            </div>
-            <label style="display:flex; align-items:flex-start; gap:0.75rem; cursor:pointer; margin-top:0.75rem; font-size:0.84rem; color:var(--ink); font-family:'Outfit',sans-serif; text-transform:none; letter-spacing:0;">
-              <input type="checkbox" id="pathb-check" style="width:16px; height:16px; flex-shrink:0; margin-top:2px; accent-color:var(--worst);" disabled onchange="updateInputsBtn()">
-              <span>I understand the insurance estimate may differ from my actual quote by $200–$400/month. I will obtain an actual quote before making any financial commitment.</span>
-            </label>
-          </div>
-        </div>
-        <div id="ins-tier3-section" style="display:none;">
-          <div class="field">
-            <label>Confirmed Monthly Insurance Quote ($) — Required at Tier 3</label>
-            <input type="number" id="f-ins-t3" placeholder="285" min="50">
-            <div class="field-note">A confirmed quote from a Florida-licensed broker is required for Tier 3 analysis. No estimate permitted.</div>
-          </div>
+        <div id="it3" style="display:none;"><div class="ff"><label>Confirmed Monthly Insurance Quote ($) — Required at Tier 3</label><input type="number" id="fit3" placeholder="285" min="50"><div class="fn">Confirmed quote required. No estimate at Tier 3.</div></div></div>
+      </div>
+      <div class="fs" id="t3x" style="display:none;">
+        <div class="fst">Tier 3 — Confirmed Loan Details</div>
+        <div class="fg">
+          <div class="ff"><label>Locked Interest Rate (%)</label><input type="number" id="flr" placeholder="6.25" step="0.01" min="2" max="15"></div>
+          <div class="ff"><label>Confirmed PMI ($/month)</label><input type="number" id="fcp" placeholder="150" min="0"><div class="fn">From your Loan Estimate document</div></div>
         </div>
       </div>
-
-      <!-- TIER 3 EXTRA FIELDS -->
-      <div class="form-section" id="tier3-extra" style="display:none;">
-        <div class="form-section-title serif">Tier 3 — Confirmed Loan Details</div>
-        <div class="form-grid">
-          <div class="field">
-            <label>Locked Interest Rate (%)</label>
-            <input type="number" id="f-locked-rate" placeholder="6.25" step="0.01" min="2" max="15">
-          </div>
-          <div class="field">
-            <label>Confirmed PMI ($/month)</label>
-            <input type="number" id="f-confirmed-pmi" placeholder="150" min="0">
-            <div class="field-note">From your Loan Estimate document</div>
-          </div>
-        </div>
-      </div>
-
-      <button class="btn btn-gold btn-full" id="inputs-btn" onclick="proceedToGate3()" style="margin-top:1rem;">
-        Review & Generate Analysis
-      </button>
-      <p style="font-size:0.75rem; color:var(--muted); text-align:center; margin-top:0.75rem;">You'll review a final acknowledgment before your analysis is generated.</p>
+      <button class="btn btn-fw btn-mn" id="ib" onclick="proc3()">Review &amp; Generate Analysis</button>
+      <p style="font-size:.72rem;color:var(--muted);text-align:center;margin-top:.75rem;">One final acknowledgment before your analysis is generated.</p>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     SCREEN 4 — GATE 3: DELIVERABLE GATE
-═══════════════════════════════════════════ -->
-<div id="screen-gate3" class="screen">
-  <div class="gate-wrap">
-    <div class="gate-header">
-      <div class="gate-logo">Home<span>True</span></div>
-      <div class="gate-step mono">Step 4 of 4 — Final Acknowledgment</div>
-    </div>
-    <div class="gate-body">
-      <div class="progress-dots">
-        <div class="dot done"></div>
-        <div class="dot done"></div>
-        <div class="dot done"></div>
-        <div class="dot active"></div>
+<!-- GATE 3 -->
+<div id="sg3" class="screen">
+  <div class="gw">
+    <div class="gh"><div class="gl">Home<span class="tr">True</span></div><div class="gs">Step 4 of 4 — Final Acknowledgment</div></div>
+    <div class="gb">
+      <div class="pw">
+        <div class="ps"><div class="pd don">✓</div><div class="pl">Terms</div></div>
+        <div class="ps"><div class="pd don">✓</div><div class="pl">Tier</div></div>
+        <div class="ps"><div class="pd don">✓</div><div class="pl">Details</div></div>
+        <div class="ps"><div class="pd act">4</div><div class="pl">Confirm</div></div>
       </div>
-      <div class="gate-eyebrow">Gate 3 of 3 — Deliverable Gate</div>
-      <h1 class="gate-title serif">Your analysis is ready.<br>One final confirmation.</h1>
-      <p style="color:var(--muted); font-size:0.9rem; margin-bottom:1.5rem;">Review the five confirmations below before your analysis is released.</p>
-
-      <div id="gate3-confirmations" style="display:flex; flex-direction:column; gap:0.75rem; margin-bottom:1.5rem;"></div>
-
-      <div class="scroll-instruction">
-        <span>↓</span> Read all confirmations, then accept below
-      </div>
-
-      <label style="display:flex; align-items:flex-start; gap:0.75rem; cursor:pointer; margin:1.25rem 0; font-size:0.875rem; color:var(--ink); font-family:'Outfit',sans-serif; text-transform:none; letter-spacing:0;">
-        <input type="checkbox" id="gate3-check" style="width:18px; height:18px; flex-shrink:0; margin-top:2px; accent-color:var(--gold);" onchange="updateGate3Btn()">
-        <span>I confirm all five statements above. I understand my analysis tier, accuracy level, and which inputs are estimated. I accept this analysis as an educational estimate and not as professional financial advice. I am ready to receive my analysis.</span>
-      </label>
-
-      <button class="btn btn-gold btn-full" id="gate3-btn" disabled onclick="generateAnalysis()">
-        I Accept — Generate My Analysis
-      </button>
+      <div class="ge">Gate 3 of 3 — Deliverable Gate</div>
+      <h1 class="gt">Your analysis is ready.<br>One final confirmation.</h1>
+      <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.5rem;">Review the five confirmations before your analysis is released.</p>
+      <div id="g3c"></div>
+      <label class="cl"><input type="checkbox" id="g3cb" onchange="updG3()"><span>I confirm all five statements above. I understand my tier, accuracy level, and which inputs are estimated. I accept this as an educational estimate — not professional financial advice. I am ready to receive my analysis.</span></label>
+      <button class="btn btn-em btn-fw" id="g3b" disabled onclick="genAnalysis()">I Accept — Generate My Analysis</button>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     SCREEN 5 — ANALYSIS OUTPUT
-═══════════════════════════════════════════ -->
-<div id="screen-analysis" class="screen">
-  <div class="analysis-wrap">
-    <div id="analysis-masthead"></div>
-    <div class="verified-strip" id="analysis-verified-strip">
-      Rate last verified: <span>Friday, April 25, 2026 · 11:52 AM ET</span>
-      &nbsp;·&nbsp; Tax rate: <span>April 2026</span>
-      &nbsp;·&nbsp; Flood zone: <span>April 2026</span>
+<!-- ANALYSIS -->
+<div id="sa" class="screen">
+  <div id="amh"></div>
+  <div class="vs" id="avs">Rate verified:<span>Friday, April 25, 2026 · 11:52 AM ET</span>&nbsp;·&nbsp;Tax:<span>April 2026</span>&nbsp;·&nbsp;Flood:<span>April 2026</span></div>
+  <nav class="an">
+    <div class="ats">
+      <button class="at atc active" onclick="showTab('c',this)">§ Comparison</button>
+      <button class="at atb" onclick="showTab('b',this)">§ Best Case</button>
+      <button class="at atw" onclick="showTab('w',this)">§ Worst Case</button>
     </div>
-    <nav class="analysis-nav">
-      <div class="analysis-tabs">
-        <button class="analysis-tab active-compare" onclick="showAnalysisTab('compare',this)">§ Comparison</button>
-        <button class="analysis-tab" onclick="showAnalysisTab('best',this)">§ Best Case</button>
-        <button class="analysis-tab" onclick="showAnalysisTab('worst',this)">§ Worst Case</button>
-      </div>
-      <button class="btn btn-sm btn-outline" onclick="startOver()" style="font-size:0.7rem;">New Analysis</button>
-    </nav>
-    <div id="analysis-content"></div>
-    <footer id="analysis-footer"></footer>
-  </div>
+    <button class="btn btn-sm btn-ol" onclick="startOver()">New Analysis</button>
+  </nav>
+  <div id="ac"></div>
+  <footer id="af"></footer>
 </div>
 
 <script>
-// ═══════════════════════════════════
-// STATE
-// ═══════════════════════════════════
-let state = {
-  tier: null,
-  insPath: null,
-  gate1Scrolled: false,
-  pathBScrolled: false,
-  isDemo: false,
-  inputs: {}
-};
+const MKT={rv:"Friday, April 25, 2026 · 11:52 AM ET",ov:"April 2026",fm:6.23,br:6.00,wr:6.75,tr:0.013,he:50000,fxb:42,fxw:85,fab:150,faw:400};
+let S={tier:null,ins:null,g1s:false,pbs:false,inp:{}};
 
-// Market data — verified Friday April 25 2026
-const MARKET = {
-  rateVerified: "Friday, April 25, 2026 · 11:52 AM ET",
-  otherVerified: "April 2026",
-  freddieMac: 6.23,
-  bestRate: 6.00,
-  worstRate: 6.75,
-  taxRate: 0.013,
-  homesteadExemption: 50000,
-  zoneXFloodBest: 42,
-  zoneXFloodWorst: 85,
-  zoneAEFloodBest: 150,
-  zoneAEFloodWorst: 400,
-};
-
-// ═══════════════════════════════════
-// NAVIGATION
-// ═══════════════════════════════════
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById('screen-' + id).classList.add('active');
-  window.scrollTo({top:0, behavior:'smooth'});
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('s'+id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+function startDemo(){bDemo();show('dm');}
+function startG1(){show('g1');}
+function startOver(){
+  S={tier:null,ins:null,g1s:false,pbs:false,inp:{}};
+  ['g1c','g3cb'].forEach(id=>{const e=document.getElementById(id);if(e){e.checked=false;e.disabled=true;}});
+  ['g1b','g3b','tb'].forEach(id=>{const e=document.getElementById(id);if(e)e.disabled=true;});
+  const g=document.getElementById('g1s');if(g)g.scrollTop=0;
+  [1,2,3].forEach(i=>{const c=document.getElementById('tc'+i);if(c)c.className='tc';});
+  show('w');
 }
 
-function startDemo() {
-  state.isDemo = true;
-  buildDemoAnalysis();
-  showScreen('demo');
+function chkG1(){const b=document.getElementById('g1s');if(b.scrollHeight-b.scrollTop<=b.clientHeight+40){S.g1s=true;document.getElementById('g1c').disabled=false;}}
+function updG1(){document.getElementById('g1b').disabled=!document.getElementById('g1c').checked;}
+
+function selTier(n){
+  S.tier=n;
+  [1,2,3].forEach(i=>{const c=document.getElementById('tc'+i);c.className='tc'+(i===n?' s'+n:'');});
+  const b=document.getElementById('tb');
+  b.disabled=false;
+  b.className='btn btn-fw '+(n===1?'btn-tl':n===2?'btn-in':'btn-em');
 }
 
-function exitDemo() {
-  state.isDemo = false;
-  startGate1();
+function procInputs(){
+  const t=S.tier;
+  document.getElementById('isl').textContent=`Step 3 of 4 — Property Details (Tier ${t})`;
+  document.getElementById('it1').style.display=t===1?'block':'none';
+  document.getElementById('it2').style.display=t===2?'block':'none';
+  document.getElementById('it3').style.display=t===3?'block':'none';
+  document.getElementById('t3x').style.display=t===3?'block':'none';
+  const b=document.getElementById('ib');
+  b.className='btn btn-fw '+(t===1?'btn-tl':t===2?'btn-in':'btn-em');
+  show('i');
 }
 
-function startGate1() { showScreen('gate1'); }
-function proceedToTierSelect() { showScreen('tier'); }
-
-function proceedToInputs() {
-  setupInputsForTier();
-  showScreen('inputs');
+function selIns(p){
+  S.ins=p;
+  document.getElementById('ipa').className='ipa'+(p==='a'?' sel':'');
+  document.getElementById('ipb').className='ipa'+(p==='b'?' sel':'');
+  document.getElementById('ipa-f').style.display=p==='a'?'block':'none';
+  document.getElementById('ipb-s').style.display=p==='b'?'block':'none';
+  updIBtn();
 }
 
-function proceedToGate3() {
-  if (!validateInputs()) return;
-  collectInputs();
-  buildGate3Confirmations();
-  showScreen('gate3');
+function chkPB(){const b=document.getElementById('pbb');if(b.scrollHeight-b.scrollTop<=b.clientHeight+20)document.getElementById('pbc').disabled=false;}
+
+function updIBtn(){
+  const t=S.tier;
+  let ok=!!(document.getElementById('fa').value.trim()&&document.getElementById('fp').value&&document.getElementById('fd').value);
+  if(t===2){if(!S.ins)ok=false;if(S.ins==='b'&&!document.getElementById('pbc').checked)ok=false;}
+  document.getElementById('ib').disabled=!ok;
 }
 
-function generateAnalysis() {
-  buildAnalysis(state.inputs, false);
-  showScreen('analysis');
+setInterval(updIBtn,600);
+
+function proc3(){
+  if(!document.getElementById('fp').value){alert('Please enter a purchase price.');return;}
+  if(!document.getElementById('fd').value){alert('Please select a down payment.');return;}
+  if(!document.getElementById('fa').value.trim()){alert('Please enter the property address.');return;}
+  collectInp();bG3();show('g3');
 }
 
-function startOver() {
-  state = { tier:null, insPath:null, gate1Scrolled:false, pathBScrolled:false, isDemo:false, inputs:{} };
-  document.getElementById('gate1-check').checked = false;
-  document.getElementById('gate1-check').disabled = true;
-  document.getElementById('gate1-btn').disabled = true;
-  document.getElementById('gate1-scroll').scrollTop = 0;
-  document.getElementById('gate3-check').checked = false;
-  document.getElementById('gate3-btn').disabled = true;
-  document.querySelectorAll('.tier-card').forEach(c => c.classList.remove('selected'));
-  document.getElementById('tier-btn').disabled = true;
-  showScreen('welcome');
+function genAnalysis(){bAnalysis(S.inp,false);show('a');}
+
+function collectInp(){
+  const t=S.tier;
+  const price=parseFloat(document.getElementById('fp').value)||399000;
+  const dpct=parseFloat(document.getElementById('fd').value)||3;
+  const damt=price*dpct/100,loan=price-damt;
+  const ilo=parseFloat(document.getElementById('fil').value)||10000;
+  const ihi=parseFloat(document.getElementById('fih').value)||13000;
+  const byr=parseInt(document.getElementById('fb2').value)||2000;
+  const ryr=parseInt(document.getElementById('fry').value)||0;
+  const rage=ryr>0?(2026-ryr):30;
+  const con=document.getElementById('fcon').value||'cbs';
+  const rtp=document.getElementById('frt').value||'asphalt';
+  const sht=document.getElementById('fsh').value==='yes';
+  const hoa=parseFloat(document.getElementById('fh').value)||0;
+  const fld=document.getElementById('ffl').value||'x';
+  const pri=document.getElementById('fpr').value==='yes';
+  const crd=document.getElementById('fcr').value||'excellent';
+  let br=MKT.br,wr=MKT.wr;
+  if(t===3){const lr=parseFloat(document.getElementById('flr').value);if(lr){br=lr;wr=lr;}}
+  const bpi=cPI(loan,br),wpi=cPI(loan,wr);
+  const ty1=Math.round(price*MKT.tr/12),ty2=Math.round((price-MKT.he)*MKT.tr/12);
+  let bi=0,wi=0,il='',ic=false,ix=false;
+  if(t===1){ix=true;il='EXCLUDED';}
+  else if(t===2&&S.ins==='a'){const c=parseFloat(document.getElementById('fic').value)||285;bi=wi=c;il='CONFIRMED';ic=true;}
+  else if(t===2&&S.ins==='b'){[bi,wi]=cIns(con,rage,rtp,sht,byr);il='ESTIMATED';}
+  else if(t===3){const c=parseFloat(document.getElementById('fit3').value)||285;bi=wi=c;il='CONFIRMED';ic=true;}
+  let bp=0,wp=0;
+  if(dpct<20){[bp,wp]=cPMI(loan,crd);if(t===3){const cp=parseFloat(document.getElementById('fcp').value);if(cp)bp=wp=cp;}}
+  const fb=fld==='ae'?MKT.fab:MKT.fxb,fw=fld==='ae'?MKT.faw:MKT.fxw;
+  const ep=dpct<20?Math.round(loan*0.002/12):0;
+  const bt=bpi+(pri?ty2:ty1)+hoa+bi+bp+fb;
+  const wt=wpi+ty1+hoa+wi+wp+fw+ep;
+  const pn=Math.round((bt+wt)/2/50)*50;
+  S.inp={address:document.getElementById('fa').value.trim()||'Miami-Dade Property',price,dpct,damt,loan,byr,rage,rtp,con,sht,hoa,fld,ilo,ihi,pri,crd,br,wr,bpi,wpi,ty1,ty2,bi,wi,il,ic,ix,bp,wp,fb,fw,ep,bt,wt,pn,tier:t};
 }
 
-// ═══════════════════════════════════
-// GATE 1 SCROLL
-// ═══════════════════════════════════
-function checkGate1Scroll() {
-  const box = document.getElementById('gate1-scroll');
-  const atBottom = box.scrollHeight - box.scrollTop <= box.clientHeight + 30;
-  if (atBottom && !state.gate1Scrolled) {
-    state.gate1Scrolled = true;
-    document.getElementById('gate1-check').disabled = false;
-  }
-}
+function cPI(l,r){const m=r/100/12,n=360;return Math.round(l*m*Math.pow(1+m,n)/(Math.pow(1+m,n)-1));}
+function cIns(c,a,r,s,y){let b=c==='cbs'?270:380;if(r==='tile')b-=30;if(a>20)b+=100;else if(a>15)b+=50;if(s)b-=40;if(y>=2002)b-=20;return[Math.max(200,b-40),Math.min(500,b+80)];}
+function cPMI(l,c){const rs={excellent:[.003,.005],'very-good':[.0035,.0055],good:[.005,.007],fair:[.007,.009]};const[lo,hi]=rs[c]||[.003,.005];return[Math.round(l*lo/12),Math.round(l*hi/12)];}
+function fmt(n){return'$'+Math.round(n).toLocaleString();}
+function fmtR(r){return r.toFixed(2)+'%';}
 
-function updateGate1Btn() {
-  const checked = document.getElementById('gate1-check').checked;
-  document.getElementById('gate1-btn').disabled = !checked;
-}
-
-// ═══════════════════════════════════
-// TIER SELECTION
-// ═══════════════════════════════════
-function selectTier(n) {
-  state.tier = n;
-  document.querySelectorAll('.tier-card').forEach(c => c.classList.remove('selected'));
-  document.getElementById('tier-' + n).classList.add('selected');
-  document.getElementById('tier-btn').disabled = false;
-}
-
-// ═══════════════════════════════════
-// INPUTS SETUP
-// ═══════════════════════════════════
-function setupInputsForTier() {
-  const t = state.tier;
-  document.getElementById('inputs-step-label').textContent = `Step 3 of 4 — Property Details (Tier ${t})`;
-
-  // Insurance
-  document.getElementById('ins-tier1-notice').style.display = t === 1 ? 'block' : 'none';
-  document.getElementById('ins-tier2-section').style.display = t === 2 ? 'block' : 'none';
-  document.getElementById('ins-tier3-section').style.display = t === 3 ? 'block' : 'none';
-  document.getElementById('tier3-extra').style.display = t === 3 ? 'block' : 'none';
-}
-
-function selectInsPath(path) {
-  state.insPath = path;
-  document.getElementById('ins-path-a').classList.toggle('selected', path === 'a');
-  document.getElementById('ins-path-b').classList.toggle('selected', path === 'b');
-  document.getElementById('ins-path-a-input').style.display = path === 'a' ? 'block' : 'none';
-  document.getElementById('ins-path-b-scroll').style.display = path === 'b' ? 'block' : 'none';
-  if (path === 'a') updateInputsBtn();
-}
-
-function checkPathBScroll() {
-  const box = document.getElementById('pathb-scroll-box');
-  const atBottom = box.scrollHeight - box.scrollTop <= box.clientHeight + 20;
-  if (atBottom) {
-    document.getElementById('pathb-check').disabled = false;
-  }
-}
-
-function updateInputsBtn() {
-  const t = state.tier;
-  let ok = true;
-  if (!document.getElementById('f-address').value.trim()) ok = false;
-  if (!document.getElementById('f-price').value) ok = false;
-  if (!document.getElementById('f-down').value) ok = false;
-  if (t === 2) {
-    if (!state.insPath) ok = false;
-    if (state.insPath === 'b' && !document.getElementById('pathb-check').checked) ok = false;
-  }
-  document.getElementById('inputs-btn').disabled = !ok;
-}
-
-// Auto-update button as user types
-document.addEventListener('DOMContentLoaded', () => {
-  ['f-address','f-price','f-down','f-ins-confirmed','f-ins-t3'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('input', updateInputsBtn);
-  });
-});
-
-function validateInputs() {
-  const price = parseFloat(document.getElementById('f-price').value);
-  if (!price || price < 50000) { alert('Please enter a valid purchase price.'); return false; }
-  if (!document.getElementById('f-down').value) { alert('Please select a down payment percentage.'); return false; }
-  if (!document.getElementById('f-address').value.trim()) { alert('Please enter the property address.'); return false; }
-  return true;
-}
-
-function collectInputs() {
-  const t = state.tier;
-  const price = parseFloat(document.getElementById('f-price').value) || 399000;
-  const downPct = parseFloat(document.getElementById('f-down').value) || 3;
-  const downAmt = price * downPct / 100;
-  const loanAmt = price - downAmt;
-  const incomeLow = parseFloat(document.getElementById('f-income-low').value) || 10000;
-  const incomeHigh = parseFloat(document.getElementById('f-income-high').value) || 13000;
-  const builtYear = parseInt(document.getElementById('f-built').value) || 2000;
-  const roofYear = parseInt(document.getElementById('f-roof-year').value) || 0;
-  const roofAge = roofYear > 0 ? (2026 - roofYear) : 30;
-  const construction = document.getElementById('f-construction').value || 'cbs';
-  const roofType = document.getElementById('f-roof-type').value || 'asphalt';
-  const shutters = document.getElementById('f-shutters').value === 'yes';
-  const hoa = parseFloat(document.getElementById('f-hoa').value) || 0;
-  const flood = document.getElementById('f-flood').value || 'x';
-  const primary = document.getElementById('f-primary').value === 'yes';
-  const credit = document.getElementById('f-credit').value || 'excellent';
-
-  // Rate
-  let bestRate = MARKET.bestRate;
-  let worstRate = MARKET.worstRate;
-  if (t === 3) {
-    const locked = parseFloat(document.getElementById('f-locked-rate').value);
-    if (locked) { bestRate = locked; worstRate = locked; }
-  }
-
-  // P&I
-  const bestPI = calcPI(loanAmt, bestRate);
-  const worstPI = calcPI(loanAmt, worstRate);
-
-  // Tax
-  const taxYr1 = Math.round(price * MARKET.taxRate / 12);
-  const taxYr2 = Math.round((price - MARKET.homesteadExemption) * MARKET.taxRate / 12);
-
-  // Insurance
-  let bestIns = 0, worstIns = 0, insLabel = '', insConfirmed = false, insExcluded = false;
-  if (t === 1) {
-    insExcluded = true;
-    insLabel = 'EXCLUDED — See caveat';
-  } else if (t === 2 && state.insPath === 'a') {
-    const confirmed = parseFloat(document.getElementById('f-ins-confirmed').value) || 285;
-    bestIns = confirmed; worstIns = confirmed;
-    insLabel = 'CONFIRMED QUOTE';
-    insConfirmed = true;
-  } else if (t === 2 && state.insPath === 'b') {
-    [bestIns, worstIns] = calcInsRange(construction, roofAge, roofType, shutters, builtYear);
-    insLabel = 'ESTIMATED — UNCONFIRMED';
-  } else if (t === 3) {
-    const confirmed = parseFloat(document.getElementById('f-ins-t3').value) || 285;
-    bestIns = confirmed; worstIns = confirmed;
-    insLabel = 'CONFIRMED QUOTE';
-    insConfirmed = true;
-  }
-
-  // PMI
-  let bestPMI = 0, worstPMI = 0;
-  if (downPct < 20) {
-    [bestPMI, worstPMI] = calcPMI(loanAmt, credit, t, downPct);
-    if (t === 3) {
-      const confirmed = parseFloat(document.getElementById('f-confirmed-pmi').value);
-      if (confirmed) { bestPMI = confirmed; worstPMI = confirmed; }
-    }
-  }
-
-  // Flood
-  let bestFlood = MARKET.zoneXFloodBest, worstFlood = MARKET.zoneXFloodWorst;
-  if (flood === 'ae') { bestFlood = MARKET.zoneAEFloodBest; worstFlood = MARKET.zoneAEFloodWorst; }
-
-  // Extra principal for worst case PMI acceleration (only if PMI applies)
-  const extraPrincipal = downPct < 20 ? Math.round(loanAmt * 0.002 / 12) : 0;
-
-  // Totals
-  const bestTotal = bestPI + (primary ? taxYr2 : taxYr1) + hoa + bestIns + bestPMI + bestFlood;
-  const worstTotal = worstPI + taxYr1 + hoa + worstIns + worstPMI + worstFlood + extraPrincipal;
-  const planningNum = Math.round((bestTotal + worstTotal) / 2 / 50) * 50;
-
-  state.inputs = {
-    address: document.getElementById('f-address').value.trim() || 'Miami-Dade Property',
-    price, downPct, downAmt, loanAmt,
-    builtYear, roofAge, roofType, construction, shutters, hoa, flood,
-    incomeLow, incomeHigh, primary, credit,
-    bestRate, worstRate, bestPI, worstPI,
-    taxYr1, taxYr2,
-    bestIns, worstIns, insLabel, insConfirmed, insExcluded,
-    bestPMI, worstPMI, bestFlood, worstFlood,
-    extraPrincipal, bestTotal, worstTotal, planningNum,
-    tier: t, downPct
-  };
-}
-
-// ═══════════════════════════════════
-// CALCULATIONS
-// ═══════════════════════════════════
-function calcPI(loan, rate) {
-  const r = rate / 100 / 12;
-  const n = 360;
-  return Math.round(loan * r * Math.pow(1+r,n) / (Math.pow(1+r,n)-1));
-}
-
-function calcInsRange(construction, roofAge, roofType, shutters, builtYear) {
-  let base = construction === 'cbs' ? 270 : 380;
-  if (roofType === 'tile') base -= 30;
-  if (roofAge > 20) base += 100;
-  else if (roofAge > 15) base += 50;
-  if (shutters) base -= 40;
-  if (builtYear >= 2002) base -= 20;
-  const best = Math.max(200, base - 40);
-  const worst = Math.min(500, base + 80);
-  return [best, worst];
-}
-
-function calcPMI(loan, credit, tier, downPct) {
-  let bestRate = 0.0035, worstRate = 0.0055;
-  if (credit === 'excellent') { bestRate = 0.003; worstRate = 0.005; }
-  else if (credit === 'very-good') { bestRate = 0.0035; worstRate = 0.0055; }
-  else if (credit === 'good') { bestRate = 0.005; worstRate = 0.007; }
-  else { bestRate = 0.007; worstRate = 0.009; }
-  return [Math.round(loan * bestRate / 12), Math.round(loan * worstRate / 12)];
-}
-
-function fmt(n) { return '$' + Math.round(n).toLocaleString(); }
-function fmtR(r) { return r.toFixed(2) + '%'; }
-
-// ═══════════════════════════════════
-// GATE 3 CONFIRMATIONS
-// ═══════════════════════════════════
-function buildGate3Confirmations() {
-  const inp = state.inputs;
-  const tierLabels = {1:'Tier 1 — Pre-Offer Estimate', 2:'Tier 2 — Active Offer Analysis', 3:'Tier 3 — Under Contract Precision'};
-  const accLabels = {1:'85–90%', 2:'92–95%', 3:'95–98%'};
-  const estimated = [];
-  if (inp.insExcluded) estimated.push('Homeowners Insurance: Excluded — obtain actual quote');
-  else if (inp.insLabel && inp.insLabel.includes('ESTIMATED')) estimated.push('Homeowners Insurance: Estimated — unconfirmed');
-  if (state.tier < 3 && inp.bestPMI > 0) estimated.push('PMI: Estimated range — get lender quote to confirm');
-
-  const confs = [
-    [`Tier & Accuracy`, `You are receiving a <strong>${tierLabels[state.tier]}</strong> with an accuracy target of <strong>${accLabels[state.tier]}</strong> based on the inputs provided.`],
-    [`Estimated Inputs`, estimated.length > 0 ? `The following inputs are estimates: <strong>${estimated.join('; ')}</strong>. Review all caveat language associated with estimated inputs before making any financial decision.` : `<strong>All inputs in your analysis are confirmed.</strong> No estimated variables.`],
-    [`Not Professional Advice`, `This analysis is an educational tool. It does not constitute financial, legal, real estate, or mortgage advice. It does not replace a licensed mortgage broker, realtor, attorney, or insurance professional.`],
-    [`Data Currency`, `The mortgage rate used in this analysis was last verified on <strong>Friday, April 25, 2026 at 11:52 AM Eastern Time</strong>. All other financial inputs were last verified in <strong>April 2026</strong>.`],
-    [`Your Information`, `You confirm that all information you provided during this session was accurate and complete to the best of your knowledge. Inaccuracies in your inputs will produce inaccuracies in your results.`],
+function bG3(){
+  const i=S.inp;
+  const tl={1:'Tier 1 — Pre-Offer Estimate',2:'Tier 2 — Active Offer Analysis',3:'Tier 3 — Under Contract Precision'};
+  const al={1:'85–90%',2:'92–95%',3:'95–98%'};
+  const est=[];
+  if(i.ix)est.push('Homeowners Insurance: Excluded');
+  else if(i.il==='ESTIMATED')est.push('Homeowners Insurance: Estimated — unconfirmed');
+  if(S.tier<3&&i.bp>0)est.push('PMI: Estimated range');
+  const cs=[
+    ['Tier &amp; Accuracy',`You are receiving a <strong>${tl[S.tier]}</strong> with an accuracy target of <strong>${al[S.tier]}</strong>.`],
+    ['Estimated Inputs',est.length?`Estimated inputs: <strong>${est.join('; ')}</strong>. Review all caveats before any financial decision.`:`<strong>All inputs confirmed.</strong>`],
+    ['Not Professional Advice','This analysis is an educational tool. It does not constitute financial, legal, real estate, or mortgage advice.'],
+    ['Data Currency',`Mortgage rate last verified: <strong>${MKT.rv}</strong>. All other inputs: <strong>${MKT.ov}</strong>.`],
+    ['Your Information','You confirm all information you provided is accurate and complete to the best of your knowledge.'],
   ];
-
-  const wrap = document.getElementById('gate3-confirmations');
-  wrap.innerHTML = confs.map((c,i) => `
-    <div style="background:var(--white); border:1px solid var(--rule); border-radius:6px; padding:1rem 1.25rem; border-left:3px solid var(--gold);">
-      <div class="mono" style="font-size:0.58rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--gold-dim); margin-bottom:0.3rem;">Confirmation ${i+1} of 5 — ${c[0]}</div>
-      <p style="font-size:0.85rem; line-height:1.6;">${c[1]}</p>
-    </div>
-  `).join('');
+  document.getElementById('g3c').innerHTML=cs.map((c,i)=>`<div class="cc"><span class="ccn">Confirmation ${i+1} of 5 — ${c[0]}</span><p class="ccb">${c[1]}</p></div>`).join('');
 }
+function updG3(){document.getElementById('g3b').disabled=!document.getElementById('g3cb').checked;}
 
-function updateGate3Btn() {
-  document.getElementById('gate3-btn').disabled = !document.getElementById('gate3-check').checked;
-}
-
-// ═══════════════════════════════════
-// ANALYSIS BUILD
-// ═══════════════════════════════════
-function buildAnalysis(inp, isDemo) {
-  const tierBadgeClass = {1:'t1', 2:'t2', 3:'t3'}[inp.tier];
-  const tierBadgeText = {1:'Tier 1 — Pre-Offer', 2:'Tier 2 — Active Offer', 3:'Tier 3 — Under Contract'}[inp.tier];
-  const swing = inp.worstTotal - inp.bestTotal;
-  const swing30yr = swing * 360;
-  const dtis = [
-    [`Best case ${fmt(inp.bestTotal)} at ${fmt(inp.incomeLow)}/mo`, (inp.bestTotal/inp.incomeLow*100).toFixed(1)+'%', inp.bestTotal/inp.incomeLow < 0.36 ? 'ok':'warn'],
-    [`Best case ${fmt(inp.bestTotal)} at ${fmt(inp.incomeHigh)}/mo`, (inp.bestTotal/inp.incomeHigh*100).toFixed(1)+'%', 'ok'],
-    [`Planning ${fmt(inp.planningNum)} at ${fmt(inp.incomeLow)}/mo`, (inp.planningNum/inp.incomeLow*100).toFixed(1)+'%', inp.planningNum/inp.incomeLow < 0.40 ? 'warn':'bad'],
-    [`Worst case ${fmt(inp.worstTotal)} at ${fmt(inp.incomeLow)}/mo`, (inp.worstTotal/inp.incomeLow*100).toFixed(1)+'%', inp.worstTotal/inp.incomeLow < 0.43 ? 'warn':'bad'],
-    [`Worst case ${fmt(inp.worstTotal)} at ${fmt(inp.incomeHigh)}/mo`, (inp.worstTotal/inp.incomeHigh*100).toFixed(1)+'%', inp.worstTotal/inp.incomeHigh < 0.36 ? 'ok':'warn'],
+function bAnalysis(i,isDemo){
+  const tl={1:'Tier 1 — Pre-Offer',2:'Tier 2 — Active Offer',3:'Tier 3 — Under Contract'}[i.tier];
+  const tc={1:'teal',2:'indigo',3:'emerald'}[i.tier];
+  const sw=i.wt-i.bt;
+  const irb=i.ix?`<span style="color:var(--warn);font-style:italic;">Excluded</span>`:`<span class="${i.ic?'bv':'wv'}">${fmt(i.bi)}</span>${i.il==='ESTIMATED'?'<span class="utag">EST</span>':'<span class="ctag">CONF</span>'}`;
+  const irw=i.ix?`<span style="color:var(--warn);font-style:italic;">Excluded</span>`:`<span class="${i.ic?'bv':'wv'}">${fmt(i.wi)}</span>${i.il==='ESTIMATED'?'<span class="utag">EST</span>':'<span class="ctag">CONF</span>'}`;
+  const bars=[6.00,6.23,6.33,6.50,6.75].map(r=>{const pi=cPI(i.loan,r);const pct=Math.round((r-5.5)/(7.5-5.5)*100);return`<div class="br"><span class="brl">${r}%</span><div class="btr"><div class="bf" style="width:${pct}%"></div></div><span class="bv2">${fmt(pi)}/mo</span></div>`;}).join('');
+  const dtis=[
+    [`Best ${fmt(i.bt)} at ${fmt(i.ilo)}/mo`,(i.bt/i.ilo*100).toFixed(1)+'%',i.bt/i.ilo<.36?'do':'dw'],
+    [`Best ${fmt(i.bt)} at ${fmt(i.ihi)}/mo`,(i.bt/i.ihi*100).toFixed(1)+'%','do'],
+    [`Planning ${fmt(i.pn)} at ${fmt(i.ilo)}/mo`,(i.pn/i.ilo*100).toFixed(1)+'%',i.pn/i.ilo<.40?'dw':'dd'],
+    [`Worst ${fmt(i.wt)} at ${fmt(i.ilo)}/mo`,(i.wt/i.ilo*100).toFixed(1)+'%',i.wt/i.ilo<.43?'dw':'dd'],
+    [`Worst ${fmt(i.wt)} at ${fmt(i.ihi)}/mo`,(i.wt/i.ihi*100).toFixed(1)+'%',i.wt/i.ihi<.36?'do':'dw'],
   ];
+  const ck=[
+    "Get actual homeowners insurance quotes from a Florida-licensed independent broker — not an online estimator.",
+    `Verify flood zone at msc.fema.gov using the exact property address. ${i.fld==='x'?'Zone X = voluntary but strongly advisable.':'Zone AE = lender required — included in your analysis.'}`,
+    "Request HOA financials and reserve study. Florida post-Surfside legislation requires funded reserves.",
+    `Budget total cash: ${fmt(i.damt)} down + ${fmt(i.price*.03)}–${fmt(i.price*.04)} closing + ${fmt(i.wt*3)} reserves = ${fmt(i.damt+i.price*.03+i.wt*3)}+ needed.`,
+    "Shop 4–5 lenders. Get Loan Estimate documents from each. Rate spread can be 0.25–0.50% on the same day.",
+    "File Homestead Exemption with Miami-Dade Property Appraiser immediately after closing. Deadline: March 1.",
+    "Get a wind mitigation inspection ($75–$150) if the property has hurricane shutters or a newer roof.",
+    `Budget Year 1 at ${fmt(Math.round((i.wt+i.bt)/2))}+ (full tax, no exemption). From Year 2 drops ~${fmt(i.ty1-i.ty2)}/month.`,
+  ].map((x,n)=>`<div class="cki"><span class="ckn">${String(n+1).padStart(2,'0')}.</span><span>${x}</span></div>`).join('');
 
-  // Masthead
-  document.getElementById('analysis-masthead').innerHTML = `
-    <div class="masthead">
-      <div class="masthead-tag">HomeTrue Analysis${isDemo ? ' · DEMO MODE' : ''}</div>
-      <h1 class="serif" style="font-size:clamp(1.4rem,3vw,2rem); margin-bottom:0.25rem;">${inp.address}</h1>
-      <div class="masthead-rule"></div>
-      <div class="masthead-sub">${inp.tier === 1 ? 'Pre-Offer' : inp.tier === 2 ? 'Active Offer' : 'Under Contract'} &nbsp;·&nbsp; 3% Down &nbsp;·&nbsp; Loan: ${fmt(inp.loanAmt)} &nbsp;·&nbsp; Miami-Dade County</div>
-      <div style="margin-top:0.75rem;">
-        <span class="tier-badge ${tierBadgeClass}">${tierBadgeText}</span>
-      </div>
+  document.getElementById('amh').innerHTML=`<div class="mh"><div class="mh-tag">HomeTrue Analysis${isDemo?' · DEMO':''}</div><h1 style="font-size:clamp(1.3rem,2.5vw,1.9rem);margin-bottom:.25rem;">Home<span class="tr">True</span></h1><div style="font-family:var(--fd);font-size:clamp(1rem,2vw,1.4rem);font-weight:600;color:rgba(255,255,255,.9);margin-bottom:.25rem;">${i.address}</div><div class="mh-rule"></div><div class="mh-sub">${tl} · ${i.dpct}% Down · Loan: ${fmt(i.loan)} · Miami-Dade</div><div style="margin-top:.75rem;"><span style="display:inline-flex;align-items:center;padding:.25rem .75rem;border-radius:3px;font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;background:var(--${tc}-light);color:var(--${tc}-dim);border:1px solid var(--${tc}-muted);">${tl}</span></div></div>`;
+
+  document.getElementById('ac').innerHTML=`
+<div id="tc" class="as v"><div class="cw">
+  <div class="ae tl">Section I</div><h2 class="at2">Side-by-Side Scenario Comparison</h2><div class="ar"></div>
+  ${i.tier===1?`<div class="nt nt-wn"><span class="nl nl-wn">Tier 1 — Insurance Excluded</span><p>South Florida range: <strong>$230–$500/month</strong>. Up to <strong>$270/month</strong> not in your totals. Get an actual quote before any commitment.</p></div>`:''}
+  ${i.il==='ESTIMATED'?`<div class="nt nt-wn"><span class="nl nl-wn">Insurance — Unconfirmed Estimate</span><p>Estimates can differ from actual quotes by <strong>$200–$400/month</strong>. Obtain a confirmed quote before committing.</p></div>`:''}
+  <div class="nt nt-tl"><span class="nl nl-tl">Tax Methodology — Purchase Price Basis</span><p>Taxes from <strong>${fmt(i.price)} purchase price</strong> — not taxes on record. Year 1: ${fmt(i.ty1)}/mo. Year 2+ with Homestead: <strong>${fmt(i.ty2)}/mo</strong>.</p></div>
+  <div class="scs">
+    <div class="sc scb"><span class="scl">Best Case Scenario</span><div class="sct">${fmt(i.bt)}<span style="font-size:1rem;">/mo</span></div><div class="scs2">Year 2+ · Homestead Exemption applied</div><span class="scr">${fmtR(i.br)} · 30-yr Fixed</span></div>
+    <div class="sc scw"><span class="scl">Worst Case Scenario</span><div class="sct">${fmt(i.wt)}<span style="font-size:1rem;">/mo</span></div><div class="scs2">Year 1 · Reassessed · All adverse</div><span class="scr">${fmtR(i.wr)} · 30-yr Fixed</span></div>
+  </div>
+  <div class="db2">
+    <div class="di"><span class="dn2">${fmt(sw)}</span><span class="dl">Monthly Swing</span></div>
+    <div class="di"><span class="dn2">${fmt(sw*360)}</span><span class="dl">30-Year Difference</span></div>
+    <div class="di"><span class="dn2">${MKT.fm}%</span><span class="dl">Freddie Mac Avg</span></div>
+    <div class="di"><span class="dn2">${fmt(i.pn)}</span><span class="dl">Planning Target</span></div>
+  </div>
+  <table class="ct">
+    <thead><tr><th>Component</th><th>Best Case</th><th>Worst Case</th><th>Δ Diff</th></tr></thead>
+    <tbody>
+      <tr><td class="rl">Interest Rate</td><td class="bv">${fmtR(i.br)}</td><td class="wv">${fmtR(i.wr)}</td><td class="dv">+${(i.wr-i.br).toFixed(2)}%</td></tr>
+      <tr><td class="rl">P&amp;I Payment</td><td class="bv">${fmt(i.bpi)}</td><td class="wv">${fmt(i.wpi)}</td><td class="dv">+${fmt(i.wpi-i.bpi)}</td></tr>
+      <tr><td class="rl">Property Taxes<span class="rn">Purchase price basis</span></td><td class="bv">${fmt(i.ty2)}<span class="rn">Yr 2+ w/ Homestead</span></td><td class="wv">${fmt(i.ty1)}<span class="rn">Yr 1 — no exemption</span></td><td class="dv">+${fmt(i.ty1-i.ty2)}</td></tr>
+      <tr><td class="rl">HOA</td><td class="bv">${fmt(i.hoa)}</td><td class="wv">${fmt(i.hoa)}</td><td class="dv">—</td></tr>
+      <tr><td class="rl">Homeowners Insurance</td><td>${irb}</td><td>${irw}</td><td class="dv">${i.ix?'—':'+'+fmt(i.wi-i.bi)}</td></tr>
+      ${i.bp>0?`<tr><td class="rl">PMI (${i.dpct}% down)</td><td class="bv">${fmt(i.bp)}</td><td class="wv">${fmt(i.wp)}</td><td class="dv">+${fmt(i.wp-i.bp)}</td></tr>`:''}
+      <tr><td class="rl">Flood Insurance</td><td class="bv">${fmt(i.fb)}</td><td class="wv">${fmt(i.fw)}</td><td class="dv">+${fmt(i.fw-i.fb)}</td></tr>
+      ${i.ep>0?`<tr><td class="rl">Extra Principal</td><td class="bv">$0</td><td class="wv">${fmt(i.ep)}</td><td class="dv">+${fmt(i.ep)}</td></tr>`:''}
+      <tr class="tr2"><td>TOTAL MONTHLY</td><td class="bv">${fmt(i.bt)}</td><td class="wv">${fmt(i.wt)}</td><td class="dv">+${fmt(sw)}</td></tr>
+    </tbody>
+  </table>
+  <div class="pb2"><span class="pbl">Recommended Budget Planning Number</span><div class="pbn">${fmt(i.pn)} / month</div><p class="pbd">Midpoint between scenarios. Year 1 runs closer to ${fmt(i.ty1)}/mo taxes. From Year 2, Homestead Exemption saves ${fmt(i.ty1-i.ty2)}/month — file immediately after closing.</p></div>
+  <h3 style="font-family:var(--fd);font-size:1.1rem;margin:1.5rem 0 .75rem;color:var(--midnight);">DTI Analysis · Income ${fmt(i.ilo)}–${fmt(i.ihi)}/mo</h3>
+  <div class="dt">${dtis.map(d=>`<div class="dr2"><span class="drl">${d[0]}</span><span class="${d[2]}">${d[1]} — ${d[2]==='do'?'Healthy':d[2]==='dw'?'Tight / Qualifiable':'Near Ceiling'}</span></div>`).join('')}</div>
+</div></div>
+
+<div id="tb2" class="as"><div class="cw">
+  <div class="ae em">Section II — Best Case</div><h2 class="at2">Everything Breaks Your Way</h2><div class="ar"></div>
+  <div class="sg">
+    <div class="stc e"><span class="sl">Monthly Total</span><div class="sv">${fmt(i.bt)}</div><div class="sn">Year 2+ with Homestead Exemption</div></div>
+    <div class="stc e"><span class="sl">Interest Rate</span><div class="sv">${fmtR(i.br)}</div><div class="sn">Achievable with 4–5 lender quotes</div></div>
+    <div class="stc e"><span class="sl">Tax (Yr 2+)</span><div class="sv">${fmt(i.ty2)}</div><div class="sn">After Homestead Exemption</div></div>
+    <div class="stc e"><span class="sl">Loan Amount</span><div class="sv">${fmt(i.loan)}</div><div class="sn">${i.dpct}% down on ${fmt(i.price)}</div></div>
+  </div>
+  <div class="nt nt-em"><span class="nl nl-em">Tax Detail — Best Case (Year 2+)</span><p>${fmt(i.price)} × 1.3% = ${fmt(i.price*.013)}/yr. Homestead Exemption −$50,000 → ${fmt((i.price-50000)*.013)}/yr = <strong>${fmt(i.ty2)}/month</strong>. File with Miami-Dade Property Appraiser immediately. Deadline: March 1 of following tax year. Year 1: <strong>${fmt(i.ty1)}/month</strong>.</p></div>
+  <table class="bt">
+    <thead><tr><th>Component</th><th>Monthly</th><th>Annual</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>P&amp;I — ${fmtR(i.br)}, 30yr</td><td><strong>${fmt(i.bpi)}</strong></td><td>${fmt(i.bpi*12)}</td><td class="nt2">Shop 4–5 lenders; best credit tier</td></tr>
+      <tr><td>Property Taxes (Yr 2+)</td><td><strong>${fmt(i.ty2)}</strong></td><td>${fmt(i.ty2*12)}</td><td class="nt2">Post-reassessment minus Homestead</td></tr>
+      <tr><td>HOA</td><td><strong>${fmt(i.hoa)}</strong></td><td>${fmt(i.hoa*12)}</td><td class="nt2">Confirmed — verify no sub-HOAs</td></tr>
+      ${i.ix?`<tr><td>Homeowners Insurance</td><td><span style="color:var(--warn);font-style:italic;font-size:.85rem;">Excluded</span></td><td>—</td><td class="nt2">Obtain actual quote before committing</td></tr>`:`<tr><td>Homeowners Insurance</td><td><strong>${fmt(i.bi)}</strong></td><td>${fmt(i.bi*12)}</td><td class="nt2">${i.il}</td></tr>`}
+      ${i.bp>0?`<tr><td>PMI (${i.dpct}% down)</td><td><strong>${fmt(i.bp)}</strong></td><td>${fmt(i.bp*12)}</td><td class="nt2">Shop lenders on PMI separately</td></tr>`:''}
+      <tr><td>Flood Insurance</td><td><strong>${fmt(i.fb)}</strong></td><td>${fmt(i.fb*12)}</td><td class="nt2">${i.fld==='x'?'Voluntary — strongly advisable':'Lender required'}</td></tr>
+      <tr><td class="tt"><strong>TOTAL</strong></td><td class="tt" style="color:var(--emerald);">${fmt(i.bt)}</td><td>${fmt(i.bt*12)}</td><td></td></tr>
+    </tbody>
+  </table>
+  <div class="tc2">
+    <div class="ci"><div class="cit e">How to Achieve ${fmtR(i.br)}</div>
+      <div class="cb">Get 4–5 lender quotes — spread can be 0.50%+ on the same day</div>
+      <div class="cb">Ask about buying down the rate with points</div>
+      <div class="cb">Your credit score qualifies for best pricing tier</div>
+      <div class="cb">Lock when Freddie Mac weekly average dips (currently ${MKT.fm}%)</div>
+      <div class="cb">Credit unions often beat national banks on rate</div>
     </div>
-  `;
-
-  const insRowBest = inp.insExcluded
-    ? `<span style="color:var(--warn); font-style:italic;">Excluded — obtain quote</span>`
-    : `<span class="${inp.insConfirmed ? 'best-v' : 'worst-v'}">${fmt(inp.bestIns)}</span>${inp.insLabel.includes('ESTIMATED') ? '<span class="unconfirmed-tag">ESTIMATED</span>' : '<span class="ins-confirmed">CONFIRMED</span>'}`;
-
-  const insRowWorst = inp.insExcluded
-    ? `<span style="color:var(--warn); font-style:italic;">Excluded — obtain quote</span>`
-    : `<span class="${inp.insConfirmed ? 'worst-v' : 'worst-v'}">${fmt(inp.worstIns)}</span>${inp.insLabel.includes('ESTIMATED') ? '<span class="unconfirmed-tag">ESTIMATED</span>' : '<span class="ins-confirmed">CONFIRMED</span>'}`;
-
-  const rateRows = [6.00,6.23,6.33,6.50,6.75].map((r,i) => {
-    const pi = calcPI(inp.loanAmt, r);
-    const pct = Math.round((r - 5.5) / (7.5 - 5.5) * 100);
-    return `<div class="bar-row"><span class="bar-rate">${r}%</span><div class="bar-track"><div class="bar-fill" style="width:${pct}%"></div></div><span class="bar-val">${fmt(pi)}/mo</span></div>`;
-  }).join('');
-
-  const checklist = buildChecklist(inp);
-
-  const content = `
-    <!-- COMPARISON TAB -->
-    <div id="tab-compare" class="analysis-section visible">
-      <div class="container-wide">
-        <div class="a-eyebrow d">Section I</div>
-        <h2 class="a-title serif">Side-by-Side Scenario Comparison</h2>
-        <div class="a-rule"></div>
-
-        ${inp.tier === 1 ? `
-        <div class="notice notice-warn">
-          <span class="notice-label warn">Tier 1 — Homeowners Insurance Excluded</span>
-          <p>Insurance is not included in this Tier 1 analysis. In the current South Florida market, insurance typically ranges from <strong>$230–$500/month</strong> for a property with this profile. This represents a potential variance of up to <strong>$270/month</strong> not reflected in your totals. Obtain an actual quote from a Florida-licensed independent broker before making any financial commitment.</p>
-        </div>
-        ` : ''}
-
-        ${inp.insLabel && inp.insLabel.includes('ESTIMATED') ? `
-        <div class="notice notice-warn">
-          <span class="notice-label warn">Insurance — Unconfirmed Estimate</span>
-          <p>The insurance figure in this analysis is an estimate. In the current South Florida market, estimates can differ from actual quotes by <strong>$200–$400/month</strong>. Obtain a confirmed quote before making any financial commitment.</p>
-        </div>
-        ` : ''}
-
-        <div class="notice notice-gold">
-          <span class="notice-label gold">Tax Methodology — Purchase Price Basis</span>
-          <p>Taxes are calculated from the <strong>${fmt(inp.price)} purchase price</strong> — not taxes on record (which reflect the prior owner's assessment). Year 1: ${fmt(inp.price)} × 1.3% = <strong>${fmt(inp.taxYr1)}/mo</strong>. Year 2+ with Homestead Exemption: ${fmt(inp.price - 50000)} × 1.3% = <strong>${fmt(inp.taxYr2)}/mo</strong>.</p>
-        </div>
-
-        <div class="scenario-cards">
-          <div class="sc-card best">
-            <span class="sc-lbl mono">Best Case Scenario</span>
-            <div class="sc-total serif">${fmt(inp.bestTotal)}<span style="font-size:1rem;">/mo</span></div>
-            <div class="sc-sub mono">Year 2+ with Homestead Exemption</div>
-            <span class="sc-rate">${fmtR(inp.bestRate)} · 30-yr Fixed</span>
-          </div>
-          <div class="sc-card worst">
-            <span class="sc-lbl mono">Worst Case Scenario</span>
-            <div class="sc-total serif">${fmt(inp.worstTotal)}<span style="font-size:1rem;">/mo</span></div>
-            <div class="sc-sub mono">Year 1 · No Exemption · All Adverse</div>
-            <span class="sc-rate">${fmtR(inp.worstRate)} · 30-yr Fixed</span>
-          </div>
-        </div>
-
-        <div class="delta-banner">
-          <div class="delta-item"><span class="delta-num serif">${fmt(swing)}</span><span class="delta-lbl mono">Monthly Swing</span></div>
-          <div class="delta-item"><span class="delta-num serif">${fmt(swing30yr)}</span><span class="delta-lbl mono">30-Year Cost Difference</span></div>
-          <div class="delta-item"><span class="delta-num serif">${MARKET.freddieMac}%</span><span class="delta-lbl mono">Current Freddie Mac Avg</span></div>
-          <div class="delta-item"><span class="delta-num serif">${fmt(inp.planningNum)}</span><span class="delta-lbl mono">Planning Target</span></div>
-        </div>
-
-        <table class="comp-table">
-          <thead><tr>
-            <th>Component</th>
-            <th>Best Case</th>
-            <th>Worst Case</th>
-            <th>Δ Diff</th>
-          </tr></thead>
-          <tbody>
-            <tr><td class="row-lbl">Interest Rate</td><td class="best-v">${fmtR(inp.bestRate)}</td><td class="worst-v">${fmtR(inp.worstRate)}</td><td class="diff-v">+${(inp.worstRate - inp.bestRate).toFixed(2)}%</td></tr>
-            <tr><td class="row-lbl">P&I Payment</td><td class="best-v">${fmt(inp.bestPI)}</td><td class="worst-v">${fmt(inp.worstPI)}</td><td class="diff-v">+${fmt(inp.worstPI - inp.bestPI)}</td></tr>
-            <tr><td class="row-lbl">Property Taxes<span class="row-note">Purchase price basis</span></td><td class="best-v">${fmt(inp.taxYr2)}<span class="row-note">Yr 2+ w/ Homestead</span></td><td class="worst-v">${fmt(inp.taxYr1)}<span class="row-note">Yr 1 — no exemption</span></td><td class="diff-v">+${fmt(inp.taxYr1 - inp.taxYr2)}</td></tr>
-            <tr><td class="row-lbl">HOA</td><td class="best-v">${fmt(inp.hoa)}</td><td class="worst-v">${fmt(inp.hoa)}</td><td class="diff-v">—</td></tr>
-            <tr><td class="row-lbl">Homeowners Insurance</td><td>${insRowBest}</td><td>${insRowWorst}</td><td class="diff-v">${inp.insExcluded ? '—' : '+' + fmt(inp.worstIns - inp.bestIns)}</td></tr>
-            ${inp.bestPMI > 0 ? `<tr><td class="row-lbl">PMI (${inp.downPct}% down)</td><td class="best-v">${fmt(inp.bestPMI)}</td><td class="worst-v">${fmt(inp.worstPMI)}</td><td class="diff-v">+${fmt(inp.worstPMI - inp.bestPMI)}</td></tr>` : ''}
-            <tr><td class="row-lbl">Flood Insurance (Zone ${inp.flood === 'x' ? 'X' : 'AE'})</td><td class="best-v">${fmt(inp.bestFlood)}</td><td class="worst-v">${fmt(inp.worstFlood)}</td><td class="diff-v">+${fmt(inp.worstFlood - inp.bestFlood)}</td></tr>
-            ${inp.extraPrincipal > 0 ? `<tr><td class="row-lbl">Extra Principal</td><td class="best-v">$0</td><td class="worst-v">${fmt(inp.extraPrincipal)}</td><td class="diff-v">+${fmt(inp.extraPrincipal)}</td></tr>` : ''}
-            <tr class="total-row"><td>TOTAL MONTHLY</td><td class="best-v">${fmt(inp.bestTotal)}</td><td class="worst-v">${fmt(inp.worstTotal)}</td><td class="diff-v">+${fmt(swing)}</td></tr>
-          </tbody>
-        </table>
-
-        <div class="planning-box">
-          <span class="planning-lbl mono">Recommended Budget Planning Number</span>
-          <div class="planning-num serif">${fmt(inp.planningNum)} / month</div>
-          <p class="planning-desc">Midpoint between scenarios. Note: Year 1 will run closer to worst-case taxes (${fmt(inp.taxYr1)}/mo before Homestead Exemption). From Year 2 onward, taxes drop to ${fmt(inp.taxYr2)}/mo — file your Homestead Exemption immediately after closing.</p>
-        </div>
-
-        <h3 class="serif" style="font-size:1.1rem; margin:1.5rem 0 0.75rem;">DTI Analysis · Income Range ${fmt(inp.incomeLow)}–${fmt(inp.incomeHigh)}/mo</h3>
-        <div class="dti-table">
-          ${dtis.map(d => `<div class="dti-row"><span class="dti-row-lbl">${d[0]}</span><span class="dti-${d[2]}">${d[1]} — ${d[2]==='ok'?'Healthy':d[2]==='warn'?'Tight / Qualifiable':'Near Lender Ceiling'}</span></div>`).join('')}
-        </div>
-      </div>
+    <div class="ci"><div class="cit t">Homestead Exemption Plan</div>
+      <div class="cb">File with Miami-Dade Property Appraiser immediately after closing</div>
+      <div class="cb">Deadline: March 1 of the following tax year</div>
+      <div class="cb">Saves ~$650/year (~$54/month) from Year 2 onward</div>
+      <div class="cb">Activates Save Our Homes — 3% annual assessment cap</div>
+      <div class="cb">File online at miamidade.gov/pa — ~15 minutes</div>
     </div>
+  </div>
+  ${i.bp>0?`<div class="pt"><div class="ptl">PMI Removal Timeline — Best Case</div>
+    <div class="pp"><span class="py">Month 0</span><span class="pd2">Close at ${fmt(i.price)}. LTV ${100-i.dpct}%. PMI ${fmt(i.bp)}/mo. Equity: ${fmt(i.damt)}. File Homestead Exemption immediately.</span></div>
+    <div class="pp"><span class="py">Year 1</span><span class="pd2">Pay ${fmt(i.ty1)}/mo tax (no exemption yet). Schedule wind mitigation inspection if applicable.</span></div>
+    <div class="pp"><span class="py">Year 2</span><span class="pd2">Homestead Exemption kicks in — tax drops to ${fmt(i.ty2)}/mo, saving ${fmt(i.ty1-i.ty2)}/month permanently.</span></div>
+    <div class="pp"><span class="py">Year 3–4</span><span class="pd2">With 3–4% appreciation, LTV approaches 85%. Order appraisal, request PMI cancellation — saves ${fmt(i.bp)}/mo = ${fmt(i.bp*12)}/yr.</span></div>
+    <div class="pp"><span class="py">Year 7–8</span><span class="pd2">Automatic PMI termination (Homeowners Protection Act) at 78% original LTV — guaranteed by federal law.</span></div>
+  </div>`:''}
+</div></div>
 
-    <!-- BEST CASE TAB -->
-    <div id="tab-best" class="analysis-section">
-      <div class="container-wide">
-        <div class="a-eyebrow g">Section II — Best Case Scenario</div>
-        <h2 class="a-title serif">Everything Breaks Your Way</h2>
-        <div class="a-rule"></div>
+<div id="tw" class="as"><div class="cw">
+  <div class="ae in">Section III — Worst Case</div><h2 class="at2">When Assumptions Break Against You</h2><div class="ar"></div>
+  <div class="sg">
+    <div class="stc i"><span class="sl">Monthly Total</span><div class="sv">${fmt(i.wt)}</div><div class="sn">Year 1 · All adverse assumptions</div></div>
+    <div class="stc i"><span class="sl">Interest Rate</span><div class="sv">${fmtR(i.wr)}</div><div class="sn">Without competitive lender shopping</div></div>
+    <div class="stc i"><span class="sl">Tax (Year 1)</span><div class="sv">${fmt(i.ty1)}</div><div class="sn">Reassessed at ${fmt(i.price)} — no exemption</div></div>
+    <div class="stc i"><span class="sl">DTI at ${fmt(i.ilo)}</span><div class="sv">${(i.wt/i.ilo*100).toFixed(1)}%</div><div class="sn">${i.wt/i.ilo>.43?'Near lender ceiling':'Manageable'}</div></div>
+  </div>
+  <div class="nt nt-in"><span class="nl nl-in">Tax Detail — Worst Case (Year 1)</span><p>Miami-Dade reassesses at ${fmt(i.price)}. At 1.3% = ${fmt(i.price*.013)}/yr = <strong>${fmt(i.ty1)}/month</strong> in Year 1. Homestead Exemption does NOT apply Year 1. Budget ${fmt(i.ty1)}/month for taxes regardless of rate.</p></div>
+  <table class="bt">
+    <thead><tr><th>Component</th><th>Monthly</th><th>Annual</th><th>Risk Notes</th></tr></thead>
+    <tbody>
+      <tr><td>P&amp;I — ${fmtR(i.wr)}, 30yr</td><td><strong style="color:var(--indigo);">${fmt(i.wpi)}</strong></td><td>${fmt(i.wpi*12)}</td><td class="nt2">Without lender comparison</td></tr>
+      <tr><td>Property Taxes (Yr 1)</td><td><strong style="color:var(--indigo);">${fmt(i.ty1)}</strong></td><td>${fmt(i.ty1*12)}</td><td class="nt2">Reassessed at ${fmt(i.price)} — no exemption</td></tr>
+      <tr><td>HOA</td><td><strong style="color:var(--indigo);">${fmt(i.hoa)}</strong></td><td>${fmt(i.hoa*12)}</td><td class="nt2">Fixed — verify no sub-HOAs</td></tr>
+      ${i.ix?`<tr><td>Homeowners Insurance</td><td><span style="color:var(--warn);font-style:italic;font-size:.85rem;">Excluded</span></td><td>—</td><td class="nt2">Ranges $230–$500/mo in South FL</td></tr>`:`<tr><td>Homeowners Insurance</td><td><strong style="color:var(--indigo);">${fmt(i.wi)}</strong></td><td>${fmt(i.wi*12)}</td><td class="nt2">${i.il}</td></tr>`}
+      ${i.wp>0?`<tr><td>PMI</td><td><strong style="color:var(--indigo);">${fmt(i.wp)}</strong></td><td>${fmt(i.wp*12)}</td><td class="nt2">Without shopping lenders on PMI</td></tr>`:''}
+      <tr><td>Flood Insurance</td><td><strong style="color:var(--indigo);">${fmt(i.fw)}</strong></td><td>${fmt(i.fw*12)}</td><td class="nt2">${i.fld==='ae'?'Required by lender':'High-end if FEMA remapping'}</td></tr>
+      ${i.ep>0?`<tr><td>Extra Principal</td><td><strong style="color:var(--indigo);">${fmt(i.ep)}</strong></td><td>${fmt(i.ep*12)}</td><td class="nt2">PMI acceleration — optional</td></tr>`:''}
+      <tr><td class="tt"><strong>TOTAL</strong></td><td class="tt" style="color:var(--indigo);">${fmt(i.wt)}</td><td>${fmt(i.wt*12)}</td><td></td></tr>
+    </tbody>
+  </table>
+  <div class="rb"><div class="rbl">Rate Sensitivity — P&amp;I on ${fmt(i.loan)} Loan</div>${bars}</div>
+  <div class="hg">
+    <div class="hc2"><span class="hcl">Closing Costs</span><span class="hcv">${fmt(i.price*.03)}–${fmt(i.price*.04)}</span><p class="hcd">Florida runs 3–4% of purchase price. Entirely separate from down payment.</p></div>
+    <div class="hc2"><span class="hcl">Post-Closing Reserves</span><span class="hcv">${fmt(i.wt*3)}–${fmt(i.wt*6)}</span><p class="hcd">3–6 months housing costs for unexpected repairs and maintenance.</p></div>
+    <div class="hc2"><span class="hcl">Hurricane Deductible</span><span class="hcv">2–5% of Value</span><p class="hcd">${fmt(i.price*.02)}–${fmt(i.price*.05)} out-of-pocket before insurance pays. Very real in South FL.</p></div>
+    <div class="hc2"><span class="hcl">Total Cash at Close</span><span class="hcv">${fmt(i.damt+i.price*.03+i.wt*3)}+</span><p class="hcd">Down + closing costs + reserves. Plan all three buckets before making an offer.</p></div>
+  </div>
+  <div class="ck"><div class="ckt">Pre-Offer Critical Checklist</div>${ck}</div>
+</div></div>`;
 
-        <div class="stat-grid">
-          <div class="stat-card g"><span class="stat-lbl mono">Monthly Total</span><div class="stat-val serif">${fmt(inp.bestTotal)}</div><div class="stat-note">Year 2+ with Homestead Exemption</div></div>
-          <div class="stat-card g"><span class="stat-lbl mono">Interest Rate</span><div class="stat-val serif">${fmtR(inp.bestRate)}</div><div class="stat-note">Achievable with 4–5 lender quotes</div></div>
-          <div class="stat-card g"><span class="stat-lbl mono">Tax (Yr 2+)</span><div class="stat-val serif">${fmt(inp.taxYr2)}</div><div class="stat-note">After Homestead Exemption — file at closing</div></div>
-          <div class="stat-card g"><span class="stat-lbl mono">Loan Amount</span><div class="stat-val serif">${fmt(inp.loanAmt)}</div><div class="stat-note">${inp.downPct}% down on ${fmt(inp.price)}</div></div>
-        </div>
-
-        <div class="notice notice-gold">
-          <span class="notice-label gold">Tax Detail — Best Case (Year 2+)</span>
-          <p>${fmt(inp.price)} × 1.3% = ${fmt(inp.price * 0.013)}/yr gross. Homestead Exemption: −$50,000 assessed value = ${fmt((inp.price - 50000) * 0.013)}/yr = <strong>${fmt(inp.taxYr2)}/month</strong>. File with Miami-Dade Property Appraiser immediately after closing. Deadline: March 1 of the following tax year. Year 1 you pay <strong>${fmt(inp.taxYr1)}/month</strong> — plan accordingly.</p>
-        </div>
-
-        <table class="breakdown-table">
-          <thead><tr><th>Component</th><th>Monthly</th><th>Annual</th><th>Notes</th></tr></thead>
-          <tbody>
-            <tr><td>P&I — ${fmtR(inp.bestRate)}, 30-yr</td><td><strong>${fmt(inp.bestPI)}</strong></td><td>${fmt(inp.bestPI*12)}</td><td class="note-td">Shop 4–5 lenders; 800 FICO earns best tier</td></tr>
-            <tr><td>Property Taxes (Yr 2+)</td><td><strong>${fmt(inp.taxYr2)}</strong></td><td>${fmt(inp.taxYr2*12)}</td><td class="note-td">Post-reassessment minus Homestead Exemption</td></tr>
-            <tr><td>HOA</td><td><strong>${fmt(inp.hoa)}</strong></td><td>${fmt(inp.hoa*12)}</td><td class="note-td">Confirmed — verify no sub-HOAs</td></tr>
-            ${inp.insExcluded ? `<tr><td>Homeowners Insurance</td><td><span style="color:var(--warn); font-style:italic; font-size:0.85rem;">Excluded — see caveat</span></td><td>—</td><td class="note-td">Obtain actual quote before committing</td></tr>` : `<tr><td>Homeowners Insurance</td><td><strong>${fmt(inp.bestIns)}</strong></td><td>${fmt(inp.bestIns*12)}</td><td class="note-td">${inp.insLabel}</td></tr>`}
-            ${inp.bestPMI > 0 ? `<tr><td>PMI (${inp.downPct}% down)</td><td><strong>${fmt(inp.bestPMI)}</strong></td><td>${fmt(inp.bestPMI*12)}</td><td class="note-td">Shop lenders on PMI separately</td></tr>` : ''}
-            <tr><td>Flood Insurance (Zone ${inp.flood === 'x' ? 'X' : 'AE'})</td><td><strong>${fmt(inp.bestFlood)}</strong></td><td>${fmt(inp.bestFlood*12)}</td><td class="note-td">${inp.flood === 'x' ? 'Voluntary — strongly advisable' : 'Lender required'}</td></tr>
-            <tr class="total-row"><td><strong>TOTAL</strong></td><td class="total-td" style="color:var(--best);">${fmt(inp.bestTotal)}</td><td>${fmt(inp.bestTotal*12)}</td><td></td></tr>
-          </tbody>
-        </table>
-
-        <div class="two-col">
-          <div class="col-inner">
-            <div class="col-title g">How to Achieve ${fmtR(inp.bestRate)}</div>
-            <div class="col-bul">Get quotes from 4–5 lenders minimum — spread can be 0.50%+ on the same day</div>
-            <div class="col-bul">Ask each about buying down the rate — 1 point buys ~0.25% off</div>
-            <div class="col-bul">Highlight your credit score — qualifies for best pricing tier</div>
-            <div class="col-bul">Lock when Freddie Mac weekly average dips (currently ${MARKET.freddieMac}%)</div>
-            <div class="col-bul">Credit unions and regional lenders often beat national banks</div>
-          </div>
-          <div class="col-inner">
-            <div class="col-title g">Homestead Exemption — Action Plan</div>
-            <div class="col-bul">File with Miami-Dade Property Appraiser immediately after closing</div>
-            <div class="col-bul">Deadline: March 1 of the tax year you want it applied</div>
-            <div class="col-bul">Saves ~$650/year (~$54/month) from Year 2 onward</div>
-            <div class="col-bul">Also qualifies for Save Our Homes cap — 3% annual increase limit</div>
-            <div class="col-bul">File online at miamidade.gov/pa — takes ~15 minutes</div>
-          </div>
-        </div>
-
-        ${inp.bestPMI > 0 ? `
-        <div class="pmi-timeline">
-          <div class="pmi-timeline-lbl mono">PMI Removal Timeline — Best Case</div>
-          <div class="pmi-step"><span class="pmi-yr mono">Month 0</span><span class="pmi-desc">Close at ${fmt(inp.price)}. LTV at ${100 - inp.downPct}%. PMI active at ${fmt(inp.bestPMI)}/mo. Equity: ${fmt(inp.downAmt)}. File Homestead Exemption within days of closing.</span></div>
-          <div class="pmi-step"><span class="pmi-yr mono">Year 1</span><span class="pmi-desc">Pay ${fmt(inp.taxYr1)}/mo tax (no exemption yet). Get wind mitigation inspection if applicable. Confirm construction type for insurance credits.</span></div>
-          <div class="pmi-step"><span class="pmi-yr mono">Year 2</span><span class="pmi-desc">Homestead Exemption kicks in — tax drops to ${fmt(inp.taxYr2)}/mo, saving ${fmt(inp.taxYr1 - inp.taxYr2)}/month permanently.</span></div>
-          <div class="pmi-step"><span class="pmi-yr mono">Year 3–4</span><span class="pmi-desc">With 3–4% annual appreciation, LTV approaches 85%. Order appraisal, request PMI cancellation — saves ${fmt(inp.bestPMI)}/mo = ${fmt(inp.bestPMI * 12)}/yr.</span></div>
-          <div class="pmi-step"><span class="pmi-yr mono">Year 7–8</span><span class="pmi-desc">Automatic PMI termination (Homeowners Protection Act) when balance reaches 78% of original purchase price — guaranteed by federal law.</span></div>
-        </div>
-        ` : ''}
-      </div>
-    </div>
-
-    <!-- WORST CASE TAB -->
-    <div id="tab-worst" class="analysis-section">
-      <div class="container-wide">
-        <div class="a-eyebrow r">Section III — Worst Case Scenario</div>
-        <h2 class="a-title serif">When Assumptions Break Against You</h2>
-        <div class="a-rule"></div>
-
-        <div class="stat-grid">
-          <div class="stat-card r"><span class="stat-lbl mono">Monthly Total</span><div class="stat-val serif">${fmt(inp.worstTotal)}</div><div class="stat-note">Year 1 · All adverse assumptions</div></div>
-          <div class="stat-card r"><span class="stat-lbl mono">Interest Rate</span><div class="stat-val serif">${fmtR(inp.worstRate)}</div><div class="stat-note">Without competitive lender shopping</div></div>
-          <div class="stat-card r"><span class="stat-lbl mono">Tax (Year 1)</span><div class="stat-val serif">${fmt(inp.taxYr1)}</div><div class="stat-note">Reassessed at ${fmt(inp.price)} — no exemption</div></div>
-          <div class="stat-card r"><span class="stat-lbl mono">DTI at ${fmt(inp.incomeLow)}/mo</span><div class="stat-val serif">${(inp.worstTotal/inp.incomeLow*100).toFixed(1)}%</div><div class="stat-note">${inp.worstTotal/inp.incomeLow > 0.43 ? 'Near lender ceiling' : 'Manageable'}</div></div>
-        </div>
-
-        <div class="notice notice-worst">
-          <span class="notice-label worst">Tax Detail — Worst Case (Year 1)</span>
-          <p>Upon purchase, Miami-Dade reassesses at ${fmt(inp.price)}. At 1.3% effective rate = ${fmt(inp.price * 0.013)}/yr = <strong>${fmt(inp.taxYr1)}/month</strong> in Year 1. The Homestead Exemption does NOT apply in Year 1 — file immediately after closing to get it for Year 2. Budget ${fmt(inp.taxYr1)}/month for taxes in Year 1 regardless of which rate you lock.</p>
-        </div>
-
-        <table class="breakdown-table">
-          <thead><tr><th>Component</th><th>Monthly</th><th>Annual</th><th>Risk Notes</th></tr></thead>
-          <tbody>
-            <tr><td>P&I — ${fmtR(inp.worstRate)}, 30-yr</td><td><strong style="color:var(--worst);">${fmt(inp.worstPI)}</strong></td><td>${fmt(inp.worstPI*12)}</td><td class="note-td">Locked without lender comparison</td></tr>
-            <tr><td>Property Taxes (Yr 1)</td><td><strong style="color:var(--worst);">${fmt(inp.taxYr1)}</strong></td><td>${fmt(inp.taxYr1*12)}</td><td class="note-td">Reassessed at ${fmt(inp.price)} — no exemption yet</td></tr>
-            <tr><td>HOA</td><td><strong style="color:var(--worst);">${fmt(inp.hoa)}</strong></td><td>${fmt(inp.hoa*12)}</td><td class="note-td">Fixed — verify no sub-HOAs</td></tr>
-            ${inp.insExcluded ? `<tr><td>Homeowners Insurance</td><td><span style="color:var(--warn); font-style:italic; font-size:0.85rem;">Excluded</span></td><td>—</td><td class="note-td">Obtain actual quote — ranges $230–$500/mo</td></tr>` : `<tr><td>Homeowners Insurance</td><td><strong style="color:var(--worst);">${fmt(inp.worstIns)}</strong></td><td>${fmt(inp.worstIns*12)}</td><td class="note-td">${inp.insLabel}</td></tr>`}
-            ${inp.worstPMI > 0 ? `<tr><td>PMI</td><td><strong style="color:var(--worst);">${fmt(inp.worstPMI)}</strong></td><td>${fmt(inp.worstPMI*12)}</td><td class="note-td">Without shopping lenders on PMI rate</td></tr>` : ''}
-            <tr><td>Flood Insurance</td><td><strong style="color:var(--worst);">${fmt(inp.worstFlood)}</strong></td><td>${fmt(inp.worstFlood*12)}</td><td class="note-td">${inp.flood === 'ae' ? 'Required by lender' : 'High-end if FEMA remapping'}</td></tr>
-            ${inp.extraPrincipal > 0 ? `<tr><td>Extra Principal (optional)</td><td><strong style="color:var(--worst);">${fmt(inp.extraPrincipal)}</strong></td><td>${fmt(inp.extraPrincipal*12)}</td><td class="note-td">PMI acceleration — not required</td></tr>` : ''}
-            <tr class="total-row"><td><strong>TOTAL</strong></td><td class="total-td" style="color:var(--worst);">${fmt(inp.worstTotal)}</td><td>${fmt(inp.worstTotal*12)}</td><td></td></tr>
-          </tbody>
-        </table>
-
-        <div class="rate-bars">
-          <div class="rate-bars-lbl mono">Rate Sensitivity — P&I on ${fmt(inp.loanAmt)} Loan</div>
-          ${rateRows}
-        </div>
-
-        <div class="hidden-grid">
-          <div class="hidden-card"><span class="hc-lbl mono">Closing Costs</span><span class="hc-val serif">${fmt(inp.price * 0.03)}–${fmt(inp.price * 0.04)}</span><p class="hc-desc">Florida runs 3–4% of purchase price. Entirely separate from down payment — needs its own cash reserve.</p></div>
-          <div class="hidden-card"><span class="hc-lbl mono">Post-Closing Reserves</span><span class="hc-val serif">${fmt(inp.worstTotal * 3)}–${fmt(inp.worstTotal * 6)}</span><p class="hc-desc">3–6 months of housing costs. Critical for unexpected maintenance, HVAC, or appliance replacement.</p></div>
-          <div class="hidden-card"><span class="hc-lbl mono">Hurricane Deductible</span><span class="hc-val serif">2–5% of Value</span><p class="hc-desc">${fmt(inp.price * 0.02)}–${fmt(inp.price * 0.05)} out-of-pocket before insurance pays a hurricane claim. Very real in South Florida.</p></div>
-          <div class="hidden-card"><span class="hc-lbl mono">Total Cash Needed at Close</span><span class="hc-val serif">${fmt(inp.downAmt + inp.price * 0.03)}–${fmt(inp.downAmt + inp.price * 0.04 + inp.worstTotal * 3)}</span><p class="hc-desc">Down payment + closing costs + reserves. Plan all three buckets before making an offer.</p></div>
-        </div>
-
-        <div class="checklist">
-          <div class="checklist-title serif">Pre-Offer Critical Checklist</div>
-          ${checklist}
-        </div>
-      </div>
-    </div>
-  `;
-
-  document.getElementById('analysis-content').innerHTML = content;
-  document.getElementById('analysis-footer').innerHTML = `
-    HomeTrue · Miami-Dade County Only · ${inp.tier === 1 ? 'Tier 1 Pre-Offer Estimate' : inp.tier === 2 ? 'Tier 2 Active Offer Analysis' : 'Tier 3 Under Contract Precision'} · Rate verified ${MARKET.rateVerified}<br>
-    Tax figures based on ${fmt(inp.price)} purchase price · Flood insurance included as ${inp.flood === 'x' ? 'voluntary Zone X coverage' : 'required Zone AE coverage'}<br>
-    This analysis is an educational tool and does not constitute financial, legal, or real estate advice. · Test Phase — Attorney Review Pending
-  `;
+  document.getElementById('af').innerHTML=`HomeTrue · Miami-Dade County Only · ${tl} · Rate verified ${MKT.rv}<br>Tax figures based on ${fmt(i.price)} purchase price · Flood insurance included · Test Phase — Attorney Review Pending<br>This analysis is an educational tool. Not financial, legal, or real estate advice.`;
 }
 
-function buildChecklist(inp) {
-  const items = [
-    "Get actual homeowners insurance quotes from a Florida-licensed independent broker — not an online estimator. This is the single biggest variable in your monthly number.",
-    `Verify flood zone at msc.fema.gov using the exact property address. ${inp.flood === 'x' ? 'Zone X = voluntary but strongly advisable given South Florida flood risk.' : 'Zone AE = lender required — already included in your analysis.'}`,
-    "Request HOA financials and reserve study. Florida's post-Surfside legislation requires funded reserves — confirm the HOA is compliant before closing.",
-    `Budget total cash: ${fmt(inp.downAmt)} down + ${fmt(inp.price * 0.03)}–${fmt(inp.price * 0.04)} closing costs + ${fmt(inp.worstTotal * 3)} reserves minimum = ${fmt(inp.downAmt + inp.price * 0.03 + inp.worstTotal * 3)}+ needed at and after close.`,
-    "Shop 4–5 lenders with your credit score. Get Loan Estimate documents from each. Rate spread between lenders can be 0.25–0.50% on the same day.",
-    "File your Homestead Exemption with the Miami-Dade Property Appraiser immediately after closing. Deadline: March 1 of the following tax year. Saves ~$650/year.",
-    "Get a wind mitigation inspection ($75–$150) if the property has hurricane shutters, impact windows, or a newer roof. Credits can reduce insurance meaningfully.",
-    "Budget Year 1 at ${fmt(Math.round((inp.worstTotal + inp.bestTotal) / 2))}+ (full tax reassessment, no Homestead Exemption). From Year 2, costs drop ~${fmt(inp.taxYr1 - inp.taxYr2)}/month.",
-  ];
-  return items.map((item, i) => `<div class="check-item"><span class="check-num mono">${String(i+1).padStart(2,'0')}.</span><span>${item}</span></div>`).join('');
+function bDemo(){
+  const d={address:"1234 Brickell Bay Dr, Miami, FL 33131 (DEMO — Fictional Property)",price:460000,dpct:3,damt:13800,loan:446200,byr:2008,rage:10,rtp:'tile',con:'cbs',sht:true,hoa:185,fld:'x',ilo:10000,ihi:13000,pri:true,crd:'excellent',br:6.00,wr:6.75,bpi:cPI(446200,6.00),wpi:cPI(446200,6.75),ty1:Math.round(460000*.013/12),ty2:Math.round(410000*.013/12),bi:240,wi:420,il:'ESTIMATED',ic:false,ix:false,bp:134,wp:210,fb:42,fw:85,ep:89,tier:2};
+  d.bt=d.bpi+d.ty2+d.hoa+d.bi+d.bp+d.fb;
+  d.wt=d.wpi+d.ty1+d.hoa+d.wi+d.wp+d.fw+d.ep;
+  d.pn=Math.round((d.bt+d.wt)/2/50)*50;
+  bAnalysis(d,true);
+  const w=document.getElementById('dmw');
+  const mh=document.getElementById('amh').innerHTML;
+  const ac=document.getElementById('ac').innerHTML;
+  const af=document.getElementById('af').innerHTML;
+  w.innerHTML=`<div id="amh">${mh}</div><div class="vs">Rate verified:<span>${MKT.rv}</span></div><nav class="an"><div class="ats"><button class="at atc active" onclick="showDT('c',this)">§ Comparison</button><button class="at atb" onclick="showDT('b',this)">§ Best Case</button><button class="at atw" onclick="showDT('w',this)">§ Worst Case</button></div></nav><div id="ac">${ac}</div><footer>${af}</footer>`;
+  w.querySelectorAll('.as').forEach(s=>s.classList.remove('v'));
+  const tc=w.querySelector('#tc');if(tc)tc.classList.add('v');
 }
 
-// ═══════════════════════════════════
-// DEMO MODE
-// ═══════════════════════════════════
-function buildDemoAnalysis() {
-  // Fictional property: 1234 Brickell Bay Dr, Miami FL 33131
-  const demoInputs = {
-    address: "1234 Brickell Bay Dr, Miami, FL 33131 (DEMO — Fictional Property)",
-    price: 460000, downPct: 3, downAmt: 13800, loanAmt: 446200,
-    builtYear: 2008, roofAge: 10, roofType: 'tile', construction: 'cbs',
-    shutters: true, hoa: 185, flood: 'x',
-    incomeLow: 10000, incomeHigh: 13000,
-    primary: true, credit: 'excellent',
-    bestRate: 6.00, worstRate: 6.75,
-    bestPI: calcPI(446200, 6.00), worstPI: calcPI(446200, 6.75),
-    taxYr1: Math.round(460000 * 0.013 / 12),
-    taxYr2: Math.round((460000 - 50000) * 0.013 / 12),
-    bestIns: 240, worstIns: 420,
-    insLabel: 'ESTIMATED — UNCONFIRMED', insConfirmed: false, insExcluded: false,
-    bestPMI: 134, worstPMI: 210,
-    bestFlood: 42, worstFlood: 85,
-    extraPrincipal: 89, tier: 2
-  };
-  demoInputs.bestTotal = demoInputs.bestPI + demoInputs.taxYr2 + demoInputs.hoa + demoInputs.bestIns + demoInputs.bestPMI + demoInputs.bestFlood;
-  demoInputs.worstTotal = demoInputs.worstPI + demoInputs.taxYr1 + demoInputs.hoa + demoInputs.worstIns + demoInputs.worstPMI + demoInputs.worstFlood + demoInputs.extraPrincipal;
-  demoInputs.planningNum = Math.round((demoInputs.bestTotal + demoInputs.worstTotal) / 2 / 50) * 50;
-
-  // Clone the analysis masthead and content into the demo wrapper
-  const tempDiv = document.createElement('div');
-  tempDiv.innerHTML = `<div id="analysis-masthead"></div><div class="verified-strip" id="analysis-verified-strip">Rate last verified: <span>${MARKET.rateVerified}</span></div><nav class="analysis-nav"><div class="analysis-tabs"><button class="analysis-tab active-compare" onclick="showDemoTab('compare',this)">§ Comparison</button><button class="analysis-tab" onclick="showDemoTab('best',this)">§ Best Case</button><button class="analysis-tab" onclick="showDemoTab('worst',this)">§ Worst Case</button></div></nav><div id="analysis-content"></div><footer id="analysis-footer"></footer>`;
-
-  const wrap = document.getElementById('demo-analysis-wrap');
-  wrap.innerHTML = '';
-  wrap.appendChild(tempDiv);
-
-  // Temporarily redirect IDs, build, restore
-  const origMH = document.getElementById('analysis-masthead');
-  const origContent = document.getElementById('analysis-content');
-  const origFooter = document.getElementById('analysis-footer');
-
-  buildAnalysis(demoInputs, true);
-
-  // Move content into demo wrapper
-  const demoMH = tempDiv.querySelector('#analysis-masthead');
-  const demoContent = tempDiv.querySelector('#analysis-content');
-  const demoFooter = tempDiv.querySelector('#analysis-footer');
-
-  if (origMH && demoMH) demoMH.innerHTML = origMH.innerHTML;
-  if (origContent && demoContent) demoContent.innerHTML = origContent.innerHTML;
-  if (origFooter && demoFooter) demoFooter.innerHTML = origFooter.innerHTML;
+function showDT(t,btn){
+  const w=document.getElementById('dmw');
+  w.querySelectorAll('.as').forEach(s=>s.classList.remove('v'));
+  const el=w.querySelector('#'+(t==='c'?'tc':t==='b'?'tb2':'tw'));if(el)el.classList.add('v');
+  w.querySelectorAll('.at').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function showDemoTab(tab, btn) {
-  const wrap = document.getElementById('demo-analysis-wrap');
-  wrap.querySelectorAll('.analysis-section').forEach(s => s.classList.remove('visible'));
-  const t = wrap.querySelector('#tab-' + tab);
-  if (t) t.classList.add('visible');
-  wrap.querySelectorAll('.analysis-tab').forEach(b => b.classList.remove('active-compare','active-best','active-worst'));
-  btn.classList.add('active-' + tab);
-  window.scrollTo({top:0, behavior:'smooth'});
+function showTab(t,btn){
+  document.querySelectorAll('#sa .as').forEach(s=>s.classList.remove('v'));
+  const el=document.getElementById(t==='c'?'tc':t==='b'?'tb2':'tw');if(el)el.classList.add('v');
+  document.querySelectorAll('.an .at').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
 }
-
-// ═══════════════════════════════════
-// ANALYSIS TAB SWITCHING
-// ═══════════════════════════════════
-function showAnalysisTab(tab, btn) {
-  document.querySelectorAll('#screen-analysis .analysis-section').forEach(s => s.classList.remove('visible'));
-  const t = document.getElementById('tab-' + tab);
-  if (t) t.classList.add('visible');
-  document.querySelectorAll('.analysis-nav .analysis-tab').forEach(b => b.classList.remove('active-compare','active-best','active-worst'));
-  btn.classList.add('active-' + tab);
-  window.scrollTo({top:0, behavior:'smooth'});
-}
-
-// Auto-validate inputs on change
-setInterval(() => {
-  const price = document.getElementById('f-price');
-  const down = document.getElementById('f-down');
-  const addr = document.getElementById('f-address');
-  if (price && down && addr) updateInputsBtn();
-}, 500);
 </script>
 </body>
 </html>
