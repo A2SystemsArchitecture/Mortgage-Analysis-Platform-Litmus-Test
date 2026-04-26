@@ -25,12 +25,12 @@ body{background:var(--slate-bg);color:var(--ink);font-family:var(--fb);font-weig
 /* MASTHEAD */
 .mh{background:var(--midnight);padding:3.5rem 2rem 3rem;text-align:center;position:relative;overflow:hidden;}
 .mh::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(0,151,167,.12),transparent 60%),radial-gradient(ellipse at 80% 50%,rgba(46,125,82,.08),transparent 60%);}
-.mh-tag{font-family:var(--fm);font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--teal-mid);margin-bottom:1rem;position:relative;}
+.mh-tag{font-family:var(--fm);font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(0,200,220,.85);margin-bottom:1rem;position:relative;}
 .mh h1{font-family:var(--fd);font-size:clamp(2.8rem,7vw,4.5rem);font-weight:900;color:var(--white);line-height:1;letter-spacing:-.03em;position:relative;}
 .mh h1 .tr{color:var(--emerald-mid);}
 .mh-rule{width:2.5rem;height:2px;background:linear-gradient(90deg,var(--teal-mid),var(--emerald-mid));margin:1.25rem auto;position:relative;}
-.mh-sub{font-family:var(--fm);font-size:.68rem;color:rgba(176,190,197,.78);letter-spacing:.12em;position:relative;}
-.scope-b{display:inline-block;background:rgba(0,131,143,.15);border:1px solid rgba(0,151,167,.3);color:var(--teal-mid);font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;padding:.3rem 1rem;border-radius:2px;margin-top:1rem;position:relative;}
+.mh-sub{font-family:var(--fm);font-size:.68rem;color:rgba(200,220,225,.88);letter-spacing:.12em;position:relative;}
+.scope-b{display:inline-block;background:rgba(0,131,143,.25);border:1px solid rgba(0,151,167,.5);color:rgba(0,210,230,.9);font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;padding:.3rem 1rem;border-radius:2px;margin-top:1rem;position:relative;}
 
 /* VERIFIED STRIP */
 .vs{background:var(--midnight-lt);padding:.6rem 1.5rem;display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap;font-family:var(--fm);font-size:.62rem;letter-spacing:.08em;color:rgba(176,190,197,.75);}
@@ -39,7 +39,7 @@ body{background:var(--slate-bg);color:var(--ink);font-family:var(--fb);font-weig
 /* GATE LAYOUT */
 .gw{background:var(--slate-bg);min-height:100vh;}
 .gh{background:var(--midnight);padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;}
-.gl{font-family:var(--fd);font-size:1.5rem;font-weight:900;color:var(--white);letter-spacing:-.02em;}
+.gl{font-family:var(--fd);font-size:1.5rem;font-weight:900;color:var(--white);letter-spacing:-.02em;transition:opacity .15s;}.gl:hover{opacity:.8;}
 .gl .tr{color:var(--emerald-mid);}
 .gs{font-family:var(--fm);font-size:.6rem;letter-spacing:.12em;color:rgba(176,190,197,.7);}
 .gb{padding:3rem 1.5rem;max-width:680px;margin:0 auto;}
@@ -413,7 +413,7 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 <!-- GATE 1 -->
 <div id="sg1" class="screen">
   <div class="gw">
-    <div class="gh"><div class="gl">Home<span class="tr">True</span></div><div class="gs">Step 1 of 4 — Terms &amp; Scope</div></div>
+    <div class="gh"><div class="gl" onclick="show('w')" style="cursor:pointer;" title="Return to Home">Home<span class="tr">True</span></div><div class="gs">Step 1 of 4 — Terms &amp; Scope</div></div>
     <div class="gb">
       <div class="pw">
         <div class="ps"><div class="pd act" id="pd1">1</div><div class="pl">Terms</div></div>
@@ -447,7 +447,7 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 <!-- TIER SELECT -->
 <div id="st" class="screen">
   <div class="gw">
-    <div class="gh"><div class="gl">Home<span class="tr">True</span></div><div class="gs">Step 2 of 4 — Select Your Tier</div></div>
+    <div class="gh"><div class="gl" onclick="show('w')" style="cursor:pointer;" title="Return to Home">Home<span class="tr">True</span></div><div class="gs">Step 2 of 4 — Select Your Tier</div></div>
     <div class="gb">
       <div class="pw">
         <div class="ps"><div class="pd don">✓</div><div class="pl">Terms</div></div>
@@ -471,7 +471,7 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 <!-- INPUTS -->
 <div id="si" class="screen">
   <div class="gw">
-    <div class="gh"><div class="gl">Home<span class="tr">True</span></div><div class="gs" id="isl">Step 3 of 4 — Property Details</div></div>
+    <div class="gh"><div class="gl" onclick="show('w')" style="cursor:pointer;" title="Return to Home">Home<span class="tr">True</span></div><div class="gs" id="isl">Step 3 of 4 — Property Details</div></div>
     <div class="gb" style="max-width:720px;">
       <div class="pw">
         <div class="ps"><div class="pd don">✓</div><div class="pl">Terms</div></div>
@@ -540,7 +540,7 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 <!-- GATE 3 -->
 <div id="sg3" class="screen">
   <div class="gw">
-    <div class="gh"><div class="gl">Home<span class="tr">True</span></div><div class="gs">Step 4 of 4 — Final Acknowledgment</div></div>
+    <div class="gh"><div class="gl" onclick="show('w')" style="cursor:pointer;" title="Return to Home">Home<span class="tr">True</span></div><div class="gs">Step 4 of 4 — Final Acknowledgment</div></div>
     <div class="gb">
       <div class="pw">
         <div class="ps"><div class="pd don">✓</div><div class="pl">Terms</div></div>
@@ -745,7 +745,7 @@ function bAnalysis(i,isDemo){
     `Budget Year 1 at ${fmt(Math.round((i.wt+i.bt)/2))}+ (full tax, no exemption). From Year 2 drops ~${fmt(i.ty1-i.ty2)}/month.`,
   ].map((x,n)=>`<div class="cki"><span class="ckn">${String(n+1).padStart(2,'0')}.</span><span>${x}</span></div>`).join('');
 
-  document.getElementById('amh').innerHTML=`<div class="mh"><div class="mh-tag">HomeTrue Analysis${isDemo?' · DEMO':''}</div><h1 style="font-size:clamp(1.3rem,2.5vw,1.9rem);margin-bottom:.25rem;">Home<span class="tr">True</span></h1><div style="font-family:var(--fd);font-size:clamp(1rem,2vw,1.4rem);font-weight:600;color:rgba(255,255,255,.9);margin-bottom:.25rem;">${i.address}</div><div class="mh-rule"></div><div class="mh-sub">${tl} · ${i.dpct}% Down · Loan: ${fmt(i.loan)} · Miami-Dade</div><div style="margin-top:.75rem;"><span style="display:inline-flex;align-items:center;padding:.25rem .75rem;border-radius:3px;font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;background:var(--${tc}-light);color:var(--${tc}-dim);border:1px solid var(--${tc}-muted);">${tl}</span></div></div>`;
+  document.getElementById('amh').innerHTML=`<div class="mh"><div class="mh-tag">HomeTrue Analysis${isDemo?' · DEMO':''}</div><h1 style="font-size:clamp(1.3rem,2.5vw,1.9rem);margin-bottom:.25rem;cursor:pointer;" onclick="show('w')" title="↩ Return to Home">Home<span class="tr">True</span></h1><div style="font-family:var(--fd);font-size:clamp(1rem,2vw,1.4rem);font-weight:600;color:rgba(255,255,255,.9);margin-bottom:.25rem;">${i.address}</div><div class="mh-rule"></div><div class="mh-sub">${tl} · ${i.dpct}% Down · Loan: ${fmt(i.loan)} · Miami-Dade</div><div style="margin-top:.75rem;"><span style="display:inline-flex;align-items:center;padding:.25rem .75rem;border-radius:3px;font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;background:var(--${tc}-light);color:var(--${tc}-dim);border:1px solid var(--${tc}-muted);">${tl}</span></div></div>`;
 
   document.getElementById('ac').innerHTML=`
 <div id="tc" class="as v"><div class="cw">
