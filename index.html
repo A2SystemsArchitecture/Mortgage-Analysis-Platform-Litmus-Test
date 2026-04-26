@@ -1053,7 +1053,7 @@ footer strong{color:rgba(220,232,235,1.0);}
   <div class="vs" id="avs">Rate verified:<span>Friday, April 25, 2026 · 11:52 AM ET</span>&nbsp;·&nbsp;Tax:<span>April 2026</span>&nbsp;·&nbsp;Flood:<span>April 2026</span></div>
   <nav class="an">
     <div class="ats">
-      <button class="at atc active" onclick="showTab('c',this)">§ Comparison</button>
+      <button class="at atc active" onclick="showTab('c',this)">§ Comparison & Rate Context</button>
       <button class="at atb" onclick="showTab('b',this)">§ Best Case</button>
       <button class="at atw" onclick="showTab('w',this)">§ Worst Case</button>
       <button class="at" id="tab-cc-btn" onclick="showTab('cc',this)" style="color:var(--muted);">§ Closing Costs</button>
@@ -1447,7 +1447,7 @@ function loadDemo(tier){
   const mh=document.getElementById('amh').innerHTML;
   const ac=document.getElementById('ac').innerHTML;
   const af=document.getElementById('af').innerHTML;
-  w.innerHTML=`<div id="amh">${mh}</div><div class="vs">Rate verified:<span>${MKT.rv}</span>&nbsp;·&nbsp;Tax:<span>${MKT.ov}</span>&nbsp;·&nbsp;Flood:<span>${MKT.ov}</span></div><nav class="an"><div class="ats"><button class="at atc active" onclick="showDT('c',this)">§ Comparison</button><button class="at atb" onclick="showDT('b',this)">§ Best Case</button><button class="at atw" onclick="showDT('w',this)">§ Worst Case</button></div><div class="nav-btns"><button class="btn btn-sm btn-ol" onclick="show('dm')">← Choose Demo</button><button class="btn btn-sm btn-tl" onclick="show('w')">Analyze My Property →</button></div></nav><div id="ac">${ac}</div><footer>${af}</footer>`;
+  w.innerHTML=`<div id="amh">${mh}</div><div class="vs">Rate verified:<span>${MKT.rv}</span>&nbsp;·&nbsp;Tax:<span>${MKT.ov}</span>&nbsp;·&nbsp;Flood:<span>${MKT.ov}</span></div><nav class="an"><div class="ats"><button class="at atc active" onclick="showDT('c',this)">§ Comparison & Rate Context</button><button class="at atb" onclick="showDT('b',this)">§ Best Case</button><button class="at atw" onclick="showDT('w',this)">§ Worst Case</button></div><div class="nav-btns"><button class="btn btn-sm btn-ol" onclick="show('dm')">← Choose Demo</button><button class="btn btn-sm btn-tl" onclick="show('w')">Analyze My Property →</button></div></nav><div id="ac">${ac}</div><footer>${af}</footer>`;
   w.querySelectorAll('.as').forEach(s=>s.classList.remove('v'));
   const tc=w.querySelector('#tc');if(tc)tc.classList.add('v');
   show('dma');
@@ -2298,6 +2298,7 @@ function buildRateContext(inp) {
         <span class="rcb-badge ${badgeClass}">${badge}</span>
       </div>
       <p class="rcb-context">${context}</p>
+      <div style="font-family:var(--fm);font-size:.56rem;letter-spacing:.08em;color:rgba(176,190,197,.45);margin-top:.75rem;line-height:1.6;position:relative;">Historical rate data sourced from Freddie Mac Primary Mortgage Market Survey. This context is educational only — it is not a prediction of future rates, a recommendation to buy or wait, or financial advice of any kind. Rate decisions should be made in consultation with a licensed mortgage professional.</div>
       <div class="rcb-savings">
         <div class="rcb-save-card">
           <span class="rcb-save-lbl">If rates drop 0.50% — to ${halfRate.toFixed(2)}%</span>
