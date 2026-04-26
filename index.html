@@ -979,9 +979,19 @@ function chkRateDisc() {
     return;
   }
 
-  // Trigger if entered rate exceeds top of qualifying range by more than 0.25%
-  if (enteredRate > range.max + 0.25) {
-    const msg = `Your ${range.label} credit score qualifies for rates between ${range.min.toFixed(2)}–${range.max.toFixed(2)}% in the current market. The rate you entered (${enteredRate.toFixed(2)}%) is significantly higher than your qualifying range. If this is a quoted rate, consider shopping additional lenders before committing — a 0.50% rate difference on a $400,000 loan adds over $120/month to your payment.`;
+  // Warning fires in BOTH directions:
+  // 1. Rate too LOW for credit score — claiming a rate better than credit qualifies for
+  // 2. Rate too HIGH for credit score — accepting a worse rate than credit deserves
+  const tooLow = enteredRate < range.min - 0.125;
+  const tooHigh = enteredRate > range.max + 0.25;
+
+  if (tooLow) {
+    const msg = `Your ${range.label} credit score typically qualifies for rates between ${range.min.toFixed(2)}–${range.max.toFixed(2)}% in the current market. The rate you entered (${enteredRate.toFixed(2)}%) is lower than what this credit tier normally receives. Please verify this rate with your lender — it may reflect a rate buydown, special program, or a data entry error. Proceeding with an inaccurate rate will produce an inaccurate analysis.`;
+    msgEl.textContent = msg;
+    warnEl.style.display = 'block';
+    if (ackEl) ackEl.checked = false;
+  } else if (tooHigh) {
+    const msg = `Your ${range.label} credit score qualifies for rates between ${range.min.toFixed(2)}–${range.max.toFixed(2)}% in the current market. The rate you entered (${enteredRate.toFixed(2)}%) is significantly higher than your qualifying range. Consider shopping additional lenders before committing — a 0.50% rate difference on a $400,000 loan adds over $120/month to your payment.`;
     msgEl.textContent = msg;
     warnEl.style.display = 'block';
     if (ackEl) ackEl.checked = false;
