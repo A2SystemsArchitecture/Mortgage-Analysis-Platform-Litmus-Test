@@ -313,6 +313,16 @@ input:focus,select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 
 
 footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;padding:2rem 1.5rem;font-family:var(--fm);font-size:.65rem;letter-spacing:.05em;line-height:2.4;border-top:1px solid rgba(176,190,197,.15);}
 .nav-btns{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;}
+.rate-warn-box{background:#fff8e6;border:1.5px solid #c8900a;border-left:4px solid #c8900a;border-radius:0 6px 6px 0;padding:1rem 1.25rem;}
+.rate-warn-lbl{font-family:var(--fm);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a5200;font-weight:500;margin-bottom:.4rem;}
+.rate-warn-msg{font-size:.85rem;color:#5a3c00;line-height:1.65;}
+.back-btn{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem 1rem;border:1.5px solid var(--rule);border-radius:6px;background:var(--white);color:var(--muted);font-family:var(--fm);font-size:.6rem;letter-spacing:.08em;cursor:pointer;transition:all .2s;text-transform:uppercase;}
+.back-btn:hover{border-color:var(--midnight);color:var(--midnight);background:var(--slate-surface);}
+.gate-back-row{display:flex;align-items:center;margin-bottom:1.25rem;}
+.dl-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1.1rem;background:var(--emerald);color:var(--white);border:none;border-radius:6px;font-family:var(--fb);font-size:.78rem;font-weight:500;cursor:pointer;transition:all .2s;}
+.dl-btn:hover{background:var(--emerald-dim);transform:translateY(-1px);box-shadow:0 4px 12px rgba(46,125,82,.3);}
+.dl-btn-outline{background:transparent;color:var(--emerald);border:1.5px solid var(--emerald);}
+.dl-btn-outline:hover{background:var(--emerald-light);}
 /* CONTRAST ENFORCEMENT — no meaningful text below 75% opacity on dark surfaces */
 .mh *,.gh *,.vs *,.dmb *{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
 .mh p,.gh p,.vs p{opacity:1 !important;}
@@ -426,6 +436,7 @@ footer strong{color:rgba(220,232,235,1.0);}
         <div class="ps"><div class="pd" id="pd3">3</div><div class="pl">Details</div></div>
         <div class="ps"><div class="pd" id="pd4">4</div><div class="pl">Confirm</div></div>
       </div>
+      <div class="gate-back-row"><button class="back-btn" onclick="show('w')">← Back</button></div>
       <div class="ge">Disclosure · Gate 1 of 3</div>
       <h1 class="gt">Before we begin,<br>please read carefully.</h1>
       <p style="color:var(--muted);font-size:.9rem;margin-bottom:1rem;">Scroll through the complete disclosure. The acceptance button unlocks once you've read everything.</p>
@@ -460,6 +471,7 @@ footer strong{color:rgba(220,232,235,1.0);}
         <div class="ps"><div class="pd">3</div><div class="pl">Details</div></div>
         <div class="ps"><div class="pd">4</div><div class="pl">Confirm</div></div>
       </div>
+      <div class="gate-back-row"><button class="back-btn" onclick="goBack('g1')">← Back</button></div>
       <div class="ge">Analysis Tier</div>
       <h1 class="gt">Where are you in<br>the buying process?</h1>
       <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.5rem;">Select the tier that matches your current stage.</p>
@@ -484,6 +496,7 @@ footer strong{color:rgba(220,232,235,1.0);}
         <div class="ps"><div class="pd act">3</div><div class="pl">Details</div></div>
         <div class="ps"><div class="pd">4</div><div class="pl">Confirm</div></div>
       </div>
+      <div class="gate-back-row"><button class="back-btn" onclick="goBack('t')">← Back</button></div>
       <div class="ge">Property &amp; Buyer Details</div>
       <h1 class="gt" style="font-size:1.8rem;">Enter your property<br>and financial details</h1>
       <p style="color:var(--muted);font-size:.875rem;margin-bottom:2rem;">The accuracy of your analysis depends on the accuracy of what you enter here.</p>
@@ -507,8 +520,23 @@ footer strong{color:rgba(220,232,235,1.0);}
         <div class="fg">
           <div class="ff"><label>Gross Monthly Income — Low ($)</label><input type="number" id="fil" placeholder="10000" min="1000"></div>
           <div class="ff"><label>Gross Monthly Income — High ($)</label><input type="number" id="fih" placeholder="13000" min="1000"></div>
-          <div class="ff"><label>Credit Score Range</label><select id="fcr"><option value="excellent">760+ Excellent</option><option value="very-good">720–759 Very Good</option><option value="good">680–719 Good</option><option value="fair">640–679 Fair</option></select></div>
+          <div class="ff"><label>Credit Score Range</label><select id="fcr" onchange="chkRateDisc()"><option value="excellent">760+ Excellent</option><option value="very-good">720–759 Very Good</option><option value="good">680–719 Good</option><option value="fair">640–679 Fair</option></select></div>
           <div class="ff"><label>Primary Residence?</label><select id="fpr"><option value="yes">Yes — Primary long-term</option><option value="no">No — Investment</option></select></div>
+          <div class="ff ffu" id="rate-opt-wrap">
+            <label>Interest Rate — Optional (leave blank to use current market range of 6.00–6.75%)</label>
+            <input type="number" id="f-rate-opt" placeholder="e.g. 6.50" step="0.01" min="2" max="15" oninput="chkRateDisc()">
+            <div class="fn">If you have a quoted rate from a lender, enter it here. It will override the market range for both best and worst case scenarios.</div>
+            <div id="rate-disc-warn" style="display:none; margin-top:.6rem;">
+              <div class="rate-warn-box">
+                <div class="rate-warn-lbl">⚠ Rate & Credit Score Discrepancy</div>
+                <div id="rate-disc-msg" class="rate-warn-msg"></div>
+                <label class="cl" style="margin-top:.75rem;">
+                  <input type="checkbox" id="rate-disc-ack" onchange="updIBtn()">
+                  <span>I understand my entered rate is higher than my credit score typically qualifies for. I will shop additional lenders before committing.</span>
+                </label>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="fs" id="ins-sec">
@@ -553,6 +581,7 @@ footer strong{color:rgba(220,232,235,1.0);}
         <div class="ps"><div class="pd don">✓</div><div class="pl">Details</div></div>
         <div class="ps"><div class="pd act">4</div><div class="pl">Confirm</div></div>
       </div>
+      <div class="gate-back-row"><button class="back-btn" onclick="goBack('i')">← Back</button></div>
       <div class="ge">Gate 3 of 3 — Deliverable Gate</div>
       <h1 class="gt">Your analysis is ready.<br>One final confirmation.</h1>
       <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.5rem;">Review the five confirmations before your analysis is released.</p>
@@ -577,6 +606,7 @@ footer strong{color:rgba(220,232,235,1.0);}
       <button class="btn btn-sm btn-ol" onclick="startOver()">← Start Over</button>
       <button class="btn btn-sm btn-slate" onclick="showTierPicker()">Change Tier ↕</button>
       <button class="btn btn-sm btn-tl" id="upgrade-btn" onclick="upgradeTier()">Upgrade →</button>
+      <button class="dl-btn" onclick="downloadPDF()">↓ Download PDF</button>
     </div>
   </nav>
   <div id="tier-picker" style="display:none;position:fixed;inset:0;background:rgba(26,35,50,0.75);z-index:999;align-items:center;justify-content:center;">
@@ -650,6 +680,10 @@ function updIBtn(){
   const t=S.tier;
   let ok=!!(document.getElementById('fa').value.trim()&&document.getElementById('fp').value&&document.getElementById('fd').value);
   if(t===2){if(!S.ins)ok=false;if(S.ins==='b'&&!document.getElementById('pbc').checked)ok=false;}
+  // Rate discrepancy — if warning visible, ack required
+  const warnEl=document.getElementById('rate-disc-warn');
+  const ackEl=document.getElementById('rate-disc-ack');
+  if(warnEl&&warnEl.style.display==='block'&&ackEl&&!ackEl.checked) ok=false;
   document.getElementById('ib').disabled=!ok;
 }
 
@@ -785,6 +819,7 @@ function bAnalysis(i,isDemo){
   <div class="pb2"><span class="pbl">Recommended Budget Planning Number</span><div class="pbn">${fmt(i.pn)} / month</div><p class="pbd">Midpoint between scenarios. Year 1 runs closer to ${fmt(i.ty1)}/mo taxes. From Year 2, Homestead Exemption saves ${fmt(i.ty1-i.ty2)}/month — file immediately after closing.</p></div>
   <h3 style="font-family:var(--fd);font-size:1.1rem;margin:1.5rem 0 .75rem;color:var(--midnight);">DTI Analysis · Income ${fmt(i.ilo)}–${fmt(i.ihi)}/mo</h3>
   <div class="dt">${dtis.map(d=>`<div class="dr2"><span class="drl">${d[0]}</span><span class="${d[2]}">${d[1]} — ${d[2]==='do'?'Healthy':d[2]==='dw'?'Tight / Qualifiable':'Near Ceiling'}</span></div>`).join('')}</div>
+  <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button></div>
 </div></div>
 
 <div id="tb2" class="as"><div class="cw">
@@ -831,6 +866,7 @@ function bAnalysis(i,isDemo){
     <div class="pp"><span class="py">Year 3–4</span><span class="pd2">With 3–4% appreciation, LTV approaches 85%. Order appraisal, request PMI cancellation — saves ${fmt(i.bp)}/mo = ${fmt(i.bp*12)}/yr.</span></div>
     <div class="pp"><span class="py">Year 7–8</span><span class="pd2">Automatic PMI termination (Homeowners Protection Act) at 78% original LTV — guaranteed by federal law.</span></div>
   </div>`:''}
+  <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button></div>
 </div></div>
 
 <div id="tw" class="as"><div class="cw">
@@ -863,6 +899,8 @@ function bAnalysis(i,isDemo){
     <div class="hc2"><span class="hcl">Total Cash at Close</span><span class="hcv">${fmt(i.damt+i.price*.03+i.wt*3)}+</span><p class="hcd">Down + closing costs + reserves. Plan all three buckets before making an offer.</p></div>
   </div>
   <div class="ck"><div class="ckt">Pre-Offer Critical Checklist</div>${ck}</div>
+
+  <div style=\"text-align:center;margin:2rem 0 1rem;\"><button class=\"dl-btn\" onclick=\"downloadPDF()\">↓ Download Full PDF Analysis</button></div>
 </div></div>`;
 
   document.getElementById('af').innerHTML=`HomeTrue · Miami-Dade County Only · ${tl} · Rate verified ${MKT.rv}<br>Tax figures based on ${fmt(i.price)} purchase price · Flood insurance included · Test Phase — Attorney Review Pending<br>This analysis is an educational tool. Not financial, legal, or real estate advice.`;
@@ -914,6 +952,398 @@ function showDT(t,btn){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
+// ── CREDIT SCORE RATE RANGES ──
+const RATE_RANGES = {
+  'excellent':  { min: 6.00, max: 6.25, label: '760+ Excellent' },
+  'very-good':  { min: 6.25, max: 6.50, label: '720–759 Very Good' },
+  'good':       { min: 6.50, max: 6.875,label: '680–719 Good' },
+  'fair':       { min: 6.875,max: 7.25, label: '640–679 Fair' },
+};
+
+function chkRateDisc() {
+  const rateEl = document.getElementById('f-rate-opt');
+  const creditEl = document.getElementById('fcr');
+  const warnEl = document.getElementById('rate-disc-warn');
+  const msgEl = document.getElementById('rate-disc-msg');
+  const ackEl = document.getElementById('rate-disc-ack');
+  if (!rateEl || !creditEl || !warnEl) return;
+
+  const enteredRate = parseFloat(rateEl.value);
+  const credit = creditEl.value || 'excellent';
+  const range = RATE_RANGES[credit];
+
+  if (!enteredRate || isNaN(enteredRate)) {
+    warnEl.style.display = 'none';
+    if (ackEl) ackEl.checked = false;
+    updIBtn();
+    return;
+  }
+
+  // Trigger if entered rate exceeds top of qualifying range by more than 0.25%
+  if (enteredRate > range.max + 0.25) {
+    const msg = `Your ${range.label} credit score qualifies for rates between ${range.min.toFixed(2)}–${range.max.toFixed(2)}% in the current market. The rate you entered (${enteredRate.toFixed(2)}%) is significantly higher than your qualifying range. If this is a quoted rate, consider shopping additional lenders before committing — a 0.50% rate difference on a $400,000 loan adds over $120/month to your payment.`;
+    msgEl.textContent = msg;
+    warnEl.style.display = 'block';
+    if (ackEl) ackEl.checked = false;
+  } else {
+    warnEl.style.display = 'none';
+    if (ackEl) ackEl.checked = false;
+  }
+  updIBtn();
+}
+
+// ── BACK NAVIGATION — one step, inputs preserved ──
+function goBack(targetScreen) {
+  // Save current input values before navigating away
+  saveInputState();
+  show(targetScreen);
+  // Restore inputs after screen renders
+  setTimeout(() => prefillInputs(), 100);
+}
+
+function saveInputState() {
+  // Capture all current field values into S.savedFields
+  const fields = ['fa','fp','fd','fb2','fcon','frt','fry','fsh','fh','ffl','fil','fih','fcr','fpr','f-rate-opt','fic','fit3','flr','fcp'];
+  S.savedFields = S.savedFields || {};
+  fields.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) S.savedFields[id] = el.value;
+  });
+  // Save insurance path
+  S.savedInsPath = S.ins;
+}
+
+function restoreInputState() {
+  if (!S.savedFields) return;
+  Object.keys(S.savedFields).forEach(id => {
+    const el = document.getElementById(id);
+    if (el && S.savedFields[id] !== undefined) el.value = S.savedFields[id];
+  });
+  // Restore insurance path selection
+  if (S.savedInsPath) {
+    S.ins = S.savedInsPath;
+    selIns(S.savedInsPath);
+  }
+  // Re-run rate discrepancy check after restore
+  setTimeout(chkRateDisc, 150);
+}
+
+// ── PREFILL FIX — use savedFields if inp empty, inp if available ──
+function prefillInputs() {
+  // Try from S.inp first (post-analysis), then S.savedFields (mid-flow)
+  const i = (S.inp && S.inp.address) ? S.inp : null;
+  const sf = S.savedFields || {};
+
+  const setVal = (id, val) => {
+    const el = document.getElementById(id);
+    if (el && val !== undefined && val !== null && val !== '') el.value = val;
+  };
+
+  if (i) {
+    setVal('fa',  i.address);
+    setVal('fp',  i.price);
+    setVal('fd',  i.dpct);
+    setVal('fb2', i.byr);
+    setVal('fcon',i.con);
+    setVal('frt', i.rtp);
+    setVal('fry', i.rage > 0 ? (2026 - i.rage) : '');
+    setVal('fsh', i.sht ? 'yes' : 'no');
+    setVal('fh',  i.hoa);
+    setVal('ffl', i.fld);
+    setVal('fil', i.ilo);
+    setVal('fih', i.ihi);
+    setVal('fcr', i.crd);
+    setVal('fpr', i.pri ? 'yes' : 'no');
+    // Rate field — carry forward if they entered one
+    if (i.br && i.br !== MKT.br) setVal('f-rate-opt', i.br);
+  } else {
+    // Use saved fields
+    Object.keys(sf).forEach(id => setVal(id, sf[id]));
+    if (S.savedInsPath) setTimeout(() => selIns(S.savedInsPath), 100);
+  }
+  setTimeout(chkRateDisc, 200);
+}
+
+// ── UPDATED updIBtn — include rate discrepancy ack ──
+// (replaces existing updIBtn)
+
+// ── PDF DOWNLOAD ──
+function downloadPDF() {
+  const inp = S.inp;
+  if (!inp || !inp.address) {
+    alert('Please generate an analysis first.');
+    return;
+  }
+
+  // Load jsPDF if not already loaded
+  if (typeof window.jspdf === 'undefined') {
+    const script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+    script.onload = () => buildPDF(inp);
+    script.onerror = () => alert('PDF library failed to load. Please check your internet connection.');
+    document.head.appendChild(script);
+  } else {
+    buildPDF(inp);
+  }
+}
+
+function buildPDF(inp) {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+  const W = 210, M = 18, CW = W - M * 2;
+  const tierLabel = {1:'Tier 1 — Pre-Offer',2:'Tier 2 — Active Offer',3:'Tier 3 — Under Contract'}[inp.tier];
+  const tierColor = {1:[0,131,143], 2:[69,39,160], 3:[46,125,82]}[inp.tier];
+
+  function addPageHeader(doc, inp, tierLabel, tierColor, pageTitle) {
+    // Dark header bar
+    doc.setFillColor(26, 35, 50);
+    doc.rect(0, 0, W, 32, 'F');
+    // HomeTrue wordmark
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(18);
+    doc.setFont('helvetica', 'bold');
+    doc.text('Home', M, 14);
+    const homeW = doc.getTextWidth('Home');
+    doc.setTextColor(tierColor[0], tierColor[1], tierColor[2]);
+    doc.text('True', M + homeW, 14);
+    // Property address
+    doc.setTextColor(200, 218, 222);
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'normal');
+    doc.text(inp.address, M, 21);
+    // Tier badge
+    doc.setFillColor(tierColor[0], tierColor[1], tierColor[2]);
+    doc.roundedRect(W - M - 50, 6, 50, 8, 1, 1, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(7);
+    doc.text(tierLabel.toUpperCase(), W - M - 25, 11.5, { align: 'center' });
+    // Page section title
+    doc.setTextColor(26, 35, 50);
+    doc.setFontSize(13);
+    doc.setFont('helvetica', 'bold');
+    doc.text(pageTitle, M, 44);
+    // Thin rule
+    doc.setDrawColor(tierColor[0], tierColor[1], tierColor[2]);
+    doc.setLineWidth(0.5);
+    doc.line(M, 47, W - M, 47);
+    return 54; // Y position after header
+  }
+
+  function addRow(doc, label, val1, val2, y, shade) {
+    if (shade) { doc.setFillColor(245, 247, 249); doc.rect(M, y-4, CW, 8, 'F'); }
+    doc.setTextColor(26, 35, 50);
+    doc.setFontSize(9);
+    doc.setFont('helvetica', val1 === 'TOTAL' ? 'bold' : 'normal');
+    doc.text(label, M + 2, y);
+    doc.text(val1, M + CW * 0.55, y);
+    doc.text(val2, M + CW * 0.78, y);
+    return y + 8;
+  }
+
+  function addFooter(doc, inp) {
+    const pageH = 297;
+    doc.setDrawColor(200, 215, 220);
+    doc.setLineWidth(0.3);
+    doc.line(M, pageH - 22, W - M, pageH - 22);
+    doc.setTextColor(120, 140, 150);
+    doc.setFontSize(6.5);
+    doc.setFont('helvetica', 'normal');
+    doc.text(`HomeTrue · Miami-Dade County Only · Rate verified: ${MKT.rv}`, M, pageH - 16);
+    doc.text(`Tax figures based on ${fmt(inp.price)} purchase price · Test Phase — Attorney Review Pending`, M, pageH - 11);
+    doc.text('This analysis is an educational tool. It does not constitute financial, legal, real estate, or mortgage advice.', M, pageH - 6);
+  }
+
+  const swing = inp.wt - inp.bt;
+
+  // ── PAGE 1: COMPARISON ──
+  let y = addPageHeader(doc, inp, tierLabel, tierColor, 'Side-by-Side Scenario Comparison');
+
+  // Scenario summary boxes
+  doc.setFillColor(232, 245, 238);
+  doc.roundedRect(M, y, CW/2 - 3, 28, 2, 2, 'F');
+  doc.setFillColor(237, 231, 246);
+  doc.roundedRect(M + CW/2 + 3, y, CW/2 - 3, 28, 2, 2, 'F');
+
+  doc.setFontSize(7); doc.setFont('helvetica','normal');
+  doc.setTextColor(46,125,82);
+  doc.text('BEST CASE SCENARIO', M + 4, y + 7);
+  doc.setTextColor(69,39,160);
+  doc.text('WORST CASE SCENARIO', M + CW/2 + 7, y + 7);
+
+  doc.setFontSize(16); doc.setFont('helvetica','bold');
+  doc.setTextColor(46,125,82);
+  doc.text(fmt(inp.bt), M + 4, y + 18);
+  doc.setTextColor(69,39,160);
+  doc.text(fmt(inp.wt), M + CW/2 + 7, y + 18);
+
+  doc.setFontSize(7); doc.setFont('helvetica','normal');
+  doc.setTextColor(100,120,130);
+  doc.text(`${fmtR(inp.br)} · Year 2+ with Homestead`, M + 4, y + 25);
+  doc.text(`${fmtR(inp.wr)} · Year 1 · All adverse`, M + CW/2 + 7, y + 25);
+
+  y += 35;
+
+  // Planning target
+  doc.setFillColor(26,35,50);
+  doc.roundedRect(M, y, CW, 14, 2, 2, 'F');
+  doc.setTextColor(0,200,220); doc.setFontSize(7); doc.setFont('helvetica','normal');
+  doc.text('PLANNING TARGET', M + 4, y + 6);
+  doc.setTextColor(255,255,255); doc.setFontSize(13); doc.setFont('helvetica','bold');
+  doc.text(fmt(inp.pn) + ' / month', M + 4, y + 13);
+  doc.setTextColor(160,190,200); doc.setFontSize(7); doc.setFont('helvetica','normal');
+  doc.text(`Monthly swing: ${fmt(swing)} · 30-year difference: ${fmt(swing*360)}`, M + CW/2, y + 13);
+  y += 22;
+
+  // Comparison table
+  doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(26,35,50);
+  doc.text('Component', M + 2, y);
+  doc.setTextColor(46,125,82); doc.text('Best Case', M + CW * 0.55, y);
+  doc.setTextColor(69,39,160); doc.text('Worst Case', M + CW * 0.78, y);
+  doc.setDrawColor(26,35,50); doc.setLineWidth(0.4);
+  doc.line(M, y + 2, W - M, y + 2);
+  y += 8;
+
+  const rows = [
+    ['Interest Rate', fmtR(inp.br), fmtR(inp.wr)],
+    ['P&I Payment', fmt(inp.bpi), fmt(inp.wpi)],
+    ['Property Tax (Yr 2+ / Yr 1)', fmt(inp.ty2), fmt(inp.ty1)],
+    ['HOA', fmt(inp.hoa), fmt(inp.hoa)],
+    ['Homeowners Insurance', inp.ix ? 'Excluded' : fmt(inp.bi), inp.ix ? 'Excluded' : fmt(inp.wi)],
+    ...(inp.bp > 0 ? [['PMI', fmt(inp.bp), fmt(inp.wp)]] : []),
+    ['Flood Insurance', fmt(inp.fb), fmt(inp.fw)],
+    ...(inp.ep > 0 ? [['Extra Principal', '$0', fmt(inp.ep)]] : []),
+    ['TOTAL MONTHLY', fmt(inp.bt), fmt(inp.wt)],
+  ];
+
+  rows.forEach((r, idx) => {
+    if (r[0] === 'TOTAL MONTHLY') {
+      doc.setDrawColor(26,35,50); doc.setLineWidth(0.4);
+      doc.line(M, y - 2, W-M, y - 2);
+      doc.setFont('helvetica','bold');
+      doc.setTextColor(26,35,50); doc.text(r[0], M+2, y);
+      doc.setTextColor(46,125,82); doc.text(r[1], M+CW*0.55, y);
+      doc.setTextColor(69,39,160); doc.text(r[2], M+CW*0.78, y);
+      y += 8;
+    } else {
+      doc.setFont('helvetica','normal'); doc.setTextColor(26,35,50);
+      if (idx % 2 === 0) { doc.setFillColor(246,248,250); doc.rect(M, y-4, CW, 7, 'F'); }
+      doc.text(r[0], M+2, y);
+      doc.setTextColor(46,125,82); doc.text(r[1], M+CW*0.55, y);
+      doc.setTextColor(69,39,160); doc.text(r[2], M+CW*0.78, y);
+      y += 7;
+    }
+  });
+
+  addFooter(doc, inp);
+
+  // ── PAGE 2: BEST CASE ──
+  doc.addPage();
+  y = addPageHeader(doc, inp, tierLabel, tierColor, 'Best Case Scenario — Everything Breaks Your Way');
+
+  const bestRows = [
+    ['P&I Payment', `${fmtR(inp.br)} · 30yr Fixed`, fmt(inp.bpi), fmt(inp.bpi*12)],
+    ['Property Taxes (Year 2+)', 'With Homestead Exemption', fmt(inp.ty2), fmt(inp.ty2*12)],
+    ['HOA', 'Monthly fee', fmt(inp.hoa), fmt(inp.hoa*12)],
+    ['Homeowners Insurance', inp.ix?'Excluded at Tier 1':inp.il, inp.ix?'—':fmt(inp.bi), inp.ix?'—':fmt(inp.bi*12)],
+    ...(inp.bp>0?[['PMI', `${inp.dpct}% down payment`, fmt(inp.bp), fmt(inp.bp*12)]]: []),
+    ['Flood Insurance', inp.fld==='x'?'Zone X Voluntary':'Zone AE Required', fmt(inp.fb), fmt(inp.fb*12)],
+  ];
+
+  doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(26,35,50);
+  doc.text('Component', M+2, y); doc.text('Detail', M+CW*0.38, y);
+  doc.setTextColor(46,125,82);
+  doc.text('Monthly', M+CW*0.68, y); doc.text('Annual', M+CW*0.84, y);
+  doc.setDrawColor(26,35,50); doc.line(M, y+2, W-M, y+2);
+  y += 8;
+
+  bestRows.forEach((r, idx) => {
+    if (idx%2===0){doc.setFillColor(232,245,238);doc.rect(M,y-4,CW,7,'F');}
+    doc.setFont('helvetica','normal'); doc.setTextColor(26,35,50);
+    doc.text(r[0], M+2, y);
+    doc.setTextColor(80,100,110); doc.setFontSize(7.5);
+    doc.text(r[1], M+CW*0.38, y);
+    doc.setFontSize(8); doc.setTextColor(46,125,82); doc.setFont('helvetica','bold');
+    doc.text(r[2], M+CW*0.68, y); doc.text(r[3], M+CW*0.84, y);
+    y += 7;
+  });
+
+  doc.setDrawColor(26,35,50); doc.line(M, y-1, W-M, y-1);
+  doc.setFont('helvetica','bold'); doc.setTextColor(26,35,50); doc.setFontSize(9);
+  doc.text('TOTAL MONTHLY', M+2, y+5);
+  doc.setTextColor(46,125,82); doc.text(fmt(inp.bt), M+CW*0.68, y+5);
+  doc.setTextColor(80,100,110); doc.setFontSize(8);
+  doc.text(fmt(inp.bt*12)+'/yr', M+CW*0.84, y+5);
+  y += 18;
+
+  // Tax note
+  doc.setFillColor(232,245,238); doc.roundedRect(M,y,CW,20,2,2,'F');
+  doc.setTextColor(27,94,56); doc.setFontSize(7); doc.setFont('helvetica','bold');
+  doc.text('HOMESTEAD EXEMPTION — FILE IMMEDIATELY AFTER CLOSING', M+4, y+7);
+  doc.setFont('helvetica','normal');
+  doc.text(`Saves ${fmt(inp.ty1-inp.ty2)}/month from Year 2 onward. Deadline: March 1 of following tax year.`, M+4, y+13);
+  doc.text('File online at miamidade.gov/pa — approximately 15 minutes.', M+4, y+18);
+
+  addFooter(doc, inp);
+
+  // ── PAGE 3: WORST CASE ──
+  doc.addPage();
+  y = addPageHeader(doc, inp, tierLabel, tierColor, 'Worst Case Scenario — When Assumptions Break Against You');
+
+  const worstRows = [
+    ['P&I Payment', `${fmtR(inp.wr)} · Without lender comparison`, fmt(inp.wpi), fmt(inp.wpi*12)],
+    ['Property Taxes (Year 1)', 'Reassessed · No exemption', fmt(inp.ty1), fmt(inp.ty1*12)],
+    ['HOA', 'Confirmed monthly fee', fmt(inp.hoa), fmt(inp.hoa*12)],
+    ['Homeowners Insurance', inp.ix?'Excluded — obtain quote':inp.il, inp.ix?'—':fmt(inp.wi), inp.ix?'—':fmt(inp.wi*12)],
+    ...(inp.wp>0?[['PMI', 'Without shopping lenders', fmt(inp.wp), fmt(inp.wp*12)]]: []),
+    ['Flood Insurance', inp.fld==='ae'?'Zone AE — Required':'Zone X — High estimate', fmt(inp.fw), fmt(inp.fw*12)],
+    ...(inp.ep>0?[['Extra Principal', 'PMI acceleration — optional', fmt(inp.ep), fmt(inp.ep*12)]]: []),
+  ];
+
+  doc.setFontSize(8); doc.setFont('helvetica','bold'); doc.setTextColor(26,35,50);
+  doc.text('Component', M+2, y); doc.text('Risk Note', M+CW*0.38, y);
+  doc.setTextColor(69,39,160);
+  doc.text('Monthly', M+CW*0.68, y); doc.text('Annual', M+CW*0.84, y);
+  doc.setDrawColor(26,35,50); doc.line(M, y+2, W-M, y+2);
+  y += 8;
+
+  worstRows.forEach((r,idx) => {
+    if(idx%2===0){doc.setFillColor(237,231,246);doc.rect(M,y-4,CW,7,'F');}
+    doc.setFont('helvetica','normal'); doc.setTextColor(26,35,50);
+    doc.text(r[0],M+2,y);
+    doc.setTextColor(80,100,110); doc.setFontSize(7.5);
+    doc.text(r[1],M+CW*0.38,y);
+    doc.setFontSize(8); doc.setTextColor(69,39,160); doc.setFont('helvetica','bold');
+    doc.text(r[2],M+CW*0.68,y); doc.text(r[3],M+CW*0.84,y);
+    y+=7;
+  });
+
+  doc.setDrawColor(26,35,50); doc.line(M,y-1,W-M,y-1);
+  doc.setFont('helvetica','bold'); doc.setTextColor(26,35,50); doc.setFontSize(9);
+  doc.text('TOTAL MONTHLY',M+2,y+5);
+  doc.setTextColor(69,39,160); doc.text(fmt(inp.wt),M+CW*0.68,y+5);
+  doc.setTextColor(80,100,110); doc.setFontSize(8);
+  doc.text(fmt(inp.wt*12)+'/yr',M+CW*0.84,y+5);
+  y+=18;
+
+  // Hidden costs
+  doc.setFillColor(26,35,50); doc.roundedRect(M,y,CW,36,2,2,'F');
+  doc.setTextColor(0,200,220); doc.setFontSize(7); doc.setFont('helvetica','bold');
+  doc.text('HIDDEN COSTS — PLAN BEFORE YOU OFFER', M+4, y+7);
+  doc.setFont('helvetica','normal'); doc.setTextColor(190,210,220);
+  doc.text(`Closing costs: ${fmt(inp.price*.03)}–${fmt(inp.price*.04)} (3–4% of purchase price, separate from down payment)`, M+4, y+14);
+  doc.text(`Post-closing reserves: ${fmt(inp.wt*3)}–${fmt(inp.wt*6)} (3–6 months housing costs)`, M+4, y+20);
+  doc.text(`Hurricane deductible: ${fmt(inp.price*.02)}–${fmt(inp.price*.05)} (2–5% of value, out-of-pocket)`, M+4, y+26);
+  doc.setTextColor(0,220,240); doc.setFont('helvetica','bold');
+  doc.text(`Total cash needed at close: ${fmt(inp.damt+inp.price*.03+inp.wt*3)}+ minimum`, M+4, y+33);
+
+  addFooter(doc, inp);
+
+  // ── SAVE ──
+  const slug = inp.address.replace(/[^a-zA-Z0-9]/g, '-').replace(/-+/g,'-').substring(0,40);
+  const tname = {1:'PreOffer',2:'ActiveOffer',3:'UnderContract'}[inp.tier];
+  doc.save(`HomeTrue-${slug}-Tier${inp.tier}-${tname}.pdf`);
+}
+
 function showTierPicker(){
   const cur=S.inp.tier||S.tier;
   [1,2,3].forEach(n=>{
@@ -929,19 +1359,20 @@ function closeTierPicker(){
 }
 
 function pickTier(n){
-  const cur=S.inp.tier||S.tier;
+  const cur=(S.inp&&S.inp.tier)||S.tier;
   if(n===cur){closeTierPicker();return;}
   closeTierPicker();
+  // Save current state before switching
+  saveInputState();
   S.tier=n;
-  S.ins=null;
-  // pre-fill inputs from session memory then go to inputs screen
+  S.ins=null; // insurance always resets on tier change
   procInputs();
-  // pre-fill fields after screen renders
-  setTimeout(()=>prefillInputs(),100);
+  // Restore all fields except insurance after screen renders
+  setTimeout(()=>restoreInputState(),120);
 }
 
 function upgradeTier(){
-  const cur=S.inp.tier||S.tier;
+  const cur=(S.inp&&S.inp.tier)||S.tier||1;
   if(cur>=3)return;
   pickTier(cur+1);
 }
