@@ -356,6 +356,88 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .dl-btn:hover{background:var(--emerald-dim);transform:translateY(-1px);box-shadow:0 4px 12px rgba(46,125,82,.3);}
 .dl-btn-outline{background:transparent;color:var(--emerald);border:1.5px solid var(--emerald);}
 .dl-btn-outline:hover{background:var(--emerald-light);}
+
+/* ── AFFORDABILITY CALCULATOR ── */
+.aff-card{background:var(--white);border:2px solid var(--slate-surface);border-radius:10px;padding:1.75rem;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;}
+.aff-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--emerald));}
+.aff-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(26,35,50,.1);}
+.aff-range-card{background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:1.25rem;text-align:center;}
+.aff-range-val{font-family:var(--fd);font-size:1.6rem;font-weight:900;color:var(--midnight);display:block;line-height:1.1;}
+.aff-range-lbl{font-family:var(--fm);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:.25rem;display:block;}
+.aff-dp-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;margin:1rem 0;}
+.aff-dp-card{background:var(--slate-bg);border-radius:6px;padding:.85rem;text-align:center;}
+.aff-dp-pct{font-family:var(--fm);font-size:.62rem;letter-spacing:.1em;color:var(--teal-dim);display:block;margin-bottom:.2rem;}
+.aff-dp-val{font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--midnight);}
+.dti-bar-wrap{background:var(--slate-bg);border-radius:8px;padding:1rem 1.25rem;margin:.75rem 0;}
+.dti-bar-track{height:10px;background:var(--rule);border-radius:5px;overflow:hidden;margin:.5rem 0;}
+.dti-bar-fill{height:100%;border-radius:5px;transition:width .4s ease;}
+
+/* ── CLOSING COST ESTIMATOR ── */
+.cc-section{margin-bottom:1.5rem;}
+.cc-section-title{font-family:var(--fd);font-size:1rem;font-weight:700;color:var(--midnight);padding-bottom:.4rem;border-bottom:1px solid var(--rule);margin-bottom:.75rem;}
+.cc-row{display:flex;justify-content:space-between;align-items:flex-start;padding:.55rem 0;border-bottom:1px solid rgba(207,216,220,.5);flex-wrap:wrap;gap:.25rem;}
+.cc-row:last-child{border-bottom:none;}
+.cc-item{font-size:.875rem;color:var(--ink);font-weight:300;}
+.cc-note{font-size:.68rem;color:var(--muted);display:block;margin-top:.1rem;}
+.cc-val{font-family:var(--fm);font-size:.82rem;color:var(--midnight);font-weight:500;text-align:right;flex-shrink:0;}
+.cc-total-row{display:flex;justify-content:space-between;align-items:center;padding:.85rem 1rem;background:var(--midnight);border-radius:6px;margin-top:.75rem;}
+.cc-total-lbl{font-family:var(--fm);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(176,190,197,.8);}
+.cc-total-val{font-family:var(--fd);font-size:1.4rem;font-weight:900;color:var(--teal-mid);}
+.cash-consolidation{background:var(--midnight);border-radius:10px;padding:1.75rem;margin:1.5rem 0;}
+.cash-con-title{font-family:var(--fd);font-size:1.1rem;color:var(--teal-mid);margin-bottom:1.1rem;}
+.cash-con-row{display:flex;justify-content:space-between;align-items:center;padding:.5rem 0;border-bottom:1px solid rgba(176,190,197,.1);}
+.cash-con-row:last-child{border-bottom:none;}
+.cash-con-lbl{font-size:.85rem;color:rgba(176,190,197,.85);}
+.cash-con-val{font-family:var(--fm);font-size:.85rem;color:var(--teal-mid);font-weight:500;}
+.cash-con-grand{display:flex;justify-content:space-between;align-items:center;padding:.85rem 0 0;margin-top:.5rem;border-top:2px solid rgba(176,190,197,.2);}
+.cash-con-grand-lbl{font-family:var(--fd);font-size:1rem;font-weight:700;color:var(--white);}
+.cash-con-grand-val{font-family:var(--fd);font-size:1.5rem;font-weight:900;color:var(--emerald-mid);}
+
+/* ── HOMESTEAD GUIDE ── */
+.hg-step{display:flex;gap:1rem;margin-bottom:1.25rem;padding-bottom:1.25rem;border-bottom:1px solid var(--rule);}
+.hg-step:last-child{border-bottom:none;}
+.hg-num{width:32px;height:32px;border-radius:50%;background:var(--emerald);color:var(--white);display:flex;align-items:center;justify-content:center;font-family:var(--fm);font-size:.7rem;font-weight:500;flex-shrink:0;}
+.hg-content{flex:1;}
+.hg-title{font-family:var(--fd);font-size:1rem;font-weight:700;color:var(--midnight);margin-bottom:.3rem;}
+.hg-desc{font-size:.85rem;color:var(--muted);line-height:1.65;}
+.hg-deadline{background:var(--emerald-light);border:1.5px solid var(--emerald-muted);border-radius:8px;padding:1.25rem 1.5rem;margin:1.25rem 0;}
+.hg-dl-lbl{font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--emerald-dim);display:block;margin-bottom:.35rem;}
+.hg-dl-date{font-family:var(--fd);font-size:1.6rem;font-weight:900;color:var(--emerald);}
+.hg-dl-sub{font-size:.82rem;color:var(--emerald-dim);margin-top:.25rem;}
+.hg-portal-btn{display:inline-flex;align-items:center;gap:.4rem;background:var(--emerald);color:var(--white);padding:.7rem 1.4rem;border-radius:6px;font-family:var(--fb);font-size:.85rem;font-weight:500;text-decoration:none;transition:all .2s;margin-top:.75rem;}
+.hg-portal-btn:hover{background:var(--emerald-dim);transform:translateY(-1px);}
+
+/* ── SAVE & SHARE ── */
+.share-toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--emerald);color:var(--white);padding:.75rem 1.25rem;border-radius:8px;font-family:var(--fm);font-size:.65rem;letter-spacing:.08em;z-index:9999;opacity:0;transform:translateY(10px);transition:all .3s;pointer-events:none;}
+.share-toast.show{opacity:1;transform:none;}
+
+/* ── COMPARISON MODE ── */
+.comp-mode-wrap{background:var(--slate-bg);min-height:100vh;}
+.comp-prop-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin:1.5rem 0;}
+@media(max-width:680px){.comp-prop-grid{grid-template-columns:1fr;}}
+.comp-prop-card{background:var(--white);border:1.5px solid var(--rule);border-radius:10px;overflow:hidden;}
+.comp-prop-header{padding:.85rem 1.1rem;display:flex;align-items:center;justify-content:space-between;}
+.comp-p1-header{background:var(--teal-light);border-bottom:1px solid var(--teal-muted);}
+.comp-p2-header{background:var(--indigo-light);border-bottom:1px solid var(--indigo-muted);}
+.comp-prop-lbl{font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;}
+.comp-p1 .comp-prop-lbl{color:var(--teal-dim);}
+.comp-p2 .comp-prop-lbl{color:var(--indigo-dim);}
+.comp-vs-table{width:100%;border-collapse:collapse;font-size:.875rem;margin:1.25rem 0;}
+.comp-vs-table th{font-family:var(--fm);font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;padding:.65rem 1rem;text-align:left;border-bottom:2px solid var(--midnight);}
+.comp-vs-table th:nth-child(2){color:var(--teal-dim);}
+.comp-vs-table th:nth-child(3){color:var(--indigo-dim);}
+.comp-vs-table td{padding:.65rem 1rem;border-bottom:1px solid var(--rule);font-weight:300;}
+.comp-vs-table .winner-1{background:rgba(0,131,143,.06);}
+.comp-vs-table .winner-2{background:rgba(69,39,160,.06);}
+.comp-verdict{border-radius:10px;padding:1.75rem;margin:1.5rem 0;}
+.comp-v1{background:var(--teal-light);border:1.5px solid var(--teal-muted);}
+.comp-v2{background:var(--indigo-light);border:1.5px solid var(--indigo-muted);}
+.comp-verdict-lbl{font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;display:block;margin-bottom:.4rem;}
+.comp-v1 .comp-verdict-lbl{color:var(--teal-dim);}
+.comp-v2 .comp-verdict-lbl{color:var(--indigo-dim);}
+.comp-verdict-title{font-family:var(--fd);font-size:1.4rem;font-weight:700;color:var(--midnight);margin-bottom:.35rem;}
+.comp-verdict-desc{font-size:.85rem;color:var(--muted);line-height:1.65;}
+.dl-btn-outline:hover{background:var(--emerald-light);}
 /* CONTRAST ENFORCEMENT — no meaningful text below 75% opacity on dark surfaces */
 .mh *,.gh *,.vs *,.dmb *{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
 .mh p,.gh p,.vs p{opacity:1 !important;}
@@ -387,9 +469,14 @@ footer strong{color:rgba(220,232,235,1.0);}
       <div class="ae tl" style="margin-bottom:.4rem;">Welcome</div>
       <h2 style="font-family:var(--fd);font-size:2rem;font-weight:700;letter-spacing:-.02em;margin-bottom:1rem;color:var(--midnight);">Before we begin</h2>
       <p style="color:var(--muted);margin-bottom:2rem;font-size:.95rem;line-height:1.75;">This tool gives you an honest, unbiased analysis of the full monthly cost of buying a home — best case and worst case — before you commit to anything. No realtor pressure. No broker estimates designed to look manageable.</p>
-      <div class="wcs">
+      <div class="wcs" style="grid-template-columns:1fr 1fr;">
         <div class="wc dm" onclick="startDemo()"><span class="wct">Option A</span><span class="wcn">See a Demo First</span><p class="wcd">Walk through a completed analysis on a sample property before entering your own.</p></div>
         <div class="wc st" onclick="startG1()"><span class="wct">Option B</span><span class="wcn">Analyze My Property</span><p class="wcd">Go straight to your analysis. Review terms, enter your property, receive your results.</p></div>
+      </div>
+      <div class="aff-card" onclick="show('aff')" style="margin-bottom:1.25rem;">
+        <span style="font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal-mid);margin-bottom:.5rem;display:block;">Option C</span>
+        <span style="font-family:var(--fd);font-size:1.15rem;font-weight:700;color:var(--midnight);display:block;margin-bottom:.4rem;">What Can I Afford?</span>
+        <p style="font-size:.82rem;color:var(--muted);line-height:1.55;">Not sure what price range to target? Enter your income, savings, and credit score. HomeTrue tells you your realistic purchase range before you start shopping.</p>
       </div>
       <div class="nt nt-tl"><span class="nl nl-tl">Miami-Dade County Only</span><p>This tool is calibrated exclusively for Miami-Dade County properties. Using it outside Miami-Dade will produce inaccurate results.</p></div>
       <div style="margin-top:2rem;background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:1.25rem;">
@@ -457,6 +544,107 @@ footer strong{color:rgba(220,232,235,1.0);}
   <div class="dmb" id="dmb-label">DEMO MODE — 1234 Brickell Bay Dr, Miami FL 33131 (Fictional)<button onclick="show('w')">Analyze My Property →</button></div>
   <div id="dmw"></div>
 </div>
+
+<!-- AFFORDABILITY CALCULATOR -->
+<div id="saff" class="screen">
+  <div class="mh">
+    <div class="mh-tag">Miami-Dade County · Affordability Calculator</div>
+    <h1>Home<span class="tr">True</span></h1>
+    <div class="mh-rule"></div>
+    <div class="mh-sub">Find your realistic price range before you start shopping</div>
+  </div>
+  <div class="vs">Miami-Dade County Only · <span>Based on current market data — April 2026</span></div>
+  <div class="c" style="max-width:680px;">
+    <div style="padding:2rem 0;">
+      <div class="gate-back-row"><button class="back-btn" onclick="show('w')">← Back</button></div>
+      <div class="ae tl" style="margin-bottom:.4rem;">Step 1 of 1</div>
+      <h2 style="font-family:var(--fd);font-size:1.8rem;font-weight:700;letter-spacing:-.02em;margin-bottom:1rem;color:var(--midnight);">Your Financial Picture</h2>
+      <p style="color:var(--muted);font-size:.9rem;margin-bottom:2rem;line-height:1.7;">Enter your financial details below. HomeTrue will calculate your realistic purchase price range based on standard lender DTI thresholds and current Miami-Dade market conditions.</p>
+
+      <div class="fs">
+        <div class="fst">Income & Savings</div>
+        <div class="fg">
+          <div class="ff"><label>Gross Monthly Income — Low ($)</label><input type="number" id="aff-il" placeholder="10000" min="1000"></div>
+          <div class="ff"><label>Gross Monthly Income — High ($)</label><input type="number" id="aff-ih" placeholder="13000" min="1000"></div>
+          <div class="ff"><label>Total Savings Available ($)</label><input type="number" id="aff-sv" placeholder="50000" min="0"><div class="fn">Include everything available for down payment and closing costs</div></div>
+          <div class="ff"><label>Monthly Debt Payments ($)</label><input type="number" id="aff-db" placeholder="500" min="0"><div class="fn">Car payments, student loans, credit cards — minimum payments only</div></div>
+        </div>
+      </div>
+
+      <div class="fs">
+        <div class="fst">Credit & Preferences</div>
+        <div class="fg">
+          <div class="ff"><label>Credit Score Range</label><select id="aff-cr"><option value="excellent">760+ Excellent</option><option value="very-good">720–759 Very Good</option><option value="good">680–719 Good</option><option value="fair">640–679 Fair</option></select></div>
+          <div class="ff"><label>Preferred Down Payment</label><select id="aff-dp"><option value="3">3% — Conventional minimum</option><option value="3.5">3.5% — FHA minimum</option><option value="5">5%</option><option value="10">10%</option><option value="20">20% — No PMI</option></select></div>
+        </div>
+      </div>
+
+      <button class="btn btn-tl btn-fw" onclick="calcAffordability()">Calculate My Range →</button>
+
+      <!-- RESULTS -->
+      <div id="aff-results" style="display:none; margin-top:2rem;">
+        <div class="a-eyebrow tl" style="margin-bottom:.4rem;">Your Results</div>
+        <h3 style="font-family:var(--fd);font-size:1.4rem;font-weight:700;color:var(--midnight);margin-bottom:1.25rem;">Realistic Purchase Range</h3>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;">
+          <div class="aff-range-card" style="border-top:3px solid var(--emerald);">
+            <span class="aff-range-val" id="aff-price-low" style="color:var(--emerald);">—</span>
+            <span class="aff-range-lbl">Conservative Price</span>
+            <div style="font-size:.72rem;color:var(--muted);margin-top:.3rem;">36% DTI — comfortable</div>
+          </div>
+          <div class="aff-range-card" style="border-top:3px solid var(--indigo);">
+            <span class="aff-range-val" id="aff-price-high" style="color:var(--indigo);">—</span>
+            <span class="aff-range-lbl">Maximum Price</span>
+            <div style="font-size:.72rem;color:var(--muted);margin-top:.3rem;">43% DTI — lender ceiling</div>
+          </div>
+        </div>
+
+        <div id="aff-monthly-wrap" style="background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:1.25rem;margin-bottom:1.25rem;">
+          <div style="font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem;">Estimated Monthly Payment Range</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;">
+            <div><span style="font-family:var(--fd);font-size:1.4rem;font-weight:900;color:var(--emerald);" id="aff-mo-low">—</span><span style="font-size:.8rem;color:var(--muted);margin-left:.3rem;">conservative</span></div>
+            <div style="font-family:var(--fm);font-size:.8rem;color:var(--muted);">to</div>
+            <div><span style="font-family:var(--fd);font-size:1.4rem;font-weight:900;color:var(--indigo);" id="aff-mo-high">—</span><span style="font-size:.8rem;color:var(--muted);margin-left:.3rem;">maximum</span></div>
+          </div>
+        </div>
+
+        <div style="font-family:var(--fm);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem;">Down Payment Required</div>
+        <div class="aff-dp-grid" id="aff-dp-grid"></div>
+
+        <div id="aff-savings-wrap" style="margin:1.25rem 0;"></div>
+
+        <div id="aff-dti-wrap"></div>
+
+        <div style="margin-top:1.5rem;display:flex;gap:.75rem;flex-wrap:wrap;">
+          <button class="btn btn-em" onclick="affToAnalysis()" id="aff-to-analysis">Analyze at This Price Range →</button>
+          <button class="btn btn-ol" onclick="show('w')">Back to Welcome</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPARISON MODE -->
+<div id="scmp" class="screen">
+  <div id="cmp-masthead"></div>
+  <div class="vs">Comparison Mode · <span>Miami-Dade County · April 2026</span></div>
+  <nav class="an">
+    <div class="ats">
+      <button class="at atc active" onclick="showCmpTab('c',this)">§ Head to Head</button>
+      <button class="at atb" onclick="showCmpTab('b',this)">§ Best Cases</button>
+      <button class="at atw" onclick="showCmpTab('w',this)">§ Worst Cases</button>
+    </div>
+    <div class="nav-btns">
+      <button class="btn btn-sm btn-ol" onclick="startOver()">← Start Over</button>
+      <button class="dl-btn btn-sm" onclick="downloadCompPDF()">↓ Download Comparison PDF</button>
+    </div>
+  </nav>
+  <div id="cmp-content"></div>
+  <footer id="cmp-footer"></footer>
+</div>
+
+<!-- SHARE TOAST -->
+<div class="share-toast" id="share-toast">✓ Analysis link copied to clipboard</div>
 
 <!-- GATE 1 -->
 <div id="sg1" class="screen">
@@ -693,12 +881,16 @@ footer strong{color:rgba(220,232,235,1.0);}
       <button class="at atc active" onclick="showTab('c',this)">§ Comparison</button>
       <button class="at atb" onclick="showTab('b',this)">§ Best Case</button>
       <button class="at atw" onclick="showTab('w',this)">§ Worst Case</button>
+      <button class="at" id="tab-cc-btn" onclick="showTab('cc',this)" style="color:var(--muted);">§ Closing Costs</button>
+      <button class="at" id="tab-hg-btn" onclick="showTab('hg',this)" style="color:var(--muted);">§ Homestead Guide</button>
     </div>
     <div class="nav-btns">
       <button class="btn btn-sm btn-ol" onclick="startOver()">← Start Over</button>
       <button class="btn btn-sm btn-slate" onclick="showTierPicker()">Change Tier ↕</button>
       <button class="btn btn-sm btn-tl" id="upgrade-btn" onclick="upgradeTier()">Upgrade →</button>
       <button class="dl-btn" onclick="downloadPDF()">↓ Download PDF</button>
+      <button class="btn btn-sm btn-slate" onclick="shareAnalysis()">⎘ Share</button>
+      <button class="btn btn-sm" id="compare-btn" onclick="startComparison()" style="background:var(--indigo);color:var(--white);display:none;">⇄ Compare</button>
     </div>
   </nav>
   <div id="tier-picker" style="display:none;position:fixed;inset:0;background:rgba(26,35,50,0.75);z-index:999;align-items:center;justify-content:center;">
@@ -715,6 +907,8 @@ footer strong{color:rgba(220,232,235,1.0);}
     </div>
   </div>
   <div id="ac"></div>
+  <div id="tab-cc" class="as" style="display:none;"></div>
+  <div id="tab-hg" class="as" style="display:none;"></div>
   <footer id="af"></footer>
 </div>
 
@@ -801,6 +995,8 @@ function updIBtn(){
 }
 
 setInterval(updIBtn,600);
+// Check for shared analysis URL on load
+window.addEventListener("load",checkShareURL);
 
 function proc3(){
   if(!document.getElementById('fp').value){alert('Please enter a purchase price.');return;}
@@ -809,7 +1005,25 @@ function proc3(){
   collectInp();bG3();show('g3');
 }
 
-function genAnalysis(){bAnalysis(S.inp,false);show('a');setTimeout(updateUpgradeBtn,150);}
+function genAnalysis(){
+  // Check if this is Property 2 in comparison mode
+  if(S2 && S2.comparingProp2 && S2.prop1){
+    collectInp();
+    buildComparison(S2.prop1, S.inp);
+    return;
+  }
+  bAnalysis(S.inp,false);
+  show('a');
+  setTimeout(updateUpgradeBtn,150);
+  setTimeout(()=>{
+    const ccTab=document.getElementById('tab-cc');
+    if(ccTab) ccTab.innerHTML=buildClosingCosts(S.inp);
+    const hgTab=document.getElementById('tab-hg');
+    if(hgTab) hgTab.innerHTML=buildHomesteadGuide(S.inp);
+    const cmpBtn=document.getElementById('compare-btn');
+    if(cmpBtn) cmpBtn.style.display='inline-flex';
+  },200);
+}
 
 function collectInp(){
   const t=S.tier;
@@ -845,6 +1059,7 @@ function collectInp(){
   const wt=wpi+ty1+hoa+wi+wp+fw+ep;
   const pn=Math.round((bt+wt)/2/50)*50;
   S.inp={address:document.getElementById('fa').value.trim()||'Miami-Dade Property',price,dpct,damt,loan,byr,rage,rtp,con,sht,hoa,fld,ilo,ihi,pri,crd,br,wr,bpi,wpi,ty1,ty2,bi,wi,il,ic,ix,bp,wp,fb,fw,ep,bt,wt,pn,tier:t};
+  if(S2&&S2.comparingProp2) S2.comparingProp2=false;
 }
 
 function cPI(l,r){const m=r/100/12,n=360;return Math.round(l*m*Math.pow(1+m,n)/(Math.pow(1+m,n)-1));}
@@ -1716,9 +1931,632 @@ function prefillInputs(){
   set('fpr', i.pri?'yes':'no');
 }
 
+// ══════════════════════════════════════
+// PRIORITY 2 — AFFORDABILITY CALCULATOR
+// ══════════════════════════════════════
+function calcAffordability() {
+  const il = parseFloat(document.getElementById('aff-il').value) || 10000;
+  const ih = parseFloat(document.getElementById('aff-ih').value) || 13000;
+  const sv = parseFloat(document.getElementById('aff-sv').value) || 0;
+  const db = parseFloat(document.getElementById('aff-db').value) || 0;
+  const cr = document.getElementById('aff-cr').value || 'excellent';
+  const dpPct = parseFloat(document.getElementById('aff-dp').value) || 3;
+  const rate = RATE_RANGES[cr] ? (RATE_RANGES[cr].min + RATE_RANGES[cr].max) / 2 : 6.25;
+
+  // Max monthly housing payment at 36% and 43% DTI
+  const maxMoLow = il * 0.36 - db;
+  const maxMoHigh = ih * 0.43 - db;
+
+  // Work back from monthly payment to price
+  // Payment = P&I + tax + estimated insurance + PMI + flood
+  // Solve for loan amount from P&I
+  function priceFromPayment(mo) {
+    // Iterative — start with estimate
+    let price = mo * 12 / 0.065;
+    for (let i = 0; i < 20; i++) {
+      const down = price * dpPct / 100;
+      const loan = price - down;
+      const r = rate / 100 / 12, n = 360;
+      const pi = loan * r * Math.pow(1+r,n) / (Math.pow(1+r,n)-1);
+      const tax = (price - 50000) * 0.013 / 12;
+      const pmi = dpPct < 20 ? loan * 0.004 / 12 : 0;
+      const ins = 280; // estimated
+      const flood = 55;
+      const total = pi + tax + pmi + ins + flood;
+      price = price * (mo / total);
+    }
+    return Math.round(price / 5000) * 5000;
+  }
+
+  const priceLow = priceFromPayment(maxMoLow);
+  const priceHigh = priceFromPayment(maxMoHigh);
+  const priceMid = Math.round((priceLow + priceHigh) / 2 / 5000) * 5000;
+
+  const moLow = calcPI(priceLow * (1 - dpPct/100), rate) + (priceLow - 50000) * 0.013/12 + 280 + 55;
+  const moHigh = calcPI(priceHigh * (1 - dpPct/100), rate) + priceHigh * 0.013/12 + 300 + 75;
+
+  document.getElementById('aff-price-low').textContent = fmt(priceLow);
+  document.getElementById('aff-price-high').textContent = fmt(priceHigh);
+  document.getElementById('aff-mo-low').textContent = fmt(moLow) + '/mo';
+  document.getElementById('aff-mo-high').textContent = fmt(moHigh) + '/mo';
+
+  // Down payment grid
+  const dpGrid = document.getElementById('aff-dp-grid');
+  dpGrid.innerHTML = [3, 5, 20].map(pct => `
+    <div class="aff-dp-card">
+      <span class="aff-dp-pct">${pct}% Down</span>
+      <div class="aff-dp-val">${fmt(priceMid * pct / 100)}</div>
+      <div style="font-size:.68rem;color:var(--muted);margin-top:.2rem;">on ${fmt(priceMid)}</div>
+    </div>
+  `).join('');
+
+  // Savings assessment
+  const needed3 = priceMid * 0.03 + priceMid * 0.035 + moHigh * 3;
+  const savingsWrap = document.getElementById('aff-savings-wrap');
+  const savingsOk = sv >= needed3;
+  savingsWrap.innerHTML = `
+    <div class="nt ${savingsOk ? 'nt-em' : 'nt-wn'}" style="margin:0;">
+      <span class="nl ${savingsOk ? 'nl-em' : 'nl-wn'}">Savings Assessment</span>
+      <p>You have <strong>${fmt(sv)}</strong> available. To close on ${fmt(priceMid)} with 3% down you need approximately <strong>${fmt(needed3)}</strong> (down payment + closing costs + 3-month reserve). ${savingsOk ? 'Your savings cover this comfortably.' : 'You may need additional savings before you are ready to close.'}</p>
+    </div>
+  `;
+
+  // DTI bar
+  const dtiPct = Math.round((moLow + db) / il * 100);
+  const dtiColor = dtiPct <= 36 ? 'var(--emerald)' : dtiPct <= 43 ? 'var(--warn)' : 'var(--indigo)';
+  document.getElementById('aff-dti-wrap').innerHTML = `
+    <div class="dti-bar-wrap">
+      <div style="font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;">DTI at Conservative Price · ${fmt(il)}/mo income</div>
+      <div class="dti-bar-track"><div class="dti-bar-fill" style="width:${Math.min(dtiPct,100)}%;background:${dtiColor};"></div></div>
+      <div style="display:flex;justify-content:space-between;font-family:var(--fm);font-size:.6rem;color:var(--muted);">
+        <span>${dtiPct}% DTI</span><span style="color:${dtiColor};">${dtiPct<=36?'Healthy':dtiPct<=43?'Qualifiable':'Near ceiling'}</span>
+      </div>
+    </div>
+  `;
+
+  // Store for feed-through
+  S.affResult = { priceMid, dpPct, il, ih, cr };
+
+  document.getElementById('aff-results').style.display = 'block';
+  document.getElementById('aff-results').scrollIntoView({ behavior: 'smooth' });
+}
+
+function affToAnalysis() {
+  if (!S.affResult) return;
+  const r = S.affResult;
+  show('g1');
+  // Pre-fill after gate 1 accepted — store for later
+  S.affPrefill = r;
+}
+
+// ══════════════════════════════════════
+// PRIORITY 1 — CLOSING COST ESTIMATOR
+// ══════════════════════════════════════
+function buildClosingCosts(inp) {
+  const p = inp.price;
+  const loan = inp.loan;
+  const tier = inp.tier;
+
+  // Florida-specific closing cost calculations
+  const deedStamp = Math.round(p * 0.007);         // $0.70 per $100 deed stamp
+  const mortgageStamp = Math.round(loan * 0.0035); // $0.35 per $100 mortgage stamp
+  const intangibleTax = Math.round(loan * 0.002);  // $0.20 per $100 intangible tax
+  const titleSearch = 250;
+  const titleInsLender = Math.round(loan * 0.00575);
+  const titleInsOwner = Math.round(p * 0.00575);
+  const settlementFee = 595;
+  const recordingFee = 185;
+  const originationFee = Math.round(loan * 0.005);
+  const appraisal = 550;
+  const creditReport = 45;
+  const floodCert = 15;
+  const prepaidInsurance = inp.bi > 0 ? inp.bi * 12 : 3200;
+  const prepaidInterest = Math.round(loan * (inp.br/100/365) * 15);
+  const escrowSetup = Math.round((inp.ty1 + (inp.bi>0?inp.bi:267)) * 2);
+  const reserves3mo = Math.round(inp.wt * 3);
+  const reserves6mo = Math.round(inp.wt * 6);
+
+  const govTotal = deedStamp + mortgageStamp + intangibleTax + recordingFee;
+  const titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
+  const lenderTotal = originationFee + appraisal + creditReport + floodCert;
+  const prepaidTotal = prepaidInsurance + prepaidInterest + escrowSetup;
+  const closingTotal = govTotal + titleTotal + lenderTotal + prepaidTotal;
+  const grandTotal = inp.damt + closingTotal + reserves3mo;
+
+  const fmtRange = (lo, hi) => `${fmt(lo)} – ${fmt(hi)}`;
+
+  return `
+    <div class="cw">
+      <div class="ae tl">Section IV</div>
+      <h2 class="at2">Closing Cost Breakdown</h2>
+      <div class="ar"></div>
+
+      <div class="nt nt-tl" style="margin-bottom:1.5rem;">
+        <span class="nl nl-tl">Miami-Dade County — Florida Specific</span>
+        <p>Florida has some of the highest closing costs in the nation due to documentary stamp taxes and intangible taxes on mortgages. These figures are calculated specifically for a ${fmt(p)} purchase in Miami-Dade County. ${tier < 3 ? 'Figures are estimates — confirm all amounts with your title company and lender before closing.' : 'Confirm all figures against your official Closing Disclosure document.'}</p>
+      </div>
+
+      <div class="cc-section">
+        <div class="cc-section-title">Government Taxes & Recording Fees</div>
+        <div class="cc-row"><div class="cc-item">Documentary Stamp Tax — Deed<span class="cc-note">$0.70 per $100 of purchase price — paid by seller in most FL transactions, verify in contract</span></div><div class="cc-val">${fmt(deedStamp)}</div></div>
+        <div class="cc-row"><div class="cc-item">Documentary Stamp Tax — Mortgage<span class="cc-note">$0.35 per $100 of loan amount — paid by buyer</span></div><div class="cc-val">${fmt(mortgageStamp)}</div></div>
+        <div class="cc-row"><div class="cc-item">Intangible Tax on Mortgage<span class="cc-note">$0.20 per $100 of loan amount — Florida specific</span></div><div class="cc-val">${fmt(intangibleTax)}</div></div>
+        <div class="cc-row"><div class="cc-item">Recording Fees<span class="cc-note">Miami-Dade Clerk of Courts — deed and mortgage recording</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
+        <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div>
+      </div>
+
+      <div class="cc-section">
+        <div class="cc-section-title">Title & Settlement Fees</div>
+        <div class="cc-row"><div class="cc-item">Title Search & Exam<span class="cc-note">Public records search for liens, judgments, encumbrances</span></div><div class="cc-val">${fmt(titleSearch)}</div></div>
+        <div class="cc-row"><div class="cc-item">Lender's Title Insurance<span class="cc-note">Required by lender — protects lender's interest in property</span></div><div class="cc-val">${fmt(titleInsLender)}</div></div>
+        <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended — protects your ownership interest permanently</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
+        <div class="cc-row"><div class="cc-item">Settlement / Closing Fee<span class="cc-note">Title company or attorney coordination fee</span></div><div class="cc-val">${fmt(settlementFee)}</div></div>
+        <div class="cc-total-row"><span class="cc-total-lbl">Title & Settlement Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div>
+      </div>
+
+      <div class="cc-section">
+        <div class="cc-section-title">Lender Fees</div>
+        <div class="cc-row"><div class="cc-item">Loan Origination Fee<span class="cc-note">0.50% of loan amount — negotiate with lender</span></div><div class="cc-val">${fmt(originationFee)}</div></div>
+        <div class="cc-row"><div class="cc-item">Appraisal Fee<span class="cc-note">Required by lender — independent property valuation</span></div><div class="cc-val">${fmt(appraisal)}</div></div>
+        <div class="cc-row"><div class="cc-item">Credit Report Fee<span class="cc-note">Tri-merge credit report from all three bureaus</span></div><div class="cc-val">${fmt(creditReport)}</div></div>
+        <div class="cc-row"><div class="cc-item">Flood Zone Certification<span class="cc-note">FEMA flood zone determination — required by lender</span></div><div class="cc-val">${fmt(floodCert)}</div></div>
+        <div class="cc-total-row"><span class="cc-total-lbl">Lender Fees Subtotal</span><span class="cc-total-val">${fmt(lenderTotal)}</span></div>
+      </div>
+
+      <div class="cc-section">
+        <div class="cc-section-title">Prepaids & Escrow Setup</div>
+        <div class="cc-row"><div class="cc-item">Prepaid Homeowners Insurance<span class="cc-note">First year premium paid at closing — lender requires proof of coverage</span></div><div class="cc-val">${fmt(prepaidInsurance)}</div></div>
+        <div class="cc-row"><div class="cc-item">Prepaid Mortgage Interest<span class="cc-note">Interest from closing date to end of month — approximately 15 days</span></div><div class="cc-val">${fmt(prepaidInterest)}</div></div>
+        <div class="cc-row"><div class="cc-item">Escrow Account Setup<span class="cc-note">2-month cushion for tax and insurance escrow — held by lender</span></div><div class="cc-val">${fmt(escrowSetup)}</div></div>
+        <div class="cc-total-row"><span class="cc-total-lbl">Prepaids & Escrow Subtotal</span><span class="cc-total-val">${fmt(prepaidTotal)}</span></div>
+      </div>
+
+      <div class="cash-consolidation">
+        <div class="cash-con-title">Total Cash Needed at Close</div>
+        <div class="cash-con-row"><span class="cash-con-lbl">Down Payment (${inp.dpct}%)</span><span class="cash-con-val">${fmt(inp.damt)}</span></div>
+        <div class="cash-con-row"><span class="cash-con-lbl">Total Closing Costs</span><span class="cash-con-val">${fmt(closingTotal)}</span></div>
+        <div class="cash-con-row"><span class="cash-con-lbl">3-Month Housing Reserve</span><span class="cash-con-val">${fmt(reserves3mo)}</span></div>
+        <div class="cash-con-grand">
+          <span class="cash-con-grand-lbl">Minimum Cash Needed</span>
+          <span class="cash-con-grand-val">${fmt(grandTotal)}</span>
+        </div>
+        <p style="font-size:.75rem;color:rgba(176,190,197,.8);margin-top:.75rem;line-height:1.6;">6-month reserve recommended: ${fmt(inp.damt + closingTotal + reserves6mo)}. Hurricane deductible exposure: ${fmt(p*.02)}–${fmt(p*.05)} additional. Have all three buckets funded before making an offer.</p>
+      </div>
+
+      <div style="text-align:center;margin:2rem 0 1rem;">
+        <button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button>
+      </div>
+    </div>
+  `;
+}
+
+// ══════════════════════════════════════
+// PRIORITY 3 — HOMESTEAD GUIDE
+// ══════════════════════════════════════
+function buildHomesteadGuide(inp) {
+  const closingDateEl = document.getElementById('hg-closing-date');
+  const closingDate = closingDateEl ? closingDateEl.value : '';
+  let deadlineHtml = '';
+
+  if (closingDate) {
+    const cd = new Date(closingDate);
+    const deadlineYear = cd.getMonth() >= 0 ? cd.getFullYear() + 1 : cd.getFullYear() + 1;
+    deadlineHtml = `
+      <div class="hg-deadline">
+        <span class="hg-dl-lbl">Your Filing Deadline</span>
+        <div class="hg-dl-date">March 1, ${deadlineYear}</div>
+        <div class="hg-dl-sub">Based on your expected closing. File immediately after closing — do not wait until the deadline.</div>
+      </div>
+    `;
+  } else {
+    deadlineHtml = `
+      <div class="hg-deadline">
+        <span class="hg-dl-lbl">Filing Deadline</span>
+        <div class="hg-dl-date">March 1 of the year after closing</div>
+        <div class="hg-dl-sub">Enter your expected closing date below for your specific deadline.</div>
+        <div style="margin-top:.75rem;">
+          <label style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--emerald-dim);display:block;margin-bottom:.3rem;">Expected Closing Date</label>
+          <input type="date" id="hg-closing-date" style="padding:.5rem .75rem;border:1.5px solid var(--emerald-muted);border-radius:6px;font-family:var(--fb);font-size:.9rem;color:var(--midnight);background:var(--white);" onchange="refreshHomesteadGuide()">
+        </div>
+      </div>
+    `;
+  }
+
+  const annualSavings = inp.ty1 * 12 - inp.ty2 * 12;
+
+  return `
+    <div class="cw">
+      <div class="ae em">Section V</div>
+      <h2 class="at2">Homestead Exemption Filing Guide</h2>
+      <div class="ar"></div>
+
+      <div class="nt nt-em" style="margin-bottom:1.5rem;">
+        <span class="nl nl-em">Annual Savings: ${fmt(annualSavings)}/year · ${fmt(inp.ty1 - inp.ty2)}/month</span>
+        <p>The Florida Homestead Exemption reduces your assessed value by $50,000, saving you ${fmt(inp.ty1 - inp.ty2)}/month on taxes from Year 2 onward. It also activates the Save Our Homes cap — limiting annual assessment increases to 3% regardless of market appreciation.</p>
+      </div>
+
+      ${deadlineHtml}
+
+      <h3 style="font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--midnight);margin:1.5rem 0 1rem;">Step-by-Step Filing Instructions</h3>
+
+      <div class="hg-step">
+        <div class="hg-num">1</div>
+        <div class="hg-content">
+          <div class="hg-title">Confirm eligibility immediately after closing</div>
+          <div class="hg-desc">You must own and occupy the property as your permanent primary residence as of January 1 of the tax year you are claiming. Florida law requires this to be your domicile — not an investment, vacation, or rental property. You cannot claim Homestead on more than one property.</div>
+        </div>
+      </div>
+
+      <div class="hg-step">
+        <div class="hg-num">2</div>
+        <div class="hg-content">
+          <div class="hg-title">Gather your documents</div>
+          <div class="hg-desc">You will need: Florida driver's license or ID showing the property address, Florida vehicle registration showing the property address, your recorded deed (available from Miami-Dade Clerk of Courts), and your Social Security number. If applicable: Declaration of Domicile, immigration documents, and prior year tax return.</div>
+        </div>
+      </div>
+
+      <div class="hg-step">
+        <div class="hg-num">3</div>
+        <div class="hg-content">
+          <div class="hg-title">File online at the Miami-Dade Property Appraiser portal</div>
+          <div class="hg-desc">The Miami-Dade Property Appraiser accepts online Homestead applications. The process takes approximately 15 minutes. You will create an account, locate your property by address or folio number, and complete the exemption application.</div>
+          <a href="https://www.miamidade.gov/Apps/PA/PAOnlineTools/homestead" target="_blank" class="hg-portal-btn" style="margin-top:.75rem;">↗ Open Miami-Dade Property Appraiser Portal</a>
+        </div>
+      </div>
+
+      <div class="hg-step">
+        <div class="hg-num">4</div>
+        <div class="hg-content">
+          <div class="hg-title">Confirm receipt and approval</div>
+          <div class="hg-desc">After filing you will receive a confirmation. The Property Appraiser typically processes applications within 30–60 days. You can verify your exemption status online. If approved, you will see the exemption reflected on your TRIM (Truth in Millage) notice mailed in August.</div>
+        </div>
+      </div>
+
+      <div class="hg-step">
+        <div class="hg-num">5</div>
+        <div class="hg-content">
+          <div class="hg-title">Notify your mortgage servicer</div>
+          <div class="hg-desc">Once your Homestead Exemption is approved and your tax bill is reduced, contact your mortgage servicer. Your escrow payment should be recalculated to reflect the lower tax obligation — this is how you actually see the ${fmt(inp.ty1 - inp.ty2)}/month savings in your monthly payment.</div>
+        </div>
+      </div>
+
+      <div class="nt nt-tl" style="margin-top:1rem;">
+        <span class="nl nl-tl">Save Our Homes — What It Means Long Term</span>
+        <p>Once Homestead is established, Florida's Save Our Homes Amendment caps annual increases in your assessed value at 3% or the CPI rate — whichever is lower. In a market where property values appreciate 5–10% annually, this protection compounds significantly over time. A buyer who stays in a home for 10 years can save tens of thousands in cumulative tax increases compared to an investor who doesn't qualify for the exemption.</p>
+      </div>
+
+      <div style="text-align:center;margin:2rem 0 1rem;">
+        <button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button>
+      </div>
+    </div>
+  `;
+}
+
+function refreshHomesteadGuide() {
+  const tab = document.getElementById('tab-hg');
+  if (tab && S.inp && S.inp.address) {
+    tab.innerHTML = buildHomesteadGuide(S.inp);
+  }
+}
+
+// ══════════════════════════════════════
+// PRIORITY 4 — SAVE & SHARE
+// ══════════════════════════════════════
+function shareAnalysis() {
+  const inp = S.inp;
+  if (!inp || !inp.address) return;
+
+  // Encode key inputs into URL params
+  const params = new URLSearchParams({
+    addr: inp.address,
+    price: inp.price,
+    dp: inp.dpct,
+    tier: inp.tier,
+    byr: inp.byr,
+    con: inp.con,
+    rtp: inp.rtp,
+    rage: inp.rage,
+    sht: inp.sht ? 1 : 0,
+    hoa: inp.hoa,
+    fld: inp.fld,
+    ilo: inp.ilo,
+    ihi: inp.ihi,
+    crd: inp.crd,
+    pri: inp.pri ? 1 : 0,
+    br: inp.br,
+    bi: inp.bi,
+    ic: inp.ic ? 1 : 0,
+    ix: inp.ix ? 1 : 0,
+  });
+
+  const shareURL = window.location.origin + window.location.pathname + '?' + params.toString();
+
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(shareURL).then(() => showToast());
+  } else {
+    // Fallback
+    const ta = document.createElement('textarea');
+    ta.value = shareURL;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast();
+  }
+}
+
+function showToast() {
+  const t = document.getElementById('share-toast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+function checkShareURL() {
+  const params = new URLSearchParams(window.location.search);
+  if (!params.get('addr')) return;
+
+  // Reconstruct inputs from URL
+  const inp = {
+    address: params.get('addr'),
+    price: parseFloat(params.get('price')) || 399000,
+    dpct: parseFloat(params.get('dp')) || 3,
+    tier: parseInt(params.get('tier')) || 1,
+    byr: parseInt(params.get('byr')) || 2000,
+    con: params.get('con') || 'cbs',
+    rtp: params.get('rtp') || 'asphalt',
+    rage: parseInt(params.get('rage')) || 10,
+    sht: params.get('sht') === '1',
+    hoa: parseFloat(params.get('hoa')) || 0,
+    fld: params.get('fld') || 'x',
+    ilo: parseFloat(params.get('ilo')) || 10000,
+    ihi: parseFloat(params.get('ihi')) || 13000,
+    crd: params.get('crd') || 'excellent',
+    pri: params.get('pri') === '1',
+    br: parseFloat(params.get('br')) || MKT.br,
+    wr: parseFloat(params.get('br')) || MKT.wr,
+    bi: parseFloat(params.get('bi')) || 0,
+    ic: params.get('ic') === '1',
+    ix: params.get('ix') === '1',
+  };
+
+  inp.damt = inp.price * inp.dpct / 100;
+  inp.loan = inp.price - inp.damt;
+  inp.bpi = cPI(inp.loan, inp.br);
+  inp.wpi = cPI(inp.loan, MKT.wr);
+  inp.ty1 = Math.round(inp.price * MKT.tr / 12);
+  inp.ty2 = Math.round((inp.price - MKT.he) * MKT.tr / 12);
+  inp.wi = inp.bi > 0 ? inp.bi * 1.35 : 0;
+  inp.il = inp.ic ? 'CONFIRMED' : inp.ix ? 'EXCLUDED' : 'ESTIMATED';
+  const [bp, wp] = cPMI(inp.loan, inp.crd);
+  inp.bp = inp.dpct < 20 ? bp : 0;
+  inp.wp = inp.dpct < 20 ? wp : 0;
+  inp.fb = inp.fld === 'ae' ? MKT.fab : MKT.fxb;
+  inp.fw = inp.fld === 'ae' ? MKT.faw : MKT.fxw;
+  inp.ep = inp.dpct < 20 ? Math.round(inp.loan * 0.002 / 12) : 0;
+  inp.bt = inp.bpi + (inp.pri ? inp.ty2 : inp.ty1) + inp.hoa + inp.bi + inp.bp + inp.fb;
+  inp.wt = inp.wpi + inp.ty1 + inp.hoa + inp.wi + inp.wp + inp.fw + inp.ep;
+  inp.pn = Math.round((inp.bt + inp.wt) / 2 / 50) * 50;
+
+  S.inp = inp;
+  S.tier = inp.tier;
+  bAnalysis(inp, false);
+  show('a');
+  setTimeout(updateUpgradeBtn, 150);
+}
+
+// ══════════════════════════════════════
+// PRIORITY 5 — COMPARISON MODE
+// ══════════════════════════════════════
+let S2 = {}; // Second property state
+
+function startComparison() {
+  // Save current analysis as Property 1
+  S2.prop1 = {...S.inp};
+  S2.comparingProp2 = true;
+  // Reset for Property 2 entry
+  S.tier = S.inp.tier;
+  S.ins = null;
+  procInputs();
+  setTimeout(() => {
+    // Update inputs screen title
+    const eyebrow = document.querySelector('.ge');
+    const stepLbl = document.getElementById('isl');
+    if (stepLbl) stepLbl.textContent = 'Comparison Mode — Property 2 Details';
+    // Add indicator banner
+    const gb = document.querySelector('#si .gb');
+    if (gb) {
+      const banner = document.createElement('div');
+      banner.className = 'nt nt-indigo';
+      banner.style.marginBottom = '1rem';
+      banner.innerHTML = '<span class="nl nl-in">Comparison Mode — Property 2</span><p>Enter the details for the second property you want to compare. Your first property analysis is saved.</p>';
+      gb.insertBefore(banner, gb.firstChild);
+    }
+  }, 100);
+}
+
+function buildComparison(p1, p2) {
+  const tl = {1:'Tier 1',2:'Tier 2',3:'Tier 3'}[p1.tier];
+
+  // Head to head comparison
+  const rows = [
+    ['Purchase Price', fmt(p1.price), fmt(p2.price)],
+    ['Loan Amount', fmt(p1.loan), fmt(p2.loan)],
+    ['Down Payment', fmt(p1.damt), fmt(p2.damt)],
+    ['Best Rate', fmtR(p1.br), fmtR(p2.br)],
+    ['Best P&I', fmt(p1.bpi), fmt(p2.bpi)],
+    ['Worst P&I', fmt(p1.wpi), fmt(p2.wpi)],
+    ['HOA', fmt(p1.hoa), fmt(p2.hoa)],
+    ['Tax Yr 1', fmt(p1.ty1), fmt(p2.ty1)],
+    ['Tax Yr 2+', fmt(p1.ty2), fmt(p2.ty2)],
+    ['Insurance', p1.ix?'Excl':fmt(p1.bi), p2.ix?'Excl':fmt(p2.bi)],
+    ['PMI', fmt(p1.bp), fmt(p2.bp)],
+    ['Flood', fmt(p1.fb), fmt(p2.fb)],
+    ['Best Case Total', fmt(p1.bt), fmt(p2.bt)],
+    ['Worst Case Total', fmt(p1.wt), fmt(p2.wt)],
+    ['Planning Target', fmt(p1.pn), fmt(p2.pn)],
+  ];
+
+  const winner = p1.pn <= p2.pn ? 1 : 2;
+  const diff = Math.abs(p1.pn - p2.pn);
+
+  const tableRows = rows.map((r, i) => {
+    const isBold = r[0].includes('Total') || r[0].includes('Target');
+    const v1Num = parseFloat(r[1].replace(/[$,]/g,'')) || 0;
+    const v2Num = parseFloat(r[2].replace(/[$,]/g,'')) || 0;
+    const w = v1Num <= v2Num ? 1 : 2;
+    return `<tr class="${isBold ? (w===1?'winner-1':'winner-2') : ''}">
+      <td class="rl"${isBold?' style="font-weight:600;"':''}>${r[0]}</td>
+      <td style="color:var(--teal-dim);font-weight:${isBold?'700':'400'};">${r[1]}</td>
+      <td style="color:var(--indigo-dim);font-weight:${isBold?'700':'400'};">${r[2]}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('cmp-masthead').innerHTML = `
+    <div class="mh">
+      <div class="mh-tag">HomeTrue · Comparison Mode</div>
+      <h1 style="font-size:clamp(1.2rem,2.5vw,1.8rem);">Home<span class="tr">True</span></h1>
+      <div class="mh-rule"></div>
+      <div class="mh-sub">Side-by-side analysis · Miami-Dade County · ${tl}</div>
+    </div>
+  `;
+
+  document.getElementById('cmp-content').innerHTML = `
+    <!-- HEAD TO HEAD -->
+    <div id="cmp-c" class="as v">
+      <div class="cw">
+        <div class="ae tl">Head to Head</div>
+        <h2 class="at2">Property Comparison</h2>
+        <div class="ar"></div>
+
+        <div class="comp-prop-grid">
+          <div class="comp-prop-card comp-p1">
+            <div class="comp-prop-header comp-p1-header">
+              <span class="comp-prop-lbl">Property 1 — Teal</span>
+              <span style="font-family:var(--fm);font-size:.6rem;color:var(--teal-dim);">${fmt(p1.price)}</span>
+            </div>
+            <div style="padding:.85rem 1.1rem;font-size:.85rem;color:var(--midnight);font-weight:500;">${p1.address}</div>
+          </div>
+          <div class="comp-prop-card comp-p2">
+            <div class="comp-prop-header comp-p2-header">
+              <span class="comp-prop-lbl">Property 2 — Indigo</span>
+              <span style="font-family:var(--fm);font-size:.6rem;color:var(--indigo-dim);">${fmt(p2.price)}</span>
+            </div>
+            <div style="padding:.85rem 1.1rem;font-size:.85rem;color:var(--midnight);font-weight:500;">${p2.address}</div>
+          </div>
+        </div>
+
+        <div class="${winner===1?'comp-verdict comp-v1':'comp-verdict comp-v2'}">
+          <span class="comp-verdict-lbl">Planning Target Advantage</span>
+          <div class="comp-verdict-title">Property ${winner} is ${fmt(diff)}/month lower</div>
+          <div class="comp-verdict-desc">${winner===1?p1.address:p2.address} has a lower planning target by ${fmt(diff)}/month — ${fmt(diff*12)}/year — ${fmt(diff*360)} over 30 years. This is based on planning targets. Review best and worst case tabs for full picture.</div>
+        </div>
+
+        <table class="comp-vs-table">
+          <thead><tr><th>Component</th><th>Property 1</th><th>Property 2</th></tr></thead>
+          <tbody>${tableRows}</tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- BEST CASES -->
+    <div id="cmp-b" class="as">
+      <div class="cw">
+        <div class="ae em">Best Cases Side by Side</div>
+        <h2 class="at2">Best Case Comparison</h2>
+        <div class="ar"></div>
+        <div class="scenario-cards">
+          <div class="sc scb">
+            <span class="scl">Property 1 — Best Case</span>
+            <div class="sct">${fmt(p1.bt)}<span style="font-size:1rem;">/mo</span></div>
+            <div class="scs2">${p1.address.substring(0,35)}...</div>
+            <span class="scr">${fmtR(p1.br)} · ${fmt(p1.price)}</span>
+          </div>
+          <div class="sc scb" style="opacity:.75;">
+            <span class="scl">Property 2 — Best Case</span>
+            <div class="sct">${fmt(p2.bt)}<span style="font-size:1rem;">/mo</span></div>
+            <div class="scs2">${p2.address.substring(0,35)}...</div>
+            <span class="scr">${fmtR(p2.br)} · ${fmt(p2.price)}</span>
+          </div>
+        </div>
+        <div class="delta-banner">
+          <div class="di"><span class="dn2">${fmt(Math.abs(p1.bt-p2.bt))}</span><span class="dl">Monthly Difference</span></div>
+          <div class="di"><span class="dn2">${fmt(Math.abs(p1.bt-p2.bt)*12)}</span><span class="dl">Annual Difference</span></div>
+          <div class="di"><span class="dn2">P${p1.bt<=p2.bt?1:2}</span><span class="dl">Lower Best Case</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WORST CASES -->
+    <div id="cmp-w" class="as">
+      <div class="cw">
+        <div class="ae in">Worst Cases Side by Side</div>
+        <h2 class="at2">Worst Case Comparison</h2>
+        <div class="ar"></div>
+        <div class="scenario-cards">
+          <div class="sc scw">
+            <span class="scl">Property 1 — Worst Case</span>
+            <div class="sct">${fmt(p1.wt)}<span style="font-size:1rem;">/mo</span></div>
+            <div class="scs2">${p1.address.substring(0,35)}...</div>
+            <span class="scr">${fmtR(p1.wr)} · Year 1</span>
+          </div>
+          <div class="sc scw" style="opacity:.75;">
+            <span class="scl">Property 2 — Worst Case</span>
+            <div class="sct">${fmt(p2.wt)}<span style="font-size:1rem;">/mo</span></div>
+            <div class="scs2">${p2.address.substring(0,35)}...</div>
+            <span class="scr">${fmtR(p2.wr)} · Year 1</span>
+          </div>
+        </div>
+        <div class="delta-banner">
+          <div class="di"><span class="dn2">${fmt(Math.abs(p1.wt-p2.wt))}</span><span class="dl">Monthly Difference</span></div>
+          <div class="di"><span class="dn2">${fmt(Math.abs(p1.wt-p2.wt)*12)}</span><span class="dl">Annual Difference</span></div>
+          <div class="di"><span class="dn2">P${p1.wt<=p2.wt?1:2}</span><span class="dl">Lower Worst Case</span></div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('cmp-footer').innerHTML = `
+    HomeTrue · Comparison Mode · Miami-Dade County Only · Rate verified ${MKT.rv}<br>
+    This analysis is an educational tool. Not financial, legal, or real estate advice.
+  `;
+
+  show('cmp');
+}
+
+function showCmpTab(t, btn) {
+  document.querySelectorAll('#scmp .as').forEach(s => s.classList.remove('v'));
+  const el = document.getElementById('cmp-' + t);
+  if (el) el.classList.add('v');
+  document.querySelectorAll('#scmp .at').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function downloadCompPDF() {
+  if (!S2.prop1 || !S.inp) return;
+  alert('Comparison PDF — downloading individual property PDFs. Use the Share button to save this comparison URL.');
+  downloadPDF();
+}
+
 function showTab(t,btn){
-  document.querySelectorAll('#sa .as').forEach(s=>s.classList.remove('v'));
-  const el=document.getElementById(t==='c'?'tc':t==='b'?'tb2':'tw');if(el)el.classList.add('v');
+  // Hide all standard analysis sections
+  document.querySelectorAll('#sa .as').forEach(s=>{s.classList.remove('v');s.style.display='none';});
+  // Also hide cc and hg tabs
+  const ccTab=document.getElementById('tab-cc');
+  const hgTab=document.getElementById('tab-hg');
+  if(ccTab) ccTab.style.display='none';
+  if(hgTab) hgTab.style.display='none';
+
+  // Show correct tab
+  if(t==='cc'){
+    if(ccTab){ccTab.style.display='block';}
+  } else if(t==='hg'){
+    if(hgTab){hgTab.style.display='block';}
+  } else {
+    const id=t==='c'?'tc':t==='b'?'tb2':'tw';
+    const el=document.getElementById(id);
+    if(el){el.classList.add('v');el.style.display='block';}
+  }
   document.querySelectorAll('.an .at').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
