@@ -381,12 +381,21 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .state-toggle.active-nc{background:var(--nc);border-color:var(--nc);color:var(--white);}
 .state-toggle.active-ga{background:var(--georgia);border-color:var(--georgia);color:var(--white);}
 .state-toggle:hover:not(.active-fl):not(.active-tx):not(.active-nc):not(.active-ga){border-color:rgba(176,190,197,.6);color:rgba(176,190,197,.9);}
-/* Georgia-colored pills */
-.county-pill.ga{border-color:rgba(139,30,45,.4);color:rgba(139,30,45,.7);}
-.county-pill.ga:hover{border-color:var(--georgia-mid);color:var(--georgia-mid);}
+/* State toggle hint colors — unselected states show a tint of their identity color */
+.state-toggle.hint-ga{border-color:rgba(139,30,45,.45);color:rgba(180,100,110,.9);}
+.state-toggle.hint-tx{border-color:rgba(163,71,25,.45);color:rgba(194,110,60,.9);}
+.state-toggle.hint-nc{border-color:rgba(58,90,120,.45);color:rgba(100,140,170,.9);}
+.state-toggle.hint-fl{border-color:rgba(0,131,143,.45);color:rgba(0,160,175,.9);}
+.state-toggle.hint-ga:hover{border-color:var(--georgia-mid);color:var(--georgia-mid);}
+.state-toggle.hint-tx:hover{border-color:var(--texas-mid);color:var(--texas-mid);}
+.state-toggle.hint-nc:hover{border-color:var(--nc-mid);color:var(--nc-mid);}
+.state-toggle.hint-fl:hover{border-color:var(--teal-mid);color:var(--teal-mid);}
+/* Georgia pills — stronger contrast when unselected */
+.county-pill.ga{border-color:rgba(139,30,45,.55);color:rgba(200,120,130,.95);}
+.county-pill.ga:hover{border-color:var(--georgia-mid);color:var(--white);background:rgba(139,30,45,.25);}
 .county-pill.ga.active{background:var(--georgia);border-color:var(--georgia);color:var(--white);}
-.county-pill.ga.yr3{border-style:dashed;opacity:.7;}
-.county-pill.ga.yr3.active{border-style:solid;opacity:1;}
+.county-pill.ga.yr3{border-style:dashed;}
+.county-pill.ga.yr3.active{border-style:solid;}
 /* Texas-colored pills */
 .county-pill.tx{border-color:rgba(163,71,25,.4);color:rgba(163,71,25,.7);}
 .county-pill.tx:hover{border-color:var(--texas-mid);color:var(--texas-mid);}
@@ -607,51 +616,55 @@ footer strong{color:rgba(220,232,235,1.0);}
   </div>
   <div class="vs" id="avs">Rate verified:<span>Friday, April 25, 2026 · 11:52 AM ET</span>&nbsp;·&nbsp;County:<span class="active-county-short">Miami-Dade</span>&nbsp;·&nbsp;Tax:<span>1.30%</span>&nbsp;·&nbsp;Source:<span>Freddie Mac PMMS</span></div>
   <div class="county-selector-wrap">
-    <div class="county-selector-inner">
-      <span class="county-sel-lbl">Market</span>
-      <div class="state-toggles">
-        <button class="state-toggle active-fl" id="st-fl" onclick="selectState('fl',this)">Florida</button>
-        <button class="state-toggle" id="st-ga" onclick="selectState('ga',this)">Georgia</button>
-        <button class="state-toggle" id="st-tx" onclick="selectState('tx',this)">Texas</button>
-        <button class="state-toggle" id="st-nc" onclick="selectState('nc',this)">North Carolina</button>
+    <div class="county-selector-inner" style="flex-direction:column;align-items:flex-start;gap:.6rem;">
+      <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;">
+        <span class="county-sel-lbl">Market</span>
+        <div class="state-toggles">
+          <button class="state-toggle active-fl" id="st-fl" onclick="selectState('fl',this)">Florida</button>
+          <button class="state-toggle hint-ga" id="st-ga" onclick="selectState('ga',this)">Georgia</button>
+          <button class="state-toggle hint-tx" id="st-tx" onclick="selectState('tx',this)">Texas</button>
+          <button class="state-toggle hint-nc" id="st-nc" onclick="selectState('nc',this)">North Carolina</button>
+        </div>
       </div>
-      <span class="county-sel-lbl" style="margin-left:.75rem;">Select County</span>
-      <div class="county-pills" id="pills-fl">
-        <button class="county-pill active" onclick="selectCounty('miami-dade',this)">Miami-Dade</button>
-        <button class="county-pill" onclick="selectCounty('broward',this)">Broward</button>
-        <button class="county-pill" onclick="selectCounty('palm-beach',this)">Palm Beach</button>
-        <button class="county-pill yr3" onclick="selectCounty('martin',this)">Martin</button>
-        <button class="county-pill yr3" onclick="selectCounty('st-lucie',this)">St. Lucie</button>
-        <button class="county-pill yr3" onclick="selectCounty('indian-river',this)">Indian River</button>
-        <button class="county-pill yr3" onclick="selectCounty('brevard',this)">Brevard</button>
+      <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;width:100%;">
+        <span class="county-sel-lbl">Select County</span>
+        <div class="county-pills" id="pills-fl">
+          <button class="county-pill active" onclick="selectCounty('miami-dade',this)">Miami-Dade</button>
+          <button class="county-pill" onclick="selectCounty('broward',this)">Broward</button>
+          <button class="county-pill" onclick="selectCounty('palm-beach',this)">Palm Beach</button>
+          <button class="county-pill yr3" onclick="selectCounty('martin',this)">Martin</button>
+          <button class="county-pill yr3" onclick="selectCounty('st-lucie',this)">St. Lucie</button>
+          <button class="county-pill yr3" onclick="selectCounty('indian-river',this)">Indian River</button>
+          <button class="county-pill yr3" onclick="selectCounty('brevard',this)">Brevard</button>
+        </div>
+        <div class="county-pills" id="pills-ga" style="display:none;">
+          <button class="county-pill ga" onclick="selectCounty('fulton',this)">Fulton</button>
+          <button class="county-pill ga" onclick="selectCounty('dekalb',this)">DeKalb</button>
+          <button class="county-pill ga" onclick="selectCounty('gwinnett',this)">Gwinnett</button>
+          <button class="county-pill ga" onclick="selectCounty('cobb',this)">Cobb</button>
+          <button class="county-pill ga" onclick="selectCounty('cherokee',this)">Cherokee</button>
+          <button class="county-pill ga" onclick="selectCounty('forsyth',this)">Forsyth</button>
+          <button class="county-pill ga" onclick="selectCounty('clayton',this)">Clayton</button>
+          <button class="county-pill ga" onclick="selectCounty('hall',this)">Hall</button>
+          <button class="county-pill ga" onclick="selectCounty('dawson',this)">Dawson</button>
+          <button class="county-pill ga" onclick="selectCounty('paulding',this)">Paulding</button>
+          <button class="county-pill ga yr3" onclick="selectCounty('pickens',this)">Pickens*</button>
+          <button class="county-pill ga yr3" onclick="selectCounty('lumpkin',this)">Lumpkin*</button>
+          <button class="county-pill ga" onclick="selectCounty('richmond',this)">Richmond</button>
+          <button class="county-pill ga" onclick="selectCounty('columbia',this)">Columbia</button>
+        </div>
+        <div class="county-pills" id="pills-tx" style="display:none;">
+          <button class="county-pill tx" onclick="selectCounty('harris',this)">Harris (Houston)</button>
+          <button class="county-pill tx" onclick="selectCounty('dallas',this)">Dallas</button>
+          <button class="county-pill tx" onclick="selectCounty('travis',this)">Travis (Austin)</button>
+          <button class="county-pill tx" onclick="selectCounty('bexar',this)">Bexar (San Antonio)</button>
+        </div>
+        <div class="county-pills" id="pills-nc" style="display:none;">
+          <button class="county-pill nc" onclick="selectCounty('mecklenburg',this)">Mecklenburg (Charlotte)</button>
+          <button class="county-pill nc" onclick="selectCounty('wake',this)">Wake (Raleigh)</button>
+        </div>
+        <span class="county-note" id="state-legend">Dashed = Year 3 expansion</span>
       </div>
-      <div class="county-pills" id="pills-ga" style="display:none;">
-        <button class="county-pill ga" onclick="selectCounty('fulton',this)">Fulton</button>
-        <button class="county-pill ga" onclick="selectCounty('dekalb',this)">DeKalb</button>
-        <button class="county-pill ga" onclick="selectCounty('gwinnett',this)">Gwinnett</button>
-        <button class="county-pill ga" onclick="selectCounty('cobb',this)">Cobb</button>
-        <button class="county-pill ga" onclick="selectCounty('cherokee',this)">Cherokee</button>
-        <button class="county-pill ga" onclick="selectCounty('forsyth',this)">Forsyth</button>
-        <button class="county-pill ga" onclick="selectCounty('clayton',this)">Clayton</button>
-        <button class="county-pill ga" onclick="selectCounty('hall',this)">Hall</button>
-        <button class="county-pill ga" onclick="selectCounty('dawson',this)">Dawson</button>
-        <button class="county-pill ga" onclick="selectCounty('paulding',this)">Paulding</button>
-        <button class="county-pill ga yr3" onclick="selectCounty('pickens',this)">Pickens*</button>
-        <button class="county-pill ga yr3" onclick="selectCounty('lumpkin',this)">Lumpkin*</button>
-        <button class="county-pill ga" onclick="selectCounty('richmond',this)">Richmond</button>
-        <button class="county-pill ga" onclick="selectCounty('columbia',this)">Columbia</button>
-      </div>
-      <div class="county-pills" id="pills-tx" style="display:none;">
-        <button class="county-pill tx" onclick="selectCounty('harris',this)">Harris (Houston)</button>
-        <button class="county-pill tx" onclick="selectCounty('dallas',this)">Dallas</button>
-        <button class="county-pill tx" onclick="selectCounty('travis',this)">Travis (Austin)</button>
-        <button class="county-pill tx" onclick="selectCounty('bexar',this)">Bexar (San Antonio)</button>
-      </div>
-      <div class="county-pills" id="pills-nc" style="display:none;">
-        <button class="county-pill nc" onclick="selectCounty('mecklenburg',this)">Mecklenburg (Charlotte)</button>
-        <button class="county-pill nc" onclick="selectCounty('wake',this)">Wake (Raleigh)</button>
-      </div>
-      <span class="county-note" id="state-legend">Dashed = Year 3 expansion</span>
     </div>
   </div>
   <div class="county-selector-wrap" id="county-note-bar" style="display:none;padding:.6rem 1.5rem;">
@@ -1726,11 +1739,18 @@ let ACTIVE_STATE = 'fl';
 
 function selectState(state, btn) {
   ACTIVE_STATE = state;
-  // Update state toggle buttons
-  document.querySelectorAll('.state-toggle').forEach(b => {
-    b.classList.remove('active-fl','active-tx','active-nc','active-ga');
+  // Reset all toggles to their hint colors, then activate selected
+  const toggleMap = {fl:'st-fl', ga:'st-ga', tx:'st-tx', nc:'st-nc'};
+  Object.entries(toggleMap).forEach(([s, id]) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.remove('active-fl','active-ga','active-tx','active-nc','hint-fl','hint-ga','hint-tx','hint-nc');
+    if (s === state) {
+      el.classList.add('active-' + state);
+    } else {
+      el.classList.add('hint-' + s);
+    }
   });
-  if(btn) btn.classList.add('active-' + state);
   // Show/hide county pill groups
   document.getElementById('pills-fl').style.display = state==='fl' ? 'flex' : 'none';
   document.getElementById('pills-ga').style.display = state==='ga' ? 'flex' : 'none';
