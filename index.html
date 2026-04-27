@@ -813,6 +813,8 @@ footer strong{color:rgba(220,232,235,1.0);}
         <button class="county-pill ga-county" onclick="selectCounty('paulding-ga',this)">Paulding</button>
         <button class="county-pill ga-county flag" onclick="selectCounty('pickens-ga',this)">Pickens*</button>
         <button class="county-pill ga-county flag" onclick="selectCounty('lumpkin-ga',this)">Lumpkin*</button>
+        <button class="county-pill ga-county" onclick="selectCounty('richmond-ga',this)">Richmond</button>
+        <button class="county-pill ga-county" onclick="selectCounty('columbia-ga',this)">Columbia</button>
       </div>
       <span class="county-note" id="fl-county-note">Dashed = Year 3 expansion</span>
       <span class="county-note" id="ga-county-note" style="display:none;">*HE amount pending final verification</span>
@@ -1592,6 +1594,25 @@ const COUNTIES = {
     paUrl:'https://www.lumpkincounty.gov/tax_assessor',
     paName:'Lumpkin County Tax Assessor',
     notes:'Dahlonega. Mountain county. 0.65% effective rate. HE amount pending Giselle verification at county assessor. Apply by April 1.',
+    state:'ga'
+  },
+  // ── AUGUSTA MARKET — Richmond & Columbia Counties ──
+  'richmond-ga': {
+    name:'Richmond County', short:'Richmond',
+    tr:0.0084, he:2000,
+    fxb:40, fxw:60, fab:80, faw:120,
+    paUrl:'https://www.augustaga.gov/1187/Tax-Commissioner',
+    paName:'Augusta-Richmond County Tax Commissioner',
+    notes:'Augusta consolidated city-county government. Augusta urban core. 0.84% effective rate. Apply for homestead exemption by April 1.',
+    state:'ga'
+  },
+  'columbia-ga': {
+    name:'Columbia County', short:'Columbia',
+    tr:0.0082, he:2000,
+    fxb:40, fxw:60, fab:80, faw:120,
+    paUrl:'https://www.columbiacountytax.com',
+    paName:'Columbia County Tax Commissioner',
+    notes:'Evans and Martinez primary communities. Fast-growing Augusta suburb. Tax bills due November 15 — earlier than most Georgia counties. HE amount pending Giselle verification — HB784 may have increased HE to $8,000 effective January 1, 2026. Verify before January 1, 2027 launch. Apply by April 1.',
     state:'ga'
   },
 };
