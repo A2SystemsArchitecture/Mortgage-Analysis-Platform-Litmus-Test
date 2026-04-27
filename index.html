@@ -355,6 +355,41 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .dl-btn{display:inline-flex;align-items:center;gap:.4rem;padding:.55rem 1.1rem;background:var(--emerald);color:var(--white);border:none;border-radius:6px;font-family:var(--fb);font-size:.78rem;font-weight:500;cursor:pointer;transition:all .2s;}
 .dl-btn:hover{background:var(--emerald-dim);transform:translateY(-1px);box-shadow:0 4px 12px rgba(46,125,82,.3);}
 .dl-btn-outline{background:transparent;color:var(--emerald);border:1.5px solid var(--emerald);}
+
+/* ── PRICING TIERS ── */
+.email-gate{background:var(--white);border:1.5px solid var(--rule);border-radius:10px;padding:1.75rem;margin:1.5rem 0;}
+.email-gate-title{font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--midnight);margin-bottom:.4rem;}
+.email-gate-sub{font-size:.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;}
+.email-input-row{display:flex;gap:.75rem;flex-wrap:wrap;}
+.email-input-row input{flex:1;min-width:200px;}
+.email-legal{font-size:.68rem;color:var(--muted);margin-top:.5rem;line-height:1.5;}
+
+.locked-tab{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:400px;padding:3rem 1.5rem;text-align:center;}
+.locked-card{background:var(--white);border:1.5px solid var(--rule);border-radius:12px;padding:2rem 2.5rem;max-width:480px;width:100%;}
+.locked-icon{font-size:2rem;margin-bottom:1rem;}
+.locked-tier-badge{display:inline-flex;align-items:center;padding:.3rem .9rem;border-radius:20px;font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem;}
+.locked-tier-badge.ess{background:var(--teal-light);color:var(--teal-dim);border:1px solid var(--teal-muted);}
+.locked-tier-badge.comp{background:var(--indigo-light);color:var(--indigo-dim);border:1px solid var(--indigo-muted);}
+.locked-title{font-family:var(--fd);font-size:1.3rem;font-weight:700;color:var(--midnight);margin-bottom:.5rem;}
+.locked-desc{font-size:.85rem;color:var(--muted);line-height:1.65;margin-bottom:1.25rem;}
+.locked-features{text-align:left;background:var(--slate-bg);border-radius:8px;padding:1rem 1.25rem;margin-bottom:1.25rem;}
+.locked-feature{display:flex;gap:.5rem;font-size:.82rem;color:var(--ink);margin-bottom:.35rem;line-height:1.5;}
+.locked-feature::before{content:"✓";color:var(--emerald);font-weight:700;flex-shrink:0;}
+.locked-upgrade-btn{width:100%;padding:.85rem;border:none;border-radius:8px;font-family:var(--fb);font-size:.9rem;font-weight:600;cursor:pointer;transition:all .2s;margin-bottom:.5rem;}
+.locked-upgrade-btn.ess-btn{background:var(--teal);color:var(--white);}
+.locked-upgrade-btn.ess-btn:hover{background:var(--teal-dim);transform:translateY(-1px);}
+.locked-upgrade-btn.comp-btn{background:var(--indigo);color:var(--white);}
+.locked-upgrade-btn.comp-btn:hover{background:var(--indigo-dim);transform:translateY(-1px);}
+.locked-note{font-size:.72rem;color:var(--muted);line-height:1.5;}
+
+.tier-ribbon{position:fixed;bottom:0;left:0;right:0;background:var(--midnight);padding:.6rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;z-index:200;border-top:1px solid rgba(176,190,197,.1);}
+.tier-ribbon-info{font-family:var(--fm);font-size:.6rem;letter-spacing:.08em;color:rgba(176,190,197,.7);}
+.tier-ribbon-info span{color:var(--teal-mid);font-weight:500;}
+.tier-ribbon-btns{display:flex;gap:.5rem;}
+.tier-ribbon-btn{padding:.35rem .85rem;border-radius:4px;font-family:var(--fm);font-size:.58rem;letter-spacing:.08em;cursor:pointer;border:none;transition:all .2s;}
+.trb-ess{background:var(--teal);color:var(--white);}
+.trb-comp{background:var(--indigo);color:var(--white);}
+.trb-free{background:transparent;color:rgba(176,190,197,.6);border:1px solid rgba(176,190,197,.2);}
 /* ── RATE CONTEXT BOX ── */
 .rcb{background:var(--midnight);border-radius:10px;padding:1.5rem 1.75rem;margin:1.5rem 0;position:relative;overflow:hidden;}
 .rcb::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 50%,rgba(0,151,167,.12),transparent 60%);}
@@ -539,13 +574,26 @@ footer strong{color:rgba(220,232,235,1.0);}
       <p style="color:var(--muted);margin-bottom:2rem;font-size:.95rem;line-height:1.75;">This tool gives you an honest, unbiased analysis of the full monthly cost of buying a home — best case and worst case — before you commit to anything. No realtor pressure. No broker estimates designed to look manageable.</p>
       <div class="wcs" style="grid-template-columns:1fr 1fr;">
         <div class="wc dm" onclick="startDemo()"><span class="wct">Option A</span><span class="wcn">See a Demo First</span><p class="wcd">Walk through a completed analysis on a sample property before entering your own.</p></div>
-        <div class="wc st" onclick="startG1()"><span class="wct">Option B</span><span class="wcn">Analyze My Property</span><p class="wcd">Go straight to your analysis. Review terms, enter your property, receive your results.</p></div>
+        <div class="wc st" onclick="startG1()"><span class="wct">Option B — Free</span><span class="wcn">Analyze My Property</span><p class="wcd">One free Tier 1 Pre-Offer analysis. No credit card required. Enter your email to begin.</p></div>
       </div>
       <div class="aff-card" onclick="show('aff')" style="margin-bottom:1.25rem;">
         <span style="font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal-mid);margin-bottom:.5rem;display:block;">Option C</span>
         <span style="font-family:var(--fd);font-size:1.15rem;font-weight:700;color:var(--midnight);display:block;margin-bottom:.4rem;">What Can I Afford?</span>
         <p style="font-size:.82rem;color:var(--muted);line-height:1.55;">Not sure what price range to target? Enter your income, savings, and credit score. HomeTrue tells you your realistic purchase range before you start shopping.</p>
       </div>
+      <!-- EMAIL GATE — appears when free tier selected -->
+      <div id="email-gate-wrap" style="display:none;margin-bottom:1.25rem;">
+        <div class="email-gate">
+          <div class="email-gate-title">Enter your email to access your free analysis</div>
+          <div class="email-gate-sub">One Tier 1 Pre-Offer analysis — no credit card required.</div>
+          <div class="email-input-row">
+            <input type="email" id="free-email-input" placeholder="your@email.com" style="font-size:.9rem;">
+            <button class="btn btn-tl" onclick="captureEmail()">Continue →</button>
+          </div>
+          <div class="email-legal">By continuing you agree to receive occasional emails from HomeTrue. Unsubscribe anytime.</div>
+        </div>
+      </div>
+
       <div class="aff-card" onclick="show('ql')" style="margin-bottom:1.25rem;border-top-color:var(--indigo);" onmouseover="this.style.boxShadow='0 10px 30px rgba(69,39,160,.15)'" onmouseout="this.style.boxShadow=''">
         <span style="font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--indigo-mid);margin-bottom:.5rem;display:block;">Option D</span>
         <span style="font-family:var(--fd);font-size:1.15rem;font-weight:700;color:var(--midnight);display:block;margin-bottom:.4rem;">Prepare for Your Meetings</span>
@@ -876,8 +924,8 @@ footer strong{color:rgba(220,232,235,1.0);}
       <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.5rem;">Select the tier that matches your current stage.</p>
       <div class="tcs">
         <div class="tc" id="tc1" onclick="selTier(1)"><div class="tck">✓</div><span class="tn">Tier 1</span><span class="tna">Pre-Offer</span><span class="ta">85–90% Accuracy</span><p class="td">Still evaluating. Haven't made an offer. Insurance excluded with full caveat.</p></div>
-        <div class="tc" id="tc2" onclick="selTier(2)"><div class="tck">✓</div><span class="tn">Tier 2</span><span class="tna">Active Offer</span><span class="ta">92–95% Accuracy</span><p class="td">Offer in or imminent. Insurance: confirmed quote or acknowledged estimate.</p></div>
-        <div class="tc" id="tc3" onclick="selTier(3)"><div class="tck">✓</div><span class="tn">Tier 3</span><span class="tna">Under Contract</span><span class="ta">95–98% Accuracy</span><p class="td">Contract signed. All inputs confirmed — rate lock and insurance quote required.</p></div>
+        <div class="tc" id="tc2" onclick="selTier(2)"><div class="tck">✓</div><span class="tn">Tier 2</span><span class="tna">Active Offer</span><span class="ta">92–95% Accuracy</span><p class="td">Offer in or imminent. Insurance: confirmed quote or acknowledged estimate.</p><div id="tc2-lock" style="display:none;font-family:var(--fm);font-size:.55rem;color:var(--teal-dim);margin-top:.5rem;padding:.25rem .5rem;background:var(--teal-light);border-radius:4px;">🔒 Essentials — $19/mo</div></div>
+        <div class="tc" id="tc3" onclick="selTier(3)"><div class="tck">✓</div><span class="tn">Tier 3</span><span class="tna">Under Contract</span><span class="ta">95–98% Accuracy</span><p class="td">Contract signed. All inputs confirmed — rate lock and insurance quote required.</p><div id="tc3-lock" style="display:none;font-family:var(--fm);font-size:.55rem;color:var(--indigo-dim);margin-top:.5rem;padding:.25rem .5rem;background:var(--indigo-light);border-radius:4px;">🔒 Complete — $29/mo</div></div>
       </div>
       <button class="btn btn-fw btn-mn" id="tb" disabled onclick="procInputs()" style="margin-top:1rem;">Continue with Selected Tier</button>
     </div>
@@ -1051,6 +1099,14 @@ footer strong{color:rgba(220,232,235,1.0);}
 <div id="sa" class="screen">
   <div id="amh"></div>
   <div class="vs" id="avs">Rate verified:<span>Friday, April 25, 2026 · 11:52 AM ET</span>&nbsp;·&nbsp;Tax:<span>April 2026</span>&nbsp;·&nbsp;Flood:<span>April 2026</span></div>
+  <!-- TIER RIBBON -->
+  <div class="tier-ribbon" id="tier-ribbon" style="display:none;">
+    <div class="tier-ribbon-info">Current plan: <span id="ribbon-plan-name">Free</span></div>
+    <div class="tier-ribbon-btns">
+      <div class="tier-ribbon-btn trb-ess" onclick="showUpgradeFlow('essentials')">Essentials $19/mo</div>
+      <div class="tier-ribbon-btn trb-comp" onclick="showUpgradeFlow('complete')">Complete $29/mo</div>
+    </div>
+  </div>
   <nav class="an">
     <div class="ats">
       <button class="at atc active" onclick="showTab('c',this)">§ Comparison & Rate Context</button>
@@ -1091,6 +1147,85 @@ footer strong{color:rgba(220,232,235,1.0);}
 
 <script>
 const MKT={rv:"Friday, April 25, 2026 · 11:52 AM ET",ov:"April 2026",fm:6.23,br:6.00,wr:6.75,tr:0.013,he:50000,fxb:42,fxw:85,fab:150,faw:400};
+
+// ── SUBSCRIPTION TIER STATE ──
+// 'free' | 'essentials' | 'complete'
+// TEST PHASE: set to 'complete' for full access
+// Production: driven by authentication layer (Memberstack/Outseta)
+let PLAN = { tier:'complete', email:null, analysisCount:0 };
+const FEATURES = {
+  free:       { maxAnalyses:1, tiers:[1],   tabs:['c'],                              pdf:false, share:false, compare:false, questions:false },
+  essentials: { maxAnalyses:999, tiers:[1,2], tabs:['c','b','w','cc','hg','ql-tab'], pdf:true,  share:true,  compare:false, questions:true  },
+  complete:   { maxAnalyses:999, tiers:[1,2,3], tabs:['c','b','w','cc','hg','ql-tab','cmp-tab'], pdf:true, share:true, compare:true, questions:true },
+};
+
+function canAccess(feature) {
+  const f = FEATURES[PLAN.tier];
+  if (!f) return false;
+  if (feature === 'pdf') return f.pdf;
+  if (feature === 'share') return f.share;
+  if (feature === 'compare') return f.compare;
+  if (feature === 'questions') return f.questions;
+  if (typeof feature === 'string' && feature.startsWith('tab-')) return f.tabs.includes(feature.replace('tab-',''));
+  if (typeof feature === 'number') return f.tiers.includes(feature);
+  return true;
+}
+
+function showLockedCard(tabId) {
+  const isComp = (tabId === 'cmp-tab');
+  const tier = isComp ? 'complete' : 'essentials';
+  const badge = isComp ? 'comp' : 'ess';
+  const price = isComp ? '$29/month' : '$19/month';
+  const planName = isComp ? 'Complete' : 'Essentials';
+  const btnClass = isComp ? 'comp-btn' : 'ess-btn';
+
+  const features = {
+    'b':       { title:'Best Case Analysis', desc:'See exactly how to achieve the lowest possible monthly payment — rate strategy, lender shopping guidance, PMI removal timeline, and Homestead Exemption action plan.', items:['Rate achievement strategy','PMI removal timeline','Homestead Exemption action plan','Annual cost breakdown'] },
+    'w':       { title:'Worst Case Analysis', desc:'Understand everything that could break against you — rate sensitivity bars, hidden closing costs, full cash-at-close picture, and the pre-offer critical checklist.', items:['Rate sensitivity analysis','Hidden cost breakdown','Pre-offer critical checklist','Hurricane deductible exposure'] },
+    'cc':      { title:'Closing Cost Estimator', desc:'Florida-specific itemized closing costs including documentary stamp tax, intangible tax, title insurance, prepaids, and total cash needed at close.', items:['Documentary stamp & intangible tax','Title insurance breakdown','Prepaid & escrow setup','Total cash-at-close consolidation'] },
+    'hg':      { title:'Homestead Exemption Guide', desc:'Step-by-step Miami-Dade Homestead filing walkthrough with your specific deadline calculated from your closing date and direct link to the Property Appraiser portal.', items:['Dynamic deadline calculation','5-step filing walkthrough','Direct portal link','Save Our Homes cap explained'] },
+    'ql-tab':  { title:'Questions to Ask', desc:'35+ stage-specific questions for your realtor, lender, title company, and insurance broker — with what a good answer looks like and what deflection sounds like.', items:['Pre-Offer questions','Active Offer questions','Under Contract questions','Good vs. deflecting answer guide'] },
+    'cmp-tab': { title:'Two-Property Comparison Mode', desc:'Analyze two properties side by side. Head-to-head table, best cases compared, worst cases compared, and a planning target verdict showing which property is financially stronger.', items:['Head-to-head comparison table','Best case & worst case side by side','Planning target verdict','Comparison PDF download'] },
+  };
+
+  const f = features[tabId] || { title:'Premium Feature', desc:'Unlock with a paid plan.', items:[] };
+
+  return `<div class="locked-tab">
+    <div class="locked-card">
+      <div class="locked-icon">🔒</div>
+      <div class="locked-tier-badge ${badge}">${planName} — ${price}</div>
+      <div class="locked-title">${f.title}</div>
+      <div class="locked-desc">${f.desc}</div>
+      <div class="locked-features">
+        ${f.items.map(i=>`<div class="locked-feature">${i}</div>`).join('')}
+      </div>
+      <button class="locked-upgrade-btn ${btnClass}" onclick="showUpgradeFlow('${tier}')">Unlock with ${planName} — ${price}</button>
+      <div class="locked-note">Cancel anytime. No contracts. No hidden fees.</div>
+    </div>
+  </div>`;
+}
+
+function showUpgradeFlow(tier) {
+  // In production: redirect to Memberstack/Outseta checkout
+  // Test phase: simulate upgrade
+  alert('Upgrade flow — ' + tier + ' plan. In production this connects to your payment processor (Memberstack or Outseta). During test phase this is a placeholder.');
+}
+
+function captureEmail() {
+  const emailEl = document.getElementById('free-email-input');
+  if (!emailEl) return;
+  const email = emailEl.value.trim();
+  if (!email || !email.includes('@')) {
+    emailEl.style.borderColor = 'var(--error)';
+    return;
+  }
+  PLAN.email = email;
+  PLAN.tier = 'free';
+  // In production: send to your email service
+  // Test phase: just proceed
+  document.getElementById('email-gate-wrap').style.display = 'none';
+  startG1();
+}
 let S={tier:null,ins:null,g1s:false,pbs:false,inp:{}};
 
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('s'+id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
@@ -1123,6 +1258,11 @@ function updG1(){
 }
 
 function selTier(n){
+  // Check plan allows this tier
+  if (!canAccess(n)) {
+    showUpgradeFlow(n === 3 ? 'complete' : 'essentials');
+    return;
+  }
   S.tier=n;
   [1,2,3].forEach(i=>{const c=document.getElementById('tc'+i);c.className='tc'+(i===n?' s'+n:'');});
   const b=document.getElementById('tb');
@@ -1173,13 +1313,25 @@ function updIBtn(){
 
 setInterval(updIBtn,600);
 // Check for shared analysis URL on load
-window.addEventListener("load",checkShareURL);
+window.addEventListener("load",()=>{checkShareURL();initPlan();});
 
 function proc3(){
   if(!document.getElementById('fp').value){alert('Please enter a purchase price.');return;}
   if(!document.getElementById('fd').value){alert('Please select a down payment.');return;}
   if(!document.getElementById('fa').value.trim()){alert('Please enter the property address.');return;}
   collectInp();bG3();show('g3');
+}
+
+function initPlan() {
+  // Show/hide tier locks based on plan
+  const isComplete = PLAN.tier === 'complete';
+  const isEssentials = PLAN.tier === 'essentials' || isComplete;
+
+  // Lock indicators on tier cards
+  const tc2lock = document.getElementById('tc2-lock');
+  const tc3lock = document.getElementById('tc3-lock');
+  if (tc2lock) tc2lock.style.display = isEssentials ? 'none' : 'block';
+  if (tc3lock) tc3lock.style.display = isComplete ? 'none' : 'block';
 }
 
 function genAnalysis(){
@@ -1198,7 +1350,14 @@ function genAnalysis(){
     const hgTab=document.getElementById('tab-hg');
     if(hgTab) hgTab.innerHTML=buildHomesteadGuide(S.inp);
     const cmpBtn=document.getElementById('compare-btn');
-    if(cmpBtn) cmpBtn.style.display='inline-flex';
+    if(cmpBtn) cmpBtn.style.display = canAccess('compare') ? 'inline-flex' : 'none';
+    // Show tier ribbon for free users
+    const ribbon = document.getElementById('tier-ribbon');
+    const ribbonName = document.getElementById('ribbon-plan-name');
+    if(ribbon && PLAN.tier === 'free') {
+      ribbon.style.display = 'flex';
+      if(ribbonName) ribbonName.textContent = 'Free';
+    }
   },200);
 }
 
@@ -1796,6 +1955,7 @@ function prefillInputs() {
 
 // ── PDF DOWNLOAD ──
 function downloadPDF() {
+  if (!canAccess('pdf')) { showUpgradeFlow('essentials'); return; }
   const inp = S.inp;
   if (!inp || !inp.address) {
     alert('Please generate an analysis first.');
@@ -2526,6 +2686,7 @@ function refreshHomesteadGuide() {
 // PRIORITY 4 — SAVE & SHARE
 // ══════════════════════════════════════
 function shareAnalysis() {
+  if (!canAccess('share')) { showUpgradeFlow('essentials'); return; }
   const inp = S.inp;
   if (!inp || !inp.address) return;
 
@@ -2633,6 +2794,7 @@ function checkShareURL() {
 let S2 = {}; // Second property state
 
 function startComparison() {
+  if (!canAccess('compare')) { showUpgradeFlow('complete'); return; }
   // Save current analysis as Property 1
   S2.prop1 = {...S.inp};
   S2.comparingProp2 = true;
@@ -3100,13 +3262,44 @@ const QL_DATA = {
 };
 
 function showTab(t,btn){
-  // Hide all standard analysis sections
+  // Check plan access
+  const tabKey = t;
+  const allowed = FEATURES[PLAN.tier] ? FEATURES[PLAN.tier].tabs.includes(t) : false;
+
+  // Hide all sections first
   document.querySelectorAll('#sa .as').forEach(s=>{s.classList.remove('v');s.style.display='none';});
-  // Also hide cc and hg tabs
   const ccTab=document.getElementById('tab-cc');
   const hgTab=document.getElementById('tab-hg');
+  const qlTabEl=document.getElementById('tab-ql-tab');
   if(ccTab) ccTab.style.display='none';
   if(hgTab) hgTab.style.display='none';
+  if(qlTabEl) qlTabEl.style.display='none';
+
+  // Free tier — comparison is always allowed, others show locked card
+  if(!allowed && t !== 'c') {
+    // Show locked card in a temporary div
+    let lockDiv = document.getElementById('locked-tab-display');
+    if(!lockDiv) {
+      lockDiv = document.createElement('div');
+      lockDiv.id = 'locked-tab-display';
+      document.getElementById('ac').parentNode.insertBefore(lockDiv, document.getElementById('ac').nextSibling);
+    }
+    // Hide ac
+    document.getElementById('ac').style.display = 'none';
+    if(ccTab) ccTab.style.display='none';
+    if(hgTab) hgTab.style.display='none';
+    lockDiv.style.display = 'block';
+    lockDiv.innerHTML = showLockedCard(t);
+    document.querySelectorAll('.an .at').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+    return;
+  }
+
+  // Hide locked display if showing
+  const lockDiv = document.getElementById('locked-tab-display');
+  if(lockDiv) lockDiv.style.display='none';
+  document.getElementById('ac').style.display='block';
 
   // Show correct tab
   if(t==='cc'){
@@ -3114,13 +3307,9 @@ function showTab(t,btn){
   } else if(t==='hg'){
     if(hgTab){hgTab.style.display='block';}
   } else if(t==='ql-tab'){
-    const qlTab=document.getElementById('tab-ql-tab');
-    if(qlTab){
-      qlTab.style.display='block';
-      // Build inline QL tab content if not already built
-      if(!qlTab.innerHTML.trim()){
-        qlTab.innerHTML = buildQLTabContent();
-      }
+    if(qlTabEl){
+      qlTabEl.style.display='block';
+      if(!qlTabEl.innerHTML.trim()) qlTabEl.innerHTML=buildQLTabContent();
     }
   } else {
     const id=t==='c'?'tc':t==='b'?'tb2':'tw';
