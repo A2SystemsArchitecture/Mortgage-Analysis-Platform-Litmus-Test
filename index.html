@@ -17,6 +17,7 @@
   --fd:'Fraunces',serif;--fm:'DM Mono',monospace;--fb:'Plus Jakarta Sans',sans-serif;
   --texas:#a34719;--texas-mid:#c25520;--texas-light:#fdf0ea;--texas-dim:#7a3512;--texas-muted:#f5cdb8;
   --nc:#3a5a78;--nc-mid:#4a6d8e;--nc-light:#e8eef4;--nc-dim:#2a4558;--nc-muted:#b8ccd8;
+  --georgia:#8b1e2d;--georgia-mid:#a32535;--georgia-light:#f5e8ea;--georgia-dim:#6a1522;--georgia-muted:#d4a0a7;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--slate-bg);color:var(--ink);font-family:var(--fb);font-weight:300;min-height:100vh;line-height:1.65;}
@@ -378,7 +379,14 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .state-toggle.active-fl{background:var(--teal);border-color:var(--teal);color:var(--white);}
 .state-toggle.active-tx{background:var(--texas);border-color:var(--texas);color:var(--white);}
 .state-toggle.active-nc{background:var(--nc);border-color:var(--nc);color:var(--white);}
-.state-toggle:hover:not(.active-fl):not(.active-tx):not(.active-nc){border-color:rgba(176,190,197,.6);color:rgba(176,190,197,.9);}
+.state-toggle.active-ga{background:var(--georgia);border-color:var(--georgia);color:var(--white);}
+.state-toggle:hover:not(.active-fl):not(.active-tx):not(.active-nc):not(.active-ga){border-color:rgba(176,190,197,.6);color:rgba(176,190,197,.9);}
+/* Georgia-colored pills */
+.county-pill.ga{border-color:rgba(139,30,45,.4);color:rgba(139,30,45,.7);}
+.county-pill.ga:hover{border-color:var(--georgia-mid);color:var(--georgia-mid);}
+.county-pill.ga.active{background:var(--georgia);border-color:var(--georgia);color:var(--white);}
+.county-pill.ga.yr3{border-style:dashed;opacity:.7;}
+.county-pill.ga.yr3.active{border-style:solid;opacity:1;}
 /* Texas-colored pills */
 .county-pill.tx{border-color:rgba(163,71,25,.4);color:rgba(163,71,25,.7);}
 .county-pill.tx:hover{border-color:var(--texas-mid);color:var(--texas-mid);}
@@ -591,7 +599,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <!-- WELCOME -->
 <div id="sw" class="screen active">
   <div class="mh">
-    <div class="mh-tag">Florida East Coast · Independent Buyer Tool</div>
+    <div class="mh-tag">Independent Buyer Tool · Florida &amp; Georgia · Texas · North Carolina</div>
     <h1>Home<span class="tr">True</span></h1>
     <div class="mh-rule"></div>
     <div class="mh-sub">Honest mortgage analysis. No pressure. No agenda.</div>
@@ -600,13 +608,14 @@ footer strong{color:rgba(220,232,235,1.0);}
   <div class="vs" id="avs">Rate verified:<span>Friday, April 25, 2026 · 11:52 AM ET</span>&nbsp;·&nbsp;County:<span class="active-county-short">Miami-Dade</span>&nbsp;·&nbsp;Tax:<span>1.30%</span>&nbsp;·&nbsp;Source:<span>Freddie Mac PMMS</span></div>
   <div class="county-selector-wrap">
     <div class="county-selector-inner">
-      <span class="county-sel-lbl">State</span>
+      <span class="county-sel-lbl">Market</span>
       <div class="state-toggles">
         <button class="state-toggle active-fl" id="st-fl" onclick="selectState('fl',this)">Florida</button>
+        <button class="state-toggle" id="st-ga" onclick="selectState('ga',this)">Georgia</button>
         <button class="state-toggle" id="st-tx" onclick="selectState('tx',this)">Texas</button>
         <button class="state-toggle" id="st-nc" onclick="selectState('nc',this)">North Carolina</button>
       </div>
-      <span class="county-sel-lbl" style="margin-left:.75rem;">County</span>
+      <span class="county-sel-lbl" style="margin-left:.75rem;">Select County</span>
       <div class="county-pills" id="pills-fl">
         <button class="county-pill active" onclick="selectCounty('miami-dade',this)">Miami-Dade</button>
         <button class="county-pill" onclick="selectCounty('broward',this)">Broward</button>
@@ -615,6 +624,22 @@ footer strong{color:rgba(220,232,235,1.0);}
         <button class="county-pill yr3" onclick="selectCounty('st-lucie',this)">St. Lucie</button>
         <button class="county-pill yr3" onclick="selectCounty('indian-river',this)">Indian River</button>
         <button class="county-pill yr3" onclick="selectCounty('brevard',this)">Brevard</button>
+      </div>
+      <div class="county-pills" id="pills-ga" style="display:none;">
+        <button class="county-pill ga" onclick="selectCounty('fulton',this)">Fulton</button>
+        <button class="county-pill ga" onclick="selectCounty('dekalb',this)">DeKalb</button>
+        <button class="county-pill ga" onclick="selectCounty('gwinnett',this)">Gwinnett</button>
+        <button class="county-pill ga" onclick="selectCounty('cobb',this)">Cobb</button>
+        <button class="county-pill ga" onclick="selectCounty('cherokee',this)">Cherokee</button>
+        <button class="county-pill ga" onclick="selectCounty('forsyth',this)">Forsyth</button>
+        <button class="county-pill ga" onclick="selectCounty('clayton',this)">Clayton</button>
+        <button class="county-pill ga" onclick="selectCounty('hall',this)">Hall</button>
+        <button class="county-pill ga" onclick="selectCounty('dawson',this)">Dawson</button>
+        <button class="county-pill ga" onclick="selectCounty('paulding',this)">Paulding</button>
+        <button class="county-pill ga yr3" onclick="selectCounty('pickens',this)">Pickens*</button>
+        <button class="county-pill ga yr3" onclick="selectCounty('lumpkin',this)">Lumpkin*</button>
+        <button class="county-pill ga" onclick="selectCounty('richmond',this)">Richmond</button>
+        <button class="county-pill ga" onclick="selectCounty('columbia',this)">Columbia</button>
       </div>
       <div class="county-pills" id="pills-tx" style="display:none;">
         <button class="county-pill tx" onclick="selectCounty('harris',this)">Harris (Houston)</button>
@@ -1296,6 +1321,135 @@ const COUNTIES = {
     notes:'Brevard County (Melbourne, Palm Bay, Cocoa Beach) has an effective tax rate of 0.95% — below the national median.',
     state:'fl'
   },
+  // ── GEORGIA ──
+  'fulton': {
+    name:'Fulton County', short:'Fulton',
+    tr:0.0088, he:2000,
+    fxb:30, fxw:55, fab:75, faw:160,
+    paUrl:'https://www.fultonassessor.org/exemptions',
+    paName:'Fulton County Board of Assessors',
+    notes:'Fulton County (Atlanta) effective tax rate ~0.88%. Georgia property is assessed at 40% of fair market value. Standard homestead exemption: $2,000 off assessed value (county) + $15,000 off assessed value (county — local enhancement). Apply by April 1.',
+    state:'ga', closingModel:'ga'
+  },
+  'dekalb': {
+    name:'DeKalb County', short:'DeKalb',
+    tr:0.0093, he:2000,
+    fxb:28, fxw:50, fab:70, faw:150,
+    paUrl:'https://www.dekalbcountyga.gov/tax-assessors-office/homestead-exemptions',
+    paName:'DeKalb County Tax Assessors Office',
+    notes:'DeKalb County effective tax rate ~0.93%. Assessed at 40% FMV. Standard homestead: $10,000 off assessed value for county taxes. Apply by April 1.',
+    state:'ga', closingModel:'ga'
+  },
+  'gwinnett': {
+    name:'Gwinnett County', short:'Gwinnett',
+    tr:0.0095, he:2000,
+    fxb:28, fxw:50, fab:70, faw:150,
+    paUrl:'https://www.gwinnettassessor.com/homestead-exemptions',
+    paName:'Gwinnett County Tax Assessors',
+    notes:'Gwinnett County effective tax rate ~0.95%. Homestead exemption: $10,000 off assessed value for county, $8,000 for school, $7,000 for recreation taxes. Apply by April 1.',
+    state:'ga', closingModel:'ga'
+  },
+  'cobb': {
+    name:'Cobb County', short:'Cobb',
+    tr:0.0068, he:2000,
+    fxb:28, fxw:50, fab:70, faw:150,
+    paUrl:'https://www.cobbtax.org/property/homestead-exemptions/',
+    paName:'Cobb County Tax Assessors',
+    notes:'Cobb County effective tax rate ~0.68% — one of the lowest in Metro Atlanta. Standard homestead applies. Apply by April 1.',
+    state:'ga', closingModel:'ga'
+  },
+  'cherokee': {
+    name:'Cherokee County', short:'Cherokee',
+    tr:0.0069, he:2000,
+    fxb:25, fxw:45, fab:65, faw:140,
+    paUrl:'https://www.cherokeega.com/tax-assessors/',
+    paName:'Cherokee County Tax Assessors',
+    notes:'Cherokee County effective tax rate ~0.69%. Standard homestead: $5,000 off assessed value for county and school taxes. Apply by April 1.',
+    state:'ga', closingModel:'ga'
+  },
+  'forsyth': {
+    name:'Forsyth County', short:'Forsyth',
+    tr:0.0073, he:2000,
+    fxb:25, fxw:45, fab:65, faw:140,
+    paUrl:'https://www.forsythco.com/Departments-Offices/Board-of-Assessors/Homestead-Exemptions',
+    paName:'Forsyth County Board of Assessors',
+    notes:'Forsyth County · Highest median home value in Georgia ($550K+). Low 0.73% effective rate. Includes Cumming. Apply by April 1.',
+    state:'ga', closingModel:'ga'
+  },
+  'clayton': {
+    name:'Clayton County', short:'Clayton',
+    tr:0.0097, he:2000,
+    fxb:28, fxw:50, fab:70, faw:150,
+    paUrl:'https://www.claytoncountyga.gov/government/tax-assessor/homestead-exemptions',
+    paName:'Clayton County Tax Assessors',
+    notes:'Clayton County effective tax rate ~0.97% — one of the higher rates in Metro Atlanta. Standard homestead: $10,000 off assessed value for county taxes. Apply by April 1.',
+    state:'ga', closingModel:'ga'
+  },
+  'hall': {
+    name:'Hall County', short:'Hall',
+    tr:0.0073, he:2000,
+    fxb:25, fxw:45, fab:65, faw:140,
+    paUrl:'https://www.hallcounty.org/264/Tax-Assessors',
+    paName:'Hall County Tax Assessors',
+    notes:'Hall County (Gainesville) effective tax rate ~0.73%. Standard homestead: $10,000 off assessed value. Apply by April 1.',
+    state:'ga', closingModel:'ga'
+  },
+  'dawson': {
+    name:'Dawson County', short:'Dawson',
+    tr:0.0060, he:2000,
+    fxb:22, fxw:42, fab:60, faw:130,
+    paUrl:'https://www.dawsoncounty.org/residents/tax-assessors-office',
+    paName:'Dawson County Tax Assessors',
+    notes:'Dawson County effective tax rate ~0.60% — low rate, growing mountain-adjacent market. Standard homestead: $7,000 off assessed value. Apply by April 1.',
+    state:'ga', closingModel:'ga'
+  },
+  'paulding': {
+    name:'Paulding County', short:'Paulding',
+    tr:0.0080, he:2000,
+    fxb:25, fxw:45, fab:65, faw:140,
+    paUrl:'https://www.paulding.gov/393/Tax-Assessors-Office',
+    paName:'Paulding County Tax Assessors',
+    notes:'Paulding County effective tax rate ~0.80%. Standard homestead: $2,000 off assessed value. Apply by April 1.',
+    state:'ga', closingModel:'ga'
+  },
+  'pickens': {
+    name:'Pickens County', short:'Pickens',
+    tr:0.0060, he:2000,
+    fxb:20, fxw:40, fab:55, faw:120,
+    paUrl:'https://www.pickenscountyga.gov/179/Tax-Assessor',
+    paName:'Pickens County Tax Assessors',
+    notes:'Pickens County effective tax rate ~0.60%. Regular homestead: $5,000 off assessed value for county and school. HE exemption amount pending final verification for all tiers. Apply by April 1.',
+    state:'ga', closingModel:'ga',
+    heNote:'*HE amount pending final verification'
+  },
+  'lumpkin': {
+    name:'Lumpkin County', short:'Lumpkin',
+    tr:0.0065, he:2000,
+    fxb:20, fxw:40, fab:55, faw:120,
+    paUrl:'https://www.lumpkincountytax.com/general-information.html',
+    paName:'Lumpkin County Tax Commissioner',
+    notes:'Lumpkin County (Dahlonega) effective tax rate ~0.65%. Standard homestead: $2,000 off assessed value. HE exemption amount pending final verification. Apply by April 1.',
+    state:'ga', closingModel:'ga',
+    heNote:'*HE amount pending final verification'
+  },
+  'richmond': {
+    name:'Richmond County', short:'Richmond',
+    tr:0.0084, he:2000,
+    fxb:25, fxw:45, fab:65, faw:140,
+    paUrl:'https://www.augustaga.gov/1340/Tax-Assessor',
+    paName:'Richmond County Tax Assessor (Augusta)',
+    notes:'Richmond County (Augusta) effective tax rate ~0.84%. Standard homestead applies. Apply by April 1.',
+    state:'ga', closingModel:'ga'
+  },
+  'columbia': {
+    name:'Columbia County', short:'Columbia',
+    tr:0.0082, he:2000,
+    fxb:25, fxw:45, fab:65, faw:140,
+    paUrl:'https://columbiacountyga.gov/departments/tax-assessor',
+    paName:'Columbia County Tax Assessor',
+    notes:'Columbia County (Evans, Grovetown) effective tax rate ~0.82%. One of the fastest-growing counties in Georgia. Standard homestead applies. Apply by April 1.',
+    state:'ga', closingModel:'ga'
+  },
   // ── TEXAS ──
   'harris': {
     name:'Harris County', short:'Harris',
@@ -1386,7 +1540,7 @@ function setCounty(key) {
   document.querySelectorAll('.active-county-short').forEach(el => el.textContent = c.short);
   // Update scope badge
   const sb = document.querySelector('.scope-b');
-  const stateLabel = c.state==='tx' ? 'Texas' : c.state==='nc' ? 'North Carolina' : 'Florida';
+  const stateLabel = c.state==='tx' ? 'Texas' : c.state==='nc' ? 'North Carolina' : c.state==='ga' ? 'Georgia' : 'Florida';
   if(sb) sb.textContent = c.name + ' · ' + stateLabel + ' · Test Phase';
   // Update verified strip
   const vs = document.getElementById('avs');
@@ -1574,17 +1728,19 @@ function selectState(state, btn) {
   ACTIVE_STATE = state;
   // Update state toggle buttons
   document.querySelectorAll('.state-toggle').forEach(b => {
-    b.classList.remove('active-fl','active-tx','active-nc');
+    b.classList.remove('active-fl','active-tx','active-nc','active-ga');
   });
   if(btn) btn.classList.add('active-' + state);
   // Show/hide county pill groups
   document.getElementById('pills-fl').style.display = state==='fl' ? 'flex' : 'none';
+  document.getElementById('pills-ga').style.display = state==='ga' ? 'flex' : 'none';
   document.getElementById('pills-tx').style.display = state==='tx' ? 'flex' : 'none';
   document.getElementById('pills-nc').style.display = state==='nc' ? 'flex' : 'none';
   // Update legend
   const legend = document.getElementById('state-legend');
   if(legend) {
     if(state==='fl') legend.textContent = 'Dashed = Year 3 expansion';
+    else if(state==='ga') legend.textContent = 'Georgia · *HE amount pending final verification';
     else if(state==='tx') legend.textContent = 'Texas · Burnt Sienna · Test Phase';
     else if(state==='nc') legend.textContent = 'North Carolina · Slate Blue · Test Phase';
   }
@@ -2885,9 +3041,37 @@ function buildClosingCosts(inp) {
       <div class="cc-row"><div class="cc-item">Settlement / Escrow Fee<span class="cc-note">Administrative closing costs — often bundled with attorney fee</span></div><div class="cc-val">${fmt(settlementFee)}</div></div>
       <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Attorney Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
     reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. NC property tax bills are issued in July and due January 5 — confirm your escrow calculation reflects the correct county and city combined rate.`;
-  }
 
-  const closingTotal = govTotal + titleTotal + lenderTotal + prepaidTotal;
+  } else if (model === 'ga') {
+    // Georgia closing cost model
+    // Transfer tax: $1 per $1,000 of purchase price (state) — seller pays by custom
+    // Intangible recording tax: $1.50 per $500 of loan amount — buyer pays
+    // Attorney-closed state — required buyer cost
+    const transferTax = Math.round(p * 0.001); // $1 per $1,000 — seller cost, shown for reference
+    const intangibleRecordingTax = Math.round(Math.ceil(loan / 500) * 1.50); // $1.50 per $500
+    const recordingFee = 120;
+    const titleSearch = 275;
+    const titleInsLender = Math.round(loan * 0.00375);
+    const titleInsOwner = Math.round(p * 0.00350);
+    const attorneyFee = 800;
+    const settlementFee = 250;
+    govTotal = intangibleRecordingTax + recordingFee;
+    titleTotal = titleSearch + titleInsLender + titleInsOwner + attorneyFee + settlementFee;
+    stateNote = `<span class="nl" style="color:var(--georgia-dim);">${countyName} — Georgia</span><p>Georgia is an <strong>attorney-closed state</strong> — a real estate attorney is required and is a buyer cost. Georgia's <strong>intangible recording tax</strong> of $1.50 per $500 of loan amount is paid by the buyer and recorded with the deed of trust. The state transfer tax of $1 per $1,000 is customarily paid by the seller. Georgia property is assessed at <strong>40% of fair market value</strong> — your assessed value will be significantly lower than your purchase price. Confirm all figures against your official Closing Disclosure.</p>`;
+    govSection = `<div class="cc-section"><div class="cc-section-title">Government Taxes &amp; Recording Fees</div>
+      <div class="cc-row"><div class="cc-item">Intangible Recording Tax (Buyer Pays)<span class="cc-note">$1.50 per $500 of loan amount — Georgia specific, recorded with security deed</span></div><div class="cc-val">${fmt(intangibleRecordingTax)}</div></div>
+      <div class="cc-row"><div class="cc-item">Recording Fees<span class="cc-note">Clerk of Superior Court — deed and security deed recording</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
+      <div class="cc-row"><div class="cc-item">State Transfer Tax<span class="cc-note">$1 per $1,000 of purchase price — customarily paid by seller (${fmt(transferTax)} on this purchase)</span></div><div class="cc-val">Seller</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
+    titleSection = `<div class="cc-section"><div class="cc-section-title">Title, Attorney &amp; Settlement Fees</div>
+      <div class="cc-row"><div class="cc-item">Closing Attorney Fee<span class="cc-note">Georgia is an attorney-closed state — attorney examines title and conducts closing. Required buyer cost.</span></div><div class="cc-val">${fmt(attorneyFee)}</div></div>
+      <div class="cc-row"><div class="cc-item">Title Search &amp; Exam<span class="cc-note">Public records search — may be bundled into attorney fee</span></div><div class="cc-val">${fmt(titleSearch)}</div></div>
+      <div class="cc-row"><div class="cc-item">Lender's Title Insurance<span class="cc-note">Required by lender — protects lender's interest in the security deed</span></div><div class="cc-val">${fmt(titleInsLender)}</div></div>
+      <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended — one-time premium protects your ownership permanently</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
+      <div class="cc-row"><div class="cc-item">Settlement / Escrow Fee<span class="cc-note">Administrative closing costs</span></div><div class="cc-val">${fmt(settlementFee)}</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Attorney Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
+    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Georgia property taxes are due October–December annually. Remember: your assessed value is 40% of fair market value — your tax bill will reflect the assessed value, not the purchase price.`;
+  }
   const grandTotal = inp.damt + closingTotal + reserves3mo;
 
   return `
@@ -2952,10 +3136,10 @@ function buildHomesteadGuide(inp) {
   if (closingDate) {
     const cd = new Date(closingDate);
     const deadlineYear = cd.getFullYear() + 1;
-    const deadlineLabel = model === 'fl' ? `March 1, ${deadlineYear}` : model === 'texas' ? `April 30, ${deadlineYear}` : `June 1, ${deadlineYear}`;
+    const deadlineLabel = model === 'fl' ? `March 1, ${deadlineYear}` : model === 'texas' ? `April 30, ${deadlineYear}` : model === 'ga' ? `April 1, ${deadlineYear}` : `June 1, ${deadlineYear}`;
     deadlineHtml = `<div class="hg-deadline"><span class="hg-dl-lbl">Your Filing Deadline</span><div class="hg-dl-date">${deadlineLabel}</div><div class="hg-dl-sub">Based on your expected closing. File as soon as possible after closing — do not wait until the deadline.</div></div>`;
   } else {
-    const deadlineLabel = model === 'fl' ? 'March 1 of the year after closing' : model === 'texas' ? 'April 30 of the tax year' : 'June 1 of the tax year';
+    const deadlineLabel = model === 'fl' ? 'March 1 of the year after closing' : model === 'texas' ? 'April 30 of the tax year' : model === 'ga' ? 'April 1 of the tax year' : 'June 1 of the tax year';
     deadlineHtml = `<div class="hg-deadline"><span class="hg-dl-lbl">Filing Deadline</span><div class="hg-dl-date">${deadlineLabel}</div><div class="hg-dl-sub">Enter your expected closing date below for your specific deadline.</div><div style="margin-top:.75rem;"><label style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--emerald-dim);display:block;margin-bottom:.3rem;">Expected Closing Date</label><input type="date" id="hg-closing-date" style="padding:.5rem .75rem;border:1.5px solid var(--emerald-muted);border-radius:6px;font-family:var(--fb);font-size:.9rem;color:var(--midnight);background:var(--white);" onchange="refreshHomesteadGuide()"></div></div>`;
   }
 
@@ -2981,6 +3165,29 @@ function buildHomesteadGuide(inp) {
       <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Confirm approval and check your TCAD/HCAD account</div><div class="hg-desc">After filing, check your county appraisal district's online portal to verify the exemption appears on your account. The exemption is typically processed within 30–90 days. If you move into the home after January 1, you may still qualify for a partial exemption in some cases.</div></div></div>
       <div class="hg-step"><div class="hg-num">5</div><div class="hg-content"><div class="hg-title">Notify your mortgage servicer</div><div class="hg-desc">Once approved, contact your mortgage servicer. Your escrow payment should be recalculated to reflect the lower taxable value — this is how the exemption savings appear in your monthly payment.</div></div></div>
       <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Texas Homestead Cap — 10% Annual Assessment Limit</span><p>Once your Homestead Exemption is established, Texas law caps annual increases in your appraised value at 10% per year regardless of market appreciation. In fast-appreciating markets like Austin and Houston, this cap provides meaningful protection against rapid tax bill increases. The cap takes effect in the second year after you establish the exemption.</p></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button></div>
+    </div>`;
+  }
+
+  if (model === 'ga') {
+    // Georgia homestead exemption guide
+    return `<div class="cw">
+      <div class="ae em">Section V</div>
+      <h2 class="at2">Homestead Exemption Filing Guide</h2>
+      <div class="ar"></div>
+      <div class="nt nt-em" style="margin-bottom:1.5rem;">
+        <span class="nl nl-em">${c.name} — Georgia Homestead Exemption</span>
+        <p>Georgia's standard homestead exemption is a <strong>$2,000 reduction from the assessed value</strong> for state taxes — and most counties add a larger local exemption on top of that. Because Georgia assesses property at <strong>40% of fair market value</strong>, your taxable base is already significantly lower than your purchase price before any exemption is applied. Apply by April 1 with the County Board of Tax Assessors.</p>
+        ${c.heNote ? `<p style="margin-top:.5rem;color:var(--georgia-dim);font-weight:500;">⚠ ${c.heNote}</p>` : ''}
+      </div>
+      ${deadlineHtml}
+      <h3 style="font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--midnight);margin:1.5rem 0 1rem;">Step-by-Step Filing Instructions</h3>
+      <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">Confirm eligibility immediately after closing</div><div class="hg-desc">You must own and occupy the property as your legal primary residence as of January 1 of the tax year. You cannot claim homestead on more than one property. Married couples are entitled to only one homestead exemption across all jurisdictions.</div></div></div>
+      <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">Gather your documents</div><div class="hg-desc">You will need: Georgia driver's license or state ID showing the property address, your recorded warranty deed (available from the Clerk of Superior Court), and your Social Security number. The address on your ID must match the property address.</div></div></div>
+      <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">File with the County Board of Tax Assessors by April 1</div><div class="hg-desc">File your homestead exemption application with the County Board of Tax Assessors. Some counties accept applications through the Tax Commissioner's office — verify with your specific county. Applications can be submitted in person, by mail, or online where available.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open County Tax Assessors Portal</a></div></div>
+      <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Once granted, the exemption renews automatically</div><div class="hg-desc">Unlike some states, Georgia's homestead exemption is automatically renewed each year — you do not need to reapply as long as you remain in the same home with the same ownership. You must reapply if you move, change ownership, or want to qualify for a different exemption type.</div></div></div>
+      <div class="hg-step"><div class="hg-num">5</div><div class="hg-content"><div class="hg-title">Notify your mortgage servicer</div><div class="hg-desc">Once approved, contact your mortgage servicer. Your escrow payment should be recalculated to reflect the lower taxable assessed value. This is how the exemption savings appear in your monthly payment.</div></div></div>
+      <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Georgia's 40% Assessment Rule — What It Means</span><p>Georgia law requires all property to be assessed at 40% of fair market value. On a $400,000 home, your assessed value is $160,000 before any exemptions. The homestead exemption is applied to that assessed value — not the purchase price. This structure means your effective tax burden is inherently lower than the nominal tax rate suggests, making Georgia's rates more competitive than they may first appear.</p></div>
       <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button></div>
     </div>`;
   }
