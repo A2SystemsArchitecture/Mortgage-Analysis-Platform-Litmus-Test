@@ -23,14 +23,14 @@ body{background:var(--slate-bg);color:var(--ink);font-family:var(--fb);font-weig
 @keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 
 /* MASTHEAD */
-.mh{background:var(--midnight);padding:3.5rem 2rem 3rem;text-align:center;position:relative;overflow:hidden;}
+.mh{background:var(--midnight);padding:1.5rem 2rem 1.25rem;text-align:center;position:relative;overflow:hidden;}
 .mh::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(0,151,167,.12),transparent 60%),radial-gradient(ellipse at 80% 50%,rgba(46,125,82,.08),transparent 60%);}
 .mh-tag{font-family:var(--fm);font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(140,220,230,1.0);margin-bottom:1rem;position:relative;}
-.mh h1{font-family:var(--fd);font-size:clamp(2.8rem,7vw,4.5rem);font-weight:900;color:var(--white);line-height:1;letter-spacing:-.03em;position:relative;}
+.mh h1{font-family:var(--fd);font-size:clamp(2rem,5vw,3rem);font-weight:900;color:var(--white);line-height:1;letter-spacing:-.03em;position:relative;}
 .mh h1 .tr{color:var(--emerald-mid);}
-.mh-rule{width:3rem;height:2px;background:linear-gradient(90deg,rgba(0,200,220,.9),rgba(56,142,94,.9));margin:1.25rem auto;position:relative;}
-.mh-sub{font-family:var(--fm);font-size:.68rem;color:rgba(220,232,235,1.0);letter-spacing:.12em;position:relative;}
-.scope-b{display:inline-block;background:rgba(0,131,143,.25);border:1px solid rgba(0,151,167,.5);color:rgba(160,230,240,1.0);font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;padding:.3rem 1rem;border-radius:2px;margin-top:1rem;position:relative;}
+.mh-rule{width:2rem;height:2px;background:linear-gradient(90deg,rgba(0,200,220,.9),rgba(56,142,94,.9));margin:.5rem auto;position:relative;}
+.mh-sub{font-family:var(--fm);font-size:.6rem;color:rgba(220,232,235,1.0);letter-spacing:.12em;position:relative;}
+.scope-b{display:inline-block;background:rgba(0,131,143,.25);border:1px solid rgba(0,151,167,.5);color:rgba(160,230,240,1.0);font-family:var(--fm);font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;padding:.2rem .65rem;border-radius:2px;margin-top:.35rem;position:relative;}
 
 /* VERIFIED STRIP */
 .vs{background:var(--midnight-lt);padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap;font-family:var(--fm);font-size:.64rem;letter-spacing:.07em;color:rgba(176,196,204,.95);border-bottom:1px solid rgba(255,255,255,.06);}
@@ -567,25 +567,16 @@ footer strong{color:rgba(220,232,235,1.0);}
     <div class="scope-b">Miami-Dade County Only · Test Phase</div>
   </div>
   <div class="vs">Rate verified:<span>Friday, April 25, 2026 · 11:52 AM ET</span>&nbsp;·&nbsp;Tax rate:<span>April 2026</span>&nbsp;·&nbsp;Flood:<span>April 2026</span>&nbsp;·&nbsp;Source:<span>Freddie Mac PMMS</span></div>
-  <div class="c">
-    <div style="max-width:560px;margin:0 auto;padding:3rem 0;">
-      <div class="ae tl" style="margin-bottom:.4rem;">Welcome</div>
-      <h2 style="font-family:var(--fd);font-size:2rem;font-weight:700;letter-spacing:-.02em;margin-bottom:1rem;color:var(--midnight);">Before we begin</h2>
-      <p style="color:var(--muted);margin-bottom:2rem;font-size:.95rem;line-height:1.75;">This tool gives you an honest, unbiased analysis of the full monthly cost of buying a home — best case and worst case — before you commit to anything. No realtor pressure. No broker estimates designed to look manageable.</p>
-      <div class="wcs" style="grid-template-columns:1fr 1fr;">
-        <div class="wc dm" onclick="startDemo()"><span class="wct">Option A</span><span class="wcn">See a Demo First</span><p class="wcd">Walk through a completed analysis on a sample property before entering your own.</p></div>
-        <div class="wc st" onclick="startG1()"><span class="wct">Option B — Free</span><span class="wcn">Analyze My Property</span><p class="wcd">One free Tier 1 Pre-Offer analysis. No credit card required. Enter your email to begin.</p></div>
-      </div>
-      <div class="aff-card" onclick="show('aff')" style="margin-bottom:1.25rem;">
-        <span style="font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal-mid);margin-bottom:.5rem;display:block;">Option C</span>
-        <span style="font-family:var(--fd);font-size:1.15rem;font-weight:700;color:var(--midnight);display:block;margin-bottom:.4rem;">What Can I Afford?</span>
-        <p style="font-size:.82rem;color:var(--muted);line-height:1.55;">Not sure what price range to target? Enter your income, savings, and credit score. HomeTrue tells you your realistic purchase range before you start shopping.</p>
-      </div>
+  <div class="c" style="max-width:900px;">
+    <div style="padding:1.5rem 0 1rem;">
+      <div class="ae tl" style="margin-bottom:.3rem;">Welcome</div>
+      <h2 style="font-family:var(--fd);font-size:1.6rem;font-weight:700;letter-spacing:-.02em;margin-bottom:.6rem;color:var(--midnight);">Before we begin</h2>
+      <p style="color:var(--muted);margin-bottom:1.25rem;font-size:.88rem;line-height:1.7;max-width:640px;">An honest, unbiased analysis of the full monthly cost of buying a home — best case and worst case — before you commit to anything. No realtor pressure. No broker estimates.</p>
+
       <!-- EMAIL GATE — appears when free tier selected -->
-      <div id="email-gate-wrap" style="display:none;margin-bottom:1.25rem;">
+      <div id="email-gate-wrap" style="display:none;margin-bottom:1rem;">
         <div class="email-gate">
           <div class="email-gate-title">Enter your email to access your free analysis</div>
-          <div class="email-gate-sub">One Tier 1 Pre-Offer analysis — no credit card required.</div>
           <div class="email-input-row">
             <input type="email" id="free-email-input" placeholder="your@email.com" style="font-size:.9rem;">
             <button class="btn btn-tl" onclick="captureEmail()">Continue →</button>
@@ -594,18 +585,45 @@ footer strong{color:rgba(220,232,235,1.0);}
         </div>
       </div>
 
-      <div class="aff-card" onclick="show('ql')" style="margin-bottom:1.25rem;border-top-color:var(--indigo);" onmouseover="this.style.boxShadow='0 10px 30px rgba(69,39,160,.15)'" onmouseout="this.style.boxShadow=''">
-        <span style="font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--indigo-mid);margin-bottom:.5rem;display:block;">Option D</span>
-        <span style="font-family:var(--fd);font-size:1.15rem;font-weight:700;color:var(--midnight);display:block;margin-bottom:.4rem;">Prepare for Your Meetings</span>
-        <p style="font-size:.82rem;color:var(--muted);line-height:1.55;">Know exactly what to ask your realtor, lender, and title company at every stage. Stage-specific question library with context on what good answers look like — and what deflection sounds like.</p>
+      <!-- 2×2 GRID — ALL FOUR OPTIONS ABOVE THE FOLD -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.85rem;margin-bottom:1rem;">
+
+        <div class="wc dm" onclick="startDemo()" style="margin:0;padding:1.25rem;">
+          <span class="wct">Option A</span>
+          <span class="wcn" style="font-size:1rem;">See a Demo First</span>
+          <p class="wcd" style="font-size:.78rem;">Walk through a completed analysis on a sample property before entering your own.</p>
+        </div>
+
+        <div class="wc st" onclick="startG1()" style="margin:0;padding:1.25rem;">
+          <span class="wct">Option B — Free</span>
+          <span class="wcn" style="font-size:1rem;">Analyze My Property</span>
+          <p class="wcd" style="font-size:.78rem;">One free Tier 1 Pre-Offer analysis. No credit card required. Enter your email to begin.</p>
+        </div>
+
+        <div style="background:var(--white);border:1.5px solid var(--rule);border-radius:10px;padding:1.25rem;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;" onclick="show('aff')" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(0,131,143,.15)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--teal),var(--emerald));"></div>
+          <span style="font-family:var(--fm);font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal-mid);margin-bottom:.35rem;display:block;">Option C</span>
+          <span style="font-family:var(--fd);font-size:1rem;font-weight:700;color:var(--midnight);display:block;margin-bottom:.3rem;">What Can I Afford?</span>
+          <p style="font-size:.78rem;color:var(--muted);line-height:1.5;">Not sure what price range to target? Enter your income, savings, and credit score to find your realistic purchase range.</p>
+        </div>
+
+        <div style="background:var(--white);border:1.5px solid var(--indigo-muted);border-radius:10px;padding:1.25rem;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;" onclick="show('ql')" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(69,39,160,.15)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+          <div style="position:absolute;top:0;left:0;right:0;height:3px;background:var(--indigo);"></div>
+          <span style="font-family:var(--fm);font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;color:var(--indigo-mid);margin-bottom:.35rem;display:block;">Option D</span>
+          <span style="font-family:var(--fd);font-size:1rem;font-weight:700;color:var(--midnight);display:block;margin-bottom:.3rem;">Prepare for Your Meetings</span>
+          <p style="font-size:.78rem;color:var(--muted);line-height:1.5;">Know exactly what to ask your realtor, lender, and title company — and what deflection sounds like.</p>
+        </div>
+
       </div>
-      <div class="nt nt-tl"><span class="nl nl-tl">Miami-Dade County Only</span><p>This tool is calibrated exclusively for Miami-Dade County properties. Using it outside Miami-Dade will produce inaccurate results.</p></div>
-      <div style="margin-top:2rem;background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:1.25rem;">
-        <div style="font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.75rem;">Analysis Color Guide</div>
-        <div style="display:flex;flex-direction:column;gap:.5rem;">
-          <div style="display:flex;align-items:center;gap:.75rem;font-size:.82rem;"><div style="width:12px;height:12px;border-radius:50%;background:var(--teal);flex-shrink:0;"></div><span><strong>Teal</strong> — Tier 1 Pre-Offer · Calm preparation</span></div>
-          <div style="display:flex;align-items:center;gap:.75rem;font-size:.82rem;"><div style="width:12px;height:12px;border-radius:50%;background:var(--indigo);flex-shrink:0;"></div><span><strong>Indigo</strong> — Tier 2 Active Offer · Wisdom and commitment</span></div>
-          <div style="display:flex;align-items:center;gap:.75rem;font-size:.82rem;"><div style="width:12px;height:12px;border-radius:50%;background:var(--emerald);flex-shrink:0;"></div><span><strong>Emerald</strong> — Tier 3 Under Contract · Success and completion</span></div>
+
+      <div class="nt nt-tl" style="margin-bottom:.75rem;"><span class="nl nl-tl">Miami-Dade County Only</span><p>This tool is calibrated exclusively for Miami-Dade County properties. Using it outside Miami-Dade will produce inaccurate results.</p></div>
+
+      <div style="background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:1rem;">
+        <div style="font-family:var(--fm);font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem;">Analysis Color Guide</div>
+        <div style="display:flex;gap:1.5rem;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:.5rem;font-size:.78rem;"><div style="width:10px;height:10px;border-radius:50%;background:var(--teal);flex-shrink:0;"></div><span><strong>Teal</strong> — Tier 1 Pre-Offer</span></div>
+          <div style="display:flex;align-items:center;gap:.5rem;font-size:.78rem;"><div style="width:10px;height:10px;border-radius:50%;background:var(--indigo);flex-shrink:0;"></div><span><strong>Indigo</strong> — Tier 2 Active Offer</span></div>
+          <div style="display:flex;align-items:center;gap:.5rem;font-size:.78rem;"><div style="width:10px;height:10px;border-radius:50%;background:var(--emerald);flex-shrink:0;"></div><span><strong>Emerald</strong> — Tier 3 Under Contract</span></div>
         </div>
       </div>
     </div>
