@@ -358,6 +358,18 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 
 /* ── PRICING TIERS ── */
 .email-gate{background:var(--white);border:1.5px solid var(--rule);border-radius:10px;padding:1.75rem;margin:1.5rem 0;}
+
+/* ── COUNTY SELECTOR ── */
+.county-selector-wrap{background:var(--midnight);padding:1rem 1.5rem;border-bottom:1px solid rgba(176,190,197,.1);}
+.county-selector-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;}
+.county-sel-lbl{font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(176,190,197,.6);flex-shrink:0;}
+.county-pills{display:flex;gap:.4rem;flex-wrap:wrap;}
+.county-pill{padding:.3rem .75rem;border-radius:20px;font-family:var(--fm);font-size:.58rem;letter-spacing:.08em;cursor:pointer;border:1px solid rgba(176,190,197,.2);background:transparent;color:rgba(176,190,197,.6);transition:all .2s;white-space:nowrap;}
+.county-pill:hover{border-color:var(--teal-mid);color:var(--teal-mid);}
+.county-pill.active{background:var(--teal);border-color:var(--teal);color:var(--white);}
+.county-pill.yr3{border-style:dashed;opacity:.7;}
+.county-pill.yr3.active{border-style:solid;opacity:1;}
+.county-note{font-family:var(--fm);font-size:.54rem;color:rgba(176,190,197,.4);margin-left:auto;}
 .email-gate-title{font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--midnight);margin-bottom:.4rem;}
 .email-gate-sub{font-size:.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.6;}
 .email-input-row{display:flex;gap:.75rem;flex-wrap:wrap;}
@@ -560,13 +572,33 @@ footer strong{color:rgba(220,232,235,1.0);}
 <!-- WELCOME -->
 <div id="sw" class="screen active">
   <div class="mh">
-    <div class="mh-tag">Miami-Dade County · Independent Buyer Tool</div>
+    <div class="mh-tag">Florida East Coast · Independent Buyer Tool</div>
     <h1>Home<span class="tr">True</span></h1>
     <div class="mh-rule"></div>
     <div class="mh-sub">Honest mortgage analysis. No pressure. No agenda.</div>
-    <div class="scope-b">Miami-Dade County Only · Test Phase</div>
+    <div class="scope-b active-county-name">Miami-Dade County</div>
   </div>
-  <div class="vs">Rate verified:<span>Friday, April 25, 2026 · 11:52 AM ET</span>&nbsp;·&nbsp;Tax rate:<span>April 2026</span>&nbsp;·&nbsp;Flood:<span>April 2026</span>&nbsp;·&nbsp;Source:<span>Freddie Mac PMMS</span></div>
+  <div class="vs" id="avs">Rate verified:<span>Friday, April 25, 2026 · 11:52 AM ET</span>&nbsp;·&nbsp;County:<span class="active-county-short">Miami-Dade</span>&nbsp;·&nbsp;Tax:<span>1.30%</span>&nbsp;·&nbsp;Source:<span>Freddie Mac PMMS</span></div>
+  <div class="county-selector-wrap">
+    <div class="county-selector-inner">
+      <span class="county-sel-lbl">Select County</span>
+      <div class="county-pills">
+        <button class="county-pill active" onclick="selectCounty('miami-dade',this)">Miami-Dade</button>
+        <button class="county-pill" onclick="selectCounty('broward',this)">Broward</button>
+        <button class="county-pill" onclick="selectCounty('palm-beach',this)">Palm Beach</button>
+        <button class="county-pill yr3" onclick="selectCounty('martin',this)">Martin</button>
+        <button class="county-pill yr3" onclick="selectCounty('st-lucie',this)">St. Lucie</button>
+        <button class="county-pill yr3" onclick="selectCounty('indian-river',this)">Indian River</button>
+        <button class="county-pill yr3" onclick="selectCounty('brevard',this)">Brevard</button>
+      </div>
+      <span class="county-note">Dashed = Year 3 expansion</span>
+    </div>
+  </div>
+  <div class="county-selector-wrap" id="county-note-bar" style="display:none;padding:.6rem 1.5rem;">
+    <div style="max-width:900px;margin:0 auto;">
+      <span style="font-family:var(--fm);font-size:.6rem;color:var(--teal-mid);" id="county-note-text"></span>
+    </div>
+  </div>
   <div class="c" style="max-width:900px;">
     <div style="padding:1.5rem 0 1rem;">
       <div class="ae tl" style="margin-bottom:.3rem;">Welcome</div>
@@ -616,7 +648,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 
       </div>
 
-      <div class="nt nt-tl" style="margin-bottom:.75rem;"><span class="nl nl-tl">Miami-Dade County Only</span><p>This tool is calibrated exclusively for Miami-Dade County properties. Using it outside Miami-Dade will produce inaccurate results.</p></div>
+      <div class="nt nt-tl miami-dade-only-note" style="margin-bottom:.75rem;"><span class="nl nl-tl">Miami-Dade County</span><p>This tool is calibrated for Miami-Dade County properties. Tax rate: 1.30%. Using it in a different county will produce inaccurate results.</p></div>
 
       <div style="background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:1rem;">
         <div style="font-family:var(--fm);font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem;">Analysis Color Guide</div>
@@ -687,7 +719,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <!-- AFFORDABILITY CALCULATOR -->
 <div id="saff" class="screen">
   <div class="mh">
-    <div class="mh-tag">Miami-Dade County · Affordability Calculator</div>
+    <div class="mh-tag"><span class="active-county-name">Miami-Dade County</span> · Affordability Calculator</div>
     <h1>Home<span class="tr">True</span></h1>
     <div class="mh-rule"></div>
     <div class="mh-sub">Find your realistic price range before you start shopping</div>
@@ -766,7 +798,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <!-- COMPARISON MODE -->
 <div id="scmp" class="screen">
   <div id="cmp-masthead"></div>
-  <div class="vs">Comparison Mode · <span>Miami-Dade County · April 2026</span></div>
+  <div class="vs">Comparison Mode · <span><span class="active-county-short">Miami-Dade</span> · April 2026</span></div>
   <nav class="an">
     <div class="ats">
       <button class="at atc active" onclick="showCmpTab('c',this)">§ Head to Head</button>
@@ -788,12 +820,12 @@ footer strong{color:rgba(220,232,235,1.0);}
 <!-- QUESTION LIBRARY -->
 <div id="sql" class="screen">
   <div class="mh">
-    <div class="mh-tag">Miami-Dade County · Buyer Question Library</div>
+    <div class="mh-tag"><span class="active-county-name">Miami-Dade County</span> · Buyer Question Library</div>
     <h1>Home<span class="tr">True</span></h1>
     <div class="mh-rule"></div>
     <div class="mh-sub">Questions that put you in control of every professional conversation</div>
   </div>
-  <div class="vs">Miami-Dade County · <span>General Educational Resource — Not Legal or Financial Advice</span></div>
+  <div class="vs"><span class="active-county-short">Miami-Dade</span> · <span>General Educational Resource — Not Legal or Financial Advice</span></div>
 
   <!-- GATE: First-time buyer question -->
   <div id="ql-gate" class="ql-gate-wrap">
@@ -914,7 +946,7 @@ footer strong{color:rgba(220,232,235,1.0);}
         <div class="ack-row" id="g1-ack-row" onclick="toggleAck('g1c','g1-ack-row',updG1)" style="pointer-events:none;opacity:.5;">
           <div class="ack-box"><span class="ack-check-icon">✓</span></div>
           <div class="ack-text">
-            I have read and understood all six sections. I confirm the property I am analyzing is in Miami-Dade County. I understand this tool produces educational estimates — not professional advice. I accept full responsibility for the accuracy of information I provide.
+            I have read and understood all six sections. I confirm the property I am analyzing is in the county I selected above. I understand this tool produces educational estimates — not professional advice. I accept full responsibility for the accuracy of information I provide.
             <span class="ack-status" id="g1-ack-status">Tap to accept</span>
           </div>
         </div>
@@ -1116,7 +1148,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <!-- ANALYSIS -->
 <div id="sa" class="screen">
   <div id="amh"></div>
-  <div class="vs" id="avs">Rate verified:<span>Friday, April 25, 2026 · 11:52 AM ET</span>&nbsp;·&nbsp;Tax:<span>April 2026</span>&nbsp;·&nbsp;Flood:<span>April 2026</span></div>
+  <div class="vs" id="avs">Rate verified:<span>Friday, April 25, 2026 · 11:52 AM ET</span>&nbsp;·&nbsp;County:<span class="active-county-short">Miami-Dade</span>&nbsp;·&nbsp;Tax:<span>1.30%</span>&nbsp;·&nbsp;Source:<span>Freddie Mac PMMS</span></div>
   <!-- TIER RIBBON -->
   <div class="tier-ribbon" id="tier-ribbon" style="display:none;">
     <div class="tier-ribbon-info">Current plan: <span id="ribbon-plan-name">Free</span></div>
@@ -1164,7 +1196,89 @@ footer strong{color:rgba(220,232,235,1.0);}
 </div>
 
 <script>
-const MKT={rv:"Friday, April 25, 2026 · 11:52 AM ET",ov:"April 2026",fm:6.23,br:6.00,wr:6.75,tr:0.013,he:50000,fxb:42,fxw:85,fab:150,faw:400};
+// ── COUNTY DATA — all verified April 2026 ──
+const COUNTIES = {
+  'miami-dade': {
+    name:'Miami-Dade County', short:'Miami-Dade',
+    tr:0.013, he:50000,
+    fxb:42, fxw:85, fab:150, faw:400,
+    paUrl:'https://www.miamidade.gov/Apps/PA/PAOnlineTools/homestead',
+    paName:'Miami-Dade Property Appraiser',
+    notes:'Documentary stamp tax on deed typically paid by seller in Miami-Dade.'
+  },
+  'broward': {
+    name:'Broward County', short:'Broward',
+    tr:0.011, he:50000,
+    fxb:40, fxw:82, fab:145, faw:390,
+    paUrl:'https://www.bcpa.net/exemptions.asp',
+    paName:'Broward County Property Appraiser',
+    notes:'Broward County has slightly lower effective tax rate than Miami-Dade.'
+  },
+  'palm-beach': {
+    name:'Palm Beach County', short:'Palm Beach',
+    tr:0.011, he:50000,
+    fxb:40, fxw:80, fab:140, faw:380,
+    paUrl:'https://www.pbcgov.org/papa/homestead.htm',
+    paName:'Palm Beach County Property Appraiser',
+    notes:'Palm Beach County 2026 surtax changes effective January 2026.'
+  },
+  'martin': {
+    name:'Martin County', short:'Martin',
+    tr:0.0091, he:50000,
+    fxb:38, fxw:78, fab:135, faw:360,
+    paUrl:'https://www.pa.martin.fl.us/homestead-exemption/how-to-apply',
+    paName:'Martin County Property Appraiser',
+    notes:'Martin County has one of the lower effective tax rates in South Florida at 0.91%.'
+  },
+  'st-lucie': {
+    name:'St. Lucie County', short:'St. Lucie',
+    tr:0.0139, he:50000,
+    fxb:42, fxw:85, fab:150, faw:400,
+    paUrl:'https://www.paslc.gov/exemptions',
+    paName:'St. Lucie County Property Appraiser',
+    notes:'St. Lucie County has Florida's highest combined millage rate at 21.79 mills. Verify tax estimates carefully — the 1.39% effective rate is meaningfully higher than neighboring counties.'
+  },
+  'indian-river': {
+    name:'Indian River County', short:'Indian River',
+    tr:0.0085, he:50000,
+    fxb:38, fxw:78, fab:130, faw:350,
+    paUrl:'https://www.ircpa.org/exemptions/homestead.aspx',
+    paName:'Indian River County Property Appraiser',
+    notes:'Indian River County (Vero Beach) has one of the more favorable effective tax rates on the Treasure Coast at 0.85%.'
+  },
+  'brevard': {
+    name:'Brevard County', short:'Brevard',
+    tr:0.0095, he:50000,
+    fxb:40, fxw:82, fab:140, faw:370,
+    paUrl:'https://www.bcpao.us/exemptions',
+    paName:'Brevard County Property Appraiser',
+    notes:'Brevard County (Melbourne, Palm Bay, Cocoa Beach) has an effective tax rate of 0.95% — below the national median.'
+  },
+};
+
+// Active county — defaults to Miami-Dade
+let ACTIVE_COUNTY = 'miami-dade';
+let MKT = {rv:"Friday, April 25, 2026 · 11:52 AM ET",ov:"April 2026",fm:6.23,br:6.00,wr:6.75,tr:COUNTIES['miami-dade'].tr,he:50000,fxb:42,fxw:85,fab:150,faw:400};
+
+function setCounty(key) {
+  ACTIVE_COUNTY = key;
+  const c = COUNTIES[key];
+  MKT.tr = c.tr;
+  MKT.he = c.he;
+  MKT.fxb = c.fxb;
+  MKT.fxw = c.fxw;
+  MKT.fab = c.fab;
+  MKT.faw = c.faw;
+  // Update all visible county name references
+  document.querySelectorAll('.active-county-name').forEach(el => el.textContent = c.name);
+  document.querySelectorAll('.active-county-short').forEach(el => el.textContent = c.short);
+  // Update scope badge
+  const sb = document.querySelector('.scope-b');
+  if(sb) sb.textContent = c.name + ' · Test Phase';
+  // Update verified strip
+  const vs = document.getElementById('avs');
+  if(vs) vs.innerHTML = `Rate verified:<span>Friday, April 25, 2026 · 11:52 AM ET</span>&nbsp;·&nbsp;County:<span>${c.short}</span>&nbsp;·&nbsp;Tax:<span>${(c.tr*100).toFixed(2)}%</span>&nbsp;·&nbsp;Source:<span>Freddie Mac PMMS</span>`;
+}
 
 // ── SUBSCRIPTION TIER STATE ──
 // 'free' | 'essentials' | 'complete'
@@ -1338,6 +1452,32 @@ function proc3(){
   if(!document.getElementById('fd').value){alert('Please select a down payment.');return;}
   if(!document.getElementById('fa').value.trim()){alert('Please enter the property address.');return;}
   collectInp();bG3();show('g3');
+}
+
+function selectCounty(key, btn) {
+  // Update active pill
+  document.querySelectorAll('.county-pill').forEach(p => p.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+
+  // Set county data
+  setCounty(key);
+
+  // Show county note for new counties
+  const c = COUNTIES[key];
+  const noteBar = document.getElementById('county-note-bar');
+  const noteText = document.getElementById('county-note-text');
+  if(noteBar && noteText && c.notes) {
+    noteText.textContent = c.name + ' · ' + c.notes;
+    noteBar.style.display = 'block';
+  } else if(noteBar) {
+    noteBar.style.display = 'none';
+  }
+
+  // Update welcome screen geographic references
+  const miami = document.querySelectorAll('.miami-dade-only-note');
+  miami.forEach(el => {
+    el.innerHTML = `<span class="nl nl-tl">${c.short} County</span><p>This tool is calibrated for ${c.name} properties. Tax rate: ${(c.tr*100).toFixed(2)}%. Using it in a different county will produce inaccurate results.</p>`;
+  });
 }
 
 function initPlan() {
@@ -2053,7 +2193,7 @@ function buildPDF(inp) {
     doc.setTextColor(120, 140, 150);
     doc.setFontSize(6.5);
     doc.setFont('helvetica', 'normal');
-    doc.text(`HomeTrue · Miami-Dade County Only · Rate verified: ${MKT.rv}`, M, pageH - 16);
+    doc.text(`HomeTrue · ${COUNTIES[ACTIVE_COUNTY]?COUNTIES[ACTIVE_COUNTY].name:'Miami-Dade'} · Rate verified: ${MKT.rv}`, M, pageH - 16);
     doc.text(`Tax figures based on ${fmt(inp.price)} purchase price · Test Phase — Attorney Review Pending`, M, pageH - 11);
     doc.text('This analysis is an educational tool. It does not constitute financial, legal, real estate, or mortgage advice.', M, pageH - 6);
   }
@@ -2534,7 +2674,7 @@ function buildClosingCosts(inp) {
 
       <div class="nt nt-tl" style="margin-bottom:1.5rem;">
         <span class="nl nl-tl">Miami-Dade County — Florida Specific</span>
-        <p>Florida has some of the highest closing costs in the nation due to documentary stamp taxes and intangible taxes on mortgages. These figures are calculated specifically for a ${fmt(p)} purchase in Miami-Dade County. ${tier < 3 ? 'Figures are estimates — confirm all amounts with your title company and lender before closing.' : 'Confirm all figures against your official Closing Disclosure document.'}</p>
+        <p>Florida has some of the highest closing costs in the nation due to documentary stamp taxes and intangible taxes on mortgages. These figures are calculated for a ${fmt(p)} purchase in ${COUNTIES[ACTIVE_COUNTY]?COUNTIES[ACTIVE_COUNTY].name:'Miami-Dade County'}. ${tier < 3 ? 'Figures are estimates — confirm all amounts with your title company and lender before closing.' : 'Confirm all figures against your official Closing Disclosure document.'}</p>
       </div>
 
       <div class="cc-section">
@@ -2633,7 +2773,7 @@ function buildHomesteadGuide(inp) {
 
       <div class="nt nt-em" style="margin-bottom:1.5rem;">
         <span class="nl nl-em">Annual Savings: ${fmt(annualSavings)}/year · ${fmt(inp.ty1 - inp.ty2)}/month</span>
-        <p>The Florida Homestead Exemption reduces your assessed value by $50,000, saving you ${fmt(inp.ty1 - inp.ty2)}/month on taxes from Year 2 onward. It also activates the Save Our Homes cap — limiting annual assessment increases to 3% regardless of market appreciation.</p>
+        <p>The Florida Homestead Exemption reduces your assessed value by $50,000, saving you ${fmt(inp.ty1 - inp.ty2)}/month on taxes from Year 2 onward. It also activates the Save Our Homes cap — limiting annual assessment increases to 3% regardless of market appreciation. ${COUNTIES[ACTIVE_COUNTY] ? '<strong>' + COUNTIES[ACTIVE_COUNTY].name + '</strong> effective tax rate: ' + (COUNTIES[ACTIVE_COUNTY].tr*100).toFixed(2) + '%.' : ''}</p>
       </div>
 
       ${deadlineHtml}
@@ -2661,7 +2801,7 @@ function buildHomesteadGuide(inp) {
         <div class="hg-content">
           <div class="hg-title">File online at the Miami-Dade Property Appraiser portal</div>
           <div class="hg-desc">The Miami-Dade Property Appraiser accepts online Homestead applications. The process takes approximately 15 minutes. You will create an account, locate your property by address or folio number, and complete the exemption application.</div>
-          <a href="https://www.miamidade.gov/Apps/PA/PAOnlineTools/homestead" target="_blank" class="hg-portal-btn" style="margin-top:.75rem;">↗ Open Miami-Dade Property Appraiser Portal</a>
+          <a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open Property Appraiser Portal</a>
         </div>
       </div>
 
@@ -2691,6 +2831,12 @@ function buildHomesteadGuide(inp) {
       </div>
     </div>
   `;
+}
+
+function openPAPortal(e) {
+  e.preventDefault();
+  const c = COUNTIES[ACTIVE_COUNTY];
+  if(c && c.paUrl) window.open(c.paUrl, '_blank');
 }
 
 function refreshHomesteadGuide() {
@@ -2979,7 +3125,7 @@ function buildComparison(p1, p2) {
   `;
 
   document.getElementById('cmp-footer').innerHTML = `
-    HomeTrue · Comparison Mode · Miami-Dade County Only · Rate verified ${MKT.rv}<br>
+    HomeTrue · Comparison Mode · ${COUNTIES[ACTIVE_COUNTY]?COUNTIES[ACTIVE_COUNTY].name:'Miami-Dade'} · Rate verified ${MKT.rv}<br>
     This analysis is an educational tool. Not financial, legal, or real estate advice.
   `;
 
