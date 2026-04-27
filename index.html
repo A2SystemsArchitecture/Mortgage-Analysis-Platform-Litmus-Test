@@ -560,6 +560,75 @@ footer a{color:rgba(176,210,220,.9);text-decoration:underline;}
 footer strong{color:rgba(220,232,235,1.0);}
 .btn-slate{background:var(--slate-surface);color:var(--midnight);border:1.5px solid var(--slate);}
 .btn-slate:hover{background:var(--slate);color:var(--midnight);}
+/* AMBER — Georgia expansion color */
+:root{--amber:#f57f17;--amber-light:#fff8e1;--amber-mid:#ff8f00;--amber-dim:#e65100;--amber-muted:#ffe082;}
+/* STATE TOGGLE */
+.state-toggle-wrap{background:var(--midnight-lt);border-bottom:1px solid rgba(255,255,255,.06);padding:.6rem 1.5rem;}
+.state-toggle-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;}
+.state-toggle-lbl{font-family:var(--fm);font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(176,190,197,.6);}
+.state-btn{font-family:var(--fm);font-size:.62rem;letter-spacing:.1em;padding:.3rem .9rem;border-radius:20px;border:1.5px solid transparent;cursor:pointer;transition:all .2s;background:transparent;}
+.state-btn.fl{color:rgba(0,200,220,.8);border-color:rgba(0,151,167,.4);}
+.state-btn.fl.active{background:var(--teal);border-color:var(--teal);color:var(--white);}
+.state-btn.ga{color:rgba(245,127,23,.8);border-color:rgba(245,127,23,.4);}
+.state-btn.ga.active{background:var(--amber);border-color:var(--amber);color:var(--white);}
+.state-beta{font-family:var(--fm);font-size:.54rem;color:rgba(245,127,23,.7);letter-spacing:.08em;margin-left:auto;}
+/* GA county pills */
+.county-pill.ga-county{border-color:rgba(245,127,23,.35);color:rgba(245,127,23,.75);}
+.county-pill.ga-county:hover{border-color:var(--amber);color:var(--amber);}
+.county-pill.ga-county.active{background:var(--amber);border-color:var(--amber);color:var(--white);}
+.county-pill.ga-county.flag{border-style:dashed;}
+/* VISION LINK in masthead */
+.vision-link{position:absolute;top:1rem;right:1.25rem;font-family:var(--fm);font-size:.54rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(160,190,200,.6);cursor:pointer;border:1px solid rgba(160,190,200,.2);padding:.25rem .6rem;border-radius:3px;transition:all .2s;z-index:10;}
+.vision-link:hover{color:var(--amber);border-color:var(--amber);background:rgba(245,127,23,.08);}
+/* EXPANSION VISION PANEL */
+.vision-overlay{display:none;position:fixed;inset:0;background:var(--midnight);z-index:9999;overflow-y:auto;animation:fi .3s ease;}
+.vision-overlay.open{display:block;}
+.vision-close{position:fixed;top:1.25rem;right:1.5rem;font-family:var(--fm);font-size:.6rem;letter-spacing:.15em;color:rgba(176,190,197,.7);cursor:pointer;border:1px solid rgba(176,190,197,.2);padding:.35rem .8rem;border-radius:4px;transition:all .2s;z-index:10000;}
+.vision-close:hover{color:var(--white);border-color:var(--white);}
+.vision-body{max-width:820px;margin:0 auto;padding:5rem 2rem 4rem;}
+.vision-eyebrow{font-family:var(--fm);font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--amber);margin-bottom:1rem;}
+.vision-headline{font-family:var(--fd);font-size:clamp(2.2rem,5vw,3.4rem);font-weight:900;color:var(--white);line-height:1.05;letter-spacing:-.03em;margin-bottom:.5rem;}
+.vision-headline .tr{color:var(--emerald-mid);}
+.vision-rule{width:3rem;height:2px;background:linear-gradient(90deg,var(--amber),var(--emerald-mid));margin:1.25rem 0;}
+.vision-tagline{font-family:var(--fm);font-size:.65rem;color:rgba(176,196,210,.85);letter-spacing:.1em;margin-bottom:2.5rem;}
+.vision-why{background:rgba(255,255,255,.04);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:1.5rem 1.75rem;margin-bottom:3rem;}
+.vision-why p{font-size:1rem;line-height:1.8;color:rgba(220,232,238,.9);}
+.vision-section-title{font-family:var(--fm);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(176,196,210,.6);margin-bottom:1.25rem;padding-bottom:.5rem;border-bottom:1px solid rgba(255,255,255,.08);}
+.vision-market-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:3rem;}
+@media(max-width:560px){.vision-market-grid{grid-template-columns:1fr;}}
+.vision-market-card{border-radius:8px;padding:1.5rem;border:1px solid rgba(255,255,255,.08);}
+.vision-market-card.fl-card{background:rgba(0,131,143,.12);border-color:rgba(0,151,167,.25);}
+.vision-market-card.ga-card{background:rgba(245,127,23,.1);border-color:rgba(245,127,23,.25);}
+.vmc-label{font-family:var(--fm);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;display:block;margin-bottom:.4rem;}
+.fl-card .vmc-label{color:var(--teal-mid);}
+.ga-card .vmc-label{color:var(--amber);}
+.vmc-title{font-family:var(--fd);font-size:1.3rem;font-weight:700;color:var(--white);display:block;margin-bottom:.3rem;}
+.vmc-status{font-family:var(--fm);font-size:.6rem;display:inline-block;padding:.15rem .5rem;border-radius:3px;margin-bottom:.75rem;}
+.fl-card .vmc-status{background:rgba(0,151,167,.2);color:rgba(0,220,240,1);}
+.ga-card .vmc-status{background:rgba(245,127,23,.2);color:var(--amber);}
+.vmc-counties{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:.75rem;}
+.vmc-county-tag{font-family:var(--fm);font-size:.54rem;padding:.2rem .5rem;border-radius:12px;letter-spacing:.05em;}
+.fl-card .vmc-county-tag{background:rgba(0,131,143,.2);color:rgba(150,230,240,.9);}
+.ga-card .vmc-county-tag{background:rgba(245,127,23,.15);color:rgba(255,185,80,.9);}
+.vmc-county-tag.flag{opacity:.6;font-style:italic;}
+.vmc-note{font-size:.78rem;color:rgba(176,196,210,.6);line-height:1.55;}
+.vision-roadmap{margin-bottom:3rem;}
+.vision-roadmap-row{display:flex;gap:1rem;align-items:flex-start;padding:.9rem 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.vision-roadmap-row:last-child{border-bottom:none;}
+.vrr-year{font-family:var(--fm);font-size:.58rem;letter-spacing:.1em;color:rgba(176,196,210,.5);min-width:3.5rem;padding-top:.1rem;}
+.vrr-year.active{color:var(--teal-mid);}
+.vrr-year.ga-yr{color:var(--amber);}
+.vrr-content{flex:1;}
+.vrr-market{font-family:var(--fb);font-size:.9rem;font-weight:500;color:var(--white);margin-bottom:.15rem;}
+.vrr-market.active{color:rgba(0,220,240,1);}
+.vrr-market.ga-mkt{color:var(--amber);}
+.vrr-detail{font-family:var(--fm);font-size:.6rem;color:rgba(176,196,210,.55);letter-spacing:.04em;}
+.vrr-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.1);margin-top:.35rem;flex-shrink:0;}
+.vrr-dot.active{background:var(--teal);}
+.vrr-dot.ga-dot{background:var(--amber);}
+.vision-closing{text-align:center;padding:2.5rem 1rem;border-top:1px solid rgba(255,255,255,.08);margin-top:1rem;}
+.vision-closing-quote{font-family:var(--fd);font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:600;color:var(--white);line-height:1.5;max-width:580px;margin:0 auto 1.5rem;letter-spacing:-.01em;}
+.vision-closing-mark{font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;color:rgba(176,196,210,.4);}
 .tp-opt{border:1.5px solid var(--rule);border-radius:8px;padding:.9rem 1rem;cursor:pointer;transition:all .2s;background:var(--white);}
 .tp-opt:hover{border-color:var(--teal);background:var(--teal-light);transform:translateY(-1px);}
 .tp-opt.cur{border-color:var(--slate);background:var(--slate-surface);opacity:.6;cursor:default;}
@@ -572,17 +641,156 @@ footer strong{color:rgba(220,232,235,1.0);}
 <!-- WELCOME -->
 <div id="sw" class="screen active">
   <div class="mh">
-    <div class="mh-tag">Florida East Coast · Independent Buyer Tool</div>
+    <div class="mh-tag">Independent Buyer Tool · Florida &amp; Georgia</div>
     <h1>Home<span class="tr">True</span></h1>
     <div class="mh-rule"></div>
     <div class="mh-sub">Honest mortgage analysis. No pressure. No agenda.</div>
     <div class="scope-b active-county-name">Miami-Dade County</div>
+    <span class="vision-link" onclick="openVision()">Our Vision ↗</span>
   </div>
+
+<!-- EXPANSION VISION OVERLAY -->
+<div class="vision-overlay" id="visionOverlay">
+  <span class="vision-close" onclick="closeVision()">✕ Close</span>
+  <div class="vision-body">
+    <div class="vision-eyebrow">Expansion Vision · April 2026</div>
+    <h1 class="vision-headline">Home<span class="tr">True</span></h1>
+    <div class="vision-rule"></div>
+    <div class="vision-tagline">Honest mortgage analysis. No pressure. No agenda.</div>
+
+    <div class="vision-why">
+      <p>A father built this tool because his son and wife were trying to buy their first home in Miami-Dade. Every estimate they received from realtors and brokers looked manageable — until it wasn't. HomeTrue was built to give buyers the honest number before anyone with a commission touches the conversation. That's where this started. It's still the reason every feature exists.</p>
+    </div>
+
+    <div class="vision-section-title">Current Footprint — Live &amp; Verified</div>
+    <div class="vision-market-grid">
+      <div class="vision-market-card fl-card">
+        <span class="vmc-label">Florida · East Coast Corridor</span>
+        <span class="vmc-title">7-County Platform</span>
+        <span class="vmc-status">● Live · Verified April 2026</span>
+        <div class="vmc-counties">
+          <span class="vmc-county-tag">Miami-Dade</span>
+          <span class="vmc-county-tag">Broward</span>
+          <span class="vmc-county-tag">Palm Beach</span>
+          <span class="vmc-county-tag">Martin</span>
+          <span class="vmc-county-tag">St. Lucie</span>
+          <span class="vmc-county-tag">Indian River</span>
+          <span class="vmc-county-tag">Brevard</span>
+        </div>
+        <p class="vmc-note">Calibrated with verified tax rates, Homestead Exemption portals, flood insurance ranges, and Florida-specific closing costs. Weekly rate verification via Freddie Mac PMMS.</p>
+      </div>
+      <div class="vision-market-card ga-card">
+        <span class="vmc-label">Georgia · Metro Atlanta</span>
+        <span class="vmc-title">12-County Expansion</span>
+        <span class="vmc-status">◐ Beta · April 2026</span>
+        <div class="vmc-counties">
+          <span class="vmc-county-tag">Fulton</span>
+          <span class="vmc-county-tag">DeKalb</span>
+          <span class="vmc-county-tag">Gwinnett</span>
+          <span class="vmc-county-tag">Cobb</span>
+          <span class="vmc-county-tag">Cherokee</span>
+          <span class="vmc-county-tag">Forsyth</span>
+          <span class="vmc-county-tag">Clayton</span>
+          <span class="vmc-county-tag">Hall</span>
+          <span class="vmc-county-tag">Dawson</span>
+          <span class="vmc-county-tag">Paulding</span>
+          <span class="vmc-county-tag flag">Pickens*</span>
+          <span class="vmc-county-tag flag">Lumpkin*</span>
+        </div>
+        <p class="vmc-note">Georgia-specific closing costs, Georgia Homestead Exemption (April 1 deadline), and Metro Atlanta flood ranges. *Pickens &amp; Lumpkin HE amounts pending final verification.</p>
+      </div>
+    </div>
+
+    <div class="vision-section-title">Expansion Roadmap</div>
+    <div class="vision-roadmap">
+      <div class="vision-roadmap-row">
+        <div class="vrr-dot active"></div>
+        <div class="vrr-year active">Year 1</div>
+        <div class="vrr-content">
+          <div class="vrr-market active">Miami-Dade, FL</div>
+          <div class="vrr-detail">Launch market · Tri-County South Florida anchor · Live</div>
+        </div>
+      </div>
+      <div class="vision-roadmap-row">
+        <div class="vrr-dot active"></div>
+        <div class="vrr-year active">Year 2</div>
+        <div class="vrr-content">
+          <div class="vrr-market active">Broward + Palm Beach, FL</div>
+          <div class="vrr-detail">Complete the Tri-County South Florida footprint · Live</div>
+        </div>
+      </div>
+      <div class="vision-roadmap-row">
+        <div class="vrr-dot active"></div>
+        <div class="vrr-year active">Year 3</div>
+        <div class="vrr-content">
+          <div class="vrr-market active">Treasure &amp; Space Coast, FL</div>
+          <div class="vrr-detail">Martin · St. Lucie · Indian River · Brevard · Live</div>
+        </div>
+      </div>
+      <div class="vision-roadmap-row">
+        <div class="vrr-dot ga-dot"></div>
+        <div class="vrr-year ga-yr">Georgia</div>
+        <div class="vrr-content">
+          <div class="vrr-market ga-mkt">Metro Atlanta — 12 Counties · Beta 2026</div>
+          <div class="vrr-detail">Fulton · DeKalb · Gwinnett · Cobb · Cherokee · Forsyth · Clayton · Hall · Dawson · Paulding · Pickens · Lumpkin</div>
+        </div>
+      </div>
+      <div class="vision-roadmap-row">
+        <div class="vrr-dot"></div>
+        <div class="vrr-year">Year 4</div>
+        <div class="vrr-content">
+          <div class="vrr-market">Daytona + Orlando, FL</div>
+          <div class="vrr-detail">Volusia · Orange · Osceola · Seminole · Complete Florida east coast corridor</div>
+        </div>
+      </div>
+      <div class="vision-roadmap-row">
+        <div class="vrr-dot"></div>
+        <div class="vrr-year">Year 5</div>
+        <div class="vrr-content">
+          <div class="vrr-market">Tampa Bay + Sarasota, FL</div>
+          <div class="vrr-detail">Hillsborough · Pinellas · Pasco · Sarasota · Manatee · First cross-coast expansion</div>
+        </div>
+      </div>
+      <div class="vision-roadmap-row">
+        <div class="vrr-dot"></div>
+        <div class="vrr-year">Year 6</div>
+        <div class="vrr-content">
+          <div class="vrr-market">Southwest &amp; Central FL</div>
+          <div class="vrr-detail">Lee (Cape Coral/Fort Myers) · Polk (Lakeland)</div>
+        </div>
+      </div>
+      <div class="vision-roadmap-row">
+        <div class="vrr-dot"></div>
+        <div class="vrr-year">Year 7</div>
+        <div class="vrr-content">
+          <div class="vrr-market">Jacksonville, FL</div>
+          <div class="vrr-detail">Duval County · Florida east coast corridor complete</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vision-closing">
+      <div class="vision-closing-quote">"HomeTrue was built for one family. It scales for every buyer who deserves the honest number before anyone with a commission touches the conversation."</div>
+      <div class="vision-closing-mark">Home<span style="color:var(--emerald-mid);">True</span> · Honest mortgage analysis. No pressure. No agenda.</div>
+    </div>
+  </div>
+</div>
   <div class="vs" id="avs">Rate verified:<span>Friday, April 25, 2026 · 11:52 AM ET</span>&nbsp;·&nbsp;County:<span class="active-county-short">Miami-Dade</span>&nbsp;·&nbsp;Tax:<span>1.30%</span>&nbsp;·&nbsp;Source:<span>Freddie Mac PMMS</span></div>
+  <!-- STATE TOGGLE -->
+  <div class="state-toggle-wrap">
+    <div class="state-toggle-inner">
+      <span class="state-toggle-lbl">Market</span>
+      <button class="state-btn fl active" id="btn-fl" onclick="selectState('fl')">Florida</button>
+      <button class="state-btn ga" id="btn-ga" onclick="selectState('ga')">Georgia</button>
+      <span class="state-beta" id="ga-beta-label" style="display:none;">Beta · April 2026 · Data verified</span>
+    </div>
+  </div>
+  <!-- COUNTY SELECTOR -->
   <div class="county-selector-wrap">
     <div class="county-selector-inner">
       <span class="county-sel-lbl">Select County</span>
-      <div class="county-pills">
+      <!-- Florida counties -->
+      <div class="county-pills" id="fl-county-pills">
         <button class="county-pill active" onclick="selectCounty('miami-dade',this)">Miami-Dade</button>
         <button class="county-pill" onclick="selectCounty('broward',this)">Broward</button>
         <button class="county-pill" onclick="selectCounty('palm-beach',this)">Palm Beach</button>
@@ -591,7 +799,23 @@ footer strong{color:rgba(220,232,235,1.0);}
         <button class="county-pill yr3" onclick="selectCounty('indian-river',this)">Indian River</button>
         <button class="county-pill yr3" onclick="selectCounty('brevard',this)">Brevard</button>
       </div>
-      <span class="county-note">Dashed = Year 3 expansion</span>
+      <!-- Georgia counties -->
+      <div class="county-pills" id="ga-county-pills" style="display:none;">
+        <button class="county-pill ga-county" onclick="selectCounty('fulton-ga',this)">Fulton</button>
+        <button class="county-pill ga-county" onclick="selectCounty('dekalb-ga',this)">DeKalb</button>
+        <button class="county-pill ga-county" onclick="selectCounty('gwinnett-ga',this)">Gwinnett</button>
+        <button class="county-pill ga-county" onclick="selectCounty('cobb-ga',this)">Cobb</button>
+        <button class="county-pill ga-county" onclick="selectCounty('cherokee-ga',this)">Cherokee</button>
+        <button class="county-pill ga-county" onclick="selectCounty('forsyth-ga',this)">Forsyth</button>
+        <button class="county-pill ga-county" onclick="selectCounty('clayton-ga',this)">Clayton</button>
+        <button class="county-pill ga-county" onclick="selectCounty('hall-ga',this)">Hall</button>
+        <button class="county-pill ga-county" onclick="selectCounty('dawson-ga',this)">Dawson</button>
+        <button class="county-pill ga-county" onclick="selectCounty('paulding-ga',this)">Paulding</button>
+        <button class="county-pill ga-county flag" onclick="selectCounty('pickens-ga',this)">Pickens*</button>
+        <button class="county-pill ga-county flag" onclick="selectCounty('lumpkin-ga',this)">Lumpkin*</button>
+      </div>
+      <span class="county-note" id="fl-county-note">Dashed = Year 3 expansion</span>
+      <span class="county-note" id="ga-county-note" style="display:none;">*HE amount pending final verification</span>
     </div>
   </div>
   <div class="county-selector-wrap" id="county-note-bar" style="display:none;padding:.6rem 1.5rem;">
@@ -1204,7 +1428,8 @@ const COUNTIES = {
     fxb:42, fxw:85, fab:150, faw:400,
     paUrl:'https://www.miamidade.gov/Apps/PA/PAOnlineTools/homestead',
     paName:'Miami-Dade Property Appraiser',
-    notes:'Documentary stamp tax on deed typically paid by seller in Miami-Dade.'
+    notes:'Documentary stamp tax on deed typically paid by seller in Miami-Dade.',
+    state:'fl'
   },
   'broward': {
     name:'Broward County', short:'Broward',
@@ -1212,7 +1437,8 @@ const COUNTIES = {
     fxb:40, fxw:82, fab:145, faw:390,
     paUrl:'https://www.bcpa.net/exemptions.asp',
     paName:'Broward County Property Appraiser',
-    notes:'Broward County has slightly lower effective tax rate than Miami-Dade.'
+    notes:'Broward County has slightly lower effective tax rate than Miami-Dade.',
+    state:'fl'
   },
   'palm-beach': {
     name:'Palm Beach County', short:'Palm Beach',
@@ -1220,7 +1446,8 @@ const COUNTIES = {
     fxb:40, fxw:80, fab:140, faw:380,
     paUrl:'https://www.pbcgov.org/papa/homestead.htm',
     paName:'Palm Beach County Property Appraiser',
-    notes:'Palm Beach County 2026 surtax changes effective January 2026.'
+    notes:'Palm Beach County 2026 surtax changes effective January 2026.',
+    state:'fl'
   },
   'martin': {
     name:'Martin County', short:'Martin',
@@ -1228,7 +1455,8 @@ const COUNTIES = {
     fxb:38, fxw:78, fab:135, faw:360,
     paUrl:'https://www.pa.martin.fl.us/homestead-exemption/how-to-apply',
     paName:'Martin County Property Appraiser',
-    notes:'Martin County has one of the lower effective tax rates in South Florida at 0.91%.'
+    notes:'Martin County has one of the lower effective tax rates in South Florida at 0.91%.',
+    state:'fl'
   },
   'st-lucie': {
     name:'St. Lucie County', short:'St. Lucie',
@@ -1236,7 +1464,8 @@ const COUNTIES = {
     fxb:42, fxw:85, fab:150, faw:400,
     paUrl:'https://www.paslc.gov/exemptions',
     paName:'St. Lucie County Property Appraiser',
-    notes:'St. Lucie County has Florida's highest combined millage rate at 21.79 mills. Verify tax estimates carefully — the 1.39% effective rate is meaningfully higher than neighboring counties.'
+    notes:'St. Lucie County has Florida\'s highest combined millage rate at 21.79 mills. Verify tax estimates carefully — the 1.39% effective rate is meaningfully higher than neighboring counties.',
+    state:'fl'
   },
   'indian-river': {
     name:'Indian River County', short:'Indian River',
@@ -1244,7 +1473,8 @@ const COUNTIES = {
     fxb:38, fxw:78, fab:130, faw:350,
     paUrl:'https://www.ircpa.org/exemptions/homestead.aspx',
     paName:'Indian River County Property Appraiser',
-    notes:'Indian River County (Vero Beach) has one of the more favorable effective tax rates on the Treasure Coast at 0.85%.'
+    notes:'Indian River County (Vero Beach) has one of the more favorable effective tax rates on the Treasure Coast at 0.85%.',
+    state:'fl'
   },
   'brevard': {
     name:'Brevard County', short:'Brevard',
@@ -1252,7 +1482,117 @@ const COUNTIES = {
     fxb:40, fxw:82, fab:140, faw:370,
     paUrl:'https://www.bcpao.us/exemptions',
     paName:'Brevard County Property Appraiser',
-    notes:'Brevard County (Melbourne, Palm Bay, Cocoa Beach) has an effective tax rate of 0.95% — below the national median.'
+    notes:'Brevard County (Melbourne, Palm Bay, Cocoa Beach) has an effective tax rate of 0.95% — below the national median.',
+    state:'fl'
+  },
+  // ── GEORGIA COUNTIES — Metro Atlanta Beta ──
+  'fulton-ga': {
+    name:'Fulton County', short:'Fulton',
+    tr:0.0105, he:15000,
+    fxb:40, fxw:70, fab:90, faw:150,
+    paUrl:'https://fultonassessor.org/exemptions/',
+    paName:'Fulton County Board of Assessors',
+    notes:'Highest effective tax rate in Metro Atlanta at 1.05%. Floating homestead freeze applies after filing. Apply by April 1.',
+    state:'ga'
+  },
+  'dekalb-ga': {
+    name:'DeKalb County', short:'DeKalb',
+    tr:0.0093, he:30000,
+    fxb:40, fxw:70, fab:90, faw:150,
+    paUrl:'https://www.dekalbcountyga.gov/tax-commissioner/homestead-exemption',
+    paName:'DeKalb County Tax Commissioner',
+    notes:'DeKalb has the highest homestead exemption in Metro Atlanta at $30,000. Includes Decatur, Tucker, Stone Mountain. Apply by April 1.',
+    state:'ga'
+  },
+  'gwinnett-ga': {
+    name:'Gwinnett County', short:'Gwinnett',
+    tr:0.0095, he:10000,
+    fxb:40, fxw:70, fab:80, faw:140,
+    paUrl:'https://www.gwinnetttaxcommissioner.com/property-tax/homestead-exemption',
+    paName:'Gwinnett County Tax Commissioner',
+    notes:'Gwinnett has the highest median tax bill in Georgia. Value Offset Exemption freezes assessed value for county portion. Tax bills due November 15 — earlier than most Georgia counties.',
+    state:'ga'
+  },
+  'cobb-ga': {
+    name:'Cobb County', short:'Cobb',
+    tr:0.0067, he:10000,
+    fxb:40, fxw:70, fab:90, faw:150,
+    paUrl:'https://www.cobbtax.org/property/homestead-exemptions/',
+    paName:'Cobb County Tax Commissioner',
+    notes:'Lowest effective tax rate in Metro Atlanta core at 0.67%. Includes Marietta, Smyrna, Kennesaw. Apply by April 1.',
+    state:'ga'
+  },
+  'cherokee-ga': {
+    name:'Cherokee County', short:'Cherokee',
+    tr:0.0069, he:5000,
+    fxb:35, fxw:60, fab:80, faw:130,
+    paUrl:'https://www.cherokeega.com/AssessorTaxCommissioner/Tax-Commissioner/Homestead-Exemption/',
+    paName:'Cherokee County Tax Commissioner',
+    notes:'Low 0.69% effective rate. Fast-growing market. Includes Canton, Woodstock. Apply in person by April 1.',
+    state:'ga'
+  },
+  'forsyth-ga': {
+    name:'Forsyth County', short:'Forsyth',
+    tr:0.0073, he:8000,
+    fxb:35, fxw:60, fab:80, faw:130,
+    paUrl:'https://www.forsythco.com/Departments-Offices/Tax-Assessors/Homestead-Exemptions',
+    paName:'Forsyth County Tax Assessors',
+    notes:'Highest median home value in Georgia ($550K+). Low 0.73% effective rate. Includes Cumming. Apply by April 1.',
+    state:'ga'
+  },
+  'clayton-ga': {
+    name:'Clayton County', short:'Clayton',
+    tr:0.0087, he:10000,
+    fxb:40, fxw:70, fab:90, faw:150,
+    paUrl:'https://www.claytoncountyga.gov/government/tax-commissioner/homestead-exemption',
+    paName:'Clayton County Tax Commissioner',
+    notes:'South of Atlanta. Includes Jonesboro, Forest Park. 0.87% effective rate. Apply by April 1.',
+    state:'ga'
+  },
+  'hall-ga': {
+    name:'Hall County', short:'Hall',
+    tr:0.0073, he:10000,
+    fxb:50, fxw:80, fab:100, faw:180,
+    paUrl:'https://www.hallcounty.org/188/Tax-Assessors',
+    paName:'Hall County Tax Assessors',
+    notes:'Gainesville and Lake Lanier market. Elevated flood exposure near Lake Lanier — Zone AE premiums higher than other Metro Atlanta counties. Apply by April 1.',
+    state:'ga'
+  },
+  'dawson-ga': {
+    name:'Dawson County', short:'Dawson',
+    tr:0.0060, he:7000,
+    fxb:35, fxw:60, fab:80, faw:120,
+    paUrl:'https://www.dawsoncounty.org/196/Tax-Assessors',
+    paName:'Dawson County Tax Assessors',
+    notes:'Dawsonville. One of the lowest effective tax rates in the region at 0.60%. Apply by April 1.',
+    state:'ga'
+  },
+  'paulding-ga': {
+    name:'Paulding County', short:'Paulding',
+    tr:0.0080, he:2000,
+    fxb:35, fxw:60, fab:80, faw:120,
+    paUrl:'https://www.paulding.gov/216/Tax-Assessor',
+    paName:'Paulding County Tax Assessor',
+    notes:'Dallas and Hiram. 0.80% effective rate. Note: homestead exemption amount ($2,000) is the lowest of the 12 Georgia counties. Apply by April 1.',
+    state:'ga'
+  },
+  'pickens-ga': {
+    name:'Pickens County', short:'Pickens',
+    tr:0.0060, he:2000,
+    fxb:35, fxw:60, fab:80, faw:120,
+    paUrl:'https://www.pickenscountyga.gov/tax-assessors',
+    paName:'Pickens County Tax Assessors',
+    notes:'Jasper. Mountain county. One of the lowest effective rates in the state at 0.60%. HE amount pending Giselle verification at county assessor. Apply by April 1.',
+    state:'ga'
+  },
+  'lumpkin-ga': {
+    name:'Lumpkin County', short:'Lumpkin',
+    tr:0.0065, he:2000,
+    fxb:35, fxw:60, fab:80, faw:120,
+    paUrl:'https://www.lumpkincounty.gov/tax_assessor',
+    paName:'Lumpkin County Tax Assessor',
+    notes:'Dahlonega. Mountain county. 0.65% effective rate. HE amount pending Giselle verification at county assessor. Apply by April 1.',
+    state:'ga'
   },
 };
 
@@ -1454,15 +1794,59 @@ function proc3(){
   collectInp();bG3();show('g3');
 }
 
+function selectState(state) {
+  const flPills = document.getElementById('fl-county-pills');
+  const gaPills = document.getElementById('ga-county-pills');
+  const flNote = document.getElementById('fl-county-note');
+  const gaNote = document.getElementById('ga-county-note');
+  const betaLabel = document.getElementById('ga-beta-label');
+  const btnFl = document.getElementById('btn-fl');
+  const btnGa = document.getElementById('btn-ga');
+
+  if (state === 'fl') {
+    flPills.style.display = 'flex';
+    gaPills.style.display = 'none';
+    flNote.style.display = '';
+    gaNote.style.display = 'none';
+    betaLabel.style.display = 'none';
+    btnFl.classList.add('active');
+    btnGa.classList.remove('active');
+    // Auto-select Miami-Dade
+    const mdc = flPills.querySelector('.county-pill');
+    selectCounty('miami-dade', mdc);
+  } else {
+    flPills.style.display = 'none';
+    gaPills.style.display = 'flex';
+    flNote.style.display = 'none';
+    gaNote.style.display = '';
+    betaLabel.style.display = '';
+    btnFl.classList.remove('active');
+    btnGa.classList.add('active');
+    // Auto-select Fulton
+    const fultonBtn = gaPills.querySelector('.county-pill');
+    selectCounty('fulton-ga', fultonBtn);
+  }
+}
+
+function openVision() {
+  document.getElementById('visionOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeVision() {
+  document.getElementById('visionOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
 function selectCounty(key, btn) {
-  // Update active pill
+  // Update active pill — only within the currently visible pill group
   document.querySelectorAll('.county-pill').forEach(p => p.classList.remove('active'));
   if(btn) btn.classList.add('active');
 
   // Set county data
   setCounty(key);
 
-  // Show county note for new counties
+  // Show county note bar
   const c = COUNTIES[key];
   const noteBar = document.getElementById('county-note-bar');
   const noteText = document.getElementById('county-note-text');
@@ -1473,12 +1857,21 @@ function selectCounty(key, btn) {
     noteBar.style.display = 'none';
   }
 
-  // Update welcome screen geographic references
+  // Update verified strip county display
+  const activeShorts = document.querySelectorAll('.active-county-short');
+  activeShorts.forEach(el => el.textContent = c.short);
+  const activeNames = document.querySelectorAll('.active-county-name');
+  activeNames.forEach(el => el.textContent = c.name);
+
+  // Update welcome screen geographic notice
   const miami = document.querySelectorAll('.miami-dade-only-note');
+  const isGA = c.state === 'ga';
   miami.forEach(el => {
-    el.innerHTML = `<span class="nl nl-tl">${c.short} County</span><p>This tool is calibrated for ${c.name} properties. Tax rate: ${(c.tr*100).toFixed(2)}%. Using it in a different county will produce inaccurate results.</p>`;
+    el.className = `nt ${isGA ? 'nt-wn' : 'nt-tl'} miami-dade-only-note`;
+    el.innerHTML = `<span class="nl ${isGA ? 'nl-wn' : 'nl-tl'}">${c.short} County${isGA ? ' · Beta' : ''}</span><p>This tool is calibrated for ${c.name} properties. Tax rate: ${(c.tr*100).toFixed(2)}%. ${isGA ? 'Georgia beta — data verified April 2026. Pickens and Lumpkin HE amounts pending final verification.' : 'Using it in a different county will produce inaccurate results.'}</p>`;
   });
 }
+
 
 function initPlan() {
   // Show/hide tier locks based on plan
@@ -1504,7 +1897,10 @@ function genAnalysis(){
   setTimeout(updateUpgradeBtn,150);
   setTimeout(()=>{
     const ccTab=document.getElementById('tab-cc');
-    if(ccTab) ccTab.innerHTML=buildClosingCosts(S.inp);
+    if(ccTab) {
+      const isGA = COUNTIES[ACTIVE_COUNTY] && COUNTIES[ACTIVE_COUNTY].state === 'ga';
+      ccTab.innerHTML = isGA ? buildClosingCostsGA(S.inp) : buildClosingCosts(S.inp);
+    }
     const hgTab=document.getElementById('tab-hg');
     if(hgTab) hgTab.innerHTML=buildHomesteadGuide(S.inp);
     const cmpBtn=document.getElementById('compare-btn');
@@ -2732,6 +3128,109 @@ function buildClosingCosts(inp) {
 }
 
 // ══════════════════════════════════════
+// CLOSING COSTS — GEORGIA
+// ══════════════════════════════════════
+function buildClosingCostsGA(inp) {
+  const p = inp.price;
+  const loan = inp.loan;
+  const c = COUNTIES[ACTIVE_COUNTY];
+
+  // Georgia-specific closing cost calculations
+  const intangibleTax = Math.round(loan * 0.003);       // 0.30% of loan — Georgia rate
+  const attorneyFee = 500;                                // Required by Georgia law — midpoint of $300–$700
+  const titleInsLender = Math.round(loan * 0.005);       // ~0.50% of loan
+  const titleInsOwner = Math.round(p * 0.003);           // ~0.30% of purchase price
+  const titleSearch = 250;
+  const appraisal = 575;
+  const inspection = 425;
+  const survey = 450;
+  const recordingFee = Math.round(14 + (3 * 12));        // $14 + $3/page est. ~12 pages
+  const originationFee = Math.round(loan * 0.005);
+  const creditReport = 45;
+  const floodCert = 15;
+  const prepaidInsurance = inp.bi > 0 ? inp.bi * 12 : 2800; // Frame construction — slightly lower than FL
+  const prepaidInterest = Math.round(loan * (inp.br/100/365) * 15);
+  const escrowSetup = Math.round((inp.ty1 + (inp.bi>0?inp.bi:233)) * 2);
+  const reserves3mo = Math.round(inp.wt * 3);
+  const reserves6mo = Math.round(inp.wt * 6);
+
+  // Transfer tax (seller-paid context — informational only)
+  const transferTax = Math.round(p * 0.001); // ~$1 per $1,000 — seller pays
+
+  const govTotal = intangibleTax + recordingFee;
+  const titleTotal = titleSearch + titleInsLender + titleInsOwner + attorneyFee;
+  const lenderTotal = originationFee + appraisal + inspection + survey + creditReport + floodCert;
+  const prepaidTotal = prepaidInsurance + prepaidInterest + escrowSetup;
+  const closingTotal = govTotal + titleTotal + lenderTotal + prepaidTotal;
+  const grandTotal = inp.damt + closingTotal + reserves3mo;
+
+  return `
+    <div class="cw">
+      <div class="ae" style="color:var(--amber);">Section IV</div>
+      <h2 class="at2">Closing Cost Breakdown</h2>
+      <div class="ar"></div>
+
+      <div class="nt" style="background:var(--amber-light);border-left:4px solid var(--amber);margin-bottom:1.5rem;">
+        <span class="nl" style="color:var(--amber-dim);">${c.name} — Georgia Specific</span>
+        <p>Georgia closing costs differ meaningfully from Florida. There is no documentary stamp tax on the deed — the seller pays a transfer tax of approximately ${fmt(transferTax)} (0.10% of sale price). Georgia law requires a licensed real estate attorney at every closing. Intangible recording tax applies to the mortgage at 0.30%. Figures are estimates — confirm all amounts with your closing attorney and lender before closing.</p>
+      </div>
+
+      <div class="cc-section">
+        <div class="cc-section-title">Government Taxes &amp; Recording Fees</div>
+        <div class="cc-row"><div class="cc-item">Intangible Recording Tax — Mortgage<span class="cc-note">0.30% of loan amount — Georgia state tax on new mortgages of 62+ months</span></div><div class="cc-val">${fmt(intangibleTax)}</div></div>
+        <div class="cc-row"><div class="cc-item">Recording Fees<span class="cc-note">County clerk — deed and mortgage recording. $14 base + $3/page</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
+        <div class="cc-row"><div class="cc-item">Transfer Tax — Seller Paid (informational)<span class="cc-note">Seller typically pays ~$1 per $1,000 of sale price. Not a buyer cost — shown for context.</span></div><div class="cc-val" style="color:var(--muted);">${fmt(transferTax)}</div></div>
+        <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal (Buyer)</span><span class="cc-total-val">${fmt(govTotal)}</span></div>
+      </div>
+
+      <div class="cc-section">
+        <div class="cc-section-title">Title, Attorney &amp; Settlement Fees</div>
+        <div class="cc-row"><div class="cc-item">Closing Attorney Fee<span class="cc-note">Required by Georgia law — licensed real estate attorney must oversee every closing</span></div><div class="cc-val">${fmt(attorneyFee)}</div></div>
+        <div class="cc-row"><div class="cc-item">Title Search &amp; Exam<span class="cc-note">Public records search for liens, judgments, and encumbrances</span></div><div class="cc-val">${fmt(titleSearch)}</div></div>
+        <div class="cc-row"><div class="cc-item">Lender's Title Insurance<span class="cc-note">Required by lender — protects lender's interest in property</span></div><div class="cc-val">${fmt(titleInsLender)}</div></div>
+        <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Recommended — protects your ownership interest. Negotiable in Georgia.</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
+        <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Attorney Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div>
+      </div>
+
+      <div class="cc-section">
+        <div class="cc-section-title">Lender &amp; Inspection Fees</div>
+        <div class="cc-row"><div class="cc-item">Loan Origination Fee<span class="cc-note">0.50% of loan amount — negotiate with lender</span></div><div class="cc-val">${fmt(originationFee)}</div></div>
+        <div class="cc-row"><div class="cc-item">Appraisal Fee<span class="cc-note">Required by lender — independent property valuation</span></div><div class="cc-val">${fmt(appraisal)}</div></div>
+        <div class="cc-row"><div class="cc-item">Home Inspection<span class="cc-note">Strongly recommended — structural and safety review before committing</span></div><div class="cc-val">${fmt(inspection)}</div></div>
+        <div class="cc-row"><div class="cc-item">Survey Fee<span class="cc-note">Verifies boundary lines and easements — common in Georgia transactions</span></div><div class="cc-val">${fmt(survey)}</div></div>
+        <div class="cc-row"><div class="cc-item">Credit Report Fee<span class="cc-note">Tri-merge credit report from all three bureaus</span></div><div class="cc-val">${fmt(creditReport)}</div></div>
+        <div class="cc-row"><div class="cc-item">Flood Zone Certification<span class="cc-note">FEMA flood zone determination — required by lender</span></div><div class="cc-val">${fmt(floodCert)}</div></div>
+        <div class="cc-total-row"><span class="cc-total-lbl">Lender &amp; Inspection Subtotal</span><span class="cc-total-val">${fmt(lenderTotal)}</span></div>
+      </div>
+
+      <div class="cc-section">
+        <div class="cc-section-title">Prepaids &amp; Escrow Setup</div>
+        <div class="cc-row"><div class="cc-item">Prepaid Homeowners Insurance<span class="cc-note">First year premium — frame construction rates applied for Metro Atlanta</span></div><div class="cc-val">${fmt(prepaidInsurance)}</div></div>
+        <div class="cc-row"><div class="cc-item">Prepaid Mortgage Interest<span class="cc-note">Interest from closing date to end of month — approximately 15 days</span></div><div class="cc-val">${fmt(prepaidInterest)}</div></div>
+        <div class="cc-row"><div class="cc-item">Escrow Account Setup<span class="cc-note">2-month cushion for tax and insurance escrow — held by lender</span></div><div class="cc-val">${fmt(escrowSetup)}</div></div>
+        <div class="cc-total-row"><span class="cc-total-lbl">Prepaids &amp; Escrow Subtotal</span><span class="cc-total-val">${fmt(prepaidTotal)}</span></div>
+      </div>
+
+      <div class="cash-consolidation">
+        <div class="cash-con-title">Total Cash Needed at Close</div>
+        <div class="cash-con-row"><span class="cash-con-lbl">Down Payment (${inp.dpct}%)</span><span class="cash-con-val">${fmt(inp.damt)}</span></div>
+        <div class="cash-con-row"><span class="cash-con-lbl">Total Closing Costs</span><span class="cash-con-val">${fmt(closingTotal)}</span></div>
+        <div class="cash-con-row"><span class="cash-con-lbl">3-Month Housing Reserve</span><span class="cash-con-val">${fmt(reserves3mo)}</span></div>
+        <div class="cash-con-grand">
+          <span class="cash-con-grand-lbl">Minimum Cash Needed</span>
+          <span class="cash-con-grand-val">${fmt(grandTotal)}</span>
+        </div>
+        <p style="font-size:.75rem;color:rgba(176,190,197,.8);margin-top:.75rem;line-height:1.6;">6-month reserve recommended: ${fmt(inp.damt + closingTotal + reserves6mo)}. Georgia closing attorney fees are non-negotiable by law — budget the full amount. Verify all figures against your official Closing Disclosure before signing.</p>
+      </div>
+
+      <div style="text-align:center;margin:2rem 0 1rem;">
+        <button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button>
+      </div>
+    </div>
+  `;
+}
+
+// ══════════════════════════════════════
 // PRIORITY 3 — HOMESTEAD GUIDE
 // ══════════════════════════════════════
 function buildHomesteadGuide(inp) {
@@ -3467,7 +3966,11 @@ function showTab(t,btn){
 
   // Show correct tab
   if(t==='cc'){
-    if(ccTab){ccTab.style.display='block';}
+    if(ccTab){
+      ccTab.style.display='block';
+      const isGA = COUNTIES[ACTIVE_COUNTY] && COUNTIES[ACTIVE_COUNTY].state === 'ga';
+      ccTab.innerHTML = isGA ? buildClosingCostsGA(S.inp) : buildClosingCosts(S.inp);
+    }
   } else if(t==='hg'){
     if(hgTab){hgTab.style.display='block';}
   } else if(t==='ql-tab'){
