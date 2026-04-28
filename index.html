@@ -18,6 +18,10 @@
   --texas:#a34719;--texas-mid:#c25520;--texas-light:#fdf0ea;--texas-dim:#7a3512;--texas-muted:#f5cdb8;
   --nc:#3a5a78;--nc-mid:#4a6d8e;--nc-light:#e8eef4;--nc-dim:#2a4558;--nc-muted:#b8ccd8;
   --georgia:#8b1e2d;--georgia-mid:#a32535;--georgia-light:#f5e8ea;--georgia-dim:#6a1522;--georgia-muted:#d4a0a7;
+  --sc:#2f4a5c;--sc-mid:#3d5f75;--sc-light:#e8eef1;--sc-dim:#1e3040;--sc-muted:#a0b8c8;
+  --tn:#b06a3c;--tn-mid:#c87a4a;--tn-light:#f4ece6;--tn-dim:#7a4a28;--tn-muted:#d4b09a;
+  --al:#6a2e2e;--al-mid:#823838;--al-light:#f2e9e9;--al-dim:#4a1e1e;--al-muted:#c4a0a0;
+  --va:#2c4a6e;--va-mid:#3a5f8a;--va-light:#e6ecf2;--va-dim:#1c3050;--va-muted:#9ab0c8;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--slate-bg);color:var(--ink);font-family:var(--fb);font-weight:300;min-height:100vh;line-height:1.65;}
@@ -371,6 +375,10 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .county-pill:hover{border-color:var(--teal-mid);color:var(--teal-mid);}
 .county-pill.active{background:var(--teal);border-color:var(--teal);color:var(--white);}
 .county-pill.yr3{border-style:dashed;opacity:.7;}
+.county-pill.yr4{border-style:dotted;opacity:.65;}
+.county-pill.yr4.active{border-style:solid;opacity:1;}
+.county-pill.yr5{border-style:dotted;opacity:.55;border-color:rgba(0,131,143,.35);}
+.county-pill.yr5.active{border-style:solid;opacity:1;}
 .county-pill.yr3.active{border-style:solid;opacity:1;}
 .county-note{font-family:var(--fm);font-size:.54rem;color:rgba(176,190,197,.4);margin-left:auto;}
 /* State toggles */
@@ -379,6 +387,10 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .state-toggle.active-fl{background:var(--teal);border-color:var(--teal);color:var(--white);}
 .state-toggle.active-tx{background:var(--texas);border-color:var(--texas);color:var(--white);}
 .state-toggle.active-nc{background:var(--nc);border-color:var(--nc);color:var(--white);}
+.state-toggle.active-sc{background:var(--sc);border-color:var(--sc);color:var(--white);}
+.state-toggle.active-tn{background:var(--tn);border-color:var(--tn);color:var(--white);}
+.state-toggle.active-al{background:var(--al);border-color:var(--al);color:var(--white);}
+.state-toggle.active-va{background:var(--va);border-color:var(--va);color:var(--white);}
 .state-toggle.active-ga{background:var(--georgia);border-color:var(--georgia);color:var(--white);}
 .state-toggle:hover:not(.active-fl):not(.active-tx):not(.active-nc):not(.active-ga){border-color:rgba(176,190,197,.6);color:rgba(176,190,197,.9);}
 /* State toggle hint colors — unselected states show a tint of their identity color */
@@ -389,6 +401,14 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .state-toggle.hint-ga:hover{border-color:var(--georgia-mid);color:var(--georgia-mid);}
 .state-toggle.hint-tx:hover{border-color:var(--texas-mid);color:var(--texas-mid);}
 .state-toggle.hint-nc:hover{border-color:var(--nc-mid);color:var(--nc-mid);}
+.state-toggle.hint-sc{border-color:rgba(47,74,92,.45);color:rgba(80,120,145,.9);}
+.state-toggle.hint-sc:hover{border-color:var(--sc-mid);color:var(--sc-mid);}
+.state-toggle.hint-tn{border-color:rgba(176,106,60,.45);color:rgba(200,130,80,.9);}
+.state-toggle.hint-tn:hover{border-color:var(--tn-mid);color:var(--tn-mid);}
+.state-toggle.hint-al{border-color:rgba(106,46,46,.45);color:rgba(150,80,80,.9);}
+.state-toggle.hint-al:hover{border-color:var(--al-mid);color:var(--al-mid);}
+.state-toggle.hint-va{border-color:rgba(44,74,110,.45);color:rgba(80,120,160,.9);}
+.state-toggle.hint-va:hover{border-color:var(--va-mid);color:var(--va-mid);}
 .state-toggle.hint-fl:hover{border-color:var(--teal-mid);color:var(--teal-mid);}
 /* Georgia pills — stronger contrast when unselected */
 .county-pill.ga{border-color:rgba(139,30,45,.55);color:rgba(200,120,130,.95);}
@@ -404,6 +424,18 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .county-pill.nc{border-color:rgba(58,90,120,.4);color:rgba(58,90,120,.7);}
 .county-pill.nc:hover{border-color:var(--nc-mid);color:var(--nc-mid);}
 .county-pill.nc.active{background:var(--nc);border-color:var(--nc);color:var(--white);}
+.county-pill.sc{border-color:rgba(47,74,92,.55);color:rgba(100,145,175,.95);}
+.county-pill.sc:hover{border-color:var(--sc-mid);color:var(--white);background:rgba(47,74,92,.25);}
+.county-pill.sc.active{background:var(--sc);border-color:var(--sc);color:var(--white);}
+.county-pill.tn{border-color:rgba(176,106,60,.55);color:rgba(210,145,95,.95);}
+.county-pill.tn:hover{border-color:var(--tn-mid);color:var(--white);background:rgba(176,106,60,.25);}
+.county-pill.tn.active{background:var(--tn);border-color:var(--tn);color:var(--white);}
+.county-pill.al{border-color:rgba(106,46,46,.55);color:rgba(160,95,95,.95);}
+.county-pill.al:hover{border-color:var(--al-mid);color:var(--white);background:rgba(106,46,46,.25);}
+.county-pill.al.active{background:var(--al);border-color:var(--al);color:var(--white);}
+.county-pill.va{border-color:rgba(44,74,110,.55);color:rgba(90,130,170,.95);}
+.county-pill.va:hover{border-color:var(--va-mid);color:var(--white);background:rgba(44,74,110,.25);}
+.county-pill.va.active{background:var(--va);border-color:var(--va);color:var(--white);}
 /* State info banner */
 .state-banner{font-family:var(--fm);font-size:.56rem;color:rgba(176,190,197,.5);padding:.4rem 0 0;letter-spacing:.06em;}
 .email-gate-title{font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--midnight);margin-bottom:.4rem;}
@@ -608,7 +640,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <!-- WELCOME -->
 <div id="sw" class="screen active">
   <div class="mh">
-    <div class="mh-tag">Independent Buyer Tool · Florida &amp; Georgia · Texas · North Carolina</div>
+    <div class="mh-tag">Independent Buyer Tool · Florida · Georgia · Texas · North Carolina · South Carolina · Tennessee · Alabama · Virginia</div>
     <h1>Home<span class="tr">True</span></h1>
     <div class="mh-rule"></div>
     <div class="mh-sub">Honest mortgage analysis. No pressure. No agenda.</div>
@@ -624,6 +656,10 @@ footer strong{color:rgba(220,232,235,1.0);}
           <button class="state-toggle hint-ga" id="st-ga" onclick="selectState('ga',this)">Georgia</button>
           <button class="state-toggle hint-tx" id="st-tx" onclick="selectState('tx',this)">Texas</button>
           <button class="state-toggle hint-nc" id="st-nc" onclick="selectState('nc',this)">North Carolina</button>
+          <button class="state-toggle hint-sc" id="st-sc" onclick="selectState('sc',this)">South Carolina</button>
+          <button class="state-toggle hint-tn" id="st-tn" onclick="selectState('tn',this)">Tennessee</button>
+          <button class="state-toggle hint-al" id="st-al" onclick="selectState('al',this)">Alabama</button>
+          <button class="state-toggle hint-va" id="st-va" onclick="selectState('va',this)">Virginia</button>
         </div>
       </div>
       <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;width:100%;">
@@ -636,6 +672,15 @@ footer strong{color:rgba(220,232,235,1.0);}
           <button class="county-pill yr3" onclick="selectCounty('st-lucie',this)">St. Lucie</button>
           <button class="county-pill yr3" onclick="selectCounty('indian-river',this)">Indian River</button>
           <button class="county-pill yr3" onclick="selectCounty('brevard',this)">Brevard</button>
+          <button class="county-pill yr4" onclick="selectCounty('volusia',this)">Volusia</button>
+          <button class="county-pill yr4" onclick="selectCounty('orange-fl',this)">Orange (Orlando)</button>
+          <button class="county-pill yr4" onclick="selectCounty('osceola',this)">Osceola</button>
+          <button class="county-pill yr4" onclick="selectCounty('seminole',this)">Seminole</button>
+          <button class="county-pill yr5" onclick="selectCounty('hillsborough',this)">Hillsborough (Tampa)</button>
+          <button class="county-pill yr5" onclick="selectCounty('pinellas',this)">Pinellas (St. Pete)</button>
+          <button class="county-pill yr5" onclick="selectCounty('pasco',this)">Pasco</button>
+          <button class="county-pill yr5" onclick="selectCounty('sarasota',this)">Sarasota</button>
+          <button class="county-pill yr5" onclick="selectCounty('manatee',this)">Manatee (Bradenton)</button>
         </div>
         <div class="county-pills" id="pills-ga" style="display:none;">
           <button class="county-pill ga" onclick="selectCounty('fulton',this)">Fulton</button>
@@ -652,16 +697,55 @@ footer strong{color:rgba(220,232,235,1.0);}
           <button class="county-pill ga yr3" onclick="selectCounty('lumpkin',this)">Lumpkin*</button>
           <button class="county-pill ga" onclick="selectCounty('richmond',this)">Richmond</button>
           <button class="county-pill ga" onclick="selectCounty('columbia',this)">Columbia</button>
+          <button class="county-pill ga yr5" onclick="selectCounty('chatham',this)">Chatham (Savannah)</button>
         </div>
         <div class="county-pills" id="pills-tx" style="display:none;">
           <button class="county-pill tx" onclick="selectCounty('harris',this)">Harris (Houston)</button>
           <button class="county-pill tx" onclick="selectCounty('dallas',this)">Dallas</button>
           <button class="county-pill tx" onclick="selectCounty('travis',this)">Travis (Austin)</button>
           <button class="county-pill tx" onclick="selectCounty('bexar',this)">Bexar (San Antonio)</button>
+          <button class="county-pill tx" onclick="selectCounty('williamson-tx',this)">Williamson (Round Rock)</button>
+          <button class="county-pill tx" onclick="selectCounty('brazoria',this)">Brazoria (Pearland)</button>
+          <button class="county-pill tx yr5" onclick="selectCounty('hays',this)">Hays (San Marcos)</button>
+          <button class="county-pill tx yr5" onclick="selectCounty('ellis',this)">Ellis (Waxahachie)</button>
         </div>
         <div class="county-pills" id="pills-nc" style="display:none;">
           <button class="county-pill nc" onclick="selectCounty('mecklenburg',this)">Mecklenburg (Charlotte)</button>
           <button class="county-pill nc" onclick="selectCounty('wake',this)">Wake (Raleigh)</button>
+          <button class="county-pill nc" onclick="selectCounty('durham',this)">Durham</button>
+          <button class="county-pill nc" onclick="selectCounty('guilford',this)">Guilford (Greensboro)</button>
+          <button class="county-pill nc yr5" onclick="selectCounty('forsyth-nc',this)">Forsyth (Winston-Salem)</button>
+        </div>
+        <div class="county-pills" id="pills-sc" style="display:none;">
+          <button class="county-pill sc" onclick="selectCounty('charleston-sc',this)">Charleston</button>
+          <button class="county-pill sc" onclick="selectCounty('richland',this)">Richland (Columbia)</button>
+          <button class="county-pill sc" onclick="selectCounty('greenville-sc',this)">Greenville</button>
+          <button class="county-pill sc" onclick="selectCounty('york-sc',this)">York (Rock Hill)</button>
+          <button class="county-pill sc yr5" onclick="selectCounty('berkeley-sc',this)">Berkeley (Goose Creek)</button>
+          <button class="county-pill sc yr5" onclick="selectCounty('dorchester-sc',this)">Dorchester (Summerville)</button>
+        </div>
+        <div class="county-pills" id="pills-tn" style="display:none;">
+          <button class="county-pill tn" onclick="selectCounty('shelby-tn',this)">Shelby (Memphis)</button>
+          <button class="county-pill tn" onclick="selectCounty('davidson',this)">Davidson (Nashville)</button>
+          <button class="county-pill tn" onclick="selectCounty('rutherford',this)">Rutherford (Murfreesboro)</button>
+          <button class="county-pill tn" onclick="selectCounty('williamson-tn',this)">Williamson (Franklin)</button>
+          <button class="county-pill tn yr5" onclick="selectCounty('sumner',this)">Sumner (Hendersonville)</button>
+          <button class="county-pill tn yr5" onclick="selectCounty('wilson',this)">Wilson (Mt. Juliet)</button>
+        </div>
+        <div class="county-pills" id="pills-al" style="display:none;">
+          <button class="county-pill al" onclick="selectCounty('jefferson-al',this)">Jefferson (Birmingham)</button>
+          <button class="county-pill al" onclick="selectCounty('madison-al',this)">Madison (Huntsville)</button>
+          <button class="county-pill al" onclick="selectCounty('shelby-al',this)">Shelby (Hoover)</button>
+          <button class="county-pill al yr5" onclick="selectCounty('limestone',this)">Limestone (Athens)</button>
+        </div>
+        <div class="county-pills" id="pills-va" style="display:none;">
+          <button class="county-pill va" onclick="selectCounty('henrico',this)">Henrico</button>
+          <button class="county-pill va" onclick="selectCounty('chesterfield',this)">Chesterfield</button>
+          <button class="county-pill va" onclick="selectCounty('hanover',this)">Hanover</button>
+          <button class="county-pill va" onclick="selectCounty('virginia-beach',this)">Virginia Beach</button>
+          <button class="county-pill va" onclick="selectCounty('chesapeake',this)">Chesapeake</button>
+          <button class="county-pill va" onclick="selectCounty('norfolk',this)">Norfolk</button>
+          <button class="county-pill va" onclick="selectCounty('suffolk',this)">Suffolk</button>
         </div>
         <span class="county-note" id="state-legend">Dashed = Year 3 expansion</span>
       </div>
@@ -1531,6 +1615,403 @@ const COUNTIES = {
     heNote:'NC Homestead Exemption is income-limited: seniors 65+ or permanently disabled with income ≤$37,900 may exclude the greater of $25,000 or 50% of assessed value. Apply at wake.gov by June 1.',
     closingModel:'nc'
   },
+
+  // ── TX METRO COMPLETION ──
+  'williamson-tx': {
+    name:'Williamson County', short:'Williamson',
+    tr:0.0168, he:0,
+    fxb:30, fxw:52, fab:78, faw:175,
+    paUrl:'https://www.wcad.org/online-exemption-information/',
+    paName:'Williamson Central Appraisal District (WCAD)',
+    notes:'Williamson County (Round Rock · Cedar Park · Georgetown) effective tax rate ~1.68%. One of the 10 fastest-growing counties in the nation. Completes the Austin metro alongside Travis County. Combined rates in Round Rock area typically 1.68–2.4% depending on city and school district. $140,000 school homestead exemption (Prop 13, 2025). Apply by April 30 at wcad.org.',
+    state:'tx', closingModel:'texas',
+    heNote:'Texas $140,000 school district homestead exemption (Prop 13, 2025). Apply by April 30 at wcad.org. Note: July 2025 flood disaster declaration allowed county to use 8% revenue cap — some rates slightly elevated.'
+  },
+  'brazoria': {
+    name:'Brazoria County', short:'Brazoria',
+    tr:0.0152, he:0,
+    fxb:28, fxw:48, fab:72, faw:165,
+    paUrl:'https://brazoriacad.org/property-tax-exemption-forms/',
+    paName:'Brazoria Central Appraisal District (BCAD)',
+    notes:'Brazoria County (Pearland · Lake Jackson · Alvin) effective tax rate ~1.52% (Ownwell median; combined Pearland rate ~2.26% including school districts). Completes the Houston south corridor. Note: Pearland spans three counties — properties on the Fort Bend or Harris side are handled by those CADs. $140,000 school homestead exemption (Prop 13, 2025). County has cut its own rate 10 consecutive years. Apply by April 30 at brazoriacad.org.',
+    state:'tx', closingModel:'texas',
+    heNote:'Texas $140,000 school homestead exemption (Prop 13, 2025). Apply by April 30 at brazoriacad.org. Confirm which appraisal district covers your specific Pearland address.'
+  },
+
+  // ── NC METRO COMPLETION ──
+  'durham': {
+    name:'Durham County', short:'Durham',
+    tr:0.0093, he:0,
+    fxb:22, fxw:42, fab:55, faw:130,
+    paUrl:'https://www.dconc.gov/county-departments/departments-f-z/tax-administration',
+    paName:'Durham County Tax Administration',
+    notes:'Durham County (Durham) effective tax rate ~0.93%. Part of the Raleigh-Durham Research Triangle metro — inseparable market from Wake County (Raleigh). Duke University anchor drives consistent buyer demand. NC attorney-closed state. No intangible tax. Excise tax ($1/$500) seller-paid. Bills due September 1, not delinquent until January 6.',
+    state:'nc', closingModel:'nc',
+    heNote:'NC Homestead Exemption is income-limited: seniors 65+ or permanently disabled with income ≤$37,900 may exclude the greater of $25,000 or 50% of assessed value. Apply at dconc.gov by June 1.'
+  },
+  'guilford': {
+    name:'Guilford County', short:'Guilford',
+    tr:0.0092, he:0,
+    fxb:22, fxw:42, fab:55, faw:130,
+    paUrl:'https://www.guilfordcountync.gov/our-county/tax',
+    paName:'Guilford County Tax Department',
+    notes:'Guilford County (Greensboro · High Point) effective tax rate ~0.92%. Piedmont Triad anchor market. Greensboro is the third-largest city in NC. Growing first-time buyer market driven by manufacturing and logistics sector employment. NC attorney-closed state. No intangible tax. Excise tax ($1/$500) seller-paid. Bills due September 1.',
+    state:'nc', closingModel:'nc',
+    heNote:'NC Homestead Exemption is income-limited: seniors 65+ or permanently disabled with income ≤$37,900 may exclude the greater of $25,000 or 50% of assessed value. Apply at guilfordcountync.gov by June 1.'
+  },
+
+  // ── SC METRO COMPLETION ──
+  'charleston-sc': {
+    name:'Charleston County', short:'Charleston',
+    tr:0.0051, he:0,
+    fxb:50, fxw:200, fab:180, faw:2500,
+    paUrl:'https://www.charlestoncounty.org/departments/auditor/homestead-exemption.php',
+    paName:'Charleston County Auditor',
+    notes:'Charleston County effective tax rate ~0.51% — one of the lowest in SC. SC assesses owner-occupied primary residences at 4% of market value. Important: flood insurance costs can EXCEED property taxes for properties near water — Zone AE premiums range from $1,800–$2,500+/yr. Attorney-closed state. Deed recording fee applies. Homestead exemption age/disability limited. Apply by July 15.',
+    state:'sc', closingModel:'sc'
+  },
+  'richland': {
+    name:'Richland County', short:'Richland',
+    tr:0.0059, he:0,
+    fxb:28, fxw:48, fab:60, faw:140,
+    paUrl:'https://www.richlandcountysc.gov/Departments/Assessor',
+    paName:'Richland County Assessor',
+    notes:'Richland County (Columbia) effective tax rate ~0.59%. State capital and University of South Carolina anchor. SC assesses at 4% for primary residences. Attorney-closed state. Deed recording fee structure applies. Homestead exemption age/disability limited ($50,000 for 65+ or disabled). Apply by July 15.',
+    state:'sc', closingModel:'sc'
+  },
+  'greenville-sc': {
+    name:'Greenville County', short:'Greenville',
+    tr:0.0070, he:0,
+    fxb:25, fxw:45, fab:55, faw:130,
+    paUrl:'https://www.greenvillecounty.org/appsuite/taxassessor',
+    paName:'Greenville County Assessor',
+    notes:'Greenville County effective tax rate ~0.70%. Fastest-growing major city in SC. Strong tech and manufacturing job base. SC assesses at 4% primary residence rate. Attorney-closed state. Homestead exemption age/disability limited. Apply by July 15.',
+    state:'sc', closingModel:'sc'
+  },
+  'york-sc': {
+    name:'York County', short:'York',
+    tr:0.0046, he:0,
+    fxb:25, fxw:45, fab:55, faw:130,
+    paUrl:'https://www.yorkcountygov.com/150/Assessor',
+    paName:'York County Assessor',
+    notes:'York County (Rock Hill · Fort Mill · Tega Cay) effective tax rate ~0.46% — lowest of SC markets. Directly borders Mecklenburg County NC. Many buyers live in Rock Hill and work in Charlotte. SC 4% assessment ratio for primary residences. Attorney-closed state. Deed recording fee applies. Homestead exemption age/disability limited. Apply by July 15.',
+    state:'sc', closingModel:'sc'
+  },
+
+  // ── TN METRO COMPLETION ──
+  'shelby-tn': {
+    name:'Shelby County', short:'Shelby',
+    tr:0.0059, he:0,
+    fxb:25, fxw:45, fab:55, faw:130,
+    paUrl:'https://www.shelbycountytn.gov/460/Taxes',
+    paName:'Shelby County Trustee',
+    notes:'Shelby County (Memphis) effective tax rate ~0.59%. Tennessee assesses residential at 25% of appraised value. 2024 county tax rate: $3.39 per $100 of assessed value. No state income tax. TN realty transfer tax at closing. No universal homestead exemption — income-limited relief available for seniors/disabled (≤$31,600). Apply at trustee by April 5.',
+    state:'tn', closingModel:'tn'
+  },
+  'davidson': {
+    name:'Davidson County', short:'Davidson',
+    tr:0.0096, he:0,
+    fxb:25, fxw:45, fab:55, faw:130,
+    paUrl:'https://padctn.org',
+    paName:'Davidson County Property Assessor (PADCTN)',
+    notes:'Davidson County (Nashville) effective tax rate ~0.96%. Nashville has experienced significant home value appreciation. Tennessee 25% assessment ratio applies. No state income tax. TN realty transfer tax at closing. Income-limited tax relief for seniors/disabled (≤$31,600). Apply at trustee by April 5.',
+    state:'tn', closingModel:'tn'
+  },
+  'rutherford': {
+    name:'Rutherford County', short:'Rutherford',
+    tr:0.0060, he:0,
+    fxb:22, fxw:42, fab:50, faw:120,
+    paUrl:'https://rctrustee.com',
+    paName:'Rutherford County Trustee',
+    notes:'Rutherford County (Murfreesboro · Smyrna · LaVergne) effective tax rate ~0.60%; Murfreesboro city rate ~0.71%. One of the fastest-growing counties in Tennessee — Nashville suburb with enormous first-time buyer market. 2025 county rate: $1.8762 per $100 of assessed value. Tennessee 25% assessment ratio. TN realty transfer tax at closing. Income-limited relief for seniors/disabled. Apply at trustee by April 5.',
+    state:'tn', closingModel:'tn'
+  },
+  'williamson-tn': {
+    name:'Williamson County', short:'Williamson',
+    tr:0.0056, he:0,
+    fxb:22, fxw:42, fab:55, faw:140,
+    paUrl:'https://www.williamsontn.gov/government/elected-offices/trustee',
+    paName:'Williamson County Trustee',
+    notes:'Williamson County TN (Franklin · Brentwood · Spring Hill) effective tax rate ~0.56% — lowest of Nashville-area counties. Highest median home values in Tennessee (~$868,600). Most affluent Nashville suburb. Tennessee 25% assessment ratio. No state income tax. TN realty transfer tax at closing. Income-limited relief for seniors/disabled (≤$31,600). Apply at trustee by April 5.',
+    state:'tn', closingModel:'tn'
+  },
+
+  // ── AL METRO COMPLETION ──
+  'jefferson-al': {
+    name:'Jefferson County', short:'Jefferson',
+    tr:0.0071, he:0,
+    fxb:22, fxw:42, fab:50, faw:120,
+    paUrl:'https://www.jccal.org/Default.asp?ID=230',
+    paName:'Jefferson County Tax Assessor',
+    notes:'Jefferson County (Birmingham) effective tax rate ~0.71% — highest in Alabama but still well below national average. Alabama assesses residential homestead at 10% of market value. Documentary stamp tax + mortgage recording tax at closing. Standard homestead exemption reduces assessed value by up to $4,000. Apply at county office. Bills due October 1.',
+    state:'al', closingModel:'al'
+  },
+  'madison-al': {
+    name:'Madison County', short:'Madison',
+    tr:0.0056, he:0,
+    fxb:20, fxw:40, fab:50, faw:120,
+    paUrl:'https://www.madisoncountyal.gov/departments/revenue',
+    paName:'Madison County Revenue Commissioner',
+    notes:'Madison County (Huntsville) effective tax rate ~0.56%. Huntsville is one of the fastest-growing tech markets in the Southeast — NASA, Redstone Arsenal, and defense/aerospace sector drive strong first-time buyer demand. Alabama 10% homestead assessment ratio. Documentary stamp + mortgage recording tax at closing. Standard homestead exemption up to $4,000 assessed value. Bills due October 1.',
+    state:'al', closingModel:'al'
+  },
+  'shelby-al': {
+    name:'Shelby County', short:'Shelby',
+    tr:0.0047, he:0,
+    fxb:20, fxw:40, fab:48, faw:115,
+    paUrl:'https://www.shelbyal.com/179/Revenue-Commissioner',
+    paName:'Shelby County Revenue Commissioner',
+    notes:'Shelby County AL (Hoover · Pelham · Helena · Alabaster) effective tax rate ~0.47% — lowest of the Birmingham-area counties. Birmingham’s primary suburb. Most buyers who don’t land in Jefferson County land here. Alabama 10% homestead assessment ratio. Documentary stamp + mortgage recording tax at closing. Standard homestead exemption reduces assessed value up to $4,000. Bills due October 1.',
+    state:'al', closingModel:'al'
+  },
+
+  // ── FL YEAR 4 — East Coast Corridor ──
+  'volusia': {
+    name:'Volusia County', short:'Volusia',
+    tr:0.0087, he:50000,
+    fxb:38, fxw:78, fab:130, faw:350,
+    paUrl:'https://vcpa.vcgov.org/exemption/homestead',
+    paName:'Volusia County Property Appraiser',
+    notes:'Volusia County (Deltona · Daytona Beach · Ormond Beach) effective tax rate ~0.87%. First county north of Brevard — completes the Florida east coast corridor. Insurance market transitions to North/Central Florida carriers here. $50,000 homestead exemption. Apply by March 1.',
+    state:'fl', closingModel:'fl'
+  },
+  'orange-fl': {
+    name:'Orange County', short:'Orange',
+    tr:0.0097, he:50000,
+    fxb:35, fxw:70, fab:120, faw:320,
+    paUrl:'https://ocpaweb.ocpafl.org/homestead',
+    paName:'Orange County Property Appraiser',
+    notes:'Orange County (Orlando) effective tax rate ~0.97%. Largest untapped Florida market — approximately 35,000–40,000 residential transactions annually. Strong HUD counselor network and FHFC relationships. $50,000 homestead exemption. Apply by March 1.',
+    state:'fl', closingModel:'fl'
+  },
+  'osceola': {
+    name:'Osceola County', short:'Osceola',
+    tr:0.0091, he:50000,
+    fxb:35, fxw:70, fab:120, faw:320,
+    paUrl:'https://www.property-appraiser.org/exemptions',
+    paName:'Osceola County Property Appraiser',
+    notes:'Osceola County (Kissimmee) effective tax rate ~0.91%. High CBS construction, accessible median prices, large first-time buyer population in the Orlando metro. $50,000 homestead exemption. Apply by March 1.',
+    state:'fl', closingModel:'fl'
+  },
+  'seminole': {
+    name:'Seminole County', short:'Seminole',
+    tr:0.0088, he:50000,
+    fxb:35, fxw:70, fab:120, faw:320,
+    paUrl:'https://www.scpafl.org/exemptions',
+    paName:'Seminole County Property Appraiser',
+    notes:'Seminole County (Sanford · Altamonte Springs) effective tax rate ~0.88%. Completes the Orlando metro trio. Strong school districts drive buyer demand. $50,000 homestead exemption. Apply by March 1.',
+    state:'fl', closingModel:'fl'
+  },
+
+  // ── FL YEAR 5 — Tampa Bay + Sarasota ──
+  'hillsborough': {
+    name:'Hillsborough County', short:'Hillsborough',
+    tr:0.0095, he:50000,
+    fxb:35, fxw:72, fab:120, faw:320,
+    paUrl:'https://www.hcpafl.org/exemptions',
+    paName:'Hillsborough County Property Appraiser',
+    notes:'Hillsborough County (Tampa · Brandon · Temple Terrace) effective tax rate ~0.95%. First cross-coast Florida expansion. Second-largest metro in Florida by transaction volume. $50,000 homestead exemption. Apply by March 1.',
+    state:'fl', closingModel:'fl'
+  },
+  'pinellas': {
+    name:'Pinellas County', short:'Pinellas',
+    tr:0.0076, he:50000,
+    fxb:35, fxw:72, fab:120, faw:320,
+    paUrl:'https://www.pcpao.gov/exemptions',
+    paName:'Pinellas County Property Appraiser',
+    notes:'Pinellas County (St. Petersburg · Clearwater · Largo) effective tax rate ~0.76%. Lowest rate in the Tampa Bay corridor. Dense coastal market. $50,000 homestead exemption. Apply by March 1.',
+    state:'fl', closingModel:'fl'
+  },
+  'pasco': {
+    name:'Pasco County', short:'Pasco',
+    tr:0.0086, he:50000,
+    fxb:35, fxw:70, fab:115, faw:310,
+    paUrl:'https://www.pascopa.com/exemptions',
+    paName:'Pasco County Property Appraiser',
+    notes:'Pasco County (Wesley Chapel · New Port Richey · Zephyrhills) effective tax rate ~0.86%. Fast-growing Tampa suburb. Wesley Chapel in particular has enormous first-time buyer demand. $50,000 homestead exemption. Apply by March 1.',
+    state:'fl', closingModel:'fl'
+  },
+  'sarasota': {
+    name:'Sarasota County', short:'Sarasota',
+    tr:0.0082, he:50000,
+    fxb:35, fxw:70, fab:115, faw:310,
+    paUrl:'https://www.sc-pa.com/exemptions',
+    paName:'Sarasota County Property Appraiser',
+    notes:'Sarasota County effective tax rate ~0.82%. Gulf Coast market with strong retiree and first-time buyer mix. Note: Gulf exposure present but more manageable than Lee County further south — private insurance market more stable here than post-Ian Southwest FL. $50,000 homestead exemption. Apply by March 1.',
+    state:'fl', closingModel:'fl'
+  },
+  'manatee': {
+    name:'Manatee County', short:'Manatee',
+    tr:0.0085, he:50000,
+    fxb:35, fxw:70, fab:115, faw:310,
+    paUrl:'https://www.manateepao.gov/exemptions',
+    paName:'Manatee County Property Appraiser',
+    notes:'Manatee County (Bradenton · Palmetto · Lakewood Ranch) effective tax rate ~0.85%. Completes the Tampa Bay / Sarasota corridor. Lakewood Ranch is one of the top-selling master-planned communities in the country. $50,000 homestead exemption. Apply by March 1.',
+    state:'fl', closingModel:'fl'
+  },
+
+  // ── GA YEAR 5 — Savannah ──
+  'chatham': {
+    name:'Chatham County', short:'Chatham',
+    tr:0.0069, he:0,
+    fxb:40, fxw:120, fab:90, faw:600,
+    paUrl:'https://www.chathamcounty.org/Departments/Board-of-Assessors',
+    paName:'Chatham County Board of Assessors',
+    notes:'Chatham County (Savannah) effective tax rate ~0.69%. Georgia attorney-closed state. 40% assessment ratio applies. Savannah coastal market — flood insurance costs here can be significant even in non-Zone AE areas due to tidal flooding patterns. Important: homestead exemption deadline is April 1. Verify flood zone classification carefully for any property near the Savannah River or coastal marshes.',
+    state:'ga', closingModel:'ga',
+    heNote:'Georgia homestead exemption filing deadline is April 1. Chatham County Board of Assessors office: 222 W. Oglethorpe Ave, Savannah. Coastal flood zone research strongly recommended before purchase.'
+  },
+
+  // ── TX YEAR 5 — Austin South + DFW South ──
+  'hays': {
+    name:'Hays County', short:'Hays',
+    tr:0.0215, he:0,
+    fxb:28, fxw:48, fab:72, faw:165,
+    paUrl:'https://hayscad.com/exemptions/',
+    paName:'Hays Central Appraisal District',
+    notes:'Hays County (San Marcos · Kyle · Buda) effective tax rate ~2.15%. One of the fastest-growing counties in Texas. Directly south of Travis County (Austin) — completes the Austin metro south corridor. Texas International University and strong first-time buyer market. $140,000 school homestead exemption (Prop 13, 2025). Apply by April 30 at hayscad.com.',
+    state:'tx', closingModel:'texas',
+    heNote:'Texas $140,000 school district homestead exemption (Prop 13, 2025). Apply by April 30 at hayscad.com.'
+  },
+  'ellis': {
+    name:'Ellis County', short:'Ellis',
+    tr:0.0187, he:0,
+    fxb:28, fxw:48, fab:70, faw:160,
+    paUrl:'https://www.elliscad.com/exemptions',
+    paName:'Ellis Central Appraisal District',
+    notes:'Ellis County (Waxahachie · Ennis · Midlothian) effective tax rate ~1.87%. Directly south of Dallas County — completes the DFW south corridor. Fast-growing commuter market. $140,000 school homestead exemption (Prop 13, 2025). Apply by April 30 at elliscad.com.',
+    state:'tx', closingModel:'texas',
+    heNote:'Texas $140,000 school district homestead exemption (Prop 13, 2025). Apply by April 30 at elliscad.com.'
+  },
+
+  // ── NC YEAR 5 — Forsyth (Winston-Salem) ──
+  'forsyth-nc': {
+    name:'Forsyth County', short:'Forsyth',
+    tr:0.0090, he:0,
+    fxb:22, fxw:42, fab:55, faw:130,
+    paUrl:'https://www.forsyth.cc/taxadministration',
+    paName:'Forsyth County Tax Administration',
+    notes:'Forsyth County (Winston-Salem · Kernersville) effective tax rate ~0.90%. Completes the NC Piedmont Triad alongside Guilford (Greensboro). Winston-Salem and Greensboro are one continuous market identity. NC attorney-closed state. No intangible tax. Excise tax ($1/$500) seller-paid. Bills due September 1, not delinquent until January 6.',
+    state:'nc', closingModel:'nc',
+    heNote:'NC Homestead Exemption is income-limited: seniors 65+ or permanently disabled with income ≤$37,900 may exclude the greater of $25,000 or 50% of assessed value. Apply at forsyth.cc by June 1.'
+  },
+
+  // ── SC YEAR 5 — Complete Charleston Metro ──
+  'berkeley-sc': {
+    name:'Berkeley County', short:'Berkeley',
+    tr:0.0042, he:0,
+    fxb:25, fxw:45, fab:55, faw:130,
+    paUrl:'https://www.berkeleycountysc.gov/departments/assessor',
+    paName:'Berkeley County Assessor',
+    notes:'Berkeley County (Goose Creek · Moncks Corner · Hanahan) effective tax rate ~0.42%. Directly borders Charleston County — completes the Charleston metro. SC 4% assessment ratio for owner-occupied primary residences. Attorney-closed state. Homestead exemption age/disability limited. Apply by July 15.',
+    state:'sc', closingModel:'sc'
+  },
+  'dorchester-sc': {
+    name:'Dorchester County', short:'Dorchester',
+    tr:0.0049, he:0,
+    fxb:25, fxw:45, fab:55, faw:130,
+    paUrl:'https://www.dorchestercounty.net/departments/assessor',
+    paName:'Dorchester County Assessor',
+    notes:'Dorchester County (Summerville · Ladson · North Charleston partial) effective tax rate ~0.49%. Completes the Charleston tri-county metro — Berkeley, Charleston, and Dorchester are inseparable in the buyer market. SC 4% assessment ratio. Attorney-closed state. Homestead exemption age/disability limited. Apply by July 15.',
+    state:'sc', closingModel:'sc'
+  },
+
+  // ── TN YEAR 5 — Complete Nashville Ring ──
+  'sumner': {
+    name:'Sumner County', short:'Sumner',
+    tr:0.0052, he:0,
+    fxb:22, fxw:42, fab:50, faw:120,
+    paUrl:'https://www.sumnercountytn.gov/departments/assessor_of_property',
+    paName:'Sumner County Assessor of Property',
+    notes:'Sumner County (Hendersonville · Gallatin · Goodlettsville) effective tax rate ~0.52%. Northeast Nashville suburb — completes the Nashville ring alongside Rutherford (south) and Williamson (southwest). Tennessee 25% assessment ratio. TN realty transfer tax at closing. Income-limited relief for seniors/disabled. Apply at trustee by April 5.',
+    state:'tn', closingModel:'tn'
+  },
+  'wilson': {
+    name:'Wilson County', short:'Wilson',
+    tr:0.0056, he:0,
+    fxb:22, fxw:42, fab:50, faw:120,
+    paUrl:'https://www.wilsoncountytn.gov/departments/assessor_of_property',
+    paName:'Wilson County Assessor of Property',
+    notes:'Wilson County (Lebanon · Mt. Juliet · Watertown) effective tax rate ~0.56%. East Nashville suburb. Mt. Juliet specifically has enormous first-time buyer demand — one of the fastest-growing municipalities in Tennessee. Completes the Nashville metro ring. Tennessee 25% assessment ratio. TN realty transfer tax at closing. Income-limited relief for seniors/disabled. Apply at trustee by April 5.',
+    state:'tn', closingModel:'tn'
+  },
+
+  // ── AL YEAR 5 — Complete Huntsville Metro ──
+  'limestone': {
+    name:'Limestone County', short:'Limestone',
+    tr:0.0035, he:0,
+    fxb:18, fxw:38, fab:45, faw:110,
+    paUrl:'https://www.limestoneal.gov/revenue',
+    paName:'Limestone County Revenue Commissioner',
+    notes:'Limestone County (Athens · Madison portions) effective tax rate ~0.35% — one of the lowest in Alabama. Directly north of Madison County (Huntsville) — completes the Huntsville metro. Strong growth from Redstone Arsenal and surrounding tech/defense sector spillover. Alabama 10% homestead assessment ratio. Documentary stamp + mortgage recording tax at closing. Bills due October 1.',
+    state:'al', closingModel:'al'
+  },
+
+  // ── VIRGINIA — Colonial Blue #2c4a6e — Year 5 ──
+  'henrico': {
+    name:'Henrico County', short:'Henrico',
+    tr:0.0071, he:0,
+    fxb:28, fxw:55, fab:75, faw:180,
+    paUrl:'https://henrico.gov/finance/real-estate/',
+    paName:'Henrico County Real Estate Division',
+    notes:'Henrico County (Richmond metro north/east) effective tax rate ~0.71%. Surrounds the City of Richmond on three sides. Virginia recordation tax: $3.33 per $1,000 of purchase price (buyer-pays deed recordation) + $3.33 per $1,000 of loan amount (deed of trust tax). Grantor’s tax ($0.50 per $500) paid by seller. No universal homestead exemption — income-limited elderly/disabled relief available. Apply at commissioner of revenue. Bills due June 5 and December 5 (semi-annual).',
+    state:'va', closingModel:'va'
+  },
+  'chesterfield': {
+    name:'Chesterfield County', short:'Chesterfield',
+    tr:0.0076, he:0,
+    fxb:28, fxw:55, fab:75, faw:180,
+    paUrl:'https://www.chesterfield.gov/748/Real-Estate-Assessments',
+    paName:'Chesterfield County Real Estate Assessments',
+    notes:'Chesterfield County (Richmond metro south) effective tax rate ~0.76%. Directly south of Richmond across the James River. Virginia recordation tax $3.33 per $1,000 purchase price + $3.33 per $1,000 loan amount. Grantor’s tax seller-paid. No universal homestead exemption — elderly/disabled relief available by application. Bills semi-annual: June 5 and December 5.',
+    state:'va', closingModel:'va'
+  },
+  'hanover': {
+    name:'Hanover County', short:'Hanover',
+    tr:0.0066, he:0,
+    fxb:26, fxw:52, fab:72, faw:175,
+    paUrl:'https://www.hanovercounty.gov/386/Tax-Rates',
+    paName:'Hanover County Commissioner of the Revenue',
+    notes:'Hanover County (Richmond metro north) effective tax rate ~0.66% — lowest of the Richmond metro counties. Growing first-time buyer market north of the city. Virginia recordation tax $3.33 per $1,000 purchase price + $3.33 per $1,000 loan amount. Grantor’s tax seller-paid. No universal homestead exemption. Bills semi-annual: June 5 and December 5.',
+    state:'va', closingModel:'va'
+  },
+  'virginia-beach': {
+    name:'Virginia Beach', short:'Virginia Beach',
+    tr:0.0099, he:0,
+    fxb:28, fxw:55, fab:78, faw:200,
+    paUrl:'https://assessor.virginiabeach.gov/relief-incentives/senior-disabled-tax-relief',
+    paName:'Virginia Beach Commissioner of the Revenue',
+    notes:'Virginia Beach (independent city) effective tax rate ~0.99%. Largest city in Virginia by population. Home to Naval Station Oceana and a major active-duty and veteran buyer market. Virginia recordation tax $3.33 per $1,000 purchase price + $3.33 per $1,000 loan amount. Grantor’s tax seller-paid. Income-limited elderly/disabled relief: applications taken Feb 1–June 30 at Commissioner of Revenue. No NOVA congestion surcharge applies here.',
+    state:'va', closingModel:'va'
+  },
+  'chesapeake': {
+    name:'Chesapeake', short:'Chesapeake',
+    tr:0.0082, he:0,
+    fxb:26, fxw:52, fab:75, faw:195,
+    paUrl:'https://www.cityofchesapeake.net/government/city-departments/departments/real-estate-assessor',
+    paName:'Chesapeake Real Estate Assessor',
+    notes:'Chesapeake (independent city) effective tax rate ~0.82%. Hampton Roads’ largest independent city by land area. Strong first-time buyer and active-duty military market. Virginia recordation tax $3.33 per $1,000 purchase price + $3.33 per $1,000 loan amount. Grantor’s tax seller-paid. Income-limited elderly/disabled relief available. No NOVA congestion surcharge.',
+    state:'va', closingModel:'va'
+  },
+  'norfolk': {
+    name:'Norfolk', short:'Norfolk',
+    tr:0.0100, he:0,
+    fxb:28, fxw:55, fab:78, faw:200,
+    paUrl:'https://www.norfolk.gov/1659/Real-Estate-Tax-Relief-Program',
+    paName:'Norfolk Department of Human Services (Tax Relief)',
+    notes:'Norfolk (independent city) effective tax rate ~1.00% — highest in Hampton Roads. Home to Naval Station Norfolk, the largest naval base in the world. Active-duty first-time buyers are core HomeTrue demographic here. Virginia recordation tax $3.33 per $1,000 purchase price + $3.33 per $1,000 loan amount. Grantor’s tax seller-paid. Elderly/disabled relief: must be 65+ or totally disabled, income ≤$67,000, net worth ≤$350,000. Apply by June 1 at Norfolk Dept of Human Services.',
+    state:'va', closingModel:'va',
+    heNote:'Norfolk elderly/disabled tax relief: 65+ or totally/permanently disabled, combined income ≤$67,000, net worth ≤$350,000. Apply by June 1 annually at Norfolk Dept of Human Services.'
+  },
+  'suffolk': {
+    name:'Suffolk', short:'Suffolk',
+    tr:0.0087, he:0,
+    fxb:26, fxw:52, fab:72, faw:190,
+    paUrl:'https://www.suffolkva.us/800/Tax-Relief-Program',
+    paName:'Suffolk Department of Social Services (Tax Relief)',
+    notes:'Suffolk (independent city — largest by land area in Virginia) effective tax rate ~0.87%. Borders Chesapeake and serves as a gateway market between Hampton Roads and the rural Eastern Shore. Strong first-time buyer and military-adjacent market. Virginia recordation tax $3.33 per $1,000 purchase price + $3.33 per $1,000 loan amount. Grantor’s tax seller-paid. Elderly/disabled relief: applications Jan 1–June 30 at Dept of Social Services.',
+    state:'va', closingModel:'va'
+  },
 };
 
 // Active county — defaults to Miami-Dade
@@ -1553,7 +2034,7 @@ function setCounty(key) {
   document.querySelectorAll('.active-county-short').forEach(el => el.textContent = c.short);
   // Update scope badge
   const sb = document.querySelector('.scope-b');
-  const stateLabel = c.state==='tx' ? 'Texas' : c.state==='nc' ? 'North Carolina' : c.state==='ga' ? 'Georgia' : 'Florida';
+  const stateLabel = c.state==='tx' ? 'Texas' : c.state==='nc' ? 'North Carolina' : c.state==='ga' ? 'Georgia' : c.state==='sc' ? 'South Carolina' : c.state==='tn' ? 'Tennessee' : c.state==='al' ? 'Alabama' : c.state==='va' ? 'Virginia' : 'Florida';
   if(sb) sb.textContent = c.name + ' · ' + stateLabel + ' · Test Phase';
   // Update verified strip
   const vs = document.getElementById('avs');
@@ -1740,7 +2221,7 @@ let ACTIVE_STATE = 'fl';
 function selectState(state, btn) {
   ACTIVE_STATE = state;
   // Reset all toggles to their hint colors, then activate selected
-  const toggleMap = {fl:'st-fl', ga:'st-ga', tx:'st-tx', nc:'st-nc'};
+  const toggleMap = {fl:'st-fl', ga:'st-ga', tx:'st-tx', nc:'st-nc', sc:'st-sc', tn:'st-tn', al:'st-al', va:'st-va'};
   Object.entries(toggleMap).forEach(([s, id]) => {
     const el = document.getElementById(id);
     if (!el) return;
@@ -1756,6 +2237,10 @@ function selectState(state, btn) {
   document.getElementById('pills-ga').style.display = state==='ga' ? 'flex' : 'none';
   document.getElementById('pills-tx').style.display = state==='tx' ? 'flex' : 'none';
   document.getElementById('pills-nc').style.display = state==='nc' ? 'flex' : 'none';
+  document.getElementById('pills-sc').style.display = state==='sc' ? 'flex' : 'none';
+  document.getElementById('pills-tn').style.display = state==='tn' ? 'flex' : 'none';
+  document.getElementById('pills-al').style.display = state==='al' ? 'flex' : 'none';
+  document.getElementById('pills-va').style.display = state==='va' ? 'flex' : 'none';
   // Update legend
   const legend = document.getElementById('state-legend');
   if(legend) {
@@ -1763,6 +2248,10 @@ function selectState(state, btn) {
     else if(state==='ga') legend.textContent = 'Georgia · *HE amount pending final verification';
     else if(state==='tx') legend.textContent = 'Texas · Burnt Sienna · Test Phase';
     else if(state==='nc') legend.textContent = 'North Carolina · Slate Blue · Test Phase';
+    else if(state==='sc') legend.textContent = 'South Carolina · Palmetto Navy · Year 4 · Test Phase';
+    else if(state==='tn') legend.textContent = 'Tennessee · Muted Copper · Year 4 · Test Phase';
+    else if(state==='al') legend.textContent = 'Alabama · Iron Maroon · Year 4 · Test Phase';
+    else if(state==='va') legend.textContent = 'Virginia · Colonial Blue · Year 5 · Test Phase';
   }
   // Auto-select first county of this state
   const firstPills = document.querySelectorAll('#pills-' + state + ' .county-pill');
@@ -3091,7 +3580,112 @@ function buildClosingCosts(inp) {
       <div class="cc-row"><div class="cc-item">Settlement / Escrow Fee<span class="cc-note">Administrative closing costs</span></div><div class="cc-val">${fmt(settlementFee)}</div></div>
       <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Attorney Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
     reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Georgia property taxes are due October–December annually. Remember: your assessed value is 40% of fair market value — your tax bill will reflect the assessed value, not the purchase price.`;
+
+  } else if (model === 'sc') {
+    const deedRecordingFee = Math.round(Math.ceil(loan / 500) * 0.185) + 125;
+    const titleSearch = 300;
+    const titleInsLender = Math.round(loan * 0.00375);
+    const titleInsOwner = Math.round(p * 0.00300);
+    const attorneyFee = 850;
+    const settlementFee = 250;
+    const transferTax = Math.round(Math.ceil(p / 500) * 1.85);
+    govTotal = deedRecordingFee;
+    titleTotal = titleSearch + titleInsLender + titleInsOwner + attorneyFee + settlementFee;
+    stateNote = `<span class="nl" style="color:var(--sc-dim);">${countyName} — South Carolina</span><p>South Carolina is an <strong>attorney-closed state</strong>. SC assesses owner-occupied primary residences at <strong>4% of market value</strong>. Deed recording fee of $1.85 per $500 paid by buyer. State transfer tax (${fmt(transferTax)}) customarily paid by seller. <strong>SC Homestead Exemption limited to 65+ or disabled homeowners.</strong> Confirm all figures against your official Closing Disclosure.</p>`;
+    govSection = `<div class="cc-section"><div class="cc-section-title">Government &amp; Recording Fees</div>
+      <div class="cc-row"><div class="cc-item">Deed Recording Fee (Buyer Pays)<span class="cc-note">$1.85 per $500 of loan amount</span></div><div class="cc-val">${fmt(deedRecordingFee)}</div></div>
+      <div class="cc-row"><div class="cc-item">State Transfer Tax<span class="cc-note">$1.85 per $500 of purchase price — customarily seller-paid (${fmt(transferTax)})</span></div><div class="cc-val">Seller</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
+    titleSection = `<div class="cc-section"><div class="cc-section-title">Title, Attorney &amp; Settlement</div>
+      <div class="cc-row"><div class="cc-item">Closing Attorney Fee<span class="cc-note">SC is attorney-closed — required buyer cost</span></div><div class="cc-val">${fmt(attorneyFee)}</div></div>
+      <div class="cc-row"><div class="cc-item">Title Search &amp; Exam</div><div class="cc-val">${fmt(titleSearch)}</div></div>
+      <div class="cc-row"><div class="cc-item">Lender's Title Insurance</div><div class="cc-val">${fmt(titleInsLender)}</div></div>
+      <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
+      <div class="cc-row"><div class="cc-item">Settlement / Escrow Fee</div><div class="cc-val">${fmt(settlementFee)}</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Attorney Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
+    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. SC property taxes due January 15. Your assessed value is 4% of market value for owner-occupied primary residences.`;
+
+  } else if (model === 'tn') {
+    const transferTaxBuyer = Math.round(p * 0.00185);
+    const recordingFee = 110;
+    const titleSearch = 275;
+    const titleInsLender = Math.round(loan * 0.00375);
+    const titleInsOwner = Math.round(p * 0.00300);
+    const settlementFee = 600;
+    govTotal = transferTaxBuyer + recordingFee;
+    titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
+    stateNote = `<span class="nl" style="color:var(--tn-dim);">${countyName} — Tennessee</span><p>Tennessee has <strong>no state income tax</strong>. Property assessed at <strong>25% of appraised value</strong>. Realty transfer tax of $0.37 per $100 typically split equally buyer/seller. <strong>No universal homestead exemption</strong> — income-limited relief for seniors/disabled (≤$31,600). Confirm all figures against your official Closing Disclosure.</p>`;
+    govSection = `<div class="cc-section"><div class="cc-section-title">Government Taxes &amp; Recording Fees</div>
+      <div class="cc-row"><div class="cc-item">Realty Transfer Tax — Buyer's Share<span class="cc-note">$0.37 per $100 total, split equally — buyer's half shown</span></div><div class="cc-val">${fmt(transferTaxBuyer)}</div></div>
+      <div class="cc-row"><div class="cc-item">Realty Transfer Tax — Seller's Share<span class="cc-note">Other half paid by seller</span></div><div class="cc-val">Seller</div></div>
+      <div class="cc-row"><div class="cc-item">Recording Fees<span class="cc-note">County Register of Deeds</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
+    titleSection = `<div class="cc-section"><div class="cc-section-title">Title &amp; Settlement Fees</div>
+      <div class="cc-row"><div class="cc-item">Title Search &amp; Exam</div><div class="cc-val">${fmt(titleSearch)}</div></div>
+      <div class="cc-row"><div class="cc-item">Lender's Title Insurance</div><div class="cc-val">${fmt(titleInsLender)}</div></div>
+      <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
+      <div class="cc-row"><div class="cc-item">Settlement / Closing Fee</div><div class="cc-val">${fmt(settlementFee)}</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Settlement Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
+    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. TN property taxes billed October, due last day of February. Assessed value is 25% of appraised value.`;
+
+  } else if (model === 'al') {
+    const docStamp = Math.round(Math.ceil(loan / 500) * 0.50);
+    const mortRecordingTax = Math.round(loan * 0.0015);
+    const recordingFee = 110;
+    const titleSearch = 275;
+    const titleInsLender = Math.round(loan * 0.00375);
+    const titleInsOwner = Math.round(p * 0.00300);
+    const settlementFee = 575;
+    govTotal = docStamp + mortRecordingTax + recordingFee;
+    titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
+    stateNote = `<span class="nl" style="color:var(--al-dim);">${countyName} — Alabama</span><p>Alabama has <strong>some of the lowest effective property tax rates in the country</strong>. Residential homestead property assessed at <strong>10% of market value</strong>. Documentary stamp tax ($0.50 per $500 of loan) + mortgage recording tax ($0.15 per $100) at closing. Standard homestead exemption reduces assessed value up to $4,000. Confirm all figures against your official Closing Disclosure.</p>`;
+    govSection = `<div class="cc-section"><div class="cc-section-title">Government Taxes &amp; Recording Fees</div>
+      <div class="cc-row"><div class="cc-item">Documentary Stamp Tax — Mortgage<span class="cc-note">$0.50 per $500 of loan amount — Alabama mortgage stamp tax</span></div><div class="cc-val">${fmt(docStamp)}</div></div>
+      <div class="cc-row"><div class="cc-item">Mortgage Recording Tax<span class="cc-note">$0.15 per $100 of loan amount — Alabama specific</span></div><div class="cc-val">${fmt(mortRecordingTax)}</div></div>
+      <div class="cc-row"><div class="cc-item">Recording Fees<span class="cc-note">County Probate Court</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
+    titleSection = `<div class="cc-section"><div class="cc-section-title">Title &amp; Settlement Fees</div>
+      <div class="cc-row"><div class="cc-item">Title Search &amp; Exam<span class="cc-note">Probate Court records</span></div><div class="cc-val">${fmt(titleSearch)}</div></div>
+      <div class="cc-row"><div class="cc-item">Lender's Title Insurance</div><div class="cc-val">${fmt(titleInsLender)}</div></div>
+      <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
+      <div class="cc-row"><div class="cc-item">Settlement / Closing Fee</div><div class="cc-val">${fmt(settlementFee)}</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Settlement Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
+    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. AL property taxes due October 1, delinquent after December 31. Assessed value is 10% of market value for homestead properties.`;
+  } else if (model === 'va') {
+    // Virginia closing cost model
+    // State recordation tax on deed: $0.25 per $100 of purchase price (buyer pays)
+    // Local recordation tax on deed: $0.0833 per $100 (1/3 of state rate, buyer pays)
+    // State deed of trust tax: $0.25 per $100 of loan amount (buyer pays)
+    // Local deed of trust tax: $0.0833 per $100 of loan (buyer pays)
+    // Combined effective: ~$3.33 per $1,000 on purchase price + ~$3.33 per $1,000 on loan
+    // Grantor's tax: $0.50 per $500 of purchase price (seller pays - shown for reference)
+    // NO Northern Virginia congestion fee (Richmond + Hampton Roads are not NOVA jurisdictions)
+    const deedRecordTax = Math.round(p * 0.003333);
+    const deedOfTrustTax = Math.round(loan * 0.003333);
+    const recordingFee = 100;
+    const titleSearch = 300;
+    const titleInsLender = Math.round(loan * 0.00375);
+    const titleInsOwner = Math.round(p * 0.00300);
+    const settlementFee = 650;
+    const grantorTax = Math.round(Math.ceil(p / 500) * 0.50); // seller pays - reference
+    govTotal = deedRecordTax + deedOfTrustTax + recordingFee;
+    titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
+    stateNote = `<span class="nl" style="color:var(--va-dim);">${countyName} — Virginia</span><p>Virginia has two buyer-paid recording taxes: a <strong>deed recordation tax</strong> ($0.25 per $100 of purchase price) and a <strong>deed of trust tax</strong> ($0.25 per $100 of loan amount) — each with a local surcharge of 1/3 the state rate. Combined effective rate is approximately $3.33 per $1,000 on both the purchase price and the loan amount. The grantor’s tax (${fmt(grantorTax)}) is paid by the seller. Virginia has <strong>no universal homestead exemption</strong> — income-limited relief is available for elderly/disabled residents. Confirm all figures against your official Closing Disclosure.</p>`;
+    govSection = `<div class="cc-section"><div class="cc-section-title">Government Recording Taxes</div>
+      <div class="cc-row"><div class="cc-item">Deed Recordation Tax (State + Local)<span class="cc-note">$0.25 per $100 state + $0.083 per $100 local = ~$3.33 per $1,000 of purchase price — buyer pays</span></div><div class="cc-val">${fmt(deedRecordTax)}</div></div>
+      <div class="cc-row"><div class="cc-item">Deed of Trust Tax (State + Local)<span class="cc-note">$0.25 per $100 state + $0.083 per $100 local = ~$3.33 per $1,000 of loan amount — buyer pays</span></div><div class="cc-val">${fmt(deedOfTrustTax)}</div></div>
+      <div class="cc-row"><div class="cc-item">Grantor’s Tax<span class="cc-note">$0.50 per $500 of purchase price — paid by seller (${fmt(grantorTax)} on this purchase)</span></div><div class="cc-val">Seller</div></div>
+      <div class="cc-row"><div class="cc-item">Recording Fees<span class="cc-note">Circuit Court clerk recording fees</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
+    titleSection = `<div class="cc-section"><div class="cc-section-title">Title &amp; Settlement Fees</div>
+      <div class="cc-row"><div class="cc-item">Title Search &amp; Exam<span class="cc-note">Public records search for liens and encumbrances</span></div><div class="cc-val">${fmt(titleSearch)}</div></div>
+      <div class="cc-row"><div class="cc-item">Lender’s Title Insurance<span class="cc-note">Required by lender — protects lender’s interest</span></div><div class="cc-val">${fmt(titleInsLender)}</div></div>
+      <div class="cc-row"><div class="cc-item">Owner’s Title Insurance<span class="cc-note">Strongly recommended — one-time premium, permanent protection</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
+      <div class="cc-row"><div class="cc-item">Settlement / Closing Fee<span class="cc-note">Title company or closing attorney coordination</span></div><div class="cc-val">${fmt(settlementFee)}</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Settlement Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
+    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Virginia property taxes are paid semi-annually — due June 5 and December 5 in most jurisdictions. Verify your specific locality’s schedule. Virginia has no universal homestead exemption — income-limited elderly/disabled relief is available at each locality.`;
   }
+
   const grandTotal = inp.damt + closingTotal + reserves3mo;
 
   return `
@@ -3156,7 +3750,7 @@ function buildHomesteadGuide(inp) {
   if (closingDate) {
     const cd = new Date(closingDate);
     const deadlineYear = cd.getFullYear() + 1;
-    const deadlineLabel = model === 'fl' ? `March 1, ${deadlineYear}` : model === 'texas' ? `April 30, ${deadlineYear}` : model === 'ga' ? `April 1, ${deadlineYear}` : `June 1, ${deadlineYear}`;
+    const deadlineLabel = model === 'fl' ? `March 1, ${deadlineYear}` : model === 'texas' ? `April 30, ${deadlineYear}` : model === 'ga' ? `April 1, ${deadlineYear}` : model === 'sc' ? `January 15, ${deadlineYear}` : model === 'tn' ? `April 5, ${deadlineYear}` : model === 'al' ? `October 1, ${deadlineYear}` : model === 'va' ? `June 30, ${deadlineYear}` : `June 1, ${deadlineYear}`;
     deadlineHtml = `<div class="hg-deadline"><span class="hg-dl-lbl">Your Filing Deadline</span><div class="hg-dl-date">${deadlineLabel}</div><div class="hg-dl-sub">Based on your expected closing. File as soon as possible after closing — do not wait until the deadline.</div></div>`;
   } else {
     const deadlineLabel = model === 'fl' ? 'March 1 of the year after closing' : model === 'texas' ? 'April 30 of the tax year' : model === 'ga' ? 'April 1 of the tax year' : 'June 1 of the tax year';
@@ -3231,6 +3825,80 @@ function buildHomesteadGuide(inp) {
       <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Apply at the County Assessor's Office</div><div class="hg-desc">All NC tax relief programs require a completed Form AV-9 submitted to the County Assessor by June 1. Late applications may be accepted for good cause at the assessor's discretion.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open County Assessor's Office Portal</a></div></div>
       <div class="hg-step"><div class="hg-num">5</div><div class="hg-content"><div class="hg-title">Verify your assessment and consider an appeal</div><div class="hg-desc">NC does not cap annual assessment increases the way Florida (3%) and Texas (10%) do. If your property is reassessed at a value you believe is too high, you can appeal to the County Board of Equalization and Review within 30 days of your assessment notice. Submit comparable sales data and property condition evidence to support your appeal.</div></div></div>
       <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Important: NC Has No Universal Homestead Exemption</span><p>If you are a standard working-age homebuyer, there is no blanket property tax exemption equivalent to Florida's $50,000 or Texas's $140,000 school exemption. NC property taxes are applied to the full assessed value without a mandatory universal exclusion. The county tax rate is fixed and applied to your full assessed value. Budget accordingly — the good news is NC effective rates (0.70–0.80%) are significantly lower than Texas (1.55–2.07%).</p></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button></div>
+    </div>`;
+  }
+
+  if (model === 'sc') {
+    return `<div class="cw">
+      <div class="ae em">Section V</div>
+      <h2 class="at2">Property Tax &amp; Homestead Guide</h2>
+      <div class="ar"></div>
+      <div class="nt nt-em" style="margin-bottom:1.5rem;">
+        <span class="nl nl-em">${c.name} — South Carolina</span>
+        <p>SC Homestead Exemption is available only to homeowners <strong>65+, permanently disabled, or legally blind</strong> ($50,000 of FMV exempt). Most first-time buyers will not qualify. What every owner-occupant does get: SC assesses primary residences at <strong>4% of market value</strong> vs. 6% for non-owner-occupied. File your Legal Residence Application immediately after closing.</p>
+      </div>
+      ${deadlineHtml}
+      <h3 style="font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--midnight);margin:1.5rem 0 1rem;">Filing Instructions</h3>
+      <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">File Legal Residence Application (Form PT-1000) by January 15</div><div class="hg-desc">Secures the 4% assessment ratio. Without it you are assessed at 6%. Bring SC driver's license and vehicle registration both showing the property address, plus your recorded deed. File at the county assessor's office.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open County Assessor Portal</a></div></div>
+      <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">If 65+ or disabled — apply for Homestead Exemption by July 15</div><div class="hg-desc">File with the county auditor for the $50,000 fair market value exemption. Requires proof of age or disability and one full year of SC residence.</div></div></div>
+      <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">Notify your mortgage servicer after lower assessment is confirmed</div><div class="hg-desc">SC property taxes are due January 15. Contact your servicer to recalculate your escrow once the 4% ratio is applied.</div></div></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button></div>
+    </div>`;
+  }
+
+  if (model === 'tn') {
+    return `<div class="cw">
+      <div class="ae em">Section V</div>
+      <h2 class="at2">Property Tax Relief Guide</h2>
+      <div class="ar"></div>
+      <div class="nt nt-em" style="margin-bottom:1.5rem;">
+        <span class="nl nl-em">${c.name} — Tennessee</span>
+        <p>Tennessee has <strong>no universal homestead exemption</strong>. The state Tax Relief program is income-limited (65+, disabled, or qualifying veteran with income ≤$31,600) and pays up to $134/year against your bill. What every TN buyer gets automatically: property assessed at <strong>25% of appraised value</strong> — on a $400,000 home, your taxable base is $100,000.</p>
+      </div>
+      ${deadlineHtml}
+      <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">25% assessment ratio — applies automatically, no filing needed</div><div class="hg-desc">Your tax bill = (appraised value × 25%) × local millage rate. No separate application required for this structural protection.</div></div></div>
+      <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">Apply for Tax Relief if you qualify — deadline April 5</div><div class="hg-desc">File at your County Trustee's office. Required: proof of age/disability, income documentation, recorded deed. Veterans with 100% service-connected disability have no income limit.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open County Trustee Portal</a></div></div>
+      <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">Tax bills mailed October — due last day of February</div><div class="hg-desc">1.5%/month penalty after that. Verify your escrow reflects the correct combined county + city millage rate.</div></div></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button></div>
+    </div>`;
+  }
+
+  if (model === 'al') {
+    return `<div class="cw">
+      <div class="ae em">Section V</div>
+      <h2 class="at2">Homestead Exemption Filing Guide</h2>
+      <div class="ar"></div>
+      <div class="nt nt-em" style="margin-bottom:1.5rem;">
+        <span class="nl nl-em">${c.name} — Alabama Homestead Exemption</span>
+        <p>Alabama's standard homestead exemption reduces your assessed value by up to <strong>$4,000</strong>. The real protection is the <strong>10% assessment ratio</strong> — homestead properties assessed at 10% of market value. On a $300,000 home, your taxable base is $30,000. Seniors 65+ or permanently disabled with income ≤$12,000 may qualify for a <strong>full exemption</strong>.</p>
+      </div>
+      ${deadlineHtml}
+      <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">File homestead exemption at County Revenue Commissioner</div><div class="hg-desc">Must own and occupy as primary residence as of October 1. Bring AL driver's license showing property address, recorded deed, and Social Security number. Renews automatically.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open County Revenue Commissioner Portal</a></div></div>
+      <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">10% assessment ratio applies automatically to homestead properties</div><div class="hg-desc">No separate filing needed. At a typical 30-mill rate, a $350,000 home assessed at $35,000 generates ~$1,050/year in taxes — among the lowest in the nation.</div></div></div>
+      <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">Tax bills due October 1 — delinquent after December 31</div><div class="hg-desc">Verify your escrow reflects the correct combined county + city millage rate for your specific address.</div></div></div>
+      <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Senior / Disability Full Exemption</span><p>If 65+ or permanently disabled with income ≤$12,000, you may qualify for a complete exemption on your primary residence and up to 160 acres. Apply at the Revenue Commissioner with proof of age/disability and income documentation.</p></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button></div>
+    </div>`;
+  }
+
+  if (model === 'va') {
+    return `<div class="cw">
+      <div class="ae em">Section V</div>
+      <h2 class="at2">Property Tax Relief Guide</h2>
+      <div class="ar"></div>
+      <div class="nt nt-em" style="margin-bottom:1.5rem;">
+        <span class="nl nl-em">${c.name} — Virginia</span>
+        <p>Virginia has <strong>no universal homestead exemption</strong>. Each city and county administers its own income-limited tax relief program for elderly (65+) and permanently disabled residents. Programs vary by locality — income limits, net worth limits, and relief amounts differ between Richmond metro counties and Hampton Roads cities.</p>
+        <p style="margin-top:.5rem;"><strong>What every Virginia buyer should know:</strong> Virginia property taxes are assessed at 100% of fair market value and paid semi-annually — typically June 5 and December 5. Unlike Florida’s Save Our Homes cap, Virginia has no annual assessment increase limit for standard homeowners. Budget for full market-value assessment.</p>
+      </div>
+      ${deadlineHtml}
+      <h3 style="font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--midnight);margin:1.5rem 0 1rem;">Tax Relief Filing Instructions</h3>
+      <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">Determine if you qualify for elderly/disabled relief</div><div class="hg-desc">Virginia Code authorizes each locality to offer tax exemption, deferral, or both for residents 65+ or totally and permanently disabled. Income and net worth limits vary by city/county. In Hampton Roads, income limits range from $48,000–$68,000. In Richmond metro, check with your county. Most programs also cap net worth (typically $250,000–$350,000 excluding the home).</div></div></div>
+      <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">Apply at your locality’s Commissioner of Revenue or equivalent office</div><div class="hg-desc">Applications are typically taken between February 1 and June 30 of each year. File annually — most programs require annual renewal. Bring proof of age or disability, prior year tax returns, and documentation of net worth.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open Tax Relief Portal</a></div></div>
+      <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">100% disabled veterans — full exemption available statewide</div><div class="hg-desc">Virginia exempts from real property tax the primary residence of any veteran who has been rated 100% service-connected permanently and totally disabled by the VA, along with surviving spouses. No income or net worth limit. Apply at the Commissioner of Revenue with your VA disability rating letter.</div></div></div>
+      <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Semi-annual tax payment schedule — verify your locality</div><div class="hg-desc">Most Virginia localities bill property taxes semi-annually — due June 5 and December 5. Some localities differ. Your mortgage servicer handles escrow but verify the correct semi-annual amounts. Virginia assessments are at 100% of fair market value — no assessment ratio or cap applies to standard homeowners.</div></div></div>
+      <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Military Note — Active Duty Servicemembers</span><p>Active-duty servicemembers may qualify for property tax relief under the Servicemembers Civil Relief Act (SCRA) if their state of legal domicile differs from Virginia. Additionally, 100% disabled veterans receive a full Virginia real estate tax exemption with no income limit. Contact your local Commissioner of Revenue or JAG office for guidance specific to your situation.</p></div>
       <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button></div>
     </div>`;
   }
