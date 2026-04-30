@@ -153,16 +153,248 @@ body::before {
 }
 
 /* ── HERO CONTENT ── */
+/* ── SPLIT HERO ── */
+.hero-split {
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  padding: 3rem 3rem 2.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  margin-top: 1.75rem;
+  padding: .85rem 1.75rem;
+  background: var(--emerald);
+  color: var(--white);
+  font-family: var(--fd);
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all .2s;
+  width: fit-content;
+}
+
+.hero-cta:hover {
+  background: var(--emerald-mid);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46,125,82,.35);
+}
+
+.hero-cta svg { transition: transform .2s; }
+.hero-cta:hover svg { transform: translateX(3px); }
+
+/* ── MOCK CARD ── */
+.hero-card-wrap {
+  position: relative;
+}
+
+.mock-card {
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.08);
+  transform: perspective(1000px) rotateY(-3deg) rotateX(2deg);
+  transition: transform .3s ease;
+}
+
+.mock-card:hover {
+  transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+}
+
+.mock-card-header {
+  background: var(--midnight);
+  padding: 1.1rem 1.25rem;
+}
+
+.mock-card-badge {
+  font-family: var(--fm);
+  font-size: .48rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--teal-mid);
+  margin-bottom: .35rem;
+}
+
+.mock-card-address {
+  font-family: var(--fd);
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: .2rem;
+}
+
+.mock-card-meta {
+  font-family: var(--fm);
+  font-size: .55rem;
+  color: rgba(255,255,255,.45);
+  letter-spacing: .06em;
+}
+
+.mock-rate-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .65rem 1.25rem;
+  background: var(--teal-light);
+  border-bottom: 1px solid var(--rule);
+}
+
+.mock-rate-label {
+  font-family: var(--fm);
+  font-size: .5rem;
+  letter-spacing: .08em;
+  color: var(--teal);
+}
+
+.mock-rate-val {
+  font-family: var(--fd);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--teal);
+}
+
+.mock-scenarios {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--rule);
+}
+
+.mock-scenario {
+  padding: 1rem 1.1rem;
+  background: var(--white);
+}
+
+.mock-scenario-label {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  font-family: var(--fm);
+  font-size: .5rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: .5rem;
+}
+
+.mock-scenario-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mock-scenario-total {
+  font-family: var(--fd);
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--midnight);
+  line-height: 1;
+  margin-bottom: .65rem;
+}
+
+.mock-scenario-total span {
+  font-size: .75rem;
+  font-weight: 400;
+  color: var(--muted);
+  font-family: var(--fb);
+}
+
+.mock-best .mock-scenario-total { color: #006670; }
+.mock-worst .mock-scenario-total { color: #c62828; }
+
+.mock-breakdown { display: flex; flex-direction: column; gap: .3rem; }
+
+.mock-line {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--fm);
+  font-size: .55rem;
+  color: var(--muted);
+  padding-bottom: .28rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.mock-line:last-child { border-bottom: none; }
+.mock-line span:last-child { color: var(--midnight); font-weight: 500; }
+.mock-save { color: var(--emerald) !important; }
+.mock-warn { color: var(--indigo) !important; font-style: italic; }
+.mock-divider { border-top: 1px dashed var(--teal-muted); padding-top: .28rem; }
+
+.mock-gap-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .65rem 1.25rem;
+  background: #fff8e6;
+  border-top: 1px solid #ffe082;
+}
+
+.mock-gap-label {
+  font-family: var(--fm);
+  font-size: .5rem;
+  letter-spacing: .08em;
+  color: #6d4c00;
+}
+
+.mock-gap-val {
+  font-family: var(--fd);
+  font-size: .95rem;
+  font-weight: 700;
+  color: #6d4c00;
+}
+
+.mock-card-footer {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .55rem 1.25rem;
+  background: var(--midnight);
+  font-family: var(--fm);
+  font-size: .44rem;
+  letter-spacing: .08em;
+  color: rgba(255,255,255,.35);
+}
+
+.mock-footer-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--emerald);
+  flex-shrink: 0;
+}
+
+.mock-card-note {
+  font-family: var(--fm);
+  font-size: .48rem;
+  letter-spacing: .06em;
+  color: rgba(255,255,255,.3);
+  text-align: center;
+  margin-top: .85rem;
+  font-style: italic;
+  line-height: 1.6;
+}
+
 .hero-inner {
   position: relative;
   z-index: 10;
-  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 3rem 3rem 2.5rem;
-  max-width: 780px;
+  padding: 0;
 }
+
+
 
 .hero-eyebrow {
   display: flex;
@@ -1067,7 +1299,9 @@ footer {
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   .nav { padding: 1.1rem 1.25rem; }
-  .hero-inner { padding: 2rem 1.25rem 1.75rem; }
+  .hero-split { grid-template-columns: 1fr; padding: 2rem 1.25rem 1.75rem; gap: 2rem; }
+  .mock-card { transform: none; }
+  .hero-inner { padding: 0; }
   .why-stripe { padding: 1.5rem 1.25rem; grid-template-columns: 1fr; gap: 1.1rem; }
   .form-inner { padding: 2.5rem 1.25rem 4rem; }
   .field-row { grid-template-columns: 1fr; }
@@ -1096,28 +1330,102 @@ footer {
     <div class="nav-badge">Early Access · Launching July 1, 2026</div>
   </nav>
 
-  <div class="hero-inner">
-    <div class="hero-eyebrow">
-      <div class="eyebrow-line"></div>
-      <div class="eyebrow-text">Free Educational Mortgage Analysis Tool</div>
+  <div class="hero-split">
+
+    <!-- LEFT — Headline -->
+    <div class="hero-inner">
+      <div class="hero-eyebrow">
+        <div class="eyebrow-line"></div>
+        <div class="eyebrow-text">Free Educational Mortgage Analysis Tool</div>
+      </div>
+
+      <h1 class="hero-headline">
+        The <em>honest number</em><br>
+        before anyone<br>
+        gets paid.
+      </h1>
+
+      <p class="hero-sub">
+        A father built this tool because his son and wife were buying their first home. Every estimate they received looked manageable — until it wasn't. <strong>HomeTrue gives you the real monthly payment before anyone with a commission enters the room.</strong> No broker. No agenda. No pressure.
+      </p>
+
+      <div class="trust-row">
+        <div class="trust-pill"><div class="trust-dot" style="background:var(--teal)"></div>No broker involvement</div>
+        <div class="trust-pill"><div class="trust-dot" style="background:var(--emerald)"></div>Best-case &amp; worst-case analysis</div>
+        <div class="trust-pill"><div class="trust-dot" style="background:var(--teal-mid)"></div>County-level data · 11 states</div>
+        <div class="trust-pill"><div class="trust-dot" style="background:rgba(255,255,255,.3)"></div>Free educational tool</div>
+      </div>
+
+      <a href="#waitlist" class="hero-cta">
+        Join the Waitlist — Free
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3l5 5-5 5M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
     </div>
 
-    <h1 class="hero-headline">
-      The <em>honest number</em><br>
-      before anyone<br>
-      gets paid.
-    </h1>
+    <!-- RIGHT — Mock Analysis Card -->
+    <div class="hero-card-wrap">
+      <div class="mock-card">
 
-    <p class="hero-sub">
-      A father built this tool because his son and wife were buying their first home. Every estimate they received looked manageable — until it wasn't. <strong>HomeTrue gives you the real monthly payment before anyone with a commission enters the room.</strong> No broker. No agenda. No pressure.
-    </p>
+        <div class="mock-card-header">
+          <div class="mock-card-badge">HomeTrue Analysis · Tier 1 Pre-Offer</div>
+          <div class="mock-card-address">123 Bayview Dr · Miami-Dade County, FL</div>
+          <div class="mock-card-meta">Purchase $485,000 · 10% Down · 30-Year Fixed</div>
+        </div>
 
-    <div class="trust-row">
-      <div class="trust-pill"><div class="trust-dot" style="background:var(--teal)"></div>No broker involvement</div>
-      <div class="trust-pill"><div class="trust-dot" style="background:var(--emerald)"></div>Best-case &amp; worst-case analysis</div>
-      <div class="trust-pill"><div class="trust-dot" style="background:var(--teal-mid)"></div>County-level data · 11 states</div>
-      <div class="trust-pill"><div class="trust-dot" style="background:rgba(255,255,255,.3)"></div>Free educational tool</div>
+        <div class="mock-rate-row">
+          <span class="mock-rate-label">Current Rate (Freddie Mac PMMS)</span>
+          <span class="mock-rate-val">6.81%</span>
+        </div>
+
+        <div class="mock-scenarios">
+
+          <div class="mock-scenario mock-best">
+            <div class="mock-scenario-label">
+              <div class="mock-scenario-dot" style="background:#00838f"></div>
+              Best Case
+            </div>
+            <div class="mock-scenario-total">$3,218<span>/mo</span></div>
+            <div class="mock-breakdown">
+              <div class="mock-line"><span>Principal &amp; Interest</span><span>$2,854</span></div>
+              <div class="mock-line"><span>Property Tax</span><span>$312</span></div>
+              <div class="mock-line"><span>Homestead Exemption</span><span class="mock-save">−$52</span></div>
+              <div class="mock-line mock-divider"><span>Insurance Est.</span><span class="mock-warn">See Tier 2</span></div>
+            </div>
+          </div>
+
+          <div class="mock-scenario mock-worst">
+            <div class="mock-scenario-label">
+              <div class="mock-scenario-dot" style="background:#cc3333"></div>
+              Worst Case
+            </div>
+            <div class="mock-scenario-total">$3,891<span>/mo</span></div>
+            <div class="mock-breakdown">
+              <div class="mock-line"><span>Principal &amp; Interest</span><span>$2,991</span></div>
+              <div class="mock-line"><span>Property Tax</span><span>$389</span></div>
+              <div class="mock-line"><span>No Homestead</span><span>+$0</span></div>
+              <div class="mock-line mock-divider"><span>Insurance Est.</span><span class="mock-warn">See Tier 2</span></div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="mock-gap-row">
+          <span class="mock-gap-label">Payment gap — best to worst</span>
+          <span class="mock-gap-val">$673/mo</span>
+        </div>
+
+        <div class="mock-card-footer">
+          <div class="mock-footer-dot"></div>
+          Educational analysis only · Not financial advice · No broker involved
+        </div>
+
+      </div>
+
+      <div class="mock-card-note">
+        This is a sample analysis. Your real numbers will reflect your actual property, county, and inputs.
+      </div>
     </div>
+
   </div>
 
   <div class="why-stripe">
