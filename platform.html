@@ -661,8 +661,36 @@ footer strong{color:rgba(220,232,235,1.0);}
 </head>
 <body>
 
-<!-- WELCOME -->
-<div id="sw" class="screen active">
+<!-- DEMO BANNER -->
+<div id="demo-banner" style="background:#1e5a38;padding:.65rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;position:sticky;top:0;z-index:999;border-bottom:2px solid #2e7d52;">
+  <div style="display:flex;align-items:center;gap:.75rem;">
+    <div style="width:8px;height:8px;border-radius:50%;background:#2EE07A;flex-shrink:0;animation:pulse-dot 2s ease-in-out infinite;"></div>
+    <span style="font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.9);">Waitlist Early Access · Free Demo</span>
+  </div>
+  <span id="demo-count-display" style="font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.1em;color:rgba(255,255,255,.65);"></span>
+  <a href="/" style="font-family:'DM Mono',monospace;font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.7);text-decoration:none;border:1px solid rgba(255,255,255,.25);padding:.2rem .65rem;border-radius:3px;">← Back to Waitlist</a>
+</div>
+
+<!-- DEMO EXHAUSTED OVERLAY -->
+<div id="demo-wall" style="display:none;position:fixed;inset:0;background:rgba(26,35,50,.96);z-index:9999;display:none;align-items:center;justify-content:center;padding:2rem;">
+  <div style="background:#fff;border-radius:12px;padding:2.5rem;max-width:480px;width:100%;text-align:center;">
+    <div style="font-size:2rem;margin-bottom:1rem;">🏡</div>
+    <div style="font-family:'Fraunces',serif;font-size:1.6rem;font-weight:900;color:#1a2332;margin-bottom:.5rem;line-height:1.15;">You've used both free analyses.</div>
+    <p style="font-size:.85rem;color:#546e7a;line-height:1.75;margin-bottom:1.5rem;">Full access opens July 1, 2026. Subscribe to HomeTrue Essentials or Complete and run unlimited analyses from launch day.</p>
+    <div style="background:#e0f7fa;border:1px solid #b2ebf2;border-radius:8px;padding:1.1rem;margin-bottom:1.25rem;text-align:left;">
+      <div style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:#006670;margin-bottom:.4rem;">What you unlocked today</div>
+      <div style="font-size:.82rem;color:#1a2332;line-height:1.65;">✓ Tier 1 Pre-Offer analysis · Best &amp; worst case payment<br>✓ County-level property tax data<br>✓ No broker. No agenda. The honest number.</div>
+    </div>
+    <a href="/" style="display:block;background:#1a2332;color:#fff;font-family:'Fraunces',serif;font-size:1rem;font-weight:700;padding:.85rem 2rem;border-radius:6px;text-decoration:none;margin-bottom:.75rem;">Return to Waitlist · Full Access July 1</a>
+    <p style="font-size:.65rem;color:#90a4ae;font-style:italic;">Essentials $19/mo · Complete $29/mo · Launch July 1, 2026</p>
+  </div>
+</div>
+
+<style>
+@keyframes pulse-dot { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+</style>
+
+<!-- WELCOME -->\n<div id="sw" class="screen active">
   <div class="mh">
     <div class="mh-tag">Independent Buyer Tool · Florida · Georgia · Texas · North Carolina · South Carolina · Tennessee · Alabama · Virginia · Arizona · Nevada · Maryland</div>
     <h1>Home<span class="tr">True</span></h1>
@@ -1987,11 +2015,15 @@ function setCounty(key) {
   if(vs) vs.innerHTML = `Rate verified:<span>${MKT.rv}</span>&nbsp;·&nbsp;State:<span>${stateLabel}</span>&nbsp;·&nbsp;County:<span>${c.short}</span>&nbsp;·&nbsp;Tax:<span>${(c.tr*100).toFixed(2)}%</span>&nbsp;·&nbsp;Source:<span>Freddie Mac PMMS</span>`;
 }
 
-// ── SUBSCRIPTION TIER STATE ──
-// 'free' | 'essentials' | 'complete'
-// TEST PHASE: set to 'complete' for full access
-// Production: driven by authentication layer (Memberstack/Outseta)
-let PLAN = { tier:'complete', email:null, analysisCount:0 };
+// ── DEMO MODE — WAITLIST EARLY ACCESS ──
+// Tier 1 full · Tier 2 visible but locked · Tier 3 known but locked
+// Max 2 analyses per device · localStorage tracking
+const DEMO_MAX = 2;
+const DEMO_KEY = 'ht_demo_count';
+function getDemoCount(){ try{ return parseInt(localStorage.getItem(DEMO_KEY)||'0'); }catch(e){ return 0; } }
+function incDemoCount(){ try{ localStorage.setItem(DEMO_KEY, getDemoCount()+1); }catch(e){} }
+function demoExhausted(){ return getDemoCount() >= DEMO_MAX; }
+let PLAN = { tier:'essentials', email:'demo@waitlist', analysisCount: getDemoCount() };
 const FEATURES = {
   free:       { maxAnalyses:1, tiers:[1],   tabs:['c'],                              pdf:false, share:false, compare:false, questions:false },
   essentials: { maxAnalyses:999, tiers:[1,2], tabs:['c','b','w','cc','hg','ql-tab'], pdf:true,  share:true,  compare:false, questions:true  },
@@ -2252,6 +2284,8 @@ function genAnalysis(){
     return;
   }
   bAnalysis(S.inp,false);
+  incDemoCount();
+  updateDemoBanner();
   show('a');
   setTimeout(updateUpgradeBtn,150);
   setTimeout(()=>{
@@ -4642,6 +4676,51 @@ function showTab(t,btn){
   btn.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
 }
+
+// ── DEMO BANNER + WALL ──────────────────────────────────────────────────────
+function updateDemoBanner() {
+  const count = getDemoCount();
+  const remaining = Math.max(0, DEMO_MAX - count);
+  const el = document.getElementById('demo-count-display');
+  if (el) {
+    el.textContent = remaining > 0
+      ? remaining + ' free analys' + (remaining === 1 ? 'is' : 'es') + ' remaining'
+      : 'Demo limit reached — Full access July 1';
+    el.style.color = remaining === 0 ? '#ff8a65' : 'rgba(255,255,255,.65)';
+  }
+}
+
+function checkDemoWall() {
+  if (demoExhausted()) {
+    const wall = document.getElementById('demo-wall');
+    if (wall) { wall.style.display = 'flex'; }
+  }
+}
+
+// Lock Tier 3 card for demo users
+function lockTier3Demo() {
+  const tc3 = document.getElementById('tc3');
+  if (!tc3) return;
+  tc3.style.opacity = '.6';
+  tc3.style.cursor = 'not-allowed';
+  tc3.onclick = function() {
+    alert('Tier 3 Under Contract analysis unlocks with HomeTrue Complete — $29/month — available July 1, 2026. Join the waitlist for early access.');
+  };
+  const lock = document.getElementById('tc3-lock');
+  if (lock) {
+    lock.style.display = 'block';
+    lock.textContent = '🔒 Complete — $29/mo · Launches July 1, 2026';
+    lock.style.background = 'var(--indigo-light)';
+    lock.style.color = 'var(--indigo-dim)';
+  }
+}
+
+// Initialize demo mode
+document.addEventListener('DOMContentLoaded', function() {
+  updateDemoBanner();
+  lockTier3Demo();
+  if (demoExhausted()) { checkDemoWall(); }
+});
 </script>
 </body>
 </html>
