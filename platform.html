@@ -1224,8 +1224,8 @@ footer strong{color:rgba(220,232,235,1.0);}
           </div>
           <div class="ff">
             <label>Listing URL (Optional)</label>
-            <input type="text" id="f-url" placeholder="e.g. zillow.com/homes/..." oninput="updLRP()">
-            <div class="fn">Paste from Zillow, Redfin, Realtor.com, Homes.com, or Trulia</div>
+            <input type="text" id="f-url" placeholder="Paste full URL — e.g. https://www.zillow.com/homedetails/..." oninput="updLRP()">
+            <div class="fn">Copy the full URL from your browser address bar on Zillow, Redfin, Realtor.com, Homes.com, or Trulia — not just the site name</div>
           </div>
 
           <!-- LISTING REFERENCE PANEL -->
@@ -1382,8 +1382,8 @@ footer strong{color:rgba(220,232,235,1.0);}
       <button class="btn btn-sm btn-ol" onclick="startOver()">← Start Over</button>
       <button class="btn btn-sm btn-slate" onclick="showTierPicker()">Change Tier ↕</button>
       <button class="btn btn-sm btn-tl" id="upgrade-btn" onclick="upgradeTier()">Upgrade →</button>
-      <button class="dl-btn" onclick="downloadPDF()">↓ Download PDF</button>
-      <button class="btn btn-sm btn-slate" onclick="shareAnalysis()">⎘ Share</button>
+      <button class="dl-btn" onclick="demoPDFClick()" id="pdf-btn">↓ Download PDF</button>
+      <button class="btn btn-sm btn-slate" onclick="demoShareClick()" id="share-btn">⎘ Share</button>
       <button class="btn btn-sm" id="compare-btn" onclick="startComparison()" style="background:var(--indigo);color:var(--white);display:none;">⇄ Compare</button>
     </div>
   </nav>
@@ -2024,7 +2024,7 @@ const DEMO_KEY = 'ht_demo_count';
 function getDemoCount(){ try{ return parseInt(localStorage.getItem(DEMO_KEY)||'0'); }catch(e){ return 0; } }
 function incDemoCount(){ try{ localStorage.setItem(DEMO_KEY, getDemoCount()+1); }catch(e){} }
 function demoExhausted(){ return getDemoCount() >= DEMO_MAX; }
-let PLAN = { tier:'essentials', email:'demo@waitlist', analysisCount: getDemoCount() };
+let PLAN = { tier:'free', email:'demo@waitlist', analysisCount: getDemoCount() };
 const FEATURES = {
   free:       { maxAnalyses:1, tiers:[1],   tabs:['c'],                              pdf:false, share:false, compare:false, questions:false },
   essentials: { maxAnalyses:999, tiers:[1,2], tabs:['c','b','w','cc','hg','ql-tab'], pdf:true,  share:true,  compare:false, questions:true  },
@@ -2433,7 +2433,7 @@ function bAnalysis(i,isDemo){
   ${buildRateContext(i)}
   <h3 style="font-family:var(--fd);font-size:1.1rem;margin:1.5rem 0 .75rem;color:var(--midnight);">DTI Analysis · Income Range ${fmt(i.ilo)}–${fmt(i.ihi)}/mo</h3>
   <div class="dt">${dtis.map(d=>`<div class="dr2"><span class="drl">${d[0]}</span><span class="${d[2]}">${d[1]} — ${d[2]==='do'?'Healthy':d[2]==='dw'?'Tight / Qualifiable':'Near Ceiling'}</span></div>`).join('')}</div>
-  <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button></div>
+  <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
 </div></div>
 
 <div id="tb2" class="as"><div class="cw">
@@ -2480,7 +2480,7 @@ function bAnalysis(i,isDemo){
     <div class="pp"><span class="py">Year 3–4</span><span class="pd2">With 3–4% appreciation, LTV approaches 85%. Order appraisal, request PMI cancellation — saves ${fmt(i.bp)}/mo = ${fmt(i.bp*12)}/yr.</span></div>
     <div class="pp"><span class="py">Year 7–8</span><span class="pd2">Automatic PMI termination (Homeowners Protection Act) at 78% original LTV — guaranteed by federal law.</span></div>
   </div>`:''}
-  <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button></div>
+  <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
 </div></div>
 
 <div id="tw" class="as"><div class="cw">
@@ -3767,7 +3767,7 @@ function buildClosingCosts(inp) {
       </div>
 
       <div style="text-align:center;margin:2rem 0 1rem;">
-        <button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button>
+        <button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button>
       </div>
     </div>
   `;
@@ -3815,7 +3815,7 @@ function buildHomesteadGuide(inp) {
       <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Confirm approval and check your TCAD/HCAD account</div><div class="hg-desc">After filing, check your county appraisal district's online portal to verify the exemption appears on your account. The exemption is typically processed within 30–90 days. If you move into the home after January 1, you may still qualify for a partial exemption in some cases.</div></div></div>
       <div class="hg-step"><div class="hg-num">5</div><div class="hg-content"><div class="hg-title">Notify your mortgage servicer</div><div class="hg-desc">Once approved, contact your mortgage servicer. Your escrow payment should be recalculated to reflect the lower taxable value — this is how the exemption savings appear in your monthly payment.</div></div></div>
       <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Texas Homestead Cap — 10% Annual Assessment Limit</span><p>Once your Homestead Exemption is established, Texas law caps annual increases in your appraised value at 10% per year regardless of market appreciation. In fast-appreciating markets like Austin and Houston, this cap provides meaningful protection against rapid tax bill increases. The cap takes effect in the second year after you establish the exemption.</p></div>
-      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
     </div>`;
   }
 
@@ -3838,7 +3838,7 @@ function buildHomesteadGuide(inp) {
       <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Once granted, the exemption renews automatically</div><div class="hg-desc">Unlike some states, Georgia's homestead exemption is automatically renewed each year — you do not need to reapply as long as you remain in the same home with the same ownership. You must reapply if you move, change ownership, or want to qualify for a different exemption type.</div></div></div>
       <div class="hg-step"><div class="hg-num">5</div><div class="hg-content"><div class="hg-title">Notify your mortgage servicer</div><div class="hg-desc">Once approved, contact your mortgage servicer. Your escrow payment should be recalculated to reflect the lower taxable assessed value. This is how the exemption savings appear in your monthly payment.</div></div></div>
       <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Georgia's 40% Assessment Rule — What It Means</span><p>Georgia law requires all property to be assessed at 40% of fair market value. On a $400,000 home, your assessed value is $160,000 before any exemptions. The homestead exemption is applied to that assessed value — not the purchase price. This structure means your effective tax burden is inherently lower than the nominal tax rate suggests, making Georgia's rates more competitive than they may first appear.</p></div>
-      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
     </div>`;
   }
 
@@ -3858,7 +3858,7 @@ function buildHomesteadGuide(inp) {
       <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">Disabled Veteran Homestead Exclusion</div><div class="hg-desc">Honorably discharged veterans with a service-connected total and permanent disability may exclude the first $45,000 of assessed value. No age or income requirement. Apply at the County Assessor's Office with VA disability documentation.</div></div></div>
       <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">Apply at the County Assessor's Office</div><div class="hg-desc">All NC tax relief programs require Form AV-9 submitted to the County Assessor by June 1.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open County Assessor's Office Portal</a></div></div>
       <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">NC Has No Universal Homestead Exemption</span><p>Standard working-age buyers receive no blanket property tax exemption. NC property taxes are applied to the full assessed value. NC effective rates (0.70–0.93%) are significantly lower than Texas (1.55–2.07%), which partially offsets this.</p></div>
-      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
     </div>`;
   }
 
@@ -3875,7 +3875,7 @@ function buildHomesteadGuide(inp) {
       <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">File Legal Residence Application (Form PT-1000) by January 15</div><div class="hg-desc">Secures the 4% assessment ratio. Without it you are assessed at 6%. Bring SC driver's license and vehicle registration both showing the property address, plus your recorded deed. File at the county assessor's office.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open County Assessor Portal</a></div></div>
       <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">If 65+ or disabled — apply for Homestead Exemption by July 15</div><div class="hg-desc">File with the county auditor for the $50,000 fair market value exemption. Requires proof of age or disability and one full year of SC residence.</div></div></div>
       <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">Notify your mortgage servicer after lower assessment is confirmed</div><div class="hg-desc">SC property taxes are due January 15. Contact your servicer to recalculate your escrow once the 4% ratio is applied.</div></div></div>
-      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
     </div>`;
   }
 
@@ -3892,7 +3892,7 @@ function buildHomesteadGuide(inp) {
       <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">25% assessment ratio — applies automatically, no filing needed</div><div class="hg-desc">Your tax bill = (appraised value × 25%) × local millage rate. No separate application required for this structural protection.</div></div></div>
       <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">Apply for Tax Relief if you qualify — deadline April 5</div><div class="hg-desc">File at your County Trustee's office. Required: proof of age/disability, income documentation, recorded deed. Veterans with 100% service-connected disability have no income limit.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open County Trustee Portal</a></div></div>
       <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">Tax bills mailed October — due last day of February</div><div class="hg-desc">1.5%/month penalty after that. Verify your escrow reflects the correct combined county + city millage rate.</div></div></div>
-      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
     </div>`;
   }
 
@@ -3910,7 +3910,7 @@ function buildHomesteadGuide(inp) {
       <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">10% assessment ratio applies automatically to homestead properties</div><div class="hg-desc">At a typical 30-mill rate, a $350,000 home assessed at $35,000 generates ~$1,050/year in taxes — among the lowest in the nation.</div></div></div>
       <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">Tax bills due October 1 — delinquent after December 31</div><div class="hg-desc">Verify your escrow reflects the correct combined county + city millage rate for your specific address.</div></div></div>
       <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Senior / Disability Full Exemption</span><p>If 65+ or permanently disabled with income ≤$12,000, you may qualify for a complete exemption on your primary residence and up to 160 acres. Apply at the Revenue Commissioner with proof of age/disability and income documentation.</p></div>
-      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
     </div>`;
   }
 
@@ -3929,7 +3929,7 @@ function buildHomesteadGuide(inp) {
       <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">Apply at your locality's Commissioner of Revenue</div><div class="hg-desc">Bring proof of age or disability, prior year tax returns, and documentation of net worth. Most programs require annual renewal.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open Tax Relief Portal</a></div></div>
       <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">100% disabled veterans — full exemption statewide</div><div class="hg-desc">Virginia exempts the primary residence of any veteran rated 100% service-connected permanently and totally disabled by the VA. No income or net worth limit. Surviving spouses may continue the benefit. Apply at the Commissioner of Revenue with your VA disability rating letter.</div></div></div>
       <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Semi-annual tax payment schedule</div><div class="hg-desc">Most Virginia localities bill semi-annually — due June 5 and December 5. Verify your specific locality. Virginia assessments are at 100% of fair market value with no cap for standard homeowners.</div></div></div>
-      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
     </div>`;
   }
 
@@ -3949,7 +3949,7 @@ function buildHomesteadGuide(inp) {
       <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">File a Homestead Declaration for creditor protection</div><div class="hg-desc">File a Homestead Declaration with the County Recorder to protect up to $400,000 of equity (Maricopa) or applicable county amount from general creditor claims. This is separate from the property tax system and does not affect your tax bill.</div></div></div>
       <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Property taxes paid semi-annually — October 1 and March 1</div><div class="hg-desc">First half due October 1 (delinquent November 1). Second half due March 1 (delinquent May 1). Verify your escrow reflects the correct county + city/district combined rate.</div></div></div>
       <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Veterans Property Tax Exemption</span><p>Arizona veterans with a service-connected disability of 100% may qualify for a property tax exemption. The amount varies — $3,000 assessed value reduction for 100% disabled veterans. Apply at the County Assessor with VA disability documentation.</p></div>
-      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
     </div>`;
   }
 
@@ -3968,7 +3968,7 @@ function buildHomesteadGuide(inp) {
       <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">3% annual assessment cap — applies automatically to primary residences</div><div class="hg-desc">Nevada caps annual increases in your assessed value at 3% (or the CPI rate, if lower) for owner-occupied primary residences. In Las Vegas and Reno where appreciation has been significant, this cap provides meaningful long-term protection.</div></div></div>
       <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">Veteran and disability exemptions</div><div class="hg-desc">Qualified veterans and disabled persons may qualify for a property tax exemption. Contact your County Assessor for current exemption amounts and income/disability requirements.</div></div></div>
       <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Property taxes paid semi-annually — August 15 and January 15</div><div class="hg-desc">First installment due August 15. Second installment due January 15. Verify your escrow reflects the correct combined county + school district rate.</div></div></div>
-      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
     </div>`;
   }
 
@@ -3987,7 +3987,7 @@ function buildHomesteadGuide(inp) {
       <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">Year 1 — full assessment, no credit yet</div><div class="hg-desc">Budget for full market-value assessment in Year 1. The Homestead Credit takes effect starting in Year 2 and caps future increases. Maryland assessments occur on a 3-year cycle — your assessment is set at purchase price or assessed value, whichever applies.</div></div></div>
       <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">First-Time Homebuyer exemption on state transfer tax</div><div class="hg-desc">Maryland first-time homebuyers may qualify for exemption from the 0.5% state transfer tax. Confirm eligibility with your settlement company — definition includes anyone who has not owned a primary residence in the past 7 years.</div></div></div>
       <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Property taxes paid semi-annually</div><div class="hg-desc">Most Maryland counties bill semi-annually. Verify your specific county's payment schedule and confirm your escrow is set correctly for both installments.</div></div></div>
-      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
     </div>`;
   }
 
@@ -4019,7 +4019,7 @@ function buildHomesteadGuide(inp) {
       </div>
 
       <div style="text-align:center;margin:2rem 0 1rem;">
-        <button class="dl-btn" onclick="downloadPDF()">↓ Download Full PDF Analysis</button>
+        <button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button>
       </div>
     </div>
   `;
@@ -4678,7 +4678,62 @@ function showTab(t,btn){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// ── DEMO BANNER + WALL ──────────────────────────────────────────────────────
+// ── DEMO PDF & SHARE INTERCEPT ──────────────────────────────────────────────
+function demoPDFClick() {
+  showDemoUpgradePrompt('pdf');
+}
+
+function demoShareClick() {
+  showDemoUpgradePrompt('share');
+}
+
+function showDemoUpgradePrompt(feature) {
+  const existing = document.getElementById('demo-upgrade-modal');
+  if (existing) existing.remove();
+
+  const modal = document.createElement('div');
+  modal.id = 'demo-upgrade-modal';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(26,35,50,.92);z-index:9999;display:flex;align-items:center;justify-content:center;padding:1.5rem;';
+
+  const isPDF = feature === 'pdf';
+
+  modal.innerHTML = `
+    <div style="background:#fff;border-radius:12px;padding:2.25rem;max-width:500px;width:100%;text-align:center;position:relative;">
+      <button onclick="document.getElementById('demo-upgrade-modal').remove()" style="position:absolute;top:.75rem;right:1rem;background:none;border:none;font-size:1.2rem;color:#90a4ae;cursor:pointer;">✕</button>
+      <div style="font-size:1.75rem;margin-bottom:.75rem;">${isPDF ? '📄' : '🔗'}</div>
+      <div style="font-family:'Fraunces',serif;font-size:1.35rem;font-weight:900;color:#1a2332;margin-bottom:.5rem;line-height:1.2;">
+        ${isPDF ? 'PDF Download' : 'Share Analysis'} is a paid feature
+      </div>
+      <p style="font-size:.82rem;color:#546e7a;line-height:1.75;margin-bottom:1.5rem;">
+        ${isPDF ? 'Download a full professional PDF of your analysis — yours to keep, share with your partner, or bring to your lender.' : 'Share a live link to your analysis with your partner, realtor, or family.'} Available from <strong>Essentials $19/mo</strong> on launch day July 1, 2026.
+      </p>
+
+      <div style="background:#eceff1;border-radius:8px;padding:1.1rem;margin-bottom:1.25rem;text-align:left;">
+        <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:#607080;margin-bottom:.6rem;">What unlocks at each plan · July 1, 2026</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;">
+          <div style="background:#e0f7fa;border-radius:6px;padding:.75rem;">
+            <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:#006670;margin-bottom:.35rem;">Essentials · $19/mo</div>
+            <div style="font-size:.72rem;color:#1a2332;line-height:1.6;">✓ PDF Download<br>✓ Share Analysis<br>✓ Tier 1 &amp; Tier 2<br>✓ Closing Costs<br>✓ Homestead Guide<br>✓ Questions to Ask</div>
+          </div>
+          <div style="background:#ede7f6;border-radius:6px;padding:.75rem;">
+            <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:#311b92;margin-bottom:.35rem;">Complete · $29/mo</div>
+            <div style="font-size:.72rem;color:#1a2332;line-height:1.6;">✓ Everything in Essentials<br>✓ Tier 3 Under Contract<br>✓ Two-Property Compare<br>✓ Rate Lock Analysis<br>✓ Full Cash-at-Close<br>✓ PDF with all tiers</div>
+          </div>
+        </div>
+      </div>
+
+      <a href="/" style="display:block;background:#1a2332;color:#fff;font-family:'Fraunces',serif;font-size:.95rem;font-weight:700;padding:.8rem 1.5rem;border-radius:6px;text-decoration:none;margin-bottom:.6rem;">
+        Return to Waitlist · Full Access July 1
+      </a>
+      <p style="font-size:.65rem;color:#90a4ae;font-style:italic;">No credit card required to join waitlist. Subscribe at launch.</p>
+    </div>`;
+
+  document.body.appendChild(modal);
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) modal.remove();
+  });
+}
+
 function updateDemoBanner() {
   const count = getDemoCount();
   const remaining = Math.max(0, DEMO_MAX - count);
