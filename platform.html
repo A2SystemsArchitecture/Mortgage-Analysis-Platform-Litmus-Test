@@ -2021,10 +2021,11 @@ function setCounty(key) {
 // Max 2 analyses per device · localStorage tracking
 const DEMO_MAX = 2;
 const DEMO_KEY = 'ht_demo_count';
-function getDemoCount(){ try{ return parseInt(localStorage.getItem(DEMO_KEY)||'0'); }catch(e){ return 0; } }
-function incDemoCount(){ try{ localStorage.setItem(DEMO_KEY, getDemoCount()+1); }catch(e){} }
-function demoExhausted(){ return getDemoCount() >= DEMO_MAX; }
-let PLAN = { tier:'free', email:'demo@waitlist', analysisCount: getDemoCount() };
+const IS_TESTER = new URLSearchParams(window.location.search).get('tester') === 'true';
+function getDemoCount(){ if(IS_TESTER) return 0; try{ return parseInt(localStorage.getItem(DEMO_KEY)||'0'); }catch(e){ return 0; } }
+function incDemoCount(){ if(IS_TESTER) return; try{ localStorage.setItem(DEMO_KEY, getDemoCount()+1); }catch(e){} }
+function demoExhausted(){ if(IS_TESTER) return false; return getDemoCount() >= DEMO_MAX; }
+let PLAN = { tier: IS_TESTER ? 'complete' : 'free', email:'demo@waitlist', analysisCount: getDemoCount() };
 const FEATURES = {
   free:       { maxAnalyses:1, tiers:[1],   tabs:['c'],                              pdf:false, share:false, compare:false, questions:false },
   essentials: { maxAnalyses:999, tiers:[1,2], tabs:['c','b','w','cc','hg','ql-tab'], pdf:true,  share:true,  compare:false, questions:true  },
@@ -4680,10 +4681,12 @@ function showTab(t,btn){
 
 // ── DEMO PDF & SHARE INTERCEPT ──────────────────────────────────────────────
 function demoPDFClick() {
+  if (IS_TESTER) { downloadPDF(); return; }
   showDemoUpgradePrompt('pdf');
 }
 
 function demoShareClick() {
+  if (IS_TESTER) { shareAnalysis(); return; }
   showDemoUpgradePrompt('share');
 }
 
@@ -4739,10 +4742,15 @@ function updateDemoBanner() {
   const remaining = Math.max(0, DEMO_MAX - count);
   const el = document.getElementById('demo-count-display');
   if (el) {
-    el.textContent = remaining > 0
-      ? remaining + ' free analys' + (remaining === 1 ? 'is' : 'es') + ' remaining'
-      : 'Demo limit reached — Full access July 1';
-    el.style.color = remaining === 0 ? '#ff8a65' : 'rgba(255,255,255,.65)';
+    if (IS_TESTER) {
+      el.textContent = 'Tester Mode · Unlimited Access';
+      el.style.color = '#ffd54f';
+    } else {
+      el.textContent = remaining > 0
+        ? remaining + ' free analys' + (remaining === 1 ? 'is' : 'es') + ' remaining'
+        : 'Demo limit reached — Full access July 1';
+      el.style.color = remaining === 0 ? '#ff8a65' : 'rgba(255,255,255,.65)';
+    }
   }
 }
 
