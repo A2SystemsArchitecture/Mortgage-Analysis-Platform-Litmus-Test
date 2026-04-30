@@ -833,9 +833,9 @@ footer strong{color:rgba(220,232,235,1.0);}
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:.85rem;margin-bottom:1rem;">
 
         <div class="wc dm" onclick="startDemo()" style="margin:0;padding:1.25rem;">
-          <span class="wct">Option A</span>
-          <span class="wcn" style="font-size:1rem;">See a Demo First</span>
-          <p class="wcd" style="font-size:.78rem;">Walk through a completed analysis on a sample property before entering your own.</p>
+          <span class="wct">Option A — Free Demo</span>
+          <span class="wcn" style="font-size:1rem;">Analyze Any Property</span>
+          <p class="wcd" style="font-size:.78rem;">Run a real Tier 1 analysis on any property in our 11 launch states. Your actual numbers — no fictional data.</p>
         </div>
 
         <div class="wc st" onclick="startG1()" style="margin:0;padding:1.25rem;">
@@ -877,12 +877,12 @@ footer strong{color:rgba(220,232,235,1.0);}
 <!-- DEMO CHOICE -->
 <div id="sdm" class="screen">
   <div class="mh">
-    <div class="mh-tag">Demo Mode · Fictional Property</div>
+    <div class="mh-tag">HomeTrue Analysis · Free Demo</div>
     <h1>Home<span class="tr">True</span></h1>
     <div class="mh-rule"></div>
     <div class="mh-sub">See a completed analysis before entering your own property</div>
   </div>
-  <div class="vs">Sample Property: <span>1234 Brickell Bay Dr, Miami FL 33131 (Fictional — Not Real)</span></div>
+  <div class="vs">Free Demo · <span>Real county data · Your actual property</span></div>
   <div class="c">
     <div style="max-width:600px;margin:0 auto;padding:3rem 0;">
       <div class="ae tl" style="margin-bottom:.4rem;">Choose Your Demo</div>
@@ -924,7 +924,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 
 <!-- DEMO ANALYSIS -->
 <div id="sdma" class="screen">
-  <div class="dmb" id="dmb-label">DEMO MODE — 1234 Brickell Bay Dr, Miami FL 33131 (Fictional)<button onclick="show('w')">Analyze My Property →</button></div>
+  <div class="dmb" id="dmb-label">HomeTrue Free Demo<button onclick="show('w')">Analyze My Property →</button></div>
   <div id="dmw"></div>
 </div>
 
@@ -2101,7 +2101,7 @@ function captureEmail() {
 let S={tier:null,ins:null,g1s:false,pbs:false,inp:{}};
 
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('s'+id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
-function startDemo(){show('dm');}
+function startDemo(){startG1();}
 function startG1(){show('g1');}
 function startOver(){
   S={tier:null,ins:null,g1s:false,pbs:false,inp:{}};
@@ -2521,7 +2521,7 @@ function bAnalysis(i,isDemo){
 }
 
 function loadDemo(tier){
-  const base={address:"1234 Brickell Bay Dr, Miami, FL 33131 (DEMO — Fictional Property)",price:460000,dpct:3,damt:13800,loan:446200,byr:2008,rage:10,rtp:'tile',con:'cbs',sht:true,hoa:185,fld:'x',ilo:10000,ihi:13000,pri:true,crd:'excellent',br:6.00,wr:6.75};
+  const base={address:"Sample Property — Enter your own above",price:460000,dpct:3,damt:13800,loan:446200,byr:2008,rage:10,rtp:'tile',con:'cbs',sht:true,hoa:185,fld:'x',ilo:10000,ihi:13000,pri:true,crd:'excellent',br:6.00,wr:6.75};
   base.bpi=cPI(base.loan,base.br);
   base.wpi=cPI(base.loan,base.wr);
   base.ty1=Math.round(460000*.013/12);
@@ -2544,7 +2544,7 @@ function loadDemo(tier){
   base.pn=Math.round((base.bt+base.wt)/2/50)*50;
 
   const lbl=document.getElementById('dmb-label');
-  if(lbl) lbl.innerHTML=`DEMO MODE · Tier ${tier} · 1234 Brickell Bay Dr, Miami FL 33131 (Fictional)<button onclick="show('w')">Analyze My Property →</button>`;
+  if(lbl) lbl.innerHTML=`HomeTrue Free Demo · Tier ${tier}<button onclick="show('w')">Analyze My Property →</button>`;
 
   bAnalysis(base,true);
   const w=document.getElementById('dmw');
