@@ -296,30 +296,28 @@ body::before {
   background: var(--midnight-mid);
   border-top: 1px solid rgba(255,255,255,.06);
   border-bottom: 1px solid rgba(255,255,255,.06);
-  padding: 1.25rem 3rem;
-  display: flex;
-  gap: 2.5rem;
-  overflow-x: auto;
-  align-items: center;
+  padding: 2rem 3rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem 2.5rem;
 }
 
 .why-item {
   display: flex;
-  align-items: center;
-  gap: .65rem;
-  white-space: nowrap;
-  flex-shrink: 0;
+  align-items: flex-start;
+  gap: .75rem;
 }
 
 .why-icon {
-  font-size: 1rem;
+  font-size: 1.2rem;
   flex-shrink: 0;
+  margin-top: .1rem;
 }
 
 .why-text {
-  font-size: .78rem;
+  font-size: .82rem;
   color: var(--midnight-sub);
-  line-height: 1.4;
+  line-height: 1.55;
 }
 
 .why-text strong { color: var(--midnight-text); font-weight: 600; }
@@ -924,7 +922,7 @@ footer {
 @media (max-width: 768px) {
   .nav { padding: 1.1rem 1.25rem; }
   .hero-inner { padding: 3.5rem 1.25rem 3rem; }
-  .why-stripe { padding: 1rem 1.25rem; gap: 1.5rem; }
+  .why-stripe { padding: 1.5rem 1.25rem; grid-template-columns: 1fr; gap: 1.1rem; }
   .form-inner { padding: 2.5rem 1.25rem 4rem; }
   .field-row { grid-template-columns: 1fr; }
   .role-grid { grid-template-columns: 1fr 1fr; }
