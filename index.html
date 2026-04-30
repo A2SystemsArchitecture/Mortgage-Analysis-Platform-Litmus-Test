@@ -60,10 +60,10 @@ body::before {
 .hero {
   position: relative;
   background: var(--midnight-deep);
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  padding-bottom: 1rem;
 }
 
 /* Geometric accent lines */
@@ -160,7 +160,7 @@ body::before {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 5rem 3rem 4rem;
+  padding: 3rem 3rem 2.5rem;
   max-width: 780px;
 }
 
@@ -296,10 +296,12 @@ body::before {
   background: var(--midnight-mid);
   border-top: 1px solid rgba(255,255,255,.06);
   border-bottom: 1px solid rgba(255,255,255,.06);
-  padding: 2rem 3rem;
+  padding: 1.75rem 3rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem 2.5rem;
+  gap: 1.25rem 2rem;
+  overflow: hidden;
+  width: 100%;
 }
 
 .why-item {
@@ -1065,7 +1067,7 @@ footer {
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   .nav { padding: 1.1rem 1.25rem; }
-  .hero-inner { padding: 3.5rem 1.25rem 3rem; }
+  .hero-inner { padding: 2rem 1.25rem 1.75rem; }
   .why-stripe { padding: 1.5rem 1.25rem; grid-template-columns: 1fr; gap: 1.1rem; }
   .form-inner { padding: 2.5rem 1.25rem 4rem; }
   .field-row { grid-template-columns: 1fr; }
