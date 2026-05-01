@@ -702,9 +702,9 @@ footer strong{color:rgba(220,232,235,1.0);}
     <h1>Home<span class="tr">True</span></h1>
     <div class="mh-rule"></div>
     <div class="mh-sub">Honest mortgage analysis. No pressure. No agenda.</div>
-    <div class="scope-b active-county-name">Miami-Dade County</div>
+    <div class="scope-b active-county-name">Select a Market</div>
   </div>
-  <div class="vs" id="avs">Rate verified:<span>Friday, April 25, 2026 · 11:52 AM ET</span>&nbsp;·&nbsp;County:<span class="active-county-short">Miami-Dade</span>&nbsp;·&nbsp;Tax:<span>1.30%</span>&nbsp;·&nbsp;Source:<span>Freddie Mac PMMS</span></div>
+  <div class="vs" id="avs">Rate verified:<span>Friday, April 25, 2026 · 11:52 AM ET</span>&nbsp;·&nbsp;County:<span class="active-county-short">— Select a market —</span>&nbsp;·&nbsp;Tax:<span>—</span>&nbsp;·&nbsp;Source:<span>Freddie Mac PMMS</span></div>
   <div class="county-selector-wrap">
     <div class="county-selector-inner" style="flex-direction:column;align-items:flex-start;gap:.6rem;">
       <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;">
@@ -712,7 +712,7 @@ footer strong{color:rgba(220,232,235,1.0);}
         <div class="state-toggles">
           <button class="state-toggle hint-al" id="st-al" onclick="selectState('al',this)">Alabama</button>
           <button class="state-toggle hint-az" id="st-az" onclick="selectState('az',this)">Arizona</button>
-          <button class="state-toggle active-fl" id="st-fl" onclick="selectState('fl',this)">Florida</button>
+          <button class="state-toggle hint-fl" id="st-fl" onclick="selectState('fl',this)">Florida</button>
           <button class="state-toggle hint-ga" id="st-ga" onclick="selectState('ga',this)">Georgia</button>
           <button class="state-toggle hint-md" id="st-md" onclick="selectState('md',this)">Maryland</button>
           <button class="state-toggle hint-nv" id="st-nv" onclick="selectState('nv',this)">Nevada</button>
@@ -723,10 +723,10 @@ footer strong{color:rgba(220,232,235,1.0);}
           <button class="state-toggle hint-va" id="st-va" onclick="selectState('va',this)">Virginia</button>
         </div>
       </div>
-      <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;width:100%;">
+      <div id="county-row" style="display:none;align-items:center;gap:.75rem;flex-wrap:wrap;width:100%;">
         <span class="county-sel-lbl">Select County</span>
         <div class="county-pills" id="pills-fl">
-          <button class="county-pill active" onclick="selectCounty('miami-dade',this)">Miami-Dade</button>
+          <button class="county-pill" onclick="selectCounty('miami-dade',this)">Miami-Dade</button>
           <button class="county-pill" onclick="selectCounty('broward',this)">Broward</button>
           <button class="county-pill" onclick="selectCounty('palm-beach',this)">Palm Beach</button>
           <button class="county-pill yr3" onclick="selectCounty('martin',this)">Martin</button>
@@ -1153,7 +1153,7 @@ footer strong{color:rgba(220,232,235,1.0);}
         <div class="dr"></div>
         <div class="ds"><span class="dn">Section 3 of 6</span><div class="dh">Geographic Scope — Miami-Dade County Only</div><div class="db">This tool is calibrated exclusively for properties located in Miami-Dade County, Florida. All financial assumptions, property tax rates, insurance cost ranges, flood zone frameworks, and legislative references are specific to Miami-Dade County. Using this tool for properties outside Miami-Dade County will produce inaccurate results. By proceeding, you confirm the property you are analyzing is in Miami-Dade County.</div></div>
         <div class="dr"></div>
-        <div class="ds"><span class="dn">Section 4 of 6</span><div class="dh">Accuracy Levels by Tier</div><div class="db">This tool operates at three tiers. Tier 1 Pre-Offer: 85–90% accuracy. Tier 2 Active Offer: 92–95% accuracy, requiring a confirmed insurance quote or an acknowledged estimate with quantified variance disclosure. Tier 3 Under Contract: 95–98% accuracy, requiring all confirmed inputs including a locked Loan Estimate. Accuracy decreases when inputs are estimated. Your analysis displays which inputs are confirmed and which are estimated.</div></div>
+        <div class="ds"><span class="dn">Section 4 of 6</span><div class="dh">Analysis Completeness by Tier</div><div class="db">This tool operates at three tiers based on how far along you are in the home buying process. Tier 1 Pre-Offer uses publicly available county tax data and estimated ranges for insurance and other costs — appropriate before you have made an offer. Tier 2 Active Offer incorporates a confirmed or estimated insurance quote, reducing cost variance. Tier 3 Under Contract uses your locked Loan Estimate for the most complete input set. Results improve as you confirm more inputs. Your analysis displays which inputs are confirmed and which are estimated. No tier produces a guarantee or professional assessment.</div></div>
         <div class="dr"></div>
         <div class="ds"><span class="dn">Section 5 of 6</span><div class="dh">Data Currency &amp; Verification Schedule</div><div class="db">Mortgage rate data is updated every Friday by 12:00 PM Eastern Time based on the Freddie Mac Primary Mortgage Market Survey published that same Thursday. In the event of a missed Friday update, data will be refreshed by Saturday 12:00 PM Eastern Time. All other financial inputs are verified on the first Friday of each month by 12:00 PM Eastern Time.</div></div>
         <div class="dr"></div>
@@ -1190,9 +1190,9 @@ footer strong{color:rgba(220,232,235,1.0);}
       <h1 class="gt">Where are you in<br>the buying process?</h1>
       <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.5rem;">Select the tier that matches your current stage.</p>
       <div class="tcs">
-        <div class="tc" id="tc1" onclick="selTier(1)"><div class="tck">✓</div><span class="tn">Tier 1</span><span class="tna">Pre-Offer</span><span class="ta">85–90% Accuracy</span><p class="td">Still evaluating. Haven't made an offer. Insurance excluded with full caveat.</p></div>
-        <div class="tc" id="tc2" onclick="selTier(2)"><div class="tck">✓</div><span class="tn">Tier 2</span><span class="tna">Active Offer</span><span class="ta">92–95% Accuracy</span><p class="td">Offer in or imminent. Insurance: confirmed quote or acknowledged estimate.</p><div id="tc2-lock" style="display:none;font-family:var(--fm);font-size:.55rem;color:var(--teal-dim);margin-top:.5rem;padding:.25rem .5rem;background:var(--teal-light);border-radius:4px;">🔒 Essentials — $19/mo</div></div>
-        <div class="tc" id="tc3" onclick="selTier(3)"><div class="tck">✓</div><span class="tn">Tier 3</span><span class="tna">Under Contract</span><span class="ta">95–98% Accuracy</span><p class="td">Contract signed. All inputs confirmed — rate lock and insurance quote required.</p><div id="tc3-lock" style="display:none;font-family:var(--fm);font-size:.55rem;color:var(--indigo-dim);margin-top:.5rem;padding:.25rem .5rem;background:var(--indigo-light);border-radius:4px;">🔒 Complete — $29/mo</div></div>
+        <div class="tc" id="tc1" onclick="selTier(1)"><div class="tck">✓</div><span class="tn">Tier 1</span><span class="tna">Pre-Offer</span><span class="ta">County Tax Data · Estimated Costs</span><p class="td">Still evaluating. Haven't made an offer. Insurance excluded with full caveat.</p></div>
+        <div class="tc" id="tc2" onclick="selTier(2)"><div class="tck">✓</div><span class="tn">Tier 2</span><span class="tna">Active Offer</span><span class="ta">More Inputs · Lower Variance</span><p class="td">Offer in or imminent. Insurance: confirmed quote or acknowledged estimate.</p><div id="tc2-lock" style="display:none;font-family:var(--fm);font-size:.55rem;color:var(--teal-dim);margin-top:.5rem;padding:.25rem .5rem;background:var(--teal-light);border-radius:4px;">🔒 Essentials — $19/mo</div></div>
+        <div class="tc" id="tc3" onclick="selTier(3)"><div class="tck">✓</div><span class="tn">Tier 3</span><span class="tna">Under Contract</span><span class="ta">All Inputs Confirmed</span><p class="td">Contract signed. All inputs confirmed — rate lock and insurance quote required.</p><div id="tc3-lock" style="display:none;font-family:var(--fm);font-size:.55rem;color:var(--indigo-dim);margin-top:.5rem;padding:.25rem .5rem;background:var(--indigo-light);border-radius:4px;">🔒 Complete — $29/mo</div></div>
       </div>
       <button class="btn btn-fw btn-mn" id="tb" disabled onclick="procInputs()" style="margin-top:1rem;">Continue with Selected Tier</button>
     </div>
@@ -1398,9 +1398,9 @@ footer strong{color:rgba(220,232,235,1.0);}
       <div style="font-family:var(--fd);font-size:1.4rem;font-weight:700;color:var(--midnight);margin-bottom:.4rem;">Select a tier for this property</div>
       <p style="font-size:.82rem;color:var(--muted);margin-bottom:1.25rem;line-height:1.6;">Your property details are remembered. You only need to update fields specific to the new tier.</p>
       <div style="display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.25rem;">
-        <div class="tp-opt" id="tp1" onclick="pickTier(1)"><div style="display:flex;justify-content:space-between;align-items:center;"><div><span style="font-family:var(--fm);font-size:.58rem;letter-spacing:.1em;color:var(--teal-mid);display:block;margin-bottom:.2rem;">TIER 1</span><strong style="color:var(--midnight);">Pre-Offer — 85–90% Accuracy</strong></div><span style="font-family:var(--fm);font-size:.62rem;color:var(--teal-dim);background:var(--teal-light);padding:.2rem .6rem;border-radius:3px;">Teal</span></div></div>
-        <div class="tp-opt" id="tp2" onclick="pickTier(2)"><div style="display:flex;justify-content:space-between;align-items:center;"><div><span style="font-family:var(--fm);font-size:.58rem;letter-spacing:.1em;color:var(--indigo-mid);display:block;margin-bottom:.2rem;">TIER 2</span><strong style="color:var(--midnight);">Active Offer — 92–95% Accuracy</strong></div><span style="font-family:var(--fm);font-size:.62rem;color:var(--indigo-dim);background:var(--indigo-light);padding:.2rem .6rem;border-radius:3px;">Indigo</span></div></div>
-        <div class="tp-opt" id="tp3" onclick="pickTier(3)"><div style="display:flex;justify-content:space-between;align-items:center;"><div><span style="font-family:var(--fm);font-size:.58rem;letter-spacing:.1em;color:var(--emerald-mid);display:block;margin-bottom:.2rem;">TIER 3</span><strong style="color:var(--midnight);">Under Contract — 95–98% Accuracy</strong></div><span style="font-family:var(--fm);font-size:.62rem;color:var(--emerald-dim);background:var(--emerald-light);padding:.2rem .6rem;border-radius:3px;">Emerald</span></div></div>
+        <div class="tp-opt" id="tp1" onclick="pickTier(1)"><div style="display:flex;justify-content:space-between;align-items:center;"><div><span style="font-family:var(--fm);font-size:.58rem;letter-spacing:.1em;color:var(--teal-mid);display:block;margin-bottom:.2rem;">TIER 1</span><strong style="color:var(--midnight);">Pre-Offer — County Tax Data · Estimated Costs</strong></div><span style="font-family:var(--fm);font-size:.62rem;color:var(--teal-dim);background:var(--teal-light);padding:.2rem .6rem;border-radius:3px;">Teal</span></div></div>
+        <div class="tp-opt" id="tp2" onclick="pickTier(2)"><div style="display:flex;justify-content:space-between;align-items:center;"><div><span style="font-family:var(--fm);font-size:.58rem;letter-spacing:.1em;color:var(--indigo-mid);display:block;margin-bottom:.2rem;">TIER 2</span><strong style="color:var(--midnight);">Active Offer — More Inputs · Lower Variance</strong></div><span style="font-family:var(--fm);font-size:.62rem;color:var(--indigo-dim);background:var(--indigo-light);padding:.2rem .6rem;border-radius:3px;">Indigo</span></div></div>
+        <div class="tp-opt" id="tp3" onclick="pickTier(3)"><div style="display:flex;justify-content:space-between;align-items:center;"><div><span style="font-family:var(--fm);font-size:.58rem;letter-spacing:.1em;color:var(--emerald-mid);display:block;margin-bottom:.2rem;">TIER 3</span><strong style="color:var(--midnight);">Under Contract — All Inputs Confirmed</strong></div><span style="font-family:var(--fm);font-size:.62rem;color:var(--emerald-dim);background:var(--emerald-light);padding:.2rem .6rem;border-radius:3px;">Emerald</span></div></div>
       </div>
       <button class="btn btn-ol btn-fw" onclick="closeTierPicker()">Cancel — Stay on Current Analysis</button>
     </div>
@@ -2236,6 +2236,9 @@ function selectState(state, btn) {
     else if(state==='nv') legend.textContent = 'Nevada · Silver Sage · Test Phase';
     else if(state==='md') legend.textContent = 'Maryland · Chesapeake · Test Phase';
   }
+  // Show county row when state is selected
+  const countyRow = document.getElementById('county-row');
+  if (countyRow) countyRow.style.display = 'flex';
   // Auto-select first county of this state
   const firstPills = document.querySelectorAll('#pills-' + state + ' .county-pill');
   if(firstPills.length > 0) {
@@ -2358,13 +2361,13 @@ function fmtR(r){return r.toFixed(2)+'%';}
 function bG3(){
   const i=S.inp;
   const tl={1:'Tier 1 — Pre-Offer Estimate',2:'Tier 2 — Active Offer Analysis',3:'Tier 3 — Under Contract Precision'};
-  const al={1:'85–90%',2:'92–95%',3:'95–98%'};
+  const al={1:'County tax data with estimated costs',2:'More confirmed inputs, lower variance',3:'All inputs confirmed'};
   const est=[];
   if(i.ix)est.push('Homeowners Insurance: Excluded');
   else if(i.il==='ESTIMATED')est.push('Homeowners Insurance: Estimated — unconfirmed');
   if(S.tier<3&&i.bp>0)est.push('PMI: Estimated range');
   const cs=[
-    ['Tier &amp; Accuracy',`You are receiving a <strong>${tl[S.tier]}</strong> with an accuracy target of <strong>${al[S.tier]}</strong>.`],
+    ['Tier &amp; Completeness',`You are receiving a <strong>${tl[S.tier]}</strong>. Input completeness: <strong>${al[S.tier]}</strong>.`],
     ['Estimated Inputs',est.length?`Estimated inputs: <strong>${est.join('; ')}</strong>. Review all caveats before any financial decision.`:`<strong>All inputs confirmed.</strong>`],
     ['Not Professional Advice','This analysis is an educational tool. It does not constitute financial, legal, real estate, or mortgage advice.'],
     ['Data Currency',`Mortgage rate last verified: <strong>${MKT.rv}</strong>. All other inputs: <strong>${MKT.ov}</strong>.`],
