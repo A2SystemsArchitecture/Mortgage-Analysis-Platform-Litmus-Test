@@ -30,6 +30,11 @@
   --arizona:#8b4513;--arizona-mid:#a0521a;--arizona-light:#f5ede6;--arizona-dim:#6a3310;--arizona-muted:#d4b09a;
   --nevada:#687865;--nevada-mid:#7a8c78;--nevada-light:#ecefec;--nevada-dim:#4a5a48;--nevada-muted:#b8c8b5;
   --maryland:#1e5a60;--maryland-mid:#266e75;--maryland-light:#e4f0f1;--maryland-dim:#144045;--maryland-muted:#9ac4c8;
+  --indiana:#6b5c45;--indiana-mid:#7d6d55;--indiana-light:#f0ece6;--indiana-dim:#4a3f30;--indiana-muted:#c8bfb0;
+  --ohio:#2d6a6a;--ohio-mid:#3a7f7f;--ohio-light:#e4f0f0;--ohio-dim:#1e4a4a;--ohio-muted:#a0c4c4;
+  --missouri:#4a4e6b;--missouri-mid:#5a5f80;--missouri-light:#eaebf2;--missouri-dim:#32364a;--missouri-muted:#b0b3c8;
+  --penn:#4a5568;--penn-mid:#5a6680;--penn-light:#eaecf0;--penn-dim:#323a4a;--penn-muted:#b0b8c8;
+  --kansas:#8a7340;--kansas-mid:#a08850;--kansas-light:#f2ede4;--kansas-dim:#5f4f2c;--kansas-muted:#c8bea0;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--slate-bg);color:var(--ink);font-family:var(--fb);font-weight:300;min-height:100vh;line-height:1.65;}
@@ -399,6 +404,11 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .state-toggle.active-az{background:var(--arizona);border-color:var(--arizona);color:var(--white);}
 .state-toggle.active-nv{background:var(--nevada);border-color:var(--nevada);color:var(--white);}
 .state-toggle.active-md{background:var(--maryland);border-color:var(--maryland);color:var(--white);}
+.state-toggle.active-in{background:var(--indiana);border-color:var(--indiana);color:var(--white);}
+.state-toggle.active-oh{background:var(--ohio);border-color:var(--ohio);color:var(--white);}
+.state-toggle.active-mo{background:var(--missouri);border-color:var(--missouri);color:var(--white);}
+.state-toggle.active-pa{background:var(--penn);border-color:var(--penn);color:var(--white);}
+.state-toggle.active-ks{background:var(--kansas);border-color:var(--kansas);color:var(--white);}
 .state-toggle:hover:not(.active-fl):not(.active-tx):not(.active-nc):not(.active-sc):not(.active-tn):not(.active-al):not(.active-va):not(.active-ga):not(.active-az):not(.active-nv):not(.active-md){border-color:rgba(176,190,197,.6);color:rgba(176,190,197,.9);}
 /* State toggle hint colors */
 .state-toggle.hint-ga{border-color:rgba(139,30,45,.45);color:rgba(180,100,110,.9);}
@@ -423,6 +433,16 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .state-toggle.hint-nv:hover{border-color:var(--nevada-mid);color:var(--nevada-mid);}
 .state-toggle.hint-md:hover{border-color:var(--maryland-mid);color:var(--maryland-mid);}
 .state-toggle.hint-fl:hover{border-color:var(--teal-mid);color:var(--teal-mid);}
+.state-toggle.hint-in{border-color:rgba(107,92,69,.45);color:rgba(140,120,90,.9);}
+.state-toggle.hint-oh{border-color:rgba(45,106,106,.45);color:rgba(70,140,140,.9);}
+.state-toggle.hint-mo{border-color:rgba(74,78,107,.45);color:rgba(105,110,150,.9);}
+.state-toggle.hint-pa{border-color:rgba(74,85,104,.45);color:rgba(105,120,145,.9);}
+.state-toggle.hint-ks{border-color:rgba(138,115,64,.45);color:rgba(170,148,90,.9);}
+.state-toggle.hint-in:hover{border-color:var(--indiana-mid);color:var(--indiana-mid);}
+.state-toggle.hint-oh:hover{border-color:var(--ohio-mid);color:var(--ohio-mid);}
+.state-toggle.hint-mo:hover{border-color:var(--missouri-mid);color:var(--missouri-mid);}
+.state-toggle.hint-pa:hover{border-color:var(--penn-mid);color:var(--penn-mid);}
+.state-toggle.hint-ks:hover{border-color:var(--kansas-mid);color:var(--kansas-mid);}
 /* Georgia pills */
 .county-pill.ga{border-color:rgba(139,30,45,.55);color:rgba(200,120,130,.95);}
 .county-pill.ga:hover{border-color:var(--georgia-mid);color:var(--white);background:rgba(139,30,45,.25);}
@@ -463,6 +483,26 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .county-pill.nv.active{background:var(--nevada);border-color:var(--nevada);color:var(--white);}
 /* Maryland pills */
 .county-pill.md{border-color:rgba(30,90,96,.55);color:rgba(70,155,164,.95);}
+/* Indiana pills */
+.county-pill.in{border-color:rgba(107,92,69,.55);color:rgba(145,125,95,.95);}
+.county-pill.in:hover{border-color:var(--indiana-mid);color:var(--white);background:rgba(107,92,69,.25);}
+.county-pill.in.active{background:var(--indiana);border-color:var(--indiana);color:var(--white);}
+/* Ohio pills */
+.county-pill.oh{border-color:rgba(45,106,106,.55);color:rgba(75,145,145,.95);}
+.county-pill.oh:hover{border-color:var(--ohio-mid);color:var(--white);background:rgba(45,106,106,.25);}
+.county-pill.oh.active{background:var(--ohio);border-color:var(--ohio);color:var(--white);}
+/* Missouri pills */
+.county-pill.mo{border-color:rgba(74,78,107,.55);color:rgba(110,115,160,.95);}
+.county-pill.mo:hover{border-color:var(--missouri-mid);color:var(--white);background:rgba(74,78,107,.25);}
+.county-pill.mo.active{background:var(--missouri);border-color:var(--missouri);color:var(--white);}
+/* Pennsylvania pills */
+.county-pill.pa{border-color:rgba(74,85,104,.55);color:rgba(110,125,155,.95);}
+.county-pill.pa:hover{border-color:var(--penn-mid);color:var(--white);background:rgba(74,85,104,.25);}
+.county-pill.pa.active{background:var(--penn);border-color:var(--penn);color:var(--white);}
+/* Kansas pills */
+.county-pill.ks{border-color:rgba(138,115,64,.55);color:rgba(175,150,90,.95);}
+.county-pill.ks:hover{border-color:var(--kansas-mid);color:var(--white);background:rgba(138,115,64,.25);}
+.county-pill.ks.active{background:var(--kansas);border-color:var(--kansas);color:var(--white);}
 .county-pill.md:hover{border-color:var(--maryland-mid);color:var(--white);background:rgba(30,90,96,.25);}
 .county-pill.md.active{background:var(--maryland);border-color:var(--maryland);color:var(--white);}
 /* State info banner */
@@ -707,20 +747,29 @@ footer strong{color:rgba(220,232,235,1.0);}
   <div class="vs" id="avs">Rate verified:<span>Friday, April 25, 2026 · 11:52 AM ET</span>&nbsp;·&nbsp;County:<span class="active-county-short">— Select a market —</span>&nbsp;·&nbsp;Tax:<span>—</span>&nbsp;·&nbsp;Source:<span>Freddie Mac PMMS</span></div>
   <div class="county-selector-wrap">
     <div class="county-selector-inner" style="flex-direction:column;align-items:flex-start;gap:.6rem;">
-      <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;">
-        <span class="county-sel-lbl">Market</span>
-        <div class="state-toggles">
-          <button class="state-toggle hint-al" id="st-al" onclick="selectState('al',this)">Alabama</button>
-          <button class="state-toggle hint-az" id="st-az" onclick="selectState('az',this)">Arizona</button>
-          <button class="state-toggle hint-fl" id="st-fl" onclick="selectState('fl',this)">Florida</button>
-          <button class="state-toggle hint-ga" id="st-ga" onclick="selectState('ga',this)">Georgia</button>
-          <button class="state-toggle hint-md" id="st-md" onclick="selectState('md',this)">Maryland</button>
-          <button class="state-toggle hint-nv" id="st-nv" onclick="selectState('nv',this)">Nevada</button>
-          <button class="state-toggle hint-nc" id="st-nc" onclick="selectState('nc',this)">North Carolina</button>
-          <button class="state-toggle hint-sc" id="st-sc" onclick="selectState('sc',this)">South Carolina</button>
-          <button class="state-toggle hint-tn" id="st-tn" onclick="selectState('tn',this)">Tennessee</button>
-          <button class="state-toggle hint-tx" id="st-tx" onclick="selectState('tx',this)">Texas</button>
-          <button class="state-toggle hint-va" id="st-va" onclick="selectState('va',this)">Virginia</button>
+      <div style="display:flex;align-items:flex-start;gap:.75rem;flex-wrap:wrap;">
+        <span class="county-sel-lbl" style="padding-top:.35rem;">Market</span>
+        <div style="display:flex;flex-direction:column;gap:.4rem;">
+          <div class="state-toggles">
+            <button class="state-toggle hint-al" id="st-al" onclick="selectState('al',this)">Alabama</button>
+            <button class="state-toggle hint-az" id="st-az" onclick="selectState('az',this)">Arizona</button>
+            <button class="state-toggle hint-fl" id="st-fl" onclick="selectState('fl',this)">Florida</button>
+            <button class="state-toggle hint-ga" id="st-ga" onclick="selectState('ga',this)">Georgia</button>
+            <button class="state-toggle hint-md" id="st-md" onclick="selectState('md',this)">Maryland</button>
+            <button class="state-toggle hint-nv" id="st-nv" onclick="selectState('nv',this)">Nevada</button>
+            <button class="state-toggle hint-nc" id="st-nc" onclick="selectState('nc',this)">North Carolina</button>
+            <button class="state-toggle hint-sc" id="st-sc" onclick="selectState('sc',this)">South Carolina</button>
+            <button class="state-toggle hint-tn" id="st-tn" onclick="selectState('tn',this)">Tennessee</button>
+            <button class="state-toggle hint-tx" id="st-tx" onclick="selectState('tx',this)">Texas</button>
+            <button class="state-toggle hint-va" id="st-va" onclick="selectState('va',this)">Virginia</button>
+          </div>
+          <div class="state-toggles">
+            <button class="state-toggle hint-in" id="st-in" onclick="selectState('in',this)">Indiana</button>
+            <button class="state-toggle hint-ks" id="st-ks" onclick="selectState('ks',this)">Kansas</button>
+            <button class="state-toggle hint-mo" id="st-mo" onclick="selectState('mo',this)">Missouri</button>
+            <button class="state-toggle hint-oh" id="st-oh" onclick="selectState('oh',this)">Ohio</button>
+            <button class="state-toggle hint-pa" id="st-pa" onclick="selectState('pa',this)">Pennsylvania</button>
+          </div>
         </div>
       </div>
       <div id="county-row" style="display:none;align-items:center;gap:.75rem;flex-wrap:wrap;width:100%;">
@@ -806,6 +855,44 @@ footer strong{color:rgba(220,232,235,1.0);}
         <div class="county-pills" id="pills-nv" style="display:none;">
           <button class="county-pill nv" onclick="selectCounty('clark',this)">Clark (Las Vegas)</button>
           <button class="county-pill nv" onclick="selectCounty('washoe',this)">Washoe (Reno)</button>
+        </div>
+        <div class="county-pills" id="pills-in" style="display:none;">
+          <button class="county-pill in" onclick="selectCounty('marion-in',this)">Marion (Indianapolis)</button>
+          <button class="county-pill in" onclick="selectCounty('hamilton-in',this)">Hamilton (Carmel/Fishers)</button>
+          <button class="county-pill in" onclick="selectCounty('hendricks',this)">Hendricks (Avon)</button>
+          <button class="county-pill in" onclick="selectCounty('johnson-in',this)">Johnson (Greenwood)</button>
+          <button class="county-pill in" onclick="selectCounty('boone-in',this)">Boone (Zionsville)</button>
+        </div>
+        <div class="county-pills" id="pills-oh" style="display:none;">
+          <button class="county-pill oh" onclick="selectCounty('franklin-oh',this)">Franklin (Columbus)</button>
+          <button class="county-pill oh" onclick="selectCounty('delaware-oh',this)">Delaware (Dublin)</button>
+          <button class="county-pill oh" onclick="selectCounty('licking',this)">Licking (Newark)</button>
+          <button class="county-pill oh" onclick="selectCounty('fairfield-oh',this)">Fairfield (Pickerington)</button>
+          <button class="county-pill oh" onclick="selectCounty('hamilton-oh',this)">Hamilton (Cincinnati)</button>
+          <button class="county-pill oh" onclick="selectCounty('warren-oh',this)">Warren (Mason)</button>
+          <button class="county-pill oh" onclick="selectCounty('butler-oh',this)">Butler (Fairfield)</button>
+          <button class="county-pill oh" onclick="selectCounty('clermont',this)">Clermont (Milford)</button>
+        </div>
+        <div class="county-pills" id="pills-mo" style="display:none;">
+          <button class="county-pill mo" onclick="selectCounty('jackson-mo',this)">Jackson (Kansas City)</button>
+          <button class="county-pill mo" onclick="selectCounty('clay-mo',this)">Clay (Liberty)</button>
+          <button class="county-pill mo" onclick="selectCounty('cass',this)">Cass (Belton)</button>
+          <button class="county-pill mo" onclick="selectCounty('platte',this)">Platte (Parkville)</button>
+          <button class="county-pill mo" onclick="selectCounty('stlouis-county',this)">St. Louis County</button>
+          <button class="county-pill mo" onclick="selectCounty('stcharles',this)">St. Charles (O'Fallon)</button>
+          <button class="county-pill mo" onclick="selectCounty('jefferson-mo',this)">Jefferson (Arnold)</button>
+          <button class="county-pill mo" onclick="selectCounty('franklin-mo',this)">Franklin (Washington)</button>
+          <button class="county-pill mo" onclick="selectCounty('stlouis-city',this)">St. Louis City ★</button>
+        </div>
+        <div class="county-pills" id="pills-pa" style="display:none;">
+          <button class="county-pill pa" onclick="selectCounty('allegheny',this)">Allegheny (Pittsburgh)</button>
+          <button class="county-pill pa" onclick="selectCounty('butler-pa',this)">Butler (Cranberry Twp)</button>
+          <button class="county-pill pa" onclick="selectCounty('washington-pa',this)">Washington (Peters Twp)</button>
+          <button class="county-pill pa" onclick="selectCounty('westmoreland',this)">Westmoreland (Greensburg)</button>
+          <button class="county-pill pa" onclick="selectCounty('beaver',this)">Beaver (Aliquippa)</button>
+        </div>
+        <div class="county-pills" id="pills-ks" style="display:none;">
+          <button class="county-pill ks" onclick="selectCounty('johnson-ks',this)">Johnson (Overland Park)</button>
         </div>
         <span class="county-note" id="state-legend">Dashed = Year 3 expansion</span>
       </div>
@@ -1994,7 +2081,292 @@ const COUNTIES = {
   },
 };
 
-// Active county — defaults to Miami-Dade
+// ── INDIANA ──
+  'marion-in': {
+    name:'Marion County', short:'Marion',
+    tr:0.0083, he:45000,
+    fxb:20, fxw:38, fab:40, faw:95,
+    paUrl:'https://www.indy.gov/activity/apply-for-a-homestead-deduction',
+    paName:'Marion County Assessor',
+    notes:'Marion County (Indianapolis) effective tax rate ~0.83%. Indiana caps homestead property taxes at 1% of gross assessed value. Standard deduction: $45,000 off assessed value + supplemental deduction of 35% of remaining AV up to $600,000. File with county assessor by December 31.',
+    state:'in', closingModel:'indiana',
+    heNote:'Indiana Homestead Standard Deduction: $45,000 off assessed value. Supplemental deduction: 35% of remaining assessed value up to $600,000. File with Marion County Assessor by December 31 of the year you move in. Renews automatically.'
+  },
+  'hamilton-in': {
+    name:'Hamilton County', short:'Hamilton',
+    tr:0.0067, he:45000,
+    fxb:18, fxw:35, fab:38, faw:90,
+    paUrl:'https://www.hamiltoncounty.in.gov/749/Homestead-Standard-Deduction',
+    paName:'Hamilton County Assessor',
+    notes:'Hamilton County (Carmel/Fishers/Westfield/Noblesville) effective tax rate ~0.67% — lowest in the Indianapolis metro. One of the fastest-growing counties in the nation. Indiana 1% homestead cap applies.',
+    state:'in', closingModel:'indiana',
+    heNote:'Indiana Homestead Standard Deduction: $45,000 off assessed value. Supplemental deduction: 35% of remaining assessed value up to $600,000. File with Hamilton County Assessor by December 31.'
+  },
+  'hendricks': {
+    name:'Hendricks County', short:'Hendricks',
+    tr:0.0074, he:45000,
+    fxb:18, fxw:35, fab:38, faw:90,
+    paUrl:'https://www.co.hendricks.in.us/government/departments/assessor',
+    paName:'Hendricks County Assessor',
+    notes:'Hendricks County (Avon/Plainfield/Brownsburg) effective tax rate ~0.74%. Western Indianapolis suburb, strong first-time buyer market. Indiana 1% homestead cap applies.',
+    state:'in', closingModel:'indiana',
+    heNote:'Indiana Homestead Standard Deduction: $45,000 off assessed value. Supplemental deduction: 35% of remaining assessed value up to $600,000. File with Hendricks County Assessor by December 31.'
+  },
+  'johnson-in': {
+    name:'Johnson County', short:'Johnson',
+    tr:0.0078, he:45000,
+    fxb:18, fxw:35, fab:38, faw:90,
+    paUrl:'https://www.co.johnson.in.us/departments/assessor',
+    paName:'Johnson County Assessor',
+    notes:'Johnson County (Greenwood/Franklin/Bargersville) effective tax rate ~0.78%. South Indianapolis suburb, high first-time buyer volume. Indiana 1% homestead cap applies.',
+    state:'in', closingModel:'indiana',
+    heNote:'Indiana Homestead Standard Deduction: $45,000 off assessed value. Supplemental deduction: 35% of remaining assessed value up to $600,000. File with Johnson County Assessor by December 31.'
+  },
+  'boone-in': {
+    name:'Boone County', short:'Boone',
+    tr:0.0065, he:45000,
+    fxb:18, fxw:35, fab:38, faw:90,
+    paUrl:'https://www.boonecounty.in.gov/departments/assessor',
+    paName:'Boone County Assessor',
+    notes:'Boone County (Zionsville/Lebanon/Whitestown) effective tax rate ~0.65% — lowest in the Indianapolis metro. Northwest Indianapolis suburb. Indiana 1% homestead cap applies.',
+    state:'in', closingModel:'indiana',
+    heNote:'Indiana Homestead Standard Deduction: $45,000 off assessed value. Supplemental deduction: 35% of remaining assessed value up to $600,000. File with Boone County Assessor by December 31.'
+  },
+  // ── OHIO ──
+  'franklin-oh': {
+    name:'Franklin County', short:'Franklin',
+    tr:0.0135, he:0,
+    fxb:20, fxw:38, fab:40, faw:95,
+    paUrl:'https://www.franklincountyauditor.com/real-estate/homestead',
+    paName:'Franklin County Auditor',
+    notes:'Franklin County (Columbus) effective tax rate ~1.35%. Ohio assesses property at 35% of appraised value. No universal homestead exemption for standard buyers — senior/disabled program only. County conveyance fee $1 per $1,000 paid by seller. Taxes paid semi-annually.',
+    state:'oh', closingModel:'ohio',
+    heNote:'Ohio Homestead Exemption is available only to homeowners 65+ or permanently disabled. Reduces the taxable value by $25,000 for qualifying owners. Apply at the Franklin County Auditor by December 31. Standard working-age buyers receive no property tax exemption in Ohio.'
+  },
+  'delaware-oh': {
+    name:'Delaware County', short:'Delaware',
+    tr:0.0105, he:0,
+    fxb:18, fxw:35, fab:38, faw:90,
+    paUrl:'https://www.co.delaware.oh.us/offices/auditor/homestead.aspx',
+    paName:'Delaware County Auditor',
+    notes:'Delaware County (Dublin/Powell/Westerville/Lewis Center) effective tax rate ~1.05%. North Columbus suburb, one of the wealthiest counties in Ohio. Ohio 35% assessment ratio applies. No universal homestead exemption.',
+    state:'oh', closingModel:'ohio',
+    heNote:'Ohio Homestead Exemption for seniors 65+ or permanently disabled only. Reduces taxable value by $25,000. Apply at Delaware County Auditor by December 31. Standard buyers receive no exemption.'
+  },
+  'licking': {
+    name:'Licking County', short:'Licking',
+    tr:0.0094, he:0,
+    fxb:18, fxw:35, fab:38, faw:90,
+    paUrl:'https://www.lcounty.com/auditor/homestead',
+    paName:'Licking County Auditor',
+    notes:'Licking County (Newark/Heath/Pataskala/Granville) effective tax rate ~0.94%. East Columbus suburb, strong affordability and growing population. Ohio 35% assessment ratio. No universal homestead exemption.',
+    state:'oh', closingModel:'ohio',
+    heNote:'Ohio Homestead Exemption for seniors 65+ or permanently disabled only. Apply at Licking County Auditor by December 31. Standard buyers receive no exemption.'
+  },
+  'fairfield-oh': {
+    name:'Fairfield County', short:'Fairfield',
+    tr:0.0102, he:0,
+    fxb:18, fxw:35, fab:38, faw:90,
+    paUrl:'https://www.co.fairfield.oh.us/auditor/homestead.html',
+    paName:'Fairfield County Auditor',
+    notes:'Fairfield County (Lancaster/Pickerington/Canal Winchester) effective tax rate ~1.02%. Southeast Columbus suburb. Ohio 35% assessment ratio. No universal homestead exemption.',
+    state:'oh', closingModel:'ohio',
+    heNote:'Ohio Homestead Exemption for seniors 65+ or permanently disabled only. Apply at Fairfield County Auditor by December 31. Standard buyers receive no exemption.'
+  },
+  'hamilton-oh': {
+    name:'Hamilton County', short:'Hamilton',
+    tr:0.0126, he:0,
+    fxb:20, fxw:38, fab:42, faw:100,
+    paUrl:'https://www.hamiltoncountyauditor.org/homestead',
+    paName:'Hamilton County Auditor',
+    notes:'Hamilton County (Cincinnati/Blue Ash/Hyde Park/Norwood) effective tax rate ~1.26%. Ohio 35% assessment ratio. No universal homestead exemption for standard buyers. Cincinnati is a major first-time buyer market with strong institutional partner presence.',
+    state:'oh', closingModel:'ohio',
+    heNote:'Ohio Homestead Exemption for seniors 65+ or permanently disabled only. Apply at Hamilton County Auditor by December 31. Standard buyers receive no exemption in Ohio.'
+  },
+  'warren-oh': {
+    name:'Warren County', short:'Warren',
+    tr:0.0087, he:0,
+    fxb:18, fxw:35, fab:38, faw:90,
+    paUrl:'https://www.co.warren.oh.us/auditor/homestead.html',
+    paName:'Warren County Auditor',
+    notes:'Warren County (Mason/Lebanon/Springboro/Loveland) effective tax rate ~0.87% — lowest in the Cincinnati metro. North Cincinnati suburb where buyers priced out of Hamilton County relocate. Major first-time buyer market. Ohio 35% assessment ratio.',
+    state:'oh', closingModel:'ohio',
+    heNote:'Ohio Homestead Exemption for seniors 65+ or permanently disabled only. Apply at Warren County Auditor by December 31. Standard buyers receive no exemption.'
+  },
+  'butler-oh': {
+    name:'Butler County', short:'Butler',
+    tr:0.0106, he:0,
+    fxb:18, fxw:35, fab:38, faw:90,
+    paUrl:'https://www.butlercountyauditor.org/homestead',
+    paName:'Butler County Auditor',
+    notes:'Butler County (Fairfield/Hamilton/Middletown/Oxford) effective tax rate ~1.06%. West Cincinnati suburb. Ohio 35% assessment ratio. No universal homestead exemption.',
+    state:'oh', closingModel:'ohio',
+    heNote:'Ohio Homestead Exemption for seniors 65+ or permanently disabled only. Apply at Butler County Auditor by December 31. Standard buyers receive no exemption.'
+  },
+  'clermont': {
+    name:'Clermont County', short:'Clermont',
+    tr:0.0094, he:0,
+    fxb:18, fxw:35, fab:38, faw:90,
+    paUrl:'https://www.clermontauditor.org/homestead',
+    paName:'Clermont County Auditor',
+    notes:'Clermont County (Milford/Eastgate/Batavia/Loveland) effective tax rate ~0.94%. East Cincinnati suburb. Ohio 35% assessment ratio. No universal homestead exemption.',
+    state:'oh', closingModel:'ohio',
+    heNote:'Ohio Homestead Exemption for seniors 65+ or permanently disabled only. Apply at Clermont County Auditor by December 31. Standard buyers receive no exemption.'
+  },
+  // ── MISSOURI ──
+  'jackson-mo': {
+    name:'Jackson County', short:'Jackson',
+    tr:0.0108, he:0,
+    fxb:20, fxw:38, fab:40, faw:95,
+    paUrl:'https://www.jacksongov.org/government/departments/assessment/homestead',
+    paName:'Jackson County Assessment Department',
+    notes:'Jackson County (Kansas City/Independence/Lee's Summit/Blue Springs) effective tax rate ~1.08%. Missouri assesses residential property at 19% of appraised value. No universal homestead exemption. Documentary stamp tax ($0.50 per $500) paid by seller.',
+    state:'mo', closingModel:'missouri',
+    heNote:'Missouri has no universal homestead exemption. The Missouri Senior Citizen Property Tax Credit (Circuit Breaker) provides income-limited relief for residents 65+ or disabled with income under $30,000 (renters) or $34,000 (owners). Apply with the Missouri Department of Revenue with your state income tax return.'
+  },
+  'clay-mo': {
+    name:'Clay County', short:'Clay',
+    tr:0.0098, he:0,
+    fxb:18, fxw:35, fab:38, faw:90,
+    paUrl:'https://claycountymo.gov/departments/collector/real_estate_tax',
+    paName:'Clay County Collector',
+    notes:'Clay County (Liberty/North Kansas City/Kearney/Gladstone) effective tax rate ~0.98%. North Kansas City suburb. Missouri 19% assessment ratio. No universal homestead exemption.',
+    state:'mo', closingModel:'missouri',
+    heNote:'Missouri has no universal homestead exemption. Senior/disabled Circuit Breaker credit available — apply with Missouri Department of Revenue.'
+  },
+  'cass': {
+    name:'Cass County', short:'Cass',
+    tr:0.0084, he:0,
+    fxb:18, fxw:35, fab:38, faw:90,
+    paUrl:'https://www.casscounty.com/259/Assessor',
+    paName:'Cass County Assessor',
+    notes:'Cass County (Belton/Raymore/Harrisonville/Peculiar) effective tax rate ~0.84%. South Kansas City suburb, strong affordability. Missouri 19% assessment ratio. No universal homestead exemption.',
+    state:'mo', closingModel:'missouri',
+    heNote:'Missouri has no universal homestead exemption. Senior/disabled Circuit Breaker credit available — apply with Missouri Department of Revenue.'
+  },
+  'platte': {
+    name:'Platte County', short:'Platte',
+    tr:0.0086, he:0,
+    fxb:18, fxw:35, fab:38, faw:90,
+    paUrl:'https://www.plattecountymo.gov/Departments/Assessor',
+    paName:'Platte County Assessor',
+    notes:'Platte County (Parkville/Riverside/Platte City/Gladstone) effective tax rate ~0.86%. Northwest Kansas City suburb. Missouri 19% assessment ratio. No universal homestead exemption.',
+    state:'mo', closingModel:'missouri',
+    heNote:'Missouri has no universal homestead exemption. Senior/disabled Circuit Breaker credit available — apply with Missouri Department of Revenue.'
+  },
+  'stlouis-county': {
+    name:'St. Louis County', short:'St. Louis Co.',
+    tr:0.0098, he:0,
+    fxb:20, fxw:38, fab:40, faw:95,
+    paUrl:'https://stlouiscountymo.gov/st-louis-county-departments/assessor/',
+    paName:'St. Louis County Assessor',
+    notes:'St. Louis County (Clayton/Chesterfield/Kirkwood/Florissant/Ballwin) effective tax rate ~0.98%. Note: St. Louis County is separate from St. Louis City — they are two distinct jurisdictions. Missouri 19% assessment ratio. No universal homestead exemption.',
+    state:'mo', closingModel:'missouri',
+    heNote:'Missouri has no universal homestead exemption. Senior/disabled Circuit Breaker credit available — apply with Missouri Department of Revenue. Note: St. Louis County and St. Louis City are separate jurisdictions with different tax rates — confirm which applies to your property address.'
+  },
+  'stcharles': {
+    name:'St. Charles County', short:'St. Charles',
+    tr:0.0088, he:0,
+    fxb:18, fxw:35, fab:38, faw:90,
+    paUrl:'https://www.sccmo.org/169/Assessor',
+    paName:'St. Charles County Assessor',
+    notes:'St. Charles County (St. Peters/O'Fallon/Wentzville/Lake Saint Louis) effective tax rate ~0.88%. One of the fastest-growing counties in Missouri. Major destination for buyers relocating from St. Louis City and County. Missouri 19% assessment ratio.',
+    state:'mo', closingModel:'missouri',
+    heNote:'Missouri has no universal homestead exemption. Senior/disabled Circuit Breaker credit available — apply with Missouri Department of Revenue.'
+  },
+  'jefferson-mo': {
+    name:'Jefferson County', short:'Jefferson',
+    tr:0.0072, he:0,
+    fxb:18, fxw:35, fab:38, faw:90,
+    paUrl:'https://www.jeffcomo.org/178/Assessor',
+    paName:'Jefferson County Assessor',
+    notes:'Jefferson County (Arnold/Festus/Hillsboro/De Soto) effective tax rate ~0.72% — lowest in the St. Louis metro. South St. Louis suburb with strong first-time buyer volume. Missouri 19% assessment ratio.',
+    state:'mo', closingModel:'missouri',
+    heNote:'Missouri has no universal homestead exemption. Senior/disabled Circuit Breaker credit available — apply with Missouri Department of Revenue.'
+  },
+  'franklin-mo': {
+    name:'Franklin County', short:'Franklin',
+    tr:0.0075, he:0,
+    fxb:18, fxw:35, fab:38, faw:90,
+    paUrl:'https://www.franklincountymo.com/assessor',
+    paName:'Franklin County Assessor',
+    notes:'Franklin County (Washington/Union/Sullivan) effective tax rate ~0.75%. West St. Louis suburb. Missouri 19% assessment ratio. No universal homestead exemption.',
+    state:'mo', closingModel:'missouri',
+    heNote:'Missouri has no universal homestead exemption. Senior/disabled Circuit Breaker credit available — apply with Missouri Department of Revenue.'
+  },
+  'stlouis-city': {
+    name:'St. Louis City', short:'St. Louis City',
+    tr:0.0135, he:0,
+    fxb:20, fxw:38, fab:40, faw:95,
+    paUrl:'https://www.stlouis-mo.gov/government/departments/assessor/',
+    paName:'St. Louis City Assessor',
+    notes:'St. Louis City is an independent city — not part of St. Louis County. Effective tax rate ~1.35%, notably higher than surrounding counties. Distinct school district, city services, and tax structure. Buyers purchasing inside St. Louis City limits must use this entry — not St. Louis County. Missouri 19% assessment ratio.',
+    state:'mo', closingModel:'missouri',
+    heNote:'Missouri has no universal homestead exemption. St. Louis City has its own tax relief programs for seniors — contact the City Assessor. Note the higher effective rate compared to St. Louis County.'
+  },
+  // ── PENNSYLVANIA ──
+  'allegheny': {
+    name:'Allegheny County', short:'Allegheny',
+    tr:0.0128, he:18000,
+    fxb:20, fxw:38, fab:40, faw:95,
+    paUrl:'https://www.alleghenycounty.us/real-estate/assessment/homestead-farmstead.aspx',
+    paName:'Allegheny County Office of Property Assessments',
+    notes:'Allegheny County (Pittsburgh/Mt. Lebanon/Bethel Park/Penn Hills) effective tax rate ~1.28%. Pennsylvania realty transfer tax: 2% total (1% state + 1% local) split 50/50 — buyer pays 1% of purchase price. Allegheny County Homestead Exclusion: $18,000 off assessed value for primary residences. Assessed at 100% of market value post-2012 reassessment. Attorney involvement common by custom but not required.',
+    state:'pa', closingModel:'pennsylvania',
+    heNote:'Allegheny County Homestead Exclusion: $18,000 reduction in assessed value for primary residences. File with the Allegheny County Office of Property Assessments by March 1. This reduces your county tax bill — school district homestead exclusion varies by district. Attorney involvement at closing is common by local custom but is not legally required in Pennsylvania.'
+  },
+  'butler-pa': {
+    name:'Butler County', short:'Butler',
+    tr:0.0136, he:0,
+    fxb:18, fxw:35, fab:38, faw:90,
+    paUrl:'https://www.co.butler.pa.us/232/Assessment',
+    paName:'Butler County Assessment Office',
+    notes:'Butler County (Cranberry Township/Mars/Butler/Zelienople) effective tax rate ~1.36%. North Pittsburgh suburb, one of the fastest-growing areas in Western PA. Pennsylvania 1% buyer realty transfer tax applies. Homestead exclusion varies by municipality — confirm with county assessment office.',
+    state:'pa', closingModel:'pennsylvania',
+    heNote:'Pennsylvania Homestead Exclusion varies by county and school district. Butler County offers a homestead exclusion — file with the Butler County Assessment Office. Amount varies by taxing district. Attorney at closing is common but not required.'
+  },
+  'washington-pa': {
+    name:'Washington County', short:'Washington',
+    tr:0.0122, he:0,
+    fxb:18, fxw:35, fab:38, faw:90,
+    paUrl:'https://www.co.washington.pa.us/248/Assessment',
+    paName:'Washington County Assessment Office',
+    notes:'Washington County (Peters Township/Canonsburg/Washington/McMurray) effective tax rate ~1.22%. South Pittsburgh suburb. Pennsylvania 1% buyer realty transfer tax. Peters Township is among the most sought-after communities in Western PA.',
+    state:'pa', closingModel:'pennsylvania',
+    heNote:'Pennsylvania Homestead Exclusion varies by county and school district. File with Washington County Assessment Office. Amount varies by taxing district. Attorney at closing is common but not required.'
+  },
+  'westmoreland': {
+    name:'Westmoreland County', short:'Westmoreland',
+    tr:0.0131, he:0,
+    fxb:18, fxw:35, fab:38, faw:90,
+    paUrl:'https://www.co.westmoreland.pa.us/208/Assessment',
+    paName:'Westmoreland County Assessment Office',
+    notes:'Westmoreland County (Greensburg/Murrysville/Jeannette/Latrobe) effective tax rate ~1.31%. East Pittsburgh suburb. Pennsylvania 1% buyer realty transfer tax. Strong first-time buyer market with affordable entry-level inventory.',
+    state:'pa', closingModel:'pennsylvania',
+    heNote:'Pennsylvania Homestead Exclusion varies by county and school district. File with Westmoreland County Assessment Office. Amount varies by taxing district. Attorney at closing is common but not required.'
+  },
+  'beaver': {
+    name:'Beaver County', short:'Beaver',
+    tr:0.0145, he:0,
+    fxb:18, fxw:35, fab:38, faw:90,
+    paUrl:'https://www.beavercountypa.gov/departments/assessment',
+    paName:'Beaver County Assessment Office',
+    notes:'Beaver County (Beaver Falls/Aliquippa/Monaca/New Brighton) effective tax rate ~1.45% — highest in the Pittsburgh metro. Northwest Pittsburgh. Pennsylvania 1% buyer realty transfer tax. Strong working-class first-time buyer market. Major growth from Pittsburgh metro spillover.',
+    state:'pa', closingModel:'pennsylvania',
+    heNote:'Pennsylvania Homestead Exclusion varies by county and school district. File with Beaver County Assessment Office. Amount varies by taxing district. Attorney at closing is common but not required.'
+  },
+  // ── KANSAS ──
+  'johnson-ks': {
+    name:'Johnson County', short:'Johnson',
+    tr:0.0109, he:0,
+    fxb:18, fxw:35, fab:38, faw:90,
+    paUrl:'https://www.jocogov.org/dept/appraiser/homestead-refund',
+    paName:'Johnson County Appraiser',
+    notes:'Johnson County KS (Overland Park/Olathe/Leawood/Lenexa/Shawnee/Prairie Village) effective tax rate ~1.09%. Kansas assesses residential property at 11.5% of appraised value. No documentary stamp tax. No state real estate transfer tax. Mortgage registration tax: 0.1% of loan amount (very modest). No universal homestead exemption — income-limited Homestead Refund program for qualifying owners.',
+    state:'ks', closingModel:'kansas',
+    heNote:'Kansas Homestead Refund: income-limited tax rebate for homeowners with household income under $36,300. Apply with your Kansas state income tax return by April 15. This is a refund program — not a traditional exemption. Standard buyers above the income threshold receive no property tax reduction. Johnson County is directly across the state line from Kansas City MO — confirm which state your property address falls in before selecting.'
+  },
+  // Active county — defaults to Miami-Dade
 let ACTIVE_COUNTY = 'miami-dade';
 let MKT = {rv:"Friday, April 25, 2026 · 11:52 AM ET",ov:"April 2026",fm:6.23,br:6.00,wr:6.75,tr:COUNTIES['miami-dade'].tr,he:50000,fxb:42,fxw:85,fab:150,faw:400};
 
@@ -2205,11 +2577,11 @@ let ACTIVE_STATE = 'fl';
 
 function selectState(state, btn) {
   ACTIVE_STATE = state;
-  const toggleMap = {fl:'st-fl', ga:'st-ga', tx:'st-tx', nc:'st-nc', sc:'st-sc', tn:'st-tn', al:'st-al', va:'st-va', az:'st-az', nv:'st-nv', md:'st-md'};
+  const toggleMap = {fl:'st-fl', ga:'st-ga', tx:'st-tx', nc:'st-nc', sc:'st-sc', tn:'st-tn', al:'st-al', va:'st-va', az:'st-az', nv:'st-nv', md:'st-md', in:'st-in', oh:'st-oh', mo:'st-mo', pa:'st-pa', ks:'st-ks'};
   Object.entries(toggleMap).forEach(([s, id]) => {
     const el = document.getElementById(id);
     if (!el) return;
-    el.classList.remove('active-fl','active-ga','active-tx','active-nc','active-sc','active-tn','active-al','active-va','active-az','active-nv','active-md','hint-fl','hint-ga','hint-tx','hint-nc','hint-sc','hint-tn','hint-al','hint-va','hint-az','hint-nv','hint-md');
+    el.classList.remove('active-fl','active-ga','active-tx','active-nc','active-sc','active-tn','active-al','active-va','active-az','active-nv','active-md','active-in','active-oh','active-mo','active-pa','active-ks','hint-fl','hint-ga','hint-tx','hint-nc','hint-sc','hint-tn','hint-al','hint-va','hint-az','hint-nv','hint-md','hint-in','hint-oh','hint-mo','hint-pa','hint-ks');
     if (s === state) {
       el.classList.add('active-' + state);
     } else {
@@ -2217,7 +2589,7 @@ function selectState(state, btn) {
     }
   });
   // Show/hide county pill groups
-  ['fl','ga','tx','nc','sc','tn','al','va','az','md','nv'].forEach(s => {
+  ['fl','ga','tx','nc','sc','tn','al','va','az','md','nv','in','oh','mo','pa','ks'].forEach(s => {
     const el = document.getElementById('pills-' + s);
     if(el) el.style.display = (state===s) ? 'flex' : 'none';
   });
@@ -2235,6 +2607,11 @@ function selectState(state, btn) {
     else if(state==='az') legend.textContent = 'Arizona · Canyon Adobe · Test Phase';
     else if(state==='nv') legend.textContent = 'Nevada · Silver Sage · Test Phase';
     else if(state==='md') legend.textContent = 'Maryland · Chesapeake · Test Phase';
+    else if(state==='in') legend.textContent = 'Indiana · Limestone · Indianapolis & Suburbs';
+    else if(state==='oh') legend.textContent = 'Ohio · Steel Teal · Columbus & Cincinnati metros';
+    else if(state==='mo') legend.textContent = 'Missouri · Ozark Slate · Kansas City & St. Louis metros';
+    else if(state==='pa') legend.textContent = 'Pennsylvania · Iron Gray · Pittsburgh Metro';
+    else if(state==='ks') legend.textContent = 'Kansas · Wheat Gold · Johnson County (Kansas City KS)';
   }
   // Show county row when state is selected
   const countyRow = document.getElementById('county-row');
@@ -3705,6 +4082,119 @@ function buildClosingCosts(inp) {
       <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
       <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Escrow Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
     reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Nevada property taxes paid semi-annually — due August 15 and January 15. Annual assessment increases capped at 3% for primary residences.`;
+  } else if (model === 'indiana') {
+    const recordingFee = 25; // Indiana recording fees are very low — per-page
+    const titleSearch = 275;
+    const titleInsLender = Math.round(loan * 0.00375);
+    const titleInsOwner = Math.round(p * 0.00325);
+    const settlementFee = 600;
+    govTotal = recordingFee;
+    titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
+    stateNote = `<span class="nl" style="color:var(--indiana-dim);">${countyName} — Indiana</span><p>Indiana has <strong>no documentary stamp tax and no real estate transfer tax</strong>. Recording fees are modest per-page amounts. Indiana is a <strong>title company state</strong> — not attorney-closed. The Indiana homestead deduction (Standard + Supplemental) can meaningfully reduce your annual tax bill starting in your first full year of ownership. Confirm all figures against your official Closing Disclosure.</p>`;
+    govSection = `<div class="cc-section"><div class="cc-section-title">Government &amp; Recording Fees</div>
+      <div class="cc-row"><div class="cc-item">Recording Fees<span class="cc-note">County Recorder — deed and mortgage recording. No transfer tax in Indiana.</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
+      <div class="cc-row"><div class="cc-item">No Real Estate Transfer Tax<span class="cc-note">Indiana does not impose a deed transfer tax — $0</span></div><div class="cc-val">$0</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
+    titleSection = `<div class="cc-section"><div class="cc-section-title">Title &amp; Settlement Fees</div>
+      <div class="cc-row"><div class="cc-item">Title Search &amp; Exam</div><div class="cc-val">${fmt(titleSearch)}</div></div>
+      <div class="cc-row"><div class="cc-item">Lender's Title Insurance<span class="cc-note">Required by lender</span></div><div class="cc-val">${fmt(titleInsLender)}</div></div>
+      <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended — one-time premium</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
+      <div class="cc-row"><div class="cc-item">Settlement / Closing Fee<span class="cc-note">Title company coordination — Indiana is not attorney-closed</span></div><div class="cc-val">${fmt(settlementFee)}</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Settlement Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
+    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Indiana property taxes are paid semi-annually — May 10 and November 10. Your homestead deduction takes effect the year after you file, so budget for full-rate taxes in Year 1.`;
+
+  } else if (model === 'ohio') {
+    const recordingFee = 28; // Ohio county recorder per-page fee
+    const conveyanceFee = Math.round(p / 1000); // $1 per $1,000 — paid by SELLER
+    const titleSearch = 275;
+    const titleInsLender = Math.round(loan * 0.00375);
+    const titleInsOwner = Math.round(p * 0.00325);
+    const settlementFee = 600;
+    govTotal = recordingFee;
+    titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
+    stateNote = `<span class="nl" style="color:var(--ohio-dim);">${countyName} — Ohio</span><p>Ohio has <strong>no state real estate transfer tax</strong>. The county conveyance fee of $1 per $1,000 of sale price (${fmt(conveyanceFee)}) is paid by the <strong>seller</strong>. Ohio is a <strong>title company state</strong> — not attorney-closed. Ohio assesses property at <strong>35% of appraised value</strong>. There is <strong>no universal homestead exemption</strong> — the exemption is limited to homeowners 65+ or permanently disabled. Standard buyers should not expect a tax reduction. Confirm all figures against your official Closing Disclosure.</p>`;
+    govSection = `<div class="cc-section"><div class="cc-section-title">Government &amp; Recording Fees</div>
+      <div class="cc-row"><div class="cc-item">Recording Fees<span class="cc-note">County Recorder — deed and mortgage recording</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
+      <div class="cc-row"><div class="cc-item">County Conveyance Fee<span class="cc-note">$1 per $1,000 of sale price — paid by seller (${fmt(conveyanceFee)})</span></div><div class="cc-val">Seller</div></div>
+      <div class="cc-row"><div class="cc-item">No State Transfer Tax<span class="cc-note">Ohio has no state real estate transfer tax — $0</span></div><div class="cc-val">$0</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
+    titleSection = `<div class="cc-section"><div class="cc-section-title">Title &amp; Settlement Fees</div>
+      <div class="cc-row"><div class="cc-item">Title Search &amp; Exam</div><div class="cc-val">${fmt(titleSearch)}</div></div>
+      <div class="cc-row"><div class="cc-item">Lender's Title Insurance</div><div class="cc-val">${fmt(titleInsLender)}</div></div>
+      <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
+      <div class="cc-row"><div class="cc-item">Settlement / Closing Fee</div><div class="cc-val">${fmt(settlementFee)}</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Settlement Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
+    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Ohio property taxes paid semi-annually — January and July. Important: Ohio has NO universal homestead exemption. Budget for full assessed value taxation as a standard buyer.`;
+
+  } else if (model === 'missouri') {
+    const docStampSeller = Math.round(Math.ceil(p / 500) * 0.50); // seller pays — shown for reference
+    const recordingFee = 35;
+    const titleSearch = 275;
+    const titleInsLender = Math.round(loan * 0.00375);
+    const titleInsOwner = Math.round(p * 0.00325);
+    const settlementFee = 575;
+    govTotal = recordingFee;
+    titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
+    stateNote = `<span class="nl" style="color:var(--missouri-dim);">${countyName} — Missouri</span><p>Missouri has a documentary stamp tax of $0.50 per $500 of sale price — paid by the <strong>seller</strong> by custom (${fmt(docStampSeller)}). Buyers pay no transfer tax. Missouri is a <strong>title company state</strong> — not attorney-closed. Property assessed at <strong>19% of appraised value</strong>. There is <strong>no universal homestead exemption</strong> for standard buyers. Confirm all figures against your official Closing Disclosure.</p>`;
+    govSection = `<div class="cc-section"><div class="cc-section-title">Government &amp; Recording Fees</div>
+      <div class="cc-row"><div class="cc-item">Recording Fees<span class="cc-note">County Recorder of Deeds — deed and deed of trust recording</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
+      <div class="cc-row"><div class="cc-item">Documentary Stamp Tax<span class="cc-note">$0.50 per $500 — paid by seller by custom (${fmt(docStampSeller)})</span></div><div class="cc-val">Seller</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
+    titleSection = `<div class="cc-section"><div class="cc-section-title">Title &amp; Settlement Fees</div>
+      <div class="cc-row"><div class="cc-item">Title Search &amp; Exam</div><div class="cc-val">${fmt(titleSearch)}</div></div>
+      <div class="cc-row"><div class="cc-item">Lender's Title Insurance</div><div class="cc-val">${fmt(titleInsLender)}</div></div>
+      <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
+      <div class="cc-row"><div class="cc-item">Settlement / Closing Fee</div><div class="cc-val">${fmt(settlementFee)}</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Settlement Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
+    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Missouri property taxes paid December 31 annually. No universal homestead exemption — budget for full assessed value taxation.`;
+
+  } else if (model === 'pennsylvania') {
+    const stateTransferTax = Math.round(p * 0.01); // 1% buyer pays
+    const localTransferTax = Math.round(p * 0.01); // 1% seller pays by custom in most PA counties
+    const recordingFee = 120;
+    const titleSearch = 300;
+    const titleInsLender = Math.round(loan * 0.00400);
+    const titleInsOwner = Math.round(p * 0.00325);
+    const settlementFee = 625;
+    govTotal = stateTransferTax + recordingFee;
+    titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
+    stateNote = `<span class="nl" style="color:var(--penn-dim);">${countyName} — Pennsylvania</span><p>Pennsylvania realty transfer tax totals <strong>2% of purchase price</strong> — 1% state + 1% local. By custom in most PA counties, the buyer pays the 1% state portion and the seller pays the 1% local portion. Attorney involvement at closing is <strong>common by local custom but not legally required</strong> in Pennsylvania. Homestead exclusion varies by county — Allegheny County offers $18,000 off assessed value. Confirm all figures against your official Closing Disclosure.</p>`;
+    govSection = `<div class="cc-section"><div class="cc-section-title">Government Transfer Tax &amp; Recording</div>
+      <div class="cc-row"><div class="cc-item">State Realty Transfer Tax — Buyer Pays<span class="cc-note">1% of purchase price — state portion, buyer's responsibility</span></div><div class="cc-val">${fmt(stateTransferTax)}</div></div>
+      <div class="cc-row"><div class="cc-item">Local Realty Transfer Tax — Seller Pays<span class="cc-note">1% of purchase price — local portion, customarily seller-paid (${fmt(localTransferTax)}). Verify in your contract.</span></div><div class="cc-val">Seller</div></div>
+      <div class="cc-row"><div class="cc-item">Recording Fees<span class="cc-note">County Recorder of Deeds</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
+    titleSection = `<div class="cc-section"><div class="cc-section-title">Title &amp; Settlement Fees</div>
+      <div class="cc-row"><div class="cc-item">Title Search &amp; Exam<span class="cc-note">Pennsylvania title search — county recorder records</span></div><div class="cc-val">${fmt(titleSearch)}</div></div>
+      <div class="cc-row"><div class="cc-item">Lender's Title Insurance</div><div class="cc-val">${fmt(titleInsLender)}</div></div>
+      <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended — one-time premium</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
+      <div class="cc-row"><div class="cc-item">Settlement / Closing Fee<span class="cc-note">Attorney involvement common by local custom — not legally required</span></div><div class="cc-val">${fmt(settlementFee)}</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Settlement Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
+    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Pennsylvania property taxes paid semi-annually — dates vary by municipality. Homestead exclusion (where available) must be filed with the county assessment office.`;
+
+  } else if (model === 'kansas') {
+    const mortgageRegTax = Math.round(loan * 0.001); // 0.1% of loan amount
+    const recordingFee = 30;
+    const titleSearch = 275;
+    const titleInsLender = Math.round(loan * 0.00375);
+    const titleInsOwner = Math.round(p * 0.00325);
+    const settlementFee = 575;
+    govTotal = mortgageRegTax + recordingFee;
+    titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
+    stateNote = `<span class="nl" style="color:var(--kansas-dim);">${countyName} — Kansas</span><p>Kansas has <strong>no documentary stamp tax and no real estate transfer tax</strong>. The mortgage registration tax of 0.1% of loan amount (${fmt(mortgageRegTax)}) is modest and paid by the buyer. Kansas is a <strong>title company state</strong> — not attorney-closed. Property assessed at <strong>11.5% of appraised value</strong>. There is <strong>no universal homestead exemption</strong> — income-limited refund program only. Confirm all figures against your official Closing Disclosure.</p>`;
+    govSection = `<div class="cc-section"><div class="cc-section-title">Government Taxes &amp; Recording</div>
+      <div class="cc-row"><div class="cc-item">Mortgage Registration Tax<span class="cc-note">0.1% of loan amount — Kansas specific, very modest</span></div><div class="cc-val">${fmt(mortgageRegTax)}</div></div>
+      <div class="cc-row"><div class="cc-item">Recording Fees<span class="cc-note">County Register of Deeds</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
+      <div class="cc-row"><div class="cc-item">No Real Estate Transfer Tax<span class="cc-note">Kansas has no deed transfer tax — $0</span></div><div class="cc-val">$0</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
+    titleSection = `<div class="cc-section"><div class="cc-section-title">Title &amp; Settlement Fees</div>
+      <div class="cc-row"><div class="cc-item">Title Search &amp; Exam</div><div class="cc-val">${fmt(titleSearch)}</div></div>
+      <div class="cc-row"><div class="cc-item">Lender's Title Insurance</div><div class="cc-val">${fmt(titleInsLender)}</div></div>
+      <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
+      <div class="cc-row"><div class="cc-item">Settlement / Closing Fee</div><div class="cc-val">${fmt(settlementFee)}</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Settlement Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
+    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Kansas property taxes paid semi-annually — December 20 and May 10. No universal homestead exemption — income-limited refund program only for qualifying buyers.`;
+
   } else if (model === 'maryland') {
     const stateTransferTax = Math.round(p * 0.005); // 0.5% state transfer tax — buyer pays
     const countyTransferTax = Math.round(p * 0.010); // 1.0% county transfer tax for Montgomery (varies by county)
@@ -3803,6 +4293,100 @@ function buildHomesteadGuide(inp) {
   }
 
   const annualSavings = inp.ty1 * 12 - inp.ty2 * 12;
+
+  if (model === 'indiana') {
+    return `<div class="cw">
+      <div class="ae em">Section V</div>
+      <h2 class="at2">Homestead Deduction Filing Guide</h2>
+      <div class="ar"></div>
+      <div class="nt nt-em" style="margin-bottom:1.5rem;">
+        <span class="nl nl-em">${c.name} — Indiana Homestead Deduction</span>
+        <p>Indiana's homestead deduction is one of the most straightforward in the country. The <strong>Standard Deduction</strong> reduces your assessed value by $45,000. The <strong>Supplemental Deduction</strong> reduces it by an additional 35% of the remaining assessed value up to $600,000. Together, these deductions significantly reduce your annual property tax bill starting the year after you file. Indiana also caps homestead property taxes at <strong>1% of gross assessed value</strong> — a meaningful protection in appreciating markets.</p>
+      </div>
+      ${deadlineHtml}
+      <h3 style="font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--midnight);margin:1.5rem 0 1rem;">Step-by-Step Filing Instructions</h3>
+      <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">File with your county assessor immediately after closing</div><div class="hg-desc">Must own and occupy as primary residence as of January 1 of the tax year. File as soon as your deed is recorded — do not wait until December 31. You will need your Indiana driver's license or ID showing the property address and your recorded deed.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open County Assessor Portal</a></div></div>
+      <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">Deadline: December 31 of the year you move in</div><div class="hg-desc">Filing by December 31 ensures the deduction applies to the following year's tax bill. Indiana property taxes are paid semi-annually — May 10 and November 10. Year 1 taxes will reflect the prior assessment, not your purchase price.</div></div></div>
+      <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">The deduction renews automatically</div><div class="hg-desc">Once granted, the Indiana homestead deduction renews automatically each year as long as you continue to own and occupy the property as your primary residence. You do not reapply each year.</div></div></div>
+      <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Notify your mortgage servicer after approval</div><div class="hg-desc">Once the deduction is confirmed, contact your mortgage servicer to recalculate your escrow. The lower tax bill should reduce your monthly payment starting the year after filing.</div></div></div>
+      <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Indiana 1% Homestead Cap</span><p>Indiana law caps property taxes on homestead properties at 1% of gross assessed value annually. This means no matter how high the tax rate, your annual homestead property tax cannot exceed 1% of what your home is assessed at. In fast-appreciating markets this cap provides significant long-term protection.</p></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
+    </div>`;
+  }
+
+  if (model === 'ohio') {
+    return `<div class="cw">
+      <div class="ae em">Section V</div>
+      <h2 class="at2">Property Tax Guide</h2>
+      <div class="ar"></div>
+      <div class="nt nt-em" style="margin-bottom:1.5rem;">
+        <span class="nl nl-em">${c.name} — Ohio</span>
+        <p>Ohio has <strong>no universal homestead exemption for standard homebuyers</strong>. The Ohio Homestead Exemption is available only to homeowners who are <strong>65 years or older</strong> or <strong>permanently and totally disabled</strong>. If you are a standard working-age buyer, you will not qualify. Your property taxes will reflect the full assessed value — 35% of appraised value — without reduction. This is important to understand before closing so you are not caught off guard by your first tax bill.</p>
+        ${c.heNote ? `<p style="margin-top:.5rem;font-weight:500;">${c.heNote}</p>` : ''}
+      </div>
+      ${deadlineHtml}
+      <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">Understand Ohio's assessment system</div><div class="hg-desc">Ohio assesses residential property at 35% of appraised value. On a $350,000 home, your taxable value is $122,500. Your county auditor sets the millage rate that applies to that taxable value. Tax bills are typically issued twice a year — January and July.</div></div></div>
+      <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">If you are 65+ or permanently disabled — apply by December 31</div><div class="hg-desc">The Ohio Homestead Exemption reduces your taxable value by $25,000 for qualifying owners. Apply at your county auditor's office with proof of age or disability and the prior year's income documentation.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open County Auditor Portal</a></div></div>
+      <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">Challenge your assessed value if it exceeds market value</div><div class="hg-desc">If your county's assessed value of your home exceeds market value, you have the right to file a complaint with the County Board of Revision. The deadline is March 31. This is not a homestead exemption — it is an appeal of the assessed value itself. In markets where reassessments lag appreciation, this right is valuable.</div></div></div>
+      <div class="nt nt-wn" style="margin-top:1rem;"><span class="nl nl-wn">No Universal Exemption — Plan Accordingly</span><p>Standard Ohio homebuyers should budget for full property taxes with no reduction. Unlike Florida, Indiana, or Georgia, Ohio does not offer a blanket homestead benefit for primary residences. Factor this into your monthly payment planning from day one.</p></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
+    </div>`;
+  }
+
+  if (model === 'missouri') {
+    return `<div class="cw">
+      <div class="ae em">Section V</div>
+      <h2 class="at2">Property Tax Guide</h2>
+      <div class="ar"></div>
+      <div class="nt nt-em" style="margin-bottom:1.5rem;">
+        <span class="nl nl-em">${c.name} — Missouri</span>
+        <p>Missouri has <strong>no universal homestead exemption for standard homebuyers</strong>. Property is assessed at <strong>19% of appraised value</strong> — on a $300,000 home, your taxable value is $57,000. The Missouri Senior Citizen Property Tax Credit (Circuit Breaker) provides income-limited relief for residents 65+ or disabled with income under $34,000 (owners). Standard working-age buyers receive no property tax reduction in Missouri.</p>
+      </div>
+      ${deadlineHtml}
+      <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">Understand Missouri's 19% assessment system</div><div class="hg-desc">Missouri assesses residential property at 19% of appraised value. Your county assessor determines the appraised value and applies the local levy rate to the assessed amount. Property taxes are due December 31 annually.</div></div></div>
+      <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">If you qualify — apply for the Circuit Breaker credit</div><div class="hg-desc">Missouri's Senior Citizen Property Tax Credit is available to homeowners 65+ or 100% disabled with income under $34,000. File Form MO-PTC with your Missouri state income tax return by April 15. The maximum credit is $1,100.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open County Assessor Portal</a></div></div>
+      <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">Appeal your assessed value if warranted</div><div class="hg-desc">If your county's assessed value exceeds market value, file an appeal with the State Tax Commission or your local Board of Equalization. Reassessments in Missouri occur every two years in odd-numbered years.</div></div></div>
+      <div class="nt nt-wn" style="margin-top:1rem;"><span class="nl nl-wn">No Universal Exemption — Plan Accordingly</span><p>Standard Missouri homebuyers receive no property tax reduction. Budget for full assessed value taxation from day one. Missouri property taxes are due December 31 — your lender will collect escrow monthly to cover this.</p></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
+    </div>`;
+  }
+
+  if (model === 'pennsylvania') {
+    return `<div class="cw">
+      <div class="ae em">Section V</div>
+      <h2 class="at2">Homestead Exclusion Filing Guide</h2>
+      <div class="ar"></div>
+      <div class="nt nt-em" style="margin-bottom:1.5rem;">
+        <span class="nl nl-em">${c.name} — Pennsylvania</span>
+        <p>Pennsylvania's homestead exclusion varies by county and school district. In <strong>Allegheny County</strong>, the exclusion reduces your assessed value by <strong>$18,000</strong> — a meaningful reduction. Other Pittsburgh metro counties have their own exclusion amounts. Unlike Florida's broad exemption, Pennsylvania's program is county-administered and requires a one-time application. File with your county assessment office as soon as possible after closing.</p>
+        ${c.heNote ? `<p style="margin-top:.5rem;">${c.heNote}</p>` : ''}
+      </div>
+      ${deadlineHtml}
+      <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">File homestead application with county assessment office</div><div class="hg-desc">Allegheny County deadline: March 1. Must own and occupy as primary residence. Bring your recorded deed and proof of primary residency. File once — the exclusion renews automatically as long as you remain in the home.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open County Assessment Office Portal</a></div></div>
+      <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">Confirm your school district's homestead exclusion separately</div><div class="hg-desc">In Pennsylvania, the county and school district homestead exclusions are separate programs with separate amounts. Your school district taxes may offer an additional exclusion — confirm with your specific school district.</div></div></div>
+      <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">Property taxes paid semi-annually — dates vary by municipality</div><div class="hg-desc">Pennsylvania property tax payment dates vary by municipality. Most Allegheny County municipalities collect in March and July. Confirm your specific payment schedule with your municipality. Your lender will collect escrow monthly.</div></div></div>
+      <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Attorney at closing — common but not required</div><div class="hg-desc">While Pennsylvania does not require an attorney at closing, many Pittsburgh area buyers use one by local custom, particularly for reviewing the deed and title insurance commitments. Budget $400–$800 if you choose to use one — included in your closing cost estimate as part of the settlement fee.</div></div></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
+    </div>`;
+  }
+
+  if (model === 'kansas') {
+    return `<div class="cw">
+      <div class="ae em">Section V</div>
+      <h2 class="at2">Property Tax Guide</h2>
+      <div class="ar"></div>
+      <div class="nt nt-em" style="margin-bottom:1.5rem;">
+        <span class="nl nl-em">${c.name} — Kansas</span>
+        <p>Kansas has <strong>no universal homestead exemption</strong> for standard homebuyers. The Kansas Homestead Refund is an income-limited program for homeowners with household income under $36,300 — not a traditional exemption. Kansas assesses residential property at <strong>11.5% of appraised value</strong>. On a $400,000 home, your taxable value is $46,000. The effective tax rate reflects this assessment structure.</p>
+        ${c.heNote ? `<p style="margin-top:.5rem;">${c.heNote}</p>` : ''}
+      </div>
+      ${deadlineHtml}
+      <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">Understand Kansas's 11.5% assessment system</div><div class="hg-desc">Kansas assesses residential property at 11.5% of appraised value. Your county appraiser sets the appraised value and the local levy applies to the assessed amount. Property taxes are paid semi-annually — December 20 and May 10.</div></div></div>
+      <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">If you qualify — apply for the Homestead Refund by April 15</div><div class="hg-desc">The Kansas Homestead Refund is available to homeowners with household income under $36,300. File Schedule K-40H with your Kansas state income tax return by April 15. The refund is applied against your state income tax — not a direct property tax reduction.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open Johnson County Appraiser Portal</a></div></div>
+      <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">Confirm your property is in Kansas — not Missouri</div><div class="hg-desc">Johnson County Kansas directly borders Jackson County Missouri. Overland Park and Olathe are in Kansas. Kansas City proper is in Missouri. Confirm which state your specific property address falls in before selecting your county — the tax rates, closing costs, and homestead programs are different.</div></div></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
+    </div>`;
+  }
 
   if (model === 'texas') {
     // Texas homestead exemption guide
