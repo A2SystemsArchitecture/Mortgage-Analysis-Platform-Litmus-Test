@@ -2702,6 +2702,10 @@ function selectState(state, btn) {
     }
   });
   // Show/hide county pill groups
+  // Show the county selector row
+  const countyRow = document.getElementById('county-row');
+  if(countyRow) countyRow.style.display = 'flex';
+
   ['fl','ga','tx','nc','sc','tn','al','va','az','md','nv','in','oh','mo','pa','ks','la'].forEach(s => {
     const el = document.getElementById('pills-' + s);
     if(el) el.style.display = (state===s) ? 'flex' : 'none';
