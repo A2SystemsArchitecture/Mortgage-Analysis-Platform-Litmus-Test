@@ -337,7 +337,7 @@ input:focus,select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 
 .roscoe-toggle:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,151,167,.3);}
 .roscoe-toggle::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(0,151,167,.35);animation:roscoe-pulse 2.5s ease-in-out infinite;}
 @keyframes roscoe-pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.08);}}
-.roscoe-label{font-family:var(--fm);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-mid);text-align:center;margin-top:.15rem;}
+.roscoe-label{font-family:var(--fb);font-size:.82rem;font-weight:500;letter-spacing:0;text-transform:none;color:var(--white);text-align:center;margin-top:.3rem;line-height:1.35;max-width:110px;}
 .roscoe-panel{position:fixed;bottom:5.5rem;right:1.75rem;width:370px;height:530px;background:var(--midnight);border-radius:16px;box-shadow:0 12px 48px rgba(0,0,0,.5);display:none;flex-direction:column;overflow:hidden;z-index:501;border:1px solid rgba(0,151,167,.25);}
 .roscoe-panel.open{display:flex;animation:roscoe-slide .25s ease;}
 @keyframes roscoe-slide{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
@@ -1604,8 +1604,7 @@ const COUNTIES = {
     paUrl:'https://www.miamidade.gov/Apps/PA/PAOnlineTools/homestead',
     paName:'Miami-Dade Property Appraiser',
     notes:'Documentary stamp tax on deed typically paid by seller in Miami-Dade.',
-    state:'fl', closingModel:'fl'
-  ,
+    state:'fl', closingModel:'fl',
     districts:[
       {id:'mia-uninc',label:'Unincorporated Miami-Dade',tr:0.013},
       {id:'mia-miami',label:'City of Miami',tr:0.0159},
@@ -1622,8 +1621,7 @@ const COUNTIES = {
     paUrl:'https://www.bcpa.net/exemptions.asp',
     paName:'Broward County Property Appraiser',
     notes:'Broward County has slightly lower effective tax rate than Miami-Dade.',
-    state:'fl', closingModel:'fl'
-  ,
+    state:'fl', closingModel:'fl',
     districts:[
       {id:'bro-uninc',label:'Unincorporated Broward',tr:0.011},
       {id:'bro-ftlaud',label:'Fort Lauderdale',tr:0.0128},
@@ -1640,8 +1638,7 @@ const COUNTIES = {
     paUrl:'https://www.pbcgov.org/papa/homestead.htm',
     paName:'Palm Beach County Property Appraiser',
     notes:'Palm Beach County 2026 surtax changes effective January 2026.',
-    state:'fl', closingModel:'fl'
-  ,
+    state:'fl', closingModel:'fl',
     districts:[
       {id:'pb-uninc',label:'Unincorporated Palm Beach',tr:0.011},
       {id:'pb-wpb',label:'West Palm Beach',tr:0.0128},
@@ -1658,8 +1655,7 @@ const COUNTIES = {
     paUrl:'https://www.pa.martin.fl.us/homestead-exemption/how-to-apply',
     paName:'Martin County Property Appraiser',
     notes:'Martin County has one of the lower effective tax rates in South Florida at 0.91%.',
-    state:'fl', closingModel:'fl'
-  ,
+    state:'fl', closingModel:'fl',
     districts:[
       {id:'mar-uninc',label:'Unincorporated / Palm City / Hobe Sound',tr:0.0091},
       {id:'mar-stuart',label:'Stuart',tr:0.0108},
@@ -1672,8 +1668,7 @@ const COUNTIES = {
     paUrl:'https://www.paslc.gov/exemptions',
     paName:'St. Lucie County Property Appraiser',
     notes:'St. Lucie County has Florida\'s highest combined millage rate at 21.79 mills. Verify tax estimates carefully — the 1.39% effective rate is meaningfully higher than neighboring counties.',
-    state:'fl', closingModel:'fl'
-  ,
+    state:'fl', closingModel:'fl',
     districts:[
       {id:'stl-uninc',label:'Unincorporated St. Lucie',tr:0.0139},
       {id:'stl-psl',label:'Port St. Lucie',tr:0.0155},
@@ -1688,8 +1683,7 @@ const COUNTIES = {
     paUrl:'https://www.ircpa.org/exemptions/homestead.aspx',
     paName:'Indian River County Property Appraiser',
     notes:'Indian River County (Vero Beach) has one of the more favorable effective tax rates on the Treasure Coast at 0.85%.',
-    state:'fl', closingModel:'fl'
-  ,
+    state:'fl', closingModel:'fl',
     districts:[
       {id:'ir-uninc',label:'Unincorporated Indian River',tr:0.0085},
       {id:'ir-vero',label:'Vero Beach',tr:0.0102},
@@ -1703,8 +1697,7 @@ const COUNTIES = {
     paUrl:'https://www.bcpao.us/exemptions',
     paName:'Brevard County Property Appraiser',
     notes:'Brevard County (Melbourne, Palm Bay, Cocoa Beach) has an effective tax rate of 0.95% — below the national median.',
-    state:'fl'
-  ,
+    state:'fl',
     districts:[
       {id:'bre-uninc',label:'Unincorporated / Merritt Island',tr:0.0095},
       {id:'bre-melbourne',label:'Melbourne',tr:0.0108},
@@ -1721,8 +1714,7 @@ const COUNTIES = {
     paUrl:'https://www.fultonassessor.org/exemptions',
     paName:'Fulton County Board of Assessors',
     notes:'Fulton County (Atlanta) effective tax rate ~0.88%. Georgia property is assessed at 40% of fair market value. Standard homestead exemption: $2,000 off assessed value (county) + $15,000 off assessed value (county — local enhancement). Apply by April 1.',
-    state:'ga', closingModel:'ga'
-  ,
+    state:'ga', closingModel:'ga',
     districts:[
       {id:'ful-atlanta',label:'City of Atlanta',tr:0.011},
       {id:'ful-sandysprings',label:'Sandy Springs',tr:0.0088},
@@ -1738,8 +1730,7 @@ const COUNTIES = {
     paUrl:'https://www.dekalbcountyga.gov/tax-assessors-office/homestead-exemptions',
     paName:'DeKalb County Tax Assessors Office',
     notes:'DeKalb County effective tax rate ~0.93%. Assessed at 40% FMV. Standard homestead: $10,000 off assessed value for county taxes. Apply by April 1.',
-    state:'ga', closingModel:'ga'
-  ,
+    state:'ga', closingModel:'ga',
     districts:[
       {id:'dek-decatur',label:'Decatur City',tr:0.0105},
       {id:'dek-uninc',label:'Unincorporated DeKalb / Tucker',tr:0.0093},
@@ -1753,8 +1744,7 @@ const COUNTIES = {
     paUrl:'https://www.gwinnettassessor.com/homestead-exemptions',
     paName:'Gwinnett County Tax Assessors',
     notes:'Gwinnett County effective tax rate ~0.95%. Homestead exemption: $10,000 off assessed value for county, $8,000 for school, $7,000 for recreation taxes. Apply by April 1.',
-    state:'ga', closingModel:'ga'
-  ,
+    state:'ga', closingModel:'ga',
     districts:[
       {id:'gwin-lawrenceville',label:'Lawrenceville',tr:0.01},
       {id:'gwin-suwanee',label:'Suwanee',tr:0.009},
@@ -1769,8 +1759,7 @@ const COUNTIES = {
     paUrl:'https://www.cobbtax.org/property/homestead-exemptions/',
     paName:'Cobb County Tax Assessors',
     notes:'Cobb County effective tax rate ~0.68% — one of the lowest in Metro Atlanta. Standard homestead applies. Apply by April 1.',
-    state:'ga', closingModel:'ga'
-  ,
+    state:'ga', closingModel:'ga',
     districts:[
       {id:'cob-marietta',label:'Marietta',tr:0.008},
       {id:'cob-smyrna',label:'Smyrna',tr:0.0075},
@@ -1785,8 +1774,7 @@ const COUNTIES = {
     paUrl:'https://www.cherokeega.com/tax-assessors/',
     paName:'Cherokee County Tax Assessors',
     notes:'Cherokee County effective tax rate ~0.69%. Standard homestead: $5,000 off assessed value for county and school taxes. Apply by April 1.',
-    state:'ga', closingModel:'ga'
-  ,
+    state:'ga', closingModel:'ga',
     districts:[
       {id:'cher-canton',label:'Canton',tr:0.0075},
       {id:'cher-woodstock',label:'Woodstock',tr:0.0072},
@@ -1800,8 +1788,7 @@ const COUNTIES = {
     paUrl:'https://www.forsythco.com/Departments-Offices/Board-of-Assessors/Homestead-Exemptions',
     paName:'Forsyth County Board of Assessors',
     notes:'Forsyth County · Highest median home value in Georgia ($550K+). Low 0.73% effective rate. Includes Cumming. Apply by April 1.',
-    state:'ga', closingModel:'ga'
-  ,
+    state:'ga', closingModel:'ga',
     districts:[
       {id:'for-cumming',label:'Cumming',tr:0.0102},
       {id:'for-uninc',label:'Unincorporated Forsyth',tr:0.0098},
@@ -1814,8 +1801,7 @@ const COUNTIES = {
     paUrl:'https://www.claytoncountyga.gov/government/tax-assessor/homestead-exemptions',
     paName:'Clayton County Tax Assessors',
     notes:'Clayton County effective tax rate ~0.97% — one of the higher rates in Metro Atlanta. Standard homestead: $10,000 off assessed value for county taxes. Apply by April 1.',
-    state:'ga', closingModel:'ga'
-  ,
+    state:'ga', closingModel:'ga',
     districts:[
       {id:'cla-jonesboro',label:'Jonesboro',tr:0.0105},
       {id:'cla-uninc',label:'Unincorporated Clayton',tr:0.0097},
@@ -1828,8 +1814,7 @@ const COUNTIES = {
     paUrl:'https://www.hallcounty.org/264/Tax-Assessors',
     paName:'Hall County Tax Assessors',
     notes:'Hall County (Gainesville) effective tax rate ~0.73%. Standard homestead: $10,000 off assessed value. Apply by April 1.',
-    state:'ga', closingModel:'ga'
-  ,
+    state:'ga', closingModel:'ga',
     districts:[
       {id:'hal-gainesville',label:'Gainesville',tr:0.0082},
       {id:'hal-uninc',label:'Unincorporated Hall',tr:0.0073},
@@ -1842,8 +1827,7 @@ const COUNTIES = {
     paUrl:'https://www.dawsoncounty.org/residents/tax-assessors-office',
     paName:'Dawson County Tax Assessors',
     notes:'Dawson County effective tax rate ~0.60% — low rate, growing mountain-adjacent market. Standard homestead: $7,000 off assessed value. Apply by April 1.',
-    state:'ga', closingModel:'ga'
-  ,
+    state:'ga', closingModel:'ga',
     districts:[
       {id:'daw-dawsonville',label:'Dawsonville',tr:0.0065},
       {id:'daw-uninc',label:'Unincorporated Dawson',tr:0.006},
@@ -1856,8 +1840,7 @@ const COUNTIES = {
     paUrl:'https://www.paulding.gov/393/Tax-Assessors-Office',
     paName:'Paulding County Tax Assessors',
     notes:'Paulding County effective tax rate ~0.80%. Standard homestead: $2,000 off assessed value. Apply by April 1.',
-    state:'ga', closingModel:'ga'
-  ,
+    state:'ga', closingModel:'ga',
     districts:[
       {id:'paul-dallas',label:'Dallas',tr:0.0088},
       {id:'paul-uninc',label:'Unincorporated Paulding',tr:0.008},
@@ -1871,8 +1854,7 @@ const COUNTIES = {
     paName:'Pickens County Tax Assessors',
     notes:'Pickens County effective tax rate ~0.60%. Regular homestead: $5,000 off assessed value for county and school. HE exemption amount pending final verification for all tiers. Apply by April 1.',
     state:'ga', closingModel:'ga',
-    heNote:'*HE amount pending final verification'
-  ,
+    heNote:'*HE amount pending final verification',
     districts:[
       {id:'pick-jasper',label:'Jasper',tr:0.0065},
       {id:'pick-uninc',label:'Unincorporated Pickens',tr:0.006},
@@ -1886,8 +1868,7 @@ const COUNTIES = {
     paName:'Lumpkin County Tax Commissioner',
     notes:'Lumpkin County (Dahlonega) effective tax rate ~0.65%. Standard homestead: $2,000 off assessed value. HE exemption amount pending final verification. Apply by April 1.',
     state:'ga', closingModel:'ga',
-    heNote:'*HE amount pending final verification'
-  ,
+    heNote:'*HE amount pending final verification',
     districts:[
       {id:'lump-dahlonega',label:'Dahlonega',tr:0.0072},
       {id:'lump-uninc',label:'Unincorporated Lumpkin',tr:0.0065},
@@ -1900,8 +1881,7 @@ const COUNTIES = {
     paUrl:'https://www.augustaga.gov/1340/Tax-Assessor',
     paName:'Richmond County Tax Assessor (Augusta)',
     notes:'Richmond County (Augusta) effective tax rate ~0.84%. Standard homestead applies. Apply by April 1.',
-    state:'ga', closingModel:'ga'
-  ,
+    state:'ga', closingModel:'ga',
     districts:[
       {id:'rich-augusta',label:'Augusta-Richmond (Consolidated)',tr:0.0084},
       {id:'rich-hephzibah',label:'Hephzibah',tr:0.0078},
@@ -1914,8 +1894,7 @@ const COUNTIES = {
     paUrl:'https://columbiacountyga.gov/departments/tax-assessor',
     paName:'Columbia County Tax Assessor',
     notes:'Columbia County (Evans, Grovetown) effective tax rate ~0.82%. One of the fastest-growing counties in Georgia. Standard homestead applies. Apply by April 1.',
-    state:'ga', closingModel:'ga'
-  ,
+    state:'ga', closingModel:'ga',
     districts:[
       {id:'col-evans',label:'Evans / Martinez',tr:0.0082},
       {id:'col-grovetown',label:'Grovetown',tr:0.0085},
@@ -1932,8 +1911,7 @@ const COUNTIES = {
     notes:'Harris County (Houston) has an effective tax rate of ~1.85% after exemptions. Texas has NO documentary stamp tax. Seller pays owner\'s title policy by custom. Flood risk is significant — Harris County has filed 170,000+ NFIP claims since 1978. Property taxes paid in arrears. $140,000 school homestead exemption per Texas Prop 13 (Nov 2025).',
     state:'tx',
     heNote:'Texas $140,000 school district homestead exemption (Prop 13, 2025). Apply by April 30 at hcad.org.',
-    closingModel:'texas'
-  ,
+    closingModel:'texas',
     districts:[
       {id:'har-houston',label:'City of Houston (HISD)',tr:0.0203},
       {id:'har-cfisd',label:'Cy-Fair / Spring Branch Area',tr:0.0218},
@@ -1950,8 +1928,7 @@ const COUNTIES = {
     notes:'Dallas County effective tax rate ~1.74% after exemptions. Texas has NO documentary stamp tax. Seller pays owner\'s title policy by custom. $140,000 school homestead exemption per Texas Prop 13 (Nov 2025). Apply by April 30 at dallascad.org.',
     state:'tx',
     heNote:'Texas $140,000 school district homestead exemption (Prop 13, 2025). Apply by April 30 at dallascad.org.',
-    closingModel:'texas'
-  ,
+    closingModel:'texas',
     districts:[
       {id:'dal-dallas',label:'City of Dallas (DISD)',tr:0.022},
       {id:'dal-plano',label:'Plano (Collin border)',tr:0.02},
@@ -1969,8 +1946,7 @@ const COUNTIES = {
     notes:'Travis County (Austin) effective tax rate ~2.07%. High home values drive the dollar amount — Austin bills are among the highest in Texas despite mid-range rates. Texas has NO documentary stamp tax. Seller pays owner\'s title policy by custom. $140,000 school homestead exemption, apply by April 30 at traviscad.org.',
     state:'tx',
     heNote:'Texas $140,000 school district homestead exemption (Prop 13, 2025). Travis County also offers 20% optional homestead exemption. Apply by April 30 at traviscad.org.',
-    closingModel:'texas'
-  ,
+    closingModel:'texas',
     districts:[
       {id:'tra-austin',label:'City of Austin (AISD)',tr:0.021},
       {id:'tra-pflugerville',label:'Pflugerville',tr:0.0215},
@@ -1986,8 +1962,7 @@ const COUNTIES = {
     notes:'Bexar County (San Antonio) effective tax rate ~1.55%. Lower home values compared to Austin mean total dollar amounts are more moderate despite higher nominal rate. Texas has NO documentary stamp tax. Seller pays owner\'s title policy by custom. $140,000 school homestead exemption per Prop 13 (Nov 2025).',
     state:'tx',
     heNote:'Texas $140,000 school district homestead exemption (Prop 13, 2025). City of San Antonio also offers 20% local exemption. Apply by April 30 at bcad.org.',
-    closingModel:'texas'
-  ,
+    closingModel:'texas',
     districts:[
       {id:'bex-sanantonio',label:'City of San Antonio',tr:0.0227},
       {id:'bex-leonvalley',label:'Leon Valley',tr:0.0215},
@@ -2005,8 +1980,7 @@ const COUNTIES = {
     notes:'Mecklenburg County (Charlotte) effective tax rate ~0.80%. Combined city + county rate is 0.9417 per $100. NC uses deed of trust (not mortgage). No intangible tax — excise tax (revenue stamps) of $1/$500 paid by seller. Attorney-closed state. Bills due January 5.',
     state:'nc',
     heNote:'NC Homestead Exemption is income-limited: seniors 65+ or permanently disabled with income ≤$37,900 may exclude the greater of $25,000 or 50% of assessed value. Apply at cao.mecknc.gov by June 1.',
-    closingModel:'nc'
-  ,
+    closingModel:'nc',
     districts:[
       {id:'mec-charlotte',label:'Charlotte (CMS)',tr:0.0105},
       {id:'mec-matthews',label:'Matthews',tr:0.0088},
@@ -2024,8 +1998,7 @@ const COUNTIES = {
     notes:'Wake County (Raleigh) effective tax rate ~0.75%. Combined county + Raleigh city rate is 0.8721 per $100. NC uses deed of trust. No intangible tax — excise tax (revenue stamps) $1/$500 paid by seller. Attorney-closed state. Bills due January 5.',
     state:'nc',
     heNote:'NC Homestead Exemption is income-limited: seniors 65+ or permanently disabled with income ≤$37,900 may exclude the greater of $25,000 or 50% of assessed value. Apply at wake.gov by June 1.',
-    closingModel:'nc'
-  ,
+    closingModel:'nc',
     districts:[
       {id:'wak-raleigh',label:'Raleigh (Wake County Schools)',tr:0.0102},
       {id:'wak-cary',label:'Cary',tr:0.0088},
@@ -2042,8 +2015,7 @@ const COUNTIES = {
     paName:'Durham County Tax Administration',
     notes:'Durham County (Durham) effective tax rate ~0.93%. Part of the Raleigh-Durham Research Triangle metro. NC attorney-closed state. No intangible tax. Excise tax ($1/$500) seller-paid. Bills due September 1.',
     state:'nc', closingModel:'nc',
-    heNote:'NC Homestead Exemption is income-limited: seniors 65+ or permanently disabled with income ≤$37,900 may exclude the greater of $25,000 or 50% of assessed value. Apply at dconc.gov by June 1.'
-  ,
+    heNote:'NC Homestead Exemption is income-limited: seniors 65+ or permanently disabled with income ≤$37,900 may exclude the greater of $25,000 or 50% of assessed value. Apply at dconc.gov by June 1.',
     districts:[
       {id:'dur-durham',label:'Durham City (Durham Public Schools)',tr:0.011},
       {id:'dur-chapelhill',label:'Chapel Hill (Orange/Durham)',tr:0.0105},
@@ -2058,8 +2030,7 @@ const COUNTIES = {
     paName:'Guilford County Tax Department',
     notes:'Guilford County (Greensboro · High Point) effective tax rate ~0.92%. Piedmont Triad anchor market. NC attorney-closed state. No intangible tax. Excise tax ($1/$500) seller-paid. Bills due September 1.',
     state:'nc', closingModel:'nc',
-    heNote:'NC Homestead Exemption is income-limited: seniors 65+ or permanently disabled with income ≤$37,900 may exclude the greater of $25,000 or 50% of assessed value. Apply at guilfordcountync.gov by June 1.'
-  ,
+    heNote:'NC Homestead Exemption is income-limited: seniors 65+ or permanently disabled with income ≤$37,900 may exclude the greater of $25,000 or 50% of assessed value. Apply at guilfordcountync.gov by June 1.',
     districts:[
       {id:'gui-greensboro',label:'Greensboro',tr:0.0105},
       {id:'gui-highpoint',label:'High Point',tr:0.01},
@@ -2074,8 +2045,7 @@ const COUNTIES = {
     paUrl:'https://www.charlestoncounty.org/departments/auditor/homestead-exemption.php',
     paName:'Charleston County Auditor',
     notes:'Charleston County effective tax rate ~0.51%. SC assesses owner-occupied primary residences at 4% of market value. Flood insurance costs can EXCEED property taxes for Zone AE properties. Attorney-closed state. Homestead exemption age/disability limited. Apply by July 15.',
-    state:'sc', closingModel:'sc'
-  ,
+    state:'sc', closingModel:'sc',
     districts:[
       {id:'cha-charleston',label:'City of Charleston',tr:0.0055},
       {id:'cha-mountpleasant',label:'Mount Pleasant',tr:0.005},
@@ -2091,8 +2061,7 @@ const COUNTIES = {
     paUrl:'https://www.richlandcountysc.gov/Departments/Assessor',
     paName:'Richland County Assessor',
     notes:'Richland County (Columbia) effective tax rate ~0.59%. State capital and University of South Carolina anchor. SC assesses at 4% for primary residences. Attorney-closed state. Homestead exemption age/disability limited ($50,000 for 65+ or disabled). Apply by July 15.',
-    state:'sc', closingModel:'sc'
-  ,
+    state:'sc', closingModel:'sc',
     districts:[
       {id:'ric-columbia',label:'Columbia',tr:0.0065},
       {id:'ric-irmo',label:'Irmo',tr:0.0058},
@@ -2106,8 +2075,7 @@ const COUNTIES = {
     paUrl:'https://www.greenvillecounty.org/appsuite/taxassessor',
     paName:'Greenville County Assessor',
     notes:'Greenville County effective tax rate ~0.70%. Fastest-growing major city in SC. SC assesses at 4% primary residence rate. Attorney-closed state. Homestead exemption age/disability limited. Apply by July 15.',
-    state:'sc', closingModel:'sc'
-  ,
+    state:'sc', closingModel:'sc',
     districts:[
       {id:'grv-greenville',label:'City of Greenville',tr:0.0078},
       {id:'grv-simpsonville',label:'Simpsonville / Mauldin',tr:0.007},
@@ -2121,8 +2089,7 @@ const COUNTIES = {
     paUrl:'https://www.yorkcountygov.com/150/Assessor',
     paName:'York County Assessor',
     notes:'York County (Rock Hill · Fort Mill · Tega Cay) effective tax rate ~0.46% — lowest of SC markets. Directly borders Mecklenburg County NC. SC 4% assessment ratio. Attorney-closed state. Apply by July 15.',
-    state:'sc', closingModel:'sc'
-  ,
+    state:'sc', closingModel:'sc',
     districts:[
       {id:'yor-rockhill',label:'Rock Hill',tr:0.0052},
       {id:'yor-fortmill',label:'Fort Mill',tr:0.0046},
@@ -2136,8 +2103,7 @@ const COUNTIES = {
     paUrl:'https://www.berkeleycountysc.gov/departments/assessor',
     paName:'Berkeley County Assessor',
     notes:'Berkeley County (Goose Creek) effective tax rate ~0.42%. Directly borders Charleston County. SC 4% assessment ratio. Attorney-closed state. Homestead exemption age/disability limited. Apply by July 15.',
-    state:'sc', closingModel:'sc'
-  ,
+    state:'sc', closingModel:'sc',
     districts:[
       {id:'ber-goosecreek',label:'Goose Creek',tr:0.0048},
       {id:'ber-summerville',label:'Summerville (Berkeley portion)',tr:0.0044},
@@ -2151,8 +2117,7 @@ const COUNTIES = {
     paUrl:'https://www.dorchestercounty.net/departments/assessor',
     paName:'Dorchester County Assessor',
     notes:'Dorchester County (Summerville) effective tax rate ~0.49%. Completes the Charleston tri-county metro. SC 4% assessment ratio. Attorney-closed state. Homestead exemption age/disability limited. Apply by July 15.',
-    state:'sc', closingModel:'sc'
-  ,
+    state:'sc', closingModel:'sc',
     districts:[
       {id:'dor-summerville',label:'Summerville (Dorchester)',tr:0.0054},
       {id:'dor-uninc',label:'Unincorporated Dorchester',tr:0.0046},
@@ -2166,8 +2131,7 @@ const COUNTIES = {
     paUrl:'https://www.shelbycountytn.gov/460/Taxes',
     paName:'Shelby County Trustee',
     notes:'Shelby County (Memphis) effective tax rate ~0.59%. Tennessee assesses residential at 25% of appraised value. No state income tax. TN realty transfer tax at closing. No universal homestead exemption — income-limited relief available for seniors/disabled (≤$31,600). Apply at trustee by April 5.',
-    state:'tn', closingModel:'tn'
-  ,
+    state:'tn', closingModel:'tn',
     districts:[
       {id:'she-memphis',label:'Memphis City',tr:0.0105},
       {id:'she-germantown',label:'Germantown',tr:0.0088},
@@ -2183,8 +2147,7 @@ const COUNTIES = {
     paUrl:'https://padctn.org',
     paName:'Davidson County Property Assessor (PADCTN)',
     notes:'Davidson County (Nashville) effective tax rate ~0.96%. Tennessee 25% assessment ratio applies. No state income tax. TN realty transfer tax at closing. Income-limited tax relief for seniors/disabled (≤$31,600). Apply at trustee by April 5.',
-    state:'tn', closingModel:'tn'
-  ,
+    state:'tn', closingModel:'tn',
     districts:[
       {id:'dav-nashville',label:'Nashville Metro (Consolidated)',tr:0.0096},
     ],
@@ -2196,8 +2159,7 @@ const COUNTIES = {
     paUrl:'https://rctrustee.com',
     paName:'Rutherford County Trustee',
     notes:'Rutherford County (Murfreesboro) effective tax rate ~0.60%. One of the fastest-growing counties in Tennessee. Tennessee 25% assessment ratio. TN realty transfer tax at closing. Income-limited relief for seniors/disabled. Apply at trustee by April 5.',
-    state:'tn', closingModel:'tn'
-  ,
+    state:'tn', closingModel:'tn',
     districts:[
       {id:'rut-murfreesboro',label:'Murfreesboro',tr:0.0068},
       {id:'rut-smyrna',label:'Smyrna',tr:0.0064},
@@ -2212,8 +2174,7 @@ const COUNTIES = {
     paUrl:'https://www.williamsontn.gov/government/elected-offices/trustee',
     paName:'Williamson County Trustee',
     notes:'Williamson County TN (Franklin · Brentwood) effective tax rate ~0.56% — lowest of Nashville-area counties. Highest median home values in Tennessee. Tennessee 25% assessment ratio. No state income tax. Apply at trustee by April 5.',
-    state:'tn', closingModel:'tn'
-  ,
+    state:'tn', closingModel:'tn',
     districts:[
       {id:'wtn-franklin',label:'Franklin',tr:0.0064},
       {id:'wtn-brentwood',label:'Brentwood',tr:0.0058},
@@ -2229,8 +2190,7 @@ const COUNTIES = {
     paUrl:'https://www.jccal.org/Default.asp?ID=230',
     paName:'Jefferson County Tax Assessor',
     notes:'Jefferson County (Birmingham) effective tax rate ~0.71%. Alabama assesses residential homestead at 10% of market value. Documentary stamp tax + mortgage recording tax at closing. Standard homestead exemption reduces assessed value up to $4,000. Bills due October 1.',
-    state:'al', closingModel:'al'
-  ,
+    state:'al', closingModel:'al',
     districts:[
       {id:'jef-birmingham',label:'Birmingham City',tr:0.008},
       {id:'jef-hoover',label:'Hoover',tr:0.0072},
@@ -2246,8 +2206,7 @@ const COUNTIES = {
     paUrl:'https://www.madisoncountyal.gov/departments/revenue',
     paName:'Madison County Revenue Commissioner',
     notes:'Madison County (Huntsville) effective tax rate ~0.56%. Huntsville is one of the fastest-growing tech markets in the Southeast — NASA, Redstone Arsenal. Alabama 10% homestead assessment ratio. Standard homestead exemption up to $4,000 assessed value. Bills due October 1.',
-    state:'al', closingModel:'al'
-  ,
+    state:'al', closingModel:'al',
     districts:[
       {id:'mad-huntsville',label:'Huntsville',tr:0.0062},
       {id:'mad-madison',label:'Madison City',tr:0.0058},
@@ -2261,8 +2220,7 @@ const COUNTIES = {
     paUrl:'https://www.shelbyal.com/179/Revenue-Commissioner',
     paName:'Shelby County Revenue Commissioner',
     notes:'Shelby County AL (Hoover · Pelham · Helena) effective tax rate ~0.47% — lowest of Birmingham-area counties. Alabama 10% homestead assessment ratio. Standard homestead exemption reduces assessed value up to $4,000. Bills due October 1.',
-    state:'al', closingModel:'al'
-  ,
+    state:'al', closingModel:'al',
     districts:[
       {id:'sha-pelham',label:'Pelham / Helena / Alabaster',tr:0.0051},
       {id:'sha-uninc',label:'Unincorporated Shelby',tr:0.0046},
@@ -2275,8 +2233,7 @@ const COUNTIES = {
     paUrl:'https://www.limestoneal.gov/revenue',
     paName:'Limestone County Revenue Commissioner',
     notes:'Limestone County (Athens) effective tax rate ~0.35% — one of the lowest in Alabama. Directly north of Madison County (Huntsville). Alabama 10% homestead assessment ratio. Bills due October 1.',
-    state:'al', closingModel:'al'
-  ,
+    state:'al', closingModel:'al',
     districts:[
       {id:'lim-athens',label:'Athens',tr:0.004},
       {id:'lim-uninc',label:'Unincorporated Limestone',tr:0.0035},
@@ -2290,8 +2247,7 @@ const COUNTIES = {
     paUrl:'https://henrico.gov/finance/real-estate/',
     paName:'Henrico County Real Estate Division',
     notes:'Henrico County (Richmond metro) effective tax rate ~0.71%. Virginia recordation tax: ~$3.33 per $1,000 of purchase price (buyer) + ~$3.33 per $1,000 of loan amount. Grantor\'s tax seller-paid. No universal homestead exemption. Bills due June 5 and December 5.',
-    state:'va', closingModel:'va'
-  ,
+    state:'va', closingModel:'va',
     districts:[
       {id:'hen-shortpump',label:'Short Pump / West End',tr:0.0071},
       {id:'hen-general',label:'East End / General Henrico',tr:0.0071},
@@ -2304,8 +2260,7 @@ const COUNTIES = {
     paUrl:'https://www.chesterfield.gov/748/Real-Estate-Assessments',
     paName:'Chesterfield County Real Estate Assessments',
     notes:'Chesterfield County (Richmond metro south) effective tax rate ~0.76%. Virginia recordation tax ~$3.33 per $1,000 purchase price + ~$3.33 per $1,000 loan amount. Grantor\'s tax seller-paid. Bills semi-annual: June 5 and December 5.',
-    state:'va', closingModel:'va'
-  ,
+    state:'va', closingModel:'va',
     districts:[
       {id:'che-midlothian',label:'Midlothian',tr:0.0076},
       {id:'che-chester',label:'Chester',tr:0.0076},
@@ -2318,8 +2273,7 @@ const COUNTIES = {
     paUrl:'https://www.hanovercounty.gov/386/Tax-Rates',
     paName:'Hanover County Commissioner of the Revenue',
     notes:'Hanover County (Richmond metro north) effective tax rate ~0.66% — lowest of the Richmond metro counties. Virginia recordation tax ~$3.33 per $1,000 purchase price + ~$3.33 per $1,000 loan amount. Bills semi-annual: June 5 and December 5.',
-    state:'va', closingModel:'va'
-  ,
+    state:'va', closingModel:'va',
     districts:[
       {id:'han-mechanicsville',label:'Mechanicsville',tr:0.0066},
       {id:'han-ashland',label:'Ashland (Town)',tr:0.007},
@@ -2333,8 +2287,7 @@ const COUNTIES = {
     paUrl:'https://assessor.virginiabeach.gov/relief-incentives/senior-disabled-tax-relief',
     paName:'Virginia Beach Commissioner of the Revenue',
     notes:'Virginia Beach (independent city) effective tax rate ~0.99%. Home to Naval Station Oceana. Virginia recordation tax ~$3.33 per $1,000 purchase price + ~$3.33 per $1,000 loan amount. Income-limited elderly/disabled relief available.',
-    state:'va', closingModel:'va'
-  ,
+    state:'va', closingModel:'va',
     districts:[
       {id:'vab-oceanfront',label:'Oceanfront / Resort District',tr:0.0105},
       {id:'vab-general',label:'General Virginia Beach',tr:0.0099},
@@ -2347,8 +2300,7 @@ const COUNTIES = {
     paUrl:'https://www.cityofchesapeake.net/government/city-departments/departments/real-estate-assessor',
     paName:'Chesapeake Real Estate Assessor',
     notes:'Chesapeake (independent city) effective tax rate ~0.82%. Hampton Roads\' largest independent city by land area. Virginia recordation tax ~$3.33 per $1,000 purchase price + ~$3.33 per $1,000 loan amount. Bills June 5 and December 5.',
-    state:'va', closingModel:'va'
-  ,
+    state:'va', closingModel:'va',
     districts:[
       {id:'chv-greatbridge',label:'Great Bridge / Greenbrier',tr:0.0082},
       {id:'chv-westernbranch',label:'Western Branch',tr:0.0082},
@@ -2361,8 +2313,7 @@ const COUNTIES = {
     paUrl:'https://www.norfolk.gov/1659/Real-Estate-Tax-Relief-Program',
     paName:'Norfolk Department of Human Services (Tax Relief)',
     notes:'Norfolk (independent city) effective tax rate ~1.00%. Home to Naval Station Norfolk. Virginia recordation tax ~$3.33 per $1,000 purchase price + ~$3.33 per $1,000 loan amount. Elderly/disabled relief: 65+ or disabled, income ≤$67,000. Apply by June 1.',
-    state:'va', closingModel:'va'
-  ,
+    state:'va', closingModel:'va',
     districts:[
       {id:'nor-ghent',label:'Ghent / Larchmont',tr:0.01},
       {id:'nor-oceanview',label:'Ocean View',tr:0.01},
@@ -2376,8 +2327,7 @@ const COUNTIES = {
     paUrl:'https://www.suffolkva.us/800/Tax-Relief-Program',
     paName:'Suffolk Department of Social Services (Tax Relief)',
     notes:'Suffolk (independent city) effective tax rate ~0.87%. Largest independent city in Virginia by land area. Virginia recordation tax ~$3.33 per $1,000 purchase price + ~$3.33 per $1,000 loan amount.',
-    state:'va', closingModel:'va'
-  ,
+    state:'va', closingModel:'va',
     districts:[
       {id:'suf-harbourview',label:'Harbour View',tr:0.0087},
       {id:'suf-downtown',label:'Downtown Suffolk',tr:0.0087},
@@ -2392,8 +2342,7 @@ const COUNTIES = {
     paName:'Williamson Central Appraisal District (WCAD)',
     notes:'Williamson County (Round Rock · Cedar Park · Georgetown) effective tax rate ~1.68%. Completes the Austin metro alongside Travis County. $140,000 school homestead exemption (Prop 13, 2025). Apply by April 30 at wcad.org.',
     state:'tx', closingModel:'texas',
-    heNote:'Texas $140,000 school district homestead exemption (Prop 13, 2025). Apply by April 30 at wcad.org.'
-  ,
+    heNote:'Texas $140,000 school district homestead exemption (Prop 13, 2025). Apply by April 30 at wcad.org.',
     districts:[
       {id:'wil-roundrock',label:'Round Rock (RRISD)',tr:0.0225},
       {id:'wil-georgetown',label:'Georgetown',tr:0.022},
@@ -2410,8 +2359,7 @@ const COUNTIES = {
     paName:'Brazoria Central Appraisal District (BCAD)',
     notes:'Brazoria County (Pearland · Lake Jackson) effective tax rate ~1.52%. Completes the Houston south corridor. $140,000 school homestead exemption (Prop 13, 2025). Apply by April 30 at brazoriacad.org.',
     state:'tx', closingModel:'texas',
-    heNote:'Texas $140,000 school homestead exemption (Prop 13, 2025). Apply by April 30 at brazoriacad.org.'
-  ,
+    heNote:'Texas $140,000 school homestead exemption (Prop 13, 2025). Apply by April 30 at brazoriacad.org.',
     districts:[
       {id:'bra-pearland',label:'Pearland (Pearland ISD)',tr:0.0226},
       {id:'bra-friendswood',label:'Friendswood',tr:0.0218},
@@ -2429,8 +2377,7 @@ const COUNTIES = {
     paName:'Maricopa County Assessor',
     notes:'Maricopa County (Phoenix · Scottsdale · Mesa · Chandler · Gilbert · Glendale · Tempe) effective tax rate ~0.55%. Arizona assesses residential primary residences at 10% of full cash value — Class 3 owner-occupied designation. No state income tax on wages. Limited Property Value (LPV) system caps annual assessment increases. Homestead exemption: $100,000 of assessed value exempt from certain creditor claims — not a property tax exemption. Primary Residential Exemption reduces LPV by 40% for primary residences. County Assessor deadline March 1. No documentary stamp tax. No intangible tax on mortgages.',
     state:'az', closingModel:'arizona',
-    heNote:'Arizona Primary Residential designation (Form 82130R) reduces your Limited Property Value assessment. File with Maricopa County Assessor by March 1. This is a property classification — not a tax exemption in the traditional sense. The $100,000 homestead exemption protects equity from creditors but does not reduce your tax bill.'
-  ,
+    heNote:'Arizona Primary Residential designation (Form 82130R) reduces your Limited Property Value assessment. File with Maricopa County Assessor by March 1. This is a property classification — not a tax exemption in the traditional sense. The $100,000 homestead exemption protects equity from creditors but does not reduce your tax bill.',
     districts:[
       {id:'mar-phoenix',label:'Phoenix',tr:0.0055},
       {id:'mar-scottsdale',label:'Scottsdale',tr:0.0048},
@@ -2448,8 +2395,7 @@ const COUNTIES = {
     paName:'Pima County Assessor',
     notes:'Pima County (Tucson · Marana · Oro Valley · Sahuarita) effective tax rate ~0.69%. Arizona 10% primary residential assessment ratio applies. Annual Limited Property Value (LPV) increase capped at 5% for owner-occupied primary residences. No state documentary stamp tax. No mortgage intangible tax. Primary Residential Exemption reduces assessed LPV by 40%.',
     state:'az', closingModel:'arizona',
-    heNote:'Arizona Primary Residential designation reduces Limited Property Value. File Form 82130R with Pima County Assessor by March 1. LPV annual increase is capped at 5% for owner-occupied primary residences — providing meaningful long-term protection in appreciating markets.'
-  ,
+    heNote:'Arizona Primary Residential designation reduces Limited Property Value. File Form 82130R with Pima County Assessor by March 1. LPV annual increase is capped at 5% for owner-occupied primary residences — providing meaningful long-term protection in appreciating markets.',
     districts:[
       {id:'pim-tucson',label:'Tucson',tr:0.0075},
       {id:'pim-marana',label:'Marana / Oro Valley',tr:0.0065},
@@ -2465,8 +2411,7 @@ const COUNTIES = {
     paName:'Pinal County Assessor',
     notes:'Pinal County (Queen Creek · Maricopa City · Casa Grande · San Tan Valley) effective tax rate ~0.69%. Major growth market — San Tan Valley and Queen Creek are among the fastest-growing communities in Arizona. Arizona 10% primary residential assessment ratio. LPV increase capped at 5%/year for owner-occupied primary residences. No documentary stamp tax. No mortgage intangible tax.',
     state:'az', closingModel:'arizona',
-    heNote:'Arizona Primary Residential designation (Form 82130R) reduces Limited Property Value. File with Pinal County Assessor by March 1. Important: Queen Creek straddles the Maricopa/Pinal county line — confirm which appraisal district covers your specific address before filing.'
-  ,
+    heNote:'Arizona Primary Residential designation (Form 82130R) reduces Limited Property Value. File with Pinal County Assessor by March 1. Important: Queen Creek straddles the Maricopa/Pinal county line — confirm which appraisal district covers your specific address before filing.',
     districts:[
       {id:'pin-casagrande',label:'Casa Grande',tr:0.0052},
       {id:'pin-maricopa',label:'Maricopa City',tr:0.0048},
@@ -2482,8 +2427,7 @@ const COUNTIES = {
     paName:'Clark County Assessor',
     notes:'Clark County (Las Vegas · Henderson · North Las Vegas · Summerlin · Enterprise) effective tax rate ~0.60%. Nevada has NO state income tax and NO documentary stamp tax on real estate transfers. The state transfer tax is minimal ($1.95 per $500 of value over $100). Nevada assesses property at 35% of taxable value. Primary residence cap: assessed value increases limited to max 3%/year (or CPI if lower). Nevada Homestead Declaration protects up to $605,000 of equity from general creditor claims — not a property tax exemption.',
     state:'nv', closingModel:'nevada',
-    heNote:'Nevada Homestead Declaration (NRS 115): file with Clark County Recorder to protect up to $605,000 of equity from general creditors. Not a property tax reduction. There is no universal Nevada property tax exemption for primary residences. Veterans with 100% service-connected disability may qualify for a property tax exemption — contact Clark County Assessor.'
-  ,
+    heNote:'Nevada Homestead Declaration (NRS 115): file with Clark County Recorder to protect up to $605,000 of equity from general creditors. Not a property tax reduction. There is no universal Nevada property tax exemption for primary residences. Veterans with 100% service-connected disability may qualify for a property tax exemption — contact Clark County Assessor.',
     districts:[
       {id:'cla-lasvegas',label:'Las Vegas (Incorporated)',tr:0.0054},
       {id:'cla-henderson',label:'Henderson',tr:0.005},
@@ -2499,8 +2443,7 @@ const COUNTIES = {
     paName:'Washoe County Assessor',
     notes:'Washoe County (Reno · Sparks · Incline Village) effective tax rate ~0.72%. Nevada has NO state income tax and NO documentary stamp tax. 35% assessment ratio applies. Primary residence cap: assessed value increases limited to max 3%/year. Nevada Homestead Declaration protects up to $605,000 of equity from general creditors — not a tax reduction. Reno metro has seen significant in-migration from California and Bay Area buyers.',
     state:'nv', closingModel:'nevada',
-    heNote:'Nevada Homestead Declaration (NRS 115): file with Washoe County Recorder after closing to protect up to $605,000 of equity from general creditors. There is no universal property tax exemption for primary residences in Nevada. Veterans and low-income seniors may qualify for partial exemptions — contact Washoe County Assessor.'
-  ,
+    heNote:'Nevada Homestead Declaration (NRS 115): file with Washoe County Recorder after closing to protect up to $605,000 of equity from general creditors. There is no universal property tax exemption for primary residences in Nevada. Veterans and low-income seniors may qualify for partial exemptions — contact Washoe County Assessor.',
     districts:[
       {id:'was-reno',label:'Reno (Incorporated)',tr:0.006},
       {id:'was-sparks',label:'Sparks',tr:0.0058},
@@ -2516,8 +2459,7 @@ const COUNTIES = {
     paName:'Maryland SDAT (State Department of Assessments and Taxation)',
     notes:'Montgomery County (Bethesda · Silver Spring · Rockville · Gaithersburg · Potomac) effective tax rate ~1.00%. Maryland assesses at 100% of full cash value but the Homestead Tax Credit limits annual increases in the taxable assessment to 10% or the county\'s limit for primary residences. County transfer tax: 1% of purchase price paid by buyer. State transfer tax: 0.5% of purchase price. State recordation tax: $4.95 per $500 of loan amount. Attorney involvement at closing is common but not mandatory — Maryland is NOT an attorney-closed state.',
     state:'md', closingModel:'maryland',
-    heNote:'Maryland Homestead Tax Credit: caps annual taxable assessment increases at 10% (or lower county cap) for primary residences. Must apply with SDAT at sdat.dat.maryland.gov — application available after first full year of ownership. Annual reminder: re-certification required periodically. Significant long-term protection in Montgomery County where values appreciate rapidly.'
-  ,
+    heNote:'Maryland Homestead Tax Credit: caps annual taxable assessment increases at 10% (or lower county cap) for primary residences. Must apply with SDAT at sdat.dat.maryland.gov — application available after first full year of ownership. Annual reminder: re-certification required periodically. Significant long-term protection in Montgomery County where values appreciate rapidly.',
     districts:[
       {id:'mon-rockville',label:'Rockville',tr:0.0105},
       {id:'mon-bethesda',label:'Bethesda / Silver Spring (uninc)',tr:0.01},
@@ -2532,8 +2474,7 @@ const COUNTIES = {
     paName:"Maryland SDAT",
     notes:"Prince George's County (College Park · Bowie · Hyattsville · Laurel · Greenbelt) effective tax rate ~1.14% — highest of Maryland markets. Directly borders DC to the east and northeast. State and county transfer taxes and recordation taxes apply at closing. Maryland Homestead Tax Credit caps assessment increases for primary residences.",
     state:'md', closingModel:'maryland',
-    heNote:"Maryland Homestead Tax Credit: caps annual taxable assessment increases at 10% (or Prince George's County cap) for primary residences. Apply with SDAT at sdat.dat.maryland.gov after first full year of ownership."
-  ,
+    heNote:"Maryland Homestead Tax Credit: caps annual taxable assessment increases at 10% (or Prince George's County cap) for primary residences. Apply with SDAT at sdat.dat.maryland.gov after first full year of ownership.",
     districts:[
       {id:'pg-bowie',label:'Bowie (uninc)',tr:0.0114},
       {id:'pg-collegepark',label:'College Park',tr:0.012},
@@ -2549,8 +2490,7 @@ const COUNTIES = {
     paName:'Maryland SDAT',
     notes:'Anne Arundel County (Annapolis · Glen Burnie · Severna Park · Crofton · Pasadena) effective tax rate ~0.83%. Directly borders Baltimore City and County. Strong Naval Academy and government/defense sector buyer market. Maryland Homestead Tax Credit limits annual assessment increases for primary residences. State and county transfer taxes + recordation tax apply at closing.',
     state:'md', closingModel:'maryland',
-    heNote:'Maryland Homestead Tax Credit: caps annual taxable assessment increases at 10% (or Anne Arundel County cap) for primary residences. Apply with SDAT at sdat.dat.maryland.gov after first full year of ownership.'
-  ,
+    heNote:'Maryland Homestead Tax Credit: caps annual taxable assessment increases at 10% (or Anne Arundel County cap) for primary residences. Apply with SDAT at sdat.dat.maryland.gov after first full year of ownership.',
     districts:[
       {id:'aa-uninc',label:'Unincorporated Anne Arundel',tr:0.0109},
       {id:'aa-annapolis',label:'City of Annapolis',tr:0.0143},
@@ -2566,8 +2506,7 @@ const COUNTIES = {
     paName:'Marion County Assessor',
     notes:'Marion County (Indianapolis) effective tax rate ~0.83%. Indiana caps homestead property taxes at 1% of gross assessed value. Standard deduction: $45,000 off assessed value + supplemental deduction of 35% of remaining AV up to $600,000. File with county assessor by December 31.',
     state:'in', closingModel:'indiana',
-    heNote:'Indiana Homestead Standard Deduction: $45,000 off assessed value. Supplemental deduction: 35% of remaining assessed value up to $600,000. File with Marion County Assessor by December 31 of the year you move in. Renews automatically.'
-  ,
+    heNote:'Indiana Homestead Standard Deduction: $45,000 off assessed value. Supplemental deduction: 35% of remaining assessed value up to $600,000. File with Marion County Assessor by December 31 of the year you move in. Renews automatically.',
     districts:[
       {id:'mar-indianapolis',label:'Indianapolis (Consolidated)',tr:0.0083},
       {id:'mar-speedway',label:'Speedway / Beech Grove',tr:0.0086},
@@ -2581,8 +2520,7 @@ const COUNTIES = {
     paName:'Hamilton County Assessor',
     notes:'Hamilton County (Carmel/Fishers/Westfield/Noblesville) effective tax rate ~0.67% — lowest in the Indianapolis metro. One of the fastest-growing counties in the nation. Indiana 1% homestead cap applies.',
     state:'in', closingModel:'indiana',
-    heNote:'Indiana Homestead Standard Deduction: $45,000 off assessed value. Supplemental deduction: 35% of remaining assessed value up to $600,000. File with Hamilton County Assessor by December 31.'
-  ,
+    heNote:'Indiana Homestead Standard Deduction: $45,000 off assessed value. Supplemental deduction: 35% of remaining assessed value up to $600,000. File with Hamilton County Assessor by December 31.',
     districts:[
       {id:'ham-carmel',label:'Carmel',tr:0.007},
       {id:'ham-fishers',label:'Fishers',tr:0.0068},
@@ -2599,8 +2537,7 @@ const COUNTIES = {
     paName:'Hendricks County Assessor',
     notes:'Hendricks County (Avon/Plainfield/Brownsburg) effective tax rate ~0.74%. Western Indianapolis suburb, strong first-time buyer market. Indiana 1% homestead cap applies.',
     state:'in', closingModel:'indiana',
-    heNote:'Indiana Homestead Standard Deduction: $45,000 off assessed value. Supplemental deduction: 35% of remaining assessed value up to $600,000. File with Hendricks County Assessor by December 31.'
-  ,
+    heNote:'Indiana Homestead Standard Deduction: $45,000 off assessed value. Supplemental deduction: 35% of remaining assessed value up to $600,000. File with Hendricks County Assessor by December 31.',
     districts:[
       {id:'hen-plainfield',label:'Plainfield',tr:0.0078},
       {id:'hen-avon',label:'Avon',tr:0.0076},
@@ -2616,8 +2553,7 @@ const COUNTIES = {
     paName:'Johnson County Assessor',
     notes:'Johnson County (Greenwood/Franklin/Bargersville) effective tax rate ~0.78%. South Indianapolis suburb, high first-time buyer volume. Indiana 1% homestead cap applies.',
     state:'in', closingModel:'indiana',
-    heNote:'Indiana Homestead Standard Deduction: $45,000 off assessed value. Supplemental deduction: 35% of remaining assessed value up to $600,000. File with Johnson County Assessor by December 31.'
-  ,
+    heNote:'Indiana Homestead Standard Deduction: $45,000 off assessed value. Supplemental deduction: 35% of remaining assessed value up to $600,000. File with Johnson County Assessor by December 31.',
     districts:[
       {id:'joh-greenwood',label:'Greenwood',tr:0.0082},
       {id:'joh-franklin',label:'Franklin',tr:0.008},
@@ -2632,8 +2568,7 @@ const COUNTIES = {
     paName:'Boone County Assessor',
     notes:'Boone County (Zionsville/Lebanon/Whitestown) effective tax rate ~0.65% — lowest in the Indianapolis metro. Northwest Indianapolis suburb. Indiana 1% homestead cap applies.',
     state:'in', closingModel:'indiana',
-    heNote:'Indiana Homestead Standard Deduction: $45,000 off assessed value. Supplemental deduction: 35% of remaining assessed value up to $600,000. File with Boone County Assessor by December 31.'
-  ,
+    heNote:'Indiana Homestead Standard Deduction: $45,000 off assessed value. Supplemental deduction: 35% of remaining assessed value up to $600,000. File with Boone County Assessor by December 31.',
     districts:[
       {id:'boo-zionsville',label:'Zionsville',tr:0.007},
       {id:'boo-lebanon',label:'Lebanon',tr:0.0068},
@@ -2650,8 +2585,7 @@ const COUNTIES = {
     paName:'Franklin County Auditor',
     notes:'Franklin County (Columbus) effective tax rate ~1.35%. Ohio assesses property at 35% of appraised value. No universal homestead exemption for standard buyers — senior/disabled program only. County conveyance fee $1 per $1,000 paid by seller. Taxes paid semi-annually.',
     state:'oh', closingModel:'ohio',
-    heNote:'Ohio Homestead Exemption is available only to homeowners 65+ or permanently disabled. Reduces the taxable value by $25,000 for qualifying owners. Apply at the Franklin County Auditor by December 31. Standard working-age buyers receive no property tax exemption in Ohio.'
-  ,
+    heNote:'Ohio Homestead Exemption is available only to homeowners 65+ or permanently disabled. Reduces the taxable value by $25,000 for qualifying owners. Apply at the Franklin County Auditor by December 31. Standard working-age buyers receive no property tax exemption in Ohio.',
     districts:[
       {id:'fra-columbus',label:'Columbus',tr:0.0142},
       {id:'fra-dublin',label:'Dublin (Dublin City Schools)',tr:0.0128},
@@ -2668,8 +2602,7 @@ const COUNTIES = {
     paName:'Delaware County Auditor',
     notes:'Delaware County (Dublin/Powell/Westerville/Lewis Center) effective tax rate ~1.05%. North Columbus suburb, one of the wealthiest counties in Ohio. Ohio 35% assessment ratio applies. No universal homestead exemption.',
     state:'oh', closingModel:'ohio',
-    heNote:'Ohio Homestead Exemption for seniors 65+ or permanently disabled only. Reduces taxable value by $25,000. Apply at Delaware County Auditor by December 31. Standard buyers receive no exemption.'
-  ,
+    heNote:'Ohio Homestead Exemption for seniors 65+ or permanently disabled only. Reduces taxable value by $25,000. Apply at Delaware County Auditor by December 31. Standard buyers receive no exemption.',
     districts:[
       {id:'del-powell',label:'Powell (Delaware City Schools)',tr:0.0155},
       {id:'del-dublin',label:'Dublin (part — Delaware portion)',tr:0.0145},
@@ -2684,8 +2617,7 @@ const COUNTIES = {
     paName:'Licking County Auditor',
     notes:'Licking County (Newark/Heath/Pataskala/Granville) effective tax rate ~0.94%. East Columbus suburb, strong affordability and growing population. Ohio 35% assessment ratio. No universal homestead exemption.',
     state:'oh', closingModel:'ohio',
-    heNote:'Ohio Homestead Exemption for seniors 65+ or permanently disabled only. Apply at Licking County Auditor by December 31. Standard buyers receive no exemption.'
-  ,
+    heNote:'Ohio Homestead Exemption for seniors 65+ or permanently disabled only. Apply at Licking County Auditor by December 31. Standard buyers receive no exemption.',
     districts:[
       {id:'lic-newark',label:'Newark',tr:0.01},
       {id:'lic-pataskala',label:'Pataskala',tr:0.0095},
@@ -2700,8 +2632,7 @@ const COUNTIES = {
     paName:'Fairfield County Auditor',
     notes:'Fairfield County (Lancaster/Pickerington/Canal Winchester) effective tax rate ~1.02%. Southeast Columbus suburb. Ohio 35% assessment ratio. No universal homestead exemption.',
     state:'oh', closingModel:'ohio',
-    heNote:'Ohio Homestead Exemption for seniors 65+ or permanently disabled only. Apply at Fairfield County Auditor by December 31. Standard buyers receive no exemption.'
-  ,
+    heNote:'Ohio Homestead Exemption for seniors 65+ or permanently disabled only. Apply at Fairfield County Auditor by December 31. Standard buyers receive no exemption.',
     districts:[
       {id:'fai-lancaster',label:'Lancaster',tr:0.0108},
       {id:'fai-pickerington',label:'Pickerington',tr:0.0104},
@@ -2716,8 +2647,7 @@ const COUNTIES = {
     paName:'Hamilton County Auditor',
     notes:'Hamilton County (Cincinnati/Blue Ash/Hyde Park/Norwood) effective tax rate ~1.26%. Ohio 35% assessment ratio. No universal homestead exemption for standard buyers. Cincinnati is a major first-time buyer market with strong institutional partner presence.',
     state:'oh', closingModel:'ohio',
-    heNote:'Ohio Homestead Exemption for seniors 65+ or permanently disabled only. Apply at Hamilton County Auditor by December 31. Standard buyers receive no exemption in Ohio.'
-  ,
+    heNote:'Ohio Homestead Exemption for seniors 65+ or permanently disabled only. Apply at Hamilton County Auditor by December 31. Standard buyers receive no exemption in Ohio.',
     districts:[
       {id:'ham-cincinnati',label:'Cincinnati',tr:0.0138},
       {id:'ham-blueash',label:'Blue Ash / Hyde Park area',tr:0.0126},
@@ -2733,8 +2663,7 @@ const COUNTIES = {
     paName:'Warren County Auditor',
     notes:'Warren County (Mason/Lebanon/Springboro/Loveland) effective tax rate ~0.87% — lowest in the Cincinnati metro. North Cincinnati suburb where buyers priced out of Hamilton County relocate. Major first-time buyer market. Ohio 35% assessment ratio.',
     state:'oh', closingModel:'ohio',
-    heNote:'Ohio Homestead Exemption for seniors 65+ or permanently disabled only. Apply at Warren County Auditor by December 31. Standard buyers receive no exemption.'
-  ,
+    heNote:'Ohio Homestead Exemption for seniors 65+ or permanently disabled only. Apply at Warren County Auditor by December 31. Standard buyers receive no exemption.',
     districts:[
       {id:'war-mason',label:'Mason (Mason City Schools)',tr:0.0092},
       {id:'war-lebanon',label:'Lebanon',tr:0.009},
@@ -2749,8 +2678,7 @@ const COUNTIES = {
     paName:'Butler County Auditor',
     notes:'Butler County (Fairfield/Hamilton/Middletown/Oxford) effective tax rate ~1.06%. West Cincinnati suburb. Ohio 35% assessment ratio. No universal homestead exemption.',
     state:'oh', closingModel:'ohio',
-    heNote:'Ohio Homestead Exemption for seniors 65+ or permanently disabled only. Apply at Butler County Auditor by December 31. Standard buyers receive no exemption.'
-  ,
+    heNote:'Ohio Homestead Exemption for seniors 65+ or permanently disabled only. Apply at Butler County Auditor by December 31. Standard buyers receive no exemption.',
     districts:[
       {id:'but-westchester',label:'West Chester Township',tr:0.011},
       {id:'but-fairfield',label:'Fairfield City',tr:0.0108},
@@ -2766,8 +2694,7 @@ const COUNTIES = {
     paName:'Clermont County Auditor',
     notes:'Clermont County (Milford/Eastgate/Batavia/Loveland) effective tax rate ~0.94%. East Cincinnati suburb. Ohio 35% assessment ratio. No universal homestead exemption.',
     state:'oh', closingModel:'ohio',
-    heNote:'Ohio Homestead Exemption for seniors 65+ or permanently disabled only. Apply at Clermont County Auditor by December 31. Standard buyers receive no exemption.'
-  ,
+    heNote:'Ohio Homestead Exemption for seniors 65+ or permanently disabled only. Apply at Clermont County Auditor by December 31. Standard buyers receive no exemption.',
     districts:[
       {id:'cle-milford',label:'Milford',tr:0.01},
       {id:'cle-anderson',label:'Anderson Township (part)',tr:0.0095},
@@ -2783,8 +2710,7 @@ const COUNTIES = {
     paName:'Jackson County Assessment Department',
     notes:'Jackson County (Kansas City/Independence/Lee\'s Summit/Blue Springs) effective tax rate ~1.08%. Missouri assesses residential property at 19% of appraised value. No universal homestead exemption. Documentary stamp tax ($0.50 per $500) paid by seller.',
     state:'mo', closingModel:'missouri',
-    heNote:'Missouri has no universal homestead exemption. The Missouri Senior Citizen Property Tax Credit (Circuit Breaker) provides income-limited relief for residents 65+ or disabled with income under $30,000 (renters) or $34,000 (owners). Apply with the Missouri Department of Revenue with your state income tax return.'
-  ,
+    heNote:'Missouri has no universal homestead exemption. The Missouri Senior Citizen Property Tax Credit (Circuit Breaker) provides income-limited relief for residents 65+ or disabled with income under $30,000 (renters) or $34,000 (owners). Apply with the Missouri Department of Revenue with your state income tax return.',
     districts:[
       {id:'jac-kansascity',label:'Kansas City',tr:0.0118},
       {id:'jac-leessummit',label:'Lee\'s Summit',tr:0.011},
@@ -2801,8 +2727,7 @@ const COUNTIES = {
     paName:'Clay County Collector',
     notes:'Clay County (Liberty/North Kansas City/Kearney/Gladstone) effective tax rate ~0.98%. North Kansas City suburb. Missouri 19% assessment ratio. No universal homestead exemption.',
     state:'mo', closingModel:'missouri',
-    heNote:'Missouri has no universal homestead exemption. Senior/disabled Circuit Breaker credit available — apply with Missouri Department of Revenue.'
-  ,
+    heNote:'Missouri has no universal homestead exemption. Senior/disabled Circuit Breaker credit available — apply with Missouri Department of Revenue.',
     districts:[
       {id:'cla-liberty',label:'Liberty',tr:0.0105},
       {id:'cla-nkc',label:'North Kansas City',tr:0.0102},
@@ -2817,8 +2742,7 @@ const COUNTIES = {
     paName:'Cass County Assessor',
     notes:'Cass County (Belton/Raymore/Harrisonville/Peculiar) effective tax rate ~0.84%. South Kansas City suburb, strong affordability. Missouri 19% assessment ratio. No universal homestead exemption.',
     state:'mo', closingModel:'missouri',
-    heNote:'Missouri has no universal homestead exemption. Senior/disabled Circuit Breaker credit available — apply with Missouri Department of Revenue.'
-  ,
+    heNote:'Missouri has no universal homestead exemption. Senior/disabled Circuit Breaker credit available — apply with Missouri Department of Revenue.',
     districts:[
       {id:'cas-belton',label:'Belton',tr:0.009},
       {id:'cas-raymore',label:'Raymore',tr:0.0087},
@@ -2833,8 +2757,7 @@ const COUNTIES = {
     paName:'Platte County Assessor',
     notes:'Platte County (Parkville/Riverside/Platte City/Gladstone) effective tax rate ~0.86%. Northwest Kansas City suburb. Missouri 19% assessment ratio. No universal homestead exemption.',
     state:'mo', closingModel:'missouri',
-    heNote:'Missouri has no universal homestead exemption. Senior/disabled Circuit Breaker credit available — apply with Missouri Department of Revenue.'
-  ,
+    heNote:'Missouri has no universal homestead exemption. Senior/disabled Circuit Breaker credit available — apply with Missouri Department of Revenue.',
     districts:[
       {id:'pla-plattecity',label:'Platte City',tr:0.0092},
       {id:'pla-parkville',label:'Parkville / Riverside',tr:0.0088},
@@ -2849,8 +2772,7 @@ const COUNTIES = {
     paName:'St. Louis County Assessor',
     notes:'St. Louis County (Clayton/Chesterfield/Kirkwood/Florissant/Ballwin) effective tax rate ~0.98%. Note: St. Louis County is separate from St. Louis City — they are two distinct jurisdictions. Missouri 19% assessment ratio. No universal homestead exemption.',
     state:'mo', closingModel:'missouri',
-    heNote:'Missouri has no universal homestead exemption. Senior/disabled Circuit Breaker credit available — apply with Missouri Department of Revenue. Note: St. Louis County and St. Louis City are separate jurisdictions with different tax rates — confirm which applies to your property address.'
-  ,
+    heNote:'Missouri has no universal homestead exemption. Senior/disabled Circuit Breaker credit available — apply with Missouri Department of Revenue. Note: St. Louis County and St. Louis City are separate jurisdictions with different tax rates — confirm which applies to your property address.',
     districts:[
       {id:'stl-clayton',label:'Clayton (own school district)',tr:0.0108},
       {id:'stl-ladue',label:'Ladue',tr:0.01},
@@ -2866,8 +2788,7 @@ const COUNTIES = {
     paName:'St. Charles County Assessor',
     notes:'St. Charles County (St. Peters/O\'Fallon/Wentzville/Lake Saint Louis) effective tax rate ~0.88%. One of the fastest-growing counties in Missouri. Major destination for buyers relocating from St. Louis City and County. Missouri 19% assessment ratio.',
     state:'mo', closingModel:'missouri',
-    heNote:'Missouri has no universal homestead exemption. Senior/disabled Circuit Breaker credit available — apply with Missouri Department of Revenue.'
-  ,
+    heNote:'Missouri has no universal homestead exemption. Senior/disabled Circuit Breaker credit available — apply with Missouri Department of Revenue.',
     districts:[
       {id:'stc-ofallon',label:'O\'Fallon (largest city)',tr:0.009},
       {id:'stc-stpeters',label:'St. Peters / Wentzville',tr:0.0088},
@@ -2882,8 +2803,7 @@ const COUNTIES = {
     paName:'Jefferson County Assessor',
     notes:'Jefferson County (Arnold/Festus/Hillsboro/De Soto) effective tax rate ~0.72% — lowest in the St. Louis metro. South St. Louis suburb with strong first-time buyer volume. Missouri 19% assessment ratio.',
     state:'mo', closingModel:'missouri',
-    heNote:'Missouri has no universal homestead exemption. Senior/disabled Circuit Breaker credit available — apply with Missouri Department of Revenue.'
-  ,
+    heNote:'Missouri has no universal homestead exemption. Senior/disabled Circuit Breaker credit available — apply with Missouri Department of Revenue.',
     districts:[
       {id:'jef-arnold',label:'Arnold',tr:0.0078},
       {id:'jef-festus',label:'Festus / Crystal City',tr:0.0074},
@@ -2898,8 +2818,7 @@ const COUNTIES = {
     paName:'Franklin County Assessor',
     notes:'Franklin County (Washington/Union/Sullivan) effective tax rate ~0.75%. West St. Louis suburb. Missouri 19% assessment ratio. No universal homestead exemption.',
     state:'mo', closingModel:'missouri',
-    heNote:'Missouri has no universal homestead exemption. Senior/disabled Circuit Breaker credit available — apply with Missouri Department of Revenue.'
-  ,
+    heNote:'Missouri has no universal homestead exemption. Senior/disabled Circuit Breaker credit available — apply with Missouri Department of Revenue.',
     districts:[
       {id:'fra-washington',label:'Washington',tr:0.0082},
       {id:'fra-uninc',label:'Unincorporated Franklin',tr:0.0073},
@@ -2913,8 +2832,7 @@ const COUNTIES = {
     paName:'St. Louis City Assessor',
     notes:'St. Louis City is an independent city — not part of St. Louis County. Effective tax rate ~1.35%, notably higher than surrounding counties. Distinct school district, city services, and tax structure. Buyers purchasing inside St. Louis City limits must use this entry — not St. Louis County. Missouri 19% assessment ratio.',
     state:'mo', closingModel:'missouri',
-    heNote:'Missouri has no universal homestead exemption. St. Louis City has its own tax relief programs for seniors — contact the City Assessor. Note the higher effective rate compared to St. Louis County.'
-  ,
+    heNote:'Missouri has no universal homestead exemption. St. Louis City has its own tax relief programs for seniors — contact the City Assessor. Note the higher effective rate compared to St. Louis County.',
     districts:[
       {id:'stlc-general',label:'St. Louis City (all areas)',tr:0.0135},
     ],
@@ -2928,8 +2846,7 @@ const COUNTIES = {
     paName:'Allegheny County Office of Property Assessments',
     notes:'Allegheny County (Pittsburgh/Mt. Lebanon/Bethel Park/Penn Hills) effective tax rate ~1.28%. Pennsylvania realty transfer tax: 2% total (1% state + 1% local) split 50/50 — buyer pays 1% of purchase price. Allegheny County Homestead Exclusion: $18,000 off assessed value for primary residences. Assessed at 100% of market value post-2012 reassessment. Attorney involvement common by custom but not required.',
     state:'pa', closingModel:'pennsylvania',
-    heNote:'Allegheny County Homestead Exclusion: $18,000 reduction in assessed value for primary residences. File with the Allegheny County Office of Property Assessments by March 1. This reduces your county tax bill — school district homestead exclusion varies by district. Attorney involvement at closing is common by local custom but is not legally required in Pennsylvania.'
-  ,
+    heNote:'Allegheny County Homestead Exclusion: $18,000 reduction in assessed value for primary residences. File with the Allegheny County Office of Property Assessments by March 1. This reduces your county tax bill — school district homestead exclusion varies by district. Attorney involvement at closing is common by local custom but is not legally required in Pennsylvania.',
     districts:[
       {id:'all-pittsburgh',label:'Pittsburgh City (city school district)',tr:0.015},
       {id:'all-mountlebo',label:'Mount Lebanon',tr:0.0132},
@@ -2946,8 +2863,7 @@ const COUNTIES = {
     paName:'Butler County Assessment Office',
     notes:'Butler County (Cranberry Township/Mars/Butler/Zelienople) effective tax rate ~1.36%. North Pittsburgh suburb, one of the fastest-growing areas in Western PA. Pennsylvania 1% buyer realty transfer tax applies. Homestead exclusion varies by municipality — confirm with county assessment office.',
     state:'pa', closingModel:'pennsylvania',
-    heNote:'Pennsylvania Homestead Exclusion varies by county and school district. Butler County offers a homestead exclusion — file with the Butler County Assessment Office. Amount varies by taxing district. Attorney at closing is common but not required.'
-  ,
+    heNote:'Pennsylvania Homestead Exclusion varies by county and school district. Butler County offers a homestead exclusion — file with the Butler County Assessment Office. Amount varies by taxing district. Attorney at closing is common but not required.',
     districts:[
       {id:'but-cranberry',label:'Cranberry Township',tr:0.0136},
       {id:'but-mars',label:'Mars / Adams Township',tr:0.0134},
@@ -2962,8 +2878,7 @@ const COUNTIES = {
     paName:'Washington County Assessment Office',
     notes:'Washington County (Peters Township/Canonsburg/Washington/McMurray) effective tax rate ~1.22%. South Pittsburgh suburb. Pennsylvania 1% buyer realty transfer tax. Peters Township is among the most sought-after communities in Western PA.',
     state:'pa', closingModel:'pennsylvania',
-    heNote:'Pennsylvania Homestead Exclusion varies by county and school district. File with Washington County Assessment Office. Amount varies by taxing district. Attorney at closing is common but not required.'
-  ,
+    heNote:'Pennsylvania Homestead Exclusion varies by county and school district. File with Washington County Assessment Office. Amount varies by taxing district. Attorney at closing is common but not required.',
     districts:[
       {id:'was-washington',label:'Washington City',tr:0.013},
       {id:'was-canonsburg',label:'Canonsburg / Peters Township',tr:0.0122},
@@ -2978,8 +2893,7 @@ const COUNTIES = {
     paName:'Westmoreland County Assessment Office',
     notes:'Westmoreland County (Greensburg/Murrysville/Jeannette/Latrobe) effective tax rate ~1.31%. East Pittsburgh suburb. Pennsylvania 1% buyer realty transfer tax. Strong first-time buyer market with affordable entry-level inventory.',
     state:'pa', closingModel:'pennsylvania',
-    heNote:'Pennsylvania Homestead Exclusion varies by county and school district. File with Westmoreland County Assessment Office. Amount varies by taxing district. Attorney at closing is common but not required.'
-  ,
+    heNote:'Pennsylvania Homestead Exclusion varies by county and school district. File with Westmoreland County Assessment Office. Amount varies by taxing district. Attorney at closing is common but not required.',
     districts:[
       {id:'wes-greensburg',label:'Greensburg / Murrysville',tr:0.0132},
       {id:'wes-uninc',label:'Unincorporated Westmoreland',tr:0.0128},
@@ -2993,8 +2907,7 @@ const COUNTIES = {
     paName:'Beaver County Assessment Office',
     notes:'Beaver County (Beaver Falls/Aliquippa/Monaca/New Brighton) effective tax rate ~1.45% — highest in the Pittsburgh metro. Northwest Pittsburgh. Pennsylvania 1% buyer realty transfer tax. Strong working-class first-time buyer market. Major growth from Pittsburgh metro spillover.',
     state:'pa', closingModel:'pennsylvania',
-    heNote:'Pennsylvania Homestead Exclusion varies by county and school district. File with Beaver County Assessment Office. Amount varies by taxing district. Attorney at closing is common but not required.'
-  ,
+    heNote:'Pennsylvania Homestead Exclusion varies by county and school district. File with Beaver County Assessment Office. Amount varies by taxing district. Attorney at closing is common but not required.',
     districts:[
       {id:'bea-beaverfalls',label:'Beaver Falls / Aliquippa',tr:0.0153},
       {id:'bea-center',label:'Center Township',tr:0.0145},
@@ -3010,8 +2923,7 @@ const COUNTIES = {
     paName:'Johnson County Appraiser',
     notes:'Johnson County KS (Overland Park/Olathe/Leawood/Lenexa/Shawnee/Prairie Village) effective tax rate ~1.09%. Kansas assesses residential property at 11.5% of appraised value. No documentary stamp tax. No state real estate transfer tax. Mortgage registration tax: 0.1% of loan amount (very modest). No universal homestead exemption — income-limited Homestead Refund program for qualifying owners.',
     state:'ks', closingModel:'kansas',
-    heNote:'Kansas Homestead Refund: income-limited tax rebate for homeowners with household income under $36,300. Apply with your Kansas state income tax return by April 15. This is a refund program — not a traditional exemption. Standard buyers above the income threshold receive no property tax reduction. Johnson County is directly across the state line from Kansas City MO — confirm which state your property address falls in before selecting.'
-  ,
+    heNote:'Kansas Homestead Refund: income-limited tax rebate for homeowners with household income under $36,300. Apply with your Kansas state income tax return by April 15. This is a refund program — not a traditional exemption. Standard buyers above the income threshold receive no property tax reduction. Johnson County is directly across the state line from Kansas City MO — confirm which state your property address falls in before selecting.',
     districts:[
       {id:'joh-overlandpark',label:'Overland Park',tr:0.0112},
       {id:'joh-olathe',label:'Olathe / Shawnee',tr:0.011},
@@ -3029,8 +2941,7 @@ const COUNTIES = {
     paName:'East Baton Rouge Parish Assessor',
     notes:'East Baton Rouge Parish (Baton Rouge/Zachary/Baker/Central) effective tax rate ~0.79% (verified: 94.05 parish+school mills outside city; 112 mills inside city limits per 2025 official millage table from ebrpa.org) — assessed at 10% of FMV. Homestead exemption: $75,000 FMV ($7,500 assessed value reduction). Taxes paid in ARREARS — due December 31. No state transfer tax. Louisiana civil law notarial closing system. Homeowners insurance avg: $2,710–$5,454/year for $300K–$400K home (2026 data). Flood: most of EBR is Zone X with some AE areas near Amite and Comite Rivers. Risk Rating 2.0 (2021) changed NFIP pricing — get a zone-specific quote.',
     state:'la', closingModel:'louisiana',
-    heNote:'Louisiana Homestead Exemption: $75,000 of fair market value is exempt from parish property taxes for your primary residence. File with the East Baton Rouge Parish Assessor at ebrpa.org by December 31 of the year you purchase. Annual savings: approximately $750–$800 depending on millage district. 100% service-connected disabled veterans pay zero property tax.'
-  ,
+    heNote:'Louisiana Homestead Exemption: $75,000 of fair market value is exempt from parish property taxes for your primary residence. File with the East Baton Rouge Parish Assessor at ebrpa.org by December 31 of the year you purchase. Annual savings: approximately $750–$800 depending on millage district. 100% service-connected disabled veterans pay zero property tax.',
     districts:[
       {id:'ebr-uninc',label:'Unincorporated EBR (parish + EBR school)',tr:0.0071},
       {id:'ebr-br',label:'City of Baton Rouge',tr:0.0088},
@@ -3047,8 +2958,7 @@ const COUNTIES = {
     paName:'Ascension Parish Assessor',
     notes:'Ascension Parish (Gonzales/Prairieville/Dutchtown/Sorrento) effective tax rate ~0.86% (verified: average 115 mills from Ascension EDC official data; range 102–125 mills) — one of the lowest in the Baton Rouge metro. Among the fastest-growing parishes in Louisiana. Assessed at 10% FMV. Homestead exemption: $75,000 FMV. Taxes due December 31. No state transfer tax. Flood: mixed Zone X and AE — Gonzales average flood insurance ~$840/year (NFIP data). Homeowners insurance avg: $6,107/year for $400K home (April 2026 verified data). Civil law notarial closing.',
     state:'la', closingModel:'louisiana',
-    heNote:'Louisiana Homestead Exemption: $75,000 of fair market value exempt from parish taxes. File with Ascension Parish Assessor by December 31. Ascension Parish has a 2026 Floodplain Management office — verify your specific flood zone at ascensionparish.net/floodplain-management before closing.'
-  ,
+    heNote:'Louisiana Homestead Exemption: $75,000 of fair market value exempt from parish taxes. File with Ascension Parish Assessor by December 31. Ascension Parish has a 2026 Floodplain Management office — verify your specific flood zone at ascensionparish.net/floodplain-management before closing.',
     districts:[
       {id:'asc-gonzales',label:'Gonzales (city mills added)',tr:0.0092},
       {id:'asc-prairieville',label:'Prairieville / Dutchtown (unincorp)',tr:0.0086},
@@ -3065,8 +2975,7 @@ const COUNTIES = {
     notes:'Livingston Parish (Denham Springs/Walker/Watson/Albany) effective tax rate ~0.50% (SmartAsset pre-2024 was 0.41%; adjusted upward post-2024 reassessment per 40% value increase and partial mill rollforward; 40+ taxing districts with variable rates) — lowest in metro but assessments increased 40% in 2024 reassessment. FLOOD WARNING: Livingston Parish suffered catastrophic flooding in August 2016 — over 110,000 homes damaged statewide, with Livingston the hardest-hit parish. Many homes in Zone X flooded. FEMA Risk Rating 2.0 (2021) significantly changed premiums here. Denham Springs avg flood insurance: $1,174/year; Walker: $884/year; Parish avg: $672/year (NFIP verified data). Homeowners insurance avg: $5,585/year for $400K home (April 2026). Civil law notarial closing. Verify flood zone at msc.fema.gov AND get a quote before making any offer.',
     state:'la', closingModel:'louisiana',
     heNote:'Louisiana Homestead Exemption: $75,000 FMV exempt from parish taxes. File with Livingston Parish Assessor by December 31. CRITICAL: In Livingston Parish, your FEMA flood zone designation requires independent verification — Zone X does not mean no risk. The August 2016 flood proved that thousands of Zone X homes in this parish flooded. Obtain flood insurance quotes from both NFIP and private carriers before committing to any purchase in Livingston Parish.',
-    floodWarning: true
-  ,
+    floodWarning: true,
     districts:[
       {id:'liv-denhamsprings',label:'Denham Springs ⚠ Highest Flood Risk',tr:0.0055},
       {id:'liv-walker',label:'Walker',tr:0.0052},
@@ -3082,8 +2991,7 @@ const COUNTIES = {
     paName:'West Baton Rouge Parish Assessor',
     notes:'West Baton Rouge Parish (Port Allen/Addis/Brusly/Plaquemine adjacent) effective tax rate ~0.52%. Directly across the Mississippi River from Baton Rouge. Assessed at 10% FMV. Homestead exemption: $75,000 FMV. Taxes due December 31. No state transfer tax. Civil law notarial closing. Mixed Zone X and AE flood areas — Mississippi River proximity warrants flood insurance verification.',
     state:'la', closingModel:'louisiana',
-    heNote:'Louisiana Homestead Exemption: $75,000 FMV exempt from parish taxes. File with West Baton Rouge Parish Assessor at wbrpa.com by December 31.'
-  ,
+    heNote:'Louisiana Homestead Exemption: $75,000 FMV exempt from parish taxes. File with West Baton Rouge Parish Assessor at wbrpa.com by December 31.',
     districts:[
       {id:'wbr-portallen',label:'Port Allen',tr:0.0058},
       {id:'wbr-addis',label:'Addis / Brusly (unincorp)',tr:0.0052},
@@ -6185,7 +6093,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 <!-- ── ROSCOE CHATBOT ── -->
 <div class="roscoe-bubble" id="roscoe-bubble">
-  <div class="roscoe-label">Ask Roscoe</div>
+  <div class="roscoe-label">Hi! I'm Roscoe — how can I help?</div>
   <button class="roscoe-toggle" onclick="roscoeToggle()" aria-label="Open Roscoe chat assistant">
     <img id="roscoe-av-1" src="" alt="Roscoe" style="width:44px;height:44px;object-fit:contain;border-radius:50%;">
   </button>
