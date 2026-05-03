@@ -2689,8 +2689,11 @@ function proc3(){
 let ACTIVE_STATE = 'fl';
 
 function selectState(state, btn) {
+  console.log('selectState called:', state);
   ACTIVE_STATE = state;
   const toggleMap = {fl:'st-fl', ga:'st-ga', tx:'st-tx', nc:'st-nc', sc:'st-sc', tn:'st-tn', al:'st-al', va:'st-va', az:'st-az', nv:'st-nv', md:'st-md', in:'st-in', oh:'st-oh', mo:'st-mo', pa:'st-pa', ks:'st-ks', la:'st-la'};
+  // Give immediate visual feedback
+  if(btn) { btn.style.background='var(--teal)'; btn.style.color='#fff'; }
   Object.entries(toggleMap).forEach(([s, id]) => {
     const el = document.getElementById(id);
     if (!el) return;
@@ -2731,13 +2734,17 @@ function selectState(state, btn) {
     else if(state==='ks') legend.textContent = 'Kansas · Wheat Gold · Johnson County (Kansas City KS)';
     else if(state==='la') legend.textContent = 'Louisiana · Deep Plum · Greater Baton Rouge · Geaux Tigers';
   }
-  // Show county row when state is selected
+  // Show county row and scroll to it
   const countyRow = document.getElementById('county-row');
-  if (countyRow) countyRow.style.display = 'flex';
+  if (countyRow) {
+    countyRow.style.display = 'flex';
+    countyRow.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
   // Auto-select first county of this state
   const firstPills = document.querySelectorAll('#pills-' + state + ' .county-pill');
   if(firstPills.length > 0) {
-    const firstKey = firstPills[0].getAttribute('onclick').match(/'([^']+)'/)[1];
+    const onclickVal = firstPills[0].getAttribute('onclick');
+    const firstKey = onclickVal ? onclickVal.replace(/.*'([^']+)'.*/, '$1') : '';
     firstPills[0].classList.add('active');
     selectCounty(firstKey, firstPills[0]);
   }
