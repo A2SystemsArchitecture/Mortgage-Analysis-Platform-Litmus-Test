@@ -337,7 +337,7 @@ input:focus,select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 
 .roscoe-toggle:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,151,167,.3);}
 .roscoe-toggle::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(0,151,167,.35);animation:roscoe-pulse 2.5s ease-in-out infinite;}
 @keyframes roscoe-pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.08);}}
-.roscoe-label{font-family:var(--fm);font-size:.52rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-mid);text-align:center;margin-top:.15rem;}
+.roscoe-label{font-family:var(--fm);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);text-align:center;margin-top:.15rem;font-weight:700;}
 .roscoe-panel{position:fixed;bottom:5.5rem;right:1.75rem;width:370px;height:530px;background:var(--midnight);border-radius:16px;box-shadow:0 12px 48px rgba(0,0,0,.5);display:none;flex-direction:column;overflow:hidden;z-index:501;border:1px solid rgba(0,151,167,.25);}
 .roscoe-panel.open{display:flex;animation:roscoe-slide .25s ease;}
 @keyframes roscoe-slide{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
@@ -817,7 +817,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <div id="sw" class="screen active">
   <div class="mh">
     <div class="mh-tag">Independent Buyer Tool · Florida · Georgia · Texas · North Carolina · South Carolina · Tennessee · Alabama · Virginia · Arizona · Nevada · Maryland · Indiana · Kansas · Louisiana · Missouri · Ohio · Pennsylvania</div>
-    <h1>Home<span class="tr">True</span></h1>
+    <h1 style="cursor:pointer;" onclick="show('w')" title="↩ Return to Home">Home<span class="tr">True</span></h1>
     <div class="mh-rule"></div>
     <div class="mh-sub">Honest mortgage analysis. No pressure. No agenda.</div>
     <div class="scope-b active-county-name">Select a Market</div>
@@ -1041,7 +1041,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 
       </div>
 
-      <div class="nt nt-tl miami-dade-only-note" style="margin-bottom:.75rem;"><span class="nl nl-tl">Miami-Dade County</span><p>This tool is calibrated for Miami-Dade County properties. Tax rate: 1.30%. Using it in a different county will produce inaccurate results.</p></div>
+      <div class="nt nt-tl miami-dade-only-note" id="county-calibration-note" style="margin-bottom:.75rem;display:none;"><span class="nl nl-tl" id="county-calibration-title"></span><p id="county-calibration-text"></p></div>
 
       <div style="background:var(--white);border:1px solid var(--rule);border-radius:8px;padding:1rem;">
         <div style="font-family:var(--fm);font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem;">Analysis Color Guide</div>
@@ -1059,7 +1059,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <div id="sdm" class="screen">
   <div class="mh">
     <div class="mh-tag">HomeTrue Analysis · Free Demo</div>
-    <h1>Home<span class="tr">True</span></h1>
+    <h1 style="cursor:pointer;" onclick="show('w')" title="↩ Return to Home">Home<span class="tr">True</span></h1>
     <div class="mh-rule"></div>
     <div class="mh-sub">See a completed analysis before entering your own property</div>
   </div>
@@ -1113,7 +1113,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <div id="saff" class="screen">
   <div class="mh">
     <div class="mh-tag"><span class="active-county-name">Select a Market</span> · Affordability Calculator</div>
-    <h1>Home<span class="tr">True</span></h1>
+    <h1 style="cursor:pointer;" onclick="show('w')" title="↩ Return to Home">Home<span class="tr">True</span></h1>
     <div class="mh-rule"></div>
     <div class="mh-sub">Find your realistic price range before you start shopping</div>
   </div>
@@ -1214,7 +1214,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <div id="sql" class="screen">
   <div class="mh">
     <div class="mh-tag"><span class="active-county-name">Select a Market</span> · Buyer Question Library</div>
-    <h1>Home<span class="tr">True</span></h1>
+    <h1 style="cursor:pointer;" onclick="show('w')" title="↩ Return to Home">Home<span class="tr">True</span></h1>
     <div class="mh-rule"></div>
     <div class="mh-sub">Questions that put you in control of every professional conversation</div>
   </div>
@@ -3314,10 +3314,14 @@ function selectCounty(key, btn) {
   }
 
   // Update welcome screen geographic references
-  const miami = document.querySelectorAll('.miami-dade-only-note');
-  miami.forEach(el => {
-    el.innerHTML = `<span class="nl nl-tl">${c.short} County</span><p>This tool is calibrated for ${c.name} properties. Tax rate: ${(c.tr*100).toFixed(2)}%. Using it in a different county will produce inaccurate results.</p>`;
-  });
+  const calibNote = document.getElementById('county-calibration-note');
+  const calibTitle = document.getElementById('county-calibration-title');
+  const calibText = document.getElementById('county-calibration-text');
+  if(calibNote && calibTitle && calibText) {
+    calibTitle.textContent = c.short + ' County';
+    calibText.textContent = 'This tool is calibrated for ' + c.name + ' properties. Tax rate: ' + (c.tr*100).toFixed(2) + '%. Using it in a different county will produce inaccurate results.';
+    calibNote.style.display = 'block';
+  }
 }
 
 function initPlan() {
@@ -6112,7 +6116,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="roscoe-bubble" id="roscoe-bubble">
   <div class="roscoe-label">Ask Roscoe</div>
   <button class="roscoe-toggle" onclick="roscoeToggle()" aria-label="Open Roscoe chat assistant">
-    <img id="roscoe-av-1" src="" alt="Roscoe" style="width:44px;height:44px;object-fit:contain;border-radius:50%;">
+    <img id="roscoe-av-1" src="" alt="Roscoe" style="width:52px;height:52px;object-fit:contain;border-radius:50%;">
   </button>
 </div>
 
