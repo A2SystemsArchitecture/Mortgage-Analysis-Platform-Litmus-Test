@@ -2140,7 +2140,6 @@ const COUNTIES = {
     state:'md', closingModel:'maryland',
     heNote:'Maryland Homestead Tax Credit: caps annual taxable assessment increases at 10% (or Anne Arundel County cap) for primary residences. Apply with SDAT at sdat.dat.maryland.gov after first full year of ownership.'
   },
-};
 
 // ── INDIANA ──
   'marion-in': {
@@ -2478,7 +2477,8 @@ const COUNTIES = {
     notes:'Iberville Parish (Plaquemine/White Castle/Maringouin) effective tax rate ~0.38% — lowest of the five Baton Rouge metro parishes. Historic sugar cane and petrochemical corridor. Assessed at 10% FMV. Homestead exemption: $75,000 FMV. Taxes due December 31. No state transfer tax. Civil law notarial closing. Mixed Zone X and AE — Bayou Plaquemine and Mississippi River proximity. Smaller market with strong affordability.',
     state:'la', closingModel:'louisiana',
     heNote:'Louisiana Homestead Exemption: $75,000 FMV exempt from parish taxes. File with Iberville Parish Assessor by December 31.'
-  },
+  }
+};
   // Active county — defaults to Miami-Dade
 let ACTIVE_COUNTY = 'miami-dade';
 let MKT = {rv:"Friday, April 25, 2026 · 11:52 AM ET",ov:"April 2026",fm:6.23,br:6.00,wr:6.75,tr:COUNTIES['miami-dade'].tr,he:50000,fxb:42,fxw:85,fab:150,faw:400};
@@ -2689,11 +2689,8 @@ function proc3(){
 let ACTIVE_STATE = 'fl';
 
 function selectState(state, btn) {
-  console.log('selectState called:', state);
   ACTIVE_STATE = state;
   const toggleMap = {fl:'st-fl', ga:'st-ga', tx:'st-tx', nc:'st-nc', sc:'st-sc', tn:'st-tn', al:'st-al', va:'st-va', az:'st-az', nv:'st-nv', md:'st-md', in:'st-in', oh:'st-oh', mo:'st-mo', pa:'st-pa', ks:'st-ks', la:'st-la'};
-  // Give immediate visual feedback
-  if(btn) { btn.style.background='var(--teal)'; btn.style.color='#fff'; }
   Object.entries(toggleMap).forEach(([s, id]) => {
     const el = document.getElementById(id);
     if (!el) return;
@@ -2734,17 +2731,12 @@ function selectState(state, btn) {
     else if(state==='ks') legend.textContent = 'Kansas · Wheat Gold · Johnson County (Kansas City KS)';
     else if(state==='la') legend.textContent = 'Louisiana · Deep Plum · Greater Baton Rouge · Geaux Tigers';
   }
-  // Show county row and scroll to it
-  const countyRow = document.getElementById('county-row');
-  if (countyRow) {
-    countyRow.style.display = 'flex';
-    countyRow.scrollIntoView({behavior:'smooth', block:'nearest'});
-  }
+  // Show county row when state is selected
+  if (countyRow) countyRow.style.display = 'flex';
   // Auto-select first county of this state
   const firstPills = document.querySelectorAll('#pills-' + state + ' .county-pill');
   if(firstPills.length > 0) {
-    const onclickVal = firstPills[0].getAttribute('onclick');
-    const firstKey = onclickVal ? onclickVal.replace(/.*'([^']+)'.*/, '$1') : '';
+    const firstKey = firstPills[0].getAttribute('onclick').match(/'([^']+)'/)[1];
     firstPills[0].classList.add('active');
     selectCounty(firstKey, firstPills[0]);
   }
@@ -4381,6 +4373,7 @@ function buildClosingCosts(inp) {
       <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Settlement Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
     reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Maryland property taxes paid semi-annually. The Homestead Tax Credit must be applied for with SDAT — it kicks in after your first full year of ownership and caps assessment increases.`;
   }
+  const closingTotal = govTotal + titleTotal + lenderTotal + prepaidTotal;
   const grandTotal = inp.damt + closingTotal + reserves3mo;
 
   return `
