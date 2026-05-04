@@ -6218,8 +6218,7 @@ function roscoeAddMessage(role, text) {
 
   const div = document.createElement('div');
   div.className = `roscoe-msg ${role}`;
-  div.innerHTML = `${avatarSVG}<div class="roscoe-msg-bubble">${text.replace(/
-/g,'<br>')}</div>`;
+  div.innerHTML = `${avatarSVG}<div class="roscoe-msg-bubble">${text.split('\n').join('<br>')}</div>`;
   msgs.appendChild(div);
 
   // Track in history
