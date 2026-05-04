@@ -704,8 +704,7 @@ footer strong{color:rgba(220,232,235,1.0);}
     <div class="mh-sub">Honest mortgage analysis. No pressure. No agenda.</div>
     <div class="scope-b active-county-name">Miami-Dade County</div>
   </div>
-  <div class="vs" id="avs">Rate verified:<span>Friday, April 25, 2026 · 11:52 AM ET</span>&nbsp;·&nbsp;County:<span class="active-county-short">Miami-Dade</span>&nbsp;·&nbsp;Tax:<span>1.30%</span>&nbsp;·&nbsp;Source:<span>Freddie Mac PMMS</span></div>
-  <div class="county-selector-wrap">
+  <div class="vs" id="avs">Rate verified:<span>Friday, May 1, 2026 · 11:31 AM ET</span>&nbsp;·&nbsp;County:<span class="active-county-short">Miami-Dade</span>&nbsp;·&nbsp;Tax:<span>1.30%</span>&nbsp;·&nbsp;Source:<span>Freddie Mac PMMS</span></div>
     <div class="county-selector-inner" style="flex-direction:column;align-items:flex-start;gap:.6rem;">
       <div style="display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;">
         <span class="county-sel-lbl">Market</span>
@@ -1365,8 +1364,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <!-- ANALYSIS -->
 <div id="sa" class="screen">
   <div id="amh"></div>
-  <div class="vs" id="avs">Rate verified:<span>Friday, April 25, 2026 · 11:52 AM ET</span>&nbsp;·&nbsp;County:<span class="active-county-short">Miami-Dade</span>&nbsp;·&nbsp;Tax:<span>1.30%</span>&nbsp;·&nbsp;Source:<span>Freddie Mac PMMS</span></div>
-  <!-- TIER RIBBON -->
+  <div class="vs" id="avs">Rate verified:<span>Friday, May 1, 2026 · 11:31 AM ET</span>&nbsp;·&nbsp;County:<span class="active-county-short">Miami-Dade</span>&nbsp;·&nbsp;Tax:<span>1.30%</span>&nbsp;·&nbsp;Source:<span>Freddie Mac PMMS</span></div>
   <div class="tier-ribbon" id="tier-ribbon" style="display:none;">
     <div class="tier-ribbon-info">Current plan: <span id="ribbon-plan-name">Free</span></div>
     <div class="tier-ribbon-btns">
@@ -1996,7 +1994,7 @@ const COUNTIES = {
 
 // Active county — defaults to Miami-Dade
 let ACTIVE_COUNTY = 'miami-dade';
-let MKT = {rv:"Friday, April 25, 2026 · 11:52 AM ET",ov:"April 2026",fm:6.23,br:6.00,wr:6.75,tr:COUNTIES['miami-dade'].tr,he:50000,fxb:42,fxw:85,fab:150,faw:400};
+let MKT = {rv:"Friday, May 1, 2026 · 11:31 AM ET",ov:"May 2026",fm:6.30,br:6.00,wr:6.75,tr:COUNTIES['miami-dade'].tr,he:50000,fxb:42,fxw:85,fab:150,faw:400};
 
 function setCounty(key) {
   ACTIVE_COUNTY = key;
@@ -2383,7 +2381,7 @@ function bAnalysis(i,isDemo){
   const sw=i.wt-i.bt;
   const irb=i.ix?`<span style="color:var(--warn);font-style:italic;">Excluded</span>`:`<span class="${i.ic?'bv':'wv'}">${fmt(i.bi)}</span>${i.il==='ESTIMATED'?'<span class="utag">EST</span>':'<span class="ctag">CONF</span>'}`;
   const irw=i.ix?`<span style="color:var(--warn);font-style:italic;">Excluded</span>`:`<span class="${i.ic?'bv':'wv'}">${fmt(i.wi)}</span>${i.il==='ESTIMATED'?'<span class="utag">EST</span>':'<span class="ctag">CONF</span>'}`;
-  const bars=[6.00,6.23,6.33,6.50,6.75].map(r=>{const pi=cPI(i.loan,r);const pct=Math.round((r-5.5)/(7.5-5.5)*100);return`<div class="br"><span class="brl">${r}%</span><div class="btr"><div class="bf" style="width:${pct}%"></div></div><span class="bv2">${fmt(pi)}/mo</span></div>`;}).join('');
+  const bars=[6.00,6.30,6.40,6.50,6.75].map(r=>{const pi=cPI(i.loan,r);const pct=Math.round((r-5.5)/(7.5-5.5)*100);return`<div class="br"><span class="brl">${r}%</span><div class="btr"><div class="bf" style="width:${pct}%"></div></div><span class="bv2">${fmt(pi)}/mo</span></div>`;}).join('');
   const dtis=[
     [`Best case ${fmt(i.bt)} at ${fmt(i.ilo)}/mo`,(i.bt/i.ilo*100).toFixed(1)+'%',i.bt/i.ilo<.36?'do':'dw'],
     [`Best case ${fmt(i.bt)} at ${fmt(i.ihi)}/mo`,(i.bt/i.ihi*100).toFixed(1)+'%',i.bt/i.ihi<.36?'do':'dw'],
@@ -3359,7 +3357,7 @@ function buildRateContext(inp) {
     allTimeLow: 2.65,   // Jan 2021
     preCovid:   3.75,   // 2019 average
     tenYrAvg:   4.50,   // 2013-2023 average
-    current:    MKT.fm, // 6.23% verified April 25 2026
+    current:    MKT.fm, // 6.30% verified May 1 2026
     crisisHigh: 8.50,   // Late 2023 peak
     historicHigh: 18.6  // 1981 peak
   };
