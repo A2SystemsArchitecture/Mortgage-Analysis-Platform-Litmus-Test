@@ -363,7 +363,7 @@ input:focus,select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 
 .roscoe-dot:nth-child(2){animation-delay:.15s;}
 .roscoe-dot:nth-child(3){animation-delay:.3s;}
 @keyframes roscoe-bounce{0%,80%,100%{transform:translateY(0);}40%{transform:translateY(-5px);}}
-.roscoe-disclaimer{font-family:var(--fm);font-size:.5rem;letter-spacing:.05em;color:rgba(140,160,170,.5);padding:.4rem 1rem;text-align:center;border-top:1px solid rgba(255,255,255,.04);flex-shrink:0;}
+.roscoe-disclaimer{font-family:var(--fm);font-size:.65rem;letter-spacing:.05em;color:rgba(176,190,197,.75);padding:.4rem 1rem;text-align:center;border-top:1px solid rgba(255,255,255,.04);flex-shrink:0;font-weight:600;}
 .roscoe-input-row{padding:.65rem .85rem;border-top:1px solid rgba(255,255,255,.06);display:flex;gap:.5rem;align-items:flex-end;flex-shrink:0;}
 .roscoe-input{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(0,151,167,.25);border-radius:8px;padding:.55rem .8rem;font-family:var(--fb);font-size:.82rem;color:var(--white);resize:none;min-height:38px;max-height:90px;line-height:1.45;outline:none;transition:border-color .15s;}
 .roscoe-input:focus{border-color:var(--teal);}
@@ -6130,7 +6130,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <button class="roscoe-close" onclick="roscoeToggle()">✕</button>
   </div>
   <div class="roscoe-messages" id="roscoe-messages"></div>
-  <div class="roscoe-disclaimer">Educational guidance only · Not financial or legal advice</div>
+  <div class="roscoe-disclaimer">🛡 Educational guidance only · Not financial or legal advice</div>
   <div class="roscoe-input-row" id="roscoe-input-row">
     <textarea class="roscoe-input" id="roscoe-input" placeholder="Ask Roscoe anything..." rows="1"
       onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();roscoeSend();}"
