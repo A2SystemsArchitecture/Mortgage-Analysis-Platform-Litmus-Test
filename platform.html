@@ -469,6 +469,9 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .state-toggle.active-wv{background:#FCCF4D;border-color:#FCCF4D;color:#1a2332;}
 .state-toggle.hint-wv{border-color:rgba(252,207,77,.45);color:rgba(252,207,77,.9);}
 .state-toggle.hint-wv:hover{border-color:#FCCF4D;color:#FCCF4D;}
+.state-toggle.active-de{background:#1a5276;border-color:#1a5276;color:var(--white);}
+.state-toggle.hint-de{border-color:rgba(26,82,118,.45);color:rgba(80,150,200,.9);}
+.state-toggle.hint-de:hover{border-color:#1a5276;color:#1a5276;}
 .state-toggle:hover:not(.active-fl):not(.active-tx):not(.active-nc):not(.active-sc):not(.active-tn):not(.active-al):not(.active-va):not(.active-ga):not(.active-az):not(.active-nv):not(.active-md){border-color:rgba(176,190,197,.6);color:rgba(176,190,197,.9);}
 /* State toggle hint colors */
 .state-toggle.hint-ga{border-color:rgba(139,30,45,.45);color:rgba(180,100,110,.9);}
@@ -556,6 +559,9 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .county-pill.wv{border-color:rgba(252,207,77,.65);color:rgba(252,207,77,.95);height:auto;background:transparent;}
 .county-pill.wv:hover{border-color:#FCCF4D;color:#1a2332;background:rgba(252,207,77,.25);}
 .county-pill.wv.active{background:#FCCF4D;border-color:#FCCF4D;color:#1a2332;}
+.county-pill.de{border-color:rgba(26,82,118,.65);color:rgba(80,150,200,.95);height:auto;background:transparent;}
+.county-pill.de:hover{border-color:#1a5276;color:var(--white);background:rgba(26,82,118,.25);}
+.county-pill.de.active{background:#1a5276;border-color:#1a5276;color:var(--white);}
 /* Indiana pills */
 .county-pill.in{border-color:rgba(107,92,69,.55);color:rgba(145,125,95,.95);}
 .county-pill.in:hover{border-color:var(--indiana-mid);color:var(--white);background:rgba(107,92,69,.25);}
@@ -834,7 +840,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <!-- WELCOME -->
 <div id="sw" class="screen active">
   <div class="mh">
-    <div class="mh-tag">Independent Buyer Tool · Florida · Georgia · Texas · North Carolina · South Carolina · Tennessee · Alabama · Virginia · Arizona · Nevada · Maryland · Indiana · Kansas · Louisiana · Missouri · Mississippi · Ohio · Pennsylvania · Arkansas · West Virginia</div>
+    <div class="mh-tag">Independent Buyer Tool · Florida · Georgia · Texas · North Carolina · South Carolina · Tennessee · Alabama · Virginia · Arizona · Nevada · Maryland · Indiana · Kansas · Louisiana · Missouri · Mississippi · Ohio · Pennsylvania · Arkansas · West Virginia · Delaware</div>
     <h1 style="cursor:pointer;" onclick="show('w')" title="↩ Return to Home">Home<span class="tr">True</span></h1>
     <div class="mh-rule"></div>
     <div class="mh-sub">Honest mortgage analysis. No pressure. No agenda.</div>
@@ -850,6 +856,7 @@ footer strong{color:rgba(220,232,235,1.0);}
             <button class="state-toggle hint-al" id="st-al" onclick="selectState('al',this)">Alabama</button>
             <button class="state-toggle hint-az" id="st-az" onclick="selectState('az',this)">Arizona</button>
             <button class="state-toggle hint-ar" id="st-ar" onclick="selectState('ar',this)">Arkansas</button>
+            <button class="state-toggle hint-de" id="st-de" onclick="selectState('de',this)">Delaware</button>
             <button class="state-toggle hint-fl" id="st-fl" onclick="selectState('fl',this)">Florida</button>
             <button class="state-toggle hint-ga" id="st-ga" onclick="selectState('ga',this)">Georgia</button>
             <button class="state-toggle hint-in" id="st-in" onclick="selectState('in',this)">Indiana</button>
@@ -872,6 +879,10 @@ footer strong{color:rgba(220,232,235,1.0);}
       </div>
       <div id="county-row" style="display:none;align-items:center;gap:.75rem;flex-wrap:wrap;width:100%;">
         <span class="county-sel-lbl">Select County</span>
+        <div class="county-pills" id="pills-de" style="display:none;">
+          <button class="county-pill de" onclick="selectCounty('new-castle-de',this)">New Castle (Wilmington)</button>
+          <button class="county-pill de" onclick="selectCounty('sussex-de',this)">Sussex (Rehoboth/Lewes)</button>
+        </div>
         <div class="county-pills" id="pills-fl">
           <button class="county-pill yr3" onclick="selectCounty('brevard',this)">Brevard</button>
           <button class="county-pill" onclick="selectCounty('broward',this)">Broward</button>
@@ -3185,6 +3196,26 @@ const COUNTIES = {
     notes:'Monongalia County (Morgantown, Star City, Westover, Granville) effective tax rate 0.64% — verified from official 2025 Monongalia County Levy Rates. Unincorporated Class II rate: $1.0684 per $100 assessed value (includes county excess levy, school levy). All unincorporated districts identical — clean single rate. Assessment = 60% of market value. WVU market — strong first-time buyer demand. No state transfer tax. Attorney-closed. Tax bills due in two installments. No universal homestead exemption for standard buyers.',
     state:'wv', closingModel:'westvirginia',
     heNote:'West Virginia Homestead Exemption: $20,000 off assessed value — available ONLY to homeowners age 65 or older, or permanently and totally disabled. Standard first-time buyers do not qualify. Application window: July 1 through December 1 at the Monongalia County Assessor.'
+  },
+  'new-castle-de': {
+    name:'New Castle County', short:'New Castle',
+    tr:0.0073, he:0,
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://www.newcastlede.gov/182/Tax-Exemptions',
+    paName:'New Castle County Assessment Division',
+    notes:'New Castle County (Wilmington, Newark, Middletown, Smyrna, Bear, Hockessin) effective tax rate 0.73% — verified from official 2025-2026 Tax Year Residential and Non-Residential Rates. Comprehensive TRS1-TRS3 unincorporated rates range 0.76%–0.81%; platform uses 0.73% conservative rate for suburban first-time buyer market. Post-reassessment at 100% of market value (2024-2025 transition). 4% transfer tax — split 2% buyer / 2% seller by statute (negotiable). Taxes due September 30. No universal homestead exemption for standard buyers — 65+/income-limited only.',
+    state:'de', closingModel:'delaware',
+    heNote:'Delaware Homestead Exemption: Available ONLY to homeowners age 65 or older with income not exceeding $15,000 single / $19,000 married. Standard first-time buyers do not qualify. Application deadline: June 1 at New Castle County Assessment Division.'
+  },
+  'sussex-de': {
+    name:'Sussex County', short:'Sussex',
+    tr:0.0021, he:0,
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://www.sussexcountyde.gov/sussex-county-annual-rates',
+    paName:'Sussex County Finance Division',
+    notes:'Sussex County (Rehoboth Beach, Lewes, Milford, Georgetown, Seaford, Millsboro) effective tax rate 0.21% — verified from official 2025 Sussex County Annual Rates Per $100 Assessment at sussexcountyde.gov. Indian River and Cape Henlopen school districts (dominant first-time buyer markets) both at 0.2136% and 0.2112% respectively. NOTE: Woodbridge and Laurel school districts run 0.34%–0.38% — verify your specific district. Post-reassessment at 100% market value. 4% transfer tax — split 2% buyer / 2% seller. Taxes due September 30. No universal homestead exemption — 65+/income-limited ($6,000–$7,500) only.',
+    state:'de', closingModel:'delaware',
+    heNote:'Delaware Homestead Exemption: Available ONLY to homeowners age 65 or older who have been full-time Sussex County residents for 5+ years, with income not exceeding $6,000 single / $7,500 married. Standard first-time buyers do not qualify. Application deadline: April 30 at Sussex County Finance Division.'
   }
 };
   // Active county — defaults to Miami-Dade
@@ -3207,7 +3238,7 @@ function setCounty(key) {
   document.querySelectorAll('.active-county-short').forEach(el => el.textContent = c.short);
   // Update scope badge
   const sb = document.querySelector('.scope-b');
-  const stateLabel = c.state==='tx' ? 'Texas' : c.state==='nc' ? 'North Carolina' : c.state==='ga' ? 'Georgia' : c.state==='sc' ? 'South Carolina' : c.state==='tn' ? 'Tennessee' : c.state==='al' ? 'Alabama' : c.state==='va' ? 'Virginia' : c.state==='az' ? 'Arizona' : c.state==='nv' ? 'Nevada' : c.state==='md' ? 'Maryland' : c.state==='in' ? 'Indiana' : c.state==='ks' ? 'Kansas' : c.state==='la' ? 'Louisiana' : c.state==='mo' ? 'Missouri' : c.state==='oh' ? 'Ohio' : c.state==='pa' ? 'Pennsylvania' : c.state==='ar' ? 'Arkansas' : c.state==='ms' ? 'Mississippi' : c.state==='wv' ? 'West Virginia' : 'Florida';
+  const stateLabel = c.state==='tx' ? 'Texas' : c.state==='nc' ? 'North Carolina' : c.state==='ga' ? 'Georgia' : c.state==='sc' ? 'South Carolina' : c.state==='tn' ? 'Tennessee' : c.state==='al' ? 'Alabama' : c.state==='va' ? 'Virginia' : c.state==='az' ? 'Arizona' : c.state==='nv' ? 'Nevada' : c.state==='md' ? 'Maryland' : c.state==='in' ? 'Indiana' : c.state==='ks' ? 'Kansas' : c.state==='la' ? 'Louisiana' : c.state==='mo' ? 'Missouri' : c.state==='oh' ? 'Ohio' : c.state==='pa' ? 'Pennsylvania' : c.state==='ar' ? 'Arkansas' : c.state==='ms' ? 'Mississippi' : c.state==='wv' ? 'West Virginia' : c.state==='de' ? 'Delaware' : 'Florida';
   if(sb) sb.textContent = c.name + ' · ' + stateLabel;
   // Update verified strip
   const vs = document.getElementById('avs');
@@ -3398,11 +3429,11 @@ let ACTIVE_STATE = 'fl';
 
 function selectState(state, btn) {
   ACTIVE_STATE = state;
-  const toggleMap = {fl:'st-fl', ga:'st-ga', tx:'st-tx', nc:'st-nc', sc:'st-sc', tn:'st-tn', al:'st-al', va:'st-va', az:'st-az', nv:'st-nv', md:'st-md', in:'st-in', oh:'st-oh', mo:'st-mo', pa:'st-pa', ks:'st-ks', la:'st-la', ar:'st-ar', ms:'st-ms', wv:'st-wv'};
+  const toggleMap = {fl:'st-fl', ga:'st-ga', tx:'st-tx', nc:'st-nc', sc:'st-sc', tn:'st-tn', al:'st-al', va:'st-va', az:'st-az', nv:'st-nv', md:'st-md', in:'st-in', oh:'st-oh', mo:'st-mo', pa:'st-pa', ks:'st-ks', la:'st-la', ar:'st-ar', ms:'st-ms', wv:'st-wv', de:'st-de'};
   Object.entries(toggleMap).forEach(([s, id]) => {
     const el = document.getElementById(id);
     if (!el) return;
-    el.classList.remove('active-fl','active-ga','active-tx','active-nc','active-sc','active-tn','active-al','active-va','active-az','active-nv','active-md','active-in','active-oh','active-mo','active-pa','active-ks','active-la','active-ar','active-ms','active-wv','hint-fl','hint-ga','hint-tx','hint-nc','hint-sc','hint-tn','hint-al','hint-va','hint-az','hint-nv','hint-md','hint-in','hint-oh','hint-mo','hint-pa','hint-ks','hint-la','hint-ar','hint-ms','hint-wv');
+    el.classList.remove('active-fl','active-ga','active-tx','active-nc','active-sc','active-tn','active-al','active-va','active-az','active-nv','active-md','active-in','active-oh','active-mo','active-pa','active-ks','active-la','active-ar','active-ms','active-wv','active-de','hint-fl','hint-ga','hint-tx','hint-nc','hint-sc','hint-tn','hint-al','hint-va','hint-az','hint-nv','hint-md','hint-in','hint-oh','hint-mo','hint-pa','hint-ks','hint-la','hint-ar','hint-ms','hint-wv','hint-de');
     if (s === state) {
       el.classList.add('active-' + state);
     } else {
@@ -3410,7 +3441,7 @@ function selectState(state, btn) {
     }
   });
   // Show/hide county pill groups
-  ['fl','ga','tx','nc','sc','tn','al','va','az','md','nv','in','oh','mo','pa','ks','la','ar','ms','wv'].forEach(s => {
+  ['fl','ga','tx','nc','sc','tn','al','va','az','md','nv','in','oh','mo','pa','ks','la','ar','ms','wv','de'].forEach(s => {
     const el = document.getElementById('pills-' + s);
     if(el) el.style.display = (state===s) ? 'flex' : 'none';
   });
@@ -3437,6 +3468,7 @@ function selectState(state, btn) {
     else if(state==='ar') legend.textContent = 'Arkansas · Ozark Stone · Little Rock · Fayetteville · Bentonville';
     else if(state==='ms') legend.textContent = 'Mississippi · River Clay · Jackson · Southaven · Brandon';
     else if(state==='wv') legend.textContent = 'West Virginia · WVU Old Gold · Charleston · Martinsburg · Morgantown';
+    else if(state==='de') legend.textContent = 'Delaware · Chesapeake Blue · Wilmington · Newark · Rehoboth Beach';
   }
   // Show county row when state is selected
   const countyRow = document.getElementById('county-row');
@@ -5021,6 +5053,33 @@ function buildClosingCosts(inp) {
       <div class="cc-total-row"><span class="cc-total-lbl">Attorney &amp; Title Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
     reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. West Virginia property taxes are due in two installments — first half October 1, second half March 1. Your lender will collect escrow monthly. Property is assessed at 60% of market value as of July 1 annually. The WV Homestead Exemption applies only to homeowners age 65+ or permanently disabled — budget for full tax rate from day one.`;
 
+  } else if (model === 'delaware') {
+    // Delaware closing model
+    // 4% transfer tax — 2% buyer / 2% seller split by statute (negotiable)
+    // Post-reassessment at 100% of market value
+    // Taxes due September 30
+    // Escrow-closed or attorney depending on transaction
+    const transferTax = Math.round(p * 0.02); // buyer's 2% share
+    const recordingFee = 75;
+    const titleSearch = 300;
+    const titleInsLender = Math.round(loan * 0.00375);
+    const titleInsOwner = Math.round(p * 0.00325);
+    const settlementFee = 550;
+    govTotal = transferTax + recordingFee;
+    titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
+    stateNote = `<span class="nl" style="color:#1a5276;">${countyName} — Delaware</span><p>Delaware has a <strong>4% real estate transfer tax</strong> — split equally 2% buyer / 2% seller by statute, though the split is negotiable in your contract. Delaware property is assessed at <strong>100% of market value</strong> following the completed county-wide reassessment. Property taxes are due <strong>September 30</strong> annually. Delaware has no universal homestead exemption for standard buyers — the exemption is restricted to homeowners age 65+ with very limited income. Confirm all figures against your official Closing Disclosure.</p>`;
+    govSection = `<div class="cc-section"><div class="cc-section-title">Government &amp; Transfer Tax</div>
+      <div class="cc-row"><div class="cc-item">Delaware Transfer Tax — Buyer's Share (2%)<span class="cc-note">4% total — split 2% buyer / 2% seller by statute. Your contract may negotiate a different split.</span></div><div class="cc-val">${fmt(transferTax)}</div></div>
+      <div class="cc-row"><div class="cc-item">Recording Fees — County Recorder<span class="cc-note">Deed and mortgage recording at the county recorder's office.</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
+    titleSection = `<div class="cc-section"><div class="cc-section-title">Title &amp; Settlement Fees</div>
+      <div class="cc-row"><div class="cc-item">Title Search &amp; Examination</div><div class="cc-val">${fmt(titleSearch)}</div></div>
+      <div class="cc-row"><div class="cc-item">Lender's Title Insurance<span class="cc-note">Required by lender — protects lender's interest</span></div><div class="cc-val">${fmt(titleInsLender)}</div></div>
+      <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended — one-time premium</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
+      <div class="cc-row"><div class="cc-item">Settlement / Closing Fee</div><div class="cc-val">${fmt(settlementFee)}</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Settlement Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
+    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Delaware transfer tax: 4% total — your 2% buyer share is ${fmt(transferTax)} on this purchase price. Taxes due September 30 annually. Property assessed at 100% of market value post-reassessment. No homestead exemption for standard buyers — budget for full tax rate.`;
+
   } else if (model === 'indiana') {
     const recordingFee = 25; // Indiana recording fees are very low — per-page
     const titleSearch = 275;
@@ -5275,6 +5334,30 @@ function buildHomesteadGuide(inp) {
       <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">The deduction renews automatically</div><div class="hg-desc">Once granted, the Indiana homestead deduction renews automatically each year as long as you continue to own and occupy the property as your primary residence. You do not reapply each year.</div></div></div>
       <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Notify your mortgage servicer after approval</div><div class="hg-desc">Once the deduction is confirmed, contact your mortgage servicer to recalculate your escrow. The lower tax bill should reduce your monthly payment starting the year after filing.</div></div></div>
       <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Indiana 1% Homestead Cap</span><p>Indiana law caps property taxes on homestead properties at 1% of gross assessed value annually. This means no matter how high the tax rate, your annual homestead property tax cannot exceed 1% of what your home is assessed at. In fast-appreciating markets this cap provides significant long-term protection.</p></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
+    </div>`;
+  }
+
+  if (model === 'delaware') {
+    return `<div class="cw">
+      <div class="ae em">Section V</div>
+      <h2 class="at2">Property Tax &amp; Exemption Guide</h2>
+      <div class="ar"></div>
+      <div class="nt nt-em" style="margin-bottom:1.5rem;">
+        <span class="nl nl-em" style="color:#1a5276;">${c.name} — Delaware Property Tax</span>
+        <p>Your analysis shows the <strong>full property tax rate</strong> — no exemption has been applied. This is the correct number for most first-time buyers in Delaware. Here is what you need to know about Delaware property taxes and the exemption programs you may have heard about.</p>
+      </div>
+      <div class="nt nt-wn" style="margin-bottom:1.5rem;">
+        <span class="nl nl-wn">About Delaware's Property Tax Exemptions</span>
+        <p>Delaware offers homestead exemptions — but they are <strong>not available to most first-time buyers</strong>. To qualify you must be <strong>65 years of age or older</strong> AND meet strict income requirements. In Sussex County, income cannot exceed $6,000 single or $7,500 married annually (excluding Social Security). In New Castle County, the income limit is $15,000 single or $19,000 married. If you do not meet both the age and income criteria, the exemption does not apply. Your analysis correctly reflects the full tax rate.</p>
+      </div>
+      ${deadlineHtml}
+      <h3 style="font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--midnight);margin:1.5rem 0 1rem;">Understanding Delaware Property Taxes</h3>
+      <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">Post-reassessment at 100% of market value</div><div class="hg-desc">Delaware completed a court-ordered county-wide reassessment. All properties are now assessed at 100% of current market value — a significant change from the prior system which used values from the 1970s and 1980s. Your tax bill is based on what your home is actually worth today.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open County Tax Portal</a></div></div>
+      <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">Taxes due September 30 annually</div><div class="hg-desc">Delaware property taxes are billed annually and due September 30. Your lender will collect monthly escrow to cover this payment. Sussex County also has supplemental bills for new construction — confirm with your title company at closing whether any supplemental assessment applies to your property.</div></div></div>
+      <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">Transfer tax — 4% total, split at closing</div><div class="hg-desc">Delaware imposes a 4% real estate transfer tax on every transaction. By statute the tax is split equally — 2% buyer and 2% seller — but the split is negotiable in your purchase contract. Your closing costs analysis reflects your 2% buyer share. Confirm the split in your contract before closing.</div></div></div>
+      <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Sussex County — school district rate varies</div><div class="hg-desc">Sussex County property taxes vary by school district. The Indian River and Cape Henlopen districts (covering most of southern Sussex County and the beach communities) have the lowest rates at 0.21%. The Woodbridge and Laurel districts in western Sussex run 0.34%–0.38%. Verify your specific school district with your realtor or the Sussex County Finance Division before closing.</div></div></div>
+      <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">If You Do Qualify for the Senior Exemption</span><p>If you are 65 or older and meet the income requirements, Delaware's senior exemption is substantial — up to $229,000 off assessed value in Sussex County and up to $173,000 in New Castle County. Applications are due April 30 (Sussex) or June 1 (New Castle). Contact your county finance division for the current application form.</p></div>
       <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
     </div>`;
   }
