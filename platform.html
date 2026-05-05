@@ -332,12 +332,12 @@ input:focus,select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 
 .ccb{font-size:.85rem;line-height:1.65;}
 
 /* ── ROSCOE CHATBOT ── */
-.roscoe-bubble{position:fixed;bottom:1.75rem;right:1.75rem;z-index:500;display:flex;flex-direction:column;align-items:flex-end;gap:.5rem;}
+.roscoe-bubble{position:fixed;bottom:1.75rem;right:1.75rem;z-index:500;display:flex;flex-direction:column;align-items:center;gap:.5rem;}
 .roscoe-toggle{width:62px;height:62px;border-radius:50%;background:var(--midnight);border:2px solid var(--teal);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.35);transition:all .25s;position:relative;padding:0;}
 .roscoe-toggle:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,151,167,.3);}
 .roscoe-toggle::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid rgba(0,151,167,.35);animation:roscoe-pulse 2.5s ease-in-out infinite;pointer-events:none;}
 @keyframes roscoe-pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.08);}}
-.roscoe-label{font-family:var(--fm);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);text-align:center;margin-top:.15rem;font-weight:700;}
+.roscoe-label{font-family:var(--fm);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:#ffffff;text-align:center;margin-top:.15rem;font-weight:700;text-shadow:0 0 8px rgba(0,151,167,.9),0 1px 3px rgba(0,0,0,.6);width:100%;}
 .roscoe-panel{position:fixed;bottom:5.5rem;right:1.75rem;width:370px;height:530px;background:var(--midnight);border-radius:16px;box-shadow:0 12px 48px rgba(0,0,0,.5);display:none;flex-direction:column;overflow:hidden;z-index:501;border:1px solid rgba(0,151,167,.25);}
 .roscoe-panel.open{display:flex;animation:roscoe-slide .25s ease;}
 @keyframes roscoe-slide{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
