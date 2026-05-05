@@ -466,6 +466,9 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .state-toggle.active-ms{background:#8a5a3b;border-color:#8a5a3b;color:var(--white);}
 .state-toggle.hint-ms{border-color:rgba(138,90,59,.45);color:rgba(185,135,100,.9);}
 .state-toggle.hint-ms:hover{border-color:#8a5a3b;color:#8a5a3b;}
+.state-toggle.active-wv{background:#FCCF4D;border-color:#FCCF4D;color:#1a2332;}
+.state-toggle.hint-wv{border-color:rgba(252,207,77,.45);color:rgba(252,207,77,.9);}
+.state-toggle.hint-wv:hover{border-color:#FCCF4D;color:#FCCF4D;}
 .state-toggle:hover:not(.active-fl):not(.active-tx):not(.active-nc):not(.active-sc):not(.active-tn):not(.active-al):not(.active-va):not(.active-ga):not(.active-az):not(.active-nv):not(.active-md){border-color:rgba(176,190,197,.6);color:rgba(176,190,197,.9);}
 /* State toggle hint colors */
 .state-toggle.hint-ga{border-color:rgba(139,30,45,.45);color:rgba(180,100,110,.9);}
@@ -550,6 +553,9 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .county-pill.ms{border-color:rgba(138,90,59,.65);color:rgba(195,150,110,.95);height:auto;background:transparent;}
 .county-pill.ms:hover{border-color:#8a5a3b;color:var(--white);background:rgba(138,90,59,.25);}
 .county-pill.ms.active{background:#8a5a3b;border-color:#8a5a3b;color:var(--white);}
+.county-pill.wv{border-color:rgba(252,207,77,.65);color:rgba(252,207,77,.95);height:auto;background:transparent;}
+.county-pill.wv:hover{border-color:#FCCF4D;color:#1a2332;background:rgba(252,207,77,.25);}
+.county-pill.wv.active{background:#FCCF4D;border-color:#FCCF4D;color:#1a2332;}
 /* Indiana pills */
 .county-pill.in{border-color:rgba(107,92,69,.55);color:rgba(145,125,95,.95);}
 .county-pill.in:hover{border-color:var(--indiana-mid);color:var(--white);background:rgba(107,92,69,.25);}
@@ -828,7 +834,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <!-- WELCOME -->
 <div id="sw" class="screen active">
   <div class="mh">
-    <div class="mh-tag">Independent Buyer Tool · Florida · Georgia · Texas · North Carolina · South Carolina · Tennessee · Alabama · Virginia · Arizona · Nevada · Maryland · Indiana · Kansas · Louisiana · Missouri · Mississippi · Ohio · Pennsylvania · Arkansas</div>
+    <div class="mh-tag">Independent Buyer Tool · Florida · Georgia · Texas · North Carolina · South Carolina · Tennessee · Alabama · Virginia · Arizona · Nevada · Maryland · Indiana · Kansas · Louisiana · Missouri · Mississippi · Ohio · Pennsylvania · Arkansas · West Virginia</div>
     <h1 style="cursor:pointer;" onclick="show('w')" title="↩ Return to Home">Home<span class="tr">True</span></h1>
     <div class="mh-rule"></div>
     <div class="mh-sub">Honest mortgage analysis. No pressure. No agenda.</div>
@@ -860,6 +866,7 @@ footer strong{color:rgba(220,232,235,1.0);}
             <button class="state-toggle hint-tn" id="st-tn" onclick="selectState('tn',this)">Tennessee</button>
             <button class="state-toggle hint-tx" id="st-tx" onclick="selectState('tx',this)">Texas</button>
             <button class="state-toggle hint-va" id="st-va" onclick="selectState('va',this)">Virginia</button>
+            <button class="state-toggle hint-wv" id="st-wv" onclick="selectState('wv',this)">West Virginia</button>
           </div>
         </div>
       </div>
@@ -932,6 +939,12 @@ footer strong{color:rgba(220,232,235,1.0);}
           <button class="county-pill va" onclick="selectCounty('norfolk',this)">Norfolk</button>
           <button class="county-pill va" onclick="selectCounty('suffolk',this)">Suffolk</button>
           <button class="county-pill va" onclick="selectCounty('virginia-beach',this)">Virginia Beach</button>
+        </div>
+        <div class="county-pills" id="pills-wv" style="display:none;">
+          <button class="county-pill wv" onclick="selectCounty('berkeley-wv',this)">Berkeley (Martinsburg)</button>
+          <button class="county-pill wv" onclick="selectCounty('cabell-wv',this)">Cabell (Huntington)</button>
+          <button class="county-pill wv" onclick="selectCounty('kanawha-wv',this)">Kanawha (Charleston)</button>
+          <button class="county-pill wv" onclick="selectCounty('monongalia-wv',this)">Monongalia (Morgantown)</button>
         </div>
         <div class="county-pills" id="pills-az" style="display:none;">
           <button class="county-pill az" onclick="selectCounty('maricopa',this)">Maricopa (Phoenix)</button>
@@ -3132,6 +3145,46 @@ const COUNTIES = {
     notes:'Rankin County (Brandon, Flowood, Pearl, Richland, Florence, Pelahatchie) effective tax rate 0.98% — unincorporated: 41.74 county + 55.78 school = 97.52 mills (2024-2025 Combined Millage Rate Schedule). Brandon city runs 1.31%. Fastest-growing county in Mississippi metro area. 10% assessment ratio. Homestead exemption: $7,500 off assessed value. File January 1 – April 1. Taxes due February 1. No state transfer tax. Attorney-closed state.',
     state:'ms', closingModel:'mississippi',
     heNote:'Mississippi Homestead Exemption: $7,500 off assessed value (equivalent to $75,000 off market value). File January 1 – April 1 with the Rankin County Tax Assessor. One-time application, renews automatically.'
+  },
+  'berkeley-wv': {
+    name:'Berkeley County', short:'Berkeley',
+    tr:0.0073, he:0,
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://www.berkeleywv.org/706/Exemptions',
+    paName:'Berkeley County Assessor',
+    notes:'Berkeley County (Martinsburg, Inwood, Hedgesville, Falling Waters) effective tax rate 0.73% — verified from official 2025 Tax Levy Rates, Berkeley County Assessor Larry A. Hess. Rural/unincorporated Class II rate: $1.2158 per $100 assessed value (includes school excess levy and school bond). Assessment = 60% of market value per WV law. DC suburb market — highest home values in WV. No state transfer tax. Attorney-closed. Tax bills issued after July 15, due in two installments. No universal homestead exemption for standard buyers.',
+    state:'wv', closingModel:'westvirginia',
+    heNote:'West Virginia Homestead Exemption: $20,000 off assessed value — available ONLY to homeowners age 65 or older, or permanently and totally disabled. Standard first-time buyers do not qualify. Application window: July 1 through December 1 at the Berkeley County Assessor.'
+  },
+  'cabell-wv': {
+    name:'Cabell County', short:'Cabell',
+    tr:0.0041, he:0,
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://www.cabellcounty.org/assessor',
+    paName:'Cabell County Assessor',
+    notes:'Cabell County (Huntington, Barboursville, Milton) effective tax rate 0.41% — verified from official 2025 Levy Rates for Cabell County. Unincorporated Class I rate: 68.40 cents per $100 assessed value (includes all 7 county excess levies, school bond, school excess levy). Assessment = 60% of market value. No state transfer tax. Attorney-closed. Tax bills due in two installments. No universal homestead exemption for standard buyers.',
+    state:'wv', closingModel:'westvirginia',
+    heNote:'West Virginia Homestead Exemption: $20,000 off assessed value — available ONLY to homeowners age 65 or older, or permanently and totally disabled. Standard first-time buyers do not qualify. Application window: July 1 through December 1 at the Cabell County Assessor.'
+  },
+  'kanawha-wv': {
+    name:'Kanawha County', short:'Kanawha',
+    tr:0.0038, he:0,
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://kanawha.us/assessor',
+    paName:'Kanawha County Assessor',
+    notes:'Kanawha County (Charleston, South Charleston, St. Albans, Dunbar) effective tax rate 0.38% — verified from official 2025 Levy Rates for Kanawha County. Unincorporated Class I rate: 62.99 cents per $100 assessed value (includes county excess levy, school current, school excess levy, school excess library, state general). Assessment = 60% of market value. No state transfer tax. Attorney-closed. Tax bills due in two installments. No universal homestead exemption for standard buyers.',
+    state:'wv', closingModel:'westvirginia',
+    heNote:'West Virginia Homestead Exemption: $20,000 off assessed value — available ONLY to homeowners age 65 or older, or permanently and totally disabled. Standard first-time buyers do not qualify. Application window: July 1 through December 1 at the Kanawha County Assessor.'
+  },
+  'monongalia-wv': {
+    name:'Monongalia County', short:'Monongalia',
+    tr:0.0064, he:0,
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://www.monassessor.com',
+    paName:'Monongalia County Assessor',
+    notes:'Monongalia County (Morgantown, Star City, Westover, Granville) effective tax rate 0.64% — verified from official 2025 Monongalia County Levy Rates. Unincorporated Class II rate: $1.0684 per $100 assessed value (includes county excess levy, school levy). All unincorporated districts identical — clean single rate. Assessment = 60% of market value. WVU market — strong first-time buyer demand. No state transfer tax. Attorney-closed. Tax bills due in two installments. No universal homestead exemption for standard buyers.',
+    state:'wv', closingModel:'westvirginia',
+    heNote:'West Virginia Homestead Exemption: $20,000 off assessed value — available ONLY to homeowners age 65 or older, or permanently and totally disabled. Standard first-time buyers do not qualify. Application window: July 1 through December 1 at the Monongalia County Assessor.'
   }
 };
   // Active county — defaults to Miami-Dade
@@ -3154,7 +3207,7 @@ function setCounty(key) {
   document.querySelectorAll('.active-county-short').forEach(el => el.textContent = c.short);
   // Update scope badge
   const sb = document.querySelector('.scope-b');
-  const stateLabel = c.state==='tx' ? 'Texas' : c.state==='nc' ? 'North Carolina' : c.state==='ga' ? 'Georgia' : c.state==='sc' ? 'South Carolina' : c.state==='tn' ? 'Tennessee' : c.state==='al' ? 'Alabama' : c.state==='va' ? 'Virginia' : c.state==='az' ? 'Arizona' : c.state==='nv' ? 'Nevada' : c.state==='md' ? 'Maryland' : c.state==='in' ? 'Indiana' : c.state==='ks' ? 'Kansas' : c.state==='la' ? 'Louisiana' : c.state==='mo' ? 'Missouri' : c.state==='oh' ? 'Ohio' : c.state==='pa' ? 'Pennsylvania' : c.state==='ar' ? 'Arkansas' : c.state==='ms' ? 'Mississippi' : 'Florida';
+  const stateLabel = c.state==='tx' ? 'Texas' : c.state==='nc' ? 'North Carolina' : c.state==='ga' ? 'Georgia' : c.state==='sc' ? 'South Carolina' : c.state==='tn' ? 'Tennessee' : c.state==='al' ? 'Alabama' : c.state==='va' ? 'Virginia' : c.state==='az' ? 'Arizona' : c.state==='nv' ? 'Nevada' : c.state==='md' ? 'Maryland' : c.state==='in' ? 'Indiana' : c.state==='ks' ? 'Kansas' : c.state==='la' ? 'Louisiana' : c.state==='mo' ? 'Missouri' : c.state==='oh' ? 'Ohio' : c.state==='pa' ? 'Pennsylvania' : c.state==='ar' ? 'Arkansas' : c.state==='ms' ? 'Mississippi' : c.state==='wv' ? 'West Virginia' : 'Florida';
   if(sb) sb.textContent = c.name + ' · ' + stateLabel;
   // Update verified strip
   const vs = document.getElementById('avs');
@@ -3345,11 +3398,11 @@ let ACTIVE_STATE = 'fl';
 
 function selectState(state, btn) {
   ACTIVE_STATE = state;
-  const toggleMap = {fl:'st-fl', ga:'st-ga', tx:'st-tx', nc:'st-nc', sc:'st-sc', tn:'st-tn', al:'st-al', va:'st-va', az:'st-az', nv:'st-nv', md:'st-md', in:'st-in', oh:'st-oh', mo:'st-mo', pa:'st-pa', ks:'st-ks', la:'st-la', ar:'st-ar', ms:'st-ms'};
+  const toggleMap = {fl:'st-fl', ga:'st-ga', tx:'st-tx', nc:'st-nc', sc:'st-sc', tn:'st-tn', al:'st-al', va:'st-va', az:'st-az', nv:'st-nv', md:'st-md', in:'st-in', oh:'st-oh', mo:'st-mo', pa:'st-pa', ks:'st-ks', la:'st-la', ar:'st-ar', ms:'st-ms', wv:'st-wv'};
   Object.entries(toggleMap).forEach(([s, id]) => {
     const el = document.getElementById(id);
     if (!el) return;
-    el.classList.remove('active-fl','active-ga','active-tx','active-nc','active-sc','active-tn','active-al','active-va','active-az','active-nv','active-md','active-in','active-oh','active-mo','active-pa','active-ks','active-la','active-ar','active-ms','hint-fl','hint-ga','hint-tx','hint-nc','hint-sc','hint-tn','hint-al','hint-va','hint-az','hint-nv','hint-md','hint-in','hint-oh','hint-mo','hint-pa','hint-ks','hint-la','hint-ar','hint-ms');
+    el.classList.remove('active-fl','active-ga','active-tx','active-nc','active-sc','active-tn','active-al','active-va','active-az','active-nv','active-md','active-in','active-oh','active-mo','active-pa','active-ks','active-la','active-ar','active-ms','active-wv','hint-fl','hint-ga','hint-tx','hint-nc','hint-sc','hint-tn','hint-al','hint-va','hint-az','hint-nv','hint-md','hint-in','hint-oh','hint-mo','hint-pa','hint-ks','hint-la','hint-ar','hint-ms','hint-wv');
     if (s === state) {
       el.classList.add('active-' + state);
     } else {
@@ -3357,7 +3410,7 @@ function selectState(state, btn) {
     }
   });
   // Show/hide county pill groups
-  ['fl','ga','tx','nc','sc','tn','al','va','az','md','nv','in','oh','mo','pa','ks','la','ar','ms'].forEach(s => {
+  ['fl','ga','tx','nc','sc','tn','al','va','az','md','nv','in','oh','mo','pa','ks','la','ar','ms','wv'].forEach(s => {
     const el = document.getElementById('pills-' + s);
     if(el) el.style.display = (state===s) ? 'flex' : 'none';
   });
@@ -3383,6 +3436,7 @@ function selectState(state, btn) {
     else if(state==='la') legend.textContent = 'Louisiana · Deep Plum · Greater Baton Rouge · Geaux Tigers';
     else if(state==='ar') legend.textContent = 'Arkansas · Ozark Stone · Little Rock · Fayetteville · Bentonville';
     else if(state==='ms') legend.textContent = 'Mississippi · River Clay · Jackson · Southaven · Brandon';
+    else if(state==='wv') legend.textContent = 'West Virginia · WVU Old Gold · Charleston · Martinsburg · Morgantown';
   }
   // Show county row when state is selected
   const countyRow = document.getElementById('county-row');
@@ -4946,6 +5000,27 @@ function buildClosingCosts(inp) {
       <div class="cc-total-row"><span class="cc-total-lbl">Attorney &amp; Title Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
     reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Mississippi property taxes are paid in arrears — due February 1 annually. Your lender will collect escrow monthly. The Mississippi Homestead Exemption (up to $300/year savings) applies from Year 1 — file January 1 through April 1 with your county tax assessor.`;
 
+  } else if (model === 'westvirginia') {
+    const recordingFee = 50;
+    const titleSearch = 275;
+    const titleInsLender = Math.round(loan * 0.00375);
+    const titleInsOwner = Math.round(p * 0.00325);
+    const settlementFee = 550;
+    govTotal = recordingFee;
+    titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
+    stateNote = `<span class="nl" style="color:#FCCF4D;">${countyName} — West Virginia</span><p>West Virginia has <strong>no state real estate transfer tax</strong>. West Virginia is an <strong>attorney-closed state</strong>. Property taxes are assessed at <strong>60% of market value</strong> annually as of July 1. Tax bills are issued after July 15 and are due in <strong>two installments</strong> — first half by October 1, second half by March 1. The West Virginia Homestead Exemption ($20,000 off assessed value) is available only to homeowners age 65+ or permanently and totally disabled — not applicable to most first-time buyers. Confirm all figures against your official Closing Disclosure.</p>`;
+    govSection = `<div class="cc-section"><div class="cc-section-title">Government &amp; Recording Fees</div>
+      <div class="cc-row"><div class="cc-item">Recording Fees — County Clerk<span class="cc-note">Deed and mortgage recording at the county clerk's office.</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
+      <div class="cc-row"><div class="cc-item">No State Transfer Tax<span class="cc-note">West Virginia does not impose a real estate transfer tax — $0</span></div><div class="cc-val">$0</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
+    titleSection = `<div class="cc-section"><div class="cc-section-title">Attorney, Title &amp; Settlement Fees</div>
+      <div class="cc-row"><div class="cc-item">Title Search &amp; Examination</div><div class="cc-val">${fmt(titleSearch)}</div></div>
+      <div class="cc-row"><div class="cc-item">Lender's Title Insurance<span class="cc-note">Required by lender — protects lender's interest</span></div><div class="cc-val">${fmt(titleInsLender)}</div></div>
+      <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended — one-time premium</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
+      <div class="cc-row"><div class="cc-item">Attorney / Settlement Fee<span class="cc-note">West Virginia requires attorney-conducted closings</span></div><div class="cc-val">${fmt(settlementFee)}</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Attorney &amp; Title Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
+    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. West Virginia property taxes are due in two installments — first half October 1, second half March 1. Your lender will collect escrow monthly. Property is assessed at 60% of market value as of July 1 annually. The WV Homestead Exemption applies only to homeowners age 65+ or permanently disabled — budget for full tax rate from day one.`;
+
   } else if (model === 'indiana') {
     const recordingFee = 25; // Indiana recording fees are very low — per-page
     const titleSearch = 275;
@@ -5200,6 +5275,30 @@ function buildHomesteadGuide(inp) {
       <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">The deduction renews automatically</div><div class="hg-desc">Once granted, the Indiana homestead deduction renews automatically each year as long as you continue to own and occupy the property as your primary residence. You do not reapply each year.</div></div></div>
       <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Notify your mortgage servicer after approval</div><div class="hg-desc">Once the deduction is confirmed, contact your mortgage servicer to recalculate your escrow. The lower tax bill should reduce your monthly payment starting the year after filing.</div></div></div>
       <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Indiana 1% Homestead Cap</span><p>Indiana law caps property taxes on homestead properties at 1% of gross assessed value annually. This means no matter how high the tax rate, your annual homestead property tax cannot exceed 1% of what your home is assessed at. In fast-appreciating markets this cap provides significant long-term protection.</p></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
+    </div>`;
+  }
+
+  if (model === 'westvirginia') {
+    return `<div class="cw">
+      <div class="ae em">Section V</div>
+      <h2 class="at2">Property Tax &amp; Homestead Guide</h2>
+      <div class="ar"></div>
+      <div class="nt nt-em" style="margin-bottom:1.5rem;">
+        <span class="nl nl-em" style="color:#FCCF4D;">${c.name} — West Virginia Property Tax</span>
+        <p>Your analysis shows the <strong>full property tax rate</strong> — no exemption has been applied. This is the honest number for most first-time buyers in West Virginia. Here's why, and what you need to know about the $20,000 Homestead Exemption you may have heard about.</p>
+      </div>
+      <div class="nt nt-wn" style="margin-bottom:1.5rem;">
+        <span class="nl nl-wn">About the $20,000 West Virginia Homestead Exemption</span>
+        <p>West Virginia offers a $20,000 exemption off assessed value — but it is <strong>not available to most first-time buyers</strong>. To qualify you must be <strong>65 years of age or older</strong> OR <strong>permanently and totally disabled</strong>. If you do not meet one of these two criteria, the exemption does not apply to your purchase. Your analysis correctly reflects the full tax rate.</p>
+      </div>
+      ${deadlineHtml}
+      <h3 style="font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--midnight);margin:1.5rem 0 1rem;">If You Do Qualify — How to Apply</h3>
+      <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">Confirm eligibility first</div><div class="hg-desc">You must be 65 years of age or older on or before June 30 of the relevant tax year, OR be permanently and totally disabled as certified by Social Security, the VA, or a physician. You must also have been a WV resident for at least two consecutive years preceding the tax year.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open County Assessor Portal</a></div></div>
+      <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">Application window: July 1 through December 1</div><div class="hg-desc">This is unusual — most states use a January through April window. West Virginia's window is July 1 through December 1. Applications must be filed in person at the county assessor's office. Once approved, the exemption renews automatically each year as long as you remain in the home.</div></div></div>
+      <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">Understanding your tax bill — two installments</div><div class="hg-desc">West Virginia property taxes are due in two installments — first half by October 1, second half by March 1. Your lender will collect monthly escrow to cover both payments. Property is assessed at 60% of market value as of July 1 each year.</div></div></div>
+      <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Notify your mortgage servicer if approved</div><div class="hg-desc">If you qualify and receive the exemption, contact your mortgage servicer to recalculate your escrow. The $20,000 off assessed value saves approximately $76–$175 per year depending on your county rate. This is how the savings appear in your monthly payment.</div></div></div>
+      <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Class II Designation — Owner-Occupied Residential</span><p>West Virginia taxes owner-occupied residential property at Class II rates — the lowest classification. Your property must be designated Class II as of July 1 annually. This designation is automatic when you own and occupy the property as your primary residence. Investment properties and rental properties are taxed at higher Class III or Class IV rates.</p></div>
       <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
     </div>`;
   }
