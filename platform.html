@@ -3048,8 +3048,8 @@ function setCounty(key) {
   document.querySelectorAll('.active-county-short').forEach(el => el.textContent = c.short);
   // Update scope badge
   const sb = document.querySelector('.scope-b');
-  const stateLabel = c.state==='tx' ? 'Texas' : c.state==='nc' ? 'North Carolina' : c.state==='ga' ? 'Georgia' : c.state==='sc' ? 'South Carolina' : c.state==='tn' ? 'Tennessee' : c.state==='al' ? 'Alabama' : c.state==='va' ? 'Virginia' : c.state==='az' ? 'Arizona' : c.state==='nv' ? 'Nevada' : c.state==='md' ? 'Maryland' : 'Florida';
-  if(sb) sb.textContent = c.name + ' · ' + stateLabel + ' · Test Phase';
+  const stateLabel = c.state==='tx' ? 'Texas' : c.state==='nc' ? 'North Carolina' : c.state==='ga' ? 'Georgia' : c.state==='sc' ? 'South Carolina' : c.state==='tn' ? 'Tennessee' : c.state==='al' ? 'Alabama' : c.state==='va' ? 'Virginia' : c.state==='az' ? 'Arizona' : c.state==='nv' ? 'Nevada' : c.state==='md' ? 'Maryland' : c.state==='in' ? 'Indiana' : c.state==='ks' ? 'Kansas' : c.state==='la' ? 'Louisiana' : c.state==='mo' ? 'Missouri' : c.state==='oh' ? 'Ohio' : c.state==='pa' ? 'Pennsylvania' : 'Florida';
+  if(sb) sb.textContent = c.name + ' · ' + stateLabel;
   // Update verified strip
   const vs = document.getElementById('avs');
   if(vs) vs.innerHTML = `Rate verified:<span>${MKT.rv}</span>&nbsp;·&nbsp;State:<span>${stateLabel}</span>&nbsp;·&nbsp;County:<span>${c.short}</span>&nbsp;·&nbsp;Tax:<span>${(c.tr*100).toFixed(2)}%</span>&nbsp;·&nbsp;Source:<span>Freddie Mac PMMS</span>`;
@@ -3260,15 +3260,15 @@ function selectState(state, btn) {
   if(legend) {
     if(state==='fl') legend.textContent = 'Dashed = Year 3 expansion';
     else if(state==='ga') legend.textContent = 'Georgia · *HE amount pending final verification';
-    else if(state==='tx') legend.textContent = 'Texas · Burnt Sienna · Test Phase';
-    else if(state==='nc') legend.textContent = 'North Carolina · Slate Blue · Test Phase';
-    else if(state==='sc') legend.textContent = 'South Carolina · Palmetto Navy · Test Phase';
-    else if(state==='tn') legend.textContent = 'Tennessee · Muted Copper · Test Phase';
-    else if(state==='al') legend.textContent = 'Alabama · Iron Maroon · Test Phase';
-    else if(state==='va') legend.textContent = 'Virginia · Colonial Blue · Test Phase';
-    else if(state==='az') legend.textContent = 'Arizona · Canyon Adobe · Test Phase';
-    else if(state==='nv') legend.textContent = 'Nevada · Silver Sage · Test Phase';
-    else if(state==='md') legend.textContent = 'Maryland · Chesapeake · Test Phase';
+    else if(state==='tx') legend.textContent = 'Texas · Burnt Sienna';
+    else if(state==='nc') legend.textContent = 'North Carolina · Slate Blue';
+    else if(state==='sc') legend.textContent = 'South Carolina · Palmetto Navy';
+    else if(state==='tn') legend.textContent = 'Tennessee · Muted Copper';
+    else if(state==='al') legend.textContent = 'Alabama · Iron Maroon';
+    else if(state==='va') legend.textContent = 'Virginia · Colonial Blue';
+    else if(state==='az') legend.textContent = 'Arizona · Canyon Adobe';
+    else if(state==='nv') legend.textContent = 'Nevada · Silver Sage';
+    else if(state==='md') legend.textContent = 'Maryland · Chesapeake';
     else if(state==='in') legend.textContent = 'Indiana · Limestone · Indianapolis & Suburbs';
     else if(state==='oh') legend.textContent = 'Ohio · Steel Teal · Columbus & Cincinnati metros';
     else if(state==='mo') legend.textContent = 'Missouri · Ozark Slate · Kansas City & St. Louis metros';
