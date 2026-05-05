@@ -837,12 +837,12 @@ footer strong{color:rgba(220,232,235,1.0);}
           <div class="state-toggles" style="flex-wrap:wrap;row-gap:.4rem;">
             <button class="state-toggle hint-al" id="st-al" onclick="selectState('al',this)">Alabama</button>
             <button class="state-toggle hint-az" id="st-az" onclick="selectState('az',this)">Arizona</button>
+            <button class="state-toggle hint-ar" id="st-ar" onclick="selectState('ar',this)">Arkansas</button>
             <button class="state-toggle hint-fl" id="st-fl" onclick="selectState('fl',this)">Florida</button>
             <button class="state-toggle hint-ga" id="st-ga" onclick="selectState('ga',this)">Georgia</button>
             <button class="state-toggle hint-in" id="st-in" onclick="selectState('in',this)">Indiana</button>
             <button class="state-toggle hint-ks" id="st-ks" onclick="selectState('ks',this)">Kansas</button>
             <button class="state-toggle hint-la" id="st-la" onclick="selectState('la',this)">Louisiana</button>
-            <button class="state-toggle hint-ar" id="st-ar" onclick="selectState('ar',this)">Arkansas</button>
             <button class="state-toggle hint-md" id="st-md" onclick="selectState('md',this)">Maryland</button>
             <button class="state-toggle hint-mo" id="st-mo" onclick="selectState('mo',this)">Missouri</button>
             <button class="state-toggle hint-nv" id="st-nv" onclick="selectState('nv',this)">Nevada</button>
@@ -859,29 +859,30 @@ footer strong{color:rgba(220,232,235,1.0);}
       <div id="county-row" style="display:none;align-items:center;gap:.75rem;flex-wrap:wrap;width:100%;">
         <span class="county-sel-lbl">Select County</span>
         <div class="county-pills" id="pills-fl">
-          <button class="county-pill" onclick="selectCounty('miami-dade',this)">Miami-Dade</button>
-          <button class="county-pill" onclick="selectCounty('broward',this)">Broward</button>
-          <button class="county-pill" onclick="selectCounty('palm-beach',this)">Palm Beach</button>
-          <button class="county-pill yr3" onclick="selectCounty('martin',this)">Martin</button>
-          <button class="county-pill yr3" onclick="selectCounty('st-lucie',this)">St. Lucie</button>
-          <button class="county-pill yr3" onclick="selectCounty('indian-river',this)">Indian River</button>
           <button class="county-pill yr3" onclick="selectCounty('brevard',this)">Brevard</button>
+          <button class="county-pill" onclick="selectCounty('broward',this)">Broward</button>
+          <button class="county-pill yr3" onclick="selectCounty('indian-river',this)">Indian River</button>
+          <button class="county-pill yr3" onclick="selectCounty('martin',this)">Martin</button>
+          <button class="county-pill" onclick="selectCounty('miami-dade',this)">Miami-Dade</button>
+          <button class="county-pill" onclick="selectCounty('palm-beach',this)">Palm Beach</button>
+          <button class="county-pill yr3" onclick="selectCounty('st-lucie',this)">St. Lucie</button>
+        </div>
         </div>
         <div class="county-pills" id="pills-ga" style="display:none;">
-          <button class="county-pill ga" onclick="selectCounty('fulton',this)">Fulton</button>
-          <button class="county-pill ga" onclick="selectCounty('dekalb',this)">DeKalb</button>
-          <button class="county-pill ga" onclick="selectCounty('gwinnett',this)">Gwinnett</button>
-          <button class="county-pill ga" onclick="selectCounty('cobb',this)">Cobb</button>
           <button class="county-pill ga" onclick="selectCounty('cherokee',this)">Cherokee</button>
-          <button class="county-pill ga" onclick="selectCounty('forsyth',this)">Forsyth</button>
           <button class="county-pill ga" onclick="selectCounty('clayton',this)">Clayton</button>
-          <button class="county-pill ga" onclick="selectCounty('hall',this)">Hall</button>
+          <button class="county-pill ga" onclick="selectCounty('cobb',this)">Cobb</button>
+          <button class="county-pill ga" onclick="selectCounty('columbia',this)">Columbia</button>
           <button class="county-pill ga" onclick="selectCounty('dawson',this)">Dawson</button>
+          <button class="county-pill ga" onclick="selectCounty('dekalb',this)">DeKalb</button>
+          <button class="county-pill ga" onclick="selectCounty('forsyth',this)">Forsyth</button>
+          <button class="county-pill ga" onclick="selectCounty('fulton',this)">Fulton</button>
+          <button class="county-pill ga" onclick="selectCounty('gwinnett',this)">Gwinnett</button>
+          <button class="county-pill ga" onclick="selectCounty('hall',this)">Hall</button>
+          <button class="county-pill ga yr3" onclick="selectCounty('lumpkin',this)">Lumpkin*</button>
           <button class="county-pill ga" onclick="selectCounty('paulding',this)">Paulding</button>
           <button class="county-pill ga yr3" onclick="selectCounty('pickens',this)">Pickens*</button>
-          <button class="county-pill ga yr3" onclick="selectCounty('lumpkin',this)">Lumpkin*</button>
           <button class="county-pill ga" onclick="selectCounty('richmond',this)">Richmond</button>
-          <button class="county-pill ga" onclick="selectCounty('columbia',this)">Columbia</button>
         </div>
         <div class="county-pills" id="pills-tx" style="display:none;">
           <button class="county-pill tx" onclick="selectCounty('bexar',this)">Bexar (San Antonio)</button>
@@ -941,53 +942,55 @@ footer strong{color:rgba(220,232,235,1.0);}
           <button class="county-pill nv" onclick="selectCounty('washoe',this)">Washoe (Reno)</button>
         </div>
         <div class="county-pills" id="pills-in" style="display:none;">
-          <button class="county-pill in" onclick="selectCounty('marion-in',this)">Marion (Indianapolis)</button>
+          <button class="county-pill in" onclick="selectCounty('boone-in',this)">Boone (Zionsville)</button>
           <button class="county-pill in" onclick="selectCounty('hamilton-in',this)">Hamilton (Carmel/Fishers)</button>
           <button class="county-pill in" onclick="selectCounty('hendricks',this)">Hendricks (Avon)</button>
           <button class="county-pill in" onclick="selectCounty('johnson-in',this)">Johnson (Greenwood)</button>
-          <button class="county-pill in" onclick="selectCounty('boone-in',this)">Boone (Zionsville)</button>
+          <button class="county-pill in" onclick="selectCounty('marion-in',this)">Marion (Indianapolis)</button>
         </div>
         <div class="county-pills" id="pills-oh" style="display:none;">
-          <button class="county-pill oh" onclick="selectCounty('franklin-oh',this)">Franklin (Columbus)</button>
-          <button class="county-pill oh" onclick="selectCounty('delaware-oh',this)">Delaware (Dublin)</button>
-          <button class="county-pill oh" onclick="selectCounty('licking',this)">Licking (Newark)</button>
-          <button class="county-pill oh" onclick="selectCounty('fairfield-oh',this)">Fairfield (Pickerington)</button>
-          <button class="county-pill oh" onclick="selectCounty('hamilton-oh',this)">Hamilton (Cincinnati)</button>
-          <button class="county-pill oh" onclick="selectCounty('warren-oh',this)">Warren (Mason)</button>
           <button class="county-pill oh" onclick="selectCounty('butler-oh',this)">Butler (Fairfield)</button>
           <button class="county-pill oh" onclick="selectCounty('clermont',this)">Clermont (Milford)</button>
+          <button class="county-pill oh" onclick="selectCounty('delaware-oh',this)">Delaware (Dublin)</button>
+          <button class="county-pill oh" onclick="selectCounty('fairfield-oh',this)">Fairfield (Pickerington)</button>
+          <button class="county-pill oh" onclick="selectCounty('franklin-oh',this)">Franklin (Columbus)</button>
+          <button class="county-pill oh" onclick="selectCounty('hamilton-oh',this)">Hamilton (Cincinnati)</button>
+          <button class="county-pill oh" onclick="selectCounty('licking',this)">Licking (Newark)</button>
+          <button class="county-pill oh" onclick="selectCounty('warren-oh',this)">Warren (Mason)</button>
         </div>
         <div class="county-pills" id="pills-mo" style="display:none;">
-          <button class="county-pill mo" onclick="selectCounty('jackson-mo',this)">Jackson (Kansas City)</button>
-          <button class="county-pill mo" onclick="selectCounty('clay-mo',this)">Clay (Liberty)</button>
           <button class="county-pill mo" onclick="selectCounty('cass',this)">Cass (Belton)</button>
-          <button class="county-pill mo" onclick="selectCounty('platte',this)">Platte (Parkville)</button>
-          <button class="county-pill mo" onclick="selectCounty('stlouis-county',this)">St. Louis County</button>
-          <button class="county-pill mo" onclick="selectCounty('stcharles',this)">St. Charles (O'Fallon)</button>
-          <button class="county-pill mo" onclick="selectCounty('jefferson-mo',this)">Jefferson (Arnold)</button>
+          <button class="county-pill mo" onclick="selectCounty('clay-mo',this)">Clay (Liberty)</button>
           <button class="county-pill mo" onclick="selectCounty('franklin-mo',this)">Franklin (Washington)</button>
+          <button class="county-pill mo" onclick="selectCounty('jackson-mo',this)">Jackson (Kansas City)</button>
+          <button class="county-pill mo" onclick="selectCounty('jefferson-mo',this)">Jefferson (Arnold)</button>
+          <button class="county-pill mo" onclick="selectCounty('platte',this)">Platte (Parkville)</button>
+          <button class="county-pill mo" onclick="selectCounty('stcharles',this)">St. Charles (O'Fallon)</button>
           <button class="county-pill mo" onclick="selectCounty('stlouis-city',this)">St. Louis City ★</button>
+          <button class="county-pill mo" onclick="selectCounty('stlouis-county',this)">St. Louis County</button>
         </div>
         <div class="county-pills" id="pills-pa" style="display:none;">
           <button class="county-pill pa" onclick="selectCounty('allegheny',this)">Allegheny (Pittsburgh)</button>
+          <button class="county-pill pa" onclick="selectCounty('beaver',this)">Beaver (Aliquippa)</button>
           <button class="county-pill pa" onclick="selectCounty('butler-pa',this)">Butler (Cranberry Twp)</button>
           <button class="county-pill pa" onclick="selectCounty('washington-pa',this)">Washington (Peters Twp)</button>
           <button class="county-pill pa" onclick="selectCounty('westmoreland',this)">Westmoreland (Greensburg)</button>
-          <button class="county-pill pa" onclick="selectCounty('beaver',this)">Beaver (Aliquippa)</button>
         </div>
         <div class="county-pills" id="pills-ks" style="display:none;">
           <button class="county-pill ks" onclick="selectCounty('johnson-ks',this)">Johnson (Overland Park)</button>
         </div>
         <div class="county-pills" id="pills-la" style="display:none;">
-          <button class="county-pill la" onclick="selectCounty('ebr',this)">East Baton Rouge</button>
           <button class="county-pill la" onclick="selectCounty('ascension',this)">Ascension (Gonzales)</button>
+          <button class="county-pill la" onclick="selectCounty('ebr',this)">East Baton Rouge</button>
+          <button class="county-pill la" onclick="selectCounty('iberville',this)">Iberville (Plaquemine)</button>
           <button class="county-pill la" onclick="selectCounty('livingston',this)">Livingston ⚠ Flood</button>
           <button class="county-pill la" onclick="selectCounty('wbr',this)">West Baton Rouge</button>
-          <button class="county-pill la" onclick="selectCounty('iberville',this)">Iberville (Plaquemine)</button>
-          <button class="county-pill ar" onclick="selectCounty('pulaski-ar',this)">Pulaski (Little Rock)</button>
+        </div>
+        <div class="county-pills" id="pills-ar" style="display:none;">
           <button class="county-pill ar" onclick="selectCounty('benton-ar',this)">Benton (Bentonville)</button>
-          <button class="county-pill ar" onclick="selectCounty('washington-ar',this)">Washington (Fayetteville)</button>
+          <button class="county-pill ar" onclick="selectCounty('pulaski-ar',this)">Pulaski (Little Rock)</button>
           <button class="county-pill ar" onclick="selectCounty('saline-ar',this)">Saline (Bryant/Benton)</button>
+          <button class="county-pill ar" onclick="selectCounty('washington-ar',this)">Washington (Fayetteville)</button>
         </div>
         <span class="county-note" id="state-legend">Dashed = Year 3 expansion</span>
       </div>
@@ -3290,11 +3293,11 @@ let ACTIVE_STATE = 'fl';
 
 function selectState(state, btn) {
   ACTIVE_STATE = state;
-  const toggleMap = {fl:'st-fl', ga:'st-ga', tx:'st-tx', nc:'st-nc', sc:'st-sc', tn:'st-tn', al:'st-al', va:'st-va', az:'st-az', nv:'st-nv', md:'st-md', in:'st-in', oh:'st-oh', mo:'st-mo', pa:'st-pa', ks:'st-ks', la:'st-la'};
+  const toggleMap = {fl:'st-fl', ga:'st-ga', tx:'st-tx', nc:'st-nc', sc:'st-sc', tn:'st-tn', al:'st-al', va:'st-va', az:'st-az', nv:'st-nv', md:'st-md', in:'st-in', oh:'st-oh', mo:'st-mo', pa:'st-pa', ks:'st-ks', la:'st-la', ar:'st-ar'};
   Object.entries(toggleMap).forEach(([s, id]) => {
     const el = document.getElementById(id);
     if (!el) return;
-    el.classList.remove('active-fl','active-ga','active-tx','active-nc','active-sc','active-tn','active-al','active-va','active-az','active-nv','active-md','active-in','active-oh','active-mo','active-pa','active-ks','active-la','hint-fl','hint-ga','hint-tx','hint-nc','hint-sc','hint-tn','hint-al','hint-va','hint-az','hint-nv','hint-md','hint-in','hint-oh','hint-mo','hint-pa','hint-ks','hint-la');
+    el.classList.remove('active-fl','active-ga','active-tx','active-nc','active-sc','active-tn','active-al','active-va','active-az','active-nv','active-md','active-in','active-oh','active-mo','active-pa','active-ks','active-la','active-ar','hint-fl','hint-ga','hint-tx','hint-nc','hint-sc','hint-tn','hint-al','hint-va','hint-az','hint-nv','hint-md','hint-in','hint-oh','hint-mo','hint-pa','hint-ks','hint-la','hint-ar');
     if (s === state) {
       el.classList.add('active-' + state);
     } else {
@@ -3302,7 +3305,7 @@ function selectState(state, btn) {
     }
   });
   // Show/hide county pill groups
-  ['fl','ga','tx','nc','sc','tn','al','va','az','md','nv','in','oh','mo','pa','ks','la'].forEach(s => {
+  ['fl','ga','tx','nc','sc','tn','al','va','az','md','nv','in','oh','mo','pa','ks','la','ar'].forEach(s => {
     const el = document.getElementById('pills-' + s);
     if(el) el.style.display = (state===s) ? 'flex' : 'none';
   });
