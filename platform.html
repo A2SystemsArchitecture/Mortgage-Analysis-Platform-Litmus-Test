@@ -472,6 +472,9 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .state-toggle.active-de{background:#1a5276;border-color:#1a5276;color:var(--white);}
 .state-toggle.hint-de{border-color:rgba(26,82,118,.45);color:rgba(80,150,200,.9);}
 .state-toggle.hint-de:hover{border-color:#1a5276;color:#1a5276;}
+.state-toggle.active-id{background:#4a7c94;border-color:#4a7c94;color:var(--white);}
+.state-toggle.hint-id{border-color:rgba(74,124,148,.45);color:rgba(110,175,205,.9);}
+.state-toggle.hint-id:hover{border-color:#4a7c94;color:#4a7c94;}
 .state-toggle:hover:not(.active-fl):not(.active-tx):not(.active-nc):not(.active-sc):not(.active-tn):not(.active-al):not(.active-va):not(.active-ga):not(.active-az):not(.active-nv):not(.active-md){border-color:rgba(176,190,197,.6);color:rgba(176,190,197,.9);}
 /* State toggle hint colors */
 .state-toggle.hint-ga{border-color:rgba(139,30,45,.45);color:rgba(180,100,110,.9);}
@@ -562,6 +565,9 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .county-pill.de{border-color:rgba(26,82,118,.65);color:rgba(80,150,200,.95);height:auto;background:transparent;}
 .county-pill.de:hover{border-color:#1a5276;color:var(--white);background:rgba(26,82,118,.25);}
 .county-pill.de.active{background:#1a5276;border-color:#1a5276;color:var(--white);}
+.county-pill.id{border-color:rgba(74,124,148,.65);color:rgba(110,175,205,.95);height:auto;background:transparent;}
+.county-pill.id:hover{border-color:#4a7c94;color:var(--white);background:rgba(74,124,148,.25);}
+.county-pill.id.active{background:#4a7c94;border-color:#4a7c94;color:var(--white);}
 /* Indiana pills */
 .county-pill.in{border-color:rgba(107,92,69,.55);color:rgba(145,125,95,.95);}
 .county-pill.in:hover{border-color:var(--indiana-mid);color:var(--white);background:rgba(107,92,69,.25);}
@@ -840,7 +846,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <!-- WELCOME -->
 <div id="sw" class="screen active">
   <div class="mh">
-    <div class="mh-tag">Independent Buyer Tool · Florida · Georgia · Texas · North Carolina · South Carolina · Tennessee · Alabama · Virginia · Arizona · Nevada · Maryland · Indiana · Kansas · Louisiana · Missouri · Mississippi · Ohio · Pennsylvania · Arkansas · West Virginia · Delaware</div>
+    <div class="mh-tag">Independent Buyer Tool · Florida · Georgia · Texas · North Carolina · South Carolina · Tennessee · Alabama · Virginia · Arizona · Nevada · Maryland · Indiana · Kansas · Louisiana · Missouri · Mississippi · Ohio · Pennsylvania · Arkansas · West Virginia · Delaware · Idaho</div>
     <h1 style="cursor:pointer;" onclick="show('w')" title="↩ Return to Home">Home<span class="tr">True</span></h1>
     <div class="mh-rule"></div>
     <div class="mh-sub">Honest mortgage analysis. No pressure. No agenda.</div>
@@ -859,6 +865,7 @@ footer strong{color:rgba(220,232,235,1.0);}
             <button class="state-toggle hint-de" id="st-de" onclick="selectState('de',this)">Delaware</button>
             <button class="state-toggle hint-fl" id="st-fl" onclick="selectState('fl',this)">Florida</button>
             <button class="state-toggle hint-ga" id="st-ga" onclick="selectState('ga',this)">Georgia</button>
+            <button class="state-toggle hint-id" id="st-id" onclick="selectState('id',this)">Idaho</button>
             <button class="state-toggle hint-in" id="st-in" onclick="selectState('in',this)">Indiana</button>
             <button class="state-toggle hint-ks" id="st-ks" onclick="selectState('ks',this)">Kansas</button>
             <button class="state-toggle hint-la" id="st-la" onclick="selectState('la',this)">Louisiana</button>
@@ -970,6 +977,11 @@ footer strong{color:rgba(220,232,235,1.0);}
         <div class="county-pills" id="pills-nv" style="display:none;">
           <button class="county-pill nv" onclick="selectCounty('clark',this)">Clark (Las Vegas)</button>
           <button class="county-pill nv" onclick="selectCounty('washoe',this)">Washoe (Reno)</button>
+        </div>
+        <div class="county-pills" id="pills-id" style="display:none;">
+          <button class="county-pill id" onclick="selectCounty('ada-id',this)">Ada (Boise/Meridian)</button>
+          <button class="county-pill id" onclick="selectCounty('canyon-id',this)">Canyon (Nampa/Caldwell)</button>
+          <button class="county-pill id" onclick="selectCounty('kootenai-id',this)">Kootenai (Coeur d'Alene)</button>
         </div>
         <div class="county-pills" id="pills-in" style="display:none;">
           <button class="county-pill in" onclick="selectCounty('boone-in',this)">Boone (Zionsville)</button>
@@ -3216,6 +3228,36 @@ const COUNTIES = {
     notes:'Sussex County (Rehoboth Beach, Lewes, Milford, Georgetown, Seaford, Millsboro) effective tax rate 0.21% — verified from official 2025 Sussex County Annual Rates Per $100 Assessment at sussexcountyde.gov. Indian River and Cape Henlopen school districts (dominant first-time buyer markets) both at 0.2136% and 0.2112% respectively. NOTE: Woodbridge and Laurel school districts run 0.34%–0.38% — verify your specific district. Post-reassessment at 100% market value. 4% transfer tax — split 2% buyer / 2% seller. Taxes due September 30. No universal homestead exemption — 65+/income-limited ($6,000–$7,500) only.',
     state:'de', closingModel:'delaware',
     heNote:'Delaware Homestead Exemption: Available ONLY to homeowners age 65 or older who have been full-time Sussex County residents for 5+ years, with income not exceeding $6,000 single / $7,500 married. Standard first-time buyers do not qualify. Application deadline: April 30 at Sussex County Finance Division.'
+  },
+  'ada-id': {
+    name:'Ada County', short:'Ada',
+    tr:0.0065, he:0,
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://adacounty.id.gov/assessor/homeowners-exemption/',
+    paName:'Ada County Assessor',
+    notes:'Ada County (Boise, Meridian, Eagle, Star, Kuna) effective tax rate 0.65% — verified from Idaho State Tax Commission EPB00129_12-04-2025, urban average 0.652%. Rate is post-Homeowner\'s Exemption effective rate; Tax Commission averages incorporate HE in the taxable base. Assessment at 100% of market value annually. No transfer tax. Escrow-closed state. Taxes due in two installments — December 20 and June 20. Homeowner\'s Exemption: 50% of value up to $125,000 maximum — apply by April 15 at Ada County Assessor.',
+    state:'id', closingModel:'idaho',
+    heNote:'Idaho Homeowner\'s Exemption: 50% of your home\'s value up to a maximum of $125,000 off assessed value. Must be owner-occupied primary residence. Apply by April 15 at the Ada County Assessor\'s office. Approved exemption renews automatically until ownership changes. The analysis above reflects the effective rate already accounting for the exemption — your actual Year 2 bill will reflect this savings.'
+  },
+  'canyon-id': {
+    name:'Canyon County', short:'Canyon',
+    tr:0.0069, he:0,
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://www.canyonco.org/elected-officials/assessor/',
+    paName:'Canyon County Assessor',
+    notes:'Canyon County (Nampa, Caldwell, Middleton, Star) effective tax rate 0.69% — verified from Idaho State Tax Commission EPB00129_12-04-2025, urban average 0.692%. Canyon County 2025 levy sheets confirm Nampa code areas 0.647%–0.781% gross; Caldwell code areas 0.647%–0.748% gross. Tax Commission urban average is post-HE effective rate. No transfer tax. Escrow-closed. Taxes due December 20 and June 20. Homeowner\'s Exemption: 50% of value up to $125,000 — apply by April 15.',
+    state:'id', closingModel:'idaho',
+    heNote:'Idaho Homeowner\'s Exemption: 50% of your home\'s value up to a maximum of $125,000 off assessed value. Must be owner-occupied primary residence. Apply by April 15 at the Canyon County Assessor\'s office. Approved exemption renews automatically until ownership changes. The analysis above reflects the effective rate already accounting for the exemption — your actual Year 2 bill will reflect this savings.'
+  },
+  'kootenai-id': {
+    name:'Kootenai County', short:'Kootenai',
+    tr:0.0054, he:0,
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://www.kcgov.us/189/Homeowners-Exemption',
+    paName:'Kootenai County Assessor',
+    notes:'Kootenai County (Coeur d\'Alene, Post Falls, Hayden, Rathdrum) effective tax rate 0.54% — verified from Idaho State Tax Commission EPB00129_12-04-2025, urban average 0.541%. Lowest rate of three Idaho counties. Rapid market appreciation in CdA metro. No transfer tax. Escrow-closed. Taxes due December 20 and June 20. Homeowner\'s Exemption: 50% of value up to $125,000 — apply by April 15.',
+    state:'id', closingModel:'idaho',
+    heNote:'Idaho Homeowner\'s Exemption: 50% of your home\'s value up to a maximum of $125,000 off assessed value. Must be owner-occupied primary residence. Apply by April 15 at the Kootenai County Assessor\'s office. Approved exemption renews automatically until ownership changes. The analysis above reflects the effective rate already accounting for the exemption — your actual Year 2 bill will reflect this savings.'
   }
 };
   // Active county — defaults to Miami-Dade
@@ -3238,7 +3280,7 @@ function setCounty(key) {
   document.querySelectorAll('.active-county-short').forEach(el => el.textContent = c.short);
   // Update scope badge
   const sb = document.querySelector('.scope-b');
-  const stateLabel = c.state==='tx' ? 'Texas' : c.state==='nc' ? 'North Carolina' : c.state==='ga' ? 'Georgia' : c.state==='sc' ? 'South Carolina' : c.state==='tn' ? 'Tennessee' : c.state==='al' ? 'Alabama' : c.state==='va' ? 'Virginia' : c.state==='az' ? 'Arizona' : c.state==='nv' ? 'Nevada' : c.state==='md' ? 'Maryland' : c.state==='in' ? 'Indiana' : c.state==='ks' ? 'Kansas' : c.state==='la' ? 'Louisiana' : c.state==='mo' ? 'Missouri' : c.state==='oh' ? 'Ohio' : c.state==='pa' ? 'Pennsylvania' : c.state==='ar' ? 'Arkansas' : c.state==='ms' ? 'Mississippi' : c.state==='wv' ? 'West Virginia' : c.state==='de' ? 'Delaware' : 'Florida';
+  const stateLabel = c.state==='tx' ? 'Texas' : c.state==='nc' ? 'North Carolina' : c.state==='ga' ? 'Georgia' : c.state==='sc' ? 'South Carolina' : c.state==='tn' ? 'Tennessee' : c.state==='al' ? 'Alabama' : c.state==='va' ? 'Virginia' : c.state==='az' ? 'Arizona' : c.state==='nv' ? 'Nevada' : c.state==='md' ? 'Maryland' : c.state==='in' ? 'Indiana' : c.state==='ks' ? 'Kansas' : c.state==='la' ? 'Louisiana' : c.state==='mo' ? 'Missouri' : c.state==='oh' ? 'Ohio' : c.state==='pa' ? 'Pennsylvania' : c.state==='ar' ? 'Arkansas' : c.state==='ms' ? 'Mississippi' : c.state==='wv' ? 'West Virginia' : c.state==='de' ? 'Delaware' : c.state==='id' ? 'Idaho' : 'Florida';
   if(sb) sb.textContent = c.name + ' · ' + stateLabel;
   // Update verified strip
   const vs = document.getElementById('avs');
@@ -3429,11 +3471,11 @@ let ACTIVE_STATE = 'fl';
 
 function selectState(state, btn) {
   ACTIVE_STATE = state;
-  const toggleMap = {fl:'st-fl', ga:'st-ga', tx:'st-tx', nc:'st-nc', sc:'st-sc', tn:'st-tn', al:'st-al', va:'st-va', az:'st-az', nv:'st-nv', md:'st-md', in:'st-in', oh:'st-oh', mo:'st-mo', pa:'st-pa', ks:'st-ks', la:'st-la', ar:'st-ar', ms:'st-ms', wv:'st-wv', de:'st-de'};
+  const toggleMap = {fl:'st-fl', ga:'st-ga', tx:'st-tx', nc:'st-nc', sc:'st-sc', tn:'st-tn', al:'st-al', va:'st-va', az:'st-az', nv:'st-nv', md:'st-md', in:'st-in', oh:'st-oh', mo:'st-mo', pa:'st-pa', ks:'st-ks', la:'st-la', ar:'st-ar', ms:'st-ms', wv:'st-wv', de:'st-de', id:'st-id'};
   Object.entries(toggleMap).forEach(([s, id]) => {
     const el = document.getElementById(id);
     if (!el) return;
-    el.classList.remove('active-fl','active-ga','active-tx','active-nc','active-sc','active-tn','active-al','active-va','active-az','active-nv','active-md','active-in','active-oh','active-mo','active-pa','active-ks','active-la','active-ar','active-ms','active-wv','active-de','hint-fl','hint-ga','hint-tx','hint-nc','hint-sc','hint-tn','hint-al','hint-va','hint-az','hint-nv','hint-md','hint-in','hint-oh','hint-mo','hint-pa','hint-ks','hint-la','hint-ar','hint-ms','hint-wv','hint-de');
+    el.classList.remove('active-fl','active-ga','active-tx','active-nc','active-sc','active-tn','active-al','active-va','active-az','active-nv','active-md','active-in','active-oh','active-mo','active-pa','active-ks','active-la','active-ar','active-ms','active-wv','active-de','active-id','hint-fl','hint-ga','hint-tx','hint-nc','hint-sc','hint-tn','hint-al','hint-va','hint-az','hint-nv','hint-md','hint-in','hint-oh','hint-mo','hint-pa','hint-ks','hint-la','hint-ar','hint-ms','hint-wv','hint-de','hint-id');
     if (s === state) {
       el.classList.add('active-' + state);
     } else {
@@ -3441,7 +3483,7 @@ function selectState(state, btn) {
     }
   });
   // Show/hide county pill groups
-  ['fl','ga','tx','nc','sc','tn','al','va','az','md','nv','in','oh','mo','pa','ks','la','ar','ms','wv','de'].forEach(s => {
+  ['fl','ga','tx','nc','sc','tn','al','va','az','md','nv','in','oh','mo','pa','ks','la','ar','ms','wv','de','id'].forEach(s => {
     const el = document.getElementById('pills-' + s);
     if(el) el.style.display = (state===s) ? 'flex' : 'none';
   });
@@ -3469,6 +3511,7 @@ function selectState(state, btn) {
     else if(state==='ms') legend.textContent = 'Mississippi · River Clay · Jackson · Southaven · Brandon';
     else if(state==='wv') legend.textContent = 'West Virginia · WVU Old Gold · Charleston · Martinsburg · Morgantown';
     else if(state==='de') legend.textContent = 'Delaware · Chesapeake Blue · Wilmington · Newark · Rehoboth Beach';
+    else if(state==='id') legend.textContent = 'Idaho · Idaho Steelhead · Boise · Nampa · Coeur d\'Alene';
   }
   // Show county row when state is selected
   const countyRow = document.getElementById('county-row');
@@ -5080,6 +5123,27 @@ function buildClosingCosts(inp) {
       <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Settlement Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
     reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Delaware transfer tax: 4% total — your 2% buyer share is ${fmt(transferTax)} on this purchase price. Taxes due September 30 annually. Property assessed at 100% of market value post-reassessment. No homestead exemption for standard buyers — budget for full tax rate.`;
 
+  } else if (model === 'idaho') {
+    const recordingFee = 75;
+    const titleSearch = 275;
+    const titleInsLender = Math.round(loan * 0.00375);
+    const titleInsOwner = Math.round(p * 0.00325);
+    const escrowFee = Math.round(p * 0.001 + 200);
+    govTotal = recordingFee;
+    titleTotal = titleSearch + titleInsLender + titleInsOwner + escrowFee;
+    stateNote = `<span class="nl" style="color:#4a7c94;">${countyName} — Idaho</span><p>Idaho has <strong>no state real estate transfer tax</strong>. Idaho is an <strong>escrow-closed state</strong> — your closing is handled by a title company or escrow company, not an attorney. Property is assessed at <strong>100% of market value</strong> annually as of January 1. Taxes are due in two installments — <strong>December 20</strong> (first half) and <strong>June 20</strong> (second half). The Idaho Homeowner's Exemption (50% of value up to $125,000) applies to owner-occupied primary residences — apply by April 15 with your county assessor. Confirm all figures against your official Closing Disclosure.</p>`;
+    govSection = `<div class="cc-section"><div class="cc-section-title">Government &amp; Recording Fees</div>
+      <div class="cc-row"><div class="cc-item">Recording Fees — County Recorder<span class="cc-note">Deed and mortgage recording at the county recorder's office.</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
+      <div class="cc-row"><div class="cc-item">No State Transfer Tax<span class="cc-note">Idaho does not impose a real estate transfer tax — $0</span></div><div class="cc-val">$0</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
+    titleSection = `<div class="cc-section"><div class="cc-section-title">Escrow, Title &amp; Settlement Fees</div>
+      <div class="cc-row"><div class="cc-item">Title Search &amp; Examination</div><div class="cc-val">${fmt(titleSearch)}</div></div>
+      <div class="cc-row"><div class="cc-item">Lender's Title Insurance<span class="cc-note">Required by lender — protects lender's interest</span></div><div class="cc-val">${fmt(titleInsLender)}</div></div>
+      <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended — one-time premium</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
+      <div class="cc-row"><div class="cc-item">Escrow / Settlement Fee<span class="cc-note">Idaho is escrow-closed — handled by title/escrow company, not an attorney</span></div><div class="cc-val">${fmt(escrowFee)}</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Escrow &amp; Title Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
+    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Idaho property taxes due in two installments — December 20 and June 20. Your lender will collect monthly escrow to cover both payments. Apply for the Homeowner's Exemption by April 15 with your county assessor — 50% of value up to $125,000 off assessed value. No transfer tax in Idaho.`;
+
   } else if (model === 'indiana') {
     const recordingFee = 25; // Indiana recording fees are very low — per-page
     const titleSearch = 275;
@@ -5334,6 +5398,27 @@ function buildHomesteadGuide(inp) {
       <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">The deduction renews automatically</div><div class="hg-desc">Once granted, the Indiana homestead deduction renews automatically each year as long as you continue to own and occupy the property as your primary residence. You do not reapply each year.</div></div></div>
       <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Notify your mortgage servicer after approval</div><div class="hg-desc">Once the deduction is confirmed, contact your mortgage servicer to recalculate your escrow. The lower tax bill should reduce your monthly payment starting the year after filing.</div></div></div>
       <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Indiana 1% Homestead Cap</span><p>Indiana law caps property taxes on homestead properties at 1% of gross assessed value annually. This means no matter how high the tax rate, your annual homestead property tax cannot exceed 1% of what your home is assessed at. In fast-appreciating markets this cap provides significant long-term protection.</p></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
+    </div>`;
+  }
+
+  if (model === 'idaho') {
+    return `<div class="cw">
+      <div class="ae em">Section V</div>
+      <h2 class="at2">Property Tax &amp; Homeowner's Exemption Guide</h2>
+      <div class="ar"></div>
+      <div class="nt nt-em" style="margin-bottom:1.5rem;">
+        <span class="nl nl-em" style="color:#4a7c94;">${c.name} — Idaho Property Tax</span>
+        <p>Idaho has a generous Homeowner's Exemption — <strong>50% of your home's value up to $125,000</strong> off assessed value. The rate shown in your analysis already accounts for this exemption in the average. Here is everything you need to know to make sure you receive it and understand your tax bill from day one.</p>
+      </div>
+      ${deadlineHtml}
+      <h3 style="font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--midnight);margin:1.5rem 0 1rem;">The Idaho Homeowner's Exemption — How It Works</h3>
+      <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">What the exemption is</div><div class="hg-desc">Idaho exempts 50% of your home's assessed value — up to a maximum of $125,000 — from property taxes. For a $300,000 home, that means $125,000 off your taxable value, saving you approximately $675–$875 per year depending on your county's levy rate. The exemption applies to your home and up to one acre of land.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open County Assessor Portal</a></div></div>
+      <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">Apply by April 15 — critical deadline</div><div class="hg-desc">You must apply for the Homeowner's Exemption at your county assessor's office. The deadline is April 15. As a new buyer, you will typically apply in your first spring of ownership. Once approved, the exemption renews automatically each year as long as you own and occupy the home as your primary residence. If you close after April 15, your first full exemption year begins the following January 1.</div></div></div>
+      <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">The Homeowner Tax Relief (HTR) — separate July deadline</div><div class="hg-desc">Idaho also offers a Homeowner Tax Relief state credit — separate from the Homeowner's Exemption. The HTR rate for Canyon County is 0.1348 per $100 of assessed value and reduces your bill further. To receive the HTR, your Homeowner's Exemption must be filed by the 2nd Monday of July. The HTR does not apply to bond levies or school bonds. Your county assessor applies this automatically once your HE is on file.</div></div></div>
+      <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Two tax installments — December 20 and June 20</div><div class="hg-desc">Idaho property taxes are due in two equal installments. First half is due December 20. Second half is due June 20. Your lender will collect monthly escrow to cover both payments. Idaho is an escrow-closed state — your closing is handled by a title or escrow company. There is no attorney closing requirement in Idaho.</div></div></div>
+      <div class="hg-step"><div class="hg-num">5</div><div class="hg-content"><div class="hg-title">Why Year 1 and Year 2 may differ</div><div class="hg-desc">If you close mid-year and your exemption isn't applied until January 1 of the following year, your first partial-year tax bill may not reflect the exemption. The rate in your analysis is the post-exemption effective rate — what you will pay once the exemption is in place. Budget conservatively for your first year and apply as soon as possible after closing.</div></div></div>
+      <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Escrow Closing — What to Expect</span><p>Idaho is an escrow-closed state. Unlike attorney-closed states, your closing is coordinated by a title company or escrow company. They handle the transfer of funds, recording of the deed, and title insurance. You will sign documents at the escrow office or via remote online notarization. The process is efficient — most Idaho closings are straightforward once your loan is cleared to close.</p></div>
       <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
     </div>`;
   }
