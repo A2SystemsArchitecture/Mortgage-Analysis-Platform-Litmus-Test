@@ -460,6 +460,9 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .state-toggle.active-la{background:#4b2e3f;border-color:#4b2e3f;color:var(--white);}
 .state-toggle.hint-la{border-color:rgba(75,46,63,.45);color:rgba(140,90,115,.9);}
 .state-toggle.hint-la:hover{border-color:#6b3d55;color:#6b3d55;}
+.state-toggle.active-ar{background:#5a5f55;border-color:#5a5f55;color:var(--white);}
+.state-toggle.hint-ar{border-color:rgba(90,95,85,.45);color:rgba(120,128,110,.9);}
+.state-toggle.hint-ar:hover{border-color:#5a5f55;color:#5a5f55;}
 .state-toggle:hover:not(.active-fl):not(.active-tx):not(.active-nc):not(.active-sc):not(.active-tn):not(.active-al):not(.active-va):not(.active-ga):not(.active-az):not(.active-nv):not(.active-md){border-color:rgba(176,190,197,.6);color:rgba(176,190,197,.9);}
 /* State toggle hint colors */
 .state-toggle.hint-ga{border-color:rgba(139,30,45,.45);color:rgba(180,100,110,.9);}
@@ -538,6 +541,9 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .county-pill.la{border-color:rgba(75,46,63,.55);color:rgba(140,90,115,.95);}
 .county-pill.la:hover{border-color:#6b3d55;color:var(--white);background:rgba(75,46,63,.25);}
 .county-pill.la.active{background:#4b2e3f;border-color:#4b2e3f;color:var(--white);}
+.county-pill.ar{border-color:rgba(90,95,85,.55);color:rgba(120,128,110,.95);}
+.county-pill.ar:hover{border-color:#5a5f55;color:var(--white);background:rgba(90,95,85,.25);}
+.county-pill.ar.active{background:#5a5f55;border-color:#5a5f55;color:var(--white);}
 /* Indiana pills */
 .county-pill.in{border-color:rgba(107,92,69,.55);color:rgba(145,125,95,.95);}
 .county-pill.in:hover{border-color:var(--indiana-mid);color:var(--white);background:rgba(107,92,69,.25);}
@@ -816,7 +822,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <!-- WELCOME -->
 <div id="sw" class="screen active">
   <div class="mh">
-    <div class="mh-tag">Independent Buyer Tool · Florida · Georgia · Texas · North Carolina · South Carolina · Tennessee · Alabama · Virginia · Arizona · Nevada · Maryland · Indiana · Kansas · Louisiana · Missouri · Ohio · Pennsylvania</div>
+    <div class="mh-tag">Independent Buyer Tool · Florida · Georgia · Texas · North Carolina · South Carolina · Tennessee · Alabama · Virginia · Arizona · Nevada · Maryland · Indiana · Kansas · Louisiana · Missouri · Ohio · Pennsylvania · Arkansas</div>
     <h1 style="cursor:pointer;" onclick="show('w')" title="↩ Return to Home">Home<span class="tr">True</span></h1>
     <div class="mh-rule"></div>
     <div class="mh-sub">Honest mortgage analysis. No pressure. No agenda.</div>
@@ -836,6 +842,7 @@ footer strong{color:rgba(220,232,235,1.0);}
             <button class="state-toggle hint-in" id="st-in" onclick="selectState('in',this)">Indiana</button>
             <button class="state-toggle hint-ks" id="st-ks" onclick="selectState('ks',this)">Kansas</button>
             <button class="state-toggle hint-la" id="st-la" onclick="selectState('la',this)">Louisiana</button>
+            <button class="state-toggle hint-ar" id="st-ar" onclick="selectState('ar',this)">Arkansas</button>
             <button class="state-toggle hint-md" id="st-md" onclick="selectState('md',this)">Maryland</button>
             <button class="state-toggle hint-mo" id="st-mo" onclick="selectState('mo',this)">Missouri</button>
             <button class="state-toggle hint-nv" id="st-nv" onclick="selectState('nv',this)">Nevada</button>
@@ -977,6 +984,10 @@ footer strong{color:rgba(220,232,235,1.0);}
           <button class="county-pill la" onclick="selectCounty('livingston',this)">Livingston ⚠ Flood</button>
           <button class="county-pill la" onclick="selectCounty('wbr',this)">West Baton Rouge</button>
           <button class="county-pill la" onclick="selectCounty('iberville',this)">Iberville (Plaquemine)</button>
+          <button class="county-pill ar" onclick="selectCounty('pulaski-ar',this)">Pulaski (Little Rock)</button>
+          <button class="county-pill ar" onclick="selectCounty('benton-ar',this)">Benton (Bentonville)</button>
+          <button class="county-pill ar" onclick="selectCounty('washington-ar',this)">Washington (Fayetteville)</button>
+          <button class="county-pill ar" onclick="selectCounty('saline-ar',this)">Saline (Bryant/Benton)</button>
         </div>
         <span class="county-note" id="state-legend">Dashed = Year 3 expansion</span>
       </div>
@@ -3026,6 +3037,46 @@ const COUNTIES = {
     notes:'Iberville Parish (Plaquemine/White Castle/Maringouin) effective tax rate ~0.38% — lowest of the five Baton Rouge metro parishes. Historic sugar cane and petrochemical corridor. Assessed at 10% FMV. Homestead exemption: $75,000 FMV. Taxes due December 31. No state transfer tax. Civil law notarial closing. Mixed Zone X and AE — Bayou Plaquemine and Mississippi River proximity. Smaller market with strong affordability.',
     state:'la', closingModel:'louisiana',
     heNote:'Louisiana Homestead Exemption: $75,000 FMV exempt from parish taxes. File with Iberville Parish Assessor by December 31.'
+  },
+  'pulaski-ar': {
+    name:'Pulaski County', short:'Pulaski',
+    tr:0.0130, he:500, heType:'credit',
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://pulaskicountyassessor.net',
+    paName:'Pulaski County Assessor',
+    notes:'Pulaski County (Little Rock, North Little Rock, Maumelle, Sherwood) effective tax rate 1.30% — weighted for Little Rock area buyers. Rates vary by city: Little Rock 1.40%, NLR 1.42%, Maumelle 1.13%, Sherwood 1.04%, unincorporated 1.02%. Verified from signed official 2025 Pay 2026 Millage Rate Chart dated 01/02/2026. 20% assessment ratio statewide per ACA §26-26-1001. Arkansas Homestead Credit: $500/year dollar credit off tax bill — one-time application, apply by October 15. No transfer tax, no documentary stamp, no intangible tax. Taxes paid one year in arrears, due October 15. Amendment 79 caps homestead assessment increases at 5%/year.',
+    state:'ar', closingModel:'arkansas',
+    heNote:'Arkansas Homestead Credit: $500 annual dollar credit applied directly to your tax bill. File a one-time application with the Pulaski County Assessor. Credit renews automatically.'
+  },
+  'benton-ar': {
+    name:'Benton County', short:'Benton',
+    tr:0.0110, he:500, heType:'credit',
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://bentoncountyar.gov/assessor',
+    paName:'Benton County Assessor',
+    notes:'Benton County (Bentonville, Rogers, Springdale, Bella Vista, Centerton) effective tax rate 1.10% — weighted for Bentonville/Rogers area buyers. Rates vary: Bentonville 1.24%, Rogers 1.09%, Springdale 1.05%. Verified from official 2025 Millage Rate Table (Benton County Collector). Walmart HQ — strong first-time buyer market. 20% assessment ratio statewide. Arkansas Homestead Credit: $500/year. No transfer tax. Taxes in arrears, due October 15. Amendment 79 caps homestead increases at 5%/year.',
+    state:'ar', closingModel:'arkansas',
+    heNote:'Arkansas Homestead Credit: $500 annual dollar credit applied directly to your tax bill. File a one-time application with the Benton County Assessor. Credit renews automatically.'
+  },
+  'washington-ar': {
+    name:'Washington County', short:'Washington',
+    tr:0.0109, he:500, heType:'credit',
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://www.washingtoncountyar.gov/residents/taxes/view-millage-rates',
+    paName:'Washington County Collector',
+    notes:'Washington County (Fayetteville, Springdale, Rogers, Siloam Springs) effective tax rate 1.09% — Fayetteville city 1.14%, Springdale 1.09%, rural 1.03%. Verified from official 2025 Millage Rates PDF (Washington County Collector, Angela Wood). University of Arkansas — strong first-time buyer and young professional market. 20% assessment ratio statewide. Arkansas Homestead Credit: $500/year. No transfer tax. Taxes in arrears, due October 15.',
+    state:'ar', closingModel:'arkansas',
+    heNote:'Arkansas Homestead Credit: $500 annual dollar credit applied directly to your tax bill. File a one-time application with the Washington County Assessor. Credit renews automatically.'
+  },
+  'saline-ar': {
+    name:'Saline County', short:'Saline',
+    tr:0.0107, he:500, heType:'credit',
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://www.salinecounty.org/government/assessor',
+    paName:'Saline County Assessor',
+    notes:'Saline County (Bryant, Benton, Shannon Hills, Alexander) effective tax rate 1.07% — Benton city 1.11%, Bryant city 1.07%, unincorporated 1.01%. Verified from official 2025 Millage Rates (Saline County Collector Jennifer Carter). Strong affordability between Little Rock and Hot Springs. 20% assessment ratio statewide. Arkansas Homestead Credit: $500/year. No transfer tax. Taxes in arrears, due October 15.',
+    state:'ar', closingModel:'arkansas',
+    heNote:'Arkansas Homestead Credit: $500 annual dollar credit applied directly to your tax bill. File a one-time application with the Saline County Assessor. Credit renews automatically.'
   }
 };
   // Active county — defaults to Miami-Dade
@@ -3048,7 +3099,7 @@ function setCounty(key) {
   document.querySelectorAll('.active-county-short').forEach(el => el.textContent = c.short);
   // Update scope badge
   const sb = document.querySelector('.scope-b');
-  const stateLabel = c.state==='tx' ? 'Texas' : c.state==='nc' ? 'North Carolina' : c.state==='ga' ? 'Georgia' : c.state==='sc' ? 'South Carolina' : c.state==='tn' ? 'Tennessee' : c.state==='al' ? 'Alabama' : c.state==='va' ? 'Virginia' : c.state==='az' ? 'Arizona' : c.state==='nv' ? 'Nevada' : c.state==='md' ? 'Maryland' : c.state==='in' ? 'Indiana' : c.state==='ks' ? 'Kansas' : c.state==='la' ? 'Louisiana' : c.state==='mo' ? 'Missouri' : c.state==='oh' ? 'Ohio' : c.state==='pa' ? 'Pennsylvania' : 'Florida';
+  const stateLabel = c.state==='tx' ? 'Texas' : c.state==='nc' ? 'North Carolina' : c.state==='ga' ? 'Georgia' : c.state==='sc' ? 'South Carolina' : c.state==='tn' ? 'Tennessee' : c.state==='al' ? 'Alabama' : c.state==='va' ? 'Virginia' : c.state==='az' ? 'Arizona' : c.state==='nv' ? 'Nevada' : c.state==='md' ? 'Maryland' : c.state==='in' ? 'Indiana' : c.state==='ks' ? 'Kansas' : c.state==='la' ? 'Louisiana' : c.state==='mo' ? 'Missouri' : c.state==='oh' ? 'Ohio' : c.state==='pa' ? 'Pennsylvania' : c.state==='ar' ? 'Arkansas' : 'Florida';
   if(sb) sb.textContent = c.name + ' · ' + stateLabel;
   // Update verified strip
   const vs = document.getElementById('avs');
@@ -3275,6 +3326,7 @@ function selectState(state, btn) {
     else if(state==='pa') legend.textContent = 'Pennsylvania · Iron Gray · Pittsburgh Metro';
     else if(state==='ks') legend.textContent = 'Kansas · Wheat Gold · Johnson County (Kansas City KS)';
     else if(state==='la') legend.textContent = 'Louisiana · Deep Plum · Greater Baton Rouge · Geaux Tigers';
+    else if(state==='ar') legend.textContent = 'Arkansas · Ozark Stone · Little Rock · Fayetteville · Bentonville';
   }
   // Show county row when state is selected
   const countyRow = document.getElementById('county-row');
@@ -3385,7 +3437,7 @@ function collectInp(){
   let br=MKT.br,wr=MKT.wr;
   if(t===3){const lr=parseFloat(document.getElementById('flr').value);if(lr){br=lr;wr=lr;}}
   const bpi=cPI(loan,br),wpi=cPI(loan,wr);
-  const ty1=Math.round(price*MKT.tr/12),ty2=Math.round((price-MKT.he)*MKT.tr/12);
+  const ty1=Math.round(price*MKT.tr/12),ty2=COUNTIES[ACTIVE_COUNTY]&&COUNTIES[ACTIVE_COUNTY].heType==='credit'?Math.round((price*MKT.tr/12)-(MKT.he/12)):Math.round((price-MKT.he)*MKT.tr/12);
   let bi=0,wi=0,il='',ic=false,ix=false;
   if(t===1){ix=true;il='EXCLUDED';}
   else if(t===2&&S.ins==='a'){const c=parseFloat(document.getElementById('fic').value)||285;bi=wi=c;il='CONFIRMED';ic=true;}
@@ -4790,6 +4842,33 @@ function buildClosingCosts(inp) {
       <div class="cc-total-row"><span class="cc-total-lbl">Notarial &amp; Title Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
     reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. IMPORTANT: Louisiana property taxes are paid in arrears — due December 31. Your lender will collect escrow monthly. The seller will credit you for the year-to-date taxes at closing. Budget for flood insurance as a separate annual cost — standard homeowners insurance does NOT cover flood damage in Louisiana.`;
 
+  } else if (model === 'arkansas') {
+    // Arkansas closing model
+    // NO documentary stamp tax, NO intangible tax, NO transfer tax
+    // Attorney or title company — varies by transaction
+    // Taxes paid one year in arrears — due October 15
+    const recordingFee = 75;
+    const titleSearch = 275;
+    const titleInsLender = Math.round(loan * 0.00375);
+    const titleInsOwner = Math.round(p * 0.00325);
+    const settlementFee = 550;
+    govTotal = recordingFee;
+    titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
+    stateNote = `<span class="nl" style="color:#5a5f55;">${countyName} — Arkansas</span><p>Arkansas has <strong>no documentary stamp tax, no intangible tax, and no real estate transfer tax</strong> — one of the cleanest closing cost structures in the country. Recording fees are modest. Closings are handled by title companies or attorneys depending on the transaction. Property taxes are paid <strong>one year in arrears</strong> and are due October 15 annually. The Arkansas homestead credit ($500/year) applies from Year 1 after a one-time application with the county assessor. Confirm all figures against your official Closing Disclosure.</p>`;
+    govSection = `<div class="cc-section"><div class="cc-section-title">Government &amp; Recording Fees</div>
+      <div class="cc-row"><div class="cc-item">Recording Fees — County Clerk<span class="cc-note">Deed and mortgage recording. No transfer tax in Arkansas.</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
+      <div class="cc-row"><div class="cc-item">No Documentary Stamp Tax<span class="cc-note">Arkansas does not impose a deed stamp tax — $0</span></div><div class="cc-val">$0</div></div>
+      <div class="cc-row"><div class="cc-item">No Intangible Tax<span class="cc-note">Arkansas does not impose an intangible tax on mortgages — $0</span></div><div class="cc-val">$0</div></div>
+      <div class="cc-row"><div class="cc-item">No Transfer Tax<span class="cc-note">Arkansas has no real estate transfer tax — $0</span></div><div class="cc-val">$0</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
+    titleSection = `<div class="cc-section"><div class="cc-section-title">Title &amp; Settlement Fees</div>
+      <div class="cc-row"><div class="cc-item">Title Search &amp; Examination</div><div class="cc-val">${fmt(titleSearch)}</div></div>
+      <div class="cc-row"><div class="cc-item">Lender's Title Insurance<span class="cc-note">Required by lender — protects lender's interest</span></div><div class="cc-val">${fmt(titleInsLender)}</div></div>
+      <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended — one-time premium</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
+      <div class="cc-row"><div class="cc-item">Settlement / Closing Fee<span class="cc-note">Title company or attorney coordination fee</span></div><div class="cc-val">${fmt(settlementFee)}</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Settlement Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
+    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Arkansas property taxes are paid one year in arrears — due October 15 annually. Your lender will collect escrow monthly. The Arkansas Homestead Credit ($500/year) reduces your tax bill starting in Year 1 — apply with your county assessor after closing.`;
+
   } else if (model === 'indiana') {
     const recordingFee = 25; // Indiana recording fees are very low — per-page
     const titleSearch = 275;
@@ -5044,6 +5123,26 @@ function buildHomesteadGuide(inp) {
       <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">The deduction renews automatically</div><div class="hg-desc">Once granted, the Indiana homestead deduction renews automatically each year as long as you continue to own and occupy the property as your primary residence. You do not reapply each year.</div></div></div>
       <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Notify your mortgage servicer after approval</div><div class="hg-desc">Once the deduction is confirmed, contact your mortgage servicer to recalculate your escrow. The lower tax bill should reduce your monthly payment starting the year after filing.</div></div></div>
       <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Indiana 1% Homestead Cap</span><p>Indiana law caps property taxes on homestead properties at 1% of gross assessed value annually. This means no matter how high the tax rate, your annual homestead property tax cannot exceed 1% of what your home is assessed at. In fast-appreciating markets this cap provides significant long-term protection.</p></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
+    </div>`;
+  }
+
+  if (model === 'arkansas') {
+    return `<div class="cw">
+      <div class="ae em">Section V</div>
+      <h2 class="at2">Homestead Credit Filing Guide</h2>
+      <div class="ar"></div>
+      <div class="nt nt-em" style="margin-bottom:1.5rem;">
+        <span class="nl nl-em">${c.name} — Arkansas Homestead Credit</span>
+        <p>Arkansas's homestead credit is simple and powerful. Every homeowner who files a one-time application receives a <strong>$500 annual credit</strong> applied directly to their property tax bill — not a deduction from assessed value, but a dollar-for-dollar reduction of what you owe. The credit is automatic from Year 1 after filing. Arkansas property taxes are also <strong>capped at 5% annual assessment increase</strong> on your primary residence, protecting you from sudden tax spikes in rising markets.</p>
+      </div>
+      ${deadlineHtml}
+      <h3 style="font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--midnight);margin:1.5rem 0 1rem;">Step-by-Step Filing Instructions</h3>
+      <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">File with your county assessor after closing</div><div class="hg-desc">Visit the county assessor's office with your deed and proof of primary residence. The application is simple — you confirm the property is your primary residence and provide your signature. The credit applies to your first full tax bill after filing.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open County Assessor Portal</a></div></div>
+      <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">Deadline: October 15 of the tax year</div><div class="hg-desc">Arkansas property taxes are due October 15 annually — paid one year in arrears. File your homestead credit application as soon as you close. The credit renews automatically each year as long as the property remains your primary residence. You never have to reapply unless you move.</div></div></div>
+      <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">Understanding taxes paid in arrears</div><div class="hg-desc">Arkansas taxes the prior year's assessment — your 2026 tax bill (due October 15, 2026) covers the 2025 tax year. At closing, the seller will credit you for their portion of the current year's taxes. Your lender will collect a monthly escrow amount to cover your October bill.</div></div></div>
+      <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Notify your mortgage servicer after approval</div><div class="hg-desc">Once your homestead credit is confirmed, contact your mortgage servicer. Your escrow should be recalculated to reflect the $500 annual credit — approximately $41.67/month reduction. This is how the savings appear in your monthly payment.</div></div></div>
+      <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Arkansas 5% Assessment Cap</span><p>Arkansas Amendment 79 limits annual increases in your homestead's taxable assessed value to 5% — even if market values rise faster. Seniors (65+) and permanently disabled homeowners receive a full value freeze — their taxable assessment cannot increase at all. This protection activates the moment you own and occupy the home.</p></div>
       <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
     </div>`;
   }
@@ -5452,7 +5551,7 @@ function checkShareURL() {
   inp.bpi = cPI(inp.loan, inp.br);
   inp.wpi = cPI(inp.loan, MKT.wr);
   inp.ty1 = Math.round(inp.price * MKT.tr / 12);
-  inp.ty2 = Math.round((inp.price - MKT.he) * MKT.tr / 12);
+  inp.ty2 = COUNTIES[ACTIVE_COUNTY]&&COUNTIES[ACTIVE_COUNTY].heType==='credit'?Math.round((inp.price*MKT.tr/12)-(MKT.he/12)):Math.round((inp.price-MKT.he)*MKT.tr/12);
   inp.wi = inp.bi > 0 ? inp.bi * 1.35 : 0;
   inp.il = inp.ic ? 'CONFIRMED' : inp.ix ? 'EXCLUDED' : 'ESTIMATED';
   const [bp, wp] = cPMI(inp.loan, inp.crd);
