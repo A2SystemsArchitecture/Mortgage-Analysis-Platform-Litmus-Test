@@ -463,6 +463,9 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .state-toggle.active-ar{background:#5a5f55;border-color:#5a5f55;color:var(--white);}
 .state-toggle.hint-ar{border-color:rgba(90,95,85,.45);color:rgba(120,128,110,.9);}
 .state-toggle.hint-ar:hover{border-color:#5a5f55;color:#5a5f55;}
+.state-toggle.active-ms{background:#8a5a3b;border-color:#8a5a3b;color:var(--white);}
+.state-toggle.hint-ms{border-color:rgba(138,90,59,.45);color:rgba(185,135,100,.9);}
+.state-toggle.hint-ms:hover{border-color:#8a5a3b;color:#8a5a3b;}
 .state-toggle:hover:not(.active-fl):not(.active-tx):not(.active-nc):not(.active-sc):not(.active-tn):not(.active-al):not(.active-va):not(.active-ga):not(.active-az):not(.active-nv):not(.active-md){border-color:rgba(176,190,197,.6);color:rgba(176,190,197,.9);}
 /* State toggle hint colors */
 .state-toggle.hint-ga{border-color:rgba(139,30,45,.45);color:rgba(180,100,110,.9);}
@@ -544,6 +547,9 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .county-pill.ar{border-color:rgba(90,95,85,.65);color:rgba(160,168,150,.95);height:auto;background:transparent;}
 .county-pill.ar:hover{border-color:#7a8070;color:var(--white);background:rgba(90,95,85,.25);}
 .county-pill.ar.active{background:#5a5f55;border-color:#5a5f55;color:var(--white);}
+.county-pill.ms{border-color:rgba(138,90,59,.65);color:rgba(195,150,110,.95);height:auto;background:transparent;}
+.county-pill.ms:hover{border-color:#8a5a3b;color:var(--white);background:rgba(138,90,59,.25);}
+.county-pill.ms.active{background:#8a5a3b;border-color:#8a5a3b;color:var(--white);}
 /* Indiana pills */
 .county-pill.in{border-color:rgba(107,92,69,.55);color:rgba(145,125,95,.95);}
 .county-pill.in:hover{border-color:var(--indiana-mid);color:var(--white);background:rgba(107,92,69,.25);}
@@ -822,7 +828,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <!-- WELCOME -->
 <div id="sw" class="screen active">
   <div class="mh">
-    <div class="mh-tag">Independent Buyer Tool · Florida · Georgia · Texas · North Carolina · South Carolina · Tennessee · Alabama · Virginia · Arizona · Nevada · Maryland · Indiana · Kansas · Louisiana · Missouri · Ohio · Pennsylvania · Arkansas</div>
+    <div class="mh-tag">Independent Buyer Tool · Florida · Georgia · Texas · North Carolina · South Carolina · Tennessee · Alabama · Virginia · Arizona · Nevada · Maryland · Indiana · Kansas · Louisiana · Missouri · Mississippi · Ohio · Pennsylvania · Arkansas</div>
     <h1 style="cursor:pointer;" onclick="show('w')" title="↩ Return to Home">Home<span class="tr">True</span></h1>
     <div class="mh-rule"></div>
     <div class="mh-sub">Honest mortgage analysis. No pressure. No agenda.</div>
@@ -845,6 +851,7 @@ footer strong{color:rgba(220,232,235,1.0);}
             <button class="state-toggle hint-la" id="st-la" onclick="selectState('la',this)">Louisiana</button>
             <button class="state-toggle hint-md" id="st-md" onclick="selectState('md',this)">Maryland</button>
             <button class="state-toggle hint-mo" id="st-mo" onclick="selectState('mo',this)">Missouri</button>
+            <button class="state-toggle hint-ms" id="st-ms" onclick="selectState('ms',this)">Mississippi</button>
             <button class="state-toggle hint-nv" id="st-nv" onclick="selectState('nv',this)">Nevada</button>
             <button class="state-toggle hint-nc" id="st-nc" onclick="selectState('nc',this)">North Carolina</button>
             <button class="state-toggle hint-oh" id="st-oh" onclick="selectState('oh',this)">Ohio</button>
@@ -967,6 +974,12 @@ footer strong{color:rgba(220,232,235,1.0);}
           <button class="county-pill mo" onclick="selectCounty('stcharles',this)">St. Charles (O'Fallon)</button>
           <button class="county-pill mo" onclick="selectCounty('stlouis-city',this)">St. Louis City ★</button>
           <button class="county-pill mo" onclick="selectCounty('stlouis-county',this)">St. Louis County</button>
+        </div>
+        <div class="county-pills" id="pills-ms" style="display:none;">
+          <button class="county-pill ms" onclick="selectCounty('desoto-ms',this)">DeSoto (Southaven)</button>
+          <button class="county-pill ms" onclick="selectCounty('hinds-ms',this)">Hinds (Jackson)</button>
+          <button class="county-pill ms" onclick="selectCounty('madison-ms',this)">Madison (Canton)</button>
+          <button class="county-pill ms" onclick="selectCounty('rankin-ms',this)">Rankin (Brandon)</button>
         </div>
         <div class="county-pills" id="pills-pa" style="display:none;">
           <button class="county-pill pa" onclick="selectCounty('allegheny',this)">Allegheny (Pittsburgh)</button>
@@ -3079,6 +3092,46 @@ const COUNTIES = {
     notes:'Saline County (Bryant, Benton, Shannon Hills, Alexander) effective tax rate 1.07% — Benton city 1.11%, Bryant city 1.07%, unincorporated 1.01%. Verified from official 2025 Millage Rates (Saline County Collector Jennifer Carter). Strong affordability between Little Rock and Hot Springs. 20% assessment ratio statewide. Arkansas Homestead Credit: $500/year. No transfer tax. Taxes in arrears, due October 15.',
     state:'ar', closingModel:'arkansas',
     heNote:'Arkansas Homestead Credit: $500 annual dollar credit applied directly to your tax bill. File a one-time application with the Saline County Assessor. Credit renews automatically.'
+  },
+  'desoto-ms': {
+    name:'DeSoto County', short:'DeSoto',
+    tr:0.0081, he:75000,
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://www.desotocountyms.gov/99/Tax-Savings-Programs-Homestead',
+    paName:'DeSoto County Tax Assessor',
+    notes:'DeSoto County (Southaven, Horn Lake, Olive Branch, Hernando) effective tax rate 0.81% — confirmed from official DeSoto County Board of Supervisors announcement: combined millage reduced to 80.74 mills for FY 2025-2026 (Oct 1, 2025). Reassessment lowered county rate from 41.02 to 34.25 mills; school district also reduced. 10% assessment ratio per Mississippi law. Homestead exemption: $7,500 off assessed value ($75,000 market value equivalent) — up to $300/year savings. File January 1 – April 1 with DeSoto County Tax Assessor. Taxes due February 1 paid in arrears. No state transfer tax. Attorney-closed state.',
+    state:'ms', closingModel:'mississippi',
+    heNote:'Mississippi Homestead Exemption: $7,500 off assessed value (equivalent to $75,000 off market value). File January 1 – April 1 with the DeSoto County Tax Assessor. One-time application, renews automatically.'
+  },
+  'hinds-ms': {
+    name:'Hinds County', short:'Hinds',
+    tr:0.0113, he:75000,
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://www.hindsco.com/departments/tax-assessor',
+    paName:'Hinds County Tax Assessor',
+    notes:'Hinds County (Jackson, Clinton, Raymond, Terry, Byram) effective tax rate 1.13% — based on unincorporated/Hinds County school district: 44.09 county + 68.90 school = 112.99 mills (2024-2025 Combined Millage Rate Schedule). NOTE: City of Jackson proper runs 1.93% effective rate — buyers inside Jackson city limits should verify their specific district with the Hinds County Tax Assessor. 10% assessment ratio. Homestead exemption: $7,500 off assessed value. File January 1 – April 1. Taxes due February 1. No state transfer tax. Attorney-closed state.',
+    state:'ms', closingModel:'mississippi',
+    heNote:'Mississippi Homestead Exemption: $7,500 off assessed value (equivalent to $75,000 off market value). File January 1 – April 1 with the Hinds County Tax Assessor. NOTE: Jackson city rates are higher — confirm your specific district.'
+  },
+  'madison-ms': {
+    name:'Madison County', short:'Madison',
+    tr:0.0093, he:75000,
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://www.madison-co.com/tax-assessor',
+    paName:'Madison County Tax Assessor',
+    notes:'Madison County (Madison, Ridgeland, Canton, Flora, Gluckstadt) effective tax rate 0.93% — unincorporated/Madison County school district: 38.13 county + 54.55 school = 92.68 mills (verified from signed FY Oct 2025–Sept 2026 Madison County millage rate schedule). Highest median home values in Mississippi at $309,100. City of Madison runs 1.17%. 10% assessment ratio. Homestead exemption: $7,500 off assessed value. File January 1 – April 1. Taxes due February 1. No state transfer tax. Attorney-closed state.',
+    state:'ms', closingModel:'mississippi',
+    heNote:'Mississippi Homestead Exemption: $7,500 off assessed value (equivalent to $75,000 off market value). File January 1 – April 1 with the Madison County Tax Assessor. One-time application, renews automatically.'
+  },
+  'rankin-ms': {
+    name:'Rankin County', short:'Rankin',
+    tr:0.0098, he:75000,
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://www.rankincounty.org/department/index.php?structureid=14',
+    paName:'Rankin County Tax Assessor',
+    notes:'Rankin County (Brandon, Flowood, Pearl, Richland, Florence, Pelahatchie) effective tax rate 0.98% — unincorporated: 41.74 county + 55.78 school = 97.52 mills (2024-2025 Combined Millage Rate Schedule). Brandon city runs 1.31%. Fastest-growing county in Mississippi metro area. 10% assessment ratio. Homestead exemption: $7,500 off assessed value. File January 1 – April 1. Taxes due February 1. No state transfer tax. Attorney-closed state.',
+    state:'ms', closingModel:'mississippi',
+    heNote:'Mississippi Homestead Exemption: $7,500 off assessed value (equivalent to $75,000 off market value). File January 1 – April 1 with the Rankin County Tax Assessor. One-time application, renews automatically.'
   }
 };
   // Active county — defaults to Miami-Dade
@@ -3101,7 +3154,7 @@ function setCounty(key) {
   document.querySelectorAll('.active-county-short').forEach(el => el.textContent = c.short);
   // Update scope badge
   const sb = document.querySelector('.scope-b');
-  const stateLabel = c.state==='tx' ? 'Texas' : c.state==='nc' ? 'North Carolina' : c.state==='ga' ? 'Georgia' : c.state==='sc' ? 'South Carolina' : c.state==='tn' ? 'Tennessee' : c.state==='al' ? 'Alabama' : c.state==='va' ? 'Virginia' : c.state==='az' ? 'Arizona' : c.state==='nv' ? 'Nevada' : c.state==='md' ? 'Maryland' : c.state==='in' ? 'Indiana' : c.state==='ks' ? 'Kansas' : c.state==='la' ? 'Louisiana' : c.state==='mo' ? 'Missouri' : c.state==='oh' ? 'Ohio' : c.state==='pa' ? 'Pennsylvania' : c.state==='ar' ? 'Arkansas' : 'Florida';
+  const stateLabel = c.state==='tx' ? 'Texas' : c.state==='nc' ? 'North Carolina' : c.state==='ga' ? 'Georgia' : c.state==='sc' ? 'South Carolina' : c.state==='tn' ? 'Tennessee' : c.state==='al' ? 'Alabama' : c.state==='va' ? 'Virginia' : c.state==='az' ? 'Arizona' : c.state==='nv' ? 'Nevada' : c.state==='md' ? 'Maryland' : c.state==='in' ? 'Indiana' : c.state==='ks' ? 'Kansas' : c.state==='la' ? 'Louisiana' : c.state==='mo' ? 'Missouri' : c.state==='oh' ? 'Ohio' : c.state==='pa' ? 'Pennsylvania' : c.state==='ar' ? 'Arkansas' : c.state==='ms' ? 'Mississippi' : 'Florida';
   if(sb) sb.textContent = c.name + ' · ' + stateLabel;
   // Update verified strip
   const vs = document.getElementById('avs');
@@ -3292,11 +3345,11 @@ let ACTIVE_STATE = 'fl';
 
 function selectState(state, btn) {
   ACTIVE_STATE = state;
-  const toggleMap = {fl:'st-fl', ga:'st-ga', tx:'st-tx', nc:'st-nc', sc:'st-sc', tn:'st-tn', al:'st-al', va:'st-va', az:'st-az', nv:'st-nv', md:'st-md', in:'st-in', oh:'st-oh', mo:'st-mo', pa:'st-pa', ks:'st-ks', la:'st-la', ar:'st-ar'};
+  const toggleMap = {fl:'st-fl', ga:'st-ga', tx:'st-tx', nc:'st-nc', sc:'st-sc', tn:'st-tn', al:'st-al', va:'st-va', az:'st-az', nv:'st-nv', md:'st-md', in:'st-in', oh:'st-oh', mo:'st-mo', pa:'st-pa', ks:'st-ks', la:'st-la', ar:'st-ar', ms:'st-ms'};
   Object.entries(toggleMap).forEach(([s, id]) => {
     const el = document.getElementById(id);
     if (!el) return;
-    el.classList.remove('active-fl','active-ga','active-tx','active-nc','active-sc','active-tn','active-al','active-va','active-az','active-nv','active-md','active-in','active-oh','active-mo','active-pa','active-ks','active-la','active-ar','hint-fl','hint-ga','hint-tx','hint-nc','hint-sc','hint-tn','hint-al','hint-va','hint-az','hint-nv','hint-md','hint-in','hint-oh','hint-mo','hint-pa','hint-ks','hint-la','hint-ar');
+    el.classList.remove('active-fl','active-ga','active-tx','active-nc','active-sc','active-tn','active-al','active-va','active-az','active-nv','active-md','active-in','active-oh','active-mo','active-pa','active-ks','active-la','active-ar','active-ms','hint-fl','hint-ga','hint-tx','hint-nc','hint-sc','hint-tn','hint-al','hint-va','hint-az','hint-nv','hint-md','hint-in','hint-oh','hint-mo','hint-pa','hint-ks','hint-la','hint-ar','hint-ms');
     if (s === state) {
       el.classList.add('active-' + state);
     } else {
@@ -3304,7 +3357,7 @@ function selectState(state, btn) {
     }
   });
   // Show/hide county pill groups
-  ['fl','ga','tx','nc','sc','tn','al','va','az','md','nv','in','oh','mo','pa','ks','la','ar'].forEach(s => {
+  ['fl','ga','tx','nc','sc','tn','al','va','az','md','nv','in','oh','mo','pa','ks','la','ar','ms'].forEach(s => {
     const el = document.getElementById('pills-' + s);
     if(el) el.style.display = (state===s) ? 'flex' : 'none';
   });
@@ -3329,6 +3382,7 @@ function selectState(state, btn) {
     else if(state==='ks') legend.textContent = 'Kansas · Wheat Gold · Johnson County (Kansas City KS)';
     else if(state==='la') legend.textContent = 'Louisiana · Deep Plum · Greater Baton Rouge · Geaux Tigers';
     else if(state==='ar') legend.textContent = 'Arkansas · Ozark Stone · Little Rock · Fayetteville · Bentonville';
+    else if(state==='ms') legend.textContent = 'Mississippi · River Clay · Jackson · Southaven · Brandon';
   }
   // Show county row when state is selected
   const countyRow = document.getElementById('county-row');
@@ -4871,6 +4925,27 @@ function buildClosingCosts(inp) {
       <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Settlement Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
     reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Arkansas property taxes are paid one year in arrears — due October 15 annually. Your lender will collect escrow monthly. The Arkansas Homestead Credit ($500/year) reduces your tax bill starting in Year 1 — apply with your county assessor after closing.`;
 
+  } else if (model === 'mississippi') {
+    const recordingFee = 75;
+    const titleSearch = 275;
+    const titleInsLender = Math.round(loan * 0.00375);
+    const titleInsOwner = Math.round(p * 0.00325);
+    const settlementFee = 550;
+    govTotal = recordingFee;
+    titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
+    stateNote = `<span class="nl" style="color:#8a5a3b;">${countyName} — Mississippi</span><p>Mississippi has <strong>no state real estate transfer tax</strong>. Mississippi is an <strong>attorney-closed state</strong> — a licensed attorney must conduct the closing. Property taxes are paid <strong>in arrears</strong> and are due February 1 annually. The Mississippi Homestead Exemption ($7,500 off assessed value — up to $300/year savings) applies from Year 1 after filing. Confirm all figures against your official Closing Disclosure.</p>`;
+    govSection = `<div class="cc-section"><div class="cc-section-title">Government &amp; Recording Fees</div>
+      <div class="cc-row"><div class="cc-item">Recording Fees — County Clerk<span class="cc-note">Deed and mortgage recording at the county chancery clerk's office.</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
+      <div class="cc-row"><div class="cc-item">No State Transfer Tax<span class="cc-note">Mississippi does not impose a real estate transfer tax — $0</span></div><div class="cc-val">$0</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
+    titleSection = `<div class="cc-section"><div class="cc-section-title">Attorney, Title &amp; Settlement Fees</div>
+      <div class="cc-row"><div class="cc-item">Title Search &amp; Examination</div><div class="cc-val">${fmt(titleSearch)}</div></div>
+      <div class="cc-row"><div class="cc-item">Lender's Title Insurance<span class="cc-note">Required by lender — protects lender's interest</span></div><div class="cc-val">${fmt(titleInsLender)}</div></div>
+      <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended — one-time premium</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
+      <div class="cc-row"><div class="cc-item">Attorney / Settlement Fee<span class="cc-note">Mississippi requires attorney-conducted closings</span></div><div class="cc-val">${fmt(settlementFee)}</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Attorney &amp; Title Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
+    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Mississippi property taxes are paid in arrears — due February 1 annually. Your lender will collect escrow monthly. The Mississippi Homestead Exemption (up to $300/year savings) applies from Year 1 — file January 1 through April 1 with your county tax assessor.`;
+
   } else if (model === 'indiana') {
     const recordingFee = 25; // Indiana recording fees are very low — per-page
     const titleSearch = 275;
@@ -5125,6 +5200,26 @@ function buildHomesteadGuide(inp) {
       <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">The deduction renews automatically</div><div class="hg-desc">Once granted, the Indiana homestead deduction renews automatically each year as long as you continue to own and occupy the property as your primary residence. You do not reapply each year.</div></div></div>
       <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Notify your mortgage servicer after approval</div><div class="hg-desc">Once the deduction is confirmed, contact your mortgage servicer to recalculate your escrow. The lower tax bill should reduce your monthly payment starting the year after filing.</div></div></div>
       <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Indiana 1% Homestead Cap</span><p>Indiana law caps property taxes on homestead properties at 1% of gross assessed value annually. This means no matter how high the tax rate, your annual homestead property tax cannot exceed 1% of what your home is assessed at. In fast-appreciating markets this cap provides significant long-term protection.</p></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
+    </div>`;
+  }
+
+  if (model === 'mississippi') {
+    return `<div class="cw">
+      <div class="ae em">Section V</div>
+      <h2 class="at2">Homestead Exemption Filing Guide</h2>
+      <div class="ar"></div>
+      <div class="nt nt-em" style="margin-bottom:1.5rem;">
+        <span class="nl nl-em">${c.name} — Mississippi Homestead Exemption</span>
+        <p>Mississippi's homestead exemption removes <strong>$7,500 from your assessed value</strong> — saving up to <strong>$300 per year</strong> on your property taxes. Since Mississippi assesses property at 10% of market value, this $7,500 assessed value reduction is equivalent to removing $75,000 of market value from your tax calculation. File once with your county tax assessor and the exemption renews automatically every year.</p>
+      </div>
+      ${deadlineHtml}
+      <h3 style="font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--midnight);margin:1.5rem 0 1rem;">Step-by-Step Filing Instructions</h3>
+      <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">File with your county tax assessor after closing</div><div class="hg-desc">Visit the county tax assessor's office with your deed and a valid Mississippi ID showing the property address. The property must be your primary residence. You cannot claim the exemption on more than one property.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open County Tax Assessor Portal</a></div></div>
+      <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">Deadline: January 1 through April 1</div><div class="hg-desc">Applications are accepted January 1 through April 1 each year. File as soon as possible after closing. If you miss the April 1 deadline you must wait until the following January. The exemption renews automatically as long as the property remains your primary residence — you only reapply if something changes.</div></div></div>
+      <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">Understanding taxes paid in arrears</div><div class="hg-desc">Mississippi property taxes are paid in arrears and due February 1 annually. At closing, the seller will credit you for their portion of the current year's taxes. Your lender will collect a monthly escrow amount to cover your February bill. Budget for this from day one.</div></div></div>
+      <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Notify your mortgage servicer after approval</div><div class="hg-desc">Once your homestead exemption is approved, contact your mortgage servicer. Your escrow should be recalculated to reflect the lower tax obligation — approximately $25/month reduction. This is how the savings appear in your monthly payment.</div></div></div>
+      <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Additional Exemptions for Seniors &amp; Disabled Veterans</span><p>Mississippi homeowners who are 65 or older or totally disabled with income below approximately $75,000 receive an additional exemption on the first $75,000 of true value — effectively eliminating their property tax obligation. 100% service-connected disabled veterans receive a full exemption on their primary residence.</p></div>
       <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
     </div>`;
   }
