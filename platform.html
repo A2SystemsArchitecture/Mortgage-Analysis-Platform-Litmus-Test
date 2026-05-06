@@ -2600,8 +2600,8 @@ const COUNTIES = {
     paUrl:'https://www.indy.gov/activity/apply-for-a-homestead-deduction',
     paName:'Marion County Assessor',
     notes:'Marion County (Indianapolis) effective tax rate ~0.83%. Indiana caps homestead property taxes at 1% of gross assessed value. Standard deduction: $45,000 off assessed value + supplemental deduction of 35% of remaining AV up to $600,000. File with county assessor by December 31.',
-    state:'in', closingModel:'indiana',
-    heNote:'Indiana Homestead Standard Deduction: $45,000 off assessed value. Supplemental deduction: 35% of remaining assessed value up to $600,000. File with Marion County Assessor by December 31 of the year you move in. Renews automatically.',
+    state:'in', closingModel:'indiana', sea1:true,
+    heNote:'Indiana Property Tax Relief — Two layers apply to your homestead. (1) Homestead Standard Deduction: $45,000 off assessed value + supplemental deduction of 35% of remaining assessed value. File with Marion County Assessor by December 31 of the year you move in — renews automatically. (2) SEA 1 Credit (2025 law, effective 2026 tax bills): An automatic 10% credit on your annual homestead tax bill, capped at $300/year. No application required — county auditors apply this credit automatically. The Year 2+ figure in your analysis reflects both layers of savings.',
     districts:[
       {id:'mar-indianapolis',label:'Indianapolis (Consolidated)',tr:0.0083},
       {id:'mar-speedway',label:'Speedway / Beech Grove',tr:0.0086},
@@ -2614,8 +2614,8 @@ const COUNTIES = {
     paUrl:'https://www.hamiltoncounty.in.gov/749/Homestead-Standard-Deduction',
     paName:'Hamilton County Assessor',
     notes:'Hamilton County (Carmel/Fishers/Westfield/Noblesville) effective tax rate ~0.67% — lowest in the Indianapolis metro. One of the fastest-growing counties in the nation. Indiana 1% homestead cap applies.',
-    state:'in', closingModel:'indiana',
-    heNote:'Indiana Homestead Standard Deduction: $45,000 off assessed value. Supplemental deduction: 35% of remaining assessed value up to $600,000. File with Hamilton County Assessor by December 31.',
+    state:'in', closingModel:'indiana', sea1:true,
+    heNote:'Indiana Property Tax Relief — Two layers apply to your homestead. (1) Homestead Standard Deduction: $45,000 off assessed value + supplemental deduction of 35% of remaining assessed value. File with Hamilton County Assessor by December 31 of the year you move in — renews automatically. (2) SEA 1 Credit (2025 law, effective 2026 tax bills): An automatic 10% credit on your annual homestead tax bill, capped at $300/year. No application required — county auditors apply this credit automatically. The Year 2+ figure in your analysis reflects both layers of savings.',
     districts:[
       {id:'ham-carmel',label:'Carmel',tr:0.007},
       {id:'ham-fishers',label:'Fishers',tr:0.0068},
@@ -2631,8 +2631,8 @@ const COUNTIES = {
     paUrl:'https://www.co.hendricks.in.us/government/departments/assessor',
     paName:'Hendricks County Assessor',
     notes:'Hendricks County (Avon/Plainfield/Brownsburg) effective tax rate ~0.74%. Western Indianapolis suburb, strong first-time buyer market. Indiana 1% homestead cap applies.',
-    state:'in', closingModel:'indiana',
-    heNote:'Indiana Homestead Standard Deduction: $45,000 off assessed value. Supplemental deduction: 35% of remaining assessed value up to $600,000. File with Hendricks County Assessor by December 31.',
+    state:'in', closingModel:'indiana', sea1:true,
+    heNote:'Indiana Property Tax Relief — Two layers apply to your homestead. (1) Homestead Standard Deduction: $45,000 off assessed value + supplemental deduction of 35% of remaining assessed value. File with Hendricks County Assessor by December 31 of the year you move in — renews automatically. (2) SEA 1 Credit (2025 law, effective 2026 tax bills): An automatic 10% credit on your annual homestead tax bill, capped at $300/year. No application required — county auditors apply this credit automatically. The Year 2+ figure in your analysis reflects both layers of savings.',
     districts:[
       {id:'hen-plainfield',label:'Plainfield',tr:0.0078},
       {id:'hen-avon',label:'Avon',tr:0.0076},
@@ -2647,8 +2647,8 @@ const COUNTIES = {
     paUrl:'https://www.co.johnson.in.us/departments/assessor',
     paName:'Johnson County Assessor',
     notes:'Johnson County (Greenwood/Franklin/Bargersville) effective tax rate ~0.78%. South Indianapolis suburb, high first-time buyer volume. Indiana 1% homestead cap applies.',
-    state:'in', closingModel:'indiana',
-    heNote:'Indiana Homestead Standard Deduction: $45,000 off assessed value. Supplemental deduction: 35% of remaining assessed value up to $600,000. File with Johnson County Assessor by December 31.',
+    state:'in', closingModel:'indiana', sea1:true,
+    heNote:'Indiana Property Tax Relief — Two layers apply to your homestead. (1) Homestead Standard Deduction: $45,000 off assessed value + supplemental deduction of 35% of remaining assessed value. File with Johnson County Assessor by December 31 of the year you move in — renews automatically. (2) SEA 1 Credit (2025 law, effective 2026 tax bills): An automatic 10% credit on your annual homestead tax bill, capped at $300/year. No application required — county auditors apply this credit automatically. The Year 2+ figure in your analysis reflects both layers of savings.',
     districts:[
       {id:'joh-greenwood',label:'Greenwood',tr:0.0082},
       {id:'joh-franklin',label:'Franklin',tr:0.008},
@@ -2662,8 +2662,8 @@ const COUNTIES = {
     paUrl:'https://www.boonecounty.in.gov/departments/assessor',
     paName:'Boone County Assessor',
     notes:'Boone County (Zionsville/Lebanon/Whitestown) effective tax rate ~0.65% — lowest in the Indianapolis metro. Northwest Indianapolis suburb. Indiana 1% homestead cap applies.',
-    state:'in', closingModel:'indiana',
-    heNote:'Indiana Homestead Standard Deduction: $45,000 off assessed value. Supplemental deduction: 35% of remaining assessed value up to $600,000. File with Boone County Assessor by December 31.',
+    state:'in', closingModel:'indiana', sea1:true,
+    heNote:'Indiana Property Tax Relief — Two layers apply to your homestead. (1) Homestead Standard Deduction: $45,000 off assessed value + supplemental deduction of 35% of remaining assessed value. File with Boone County Assessor by December 31 of the year you move in — renews automatically. (2) SEA 1 Credit (2025 law, effective 2026 tax bills): An automatic 10% credit on your annual homestead tax bill, capped at $300/year. No application required — county auditors apply this credit automatically. The Year 2+ figure in your analysis reflects both layers of savings.',
     districts:[
       {id:'boo-zionsville',label:'Zionsville',tr:0.007},
       {id:'boo-lebanon',label:'Lebanon',tr:0.0068},
@@ -3687,7 +3687,11 @@ function collectInp(){
   let br=MKT.br,wr=MKT.wr;
   if(t===3){const lr=parseFloat(document.getElementById('flr').value);if(lr){br=lr;wr=lr;}}
   const bpi=cPI(loan,br),wpi=cPI(loan,wr);
-  const ty1=Math.round(price*MKT.tr/12),ty2=COUNTIES[ACTIVE_COUNTY]&&COUNTIES[ACTIVE_COUNTY].heType==='credit'?Math.round((price*MKT.tr/12)-(MKT.he/12)):Math.round((price-MKT.he)*MKT.tr/12);
+  let ty1=Math.round(price*MKT.tr/12),ty2=COUNTIES[ACTIVE_COUNTY]&&COUNTIES[ACTIVE_COUNTY].heType==='credit'?Math.round((price*MKT.tr/12)-(MKT.he/12)):Math.round((price-MKT.he)*MKT.tr/12);
+  // Indiana SEA 1 (2025): automatic 10% homestead credit capped at $300/year — applies from first tax bill, no application required
+  if(COUNTIES[ACTIVE_COUNTY]&&COUNTIES[ACTIVE_COUNTY].sea1){const sea1Credit=Math.min((ty2*12)*0.10,300);ty2=Math.round((ty2*12-sea1Credit)/12);}
+  // ty1Disp/ty2Disp aliases for clarity
+  const ty1Disp=ty1, ty2Disp=ty2;
   let bi=0,wi=0,il='',ic=false,ix=false;
   if(t===1){ix=true;il='EXCLUDED';}
   else if(t===2&&S.ins==='a'){const c=parseFloat(document.getElementById('fic').value)||285;bi=wi=c;il='CONFIRMED';ic=true;}
@@ -6027,6 +6031,8 @@ function checkShareURL() {
   inp.wpi = cPI(inp.loan, MKT.wr);
   inp.ty1 = Math.round(inp.price * MKT.tr / 12);
   inp.ty2 = COUNTIES[ACTIVE_COUNTY]&&COUNTIES[ACTIVE_COUNTY].heType==='credit'?Math.round((inp.price*MKT.tr/12)-(MKT.he/12)):Math.round((inp.price-MKT.he)*MKT.tr/12);
+  // Indiana SEA 1 (2025): automatic 10% homestead credit capped at $300/year
+  if(COUNTIES[ACTIVE_COUNTY]&&COUNTIES[ACTIVE_COUNTY].sea1){const sea1Credit=Math.min((inp.ty2*12)*0.10,300);inp.ty2=Math.round((inp.ty2*12-sea1Credit)/12);}
   inp.wi = inp.bi > 0 ? inp.bi * 1.35 : 0;
   inp.il = inp.ic ? 'CONFIRMED' : inp.ix ? 'EXCLUDED' : 'ESTIMATED';
   const [bp, wp] = cPMI(inp.loan, inp.crd);
