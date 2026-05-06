@@ -183,8 +183,8 @@ input:focus,select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 
 .wcd{font-size:.82rem;color:var(--muted);line-height:1.55;}
 
 /* ANALYSIS NAV */
-.an{background:var(--white);border-bottom:1px solid var(--rule);position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;box-shadow:0 2px 12px rgba(26,35,50,.06);}
-.ats{display:flex;overflow-x:auto;}
+.an{background:var(--white);border-bottom:1px solid var(--rule);position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:0 1.5rem;box-shadow:0 2px 12px rgba(26,35,50,.06);}
+.ats{display:flex;overflow-x:auto;flex:1 1 auto;min-width:0;}
 .at{padding:1rem 1.4rem;font-family:var(--fm);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;border:none;background:none;color:var(--muted);border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;}
 .at:hover{color:var(--midnight);}
 .at.atc.active{color:var(--teal-dim);border-bottom-color:var(--teal);}
@@ -380,7 +380,7 @@ input:focus,select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 
 @media(max-width:480px){.roscoe-panel{width:100vw;height:100dvh;bottom:0;right:0;border-radius:0;}
 .roscoe-bubble{bottom:1.25rem;right:1.25rem;}}
 footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;padding:2rem 1.5rem;font-family:var(--fm);font-size:.65rem;letter-spacing:.05em;line-height:2.4;border-top:1px solid rgba(176,190,197,.15);}
-.nav-btns{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;}
+.nav-btns{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;flex-shrink:0;padding:.4rem 0;}
 .rate-warn-box{background:#fff8e6;border:1.5px solid #c8900a;border-left:4px solid #c8900a;border-radius:0 6px 6px 0;padding:1rem 1.25rem;}
 .rate-warn-lbl{font-family:var(--fm);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a5200;font-weight:500;margin-bottom:.4rem;}
 .rate-warn-msg{font-size:.85rem;color:#5a3c00;line-height:1.65;}
@@ -478,6 +478,9 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .state-toggle.active-ky{background:#9a9070;border-color:#9a9070;color:var(--white);}
 .state-toggle.hint-ky{border-color:rgba(154,144,112,.45);color:rgba(195,185,150,.9);}
 .state-toggle.hint-ky:hover{border-color:#9a9070;color:#9a9070;}
+.state-toggle.active-ut{background:#8090a8;border-color:#8090a8;color:var(--white);}
+.state-toggle.hint-ut{border-color:rgba(128,144,168,.45);color:rgba(175,195,220,.9);}
+.state-toggle.hint-ut:hover{border-color:#8090a8;color:#8090a8;}
 .state-toggle:hover:not(.active-fl):not(.active-tx):not(.active-nc):not(.active-sc):not(.active-tn):not(.active-al):not(.active-va):not(.active-ga):not(.active-az):not(.active-nv):not(.active-md){border-color:rgba(176,190,197,.6);color:rgba(176,190,197,.9);}
 /* State toggle hint colors */
 .state-toggle.hint-ga{border-color:rgba(139,30,45,.45);color:rgba(180,100,110,.9);}
@@ -574,6 +577,9 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .county-pill.ky{border-color:rgba(154,144,112,.65);color:rgba(195,185,150,.95);height:auto;background:transparent;}
 .county-pill.ky:hover{border-color:#9a9070;color:var(--white);background:rgba(154,144,112,.25);}
 .county-pill.ky.active{background:#9a9070;border-color:#9a9070;color:var(--white);}
+.county-pill.ut{border-color:rgba(128,144,168,.65);color:rgba(175,195,220,.95);height:auto;background:transparent;}
+.county-pill.ut:hover{border-color:#8090a8;color:var(--white);background:rgba(128,144,168,.25);}
+.county-pill.ut.active{background:#8090a8;border-color:#8090a8;color:var(--white);}
 /* Indiana pills */
 .county-pill.in{border-color:rgba(107,92,69,.55);color:rgba(145,125,95,.95);}
 .county-pill.in:hover{border-color:var(--indiana-mid);color:var(--white);background:rgba(107,92,69,.25);}
@@ -852,7 +858,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <!-- WELCOME -->
 <div id="sw" class="screen active">
   <div class="mh">
-    <div class="mh-tag">Independent Buyer Tool · Florida · Georgia · Texas · North Carolina · South Carolina · Tennessee · Alabama · Virginia · Arizona · Nevada · Maryland · Indiana · Kansas · Kentucky · Louisiana · Missouri · Mississippi · Ohio · Pennsylvania · Arkansas · West Virginia · Delaware · Idaho</div>
+    <div class="mh-tag">Independent Buyer Tool · Florida · Georgia · Texas · North Carolina · South Carolina · Tennessee · Alabama · Virginia · Arizona · Nevada · Maryland · Indiana · Kansas · Kentucky · Louisiana · Missouri · Mississippi · Ohio · Pennsylvania · Arkansas · West Virginia · Delaware · Idaho · Utah</div>
     <h1 style="cursor:pointer;" onclick="show('w')" title="↩ Return to Home">Home<span class="tr">True</span></h1>
     <div class="mh-rule"></div>
     <div class="mh-sub">Honest mortgage analysis. No pressure. No agenda.</div>
@@ -886,6 +892,7 @@ footer strong{color:rgba(220,232,235,1.0);}
             <button class="state-toggle hint-sc" id="st-sc" onclick="selectState('sc',this)">South Carolina</button>
             <button class="state-toggle hint-tn" id="st-tn" onclick="selectState('tn',this)">Tennessee</button>
             <button class="state-toggle hint-tx" id="st-tx" onclick="selectState('tx',this)">Texas</button>
+            <button class="state-toggle hint-ut" id="st-ut" onclick="selectState('ut',this)">Utah</button>
             <button class="state-toggle hint-va" id="st-va" onclick="selectState('va',this)">Virginia</button>
             <button class="state-toggle hint-wv" id="st-wv" onclick="selectState('wv',this)">West Virginia</button>
           </div>
@@ -929,6 +936,12 @@ footer strong{color:rgba(220,232,235,1.0);}
           <button class="county-pill tx" onclick="selectCounty('travis',this)">Travis (Austin)</button>
           <button class="county-pill tx" onclick="selectCounty('williamson-tx',this)">Williamson (Round Rock)</button>
           <button class="county-pill tx" onclick="selectCounty('brazoria',this)">Brazoria (Pearland)</button>
+        </div>
+        <div class="county-pills" id="pills-ut" style="display:none;">
+          <button class="county-pill ut" onclick="selectCounty('davis-ut',this)">Davis (Layton/Kaysville)</button>
+          <button class="county-pill ut" onclick="selectCounty('salt-lake-ut',this)">Salt Lake (West Jordan/Sandy)</button>
+          <button class="county-pill ut" onclick="selectCounty('utah-county',this)">Utah County (Lehi/Saratoga Springs)</button>
+          <button class="county-pill ut" onclick="selectCounty('washington-ut',this)">Washington (St. George)</button>
         </div>
         <div class="county-pills" id="pills-nc" style="display:none;">
           <button class="county-pill nc" onclick="selectCounty('durham',this)">Durham</button>
@@ -3322,6 +3335,46 @@ const COUNTIES = {
     notes:'Warren County (Bowling Green unincorporated, Smith\'s Grove, Oakland) effective tax rate 0.84% — verified from Warren County Clerk Lynette Yates official 2025 Tax Rates document. Unincorporated COUNTY rate: county 0.1400 + library 0.037 + health 0.029 + extension 0.006 + conservation 0.0025 + state 0.106 + school 0.522 = 84.25 cents/$100 = 0.8425%. IMPORTANT: Bowling Green city adds city levy and higher school rate — city total 1.37%. Annex 1.05%. Lowest tax rate of Kentucky counties on platform. No deed transfer tax. Attorney-closed. Taxes due December 31.',
     state:'ky', closingModel:'kentucky',
     heNote:'Kentucky Homestead Exemption: $46,350 off assessed value — available ONLY to homeowners age 65 or older, or totally disabled. Standard first-time buyers do not qualify. Apply with the Warren County PVA. Your analysis correctly reflects the full tax rate.'
+  },
+  'davis-ut': {
+    name:'Davis County', short:'Davis',
+    tr:0.0059, he:0,
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://www.daviscountyutah.gov/assessor',
+    paName:'Davis County Assessor',
+    notes:'Davis County (Layton, Kaysville, Syracuse, Bountiful, Clearfield) effective tax rate 0.59% — verified from Utah State Tax Commission Report 520, October 8, 2025. Calculated: Davis County 0.001016 + Davis SD 0.006306 + Layton city 0.001143 + North Davis Fire 0.001557 + Weber Basin Water 0.000191 + Library 0.000222 + Animal Welfare 0.000098 + assessing 0.000138 = 0.010671 gross levy × 55% primary residential exemption = 0.5869% effective. Rate already incorporates Utah\'s 45% primary residential exemption — he:0 is correct. No transfer tax. Escrow-closed. Taxes due November 30.',
+    state:'ut', closingModel:'utah',
+    heNote:'Utah Primary Residential Exemption: Utah exempts 45% of your home\'s value from property taxes automatically — no application required. This exemption is built into the rate shown in your analysis. Your tax is calculated on 55% of the purchase price. There is nothing to file. The savings are already reflected in your numbers from day one.'
+  },
+  'salt-lake-ut': {
+    name:'Salt Lake County', short:'Salt Lake',
+    tr:0.0057, he:0,
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://slco.org/assessor/',
+    paName:'Salt Lake County Assessor',
+    notes:'Salt Lake County (West Jordan, South Jordan, Sandy, Herriman, Riverton, Taylorsville) effective tax rate 0.57% — verified from Utah State Tax Commission Report 520, October 8, 2025. Calculated: SL County 0.001253 + Jordan SD 0.005098 + West Jordan city 0.001328 + Unified Fire 0.001650 + Jordan Valley Water 0.000340 + Central Utah Water 0.000400 + SL County Library 0.000425 + assessing 0.000150 = 0.010644 gross levy × 55% = 0.5854% effective. Jordan SD covers the dominant first-time buyer corridor. Rate already incorporates Utah\'s 45% primary residential exemption. No transfer tax. Escrow-closed. Taxes due November 30.',
+    state:'ut', closingModel:'utah',
+    heNote:'Utah Primary Residential Exemption: Utah exempts 45% of your home\'s value from property taxes automatically — no application required. This exemption is built into the rate shown in your analysis. Your tax is calculated on 55% of the purchase price. There is nothing to file. The savings are already reflected in your numbers from day one.'
+  },
+  'utah-county': {
+    name:'Utah County', short:'Utah County',
+    tr:0.0055, he:0,
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://www.utahcounty.gov/Dept/Assessor/',
+    paName:'Utah County Assessor',
+    notes:'Utah County (Lehi, Saratoga Springs, Eagle Mountain, American Fork, Orem, Provo) effective tax rate 0.55% — verified from Utah State Tax Commission Report 520, October 8, 2025. Calculated: Utah County 0.000893 + Alpine SD 0.005774 + Lehi city 0.001163 + Unified Fire 0.001650 + Central Utah Water 0.000400 + assessing 0.000126 = 0.010006 gross levy × 55% = 0.5503% effective. Alpine SD covers the dominant first-time buyer markets (Lehi, Saratoga Springs, Eagle Mountain — among fastest-growing cities in the US). Rate already incorporates Utah\'s 45% primary residential exemption. No transfer tax. Escrow-closed. Taxes due November 30.',
+    state:'ut', closingModel:'utah',
+    heNote:'Utah Primary Residential Exemption: Utah exempts 45% of your home\'s value from property taxes automatically — no application required. This exemption is built into the rate shown in your analysis. Your tax is calculated on 55% of the purchase price. There is nothing to file. The savings are already reflected in your numbers from day one.'
+  },
+  'washington-ut': {
+    name:'Washington County', short:'Washington',
+    tr:0.0042, he:0,
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://www.washco.utah.gov/assessor/',
+    paName:'Washington County Assessor',
+    notes:'Washington County (St. George, Washington City, Hurricane, Ivins, Santa Clara) effective tax rate 0.42% — verified from Utah State Tax Commission Report 520, October 8, 2025. Calculated: Washington County 0.000486 + Washington SD 0.004687 + St George city 0.000754 + Hurricane Valley Fire 0.000996 + Washington County Water 0.000399 + assessing 0.000237 = 0.007559 gross levy × 55% = 0.4157% effective. Lowest rate of all four Utah counties. St. George is one of the fastest-growing metros in the US. Rate already incorporates Utah\'s 45% primary residential exemption. No transfer tax. Escrow-closed. Taxes due November 30.',
+    state:'ut', closingModel:'utah',
+    heNote:'Utah Primary Residential Exemption: Utah exempts 45% of your home\'s value from property taxes automatically — no application required. This exemption is built into the rate shown in your analysis. Your tax is calculated on 55% of the purchase price. There is nothing to file. The savings are already reflected in your numbers from day one.'
   }
 };
   // Active county — defaults to Miami-Dade
@@ -3344,7 +3397,7 @@ function setCounty(key) {
   document.querySelectorAll('.active-county-short').forEach(el => el.textContent = c.short);
   // Update scope badge
   const sb = document.querySelector('.scope-b');
-  const stateLabel = c.state==='tx' ? 'Texas' : c.state==='nc' ? 'North Carolina' : c.state==='ga' ? 'Georgia' : c.state==='sc' ? 'South Carolina' : c.state==='tn' ? 'Tennessee' : c.state==='al' ? 'Alabama' : c.state==='va' ? 'Virginia' : c.state==='az' ? 'Arizona' : c.state==='nv' ? 'Nevada' : c.state==='md' ? 'Maryland' : c.state==='in' ? 'Indiana' : c.state==='ks' ? 'Kansas' : c.state==='la' ? 'Louisiana' : c.state==='mo' ? 'Missouri' : c.state==='oh' ? 'Ohio' : c.state==='pa' ? 'Pennsylvania' : c.state==='ar' ? 'Arkansas' : c.state==='ms' ? 'Mississippi' : c.state==='wv' ? 'West Virginia' : c.state==='de' ? 'Delaware' : c.state==='id' ? 'Idaho' : c.state==='ky' ? 'Kentucky' : 'Florida';
+  const stateLabel = c.state==='tx' ? 'Texas' : c.state==='nc' ? 'North Carolina' : c.state==='ga' ? 'Georgia' : c.state==='sc' ? 'South Carolina' : c.state==='tn' ? 'Tennessee' : c.state==='al' ? 'Alabama' : c.state==='va' ? 'Virginia' : c.state==='az' ? 'Arizona' : c.state==='nv' ? 'Nevada' : c.state==='md' ? 'Maryland' : c.state==='in' ? 'Indiana' : c.state==='ks' ? 'Kansas' : c.state==='la' ? 'Louisiana' : c.state==='mo' ? 'Missouri' : c.state==='oh' ? 'Ohio' : c.state==='pa' ? 'Pennsylvania' : c.state==='ar' ? 'Arkansas' : c.state==='ms' ? 'Mississippi' : c.state==='wv' ? 'West Virginia' : c.state==='de' ? 'Delaware' : c.state==='id' ? 'Idaho' : c.state==='ky' ? 'Kentucky' : c.state==='ut' ? 'Utah' : 'Florida';
   if(sb) sb.textContent = c.name + ' · ' + stateLabel;
   // Update verified strip
   const vs = document.getElementById('avs');
@@ -3535,11 +3588,11 @@ let ACTIVE_STATE = 'fl';
 
 function selectState(state, btn) {
   ACTIVE_STATE = state;
-  const toggleMap = {fl:'st-fl', ga:'st-ga', tx:'st-tx', nc:'st-nc', sc:'st-sc', tn:'st-tn', al:'st-al', va:'st-va', az:'st-az', nv:'st-nv', md:'st-md', in:'st-in', oh:'st-oh', mo:'st-mo', pa:'st-pa', ks:'st-ks', la:'st-la', ar:'st-ar', ms:'st-ms', wv:'st-wv', de:'st-de', id:'st-id', ky:'st-ky'};
+  const toggleMap = {fl:'st-fl', ga:'st-ga', tx:'st-tx', nc:'st-nc', sc:'st-sc', tn:'st-tn', al:'st-al', va:'st-va', az:'st-az', nv:'st-nv', md:'st-md', in:'st-in', oh:'st-oh', mo:'st-mo', pa:'st-pa', ks:'st-ks', la:'st-la', ar:'st-ar', ms:'st-ms', wv:'st-wv', de:'st-de', id:'st-id', ky:'st-ky', ut:'st-ut'};
   Object.entries(toggleMap).forEach(([s, id]) => {
     const el = document.getElementById(id);
     if (!el) return;
-    el.classList.remove('active-fl','active-ga','active-tx','active-nc','active-sc','active-tn','active-al','active-va','active-az','active-nv','active-md','active-in','active-oh','active-mo','active-pa','active-ks','active-la','active-ar','active-ms','active-wv','active-de','active-id','active-ky','hint-fl','hint-ga','hint-tx','hint-nc','hint-sc','hint-tn','hint-al','hint-va','hint-az','hint-nv','hint-md','hint-in','hint-oh','hint-mo','hint-pa','hint-ks','hint-la','hint-ar','hint-ms','hint-wv','hint-de','hint-id','hint-ky');
+    el.classList.remove('active-fl','active-ga','active-tx','active-nc','active-sc','active-tn','active-al','active-va','active-az','active-nv','active-md','active-in','active-oh','active-mo','active-pa','active-ks','active-la','active-ar','active-ms','active-wv','active-de','active-id','active-ky','active-ut','hint-fl','hint-ga','hint-tx','hint-nc','hint-sc','hint-tn','hint-al','hint-va','hint-az','hint-nv','hint-md','hint-in','hint-oh','hint-mo','hint-pa','hint-ks','hint-la','hint-ar','hint-ms','hint-wv','hint-de','hint-id','hint-ky','hint-ut');
     if (s === state) {
       el.classList.add('active-' + state);
     } else {
@@ -3547,7 +3600,7 @@ function selectState(state, btn) {
     }
   });
   // Show/hide county pill groups
-  ['fl','ga','tx','nc','sc','tn','al','va','az','md','nv','in','oh','mo','pa','ks','la','ar','ms','wv','de','id','ky'].forEach(s => {
+  ['fl','ga','tx','nc','sc','tn','al','va','az','md','nv','in','oh','mo','pa','ks','la','ar','ms','wv','de','id','ky','ut'].forEach(s => {
     const el = document.getElementById('pills-' + s);
     if(el) el.style.display = (state===s) ? 'flex' : 'none';
   });
@@ -3577,6 +3630,7 @@ function selectState(state, btn) {
     else if(state==='de') legend.textContent = 'Delaware · Chesapeake Blue · Wilmington · Newark · Rehoboth Beach';
     else if(state==='id') legend.textContent = 'Idaho · Idaho Steelhead · Boise · Nampa · Coeur d\'Alene';
     else if(state==='ky') legend.textContent = 'Kentucky · KY Limestone · Louisville · Lexington · Covington · Bowling Green';
+    else if(state==='ut') legend.textContent = 'Utah · Utah Snow · Salt Lake · Lehi · Layton · St. George';
   }
   // Show county row when state is selected
   const countyRow = document.getElementById('county-row');
@@ -5234,6 +5288,27 @@ function buildClosingCosts(inp) {
       <div class="cc-total-row"><span class="cc-total-lbl">Attorney &amp; Title Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
     reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Kentucky property taxes are paid in arrears and due December 31 annually. Your lender will collect escrow monthly. No deed transfer tax in Kentucky. The Kentucky Homestead Exemption ($46,350 off assessed value) applies only to homeowners age 65+ or totally disabled — budget for the full tax rate from day one.`;
 
+  } else if (model === 'utah') {
+    const recordingFee = 50;
+    const titleSearch = 275;
+    const titleInsLender = Math.round(loan * 0.00375);
+    const titleInsOwner = Math.round(p * 0.00325);
+    const escrowFee = Math.round(p * 0.001 + 200);
+    govTotal = recordingFee;
+    titleTotal = titleSearch + titleInsLender + titleInsOwner + escrowFee;
+    stateNote = `<span class="nl" style="color:#8090a8;">${countyName} — Utah</span><p>Utah has <strong>no real estate transfer tax</strong>. Utah is an <strong>escrow-closed state</strong> — your closing is handled by a title or escrow company. Property taxes are due <strong>November 30</strong> annually as a single payment. Utah's primary residential exemption automatically reduces your taxable value to <strong>55% of market value</strong> — no application required. This exemption is already reflected in your analysis rate. Confirm all figures against your official Closing Disclosure.</p>`;
+    govSection = `<div class="cc-section"><div class="cc-section-title">Government &amp; Recording Fees</div>
+      <div class="cc-row"><div class="cc-item">Recording Fees — County Recorder<span class="cc-note">Deed and mortgage recording at the county recorder's office.</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
+      <div class="cc-row"><div class="cc-item">No State Transfer Tax<span class="cc-note">Utah does not impose a real estate transfer tax — $0</span></div><div class="cc-val">$0</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
+    titleSection = `<div class="cc-section"><div class="cc-section-title">Escrow, Title &amp; Settlement Fees</div>
+      <div class="cc-row"><div class="cc-item">Title Search &amp; Examination</div><div class="cc-val">${fmt(titleSearch)}</div></div>
+      <div class="cc-row"><div class="cc-item">Lender's Title Insurance<span class="cc-note">Required by lender — protects lender's interest</span></div><div class="cc-val">${fmt(titleInsLender)}</div></div>
+      <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended — one-time premium</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
+      <div class="cc-row"><div class="cc-item">Escrow / Settlement Fee<span class="cc-note">Utah is escrow-closed — handled by title/escrow company, not an attorney</span></div><div class="cc-val">${fmt(escrowFee)}</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Escrow &amp; Title Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
+    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Utah property taxes are due November 30 annually as a single payment. Your lender will collect monthly escrow. No transfer tax in Utah. The 45% primary residential exemption is automatic — already reflected in your analysis rate. No application needed.`;
+
   } else if (model === 'indiana') {
     const recordingFee = 25; // Indiana recording fees are very low — per-page
     const titleSearch = 275;
@@ -5489,6 +5564,27 @@ function buildHomesteadGuide(inp) {
       <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Notify your mortgage servicer after approval</div><div class="hg-desc">Once the deduction is confirmed, contact your mortgage servicer to recalculate your escrow. The lower tax bill should reduce your monthly payment starting the year after filing.</div></div></div>
       <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Indiana 1% Homestead Cap</span><p>Indiana law caps property taxes on homestead properties at 1% of gross assessed value annually. This means no matter how high the tax rate, your annual homestead property tax cannot exceed 1% of what your home is assessed at. In fast-appreciating markets this cap provides significant long-term protection.</p></div>
       <div class="nt nt-em" style="margin-top:1rem;"><span class="nl nl-em">Senate Enrolled Act 1 — New Automatic Credit (2025 Law)</span><p>Beginning with 2026 property tax bills, every Indiana homestead automatically receives an additional <strong>10% credit on the annual tax bill, capped at $300 per year</strong>. This is separate from the $45,000 standard deduction — it is applied after your deductions are calculated. <strong>No application is required.</strong> Your county auditor identifies eligible homesteads and applies the credit automatically. The Year 2+ figure in your analysis already reflects this credit. For example: if your annual tax bill after deductions is $2,040, your SEA 1 credit is $204 — reducing the bill to $1,836 per year ($153/month). The credit is capped at $300, meaning homes with post-deduction tax bills above $3,000 annually receive the maximum $300 savings.</p></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
+    </div>`;
+  }
+
+  if (model === 'utah') {
+    return `<div class="cw">
+      <div class="ae em">Section V</div>
+      <h2 class="at2">Property Tax &amp; Exemption Guide</h2>
+      <div class="ar"></div>
+      <div class="nt nt-em" style="margin-bottom:1.5rem;">
+        <span class="nl nl-em" style="color:#8090a8;">${c.name} — Utah Property Tax</span>
+        <p>Good news — Utah's primary residential exemption is <strong>automatic</strong>. There is nothing to file, no deadline to meet, and no application to submit. The exemption is already built into the rate shown in your analysis. Here is everything you need to understand your Utah property tax bill.</p>
+      </div>
+      ${deadlineHtml}
+      <h3 style="font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--midnight);margin:1.5rem 0 1rem;">How Utah Property Taxes Work</h3>
+      <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">The 45% Primary Residential Exemption — automatic</div><div class="hg-desc">Utah law exempts 45% of your primary home's value from property taxes. This means your property tax is calculated on only 55% of what you paid for the home. This exemption applies automatically to every owner-occupied primary residence — no filing, no application, no deadline. It is already reflected in the rate shown in your analysis. You will see it on your first tax bill.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open County Assessor Portal</a></div></div>
+      <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">How your rate was calculated</div><div class="hg-desc">Utah levy rates are expressed per $1 of assessed value. Your county's combined levy — covering county government, school district, city, fire district, and water conservancy — is multiplied by 55% (your taxable share) to produce the effective rate in your analysis. Every levying district in your area contributes to the total. The rate in your analysis is the all-in number for your specific market area.</div></div></div>
+      <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">Taxes due November 30 — single annual payment</div><div class="hg-desc">Utah property taxes are billed annually and due by November 30. There is a 3% discount if paid by November 30 — most lenders collect monthly escrow to ensure the full payment is made on time. Unlike many states, Utah has a single annual due date rather than two installments. Your lender will handle this through escrow.</div></div></div>
+      <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">No real estate transfer tax in Utah</div><div class="hg-desc">Utah does not impose a transfer tax on real estate transactions. This is a meaningful closing cost savings compared to many states. Your closing costs section reflects this — only recording fees apply on the government side.</div></div></div>
+      <div class="hg-step"><div class="hg-num">5</div><div class="hg-content"><div class="hg-title">Utah is escrow-closed</div><div class="hg-desc">Like Idaho, Utah closings are handled by a title company or escrow company — not an attorney. Your lender coordinates directly with the escrow officer. The process is efficient. Most Utah closings can be completed remotely via remote online notarization if needed.</div></div></div>
+      <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Why Utah Rates Look Low</span><p>Utah's effective property tax rates appear low compared to many states — and they are. The 45% exemption is a significant reason. Washington County (St. George) at 0.42% is among the lowest rates on the platform. On a $500,000 home in St. George, annual property taxes run approximately $2,100. In Davis or Salt Lake County at 0.57–0.59%, the same home runs approximately $2,850–$2,950 per year. These are genuine rates verified from the Utah State Tax Commission's 2025 certified rate report.</p></div>
       <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
     </div>`;
   }
