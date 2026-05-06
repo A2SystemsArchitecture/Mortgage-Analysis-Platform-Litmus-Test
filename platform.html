@@ -481,6 +481,9 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .state-toggle.active-ut{background:#8090a8;border-color:#8090a8;color:var(--white);}
 .state-toggle.hint-ut{border-color:rgba(128,144,168,.45);color:rgba(175,195,220,.9);}
 .state-toggle.hint-ut:hover{border-color:#8090a8;color:#8090a8;}
+.state-toggle.active-nm{background:#c8a030;border-color:#c8a030;color:#1a2332;}
+.state-toggle.hint-nm{border-color:rgba(200,160,48,.45);color:rgba(210,175,80,.9);}
+.state-toggle.hint-nm:hover{border-color:#c8a030;color:#c8a030;}
 .state-toggle:hover:not(.active-fl):not(.active-tx):not(.active-nc):not(.active-sc):not(.active-tn):not(.active-al):not(.active-va):not(.active-ga):not(.active-az):not(.active-nv):not(.active-md){border-color:rgba(176,190,197,.6);color:rgba(176,190,197,.9);}
 /* State toggle hint colors */
 .state-toggle.hint-ga{border-color:rgba(139,30,45,.45);color:rgba(180,100,110,.9);}
@@ -580,6 +583,9 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .county-pill.ut{border-color:rgba(128,144,168,.65);color:rgba(175,195,220,.95);height:auto;background:transparent;}
 .county-pill.ut:hover{border-color:#8090a8;color:var(--white);background:rgba(128,144,168,.25);}
 .county-pill.ut.active{background:#8090a8;border-color:#8090a8;color:var(--white);}
+.county-pill.nm{border-color:rgba(200,160,48,.65);color:rgba(210,175,80,.95);height:auto;background:transparent;}
+.county-pill.nm:hover{border-color:#c8a030;color:#1a2332;background:rgba(200,160,48,.25);}
+.county-pill.nm.active{background:#c8a030;border-color:#c8a030;color:#1a2332;}
 /* Indiana pills */
 .county-pill.in{border-color:rgba(107,92,69,.55);color:rgba(145,125,95,.95);}
 .county-pill.in:hover{border-color:var(--indiana-mid);color:var(--white);background:rgba(107,92,69,.25);}
@@ -858,7 +864,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <!-- WELCOME -->
 <div id="sw" class="screen active">
   <div class="mh">
-    <div class="mh-tag">Independent Buyer Tool · Florida · Georgia · Texas · North Carolina · South Carolina · Tennessee · Alabama · Virginia · Arizona · Nevada · Maryland · Indiana · Kansas · Kentucky · Louisiana · Missouri · Mississippi · Ohio · Pennsylvania · Arkansas · West Virginia · Delaware · Idaho · Utah</div>
+    <div class="mh-tag">Independent Buyer Tool · Florida · Georgia · Texas · North Carolina · South Carolina · Tennessee · Alabama · Virginia · Arizona · Nevada · New Mexico · Maryland · Indiana · Kansas · Kentucky · Louisiana · Missouri · Mississippi · Ohio · Pennsylvania · Arkansas · West Virginia · Delaware · Idaho · Utah</div>
     <h1 style="cursor:pointer;" onclick="show('w')" title="↩ Return to Home">Home<span class="tr">True</span></h1>
     <div class="mh-rule"></div>
     <div class="mh-sub">Honest mortgage analysis. No pressure. No agenda.</div>
@@ -886,6 +892,7 @@ footer strong{color:rgba(220,232,235,1.0);}
             <button class="state-toggle hint-mo" id="st-mo" onclick="selectState('mo',this)">Missouri</button>
             <button class="state-toggle hint-ms" id="st-ms" onclick="selectState('ms',this)">Mississippi</button>
             <button class="state-toggle hint-nv" id="st-nv" onclick="selectState('nv',this)">Nevada</button>
+            <button class="state-toggle hint-nm" id="st-nm" onclick="selectState('nm',this)">New Mexico</button>
             <button class="state-toggle hint-nc" id="st-nc" onclick="selectState('nc',this)">North Carolina</button>
             <button class="state-toggle hint-oh" id="st-oh" onclick="selectState('oh',this)">Ohio</button>
             <button class="state-toggle hint-pa" id="st-pa" onclick="selectState('pa',this)">Pennsylvania</button>
@@ -997,6 +1004,11 @@ footer strong{color:rgba(220,232,235,1.0);}
         <div class="county-pills" id="pills-nv" style="display:none;">
           <button class="county-pill nv" onclick="selectCounty('clark',this)">Clark (Las Vegas)</button>
           <button class="county-pill nv" onclick="selectCounty('washoe',this)">Washoe (Reno)</button>
+        </div>
+        <div class="county-pills" id="pills-nm" style="display:none;">
+          <button class="county-pill nm" onclick="selectCounty('bernalillo-nm',this)">Bernalillo (Albuquerque)</button>
+          <button class="county-pill nm" onclick="selectCounty('dona-ana-nm',this)">Doña Ana (Las Cruces)</button>
+          <button class="county-pill nm" onclick="selectCounty('sandoval-nm',this)">Sandoval (Rio Rancho)</button>
         </div>
         <div class="county-pills" id="pills-id" style="display:none;">
           <button class="county-pill id" onclick="selectCounty('ada-id',this)">Ada (Boise/Meridian)</button>
@@ -3375,6 +3387,36 @@ const COUNTIES = {
     notes:'Washington County (St. George, Washington City, Hurricane, Ivins, Santa Clara) effective tax rate 0.42% — verified from Utah State Tax Commission Report 520, October 8, 2025. Calculated: Washington County 0.000486 + Washington SD 0.004687 + St George city 0.000754 + Hurricane Valley Fire 0.000996 + Washington County Water 0.000399 + assessing 0.000237 = 0.007559 gross levy × 55% = 0.4157% effective. Lowest rate of all four Utah counties. St. George is one of the fastest-growing metros in the US. Rate already incorporates Utah\'s 45% primary residential exemption. No transfer tax. Escrow-closed. Taxes due November 30.',
     state:'ut', closingModel:'utah',
     heNote:'Utah Primary Residential Exemption: Utah exempts 45% of your home\'s value from property taxes automatically — no application required. This exemption is built into the rate shown in your analysis. Your tax is calculated on 55% of the purchase price. There is nothing to file. The savings are already reflected in your numbers from day one.'
+  },
+  'bernalillo-nm': {
+    name:'Bernalillo County', short:'Bernalillo',
+    tr:0.0161, he:6000, heType:'value',
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://www.bernco.gov/assessor/',
+    paName:'Bernalillo County Assessor',
+    notes:'Bernalillo County (Albuquerque) effective tax rate 1.61% — verified from LGBMS Certificate of Property Tax Rates TY2025, printed 2025-09-23. Albuquerque city residential (district 12 IN R): 48.323 total mills. New Mexico assesses at 1/3 of market value — effective rate = 48.323 / 3000 = 1.611%. Rate components: State 1.360 + County 8.357 + Albuquerque city 11.107 + APS Schools 10.383 + CNM College 3.706 + UNM Hospital 6.400 + Arroyo Flood 0.846 + Ciudad SWCD 0.095 + Middle Rio Grande Conservancy 6.069 mills. NOTE: Middle Rio Grande Conservancy District (6.069 mills = 0.20% effective) covers irrigation and flood infrastructure — most Albuquerque valley properties pay this levy. No buyer deed transfer tax. Attorney or escrow closing. Taxes due November 30.',
+    state:'nm', closingModel:'newmexico',
+    heNote:'New Mexico Head of Family Exemption: $2,000 off assessed value — equivalent to $6,000 off market value (NM assesses at 1/3 of market value). Must be your primary residence. File with the Bernalillo County Assessor — deadline is typically the last day of February. Renews annually as long as you remain the primary resident. Annual savings: approximately $97 at Bernalillo rates (~$8/month). File as soon as your deed is recorded.'
+  },
+  'dona-ana-nm': {
+    name:'Doña Ana County', short:'Doña Ana',
+    tr:0.0101, he:6000, heType:'value',
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://www.donaanacounty.org/assessor',
+    paName:'Doña Ana County Assessor',
+    notes:'Doña Ana County (Las Cruces) effective tax rate 1.01% — verified from LGBMS Certificate of Property Tax Rates TY2025, printed 2025-08-22. Las Cruces city residential (district 2 IN R): 30.287 total mills. NM assesses at 1/3 of market value — effective rate = 30.287 / 3000 = 1.010%. Components: State 1.360 + County 9.047 + Las Cruces city 8.595 + Las Cruces Public Schools 9.326 + NMSU College 1.959 = 30.287 mills. Notably lower than Bernalillo — no UNM Hospital levy and lower school mill rate. No buyer deed transfer tax. Attorney or escrow closing. Taxes due November 30.',
+    state:'nm', closingModel:'newmexico',
+    heNote:'New Mexico Head of Family Exemption: $2,000 off assessed value — equivalent to $6,000 off market value (NM assesses at 1/3 of market value). Must be your primary residence. File with the Doña Ana County Assessor — deadline is typically the last day of February. Renews annually as long as you remain the primary resident. Annual savings: approximately $61 at Doña Ana rates (~$5/month). File as soon as your deed is recorded.'
+  },
+  'sandoval-nm': {
+    name:'Sandoval County', short:'Sandoval',
+    tr:0.0116, he:6000, heType:'value',
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://www.sandovalcounty.org/assessor',
+    paName:'Sandoval County Assessor',
+    notes:'Sandoval County (Rio Rancho) effective tax rate 1.16% — verified from LGBMS Certificate of Property Tax Rates TY2025, printed 2025-09-05. Rio Rancho city residential (district 94 IN R): 34.896 total mills. NM assesses at 1/3 of market value — effective rate = 34.896 / 3000 = 1.163%. Components: State 1.360 + County 6.133 + Rio Rancho city 9.407 + Rio Rancho Public Schools 10.591 + CNM College 3.706 + UNM Hospital 1.720 + Southern Sandoval Arroyo Flood Control 1.979 mills. Rio Rancho is one of the fastest-growing cities in New Mexico. No buyer deed transfer tax. Attorney or escrow closing. Taxes due November 30.',
+    state:'nm', closingModel:'newmexico',
+    heNote:'New Mexico Head of Family Exemption: $2,000 off assessed value — equivalent to $6,000 off market value (NM assesses at 1/3 of market value). Must be your primary residence. File with the Sandoval County Assessor — deadline is typically the last day of February. Renews annually as long as you remain the primary resident. Annual savings: approximately $70 at Sandoval rates (~$6/month). File as soon as your deed is recorded.'
   }
 };
   // Active county — defaults to Miami-Dade
@@ -3397,7 +3439,7 @@ function setCounty(key) {
   document.querySelectorAll('.active-county-short').forEach(el => el.textContent = c.short);
   // Update scope badge
   const sb = document.querySelector('.scope-b');
-  const stateLabel = c.state==='tx' ? 'Texas' : c.state==='nc' ? 'North Carolina' : c.state==='ga' ? 'Georgia' : c.state==='sc' ? 'South Carolina' : c.state==='tn' ? 'Tennessee' : c.state==='al' ? 'Alabama' : c.state==='va' ? 'Virginia' : c.state==='az' ? 'Arizona' : c.state==='nv' ? 'Nevada' : c.state==='md' ? 'Maryland' : c.state==='in' ? 'Indiana' : c.state==='ks' ? 'Kansas' : c.state==='la' ? 'Louisiana' : c.state==='mo' ? 'Missouri' : c.state==='oh' ? 'Ohio' : c.state==='pa' ? 'Pennsylvania' : c.state==='ar' ? 'Arkansas' : c.state==='ms' ? 'Mississippi' : c.state==='wv' ? 'West Virginia' : c.state==='de' ? 'Delaware' : c.state==='id' ? 'Idaho' : c.state==='ky' ? 'Kentucky' : c.state==='ut' ? 'Utah' : 'Florida';
+  const stateLabel = c.state==='tx' ? 'Texas' : c.state==='nc' ? 'North Carolina' : c.state==='ga' ? 'Georgia' : c.state==='sc' ? 'South Carolina' : c.state==='tn' ? 'Tennessee' : c.state==='al' ? 'Alabama' : c.state==='va' ? 'Virginia' : c.state==='az' ? 'Arizona' : c.state==='nv' ? 'Nevada' : c.state==='md' ? 'Maryland' : c.state==='in' ? 'Indiana' : c.state==='ks' ? 'Kansas' : c.state==='la' ? 'Louisiana' : c.state==='mo' ? 'Missouri' : c.state==='oh' ? 'Ohio' : c.state==='pa' ? 'Pennsylvania' : c.state==='ar' ? 'Arkansas' : c.state==='ms' ? 'Mississippi' : c.state==='wv' ? 'West Virginia' : c.state==='de' ? 'Delaware' : c.state==='id' ? 'Idaho' : c.state==='ky' ? 'Kentucky' : c.state==='ut' ? 'Utah' : c.state==='nm' ? 'New Mexico' : 'Florida';
   if(sb) sb.textContent = c.name + ' · ' + stateLabel;
   // Update verified strip
   const vs = document.getElementById('avs');
@@ -3588,11 +3630,11 @@ let ACTIVE_STATE = 'fl';
 
 function selectState(state, btn) {
   ACTIVE_STATE = state;
-  const toggleMap = {fl:'st-fl', ga:'st-ga', tx:'st-tx', nc:'st-nc', sc:'st-sc', tn:'st-tn', al:'st-al', va:'st-va', az:'st-az', nv:'st-nv', md:'st-md', in:'st-in', oh:'st-oh', mo:'st-mo', pa:'st-pa', ks:'st-ks', la:'st-la', ar:'st-ar', ms:'st-ms', wv:'st-wv', de:'st-de', id:'st-id', ky:'st-ky', ut:'st-ut'};
+  const toggleMap = {fl:'st-fl', ga:'st-ga', tx:'st-tx', nc:'st-nc', sc:'st-sc', tn:'st-tn', al:'st-al', va:'st-va', az:'st-az', nv:'st-nv', md:'st-md', in:'st-in', oh:'st-oh', mo:'st-mo', pa:'st-pa', ks:'st-ks', la:'st-la', ar:'st-ar', ms:'st-ms', wv:'st-wv', de:'st-de', id:'st-id', ky:'st-ky', ut:'st-ut', nm:'st-nm'};
   Object.entries(toggleMap).forEach(([s, id]) => {
     const el = document.getElementById(id);
     if (!el) return;
-    el.classList.remove('active-fl','active-ga','active-tx','active-nc','active-sc','active-tn','active-al','active-va','active-az','active-nv','active-md','active-in','active-oh','active-mo','active-pa','active-ks','active-la','active-ar','active-ms','active-wv','active-de','active-id','active-ky','active-ut','hint-fl','hint-ga','hint-tx','hint-nc','hint-sc','hint-tn','hint-al','hint-va','hint-az','hint-nv','hint-md','hint-in','hint-oh','hint-mo','hint-pa','hint-ks','hint-la','hint-ar','hint-ms','hint-wv','hint-de','hint-id','hint-ky','hint-ut');
+    el.classList.remove('active-fl','active-ga','active-tx','active-nc','active-sc','active-tn','active-al','active-va','active-az','active-nv','active-md','active-in','active-oh','active-mo','active-pa','active-ks','active-la','active-ar','active-ms','active-wv','active-de','active-id','active-ky','active-ut','active-nm','hint-fl','hint-ga','hint-tx','hint-nc','hint-sc','hint-tn','hint-al','hint-va','hint-az','hint-nv','hint-md','hint-in','hint-oh','hint-mo','hint-pa','hint-ks','hint-la','hint-ar','hint-ms','hint-wv','hint-de','hint-id','hint-ky','hint-ut','hint-nm');
     if (s === state) {
       el.classList.add('active-' + state);
     } else {
@@ -3600,7 +3642,7 @@ function selectState(state, btn) {
     }
   });
   // Show/hide county pill groups
-  ['fl','ga','tx','nc','sc','tn','al','va','az','md','nv','in','oh','mo','pa','ks','la','ar','ms','wv','de','id','ky','ut'].forEach(s => {
+  ['fl','ga','tx','nc','sc','tn','al','va','az','md','nv','in','oh','mo','pa','ks','la','ar','ms','wv','de','id','ky','ut','nm'].forEach(s => {
     const el = document.getElementById('pills-' + s);
     if(el) el.style.display = (state===s) ? 'flex' : 'none';
   });
@@ -3631,6 +3673,7 @@ function selectState(state, btn) {
     else if(state==='id') legend.textContent = 'Idaho · Idaho Steelhead · Boise · Nampa · Coeur d\'Alene';
     else if(state==='ky') legend.textContent = 'Kentucky · KY Limestone · Louisville · Lexington · Covington · Bowling Green';
     else if(state==='ut') legend.textContent = 'Utah · Utah Snow · Salt Lake · Lehi · Layton · St. George';
+    else if(state==='nm') legend.textContent = 'New Mexico · NM Zia Gold · Albuquerque · Las Cruces · Rio Rancho';
   }
   // Show county row when state is selected
   const countyRow = document.getElementById('county-row');
@@ -5309,6 +5352,27 @@ function buildClosingCosts(inp) {
       <div class="cc-total-row"><span class="cc-total-lbl">Escrow &amp; Title Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
     reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Utah property taxes are due November 30 annually as a single payment. Your lender will collect monthly escrow. No transfer tax in Utah. The 45% primary residential exemption is automatic — already reflected in your analysis rate. No application needed.`;
 
+  } else if (model === 'newmexico') {
+    const recordingFee = 75;
+    const titleSearch = 300;
+    const titleInsLender = Math.round(loan * 0.00375);
+    const titleInsOwner = Math.round(p * 0.00325);
+    const settlementFee = 575;
+    govTotal = recordingFee;
+    titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
+    stateNote = `<span class="nl" style="color:#c8a030;">${countyName} — New Mexico</span><p>New Mexico has <strong>no deed transfer tax on the buyer</strong>. New Mexico does impose a Realty Transfer Tax — but it is paid entirely by the <strong>seller</strong>, not the buyer. New Mexico uses a <strong>dual-track closing system</strong> — most transactions are attorney-closed by local custom, but escrow closings are legally permitted. Confirm with your agent which is standard in your specific area. Property is assessed at <strong>1/3 of market value</strong> annually. Taxes are due <strong>November 30</strong> in two equal installments — first half April 30, second half October 31. File for the Head of Family Exemption ($2,000 off assessed value) with your county assessor as soon as your deed is recorded. Confirm all figures against your official Closing Disclosure.</p>`;
+    govSection = `<div class="cc-section"><div class="cc-section-title">Government &amp; Recording Fees</div>
+      <div class="cc-row"><div class="cc-item">Recording Fees — County Clerk<span class="cc-note">Deed and mortgage recording at the county clerk's office.</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
+      <div class="cc-row"><div class="cc-item">No Buyer Deed Transfer Tax<span class="cc-note">New Mexico's Realty Transfer Tax is paid by the seller — $0 cost to buyer</span></div><div class="cc-val">$0</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
+    titleSection = `<div class="cc-section"><div class="cc-section-title">Title &amp; Settlement Fees</div>
+      <div class="cc-row"><div class="cc-item">Title Search &amp; Examination</div><div class="cc-val">${fmt(titleSearch)}</div></div>
+      <div class="cc-row"><div class="cc-item">Lender's Title Insurance<span class="cc-note">Required by lender — protects lender's interest</span></div><div class="cc-val">${fmt(titleInsLender)}</div></div>
+      <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended — one-time premium</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
+      <div class="cc-row"><div class="cc-item">Attorney / Settlement Fee<span class="cc-note">NM commonly attorney-closed; escrow also permitted — confirm with your agent</span></div><div class="cc-val">${fmt(settlementFee)}</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Settlement Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
+    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. New Mexico property taxes due in two installments — first half April 30, second half October 31. Your lender will collect monthly escrow. No buyer deed transfer tax — seller pays the Realty Transfer Tax. File Head of Family Exemption ($2,000 off assessed value) with your county assessor immediately after closing.`;
+
   } else if (model === 'indiana') {
     const recordingFee = 25; // Indiana recording fees are very low — per-page
     const titleSearch = 275;
@@ -5564,6 +5628,27 @@ function buildHomesteadGuide(inp) {
       <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Notify your mortgage servicer after approval</div><div class="hg-desc">Once the deduction is confirmed, contact your mortgage servicer to recalculate your escrow. The lower tax bill should reduce your monthly payment starting the year after filing.</div></div></div>
       <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Indiana 1% Homestead Cap</span><p>Indiana law caps property taxes on homestead properties at 1% of gross assessed value annually. This means no matter how high the tax rate, your annual homestead property tax cannot exceed 1% of what your home is assessed at. In fast-appreciating markets this cap provides significant long-term protection.</p></div>
       <div class="nt nt-em" style="margin-top:1rem;"><span class="nl nl-em">Senate Enrolled Act 1 — New Automatic Credit (2025 Law)</span><p>Beginning with 2026 property tax bills, every Indiana homestead automatically receives an additional <strong>10% credit on the annual tax bill, capped at $300 per year</strong>. This is separate from the $45,000 standard deduction — it is applied after your deductions are calculated. <strong>No application is required.</strong> Your county auditor identifies eligible homesteads and applies the credit automatically. The Year 2+ figure in your analysis already reflects this credit. For example: if your annual tax bill after deductions is $2,040, your SEA 1 credit is $204 — reducing the bill to $1,836 per year ($153/month). The credit is capped at $300, meaning homes with post-deduction tax bills above $3,000 annually receive the maximum $300 savings.</p></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
+    </div>`;
+  }
+
+  if (model === 'newmexico') {
+    return `<div class="cw">
+      <div class="ae em">Section V</div>
+      <h2 class="at2">Property Tax &amp; Exemption Guide</h2>
+      <div class="ar"></div>
+      <div class="nt nt-em" style="margin-bottom:1.5rem;">
+        <span class="nl nl-em" style="color:#c8a030;">${c.name} — New Mexico Property Tax</span>
+        <p>New Mexico has a unique tax structure — property is assessed at <strong>1/3 of market value</strong>, which means the mill rates look high but the effective rates are moderate. The Head of Family Exemption saves you $5–$8 per month and requires a one-time filing. Here is everything you need to know.</p>
+      </div>
+      ${deadlineHtml}
+      <h3 style="font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--midnight);margin:1.5rem 0 1rem;">How New Mexico Property Taxes Work</h3>
+      <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">Assessment at 1/3 of market value</div><div class="hg-desc">New Mexico assesses all real property at one-third of its estimated market value. This means your $400,000 home has an assessed value of approximately $133,333. Mill rates are then applied to this assessed value. One mill = $1 per $1,000 of assessed value. This is why NM mill rates appear large — they are applied to a much smaller base than states that assess at 100% of value.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open County Assessor Portal</a></div></div>
+      <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">Head of Family Exemption — file immediately after closing</div><div class="hg-desc">New Mexico offers a Head of Family Exemption of $2,000 off assessed value for primary residences. Since assessed value is 1/3 of market value, this equals $6,000 off market value. The annual savings are modest — approximately $61–$97 depending on your county — but the exemption is real and requires a one-time filing with your county assessor. The deadline is typically the last day of February. File as soon as your deed is recorded so the exemption applies to your first full tax year.</div></div></div>
+      <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">Two tax installments — April 30 and October 31</div><div class="hg-desc">New Mexico property taxes are billed annually but paid in two equal installments. The first half is due April 30, the second half October 31. Your lender will collect monthly escrow to cover both payments. New Mexico also has a 5% discount if you pay the full annual amount by November 10.</div></div></div>
+      <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">No buyer deed transfer tax</div><div class="hg-desc">New Mexico's Realty Transfer Tax is paid entirely by the seller. As a buyer, you pay $0 in transfer taxes at closing. This is a meaningful savings compared to states like Delaware (4%) or Pennsylvania (2%). Your closing costs reflect only recording fees on the government side.</div></div></div>
+      <div class="hg-step"><div class="hg-num">5</div><div class="hg-content"><div class="hg-title">Closing: attorney or escrow — confirm with your agent</div><div class="hg-desc">New Mexico uses a dual-track closing system. Attorney-closed transactions are common by local custom, particularly in established markets. Escrow closings conducted by title companies are also legally permitted and used in many transactions. Confirm with your real estate agent which is standard practice in your specific area and price range before your contract is finalized.</div></div></div>
+      ${c.name === 'Bernalillo County' ? `<div class="nt nt-wn" style="margin-top:1rem;"><span class="nl nl-wn">Bernalillo County — Middle Rio Grande Conservancy District</span><p>Bernalillo County's rate includes a significant levy from the Middle Rio Grande Conservancy District (6.069 mills = approximately 0.20% effective rate). This district funds irrigation and flood control infrastructure along the Rio Grande valley. Most properties within Albuquerque's metro area pay this levy. It is included in the 1.61% rate shown in your analysis. If your property is outside the conservancy district boundary, your rate would be lower — confirm with the Bernalillo County Assessor.</p></div>` : ''}
       <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
     </div>`;
   }
