@@ -481,9 +481,9 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .state-toggle.active-ut{background:#8090a8;border-color:#8090a8;color:var(--white);}
 .state-toggle.hint-ut{border-color:rgba(128,144,168,.45);color:rgba(175,195,220,.9);}
 .state-toggle.hint-ut:hover{border-color:#8090a8;color:#8090a8;}
-.state-toggle.active-nm{background:#c8a030;border-color:#c8a030;color:#1a2332;}
-.state-toggle.hint-nm{border-color:rgba(200,160,48,.45);color:rgba(210,175,80,.9);}
-.state-toggle.hint-nm:hover{border-color:#c8a030;color:#c8a030;}
+.state-toggle.active-nm{background:#c06080;border-color:#c06080;color:var(--white);}
+.state-toggle.hint-nm{border-color:rgba(192,96,128,.45);color:rgba(220,150,180,.9);}
+.state-toggle.hint-nm:hover{border-color:#c06080;color:#c06080;}
 .state-toggle:hover:not(.active-fl):not(.active-tx):not(.active-nc):not(.active-sc):not(.active-tn):not(.active-al):not(.active-va):not(.active-ga):not(.active-az):not(.active-nv):not(.active-md){border-color:rgba(176,190,197,.6);color:rgba(176,190,197,.9);}
 /* State toggle hint colors */
 .state-toggle.hint-ga{border-color:rgba(139,30,45,.45);color:rgba(180,100,110,.9);}
@@ -583,9 +583,9 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .county-pill.ut{border-color:rgba(128,144,168,.65);color:rgba(175,195,220,.95);height:auto;background:transparent;}
 .county-pill.ut:hover{border-color:#8090a8;color:var(--white);background:rgba(128,144,168,.25);}
 .county-pill.ut.active{background:#8090a8;border-color:#8090a8;color:var(--white);}
-.county-pill.nm{border-color:rgba(200,160,48,.65);color:rgba(210,175,80,.95);height:auto;background:transparent;}
-.county-pill.nm:hover{border-color:#c8a030;color:#1a2332;background:rgba(200,160,48,.25);}
-.county-pill.nm.active{background:#c8a030;border-color:#c8a030;color:#1a2332;}
+.county-pill.nm{border-color:rgba(192,96,128,.65);color:rgba(220,150,180,.95);height:auto;background:transparent;}
+.county-pill.nm:hover{border-color:#c06080;color:var(--white);background:rgba(192,96,128,.25);}
+.county-pill.nm.active{background:#c06080;border-color:#c06080;color:var(--white);}
 /* Indiana pills */
 .county-pill.in{border-color:rgba(107,92,69,.55);color:rgba(145,125,95,.95);}
 .county-pill.in:hover{border-color:var(--indiana-mid);color:var(--white);background:rgba(107,92,69,.25);}
@@ -3673,7 +3673,7 @@ function selectState(state, btn) {
     else if(state==='id') legend.textContent = 'Idaho · Idaho Steelhead · Boise · Nampa · Coeur d\'Alene';
     else if(state==='ky') legend.textContent = 'Kentucky · KY Limestone · Louisville · Lexington · Covington · Bowling Green';
     else if(state==='ut') legend.textContent = 'Utah · Utah Snow · Salt Lake · Lehi · Layton · St. George';
-    else if(state==='nm') legend.textContent = 'New Mexico · NM Zia Gold · Albuquerque · Las Cruces · Rio Rancho';
+    else if(state==='nm') legend.textContent = 'New Mexico · NM Sandia · Albuquerque · Las Cruces · Rio Rancho';
   }
   // Show county row when state is selected
   const countyRow = document.getElementById('county-row');
@@ -5360,7 +5360,7 @@ function buildClosingCosts(inp) {
     const settlementFee = 575;
     govTotal = recordingFee;
     titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
-    stateNote = `<span class="nl" style="color:#c8a030;">${countyName} — New Mexico</span><p>New Mexico has <strong>no deed transfer tax on the buyer</strong>. New Mexico does impose a Realty Transfer Tax — but it is paid entirely by the <strong>seller</strong>, not the buyer. New Mexico uses a <strong>dual-track closing system</strong> — most transactions are attorney-closed by local custom, but escrow closings are legally permitted. Confirm with your agent which is standard in your specific area. Property is assessed at <strong>1/3 of market value</strong> annually. Taxes are due <strong>November 30</strong> in two equal installments — first half April 30, second half October 31. File for the Head of Family Exemption ($2,000 off assessed value) with your county assessor as soon as your deed is recorded. Confirm all figures against your official Closing Disclosure.</p>`;
+    stateNote = `<span class="nl" style="color:#c06080;">${countyName} — New Mexico</span><p>New Mexico has <strong>no deed transfer tax on the buyer</strong>. New Mexico does impose a Realty Transfer Tax — but it is paid entirely by the <strong>seller</strong>, not the buyer. New Mexico uses a <strong>dual-track closing system</strong> — most transactions are attorney-closed by local custom, but escrow closings are legally permitted. Confirm with your agent which is standard in your specific area. Property is assessed at <strong>1/3 of market value</strong> annually. Taxes are due <strong>November 30</strong> in two equal installments — first half April 30, second half October 31. File for the Head of Family Exemption ($2,000 off assessed value) with your county assessor as soon as your deed is recorded. Confirm all figures against your official Closing Disclosure.</p>`;
     govSection = `<div class="cc-section"><div class="cc-section-title">Government &amp; Recording Fees</div>
       <div class="cc-row"><div class="cc-item">Recording Fees — County Clerk<span class="cc-note">Deed and mortgage recording at the county clerk's office.</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
       <div class="cc-row"><div class="cc-item">No Buyer Deed Transfer Tax<span class="cc-note">New Mexico's Realty Transfer Tax is paid by the seller — $0 cost to buyer</span></div><div class="cc-val">$0</div></div>
@@ -5638,7 +5638,7 @@ function buildHomesteadGuide(inp) {
       <h2 class="at2">Property Tax &amp; Exemption Guide</h2>
       <div class="ar"></div>
       <div class="nt nt-em" style="margin-bottom:1.5rem;">
-        <span class="nl nl-em" style="color:#c8a030;">${c.name} — New Mexico Property Tax</span>
+        <span class="nl nl-em" style="color:#c06080;">${c.name} — New Mexico Property Tax</span>
         <p>New Mexico has a unique tax structure — property is assessed at <strong>1/3 of market value</strong>, which means the mill rates look high but the effective rates are moderate. The Head of Family Exemption saves you $5–$8 per month and requires a one-time filing. Here is everything you need to know.</p>
       </div>
       ${deadlineHtml}
