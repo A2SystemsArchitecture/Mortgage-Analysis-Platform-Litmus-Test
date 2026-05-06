@@ -475,6 +475,9 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .state-toggle.active-id{background:#4a7c94;border-color:#4a7c94;color:var(--white);}
 .state-toggle.hint-id{border-color:rgba(74,124,148,.45);color:rgba(110,175,205,.9);}
 .state-toggle.hint-id:hover{border-color:#4a7c94;color:#4a7c94;}
+.state-toggle.active-ky{background:#9a9070;border-color:#9a9070;color:var(--white);}
+.state-toggle.hint-ky{border-color:rgba(154,144,112,.45);color:rgba(195,185,150,.9);}
+.state-toggle.hint-ky:hover{border-color:#9a9070;color:#9a9070;}
 .state-toggle:hover:not(.active-fl):not(.active-tx):not(.active-nc):not(.active-sc):not(.active-tn):not(.active-al):not(.active-va):not(.active-ga):not(.active-az):not(.active-nv):not(.active-md){border-color:rgba(176,190,197,.6);color:rgba(176,190,197,.9);}
 /* State toggle hint colors */
 .state-toggle.hint-ga{border-color:rgba(139,30,45,.45);color:rgba(180,100,110,.9);}
@@ -568,6 +571,9 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .county-pill.id{border-color:rgba(74,124,148,.65);color:rgba(110,175,205,.95);height:auto;background:transparent;}
 .county-pill.id:hover{border-color:#4a7c94;color:var(--white);background:rgba(74,124,148,.25);}
 .county-pill.id.active{background:#4a7c94;border-color:#4a7c94;color:var(--white);}
+.county-pill.ky{border-color:rgba(154,144,112,.65);color:rgba(195,185,150,.95);height:auto;background:transparent;}
+.county-pill.ky:hover{border-color:#9a9070;color:var(--white);background:rgba(154,144,112,.25);}
+.county-pill.ky.active{background:#9a9070;border-color:#9a9070;color:var(--white);}
 /* Indiana pills */
 .county-pill.in{border-color:rgba(107,92,69,.55);color:rgba(145,125,95,.95);}
 .county-pill.in:hover{border-color:var(--indiana-mid);color:var(--white);background:rgba(107,92,69,.25);}
@@ -846,7 +852,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <!-- WELCOME -->
 <div id="sw" class="screen active">
   <div class="mh">
-    <div class="mh-tag">Independent Buyer Tool · Florida · Georgia · Texas · North Carolina · South Carolina · Tennessee · Alabama · Virginia · Arizona · Nevada · Maryland · Indiana · Kansas · Louisiana · Missouri · Mississippi · Ohio · Pennsylvania · Arkansas · West Virginia · Delaware · Idaho</div>
+    <div class="mh-tag">Independent Buyer Tool · Florida · Georgia · Texas · North Carolina · South Carolina · Tennessee · Alabama · Virginia · Arizona · Nevada · Maryland · Indiana · Kansas · Kentucky · Louisiana · Missouri · Mississippi · Ohio · Pennsylvania · Arkansas · West Virginia · Delaware · Idaho</div>
     <h1 style="cursor:pointer;" onclick="show('w')" title="↩ Return to Home">Home<span class="tr">True</span></h1>
     <div class="mh-rule"></div>
     <div class="mh-sub">Honest mortgage analysis. No pressure. No agenda.</div>
@@ -868,6 +874,7 @@ footer strong{color:rgba(220,232,235,1.0);}
             <button class="state-toggle hint-id" id="st-id" onclick="selectState('id',this)">Idaho</button>
             <button class="state-toggle hint-in" id="st-in" onclick="selectState('in',this)">Indiana</button>
             <button class="state-toggle hint-ks" id="st-ks" onclick="selectState('ks',this)">Kansas</button>
+            <button class="state-toggle hint-ky" id="st-ky" onclick="selectState('ky',this)">Kentucky</button>
             <button class="state-toggle hint-la" id="st-la" onclick="selectState('la',this)">Louisiana</button>
             <button class="state-toggle hint-md" id="st-md" onclick="selectState('md',this)">Maryland</button>
             <button class="state-toggle hint-mo" id="st-mo" onclick="selectState('mo',this)">Missouri</button>
@@ -1026,6 +1033,13 @@ footer strong{color:rgba(220,232,235,1.0);}
         </div>
         <div class="county-pills" id="pills-ks" style="display:none;">
           <button class="county-pill ks" onclick="selectCounty('johnson-ks',this)">Johnson (Overland Park)</button>
+        </div>
+        <div class="county-pills" id="pills-ky" style="display:none;">
+          <button class="county-pill ky" onclick="selectCounty('boone-ky',this)">Boone (Florence/Burlington)</button>
+          <button class="county-pill ky" onclick="selectCounty('fayette-ky',this)">Fayette (Lexington)</button>
+          <button class="county-pill ky" onclick="selectCounty('jefferson-ky',this)">Jefferson (Louisville)</button>
+          <button class="county-pill ky" onclick="selectCounty('kenton-ky',this)">Kenton (Covington/Independence)</button>
+          <button class="county-pill ky" onclick="selectCounty('warren-ky',this)">Warren (Bowling Green)</button>
         </div>
         <div class="county-pills" id="pills-la" style="display:none;">
           <button class="county-pill la" onclick="selectCounty('ascension',this)">Ascension (Gonzales)</button>
@@ -3258,6 +3272,56 @@ const COUNTIES = {
     notes:'Kootenai County (Coeur d\'Alene, Post Falls, Hayden, Rathdrum) effective tax rate 0.54% — verified from Idaho State Tax Commission EPB00129_12-04-2025, urban average 0.541%. Lowest rate of three Idaho counties. Rapid market appreciation in CdA metro. No transfer tax. Escrow-closed. Taxes due December 20 and June 20. Homeowner\'s Exemption: 50% of value up to $125,000 — apply by April 15.',
     state:'id', closingModel:'idaho',
     heNote:'Idaho Homeowner\'s Exemption: 50% of your home\'s value up to a maximum of $125,000 off assessed value. Must be owner-occupied primary residence. Apply by April 15 at the Kootenai County Assessor\'s office. Approved exemption renews automatically until ownership changes. The analysis above reflects the effective rate already accounting for the exemption — your actual Year 2 bill will reflect this savings.'
+  },
+  'boone-ky': {
+    name:'Boone County', short:'Boone',
+    tr:0.0108, he:0,
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://www.boonecountyky.org/government/tax_information/current_property_tax_rates.php',
+    paName:'Boone County Fiscal Court',
+    notes:'Boone County (Florence, Burlington, Hebron, Union, Erlanger area) effective tax rate 1.08% — verified from boonecountyky.org official 2025 rate table. Boone County School District base 0.9225% (county 0.085 + school 0.655 + library 0.041 + health 0.020 + extension 0.0155 + state 0.106) plus typical fire district average (Florence 0.15, Hebron 0.135, Burlington 0.17, Union 0.195). IMPORTANT: Walton-Verona School District buyers pay 1.55%+ — verify your school district. No deed transfer tax. Attorney-closed. Taxes due December 31 annually.',
+    state:'ky', closingModel:'kentucky',
+    heNote:'Kentucky Homestead Exemption: $46,350 off assessed value — available ONLY to homeowners age 65 or older, or totally disabled. Standard first-time buyers do not qualify. Apply with the Boone County PVA. Your analysis correctly reflects the full tax rate.'
+  },
+  'fayette-ky': {
+    name:'Fayette County', short:'Fayette',
+    tr:0.0109, he:0,
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://www.lexingtonky.gov/property-taxes',
+    paName:'Lexington-Fayette Urban County Government',
+    notes:'Fayette County (Lexington) effective tax rate 1.09% — verified from Lexington-Fayette Urban County Government official 2025 rate table. District 2 base rate (most common for suburban and new construction buyers): state 0.106 + school 0.798 + general service 0.075 + extension 0.004 + soil conservation 0.001 + health 0.0243 + LexTran 0.060 + park 0.0225 = 1.0908%. Districts 1, 3, 5, 7 run 1.23–1.26% depending on refuse/street light/cleaning services. No deed transfer tax. Attorney-closed. Taxes due December 31.',
+    state:'ky', closingModel:'kentucky',
+    heNote:'Kentucky Homestead Exemption: $46,350 off assessed value — available ONLY to homeowners age 65 or older, or totally disabled. Standard first-time buyers do not qualify. Apply with the Fayette County PVA. Your analysis correctly reflects the full tax rate.'
+  },
+  'jefferson-ky': {
+    name:'Jefferson County', short:'Jefferson',
+    tr:0.0113, he:0,
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://www.jcsoky.org/property-tax/rates',
+    paName:'Jefferson County Sheriff\'s Office',
+    notes:'Jefferson County (Louisville) effective tax rate 1.13% — verified from Jefferson County Sheriff\'s Office official 2025 Real Property Tax Rates. Base: state 0.106 + Metro Louisville 0.118 + school 0.717 = 0.941, plus typical suburban fire district (Pleasure Ridge Park 0.20, Fern Creek 0.18, Okolona 0.17, Jeffersontown 0.20 avg 0.188). IMPORTANT: Urban Service District (USD) adds 0.319 — buyers in Louisville urban core pay 1.26%. Verify your fire district. No deed transfer tax. Attorney-closed. Taxes due December 31.',
+    state:'ky', closingModel:'kentucky',
+    heNote:'Kentucky Homestead Exemption: $46,350 off assessed value — available ONLY to homeowners age 65 or older, or totally disabled. Standard first-time buyers do not qualify. Apply with the Jefferson County PVA. Your analysis correctly reflects the full tax rate.'
+  },
+  'kenton-ky': {
+    name:'Kenton County', short:'Kenton',
+    tr:0.0118, he:0,
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://www.kentonpva.com',
+    paName:'Kenton County PVA',
+    notes:'Kenton County (Covington, Independence, Taylor Mill, Edgewood, Erlanger) effective tax rate 1.18% — verified from Kenton County PVA official 2025 Real Estate Tax Rates. Common School District base 0.991% plus Independence/Boone-Walton fire average 0.182%. IMPORTANT: Covington, Erlanger, and Ludlow school districts run 1.31–1.49% base; Walt-Verona SD 1.49%+ — verify your school district. No deed transfer tax. Attorney-closed. Taxes due December 31.',
+    state:'ky', closingModel:'kentucky',
+    heNote:'Kentucky Homestead Exemption: $46,350 off assessed value — available ONLY to homeowners age 65 or older, or totally disabled. Standard first-time buyers do not qualify. Apply with the Kenton County PVA. Your analysis correctly reflects the full tax rate.'
+  },
+  'warren-ky': {
+    name:'Warren County', short:'Warren',
+    tr:0.0084, he:0,
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://warrencountyclerk.ky.gov',
+    paName:'Warren County Clerk',
+    notes:'Warren County (Bowling Green unincorporated, Smith\'s Grove, Oakland) effective tax rate 0.84% — verified from Warren County Clerk Lynette Yates official 2025 Tax Rates document. Unincorporated COUNTY rate: county 0.1400 + library 0.037 + health 0.029 + extension 0.006 + conservation 0.0025 + state 0.106 + school 0.522 = 84.25 cents/$100 = 0.8425%. IMPORTANT: Bowling Green city adds city levy and higher school rate — city total 1.37%. Annex 1.05%. Lowest tax rate of Kentucky counties on platform. No deed transfer tax. Attorney-closed. Taxes due December 31.',
+    state:'ky', closingModel:'kentucky',
+    heNote:'Kentucky Homestead Exemption: $46,350 off assessed value — available ONLY to homeowners age 65 or older, or totally disabled. Standard first-time buyers do not qualify. Apply with the Warren County PVA. Your analysis correctly reflects the full tax rate.'
   }
 };
   // Active county — defaults to Miami-Dade
@@ -3280,7 +3344,7 @@ function setCounty(key) {
   document.querySelectorAll('.active-county-short').forEach(el => el.textContent = c.short);
   // Update scope badge
   const sb = document.querySelector('.scope-b');
-  const stateLabel = c.state==='tx' ? 'Texas' : c.state==='nc' ? 'North Carolina' : c.state==='ga' ? 'Georgia' : c.state==='sc' ? 'South Carolina' : c.state==='tn' ? 'Tennessee' : c.state==='al' ? 'Alabama' : c.state==='va' ? 'Virginia' : c.state==='az' ? 'Arizona' : c.state==='nv' ? 'Nevada' : c.state==='md' ? 'Maryland' : c.state==='in' ? 'Indiana' : c.state==='ks' ? 'Kansas' : c.state==='la' ? 'Louisiana' : c.state==='mo' ? 'Missouri' : c.state==='oh' ? 'Ohio' : c.state==='pa' ? 'Pennsylvania' : c.state==='ar' ? 'Arkansas' : c.state==='ms' ? 'Mississippi' : c.state==='wv' ? 'West Virginia' : c.state==='de' ? 'Delaware' : c.state==='id' ? 'Idaho' : 'Florida';
+  const stateLabel = c.state==='tx' ? 'Texas' : c.state==='nc' ? 'North Carolina' : c.state==='ga' ? 'Georgia' : c.state==='sc' ? 'South Carolina' : c.state==='tn' ? 'Tennessee' : c.state==='al' ? 'Alabama' : c.state==='va' ? 'Virginia' : c.state==='az' ? 'Arizona' : c.state==='nv' ? 'Nevada' : c.state==='md' ? 'Maryland' : c.state==='in' ? 'Indiana' : c.state==='ks' ? 'Kansas' : c.state==='la' ? 'Louisiana' : c.state==='mo' ? 'Missouri' : c.state==='oh' ? 'Ohio' : c.state==='pa' ? 'Pennsylvania' : c.state==='ar' ? 'Arkansas' : c.state==='ms' ? 'Mississippi' : c.state==='wv' ? 'West Virginia' : c.state==='de' ? 'Delaware' : c.state==='id' ? 'Idaho' : c.state==='ky' ? 'Kentucky' : 'Florida';
   if(sb) sb.textContent = c.name + ' · ' + stateLabel;
   // Update verified strip
   const vs = document.getElementById('avs');
@@ -3471,11 +3535,11 @@ let ACTIVE_STATE = 'fl';
 
 function selectState(state, btn) {
   ACTIVE_STATE = state;
-  const toggleMap = {fl:'st-fl', ga:'st-ga', tx:'st-tx', nc:'st-nc', sc:'st-sc', tn:'st-tn', al:'st-al', va:'st-va', az:'st-az', nv:'st-nv', md:'st-md', in:'st-in', oh:'st-oh', mo:'st-mo', pa:'st-pa', ks:'st-ks', la:'st-la', ar:'st-ar', ms:'st-ms', wv:'st-wv', de:'st-de', id:'st-id'};
+  const toggleMap = {fl:'st-fl', ga:'st-ga', tx:'st-tx', nc:'st-nc', sc:'st-sc', tn:'st-tn', al:'st-al', va:'st-va', az:'st-az', nv:'st-nv', md:'st-md', in:'st-in', oh:'st-oh', mo:'st-mo', pa:'st-pa', ks:'st-ks', la:'st-la', ar:'st-ar', ms:'st-ms', wv:'st-wv', de:'st-de', id:'st-id', ky:'st-ky'};
   Object.entries(toggleMap).forEach(([s, id]) => {
     const el = document.getElementById(id);
     if (!el) return;
-    el.classList.remove('active-fl','active-ga','active-tx','active-nc','active-sc','active-tn','active-al','active-va','active-az','active-nv','active-md','active-in','active-oh','active-mo','active-pa','active-ks','active-la','active-ar','active-ms','active-wv','active-de','active-id','hint-fl','hint-ga','hint-tx','hint-nc','hint-sc','hint-tn','hint-al','hint-va','hint-az','hint-nv','hint-md','hint-in','hint-oh','hint-mo','hint-pa','hint-ks','hint-la','hint-ar','hint-ms','hint-wv','hint-de','hint-id');
+    el.classList.remove('active-fl','active-ga','active-tx','active-nc','active-sc','active-tn','active-al','active-va','active-az','active-nv','active-md','active-in','active-oh','active-mo','active-pa','active-ks','active-la','active-ar','active-ms','active-wv','active-de','active-id','active-ky','hint-fl','hint-ga','hint-tx','hint-nc','hint-sc','hint-tn','hint-al','hint-va','hint-az','hint-nv','hint-md','hint-in','hint-oh','hint-mo','hint-pa','hint-ks','hint-la','hint-ar','hint-ms','hint-wv','hint-de','hint-id','hint-ky');
     if (s === state) {
       el.classList.add('active-' + state);
     } else {
@@ -3483,7 +3547,7 @@ function selectState(state, btn) {
     }
   });
   // Show/hide county pill groups
-  ['fl','ga','tx','nc','sc','tn','al','va','az','md','nv','in','oh','mo','pa','ks','la','ar','ms','wv','de','id'].forEach(s => {
+  ['fl','ga','tx','nc','sc','tn','al','va','az','md','nv','in','oh','mo','pa','ks','la','ar','ms','wv','de','id','ky'].forEach(s => {
     const el = document.getElementById('pills-' + s);
     if(el) el.style.display = (state===s) ? 'flex' : 'none';
   });
@@ -3512,6 +3576,7 @@ function selectState(state, btn) {
     else if(state==='wv') legend.textContent = 'West Virginia · WVU Old Gold · Charleston · Martinsburg · Morgantown';
     else if(state==='de') legend.textContent = 'Delaware · Chesapeake Blue · Wilmington · Newark · Rehoboth Beach';
     else if(state==='id') legend.textContent = 'Idaho · Idaho Steelhead · Boise · Nampa · Coeur d\'Alene';
+    else if(state==='ky') legend.textContent = 'Kentucky · KY Limestone · Louisville · Lexington · Covington · Bowling Green';
   }
   // Show county row when state is selected
   const countyRow = document.getElementById('county-row');
@@ -5144,6 +5209,27 @@ function buildClosingCosts(inp) {
       <div class="cc-total-row"><span class="cc-total-lbl">Escrow &amp; Title Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
     reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Idaho property taxes due in two installments — December 20 and June 20. Your lender will collect monthly escrow to cover both payments. Apply for the Homeowner's Exemption by April 15 with your county assessor — 50% of value up to $125,000 off assessed value. No transfer tax in Idaho.`;
 
+  } else if (model === 'kentucky') {
+    const recordingFee = 50;
+    const titleSearch = 275;
+    const titleInsLender = Math.round(loan * 0.00375);
+    const titleInsOwner = Math.round(p * 0.00325);
+    const settlementFee = 550;
+    govTotal = recordingFee;
+    titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
+    stateNote = `<span class="nl" style="color:#9a9070;">${countyName} — Kentucky</span><p>Kentucky has <strong>no deed transfer tax</strong>. Kentucky is an <strong>attorney-closed state</strong>. Property is assessed at <strong>100% of fair cash value</strong> annually. Property taxes are paid in <strong>arrears</strong> and are due by <strong>December 31</strong> each year. Kentucky property tax bills are layered — state, county, school, and special district levies each appear as separate line items. Your rate reflects the combination applicable to your area. The Kentucky Homestead Exemption ($46,350 off assessed value) applies only to homeowners age 65+ or totally disabled — not applicable to most first-time buyers. Confirm all figures against your official Closing Disclosure.</p>`;
+    govSection = `<div class="cc-section"><div class="cc-section-title">Government &amp; Recording Fees</div>
+      <div class="cc-row"><div class="cc-item">Recording Fees — County Clerk<span class="cc-note">Deed and mortgage recording at the county clerk's office.</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
+      <div class="cc-row"><div class="cc-item">No Deed Transfer Tax<span class="cc-note">Kentucky does not impose a deed transfer tax — $0</span></div><div class="cc-val">$0</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
+    titleSection = `<div class="cc-section"><div class="cc-section-title">Attorney, Title &amp; Settlement Fees</div>
+      <div class="cc-row"><div class="cc-item">Title Search &amp; Examination</div><div class="cc-val">${fmt(titleSearch)}</div></div>
+      <div class="cc-row"><div class="cc-item">Lender's Title Insurance<span class="cc-note">Required by lender — protects lender's interest</span></div><div class="cc-val">${fmt(titleInsLender)}</div></div>
+      <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended — one-time premium</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
+      <div class="cc-row"><div class="cc-item">Attorney / Settlement Fee<span class="cc-note">Kentucky requires attorney-conducted closings</span></div><div class="cc-val">${fmt(settlementFee)}</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Attorney &amp; Title Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
+    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Kentucky property taxes are paid in arrears and due December 31 annually. Your lender will collect escrow monthly. No deed transfer tax in Kentucky. The Kentucky Homestead Exemption ($46,350 off assessed value) applies only to homeowners age 65+ or totally disabled — budget for the full tax rate from day one.`;
+
   } else if (model === 'indiana') {
     const recordingFee = 25; // Indiana recording fees are very low — per-page
     const titleSearch = 275;
@@ -5398,6 +5484,31 @@ function buildHomesteadGuide(inp) {
       <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">The deduction renews automatically</div><div class="hg-desc">Once granted, the Indiana homestead deduction renews automatically each year as long as you continue to own and occupy the property as your primary residence. You do not reapply each year.</div></div></div>
       <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Notify your mortgage servicer after approval</div><div class="hg-desc">Once the deduction is confirmed, contact your mortgage servicer to recalculate your escrow. The lower tax bill should reduce your monthly payment starting the year after filing.</div></div></div>
       <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Indiana 1% Homestead Cap</span><p>Indiana law caps property taxes on homestead properties at 1% of gross assessed value annually. This means no matter how high the tax rate, your annual homestead property tax cannot exceed 1% of what your home is assessed at. In fast-appreciating markets this cap provides significant long-term protection.</p></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
+    </div>`;
+  }
+
+  if (model === 'kentucky') {
+    return `<div class="cw">
+      <div class="ae em">Section V</div>
+      <h2 class="at2">Property Tax &amp; Exemption Guide</h2>
+      <div class="ar"></div>
+      <div class="nt nt-em" style="margin-bottom:1.5rem;">
+        <span class="nl nl-em" style="color:#9a9070;">${c.name} — Kentucky Property Tax</span>
+        <p>Your analysis shows the <strong>full property tax rate</strong> for your area — no exemption has been applied. This is the correct number for most first-time buyers in Kentucky. Here is what you need to know about how Kentucky property taxes work and the exemption you may have heard about.</p>
+      </div>
+      <div class="nt nt-wn" style="margin-bottom:1.5rem;">
+        <span class="nl nl-wn">About the Kentucky Homestead Exemption</span>
+        <p>Kentucky offers a Homestead Exemption of <strong>$46,350 off assessed value</strong> — but it is available <strong>only to homeowners age 65 or older, or totally disabled</strong>. Standard first-time buyers do not qualify. If you do not meet one of these criteria, the exemption does not affect your analysis. Your numbers are correct as shown.</p>
+      </div>
+      ${deadlineHtml}
+      <h3 style="font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--midnight);margin:1.5rem 0 1rem;">Understanding Your Kentucky Property Tax Bill</h3>
+      <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">Kentucky taxes are layered — multiple jurisdictions on one bill</div><div class="hg-desc">Your property tax bill in Kentucky is not a single rate — it is the sum of multiple taxing jurisdictions. State, county, school district, library, health department, and extension service each set their own rate. Fire protection districts add another layer in unincorporated areas. Your analysis reflects the combined rate for your specific area.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open County Tax Portal</a></div></div>
+      <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">Your school district matters — rates vary significantly</div><div class="hg-desc">The school district portion is typically the largest single component of your Kentucky property tax bill. Different school districts within the same county can have dramatically different rates. Confirm your property's school district with your realtor or the county PVA before closing. In Boone County, Walton-Verona School District buyers pay significantly more than Boone County School District buyers.</div></div></div>
+      <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">Taxes paid in arrears — due December 31</div><div class="hg-desc">Kentucky property taxes are paid in arrears — you pay 2025 taxes in late 2025 by December 31. At closing, your seller will typically credit you for the portion of the year they owned the property. Your lender will collect monthly escrow to build up funds for the annual December payment. There is a 2% discount for paying by November 1.</div></div></div>
+      <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">No deed transfer tax in Kentucky</div><div class="hg-desc">Kentucky does not impose a deed transfer tax on real estate transactions. This is a meaningful savings compared to many other states. Your closing costs reflect this — the government fees section shows only recording costs.</div></div></div>
+      <div class="hg-step"><div class="hg-num">5</div><div class="hg-content"><div class="hg-title">If you do qualify for the Homestead Exemption</div><div class="hg-desc">If you are 65 or older and own the property as your primary residence, the $46,350 exemption is applied automatically after your first year of ownership. Contact your county PVA to confirm it has been applied. At current rates, the exemption saves approximately $490–$550 per year depending on your county.</div></div></div>
+      <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Attorney Closing — What to Expect</span><p>Kentucky is an attorney-closed state. Your closing will be conducted by a licensed Kentucky real estate attorney who reviews the title, prepares closing documents, handles the transfer of funds, and records the deed. Your lender will coordinate directly with the closing attorney. Budget $450–$650 for attorney and settlement fees.</p></div>
       <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
     </div>`;
   }
