@@ -484,6 +484,9 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .state-toggle.active-nm{background:#c06080;border-color:#c06080;color:var(--white);}
 .state-toggle.hint-nm{border-color:rgba(192,96,128,.45);color:rgba(220,150,180,.9);}
 .state-toggle.hint-nm:hover{border-color:#c06080;color:#c06080;}
+.state-toggle.active-me{background:#c8a96e;border-color:#c8a96e;color:#1a2332;}
+.state-toggle.hint-me{border-color:rgba(200,169,110,.45);color:rgba(210,180,130,.9);}
+.state-toggle.hint-me:hover{border-color:#c8a96e;color:#c8a96e;}
 .state-toggle:hover:not(.active-fl):not(.active-tx):not(.active-nc):not(.active-sc):not(.active-tn):not(.active-al):not(.active-va):not(.active-ga):not(.active-az):not(.active-nv):not(.active-md){border-color:rgba(176,190,197,.6);color:rgba(176,190,197,.9);}
 /* State toggle hint colors */
 .state-toggle.hint-ga{border-color:rgba(139,30,45,.45);color:rgba(180,100,110,.9);}
@@ -586,6 +589,9 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .county-pill.nm{border-color:rgba(192,96,128,.65);color:rgba(220,150,180,.95);height:auto;background:transparent;}
 .county-pill.nm:hover{border-color:#c06080;color:var(--white);background:rgba(192,96,128,.25);}
 .county-pill.nm.active{background:#c06080;border-color:#c06080;color:var(--white);}
+.county-pill.me{border-color:rgba(200,169,110,.65);color:rgba(210,180,130,.95);height:auto;background:transparent;}
+.county-pill.me:hover{border-color:#c8a96e;color:#1a2332;background:rgba(200,169,110,.25);}
+.county-pill.me.active{background:#c8a96e;border-color:#c8a96e;color:#1a2332;}
 /* Indiana pills */
 .county-pill.in{border-color:rgba(107,92,69,.55);color:rgba(145,125,95,.95);}
 .county-pill.in:hover{border-color:var(--indiana-mid);color:var(--white);background:rgba(107,92,69,.25);}
@@ -864,7 +870,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <!-- WELCOME -->
 <div id="sw" class="screen active">
   <div class="mh">
-    <div class="mh-tag">Independent Buyer Tool · Florida · Georgia · Texas · North Carolina · South Carolina · Tennessee · Alabama · Virginia · Arizona · Nevada · New Mexico · Maryland · Indiana · Kansas · Kentucky · Louisiana · Missouri · Mississippi · Ohio · Pennsylvania · Arkansas · West Virginia · Delaware · Idaho · Utah</div>
+    <div class="mh-tag">Independent Buyer Tool · Florida · Georgia · Texas · North Carolina · South Carolina · Tennessee · Alabama · Virginia · Arizona · Nevada · New Mexico · Maryland · Indiana · Kansas · Kentucky · Louisiana · Maine · Missouri · Mississippi · Ohio · Pennsylvania · Arkansas · West Virginia · Delaware · Idaho · Utah</div>
     <h1 style="cursor:pointer;" onclick="show('w')" title="↩ Return to Home">Home<span class="tr">True</span></h1>
     <div class="mh-rule"></div>
     <div class="mh-sub">Honest mortgage analysis. No pressure. No agenda.</div>
@@ -888,6 +894,7 @@ footer strong{color:rgba(220,232,235,1.0);}
             <button class="state-toggle hint-ks" id="st-ks" onclick="selectState('ks',this)">Kansas</button>
             <button class="state-toggle hint-ky" id="st-ky" onclick="selectState('ky',this)">Kentucky</button>
             <button class="state-toggle hint-la" id="st-la" onclick="selectState('la',this)">Louisiana</button>
+            <button class="state-toggle hint-me" id="st-me" onclick="selectState('me',this)">Maine</button>
             <button class="state-toggle hint-md" id="st-md" onclick="selectState('md',this)">Maryland</button>
             <button class="state-toggle hint-mo" id="st-mo" onclick="selectState('mo',this)">Missouri</button>
             <button class="state-toggle hint-ms" id="st-ms" onclick="selectState('ms',this)">Mississippi</button>
@@ -1072,6 +1079,10 @@ footer strong{color:rgba(220,232,235,1.0);}
           <button class="county-pill la" onclick="selectCounty('iberville',this)">Iberville (Plaquemine)</button>
           <button class="county-pill la" onclick="selectCounty('livingston',this)">Livingston ⚠ Flood</button>
           <button class="county-pill la" onclick="selectCounty('wbr',this)">West Baton Rouge</button>
+        </div>
+        <div class="county-pills" id="pills-me" style="display:none;">
+          <button class="county-pill me" onclick="selectCounty('cumberland-me',this)">Cumberland (Portland)</button>
+          <button class="county-pill me" onclick="selectCounty('york-me',this)">York (Biddeford/Kittery)</button>
         </div>
         <div class="county-pills" id="pills-ar" style="display:none;">
           <button class="county-pill ar" onclick="selectCounty('benton-ar',this)">Benton (Bentonville)</button>
@@ -3417,6 +3428,37 @@ const COUNTIES = {
     notes:'Sandoval County (Rio Rancho) effective tax rate 1.16% — verified from LGBMS Certificate of Property Tax Rates TY2025, printed 2025-09-05. Rio Rancho city residential (district 94 IN R): 34.896 total mills. NM assesses at 1/3 of market value — effective rate = 34.896 / 3000 = 1.163%. Components: State 1.360 + County 6.133 + Rio Rancho city 9.407 + Rio Rancho Public Schools 10.591 + CNM College 3.706 + UNM Hospital 1.720 + Southern Sandoval Arroyo Flood Control 1.979 mills. Rio Rancho is one of the fastest-growing cities in New Mexico. No buyer deed transfer tax. Attorney or escrow closing. Taxes due November 30.',
     state:'nm', closingModel:'newmexico',
     heNote:'New Mexico Head of Family Exemption: $2,000 off assessed value — equivalent to $6,000 off market value (NM assesses at 1/3 of market value). Must be your primary residence. File with the Sandoval County Assessor — deadline is typically the last day of February. Renews annually as long as you remain the primary resident. Annual savings: approximately $70 at Sandoval rates (~$6/month). File as soon as your deed is recorded.'
+  },
+  'cumberland-me': {
+    name:'Cumberland County', short:'Cumberland',
+    tr:0.0120, he:25000, heType:'value',
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://www.portlandmaine.gov/assessing',
+    paName:'Cumberland County Assessor',
+    notes:'Cumberland County (Portland, South Portland, Westbrook) — district rates verified FY2025-2026 from primary municipal sources. Portland: 11.98 mills (City Tax Computation FY2026, post-revaluation 100%). South Portland: 13.65 mills (southportland.gov newsflash). Westbrook: 15.32 mills (City Annual Tax Calculation Summary FY2026, April 2025 projection). All municipalities assessed at 100% of market value. No buyer transfer tax on amounts under $1M — standard rate $2.20 per $500 = 0.22% buyer share. Attorney-closed state. Semi-annual billing. Homestead Exemption $25,000 off assessed value — file by April 1, must own 12 months.',
+    state:'me', closingModel:'maine',
+    districts:[
+      {id:'me-portland',      label:'Portland',       tr:0.0120},
+      {id:'me-southportland', label:'South Portland', tr:0.0137},
+      {id:'me-westbrook',     label:'Westbrook',      tr:0.0153},
+    ],
+    heNote:'Maine Homestead Exemption: $25,000 off assessed value for your primary residence. Must have owned the property for at least 12 months as of April 1 of the tax year. File application with your municipal assessor by April 1. Renews automatically each year as long as you remain the primary resident and owner. Annual savings at Cumberland County rates: approximately $300–$382 ($25–$32/month). File immediately after closing — your first full year of savings begins the April 1 after you meet the 12-month ownership requirement.'
+  },
+  'york-me': {
+    name:'York County', short:'York',
+    tr:0.0093, he:25000, heType:'value',
+    fxb:0, fxw:0, fab:0, faw:0,
+    paUrl:'https://www.yorkcountymaine.gov',
+    paName:'York County Assessor',
+    notes:'York County (Biddeford, Saco, Kennebunk, Kittery) — district rates verified FY2025-2026 from primary municipal sources. Biddeford: 14.94 mills (biddefordmaine.org CivicAlerts, official city release). Saco: 14.20 mills (sacomaine.org official FAQ). Kennebunk: 9.85 mills (kennebunkmaine.us/125/Assessing). Kittery: 9.29 mills (kitteryme.gov/276/Assessor, post-revaluation 100%, committed September 22, 2025). All municipalities at 100% of market value. No buyer transfer tax under $1M — $2.20 per $500 = 0.22% buyer share. New November 2025 law: additional $3.80 per $500 on portion over $1M. MSHA first-time buyer program participants: exempt from transfer tax entirely. Attorney-closed. Semi-annual billing.',
+    state:'me', closingModel:'maine',
+    districts:[
+      {id:'me-biddeford',  label:'Biddeford',  tr:0.0149},
+      {id:'me-saco',       label:'Saco',        tr:0.0142},
+      {id:'me-kennebunk',  label:'Kennebunk',   tr:0.0099},
+      {id:'me-kittery',    label:'Kittery',     tr:0.0093},
+    ],
+    heNote:'Maine Homestead Exemption: $25,000 off assessed value for your primary residence. Must have owned the property for at least 12 months as of April 1 of the tax year. File application with your municipal assessor by April 1. Renews automatically each year as long as you remain the primary resident and owner. Annual savings at York County rates: approximately $232–$372 ($19–$31/month) depending on your city. File immediately after closing — your first full year of savings begins the April 1 after you meet the 12-month ownership requirement.'
   }
 };
   // Active county — defaults to Miami-Dade
@@ -3439,7 +3481,7 @@ function setCounty(key) {
   document.querySelectorAll('.active-county-short').forEach(el => el.textContent = c.short);
   // Update scope badge
   const sb = document.querySelector('.scope-b');
-  const stateLabel = c.state==='tx' ? 'Texas' : c.state==='nc' ? 'North Carolina' : c.state==='ga' ? 'Georgia' : c.state==='sc' ? 'South Carolina' : c.state==='tn' ? 'Tennessee' : c.state==='al' ? 'Alabama' : c.state==='va' ? 'Virginia' : c.state==='az' ? 'Arizona' : c.state==='nv' ? 'Nevada' : c.state==='md' ? 'Maryland' : c.state==='in' ? 'Indiana' : c.state==='ks' ? 'Kansas' : c.state==='la' ? 'Louisiana' : c.state==='mo' ? 'Missouri' : c.state==='oh' ? 'Ohio' : c.state==='pa' ? 'Pennsylvania' : c.state==='ar' ? 'Arkansas' : c.state==='ms' ? 'Mississippi' : c.state==='wv' ? 'West Virginia' : c.state==='de' ? 'Delaware' : c.state==='id' ? 'Idaho' : c.state==='ky' ? 'Kentucky' : c.state==='ut' ? 'Utah' : c.state==='nm' ? 'New Mexico' : 'Florida';
+  const stateLabel = c.state==='tx' ? 'Texas' : c.state==='nc' ? 'North Carolina' : c.state==='ga' ? 'Georgia' : c.state==='sc' ? 'South Carolina' : c.state==='tn' ? 'Tennessee' : c.state==='al' ? 'Alabama' : c.state==='va' ? 'Virginia' : c.state==='az' ? 'Arizona' : c.state==='nv' ? 'Nevada' : c.state==='md' ? 'Maryland' : c.state==='in' ? 'Indiana' : c.state==='ks' ? 'Kansas' : c.state==='la' ? 'Louisiana' : c.state==='mo' ? 'Missouri' : c.state==='oh' ? 'Ohio' : c.state==='pa' ? 'Pennsylvania' : c.state==='ar' ? 'Arkansas' : c.state==='ms' ? 'Mississippi' : c.state==='wv' ? 'West Virginia' : c.state==='de' ? 'Delaware' : c.state==='id' ? 'Idaho' : c.state==='ky' ? 'Kentucky' : c.state==='ut' ? 'Utah' : c.state==='nm' ? 'New Mexico' : c.state==='me' ? 'Maine' : 'Florida';
   if(sb) sb.textContent = c.name + ' · ' + stateLabel;
   // Update verified strip
   const vs = document.getElementById('avs');
@@ -3630,11 +3672,11 @@ let ACTIVE_STATE = 'fl';
 
 function selectState(state, btn) {
   ACTIVE_STATE = state;
-  const toggleMap = {fl:'st-fl', ga:'st-ga', tx:'st-tx', nc:'st-nc', sc:'st-sc', tn:'st-tn', al:'st-al', va:'st-va', az:'st-az', nv:'st-nv', md:'st-md', in:'st-in', oh:'st-oh', mo:'st-mo', pa:'st-pa', ks:'st-ks', la:'st-la', ar:'st-ar', ms:'st-ms', wv:'st-wv', de:'st-de', id:'st-id', ky:'st-ky', ut:'st-ut', nm:'st-nm'};
+  const toggleMap = {fl:'st-fl', ga:'st-ga', tx:'st-tx', nc:'st-nc', sc:'st-sc', tn:'st-tn', al:'st-al', va:'st-va', az:'st-az', nv:'st-nv', md:'st-md', in:'st-in', oh:'st-oh', mo:'st-mo', pa:'st-pa', ks:'st-ks', la:'st-la', ar:'st-ar', ms:'st-ms', wv:'st-wv', de:'st-de', id:'st-id', ky:'st-ky', ut:'st-ut', nm:'st-nm', me:'st-me'};
   Object.entries(toggleMap).forEach(([s, id]) => {
     const el = document.getElementById(id);
     if (!el) return;
-    el.classList.remove('active-fl','active-ga','active-tx','active-nc','active-sc','active-tn','active-al','active-va','active-az','active-nv','active-md','active-in','active-oh','active-mo','active-pa','active-ks','active-la','active-ar','active-ms','active-wv','active-de','active-id','active-ky','active-ut','active-nm','hint-fl','hint-ga','hint-tx','hint-nc','hint-sc','hint-tn','hint-al','hint-va','hint-az','hint-nv','hint-md','hint-in','hint-oh','hint-mo','hint-pa','hint-ks','hint-la','hint-ar','hint-ms','hint-wv','hint-de','hint-id','hint-ky','hint-ut','hint-nm');
+    el.classList.remove('active-fl','active-ga','active-tx','active-nc','active-sc','active-tn','active-al','active-va','active-az','active-nv','active-md','active-in','active-oh','active-mo','active-pa','active-ks','active-la','active-ar','active-ms','active-wv','active-de','active-id','active-ky','active-ut','active-nm','active-me','hint-fl','hint-ga','hint-tx','hint-nc','hint-sc','hint-tn','hint-al','hint-va','hint-az','hint-nv','hint-md','hint-in','hint-oh','hint-mo','hint-pa','hint-ks','hint-la','hint-ar','hint-ms','hint-wv','hint-de','hint-id','hint-ky','hint-ut','hint-nm','hint-me');
     if (s === state) {
       el.classList.add('active-' + state);
     } else {
@@ -3642,7 +3684,7 @@ function selectState(state, btn) {
     }
   });
   // Show/hide county pill groups
-  ['fl','ga','tx','nc','sc','tn','al','va','az','md','nv','in','oh','mo','pa','ks','la','ar','ms','wv','de','id','ky','ut','nm'].forEach(s => {
+  ['fl','ga','tx','nc','sc','tn','al','va','az','md','nv','in','oh','mo','pa','ks','la','ar','ms','wv','de','id','ky','ut','nm','me'].forEach(s => {
     const el = document.getElementById('pills-' + s);
     if(el) el.style.display = (state===s) ? 'flex' : 'none';
   });
@@ -3674,6 +3716,7 @@ function selectState(state, btn) {
     else if(state==='ky') legend.textContent = 'Kentucky · KY Limestone · Louisville · Lexington · Covington · Bowling Green';
     else if(state==='ut') legend.textContent = 'Utah · Utah Snow · Salt Lake · Lehi · Layton · St. George';
     else if(state==='nm') legend.textContent = 'New Mexico · NM Sandia · Albuquerque · Las Cruces · Rio Rancho';
+    else if(state==='me') legend.textContent = 'Maine · Pine Buff · Portland · South Portland · Westbrook · Biddeford · Saco · Kennebunk · Kittery';
   }
   // Show county row when state is selected
   const countyRow = document.getElementById('county-row');
@@ -5373,6 +5416,29 @@ function buildClosingCosts(inp) {
       <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Settlement Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
     reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. New Mexico property taxes due in two installments — first half April 30, second half October 31. Your lender will collect monthly escrow. No buyer deed transfer tax — seller pays the Realty Transfer Tax. File Head of Family Exemption ($2,000 off assessed value) with your county assessor immediately after closing.`;
 
+  } else if (model === 'maine') {
+    const transferTax = Math.round(p <= 1000000 ? p * 0.0022 : (1000000 * 0.0022) + ((p - 1000000) * 0.0098));
+    const recordingFee = 50;
+    const titleSearch = 300;
+    const titleInsLender = Math.round(loan * 0.00375);
+    const titleInsOwner = Math.round(p * 0.00325);
+    const attorneyFee = 800;
+    govTotal = transferTax + recordingFee;
+    titleTotal = titleSearch + titleInsLender + titleInsOwner + attorneyFee;
+    const transferNote = p > 1000000 ? ` (includes additional $3.80/$500 rate on portion over $1M per November 2025 law)` : ` ($2.20 per $500 of purchase price — buyer's share)`;
+    stateNote = `<span class="nl" style="color:#c8a96e;">${countyName} — Maine</span><p>Maine's Real Estate Transfer Tax is split 50/50 between buyer and seller at <strong>$2.20 per $500</strong> of purchase price (0.22% buyer share). For homes over $1,000,000, an additional $3.80 per $500 applies to the portion above $1M — effective November 1, 2025. <strong>MSHA first-time homebuyer program participants are exempt from transfer tax entirely</strong> — confirm with your lender if you qualify. Maine is an <strong>attorney-closed state</strong>. Property taxes are billed semi-annually — due dates vary by municipality. File for the <strong>Homestead Exemption ($25,000 off assessed value)</strong> with your municipal assessor by April 1 — requires 12 months of ownership. Confirm all figures against your official Closing Disclosure.</p>`;
+    govSection = `<div class="cc-section"><div class="cc-section-title">Government &amp; Recording Fees</div>
+      <div class="cc-row"><div class="cc-item">Real Estate Transfer Tax — Buyer's Share<span class="cc-note">$2.20 per $500 of purchase price (buyer's 50% share)${transferNote}</span></div><div class="cc-val">${fmt(transferTax)}</div></div>
+      <div class="cc-row"><div class="cc-item">Recording Fees — Registry of Deeds<span class="cc-note">Deed and mortgage recording at the county registry.</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
+    titleSection = `<div class="cc-section"><div class="cc-section-title">Title &amp; Attorney Settlement Fees</div>
+      <div class="cc-row"><div class="cc-item">Title Search &amp; Examination</div><div class="cc-val">${fmt(titleSearch)}</div></div>
+      <div class="cc-row"><div class="cc-item">Lender's Title Insurance<span class="cc-note">Required by lender — protects lender's interest</span></div><div class="cc-val">${fmt(titleInsLender)}</div></div>
+      <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended — one-time premium</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
+      <div class="cc-row"><div class="cc-item">Attorney Settlement Fee<span class="cc-note">Maine is attorney-closed — your closing attorney handles settlement</span></div><div class="cc-val">${fmt(attorneyFee)}</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Settlement Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
+    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Maine property taxes are billed semi-annually — due dates vary by municipality. Your lender will collect monthly escrow. Transfer tax: buyer pays $2.20 per $500 (0.22%). File Homestead Exemption ($25,000 off assessed value) with your municipal assessor by April 1 — requires 12 months of ownership.`;
+
   } else if (model === 'indiana') {
     const recordingFee = 25; // Indiana recording fees are very low — per-page
     const titleSearch = 275;
@@ -5628,6 +5694,27 @@ function buildHomesteadGuide(inp) {
       <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Notify your mortgage servicer after approval</div><div class="hg-desc">Once the deduction is confirmed, contact your mortgage servicer to recalculate your escrow. The lower tax bill should reduce your monthly payment starting the year after filing.</div></div></div>
       <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Indiana 1% Homestead Cap</span><p>Indiana law caps property taxes on homestead properties at 1% of gross assessed value annually. This means no matter how high the tax rate, your annual homestead property tax cannot exceed 1% of what your home is assessed at. In fast-appreciating markets this cap provides significant long-term protection.</p></div>
       <div class="nt nt-em" style="margin-top:1rem;"><span class="nl nl-em">Senate Enrolled Act 1 — New Automatic Credit (2025 Law)</span><p>Beginning with 2026 property tax bills, every Indiana homestead automatically receives an additional <strong>10% credit on the annual tax bill, capped at $300 per year</strong>. This is separate from the $45,000 standard deduction — it is applied after your deductions are calculated. <strong>No application is required.</strong> Your county auditor identifies eligible homesteads and applies the credit automatically. The Year 2+ figure in your analysis already reflects this credit. For example: if your annual tax bill after deductions is $2,040, your SEA 1 credit is $204 — reducing the bill to $1,836 per year ($153/month). The credit is capped at $300, meaning homes with post-deduction tax bills above $3,000 annually receive the maximum $300 savings.</p></div>
+      <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
+    </div>`;
+  }
+
+  if (model === 'maine') {
+    return `<div class="cw">
+      <div class="ae em">Section V</div>
+      <h2 class="at2">Homestead Exemption Filing Guide</h2>
+      <div class="ar"></div>
+      <div class="nt nt-em" style="margin-bottom:1.5rem;">
+        <span class="nl nl-em" style="color:#c8a96e;">${c.name} — Maine Homestead Exemption</span>
+        <p>Maine's Homestead Exemption reduces your taxable assessed value by <strong>$25,000</strong>. It requires a one-time application and <strong>12 months of ownership</strong> before it applies. At your district's rate, it saves you <strong>$19–$32 per month</strong> starting in Year 2. File immediately after closing so the clock starts running.</p>
+      </div>
+      ${deadlineHtml}
+      <h3 style="font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--midnight);margin:1.5rem 0 1rem;">Step-by-Step Filing Instructions</h3>
+      <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">File with your municipal assessor immediately after closing</div><div class="hg-desc">In Maine the Homestead Exemption is administered by each municipality — not the county. Go to your city or town's assessor office. You must own and occupy the property as your primary Maine residence. Bring your recorded deed and a Maine driver's license or state ID showing the property address.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open Assessor Portal</a></div></div>
+      <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">12-month ownership requirement — April 1 deadline</div><div class="hg-desc">You must have owned your Maine homestead for at least 12 months as of April 1 of the tax year you are claiming the exemption. If you close in May 2025, you must own for 12 months by April 1, 2026 — meaning your exemption first applies to the 2026 tax year. File your application before April 1 of the first year you qualify. Do not wait — the deadline is firm.</div></div></div>
+      <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">The exemption renews automatically</div><div class="hg-desc">Once granted, Maine's Homestead Exemption renews automatically each year as long as you continue to own and occupy the property as your primary residence. You do not reapply each year. If you move or stop using the property as your primary residence, notify the assessor — you are required to do so by law.</div></div></div>
+      <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Notify your mortgage servicer after approval</div><div class="hg-desc">Once the exemption is confirmed, contact your mortgage servicer to recalculate your escrow. The lower tax bill should reduce your monthly payment starting the year after filing. Your servicer will adjust escrow during their annual analysis — but contacting them proactively gets the reduction sooner.</div></div></div>
+      <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Maine Transfer Tax — What to Know</span><p>Maine splits its Real Estate Transfer Tax 50/50 between buyer and seller. The buyer's share is <strong>$2.20 per $500</strong> of purchase price — approximately 0.22% of the sale price. A new law effective November 1, 2025 adds an additional $3.80 per $500 on the portion of any home sold for over $1,000,000. If you are using a Maine State Housing Authority (MSHA) first-time homebuyer program, you may be <strong>exempt from the transfer tax entirely</strong> — confirm with your lender before closing.</p></div>
+      <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Why Maine Rates Vary Widely Within a County</span><p>Maine municipalities set their own mill rates independently. Within Cumberland County alone, Portland's post-revaluation rate of 1.20% and Westbrook's rate of 1.53% represent a $132/month difference on a $350,000 home. Within York County, Biddeford at 1.49% and Kittery at 0.93% differ by $196/month on the same home. This is why the HomeTrue analysis asks you to select your specific city — using a county average would misrepresent your actual cost in either direction.</p></div>
       <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
     </div>`;
   }
