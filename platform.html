@@ -53,8 +53,8 @@ body{background:var(--slate-bg);color:var(--ink);font-family:var(--fb);font-weig
 .scope-b{display:inline-block;background:rgba(0,131,143,.25);border:1px solid rgba(0,151,167,.5);color:rgba(160,230,240,1.0);font-family:var(--fm);font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;padding:.2rem .65rem;border-radius:2px;margin-top:.35rem;position:relative;}
 
 /* VERIFIED STRIP */
-.vs{background:var(--midnight-lt);padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap;font-family:var(--fm);font-size:.64rem;letter-spacing:.07em;color:rgba(176,196,204,.95);border-bottom:1px solid rgba(255,255,255,.06);}
-.vs span{color:rgba(0,220,240,1.0);font-weight:500;}
+.vs{background:var(--slate-bg);padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap;font-family:var(--fm);font-size:.72rem;letter-spacing:.07em;color:var(--muted);border-bottom:1px solid var(--rule);}
+.vs span{color:var(--teal);font-weight:500;}
 
 /* GATE LAYOUT */
 .gw{background:var(--slate-bg);min-height:100vh;}
@@ -809,7 +809,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 .tp-opt{border:1.5px solid var(--rule);border-radius:8px;padding:.9rem 1rem;cursor:pointer;transition:all .2s;background:var(--white);}
 .tp-opt:hover{border-color:var(--teal);background:var(--teal-light);transform:translateY(-1px);}
 .tp-opt.cur{border-color:var(--slate);background:var(--slate-surface);opacity:.6;cursor:default;}
-@media(max-width:600px){.nav-btns{gap:.35rem;}.btn-sm{padding:.4rem .7rem;font-size:.68rem;}}
+@media(max-width:600px){.nav-btns{gap:.35rem;}.btn-sm{padding:.4rem .7rem;font-size:.68rem;}.vs{gap:.75rem;font-size:.65rem;padding:.6rem 1rem;}}
 @media(max-width:460px){.db2{flex-direction:column;}.at{padding:.75rem .8rem;font-size:.56rem;}.ip{grid-template-columns:1fr;}}
 
 /* DISTRICT SELECTOR */
@@ -876,7 +876,7 @@ footer strong{color:rgba(220,232,235,1.0);}
     <div class="mh-sub">Honest mortgage analysis. No pressure. No agenda.</div>
     <div class="scope-b active-county-name">Select a Market</div>
   </div>
-  <div class="vs" id="avs">Rate verified:<span>Friday, May 1, 2026 · 11:31 AM ET</span>&nbsp;·&nbsp;County:<span class="active-county-short">— Select a market —</span>&nbsp;·&nbsp;Tax:<span>—</span>&nbsp;·&nbsp;Source:<span>Freddie Mac PMMS</span></div>
+  <div class="vs" id="avs">Rate verified:&nbsp;<span>Friday, May 1, 2026 · 11:31 AM ET</span>&nbsp;·&nbsp;County:&nbsp;<span class="active-county-short">— Select a market —</span>&nbsp;·&nbsp;Tax:&nbsp;<span>—</span>&nbsp;·&nbsp;Source:&nbsp;<span>Freddie Mac PMMS</span></div>
   <div class="county-selector-wrap">
     <div class="county-selector-inner" style="flex-direction:column;align-items:flex-start;gap:.6rem;">
       <div style="display:flex;align-items:flex-start;gap:.75rem;flex-wrap:wrap;">
@@ -1677,7 +1677,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <!-- ANALYSIS -->
 <div id="sa" class="screen">
   <div id="amh"></div>
-  <div class="vs" id="avs">Rate verified:<span>Friday, May 1, 2026 · 11:31 AM ET</span>&nbsp;·&nbsp;County:<span class="active-county-short">Miami-Dade</span>&nbsp;·&nbsp;Tax:<span>1.30%</span>&nbsp;·&nbsp;Source:<span>Freddie Mac PMMS</span></div>
+  <div class="vs" id="avs">Rate verified:&nbsp;<span>Friday, May 1, 2026 · 11:31 AM ET</span>&nbsp;·&nbsp;County:&nbsp;<span class="active-county-short">Miami-Dade</span>&nbsp;·&nbsp;Tax:&nbsp;<span>1.30%</span>&nbsp;·&nbsp;Source:&nbsp;<span>Freddie Mac PMMS</span></div>
   <!-- TIER RIBBON -->
   <div class="tier-ribbon" id="tier-ribbon" style="display:none;">
     <div class="tier-ribbon-info">Current plan: <span id="ribbon-plan-name">Free</span></div>
@@ -3485,7 +3485,7 @@ function setCounty(key) {
   if(sb) sb.textContent = c.name + ' · ' + stateLabel;
   // Update verified strip
   const vs = document.getElementById('avs');
-  if(vs) vs.innerHTML = `Rate verified:<span>${MKT.rv}</span>&nbsp;·&nbsp;State:<span>${stateLabel}</span>&nbsp;·&nbsp;County:<span>${c.short}</span>&nbsp;·&nbsp;Tax:<span>${(c.tr*100).toFixed(2)}%</span>&nbsp;·&nbsp;Source:<span>Freddie Mac PMMS</span>`;
+  if(vs) vs.innerHTML = `Rate verified:&nbsp;<span>${MKT.rv}</span>&nbsp;·&nbsp;State:&nbsp;<span>${stateLabel}</span>&nbsp;·&nbsp;County:&nbsp;<span>${c.short}</span>&nbsp;·&nbsp;Tax:&nbsp;<span>${(c.tr*100).toFixed(2)}%</span>&nbsp;·&nbsp;Source:&nbsp;<span>Freddie Mac PMMS</span>`;
 }
 
 // ── DEMO MODE — WAITLIST EARLY ACCESS ──
@@ -4056,7 +4056,7 @@ function loadDemo(tier){
   const mh=document.getElementById('amh').innerHTML;
   const ac=document.getElementById('ac').innerHTML;
   const af=document.getElementById('af').innerHTML;
-  w.innerHTML=`<div id="amh">${mh}</div><div class="vs">Rate verified:<span>${MKT.rv}</span>&nbsp;·&nbsp;Tax:<span>${MKT.ov}</span>&nbsp;·&nbsp;Flood:<span>${MKT.ov}</span></div><nav class="an"><div class="ats"><button class="at atc active" onclick="showDT('c',this)">§ Comparison & Rate Context</button><button class="at atb" onclick="showDT('b',this)">§ Best Case</button><button class="at atw" onclick="showDT('w',this)">§ Worst Case</button></div><div class="nav-btns"><button class="btn btn-sm btn-ol" onclick="show('dm')">← Choose Demo</button><button class="btn btn-sm btn-tl" onclick="show('w')">Analyze My Property →</button></div></nav><div id="ac">${ac}</div><footer>${af}</footer>`;
+  w.innerHTML=`<div id="amh">${mh}</div><div class="vs">Rate verified:&nbsp;<span>${MKT.rv}</span>&nbsp;·&nbsp;Tax:&nbsp;<span>${MKT.ov}</span>&nbsp;·&nbsp;Flood:&nbsp;<span>${MKT.ov}</span></div><nav class="an"><div class="ats"><button class="at atc active" onclick="showDT('c',this)">§ Comparison & Rate Context</button><button class="at atb" onclick="showDT('b',this)">§ Best Case</button><button class="at atw" onclick="showDT('w',this)">§ Worst Case</button></div><div class="nav-btns"><button class="btn btn-sm btn-ol" onclick="show('dm')">← Choose Demo</button><button class="btn btn-sm btn-tl" onclick="show('w')">Analyze My Property →</button></div></nav><div id="ac">${ac}</div><footer>${af}</footer>`;
   w.querySelectorAll('.as').forEach(s=>s.classList.remove('v'));
   const tc=w.querySelector('#tc');if(tc)tc.classList.add('v');
   show('dma');
