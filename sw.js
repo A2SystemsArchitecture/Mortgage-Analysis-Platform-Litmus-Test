@@ -2,9 +2,9 @@
 // Cache-first strategy — serves platform from cache for instant load and offline use
 // Version bump triggers cache refresh on deploy
 
-const CACHE_NAME = 'hometrue-v1';
+const CACHE_NAME = 'hometrue-v2';
 const ASSETS = [
-  '/Mortgage-Analysis-Platform-Litmus-Test/platform.html',
+  '/platform.html',
   '/android-chrome-192x192.png',
   '/android-chrome-512x512.png',
   '/apple-touch-icon.png',
@@ -47,6 +47,6 @@ self.addEventListener('fetch', event => {
           return response;
         });
       })
-      .catch(() => caches.match('/Mortgage-Analysis-Platform-Litmus-Test/platform.html'))
+      .catch(() => caches.match('/platform.html'))
   );
 });
