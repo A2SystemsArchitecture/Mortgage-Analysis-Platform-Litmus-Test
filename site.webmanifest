@@ -2,7 +2,7 @@
   "name": "HomeTrue",
   "short_name": "HomeTrue",
   "description": "Honest mortgage analysis. No pressure. No agenda.",
-  "start_url": "/Mortgage-Analysis-Platform-Litmus-Test/platform.html",
+  "start_url": "/platform.html",
   "display": "standalone",
   "background_color": "#1a2332",
   "theme_color": "#1a2332",
