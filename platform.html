@@ -843,7 +843,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/Mortgage-Analysis-Platform-Litmus-Test/sw.js')
+      navigator.serviceWorker.register('/sw.js')
         .catch(err => console.warn('HomeTrue SW registration failed:', err));
     });
   }
