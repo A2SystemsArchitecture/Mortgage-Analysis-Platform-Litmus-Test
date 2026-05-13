@@ -9,6 +9,11 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#1a2332">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="HomeTrue">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Mono:wght@300;400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -835,6 +840,14 @@ footer strong{color:rgba(220,232,235,1.0);}
 .fz-btn.sel-unk .fz-code{color:var(--muted);}
 .fz-desc{font-size:.68rem;color:var(--muted);line-height:1.3;}
 </style>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/Mortgage-Analysis-Platform-Litmus-Test/sw.js')
+        .catch(err => console.warn('HomeTrue SW registration failed:', err));
+    });
+  }
+</script>
 </head>
 <body>
 
