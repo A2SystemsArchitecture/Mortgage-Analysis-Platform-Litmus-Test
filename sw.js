@@ -34,12 +34,17 @@ self.addEventListener('activate', event => {
 
 // Fetch — cache-first, fall back to network
 self.addEventListener('fetch', event => {
+  // Never intercept API calls — let them go straight to network
+  if (event.request.url.includes('/api/')) {
+    event.respondWith(fetch(event.request));
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request)
       .then(cached => {
         if (cached) return cached;
         return fetch(event.request).then(response => {
-          // Cache valid responses for future offline use
           if (response && response.status === 200 && response.type === 'basic') {
             const clone = response.clone();
             caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
