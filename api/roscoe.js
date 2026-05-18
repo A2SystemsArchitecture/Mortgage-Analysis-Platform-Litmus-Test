@@ -48,7 +48,7 @@ You are not a feature. You are not a chatbot. You are the reason someone who cam
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-sonnet-4-5',
         max_tokens: 1000,
         system: systemPrompt,
         messages: messages
