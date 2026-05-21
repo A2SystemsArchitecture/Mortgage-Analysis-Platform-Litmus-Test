@@ -2,51 +2,1547 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HomeTrue — Coming Soon</title>
-<meta name="description" content="Honest mortgage analysis. No pressure. No agenda. Coming soon.">
-<meta name="theme-color" content="#1a2332">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,900&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>RAWROUTE</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#00bfa5">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="RawRoute">
+<link rel="apple-touch-icon" sizes="180x180" href="/RawRoute/icons/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/RawRoute/icons/icon-152x152.png">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/RawRoute/icons/favicon-32x32.png">
+<meta name="description" content="Community navigation with no filter. No apologies. Just the road.">
+<script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(e=>console.log('SW:',e));});}</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{background:#1a2332;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;}
-.wrap{text-align:center;padding:2rem;}
-.logo{font-family:'Fraunces',serif;font-size:2.5rem;font-weight:900;color:#ffffff;letter-spacing:-.03em;margin-bottom:.75rem;}
-.logo span{color:#388e5e;}
-.rule{width:2rem;height:2px;background:linear-gradient(90deg,#0097a7,#388e5e);margin:.75rem auto;}
-.tag{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(140,220,230,.8);margin-bottom:2rem;}
-.status{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(176,190,197,.5);}
-.email-wrap{margin-top:2rem;}
-.email-wrap input{background:rgba(255,255,255,.07);border:1px solid rgba(0,151,167,.3);border-radius:6px;padding:.65rem 1rem;font-family:'DM Mono',monospace;font-size:.8rem;color:#ffffff;width:260px;outline:none;}
-.email-wrap input::placeholder{color:rgba(176,190,197,.35);}
-.email-wrap input:focus{border-color:#0097a7;}
-.email-wrap button{background:#0097a7;color:#ffffff;border:none;padding:.65rem 1.25rem;border-radius:6px;font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:.08em;cursor:pointer;margin-left:.5rem;transition:background .2s;}
-.email-wrap button:hover{background:#006670;}
-.legal{font-size:.55rem;color:rgba(176,190,197,.3);margin-top:.75rem;letter-spacing:.05em;}
-.confirm{font-size:.65rem;color:#388e5e;margin-top:.5rem;display:none;}
+:root {
+  --black: #1e2328;
+  --dark: #252b32;
+  --card: #2e363f;
+  --border: #3a4450;
+  --teal: #00bfa5;
+  --teal-dim: #009d87;
+  --amber: #f5a623;
+  --white: #eaf2f8;
+  --muted: #7f92a0;
+  --danger: #ff5c7a;
+  --green: #4caf7d;
+  --warn: #ffb300;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;width:100%;overflow:hidden;font-family:'Barlow',sans-serif;background:var(--black);color:var(--white);}
+
+/* MAP */
+#map{position:fixed;inset:0;z-index:0;}
+.leaflet-tile{filter:brightness(0.78) saturate(0.5) hue-rotate(175deg);}
+.leaflet-control-zoom{display:none;}
+
+/* BETA */
+#beta-badge{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;color:var(--black);background:var(--amber);padding:2px 6px;border-radius:4px;margin-left:8px;vertical-align:middle;position:relative;top:-2px;}
+#beta-banner{position:fixed;top:0;left:0;right:0;z-index:500;background:linear-gradient(135deg,#1e2328,#2e363f);border-bottom:2px solid var(--amber);padding:0;transform:translateY(-100%);transition:transform 0.4s cubic-bezier(0.32,0.72,0,1);}
+#beta-banner.show{transform:translateY(0);}
+#beta-banner-inner{padding:20px 20px 16px;}
+#beta-banner-top{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+#beta-banner-icon{font-size:32px;}
+#beta-banner-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--amber);}
+#beta-banner-sub{font-family:'Barlow Condensed',sans-serif;font-size:11px;color:var(--muted);letter-spacing:1px;margin-top:2px;}
+#beta-banner-msg{font-family:'Barlow',sans-serif;font-size:14px;color:var(--white);line-height:1.6;margin-bottom:16px;}
+#beta-banner-msg b{color:var(--amber);}
+#beta-banner-close{width:100%;background:var(--amber);border:none;color:var(--black);font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:2px;padding:13px;border-radius:6px;cursor:pointer;}
+
+/* LOGO */
+/* SPEED + LIMIT HUD */
+#speed-hud{position:fixed;top:calc(env(safe-area-inset-top, 0px) + 14px);right:14px;z-index:100;display:flex;flex-direction:column;align-items:flex-end;gap:6px;}
+#speed-display{background:var(--dark);border:2px solid var(--teal);border-radius:8px;padding:6px 12px;text-align:center;min-width:64px;display:none;}
+#speed-display.show{display:block;}
+#speed-val{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--white);line-height:1;}
+#speed-unit{font-family:'Barlow Condensed',sans-serif;font-size:10px;color:var(--muted);letter-spacing:1px;}
+#speed-limit-badge{background:white;border:3px solid #cc2200;border-radius:50%;width:40px;height:40px;display:none;align-items:center;justify-content:center;flex-direction:column;}
+#speed-limit-badge.show{display:flex;}
+#speed-limit-badge.over{border-color:var(--danger);background:var(--danger);}
+#slimit-val{font-family:'Bebas Neue',sans-serif;font-size:16px;color:#cc2200;line-height:1;}
+#speed-limit-badge.over #slimit-val{color:white;}
+
+/* POINTS BADGE */
+#points-badge{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:100;background:var(--dark);border:1.5px solid var(--amber);border-radius:20px;padding:5px 14px;display:none;align-items:center;gap:6px;}
+#points-badge.show{display:flex;}
+#points-val{font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--amber);letter-spacing:1px;}
+#points-label{font-family:'Barlow Condensed',sans-serif;font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+
+/* FABS */
+#fabs{position:fixed;bottom:200px;right:14px;z-index:100;display:flex;flex-direction:column;gap:10px;}
+.fab{width:54px;height:54px;border-radius:50%;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:20px;box-shadow:0 4px 16px rgba(0,0,0,0.5);transition:transform 0.15s;background:var(--teal);}
+.fab:active{transform:scale(0.92);}
+.fab.shame-fab{background:var(--danger);}
+.fab.gas-fab{background:#4caf7d;}
+.fab-label{font-family:'Bebas Neue',sans-serif;font-size:7px;letter-spacing:1px;color:white;margin-top:1px;line-height:1;}
+
+/* FOLLOW BTN */
+#follow-btn{position:fixed;bottom:200px;left:14px;z-index:100;background:var(--card);border:2px solid var(--teal);color:var(--teal);font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:1px;padding:7px 12px;border-radius:20px;cursor:pointer;display:none;align-items:center;gap:5px;box-shadow:0 2px 10px rgba(0,0,0,0.4);}
+#follow-btn.active-follow{background:var(--teal);color:var(--black);}
+#follow-btn.show{display:flex;}
+
+/* NAV BAR */
+#nav-bar{display:none;position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(30,35,40,0.97);border-bottom:3px solid var(--teal);padding:14px 16px 12px;flex-direction:column;gap:6px;box-shadow:0 4px 24px rgba(0,0,0,0.6);}
+#nav-bar.active{display:flex;}
+#nav-top{display:flex;align-items:center;gap:12px;}
+#nav-arrow{font-size:44px;line-height:1;min-width:48px;text-align:center;}
+#nav-instruction{flex:1;font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:800;color:var(--white);line-height:1.2;letter-spacing:0.5px;}
+#nav-dist-next{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--teal);letter-spacing:1px;min-width:80px;text-align:right;}
+#nav-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:6px;border-top:1px solid var(--border);}
+#nav-total{font-family:'Barlow Condensed',sans-serif;font-size:16px;color:var(--muted);}
+#nav-total span{color:var(--amber);font-weight:800;font-size:18px;}
+#nav-end-btn{background:var(--danger);border:none;color:white;font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1px;padding:8px 18px;border-radius:6px;cursor:pointer;}
+
+/* BOTTOM SHEET */
+#sheet{position:fixed;bottom:0;left:0;right:0;z-index:200;background:#f0f2f4;border-top:3px solid var(--teal);border-radius:20px 20px 0 0;display:flex;flex-direction:column;transition:transform 0.35s cubic-bezier(0.32,0.72,0,1);box-shadow:0 -4px 24px rgba(0,0,0,0.18);}
+#sheet.peek{transform:translateY(calc(100% - 52px - env(safe-area-inset-bottom, 0px)));}
+#sheet.half{transform:translateY(0);}
+#sheet.full{transform:translateY(0);}
+#sheet-handle-area{padding:10px 0 0;display:flex;flex-direction:column;align-items:center;flex-shrink:0;}
+#sheet-handle{width:44px;height:5px;background:#c0c8d0;border-radius:3px;margin-bottom:0;}
+#sheet-tabs{display:flex;width:100%;border-bottom:2px solid #dde2e8;flex-shrink:0;background:#f0f2f4;}
+.sheet-tab{flex:1;padding:15px 9px;font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1.5px;color:#7f92a0;background:none;border:none;cursor:pointer;border-bottom:3px solid transparent;transition:all 0.15s;text-transform:uppercase;font-weight:700;}
+.sheet-tab.active{color:var(--teal);border-bottom-color:var(--teal);}
+#sheet-content{flex:1;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;max-height:45vh;padding-bottom:env(safe-area-inset-bottom,16px);background:#f0f2f4;}
+#sheet-content::-webkit-scrollbar{display:none;}
+
+/* AUTOCOMPLETE */
+.ac-wrap{position:relative;margin-bottom:8px;}
+.ac-wrap .route-input{margin-bottom:0;}
+.ac-dropdown{display:none;position:absolute;top:100%;left:0;right:0;background:#ffffff;border:1.5px solid var(--teal);border-top:none;border-radius:0 0 10px 10px;z-index:1000;max-height:220px;overflow-y:auto;box-shadow:0 4px 12px rgba(0,0,0,0.12);}
+.ac-dropdown.open{display:block;}
+.ac-item{padding:11px 14px;font-family:'Barlow',sans-serif;font-size:14px;color:#1e2328;cursor:pointer;border-bottom:1px solid #f0f2f4;line-height:1.3;transition:background 0.1s;}
+.ac-item:last-child{border-bottom:none;}
+.ac-item:hover,.ac-item:active{background:#f0f2f4;}
+.ac-item b{color:var(--teal);}
+.ac-gmaps{display:flex;align-items:center;gap:10px;background:#f8f9fa;border-top:1px solid #dde2e8;}
+.ac-gmaps:hover{background:#eef0f2 !important;}
+.ac-saved{display:flex;align-items:center;gap:10px;}
+.ac-icon{font-size:18px;flex-shrink:0;}
+.ac-saved-name{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:700;color:var(--white);}
+.ac-saved-addr{font-size:11px;color:var(--muted);margin-top:1px;}
+
+/* ROUTE TAB */
+#tab-route{padding:14px;}
+.route-input{width:100%;background:var(--card);border:1px solid var(--border);color:var(--white);font-family:'Barlow',sans-serif;font-size:15px;padding:11px 14px;margin-bottom:8px;outline:none;border-radius:4px;transition:border-color 0.15s;}
+.route-input:focus{border-color:var(--teal);}
+.route-input::placeholder{color:var(--muted);}
+#route-btn{width:100%;background:var(--teal);border:none;color:white;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;padding:12px;border-radius:4px;cursor:pointer;transition:background 0.15s;}
+#route-btn:active{background:var(--teal-dim);}
+#route-result{display:none;margin-top:10px;background:var(--card);border:1px solid var(--border);border-radius:4px;padding:11px;}
+#route-result.show{display:block;}
+.route-stat{font-family:'Barlow Condensed',sans-serif;font-size:14px;color:var(--muted);}
+.route-stat span{color:var(--amber);font-weight:700;}
+
+/* FEED TAB */
+#tab-feed{padding:8px;}
+.feed-item{background:#ffffff;border:1.5px solid #dde2e8;border-left:4px solid var(--teal);padding:12px;margin-bottom:8px;border-radius:0 10px 10px 0;cursor:pointer;animation:slideUp 0.3s ease;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.feed-item.repeat{border-left-color:var(--danger);}
+@keyframes slideUp{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.feed-top{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
+.feed-emoji{font-size:22px;}
+.feed-animal{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1px;color:#1e2328;}
+.repeat-badge{background:var(--danger);color:white;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;padding:2px 7px;border-radius:2px;text-transform:uppercase;}
+.feed-car{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;color:var(--amber);}
+.feed-plate{font-size:12px;color:#7f92a0;margin-top:2px;}
+.feed-quip{font-size:13px;color:#3a4450;margin-top:5px;font-style:italic;line-height:1.4;}
+.feed-meta{display:flex;justify-content:space-between;align-items:center;margin-top:8px;}
+.feed-time{font-size:11px;color:#9aaab4;}
+.feed-rcount{font-size:11px;color:var(--danger);font-weight:700;}
+.thank-btn{background:none;border:1.5px solid #dde2e8;color:#7f92a0;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;padding:4px 10px;border-radius:12px;cursor:pointer;transition:all 0.15s;display:flex;align-items:center;gap:3px;}
+.thank-btn:hover,.thank-btn.thanked{background:rgba(0,191,165,0.1);border-color:var(--teal);color:var(--teal);}
+.thank-btn.thanked{cursor:default;}
+.share-btn{background:none;border:1.5px solid #dde2e8;color:#7f92a0;font-size:14px;padding:4px 10px;border-radius:12px;cursor:pointer;transition:all 0.15s;}
+.share-btn:hover{background:rgba(0,191,165,0.1);border-color:var(--teal);}
+.dispute-btn{background:none;border:1.5px solid #dde2e8;color:#7f92a0;font-size:14px;padding:4px 10px;border-radius:12px;cursor:pointer;transition:all 0.15s;}
+.dispute-btn:hover{background:rgba(255,179,0,0.1);border-color:var(--warn);color:var(--warn);}
+
+/* ── GORILLA / SIT-DOWN SYSTEM ── */
+#sitdown-notify{position:fixed;bottom:185px;left:0;right:0;z-index:350;margin:0 14px;background:var(--dark);border:2px solid #6b4226;border-radius:12px;padding:14px 16px;display:none;animation:slideUp 0.4s ease;box-shadow:0 4px 20px rgba(0,0,0,0.5);}
+#sitdown-notify.show{display:block;}
+.sitdown-notify-top{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.gorilla-icon-lg{font-size:36px;line-height:1;}
+.sitdown-notify-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:#d4a574;}
+.sitdown-notify-msg{font-family:'Barlow',sans-serif;font-size:13px;color:var(--muted);line-height:1.4;margin-bottom:12px;}
+.sitdown-notify-actions{display:flex;gap:8px;}
+.sitdown-accept-btn{flex:2;background:#6b4226;border:none;color:white;font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1px;padding:11px;border-radius:6px;cursor:pointer;}
+.sitdown-later-btn{flex:1;background:var(--card);border:1px solid var(--border);color:var(--muted);font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1px;padding:11px;border-radius:6px;cursor:pointer;}
+
+/* Sit-Down Chat Sheet */
+#sitdown-sheet{position:fixed;inset:0;z-index:700;display:flex;flex-direction:column;justify-content:flex-end;background:rgba(0,0,0,0.85);opacity:0;pointer-events:none;transition:opacity 0.25s;}
+#sitdown-sheet.open{opacity:1;pointer-events:all;}
+#sitdown-inner{background:var(--dark);border-top:3px solid #6b4226;border-radius:16px 16px 0 0;height:85vh;display:flex;flex-direction:column;transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.32,0.72,0,1);}
+#sitdown-sheet.open #sitdown-inner{transform:translateY(0);}
+#sitdown-header{background:linear-gradient(135deg,#3d1f0a,#6b4226);padding:14px 18px;display:flex;align-items:center;gap:12px;border-radius:14px 14px 0 0;flex-shrink:0;}
+#sitdown-header-icon{font-size:32px;}
+#sitdown-header-info{flex:1;}
+#sitdown-header-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#d4a574;}
+#sitdown-header-sub{font-family:'Barlow Condensed',sans-serif;font-size:12px;color:rgba(212,165,116,0.7);letter-spacing:1px;margin-top:2px;}
+#sitdown-close{background:none;border:none;color:#d4a574;font-size:22px;cursor:pointer;}
+#sitdown-status{background:rgba(107,66,38,0.2);border-bottom:1px solid rgba(107,66,38,0.4);padding:10px 16px;font-family:'Barlow Condensed',sans-serif;font-size:13px;color:#d4a574;text-align:center;letter-spacing:0.5px;flex-shrink:0;}
+#sitdown-messages{flex:1;overflow-y:auto;padding:12px 16px;display:flex;flex-direction:column;gap:10px;}
+#sitdown-messages::-webkit-scrollbar{display:none;}
+.sitdown-msg{max-width:80%;padding:10px 13px;border-radius:12px;font-family:'Barlow',sans-serif;font-size:14px;line-height:1.4;}
+.sitdown-msg.mine{background:var(--teal);color:var(--black);align-self:flex-end;border-bottom-right-radius:3px;}
+.sitdown-msg.theirs{background:var(--card);color:var(--white);border:1px solid var(--border);align-self:flex-start;border-bottom-left-radius:3px;}
+.sitdown-msg.system{background:rgba(107,66,38,0.15);color:#d4a574;border:1px solid rgba(107,66,38,0.3);align-self:center;text-align:center;font-style:italic;font-size:12px;max-width:90%;}
+#sitdown-input-area{padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:8px;flex-shrink:0;background:var(--dark);}
+#sitdown-input{flex:1;background:var(--card);border:1px solid var(--border);color:var(--white);font-family:'Barlow',sans-serif;font-size:14px;padding:10px 14px;border-radius:20px;outline:none;}
+#sitdown-input:focus{border-color:#6b4226;}
+#sitdown-send{background:#6b4226;border:none;color:white;font-size:18px;width:42px;height:42px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+#sitdown-resolve-bar{padding:10px 16px;background:rgba(0,191,165,0.08);border-top:1px solid var(--border);display:none;flex-shrink:0;}
+#sitdown-resolve-bar.show{display:block;}
+#sitdown-resolve-btn{width:100%;background:var(--teal);border:none;color:var(--black);font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;padding:12px;border-radius:6px;cursor:pointer;}
+
+/* Registration Gate */
+#reg-gate{position:fixed;inset:0;z-index:800;display:flex;flex-direction:column;justify-content:flex-end;background:rgba(0,0,0,0.9);opacity:0;pointer-events:none;transition:opacity 0.25s;}
+#reg-gate.open{opacity:1;pointer-events:all;}
+#reg-gate-inner{background:var(--dark);border-top:3px solid #6b4226;border-radius:16px 16px 0 0;padding:0 0 32px;transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.32,0.72,0,1);}
+#reg-gate.open #reg-gate-inner{transform:translateY(0);}
+#reg-gate-header{background:linear-gradient(135deg,#3d1f0a,#6b4226);padding:16px 18px;border-radius:14px 14px 0 0;text-align:center;}
+#reg-gate-gorilla{font-size:48px;margin-bottom:6px;}
+#reg-gate-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:#d4a574;}
+#reg-gate-sub{font-family:'Barlow',sans-serif;font-size:13px;color:rgba(212,165,116,0.8);margin-top:4px;}
+#reg-gate-body{padding:20px 20px 0;}
+.reg-gate-msg{font-family:'Barlow',sans-serif;font-size:14px;color:var(--muted);text-align:center;margin-bottom:20px;line-height:1.5;}
+#sitdown-req-btn{background:none;border:1px solid #6b4226;color:#d4a574;font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;padding:3px 10px;border-radius:10px;cursor:pointer;margin-left:6px;}
+#sitdown-req-btn:hover{background:#6b4226;color:white;}
+
+/* ── DISPUTE SHEET ── */
+#dispute-sheet{position:fixed;inset:0;z-index:600;display:flex;flex-direction:column;justify-content:flex-end;background:rgba(0,0,0,0.75);opacity:0;pointer-events:none;transition:opacity 0.25s;}
+#dispute-sheet.open{opacity:1;pointer-events:all;}
+#dispute-inner{background:var(--dark);border-top:2px solid var(--warn);border-radius:16px 16px 0 0;transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.32,0.72,0,1);padding-bottom:24px;}
+#dispute-sheet.open #dispute-inner{transform:translateY(0);}
+#dispute-header{background:var(--warn);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;border-radius:14px 14px 0 0;}
+#dispute-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:var(--black);}
+
+/* ── SHARE SHEET ── */
+#share-sheet{position:fixed;inset:0;z-index:600;display:flex;flex-direction:column;justify-content:flex-end;background:rgba(0,0,0,0.75);opacity:0;pointer-events:none;transition:opacity 0.25s;}
+#share-sheet.open{opacity:1;pointer-events:all;}
+#share-inner{background:var(--dark);border-top:2px solid var(--teal);border-radius:16px 16px 0 0;padding:0 0 24px;transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.32,0.72,0,1);}
+#share-sheet.open #share-inner{transform:translateY(0);}
+#share-header{background:var(--teal);padding:13px 18px;display:flex;align-items:center;justify-content:space-between;border-radius:14px 14px 0 0;}
+#share-header-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;color:var(--black);}
+#share-preview{margin:16px 16px 12px;border-radius:12px;overflow:hidden;border:1px solid var(--border);}
+#share-canvas{width:100%;display:block;border-radius:12px;}
+#share-actions{display:flex;gap:10px;padding:0 16px;}
+.share-action-btn{flex:1;padding:13px;border:none;border-radius:8px;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;cursor:pointer;transition:opacity 0.15s;display:flex;align-items:center;justify-content:center;gap:8px;}
+.share-action-btn:active{opacity:0.8;}
+#share-native-btn{background:var(--teal);color:var(--black);}
+#share-copy-btn{background:var(--card);color:var(--white);border:1px solid var(--border);}
+#share-copy-btn.copied{background:var(--green);color:white;border-color:var(--green);}
+
+/* TRAFFIC LEGEND */
+#traffic-legend{position:fixed;bottom:160px;left:14px;z-index:99;background:var(--dark);border:1px solid var(--border);border-radius:6px;padding:6px 10px;display:none;}
+#traffic-legend.show{display:block;}
+.tleg-row{display:flex;align-items:center;gap:6px;font-family:'Barlow Condensed',sans-serif;font-size:11px;color:var(--muted);margin-bottom:2px;}
+.tleg-dot{width:10px;height:10px;border-radius:50%;}
+
+/* REPORT SHEET */
+#report-sheet{position:fixed;inset:0;z-index:500;display:flex;flex-direction:column;justify-content:flex-end;background:rgba(0,0,0,0.7);opacity:0;pointer-events:none;transition:opacity 0.25s;}
+#report-sheet.open{opacity:1;pointer-events:all;}
+#report-inner{background:#f0f2f4;border-top:3px solid var(--teal);border-radius:20px 20px 0 0;max-height:92vh;overflow-y:auto;-webkit-overflow-scrolling:touch;transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.32,0.72,0,1);}
+#report-sheet.open #report-inner{transform:translateY(0);}
+#report-header{background:var(--teal);padding:16px 18px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:1;border-radius:20px 20px 0 0;}
+#report-title{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:var(--black);}
+#report-close{background:none;border:none;color:var(--black);font-size:26px;cursor:pointer;font-weight:bold;padding:0 4px;}
+#report-body{padding:16px;}
+.form-section{margin-bottom:20px;}
+.form-label{display:block;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;letter-spacing:2px;color:var(--teal);text-transform:uppercase;margin-bottom:10px;}
+.animal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.animal-btn{background:#ffffff;border:1.5px solid #dde2e8;color:#1e2328;padding:14px 4px 10px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;border-radius:10px;transition:all 0.15s;min-height:80px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.animal-btn.selected{background:var(--teal);border-color:var(--teal);}
+.a-emoji{font-size:32px;line-height:1;}
+.a-name{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;line-height:1.1;text-align:center;color:#1e2328;}
+.animal-btn.selected .a-name{color:var(--black);}
+.color-grid{display:flex;gap:10px;flex-wrap:wrap;}
+.color-btn{width:44px;height:44px;border:2.5px solid #dde2e8;cursor:pointer;border-radius:50%;transition:all 0.15s;}
+.color-btn.selected{border-color:var(--teal);transform:scale(1.2);}
+.form-row{display:flex;gap:8px;}
+.form-select,.form-input{background:#ffffff;border:1.5px solid #dde2e8;color:#1e2328;font-family:'Barlow',sans-serif;font-size:17px;padding:13px 14px;outline:none;border-radius:8px;width:100%;transition:border-color 0.15s;-webkit-appearance:none;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.form-select:focus,.form-input:focus{border-color:var(--teal);}
+.form-select option{background:#ffffff;color:#1e2328;}
+.disclaimer{font-size:12px;color:#7f92a0;margin-top:6px;}
+#submit-report{width:100%;background:var(--teal);border:none;color:white;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;padding:16px;border-radius:10px;cursor:pointer;transition:background 0.15s;margin-bottom:8px;}
+#submit-report:active{background:var(--teal-dim);}
+
+/* SHAME SHEET */
+#shame-sheet{position:fixed;inset:0;z-index:500;display:flex;flex-direction:column;justify-content:flex-end;background:rgba(0,0,0,0.6);opacity:0;pointer-events:none;transition:opacity 0.25s;}
+#shame-sheet.open{opacity:1;pointer-events:all;}
+#shame-inner{background:#f0f2f4;border-top:3px solid var(--danger);border-radius:20px 20px 0 0;max-height:85vh;overflow-y:auto;-webkit-overflow-scrolling:touch;transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.32,0.72,0,1);}
+#shame-sheet.open #shame-inner{transform:translateY(0);}
+#shame-header{background:var(--danger);padding:16px 18px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;border-radius:20px 20px 0 0;}
+#shame-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:white;}
+#shame-close{background:none;border:none;color:white;font-size:24px;cursor:pointer;}
+#shame-list{padding:12px;}
+.shame-item{background:#ffffff;border:1.5px solid #dde2e8;border-left:4px solid var(--danger);padding:14px;margin-bottom:10px;border-radius:0 10px 10px 0;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.shame-top{display:flex;align-items:flex-start;gap:12px;}
+.shame-rank{font-family:'Bebas Neue',sans-serif;font-size:34px;color:var(--danger);line-height:1;min-width:38px;}
+.shame-info{flex:1;}
+.shame-plate{font-family:'Bebas Neue',sans-serif;font-size:20px;color:#1e2328;letter-spacing:2px;}
+.shame-car{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;color:var(--amber);}
+.shame-count{font-size:13px;color:var(--danger);font-weight:700;margin-top:2px;}
+.shame-animals{font-size:22px;margin-top:6px;}
+
+/* GAS SHEET */
+#gas-sheet{position:fixed;inset:0;z-index:500;display:flex;flex-direction:column;justify-content:flex-end;background:rgba(0,0,0,0.6);opacity:0;pointer-events:none;transition:opacity 0.25s;}
+#gas-sheet.open{opacity:1;pointer-events:all;}
+#gas-inner{background:#f0f2f4;border-top:3px solid var(--green);border-radius:20px 20px 0 0;max-height:80vh;overflow-y:auto;-webkit-overflow-scrolling:touch;transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.32,0.72,0,1);}
+#gas-sheet.open #gas-inner{transform:translateY(0);}
+#gas-header{background:var(--green);padding:16px 18px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;border-radius:20px 20px 0 0;}
+#gas-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:white;}
+#gas-close{background:none;border:none;color:white;font-size:24px;cursor:pointer;}
+#gas-list{padding:12px;}
+.gas-item{background:#ffffff;border:1.5px solid #dde2e8;border-left:4px solid var(--green);padding:14px;margin-bottom:10px;border-radius:0 10px 10px 0;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.gas-name{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:700;color:#1e2328;}
+.gas-dist{font-size:13px;color:#7f92a0;margin-top:2px;}
+.gas-price{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--green);letter-spacing:1px;}
+.gas-type{font-size:12px;color:#7f92a0;}
+
+/* POINTS SHEET */
+#points-sheet{position:fixed;inset:0;z-index:500;display:flex;flex-direction:column;justify-content:flex-end;background:rgba(0,0,0,0.6);opacity:0;pointer-events:none;transition:opacity 0.25s;}
+#points-sheet.open{opacity:1;pointer-events:all;}
+#points-inner{background:#f0f2f4;border-top:3px solid var(--amber);border-radius:20px 20px 0 0;max-height:85vh;overflow-y:auto;-webkit-overflow-scrolling:touch;transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.32,0.72,0,1);}
+#points-sheet.open #points-inner{transform:translateY(0);}
+#points-header{background:var(--amber);padding:16px 18px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;border-radius:20px 20px 0 0;}
+#points-header-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--black);}
+#points-close{background:none;border:none;color:var(--black);font-size:24px;cursor:pointer;}
+#points-body{padding:16px;}
+.points-total{text-align:center;margin-bottom:20px;}
+.points-big{font-family:'Bebas Neue',sans-serif;font-size:64px;color:var(--amber);line-height:1;}
+.points-sub{font-family:'Barlow Condensed',sans-serif;font-size:14px;color:#7f92a0;letter-spacing:1px;text-transform:uppercase;}
+.badge-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px;}
+.badge-item{background:#ffffff;border:1.5px solid #dde2e8;border-radius:10px;padding:14px 8px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.badge-item.earned{border-color:var(--amber);}
+.badge-emoji{font-size:30px;margin-bottom:4px;}
+.badge-name{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;color:#1e2328;text-transform:uppercase;letter-spacing:0.5px;}
+.badge-req{font-size:10px;color:#7f92a0;margin-top:2px;}
+.badge-item.earned .badge-req{color:var(--amber);}
+
+/* ── WEATHER WIDGET ── */
+#weather-widget{position:fixed;top:calc(env(safe-area-inset-top, 0px) + 50px);left:14px;z-index:100;background:rgba(37,43,50,0.92);border:1px solid var(--border);border-radius:20px;padding:6px 12px;display:none;align-items:center;gap:8px;cursor:pointer;backdrop-filter:blur(8px);transition:border-color 0.15s;}
+#weather-widget.show{display:flex;}
+#weather-widget:hover{border-color:var(--teal);}
+#weather-icon{font-size:20px;line-height:1;}
+#weather-info{display:flex;flex-direction:column;}
+#weather-temp{font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--white);line-height:1;}
+#weather-desc{font-family:'Barlow Condensed',sans-serif;font-size:10px;color:var(--muted);letter-spacing:0.5px;text-transform:uppercase;}
+#weather-card{display:none;position:fixed;top:calc(env(safe-area-inset-top, 0px) + 98px);left:14px;z-index:200;background:var(--dark);border:1px solid var(--teal);border-radius:12px;width:260px;box-shadow:0 8px 24px rgba(0,0,0,0.5);overflow:hidden;}
+#weather-card.show{display:block;animation:obFadeIn 0.2s ease;}
+#weather-card-header{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--border);}
+#weather-card-title{font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px;color:var(--teal);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px;}
+#weather-card-body{padding:12px 14px;}
+.weather-main{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+#wc-icon{font-size:40px;line-height:1;}
+#wc-temp{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--white);line-height:1;}
+#wc-desc{font-family:'Barlow Condensed',sans-serif;font-size:14px;color:var(--muted);margin-top:2px;}
+.weather-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+.weather-stat{background:var(--card);border-radius:6px;padding:8px 10px;}
+.ws-label{font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:700;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;margin-bottom:3px;}
+.ws-val{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--white);letter-spacing:0.5px;}
+#wc-quip{font-family:'Barlow',sans-serif;font-size:13px;color:var(--amber);font-style:italic;text-align:center;padding:10px 4px 6px;line-height:1.4;min-height:20px;}
+#wc-alert{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;padding:8px 10px;border-radius:6px;display:none;line-height:1.3;}
+#wc-alert.show{display:block;}
+#wc-alert.warn{background:rgba(255,179,0,0.15);color:var(--warn);border:1px solid rgba(255,179,0,0.3);}
+#wc-alert.danger{background:rgba(255,92,122,0.15);color:var(--danger);border:1px solid rgba(255,92,122,0.3);}
+
+/* ── NEWS TICKER (top pill) ── */
+#news-ticker{display:none;position:fixed;top:58px;left:50%;transform:translateX(-50%);z-index:150;background:rgba(30,35,40,0.95);border:1px solid var(--teal);border-radius:20px;padding:7px 18px;font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;color:var(--amber);letter-spacing:0.5px;text-align:center;white-space:nowrap;max-width:90vw;overflow:hidden;text-overflow:ellipsis;box-shadow:0 4px 16px rgba(0,0,0,0.5);transition:opacity 0.5s,transform 0.3s;}
+#news-ticker.show{display:block;animation:tickerSlideIn 0.35s ease;}
+@keyframes tickerSlideIn{from{opacity:0;transform:translateX(-50%) translateY(-12px);}to{opacity:1;transform:translateX(-50%) translateY(0);}}
+
+/* ── ROUTE FIELDS ── */
+.route-field-wrap{background:#ffffff;border:1.5px solid #dde2e8;border-radius:12px;padding:14px 16px;margin-bottom:6px;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.route-field-label{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:800;letter-spacing:2.5px;color:var(--teal);text-transform:uppercase;margin-bottom:8px;}
+.route-field-wrap .route-input{border:none;background:transparent;padding:4px 0;font-size:22px;font-weight:600;margin-bottom:0;color:#1e2328;}
+.route-field-wrap .route-input:focus{border:none;outline:none;}
+.route-field-wrap .route-input::placeholder{color:#b0bec5;font-weight:400;}
+.route-swap-row{display:flex;align-items:center;gap:8px;margin:4px 0;}
+.route-connector-line{flex:1;height:1px;background:#dde2e8;}
+.swap-btn{background:#ffffff;border:1.5px solid #dde2e8;color:var(--teal);font-size:18px;width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.15s;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,0.08);}
+.swap-btn:hover{background:var(--teal);color:#ffffff;}
+.loc-btn{background:#ffffff;border:1.5px solid #dde2e8;font-size:20px;width:46px;height:46px;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s;box-shadow:0 1px 4px rgba(0,0,0,0.08);}
+.loc-btn:hover{border-color:var(--teal);}
+#route-btn{font-size:26px;padding:17px;letter-spacing:3px;border-radius:12px;font-weight:700;}
+#go-btn-wrap{position:sticky;bottom:0;background:#f0f2f4;padding:10px 0 4px;margin-top:10px;border-top:1px solid #dde2e8;}
+#go-btn-wrap #route-btn{margin:0;}
+
+/* ── UNIT & ACCOUNT BUTTONS ── */
+#unit-toggle{background:#ffffff;border:1.5px solid #dde2e8;color:#1e2328;font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1px;padding:8px 16px;border-radius:20px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.08);font-weight:700;}
+.acct-btn-top{background:#ffffff;border:1.5px solid #dde2e8;color:#1e2328;font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1px;padding:8px 16px;border-radius:20px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.08);}
+
+/* ── QUICK DEST BUTTONS ── */
+.quick-btn{background:#ffffff;border:1.5px solid #dde2e8;color:#1e2328;font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1px;padding:9px 18px;border-radius:20px;cursor:pointer;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.quick-btn:hover{border-color:var(--teal);color:var(--teal);}
+
+/* ── ROUTE RESULT ── */
+#route-result{margin-top:8px;padding:12px 16px;background:#ffffff;border-radius:12px;border:1.5px solid #dde2e8;}
+.route-stat{font-family:'Barlow Condensed',sans-serif;font-size:18px;color:#1e2328;font-weight:700;}
+.route-stat span{color:var(--teal);font-size:20px;font-weight:700;}
+
+/* ── MY PLACES TAB ── */
+.places-label{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;color:var(--teal);text-transform:uppercase;margin-bottom:8px;}
+.place-row{display:flex;align-items:center;gap:12px;background:#ffffff;border:1.5px solid #dde2e8;border-radius:10px;padding:14px;margin-bottom:8px;cursor:pointer;transition:border-color 0.15s;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.place-row:hover{border-color:var(--teal);}
+.place-icon{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.place-info{flex:1;}
+.place-name{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:#1e2328;}
+.place-addr{font-size:13px;color:#7f92a0;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px;}
+.place-edit{background:none;border:none;font-size:16px;cursor:pointer;padding:4px;color:#9aaab4;}
+.add-fav-btn{width:100%;background:none;border:1.5px dashed #c0c8d0;color:#7f92a0;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;letter-spacing:1px;padding:13px;border-radius:10px;cursor:pointer;margin-top:4px;transition:all 0.15s;}
+.add-fav-btn:hover{border-color:var(--teal);color:var(--teal);}
+.recent-row{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #dde2e8;cursor:pointer;}
+.recent-row:last-child{border-bottom:none;}
+.recent-addr{font-size:14px;color:#1e2328;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.fav-row{display:flex;align-items:center;gap:10px;background:#ffffff;border:1.5px solid #dde2e8;border-radius:10px;padding:12px;margin-bottom:7px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.fav-row:hover{border-color:var(--teal);}
+.fav-name{font-family:'Bebas Neue',sans-serif;font-size:16px;color:#1e2328;}
+.fav-addr{font-size:12px;color:#7f92a0;margin-top:1px;}
+.fav-del{background:none;border:none;color:var(--danger);font-size:16px;cursor:pointer;padding:4px;margin-left:auto;}
+.quick-btn{background:#ffffff;border:1.5px solid #dde2e8;color:#1e2328;font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;padding:9px 16px;border-radius:20px;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all 0.15s;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,0.06);}
+.quick-btn:hover{border-color:var(--teal);color:var(--teal);}
+
+/* ── ACCOUNT SHEET ── */
+#account-sheet{position:fixed;inset:0;z-index:500;display:flex;flex-direction:column;justify-content:flex-end;background:rgba(0,0,0,0.7);opacity:0;pointer-events:none;transition:opacity 0.25s;}
+#account-sheet.open{opacity:1;pointer-events:all;}
+#account-inner{background:var(--dark);border-top:2px solid var(--teal);border-radius:16px 16px 0 0;max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch;transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.32,0.72,0,1);}
+#account-sheet.open #account-inner{transform:translateY(0);}
+#account-header{background:var(--teal);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;}
+#account-title{font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:2px;color:var(--black);}
+#account-body{padding:16px;}
+#profile-card{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:16px;}
+#profile-avatar{width:48px;height:48px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--black);flex-shrink:0;}
+#profile-info{flex:1;}
+#profile-name-display{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--white);letter-spacing:1px;}
+#profile-since{font-size:11px;color:var(--muted);margin-top:2px;}
+#profile-pts{text-align:right;}
+#profile-pts-val{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--amber);line-height:1;}
+.acct-section-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--teal);text-transform:uppercase;margin-bottom:8px;}
+.acct-place-row{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:8px;cursor:pointer;transition:border-color 0.15s;}
+.acct-place-row:hover{border-color:var(--teal);}
+.acct-place-name{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;color:var(--white);}
+.acct-place-addr{font-size:12px;color:var(--muted);margin-top:2px;}
+.acct-setting-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border);font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;color:var(--white);}
+
+/* ── PLACE / FAV SHEETS ── */
+#place-sheet,#fav-sheet{position:fixed;inset:0;z-index:600;display:flex;flex-direction:column;justify-content:flex-end;background:rgba(0,0,0,0.7);opacity:0;pointer-events:none;transition:opacity 0.25s;}
+#place-sheet.open,#fav-sheet.open{opacity:1;pointer-events:all;}
+#place-inner,#fav-inner{background:#f0f2f4;border-top:3px solid var(--teal);border-radius:20px 20px 0 0;transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.32,0.72,0,1);padding-bottom:24px;}
+#place-sheet.open #place-inner,#fav-sheet.open #fav-inner{transform:translateY(0);}
+#place-header,#fav-header{background:var(--teal);padding:16px 18px;display:flex;align-items:center;justify-content:space-between;border-radius:20px 20px 0 0;}
+#place-title,#fav-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#1e2328;}
+
+/* TOAST */
+#toast{position:fixed;bottom:185px;left:50%;transform:translateX(-50%) translateY(10px);background:var(--teal);color:var(--black);font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:1px;padding:9px 18px;z-index:600;opacity:0;pointer-events:none;transition:all 0.3s;border-radius:4px;max-width:88vw;text-align:center;}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+#toast.danger{background:var(--danger);color:white;}
+#toast.award{background:var(--amber);color:var(--black);}
+
+/* POPUP */
+.leaflet-popup-content-wrapper{background:var(--dark)!important;border:1px solid var(--teal)!important;border-radius:6px!important;color:var(--white)!important;font-family:'Barlow',sans-serif!important;box-shadow:0 4px 20px rgba(0,0,0,0.4)!important;}
+.leaflet-popup-tip{background:var(--dark)!important;}
+.leaflet-popup-close-button{color:var(--teal)!important;font-size:18px!important;top:6px!important;right:8px!important;}
+.popup-animal{font-size:24px;margin-bottom:3px;}
+.popup-type{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1px;color:var(--teal);}
+.popup-car{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;color:var(--amber);margin:3px 0;}
+.popup-plate{font-size:12px;color:var(--muted);}
+.popup-quip{font-size:12px;font-style:italic;color:#aaa;margin-top:5px;line-height:1.4;border-top:1px solid var(--border);padding-top:5px;}
+.popup-repeat{font-size:11px;color:var(--danger);font-weight:700;margin-top:3px;}
+.custom-pin{display:flex;flex-direction:column;align-items:center;}
+.pin-bubble{background:var(--dark);border:2px solid var(--teal);border-radius:6px;padding:4px 6px;font-size:17px;box-shadow:0 3px 10px rgba(0,0,0,0.5);}
+.pin-bubble.rep{border-color:var(--danger);}
+.pin-bubble.gas-pin{border-color:var(--green);background:#1a2e22;}
+.pin-tail{width:2px;height:5px;background:var(--teal);}
+
+/* ONBOARDING */
+#onboarding{position:fixed;inset:0;z-index:2000;background:var(--black);display:flex;align-items:center;justify-content:center;overflow-y:auto;}
+#ob-inner{width:100%;max-width:480px;display:flex;flex-direction:column;align-items:center;padding:40px 24px 60px;min-height:100vh;justify-content:center;text-align:center;}
+#ob-logo{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:4px;color:var(--teal);text-shadow:0 0 30px rgba(0,191,165,0.4);margin-bottom:4px;text-align:center;}
+#ob-logo span{color:var(--amber);}
+#ob-tagline{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:1px;color:var(--muted);margin-bottom:40px;text-transform:uppercase;text-align:center;}
+#ob-steps{width:100%;position:relative;}
+.ob-step{display:none;flex-direction:column;align-items:center;text-align:center;gap:11px;animation:obFadeIn 0.35s ease;}
+.ob-step.active{display:flex;}
+@keyframes obFadeIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.ob-emoji{font-size:52px;margin-bottom:4px;}
+.ob-title{font-family:'Bebas Neue',sans-serif;font-size:25px;letter-spacing:1px;color:var(--white);line-height:1.2;text-align:center;}
+.ob-sub{font-family:'Barlow',sans-serif;font-size:14px;color:var(--muted);line-height:1.5;max-width:300px;margin-bottom:6px;text-align:center;}
+.ob-input{width:100%;background:var(--card);border:1px solid var(--border);border-radius:8px;color:var(--white);font-family:'Barlow',sans-serif;font-size:17px;padding:13px 16px;outline:none;text-align:center;transition:border-color 0.15s;margin:4px 0;}
+.ob-input:focus{border-color:var(--teal);}
+.ob-input::placeholder{color:var(--muted);}
+.ob-btn{width:100%;background:var(--teal);border:none;color:var(--black);font-family:'Bebas Neue',sans-serif;font-size:19px;letter-spacing:2px;padding:15px;border-radius:8px;cursor:pointer;margin-top:8px;transition:background 0.15s;font-weight:700;}
+.ob-btn:active{background:var(--teal-dim);}
+.ob-btn:disabled{opacity:0.35;cursor:not-allowed;}
+.ob-skip{background:none;border:none;color:var(--muted);font-family:'Barlow',sans-serif;font-size:13px;cursor:pointer;padding:4px;text-decoration:underline;}
+.ob-unit-grid{display:flex;flex-direction:column;gap:10px;width:100%;margin:4px 0;}
+.ob-unit-btn{background:var(--card);border:2px solid var(--border);border-radius:10px;color:var(--white);padding:15px;cursor:pointer;display:flex;align-items:center;gap:14px;transition:all 0.15s;text-align:left;}
+.ob-unit-btn.selected{border-color:var(--teal);background:rgba(0,191,165,0.08);}
+.ob-unit-flag{font-size:26px;}
+.ob-unit-label{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:700;flex:1;}
+.ob-unit-sub{font-family:'Bebas Neue',sans-serif;font-size:15px;color:var(--teal);letter-spacing:1px;}
+.ob-animal-list{width:100%;display:flex;flex-direction:column;gap:7px;text-align:left;margin:4px 0;}
+.ob-animal-row{display:flex;align-items:center;gap:11px;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:9px 13px;font-size:13px;color:var(--white);}
+.ob-animal-row span:first-child{font-size:20px;}
+.ob-animal-row b{color:var(--teal);}
+#ob-dots{display:flex;gap:8px;margin-top:32px;justify-content:center;width:100%;}
+.ob-dot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:all 0.2s;flex-shrink:0;}
+.ob-dot.active{background:var(--teal);width:24px;border-radius:4px;}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="logo">Home<span>True</span></div>
-  <div class="rule"></div>
-  <div class="tag">Honest mortgage analysis. No pressure. No agenda.</div>
-  <div class="status">Coming Soon</div>
-  <div class="email-wrap">
-    <input type="email" id="email" placeholder="your@email.com">
-    <button onclick="notify()">Notify Me</button>
-    <div class="legal">No spam. Launch notification only.</div>
-    <div class="confirm" id="confirm">✓ You're on the list.</div>
+
+
+<div id="onboarding">
+  <div id="ob-inner">
+    <div id="ob-logo">RAW<span>ROUTE</span></div>
+    <div id="ob-tagline">No filter. No apologies. Just the road.</div>
+    <div id="ob-steps">
+      <div class="ob-step active" id="step-1">
+        <div class="ob-emoji">🗺️</div>
+        <div class="ob-title">Navigation with no filter.</div>
+        <div class="ob-sub">Report road hazards, bad drivers, and speed traps — call them what they are. No corporate speak. No apologies.</div>
+        <button class="ob-btn" onclick="obNext(2)" style="margin-top:16px">LET'S GO</button>
+      </div>
+      <div class="ob-step" id="step-2">
+        <div class="ob-emoji">👤</div>
+        <div class="ob-title">What do we call you?</div>
+        <div class="ob-sub">Anonymous on the map. Known in the community.</div>
+        <input class="ob-input" id="ob-name" placeholder="Your nickname..." maxlength="20"/>
+        <button class="ob-btn" onclick="obNext(3)">NEXT</button>
+        <button class="ob-skip" onclick="obNext(3)">Skip for now</button>
+      </div>
+      <div class="ob-step" id="step-3">
+        <div class="ob-emoji">📏</div>
+        <div class="ob-title">How do you measure distance?</div>
+        <div class="ob-sub">You can always change this later.</div>
+        <div class="ob-unit-grid">
+          <button class="ob-unit-btn" id="unit-metric" onclick="selectUnit('metric')">
+            <span class="ob-unit-flag">🌍</span>
+            <span class="ob-unit-label">Kilometers & Meters</span>
+            <span class="ob-unit-sub">km / m</span>
+          </button>
+          <button class="ob-unit-btn" id="unit-imperial" onclick="selectUnit('imperial')">
+            <span class="ob-unit-flag">🇺🇸</span>
+            <span class="ob-unit-label">Miles & Feet</span>
+            <span class="ob-unit-sub">mi / ft</span>
+          </button>
+        </div>
+        <button class="ob-btn" id="ob-unit-confirm" onclick="obNext(4)" disabled>CONFIRM</button>
+      </div>
+      <div class="ob-step" id="step-4">
+        <div class="ob-emoji">🦥</div>
+        <div class="ob-title">Learn the language.</div>
+        <div class="ob-sub">RawRoute uses animals to identify road situations. No jargon. No corporate speak.</div>
+        <div class="ob-animal-list">
+          <div class="ob-animal-row"><span>🦊</span><span><b>Fox</b> — Speed trap ahead</span></div>
+          <div class="ob-animal-row"><span>🦥</span><span><b>FLAG</b> — Left lane camper</span></div>
+          <div class="ob-animal-row"><span>🐸</span><span><b>SAPINGO</b> — Complete driving idiot</span></div>
+          <div class="ob-animal-row"><span>🦏</span><span><b>Rhino</b> — Blind merger</span></div>
+          <div class="ob-animal-row"><span>🦛</span><span><b>Hippo</b> — Blocking traffic</span></div>
+          <div class="ob-animal-row"><span>🐘</span><span><b>Elephant</b> — Big rig ahead</span></div>
+        </div>
+        <button class="ob-btn" onclick="obNext(5)">GOT IT</button>
+      </div>
+      <div class="ob-step" id="step-5">
+        <div class="ob-emoji">🚀</div>
+        <div class="ob-title" id="ob-ready-title">You're in.</div>
+        <div class="ob-sub">Drive smart. Report what you see. Don't be a FLAG.</div>
+        <button class="ob-btn" onclick="finishOnboarding()">START DRIVING</button>
+      </div>
+    </div>
+    <div id="ob-dots">
+      <div class="ob-dot active" id="dot-1"></div>
+      <div class="ob-dot" id="dot-2"></div>
+      <div class="ob-dot" id="dot-3"></div>
+      <div class="ob-dot" id="dot-4"></div>
+      <div class="ob-dot" id="dot-5"></div>
+    </div>
   </div>
 </div>
-<script>
-function notify(){
-  var e=document.getElementById('email');
-  if(e.value&&e.value.includes('@')){
-    document.getElementById('confirm').style.display='block';
-    e.value='';
-  }
+
+
+<div id="nav-bar">
+  <div id="nav-top">
+    <div id="nav-arrow">⬆️</div>
+    <div id="nav-instruction">Head north</div>
+    <div id="nav-dist-next">—</div>
+  </div>
+  <div id="nav-bottom">
+    <div id="nav-total">Remaining: <span id="nav-remain">—</span> · <span id="nav-eta">—</span></div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button id="nav-stop-btn" onclick="openAddStop()" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px;padding:7px 12px;border-radius:6px;cursor:pointer">➕ ADD STOP</button>
+      <button id="nav-share-btn" onclick="shareLionsShare()" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);color:white;font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px;padding:7px 12px;border-radius:6px;cursor:pointer">🦁 SHARE</button>
+      <button id="nav-end-btn" onclick="endNav()">END ROUTE</button>
+    </div>
+  </div>
+</div>
+
+
+<div id="speed-hud">
+  <div id="speed-display">
+    <div id="speed-val">0</div>
+    <div id="speed-unit">mph</div>
+  </div>
+  <div id="speed-limit-badge"><div id="slimit-val">—</div></div>
+</div>
+
+
+<div id="points-badge" onclick="openPoints()">
+  <span>⭐</span>
+  <span id="points-val">0</span>
+  <span id="points-label">pts</span>
+</div>
+
+
+<button id="follow-btn" onclick="toggleFollow()">
+  <span id="follow-icon">📍</span>
+  <span id="follow-label">FOLLOW ME</span>
+</button>
+
+
+<div id="news-ticker"></div>
+
+
+<div id="map"></div>
+
+
+<div id="beta-banner">
+  <div id="beta-banner-inner">
+    <div id="beta-banner-top">
+      <div id="beta-banner-icon">🐼</div>
+      <div>
+        <div id="beta-banner-title">You're in Beta</div>
+        <div id="beta-banner-sub">RawRoute Beta — Early Access</div>
+      </div>
+    </div>
+    <div id="beta-banner-msg">
+      Welcome to <b>RawRoute Beta.</b> You're one of the first drivers using this app and your feedback shapes what it becomes.<br><br>
+      <b>What Beta means:</b> Reports are currently saved to your device only. You won't see other users' reports yet — that's coming when we launch the full community server.<br><br>
+      Everything else is live. Navigate. Report. Use it on your commute. <b>Don't be a FLAG.</b>
+    </div>
+    <button id="beta-banner-close" onclick="closeBetaBanner()">I'M IN. LET'S GO. 🚀</button>
+  </div>
+</div>
+
+
+<div id="beta-badge" style="position:fixed;top:calc(env(safe-area-inset-top,0px) + 14px);left:14px;z-index:100;background:var(--amber);color:#1e2328;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;letter-spacing:2px;padding:4px 10px;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,0.3)">BETA</div>
+
+
+<button id="lang-toggle" onclick="toggleLanguage()" style="position:fixed;bottom:90px;left:14px;z-index:100;background:var(--card);border:1px solid var(--border);color:var(--white);font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px;padding:5px 12px;border-radius:20px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.4)">🇨🇺 ES</button>
+
+
+<div id="weather-widget" onclick="toggleWeatherCard()">
+  <div id="weather-icon">⛅</div>
+  <div id="weather-info">
+    <div id="weather-temp">--°</div>
+    <div id="weather-desc">Loading...</div>
+  </div>
+</div>
+
+
+<div id="weather-card">
+  <div id="weather-card-header">
+    <div id="weather-card-title">Current Conditions</div>
+    <button onclick="toggleWeatherCard()" style="background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer">✕</button>
+  </div>
+  <div id="weather-card-body">
+    <div class="weather-main">
+      <div id="wc-icon">⛅</div>
+      <div>
+        <div id="wc-temp"></div>
+        <div id="wc-desc"></div>
+      </div>
+    </div>
+    <div class="weather-grid">
+      <div class="weather-stat"><div class="ws-label">FEELS LIKE</div><div class="ws-val" id="wc-feels"></div></div>
+      <div class="weather-stat"><div class="ws-label">HUMIDITY</div><div class="ws-val" id="wc-humidity"></div></div>
+      <div class="weather-stat"><div class="ws-label">WIND</div><div class="ws-val" id="wc-wind"></div></div>
+      <div class="weather-stat"><div class="ws-label">VISIBILITY</div><div class="ws-val" id="wc-visibility"></div></div>
+    </div>
+    <div id="wc-quip"></div>
+    <div id="wc-alert"></div>
+  </div>
+</div>
+
+
+<div id="fabs">
+  <button class="fab shame-fab" onclick="openShame()" title="Hall of Shame">🏆<span class="fab-label">SHAME</span></button>
+  <button class="fab gas-fab" onclick="openGas()" title="Gas Stations">⛽<span class="fab-label">GAS</span></button>
+  <button class="fab" onclick="openReport()" title="File Report">⚠️<span class="fab-label">REPORT</span></button>
+  <button class="fab" onclick="recenter()" title="My Location" style="background:var(--card);border:2px solid var(--teal)">📍<span class="fab-label">ME</span></button>
+</div>
+
+
+<div id="sheet" class="peek">
+  <div id="sheet-handle-area" onclick="cycleSheet()">
+    <div id="sheet-handle" style="margin-bottom:6px;margin-top:2px"></div>
+    <div id="sheet-tabs">
+      <button class="sheet-tab active" onclick="switchTab('route',event)">📍 Route</button>
+      <button class="sheet-tab" onclick="switchTab('places',event)">🏠 My Places</button>
+      <button class="sheet-tab" onclick="switchTab('feed',event)">📡 Feed</button>
+    </div>
+  </div>
+  <div id="sheet-content">
+    <div id="tab-route">
+      
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <button id="unit-toggle" onclick="toggleUnits()" style="background:#ffffff;border:1.5px solid #dde2e8;color:#1e2328;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;padding:9px 18px;border-radius:20px;cursor:pointer;font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,0.08)">🌍 km/m</button>
+        <button onclick="openAccount()" style="background:#ffffff;border:1.5px solid #dde2e8;color:#1e2328;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;padding:9px 18px;border-radius:20px;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.08);font-weight:700">👤 ACCOUNT</button>
+      </div>
+
+      
+      <div class="route-field-wrap">
+        <div class="route-field-label">FROM</div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <div class="ac-wrap" style="flex:1;margin-bottom:0">
+            <input class="route-input" id="origin" placeholder="Your location or address..." autocomplete="off" oninput="acSearch(this,'ac-origin')"/>
+            <div class="ac-dropdown" id="ac-origin"></div>
+          </div>
+          <button onclick="useMyLocationForOrigin()" class="loc-btn" title="Use my location">📍</button>
+        </div>
+      </div>
+
+      <div class="route-swap-row">
+        <div class="route-connector-line"></div>
+        <button onclick="swapRouteFields()" class="swap-btn" title="Swap">⇅</button>
+        <div class="route-connector-line"></div>
+      </div>
+
+      <div class="route-field-wrap">
+        <div class="route-field-label">TO</div>
+        <div class="ac-wrap" style="margin-bottom:0">
+          <input class="route-input" id="destination" placeholder="Where are you going?" autocomplete="off" oninput="acSearch(this,'ac-destination')"/>
+          <div class="ac-dropdown" id="ac-destination"></div>
+        </div>
+      </div>
+
+      
+      <div id="quick-dest" style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap"></div>
+
+      <div id="route-result">
+        <div class="route-stat">Distance: <span id="route-dist">—</span></div>
+        <div class="route-stat">Est. Time: <span id="route-time">—</span></div>
+        <div class="route-stat" style="margin-top:4px;font-size:12px;color:var(--danger)" id="route-flags"></div>
+      </div>
+
+      
+      <div id="go-btn-wrap">
+        <button id="route-btn" onclick="getRoute()">🚀 GO</button>
+      </div>
+    </div>
+    <div id="tab-places" style="display:none;padding:14px">
+      <div class="places-section">
+        <div class="places-label" id="places-label-saved">SAVED PLACES</div>
+        <div class="place-row" id="place-home" onclick="goToPlace('home')">
+          <div class="place-icon" style="background:rgba(0,191,165,0.15);color:var(--teal)">🏠</div>
+          <div class="place-info">
+            <div class="place-name" id="place-home-name">Home</div>
+            <div class="place-addr" id="home-addr-display">Not set</div>
+          </div>
+          <button class="place-edit" onclick="editPlace('home',event)">✏️</button>
+        </div>
+        <div class="place-row" id="place-work" onclick="goToPlace('work')">
+          <div class="place-icon" style="background:rgba(245,166,35,0.15);color:var(--amber)">💼</div>
+          <div class="place-info">
+            <div class="place-name" id="place-work-name">Work</div>
+            <div class="place-addr" id="work-addr-display">Not set</div>
+          </div>
+          <button class="place-edit" onclick="editPlace('work',event)">✏️</button>
+        </div>
+      </div>
+      <div class="places-section" style="margin-top:16px">
+        <div class="places-label" id="places-label-fav">FAVORITES</div>
+        <div id="favorites-list"></div>
+        <button class="add-fav-btn" id="add-fav-btn" onclick="addFavorite()">+ Add Favorite</button>
+      </div>
+      <div class="places-section" style="margin-top:16px">
+        <div class="places-label" id="places-label-recent">RECENT</div>
+        <div id="recent-list"></div>
+      </div>
+    </div>
+    <div id="tab-feed" style="display:none"></div>
+  </div>
+</div>
+
+
+<div id="report-sheet" onclick="bgClose(event,'report-sheet')">
+  <div id="report-inner">
+    <div id="report-header">
+      <div id="report-title">⚠ FILE A REPORT</div>
+      <button id="report-close" onclick="closeReport()">✕</button>
+    </div>
+    <div id="report-body">
+      <div class="form-section">
+        <label class="form-label">Select Animal Type</label>
+        <div class="animal-grid" id="animal-grid"></div>
+      </div>
+      <div class="form-section">
+        <label class="form-label">Vehicle Color</label>
+        <div class="color-grid" id="color-grid"></div>
+      </div>
+      <div class="form-section" id="vehicle-fields">
+        <label class="form-label">Vehicle Info</label>
+        <div class="form-row" style="margin-bottom:8px">
+          <select class="form-select" id="car-brand">
+            <option value="">Brand...</option>
+            <option>Acura</option><option>Audi</option><option>BMW</option><option>Buick</option>
+            <option>Cadillac</option><option>Chevrolet</option><option>Chrysler</option><option>Dodge</option>
+            <option>Ferrari</option><option>Ford</option><option>GMC</option><option>Honda</option>
+            <option>Hyundai</option><option>Infiniti</option><option>Jeep</option><option>Kia</option>
+            <option>Lamborghini</option><option>Lexus</option><option>Lincoln</option><option>Mazda</option>
+            <option>Mercedes-Benz</option><option>Mitsubishi</option><option>Nissan</option><option>Porsche</option>
+            <option>RAM</option><option>Subaru</option><option>Tesla</option><option>Toyota</option>
+            <option>Volkswagen</option><option>Volvo</option>
+          </select>
+          <input class="form-input" id="car-model" placeholder="Model (e.g. Camry)"/>
+        </div>
+      </div>
+      <div class="form-section" id="plate-field">
+        <label class="form-label">License Plate</label>
+        <input class="form-input" id="plate" placeholder="e.g. ABC-1234" maxlength="10" style="text-transform:uppercase"/>
+        <div class="disclaimer">Reports are for road awareness only. Misuse is on you.</div>
+      </div>
+      <div class="form-section" id="direction-field" style="display:none">
+        <label class="form-label">Direction of Travel</label>
+        <select class="form-select" id="travel-direction">
+          <option value="">Select direction...</option>
+          <option>Northbound</option>
+          <option>Southbound</option>
+          <option>Eastbound</option>
+          <option>Westbound</option>
+          <option>Northeastbound</option>
+          <option>Northwestbound</option>
+          <option>Southeastbound</option>
+          <option>Southwestbound</option>
+        </select>
+        <div class="disclaimer">Help other drivers find and avoid the flock.</div>
+      </div>
+      <div class="form-section">
+        <label class="form-label">Drop a Note (optional — be yourself)</label>
+        <input class="form-input" id="note" placeholder="e.g. Has been in this lane since the Obama administration"/>
+      </div>
+      <button id="submit-report" onclick="submitReport()">DROP THE FLAG</button>
+    </div>
+  </div>
+</div>
+
+
+<div id="shame-sheet" onclick="bgClose(event,'shame-sheet')">
+  <div id="shame-inner">
+    <div id="shame-header">
+      <div id="shame-title">🏆 HALL OF SHAME</div>
+      <button id="shame-close" onclick="closeShame()">✕</button>
+    </div>
+    <div id="shame-list"></div>
+  </div>
+</div>
+
+
+<div id="stop-sheet" onclick="bgClose(event,'stop-sheet')" style="position:fixed;inset:0;z-index:600;display:flex;flex-direction:column;justify-content:flex-end;background:rgba(0,0,0,0.6);opacity:0;pointer-events:none;transition:opacity 0.25s;">
+  <div id="stop-inner" style="background:#f0f2f4;border-top:3px solid var(--teal);border-radius:20px 20px 0 0;transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.32,0.72,0,1);padding-bottom:24px;">
+    <div style="background:var(--teal);padding:16px 18px;display:flex;align-items:center;justify-content:space-between;border-radius:20px 20px 0 0;">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:#1e2328">➕ ADD A STOP</div>
+      <button onclick="closeAddStop()" style="background:none;border:none;color:#1e2328;font-size:26px;cursor:pointer;font-weight:bold">×</button>
+    </div>
+    <div style="padding:16px">
+      
+      <button onclick="addStopGas()" style="width:100%;background:#ffffff;border:1.5px solid #dde2e8;color:#1e2328;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;padding:16px;border-radius:12px;cursor:pointer;margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 1px 4px rgba(0,0,0,0.06)">⛽ NEAREST GAS STATION</button>
+      
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;letter-spacing:2px;color:var(--teal);text-transform:uppercase;margin-bottom:8px">OR SEARCH AN ADDRESS</div>
+      <div class="ac-wrap" style="position:relative">
+        <input id="stop-input" class="form-input" placeholder="Search address..." autocomplete="off" oninput="acSearch(this,'ac-stop')" style="background:#ffffff;border:1.5px solid #dde2e8;color:#1e2328;font-size:18px;font-weight:600;border-radius:12px;padding:14px;width:100%;box-sizing:border-box;box-shadow:0 1px 4px rgba(0,0,0,0.06)"/>
+        <div class="ac-dropdown" id="ac-stop"></div>
+      </div>
+      <button onclick="addStopFromInput()" style="width:100%;background:var(--teal);border:none;color:white;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;padding:15px;border-radius:12px;cursor:pointer;margin-top:10px">SET AS STOP</button>
+      <div style="font-family:'Barlow',sans-serif;font-size:12px;color:#9aaab4;text-align:center;margin-top:10px">Route will recalculate to go here first, then continue to your destination.</div>
+    </div>
+  </div>
+</div>
+
+
+<div id="lions-sheet" onclick="bgClose(event,'lions-sheet')" style="position:fixed;inset:0;z-index:600;display:flex;flex-direction:column;justify-content:flex-end;background:rgba(0,0,0,0.6);opacity:0;pointer-events:none;transition:opacity 0.25s;">
+  <div id="lions-inner" style="background:#f0f2f4;border-top:3px solid var(--amber);border-radius:20px 20px 0 0;transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.32,0.72,0,1);padding-bottom:24px;">
+    <div style="background:var(--amber);padding:16px 18px;display:flex;align-items:center;justify-content:space-between;border-radius:20px 20px 0 0;">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:#1e2328">🦁 LION'S SHARE</div>
+      <button onclick="closeLionsShare()" style="background:none;border:none;color:#1e2328;font-size:26px;cursor:pointer;font-weight:bold">×</button>
+    </div>
+    <div style="padding:20px">
+      <div id="lions-preview" style="background:#ffffff;border:1.5px solid #dde2e8;border-radius:12px;padding:16px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,0.06)">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:2px;color:var(--teal);margin-bottom:8px">SHARE PREVIEW</div>
+        <div id="lions-text" style="font-family:'Barlow',sans-serif;font-size:15px;color:#1e2328;line-height:1.6"></div>
+      </div>
+      <button onclick="doLionsShare()" style="width:100%;background:var(--amber);border:none;color:#1e2328;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;padding:16px;border-radius:12px;cursor:pointer;font-weight:700;margin-bottom:8px">🦁 SHARE THE LION'S SHARE</button>
+      <div style="font-family:'Barlow',sans-serif;font-size:11px;color:#9aaab4;text-align:center">Live tracking coming when the community server launches.</div>
+    </div>
+  </div>
+</div>
+
+
+<button id="bird-fab" onclick="openBirdPicker()" style="position:fixed;bottom:90px;left:14px;z-index:100;background:var(--card);border:1.5px solid var(--border);border-radius:50px;padding:8px 14px;cursor:pointer;display:flex;align-items:center;gap:6px;box-shadow:0 2px 8px rgba(0,0,0,0.4);">
+  <span id="bird-fab-emoji" style="font-size:20px">🦅</span>
+  <span style="font-family:'Bebas Neue',sans-serif;font-size:12px;color:var(--white);letter-spacing:1px">MY RIDE</span>
+</button>
+
+
+<div id="bird-sheet" onclick="bgClose(event,'bird-sheet')" style="position:fixed;inset:0;z-index:600;display:flex;flex-direction:column;justify-content:flex-end;background:rgba(0,0,0,0.6);opacity:0;pointer-events:none;transition:opacity 0.25s;">
+  <div id="bird-inner" style="background:#f0f2f4;border-top:3px solid var(--teal);border-radius:20px 20px 0 0;transform:translateY(100%);transition:transform 0.35s cubic-bezier(0.32,0.72,0,1);padding-bottom:24px;">
+    <div style="background:var(--teal);padding:16px 18px;display:flex;align-items:center;justify-content:space-between;border-radius:20px 20px 0 0;">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:#1e2328">🐦 CHOOSE YOUR RIDE</div>
+      <button onclick="closeBirdPicker()" style="background:none;border:none;color:#1e2328;font-size:26px;cursor:pointer;font-weight:bold">×</button>
+    </div>
+    <div style="padding:16px">
+      <div id="bird-picker-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px;"></div>
+      <div id="bird-picker-label" style="font-family:'Barlow Condensed',sans-serif;font-size:14px;color:var(--teal);letter-spacing:1px;text-align:center;margin-bottom:12px;text-transform:uppercase;min-height:20px;"></div>
+    </div>
+  </div>
+</div>
+<div id="gas-sheet" onclick="bgClose(event,'gas-sheet')">
+  <div id="gas-inner">
+    <div id="gas-header">
+      <div id="gas-title">⛽ NEARBY GAS</div>
+      <button id="gas-close" onclick="closeGas()">✕</button>
+    </div>
+    <div id="gas-list"></div>
+  </div>
+</div>
+
+
+<div id="points-sheet" onclick="bgClose(event,'points-sheet')">
+  <div id="points-inner">
+    <div id="points-header">
+      <div id="points-header-title">⭐ YOUR STATS</div>
+      <button id="points-close" onclick="closePoints()">✕</button>
+    </div>
+    <div id="points-body"></div>
+  </div>
+</div>
+
+
+<div id="account-sheet" onclick="bgClose(event,'account-sheet')">
+  <div id="account-inner">
+    <div id="account-header">
+      <div id="account-title">👤 MY ACCOUNT</div>
+      <button onclick="closeAccount()" style="background:none;border:none;color:var(--black);font-size:22px;cursor:pointer">✕</button>
+    </div>
+    <div id="account-body">
+      
+      <div id="profile-card">
+        <div id="profile-avatar" id="profile-avatar"></div>
+        <div id="profile-info">
+          <div id="profile-name-display"></div>
+          <div id="profile-since"></div>
+        </div>
+        <div id="profile-pts">
+          <div id="profile-pts-val"></div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:10px;color:var(--muted);letter-spacing:1px">POINTS</div>
+        </div>
+      </div>
+
+      
+      <div class="acct-section-label">SAVED PLACES</div>
+      <div class="acct-place-row" onclick="editPlace('home',event);closeAccount()">
+        <span style="font-size:20px">🏠</span>
+        <div style="flex:1">
+          <div class="acct-place-name">Home</div>
+          <div class="acct-place-addr" id="acct-home-addr">Not set — tap to add</div>
+        </div>
+        <span style="color:var(--muted);font-size:18px">›</span>
+      </div>
+      <div class="acct-place-row" onclick="editPlace('work',event);closeAccount()">
+        <span style="font-size:20px">💼</span>
+        <div style="flex:1">
+          <div class="acct-place-name">Work</div>
+          <div class="acct-place-addr" id="acct-work-addr">Not set — tap to add</div>
+        </div>
+        <span style="color:var(--muted);font-size:18px">›</span>
+      </div>
+
+      
+      <div class="acct-section-label" style="margin-top:16px">🐦 MY RIDE</div>
+      <div id="bird-grid" style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:4px;"></div>
+      <div id="bird-selected-label" style="font-family:'Barlow Condensed',sans-serif;font-size:13px;color:var(--teal);letter-spacing:1px;text-align:center;margin-top:6px;text-transform:uppercase;"></div>
+
+      
+      <div class="acct-section-label" style="margin-top:16px">SETTINGS</div>
+      <div class="acct-setting-row">
+        <span>📏 Distance Units</span>
+        <button id="acct-unit-toggle" onclick="toggleUnits();updateAccountSheet()" style="background:var(--card);border:1px solid var(--border);color:var(--teal);font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px;padding:5px 14px;border-radius:20px;cursor:pointer">🌍 km/m</button>
+      </div>
+      <div class="acct-setting-row">
+        <span>🔊 Voice Navigation</span>
+        <button id="voice-toggle-btn" onclick="toggleVoice()" style="background:var(--card);border:1px solid var(--border);color:var(--teal);font-family:'Bebas Neue',sans-serif;font-size:13px;letter-spacing:1px;padding:5px 14px;border-radius:20px;cursor:pointer">ON</button>
+      </div>
+      <div class="acct-setting-row">
+        <span>✏️ Change Nickname</span>
+        <input id="acct-nickname" class="form-input" style="width:120px;padding:6px 10px;font-size:13px" placeholder="Nickname"/>
+      </div>
+      <button onclick="saveAccountSettings()" style="width:100%;background:var(--teal);border:none;color:white;font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:2px;padding:12px;border-radius:4px;cursor:pointer;margin-top:12px">SAVE SETTINGS</button>
+      <button onclick="clearAccount()" style="width:100%;background:none;border:1px solid var(--danger);color:var(--danger);font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:2px;padding:10px;border-radius:4px;cursor:pointer;margin-top:8px">RESET ACCOUNT</button>
+    </div>
+  </div>
+</div>
+
+
+<div id="place-sheet" onclick="bgClose(event,'place-sheet')">
+  <div id="place-inner">
+    <div id="place-header">
+      <div id="place-title">🏠 SET HOME</div>
+      <button onclick="closePlaceSheet()" style="background:none;border:none;color:var(--black);font-size:22px;cursor:pointer">✕</button>
+    </div>
+    <div style="padding:16px">
+      <div class="form-label" style="color:var(--teal);font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:8px">Address</div>
+      <div class="ac-wrap">
+        <input class="form-input" id="place-input" placeholder="Search address..." autocomplete="off" oninput="acSearch(this,'ac-place')" style="background:#ffffff;border:1.5px solid #dde2e8;color:#1e2328;font-size:20px;font-weight:600;border-radius:12px;padding:14px;width:100%;box-sizing:border-box;box-shadow:0 1px 4px rgba(0,0,0,0.06)"/>
+        <div class="ac-dropdown" id="ac-place"></div>
+      </div>
+      <button onclick="useMyLocationForPlace()" style="width:100%;background:#ffffff;border:1.5px solid #dde2e8;color:#1e2328;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;padding:13px;border-radius:12px;cursor:pointer;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 1px 4px rgba(0,0,0,0.06)">📍 USE MY CURRENT LOCATION</button>
+      <button onclick="savePlace()" style="width:100%;background:var(--teal);border:none;color:white;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;padding:15px;border-radius:12px;cursor:pointer;margin-top:10px;font-weight:700">SAVE</button>
+    </div>
+  </div>
+</div>
+
+
+<div id="fav-sheet" onclick="bgClose(event,'fav-sheet')">
+  <div id="fav-inner">
+    <div id="fav-header">
+      <div id="fav-title">⭐ ADD FAVORITE</div>
+      <button onclick="closeFavSheet()" style="background:none;border:none;color:var(--black);font-size:22px;cursor:pointer">✕</button>
+    </div>
+    <div style="padding:16px">
+      <div class="form-label" style="color:var(--teal);font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:8px">Name</div>
+      <input class="form-input" id="fav-name" placeholder="e.g. Gulliver Prep, Gym..." style="background:#ffffff;border:1.5px solid #dde2e8;color:#1e2328;font-size:20px;font-weight:600;border-radius:12px;padding:14px;margin-bottom:12px;width:100%;box-sizing:border-box;box-shadow:0 1px 4px rgba(0,0,0,0.06)"/>
+      <div class="form-label" style="color:var(--teal);font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:8px">Address</div>
+      <div class="ac-wrap">
+        <input class="form-input" id="fav-input" placeholder="Search address..." autocomplete="off" oninput="acSearch(this,'ac-fav')" style="background:#ffffff;border:1.5px solid #dde2e8;color:#1e2328;font-size:20px;font-weight:600;border-radius:12px;padding:14px;width:100%;box-sizing:border-box;box-shadow:0 1px 4px rgba(0,0,0,0.06)"/>
+        <div class="ac-dropdown" id="ac-fav"></div>
+      </div>
+      <button onclick="useMyLocationForFav()" style="width:100%;background:#ffffff;border:1.5px solid #dde2e8;color:#1e2328;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;padding:13px;border-radius:12px;cursor:pointer;margin-top:10px;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 1px 4px rgba(0,0,0,0.06)">📍 USE MY CURRENT LOCATION</button>
+      <button onclick="saveFavorite()" style="width:100%;background:var(--teal);border:none;color:white;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;padding:15px;border-radius:12px;cursor:pointer;margin-top:10px;font-weight:700">SAVE FAVORITE</button>
+    </div>
+  </div>
+</div>
+
+  <div style="display:flex;gap:8px;margin-top:10px">
+    <button onclick="cancelPinMode()" style="flex:1;background:var(--card);border:1px solid var(--border);color:var(--white);font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1px;padding:11px;border-radius:4px;cursor:pointer">CANCEL</button>
+    <button onclick="confirmPin()" style="flex:2;background:var(--teal);border:none;color:white;font-family:'Bebas Neue',sans-serif;font-size:15px;letter-spacing:1px;padding:11px;border-radius:4px;cursor:pointer">🚀 NAVIGATE HERE</button>
+  </div>
+</div>
+
+
+<div id="sitdown-notify">
+  <div class="sitdown-notify-top">
+    <div class="gorilla-icon-lg">🦍</div>
+    <div>
+      <div class="sitdown-notify-title">A Report Was Filed</div>
+      <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;color:#d4a574;letter-spacing:1px">THE GORILLA IS AVAILABLE</div>
+    </div>
+  </div>
+  <div class="sitdown-notify-msg" id="sitdown-notify-msg">Your vehicle was reported. You have 24 hours to request a Sit-Down with the reporter. The Gorilla doesn't yell. He waits.</div>
+  <div class="sitdown-notify-actions">
+    <button class="sitdown-accept-btn" onclick="requestSitDown()">🦍 REQUEST A SIT-DOWN</button>
+    <button class="sitdown-later-btn" onclick="dismissSitDownNotify()">NOT NOW</button>
+  </div>
+</div>
+
+
+<div id="reg-gate">
+  <div id="reg-gate-inner">
+    <div id="reg-gate-header">
+      <div id="reg-gate-gorilla">🦍</div>
+      <div id="reg-gate-title">THE GORILLA REQUIRES REGISTRATION</div>
+      <div id="reg-gate-sub">The Sit-Down is for members only.</div>
+    </div>
+    <div id="reg-gate-body">
+      <div class="reg-gate-msg">To enter the Gorilla's room — as a reporter or a reported driver — you must be a registered RawRoute member. It takes 30 seconds.</div>
+      <div class="form-label">Email Address</div>
+      <input class="form-input" id="reg-email" type="email" placeholder="your@email.com" style="margin-bottom:10px"/>
+      <div class="form-label">Create Password</div>
+      <input class="form-input" id="reg-password" type="password" placeholder="At least 6 characters" style="margin-bottom:16px"/>
+      <button onclick="completeRegistration()" style="width:100%;background:#6b4226;border:none;color:white;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;padding:14px;border-radius:6px;cursor:pointer;margin-bottom:10px">ENTER THE ROOM</button>
+      <button onclick="closeRegGate()" style="width:100%;background:none;border:none;color:var(--muted);font-family:'Barlow',sans-serif;font-size:13px;cursor:pointer;padding:8px">Not right now</button>
+    </div>
+  </div>
+</div>
+
+
+<div id="sitdown-sheet">
+  <div id="sitdown-inner">
+    <div id="sitdown-header">
+      <div id="sitdown-header-icon">🦍</div>
+      <div id="sitdown-header-info">
+        <div id="sitdown-header-title">THE SIT-DOWN</div>
+        <div id="sitdown-header-sub">ANONYMOUS · CONFIDENTIAL · UNDER THE GORILLA'S WATCH</div>
+      </div>
+      <button id="sitdown-close" onclick="closeSitDown()">✕</button>
+    </div>
+    <div id="sitdown-status">The room is quiet. Speak your truth. The Gorilla is watching.</div>
+    <div id="sitdown-messages"></div>
+    <div id="sitdown-resolve-bar">
+      <button id="sitdown-resolve-btn" onclick="resolveSitDown()">✅ REMOVE REPORT — THE MATTER IS RESOLVED</button>
+    </div>
+    <div id="sitdown-input-area">
+      <input id="sitdown-input" placeholder="Speak respectfully. The Gorilla is watching." maxlength="300" onkeydown="if(event.key==='Enter')sendSitDownMsg()"/>
+      <button id="sitdown-send" onclick="sendSitDownMsg()">➤</button>
+    </div>
+  </div>
+</div>
+
+
+<div id="dispute-sheet" onclick="if(event.target.id==='dispute-sheet')closeDisputeSheet()">
+  <div id="dispute-inner">
+    <div id="dispute-header">
+      <div id="dispute-title">🚩 DISPUTE THIS REPORT</div>
+      <button onclick="closeDisputeSheet()" style="background:none;border:none;color:var(--black);font-size:22px;cursor:pointer;font-weight:bold">✕</button>
+    </div>
+    <div style="padding:16px">
+      <div style="font-family:'Barlow',sans-serif;font-size:14px;color:var(--muted);margin-bottom:14px;line-height:1.5">
+        If this report is inaccurate or filed in bad faith, let us know. Disputed reports are flagged for review. Filing false disputes is also a violation of community standards.
+      </div>
+      <div class="form-label">Reason for dispute</div>
+      <select class="form-select" id="dispute-reason" style="margin-bottom:12px">
+        <option value="">Select a reason...</option>
+        <option>This is not my vehicle</option>
+        <option>The plate number is incorrect</option>
+        <option>The incident description is false</option>
+        <option>This report is targeting me personally</option>
+        <option>Other</option>
+      </select>
+      <div class="form-label">Additional details (optional)</div>
+      <input class="form-input" id="dispute-note" placeholder="Any additional context..." style="margin-bottom:14px"/>
+      <button onclick="submitDispute()" style="width:100%;background:var(--warn);border:none;color:var(--black);font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:2px;padding:13px;border-radius:4px;cursor:pointer">SUBMIT DISPUTE</button>
+      <div style="font-size:11px;color:var(--muted);margin-top:8px;text-align:center">Disputes are reviewed by our community team. Abuse of this system may result in removal.</div>
+    </div>
+  </div>
+</div>
+
+
+<div id="share-sheet" onclick="if(event.target.id==='share-sheet')closeShare()">
+  <div id="share-inner">
+    <div id="share-header">
+      <div id="share-header-title">📤 SHARE THIS REPORT</div>
+      <button onclick="closeShare()" style="background:none;border:none;color:var(--black);font-size:22px;cursor:pointer;font-weight:bold">✕</button>
+    </div>
+    <div id="share-preview">
+      <canvas id="share-canvas" width="600" height="340"></canvas>
+    </div>
+    <div id="share-actions">
+      <button class="share-action-btn" id="share-native-btn" onclick="doNativeShare()">📱 Share</button>
+      <button class="share-action-btn" id="share-copy-btn" onclick="copyShareText()">📋 Copy Text</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>/* Copyright 2025 GA2 Enterprises. RawRoute is proprietary software. Unauthorized use prohibited. */
+// ── BETA BANNER ──────────────────────────────────────────────────────
+function checkBetaBanner(){
+const seen = localStorage.getItem('rawroute_beta_seen');
+if(!seen){
+setTimeout(()=>{
+document.getElementById('beta-banner').classList.add('show');
+}, 1500); // show after onboarding settles
 }
-</script>
-</body>
-</html>
+}
+function closeBetaBanner(){
+document.getElementById('beta-banner').classList.remove('show');
+localStorage.setItem('rawroute_beta_seen','1');
+}
+// ── BIRD VEHICLE SYSTEM ──────────────────────────────────────────────
+const BIRDS = [
+{id:'eagle',   emoji:'🦅', name:'Eagle'},
+{id:'owl',     emoji:'🦉', name:'Owl'},
+{id:'duck',    emoji:'🦆', name:'Duck'},
+{id:'sparrow', emoji:'🐦', name:'Sparrow'},
+{id:'peacock', emoji:'🦚', name:'Peacock'},
+{id:'parrot',  emoji:'🦜', name:'Parrot'},
+{id:'penguin', emoji:'🐧', name:'Penguin'},
+{id:'flamingo',emoji:'🦩', name:'Flamingo'},
+{id:'swan',    emoji:'🦢', name:'Swan'},
+{id:'crow',    emoji:'🐦‍⬛', name:'Crow'},
+{id:'panda',   emoji:'🐼', name:'Panda'},
+];
+let selectedBird = userProfile?.bird || 'eagle';
+function getBirdEmoji(){ return BIRDS.find(b=>b.id===selectedBird)?.emoji || '🦅'; }
+function getBirdName(){ return BIRDS.find(b=>b.id===selectedBird)?.name || 'Eagle'; }
+function selectBird(id){
+selectedBird = id;
+if(userProfile){ userProfile.bird=id; localStorage.setItem('rawroute_pub_profile',JSON.stringify(userProfile)); }
+updateBirdMarker();
+updateBirdUI();
+const bird = BIRDS.find(b=>b.id===id);
+showToast(`${bird.emoji} Riding as the ${bird.name}.`,'award');
+speak(`Riding as the ${bird.name}.`);
+}
+function updateBirdMarker(){
+const emoji = getBirdEmoji();
+const newIcon = L.divIcon({
+className:'',
+html:`<div id="you-marker" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;transform:rotate(${userHeading}deg);transition:transform 0.5s ease;filter:drop-shadow(0 2px 6px rgba(0,0,0,0.5));font-size:26px;line-height:1">${emoji}</div>`,
+iconSize:[32,32],iconAnchor:[16,16]
+});
+if(userMarker) userMarker.setIcon(newIcon);
+// Update FAB
+const fabEmoji = document.getElementById('bird-fab-emoji');
+if(fabEmoji) fabEmoji.textContent=emoji;
+}
+function updateBirdUI(){
+const emoji = getBirdEmoji();
+const name = getBirdName();
+// FAB
+const fabEmoji = document.getElementById('bird-fab-emoji');
+if(fabEmoji) fabEmoji.textContent=emoji;
+// Account sheet grid
+renderBirdGrid('bird-grid','bird-selected-label');
+// Picker grid
+renderBirdGrid('bird-picker-grid','bird-picker-label');
+}
+function renderBirdGrid(gridId, labelId){
+const grid = document.getElementById(gridId);
+const label = document.getElementById(labelId);
+if(!grid) return;
+grid.innerHTML='';
+BIRDS.forEach(b=>{
+const btn=document.createElement('button');
+const selected=b.id===selectedBird;
+btn.style.cssText=`background:${selected?'var(--teal)':'#ffffff'};border:${selected?'2px solid var(--teal)':'1.5px solid #dde2e8'};border-radius:12px;padding:10px 4px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px;transition:all 0.15s;box-shadow:0 1px 4px rgba(0,0,0,0.06);`;
+btn.innerHTML=`<span style="font-size:28px;line-height:1">${b.emoji}</span><span style="font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.5px;text-transform:uppercase;color:${selected?'#1e2328':'#1e2328'}">${b.name}</span>`;
+btn.onclick=()=>{ selectBird(b.id); closeBirdPicker(); };
+grid.appendChild(btn);
+});
+if(label){
+const bird=BIRDS.find(b=>b.id===selectedBird);
+label.textContent=bird?`${bird.emoji} Riding as the ${bird.name}`:'';
+}
+}
+function openBirdPicker(){
+renderBirdGrid('bird-picker-grid','bird-picker-label');
+const sheet=document.getElementById('bird-sheet');
+const inner=document.getElementById('bird-inner');
+sheet.style.opacity='1';sheet.style.pointerEvents='all';
+inner.style.transform='translateY(0)';
+}
+function closeBirdPicker(){
+const sheet=document.getElementById('bird-sheet');
+const inner=document.getElementById('bird-inner');
+inner.style.transform='translateY(100%)';
+setTimeout(()=>{sheet.style.opacity='0';sheet.style.pointerEvents='none';},350);
+}
+// ── ADD A STOP ───────────────────────────────────────────────────────
+function openAddStop(){
+const sheet=document.getElementById('stop-sheet');
+const inner=document.getElementById('stop-inner');
+sheet.style.opacity='1';sheet.style.pointerEvents='all';
+inner.style.transform='translateY(0)';
+}
+function closeAddStop(){
+const sheet=document.getElementById('stop-sheet');
+const inner=document.getElementById('stop-inner');
+inner.style.transform='translateY(100%)';
+setTimeout(()=>{sheet.style.opacity='0';sheet.style.pointerEvents='none';},350);
+}
+function addStopGas(){
+closeAddStop();
+openGas(); // Opens gas sheet so user picks nearest station
+}
+async function addStopFromInput(){
+const input=document.getElementById('stop-input');
+const addr=input.value.trim();
+if(!addr){showToast('Enter an address first.');return;}
+// Geocode the stop address
+try{
+const res=await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(addr)}&limit=1&countrycodes=us`);
+const data=await res.json();
+if(!data.length){showToast('Address not found. Try Google Maps.');return;}
+const stopLat=parseFloat(data[0].lat);
+const stopLng=parseFloat(data[0].lon);
+const stopName=data[0].display_name.split(',')[0];
+closeAddStop();
+// Store original destination and reroute through stop first
+showToast(`Stop added: ${stopName}`);
+speak(`Stop added. Rerouting through ${stopName}.`);
+// Reroute: current → stop → original destination
+const origDest={lat:navDestLat,lng:navDestLng,name:navDestName};
+await calcRouteWithStop(userLat,userLng,stopLat,stopLng,origDest);
+}catch(e){showToast('Could not add stop. Try again.');}
+}
+async function calcRouteWithStop(fromLat,fromLng,stopLat,stopLng,dest){
+try{
+const url=`https://router.project-osrm.org/route/v1/driving/${fromLng},${fromLat};${stopLng},${stopLat};${dest.lng},${dest.lat}?overview=full&geometries=geojson&steps=true`;
+const res=await fetch(url);
+const data=await res.json();
+if(data.routes&&data.routes[0]){
+const route=data.routes[0];
+if(routeLayer){map.removeLayer(routeLayer);}
+routeLayer=L.geoJSON(route.geometry,{style:{color:'#00bfa5',weight:5,opacity:0.85}}).addTo(map);
+navSteps=route.legs.flatMap(l=>l.steps);
+navStepIdx=0;
+navTotalDist=route.distance;
+navStartTime=Date.now();
+showToast(`Route updated. Stop at ${dest.name||'destination'} added.`);
+}
+}catch(e){showToast('Could not recalculate route.');}
+}
+// ── LION'S SHARE ─────────────────────────────────────────────────────
+// Firebase upgrade note: replace static text with live tracking link
+let navDestLat=null,navDestLng=null,navDestName='';
+function shareLionsShare(){
+if(!navActive){showToast("Start a route first.");return;}
+const remain=document.getElementById('nav-remain')?.textContent||'';
+const eta=document.getElementById('nav-eta')?.textContent||'';
+const dest=navDestName||'destination';
+const shareText=`🦁 On my way to ${dest}\n📍 ${remain} · ETA ${eta}\n\n🗺️ Navigating with Raw Rowt — No filter. No apologies. Just the road.\nrawroute.app`;
+document.getElementById('lions-text').textContent=shareText;
+const sheet=document.getElementById('lions-sheet');
+const inner=document.getElementById('lions-inner');
+sheet.style.opacity='1';sheet.style.pointerEvents='all';
+inner.style.transform='translateY(0)';
+}
+function closeLionsShare(){
+const sheet=document.getElementById('lions-sheet');
+const inner=document.getElementById('lions-inner');
+inner.style.transform='translateY(100%)';
+setTimeout(()=>{sheet.style.opacity='0';sheet.style.pointerEvents='none';},350);
+}
+async function doLionsShare(){
+const text=document.getElementById('lions-text')?.textContent||'';
+if(navigator.share){
+try{
+await navigator.share({title:'Lion\'s Share',text});
+closeLionsShare();
+}catch(e){if(e.name!=='AbortError') copyToClipboard(text);}
+}else{
+copyToClipboard(text);
+showToast('Copied to clipboard. 🦁');
+closeLionsShare();
+}
+}
+function copyToClipboard(text){
+navigator.clipboard?.writeText(text).then(()=>showToast('Copied. 🦁')).catch(()=>{
+const ta=document.createElement('textarea');
+ta.value=text;document.body.appendChild(ta);ta.select();
+document.execCommand('copy');document.body.removeChild(ta);
+showToast('Copied. 🦁');
+});
+}
+// ── GORILLA SIT-DOWN SYSTEM ──────────────────────────────────────────
+let sitDownActive = false;
+let sitDownReportIdx = null;
+let sitDownMessages = [];
+let sitDownTimer = null;
+let isRegistered = JSON.parse(localStorage.getItem('rawroute_pub_registered')||'false');
+let pendingSitDownAction = null; // what to do after registration
+// Simulate reported driver receiving notification (demo purposes)
+function simulateSitDownNotification(reportIdx){
+const r = reports[reportIdx];
+if(!r) return;
+const a = ANIMALS.find(x=>x.id===r.animal);
+sitDownReportIdx = reportIdx;
+document.getElementById('sitdown-notify-msg').textContent =
+`Your vehicle was reported as a ${a?.name||'driver'}. You have 24 hours to request a Sit-Down with the reporter. The Gorilla doesn't yell. He waits.`;
+setTimeout(()=>{
+document.getElementById('sitdown-notify').classList.add('show');
+}, 2000);
+}
+function dismissSitDownNotify(){
+document.getElementById('sitdown-notify').classList.remove('show');
+}
+// Reporter opens Sit-Down from feed
+function openSitDownAsReporter(e, idx){
+if(e) e.stopPropagation();
+sitDownReportIdx = idx;
+if(!isRegistered){
+pendingSitDownAction = 'reporter';
+openRegGate();
+return;
+}
+openSitDownChat('reporter');
+}
+// Reported driver requests Sit-Down
+function requestSitDown(){
+dismissSitDownNotify();
+if(!isRegistered){
+pendingSitDownAction = 'reported';
+openRegGate();
+return;
+}
+openSitDownChat('reported');
+}
+// Registration Gate
+function openRegGate(){
+document.getElementById('reg-gate').classList.add('open');
+}
+function closeRegGate(){
+document.getElementById('reg-gate').classList.remove('open');
+pendingSitDownAction = null;
+}
+function completeRegistration(){
+const email = document.getElementById('reg-email').value.trim();
+const password = document.getElementById('reg-password').value.trim();
+if(!email || !email.includes('@')){ showToast('Enter a valid email address.','danger'); return; }
+if(password.length < 6){ showToast('Password must be at least 6 characters.','danger'); return; }
+// Save registration
+isRegistered = true;
+localStorage.setItem('rawroute_pub_registered', 'true');
+if(userProfile){ userProfile.email = email; localStorage.setItem('rawroute_pub_profile', JSON.stringify(userProfile)); }
+closeRegGate();
+showToast('🦍 Welcome to the room. The Gorilla nods.','award');
+// Continue with pending action
+if(pendingSitDownAction) {
+setTimeout(()=>openSitDownChat(pendingSitDownAction), 800);
+pendingSitDownAction = null;
+}
+}
+// Open the Sit-Down chat
+function openSitDownChat(role){
+sitDownActive = true;
+sitDownMessages = [];
+const r = reports[sitDownReportIdx];
+const a = ANIMALS.find(x=>x.id===r?.animal);
+// Set status message
+document.getElementById('sitdown-status').textContent =
+role==='reporter'
+? 'The reported driver has requested a Sit-Down. The room is open.'
+: 'You requested a Sit-Down. The reporter has been notified.';
+// Clear messages
+document.getElementById('sitdown-messages').innerHTML = '';
+// Add opening system message
+addSitDownMessage('system', `The Gorilla has opened the room. Both parties are anonymous. Community standards apply. Speak your truth.`);
+if(role==='reported'){
+addSitDownMessage('system', `You have 24 hours to reach a resolution. The reporter may remove the report at any time.`);
+// Simulate other party joining after delay
+setTimeout(()=>{
+addSitDownMessage('system','The reporter has entered the room.');
+setTimeout(()=>{
+addSitDownMessage('theirs', `I'm listening. What happened?`);
+}, 3000);
+}, 2000);
+} else {
+addSitDownMessage('system','The reported driver has entered the room.');
+// Show resolve bar for reporter
+document.getElementById('sitdown-resolve-bar').classList.add('show');
+}
+document.getElementById('sitdown-sheet').classList.add('open');
+// Start 24-hour timer display
+startSitDownTimer();
+}
+function closeSitDown(){
+document.getElementById('sitdown-sheet').classList.remove('open');
+sitDownActive = false;
+if(sitDownTimer) clearInterval(sitDownTimer);
+}
+function addSitDownMessage(type, text){
+const messages = document.getElementById('sitdown-messages');
+const div = document.createElement('div');
+div.className = `sitdown-msg ${type}`;
+div.textContent = text;
+messages.appendChild(div);
+messages.scrollTop = messages.scrollHeight;
+sitDownMessages.push({type, text, time: Date.now()});
+}
+function sendSitDownMsg(){
+const input = document.getElementById('sitdown-input');
+const text = input.value.trim();
+if(!text) return;
+const filtered = filterNote(text);
+if(filtered !== text){ showToast('Message contains blocked content. The Gorilla disapproves.','danger'); return; }
+addSitDownMessage('mine', text);
+input.value = '';
+// Simulate response for demo
+simulateSitDownResponse(text);
+}
+function simulateSitDownResponse(userText){
+const responses = [
+"I understand. I should have been more careful.",
+"You're right. I was rushing to the hospital — my wife got sick at work. I'm sorry.",
+"I hear you. That was dangerous and I apologize.",
+"Fair enough. I'll be more careful going forward.",
+"I appreciate you giving me the chance to explain.",
+];
+setTimeout(()=>{
+const r = responses[Math.floor(Math.random()*responses.length)];
+addSitDownMessage('theirs', r);
+// Show resolve option to reporter after exchange
+document.getElementById('sitdown-resolve-bar').classList.add('show');
+}, 1500 + Math.random()*2000);
+}
+function resolveSitDown(){
+if(sitDownReportIdx === null) return;
+// Mark report as resolved
+reports[sitDownReportIdx]._resolved = true;
+// Add final system message
+addSitDownMessage('system', 'The Gorilla nods. The matter is resolved. This conversation will be deleted in 72 hours.');
+document.getElementById('sitdown-status').textContent = '✅ Resolved — Both parties sat down. The matter is closed.';
+document.getElementById('sitdown-resolve-bar').classList.remove('show');
+// Update feed and shame
+document.getElementById('tab-feed').innerHTML='';
+reports.forEach(r=>addFeedItem(r));
+updateShame();
+showToast('🦍 The Gorilla nods. The matter is resolved.','award');
+speak('The Gorilla nods. The matter is resolved.');
+// Schedule chat deletion (72 hours — simulated)
+setTimeout(()=>{ sitDownMessages=[]; }, 72*60*60*1000);
+}
+function startSitDownTimer(){
+if(sitDownTimer) clearInterval(sitDownTimer);
+let remaining = 24*60*60; // 24 hours in seconds
+sitDownTimer = setInterval(()=>{
+remaining--;
+if(remaining <= 0){
+clearInterval(sitDownTimer);
+addSitDownMessage('system','The offer expired. The report stands. The Gorilla remembers.');
+document.getElementById('sitdown-status').textContent='The offer expired. The report stands.';
+}
+}, 1000);
+}
+// ── DISPUTE SYSTEM ───────────────────────────────────────────────────
+let disputeTargetIdx = null;
+function showDisputeSheet(e, idx){
+if(e) e.stopPropagation();
+disputeTargetIdx = idx;
+document.getElementById('dispute-reason').value='';
+document.getElementById('dispute-note').value='';
+document.getElementById('dispute-sheet').classList.add('open');
+}
+function closeDisputeSheet(){
+document.getElementById('dispute-sheet').classList.remove('open');
+disputeTargetIdx = null;
+}
+function submitDispute(){
+const reason = document.getElementById('dispute-reason').value;
+if(!reason){ showToast('Please select a reason.','danger'); return; }
+if(disputeTargetIdx !== null) disputeReport(disputeTargetIdx);
+closeDisputeSheet();
+}
+// ── PLATE PROTECTION SYSTEM ──────────────────────────────────────────
+// Mask plate to last 4 digits only
+function maskPlate(plate){
+if(!plate || plate==='—' || plate==='') return '—';
+const clean = plate.replace(/[^A-Z0-9]/gi,'').toUpperCase();
+if(clean.length<=4) return clean; // too short to mask
+const last4 = clean.slice(-4);
+return `**-${last4}`;
+}
+// Match plates by last 4 digits + color + brand
+function platesMatch(p1, p2){
+if(!p1||!p2||p1==='—'||p2==='—') return false;
+return p1.slice(-4)===p2.slice(-4);
+}
+// Rate limiter — one report per plate per user per 24 hours
+const reportRateLimit = JSON.parse(localStorage.getItem('rawroute_pub_ratelimit')||'{}');
+function canReport(maskedPlate){
+if(!maskedPlate||maskedPlate==='—') return true; // no plate = no rate limit
+const key = maskedPlate.slice(-4);
+const last = reportRateLimit[key];
+if(!last) return true;
+return (Date.now()-last) > 86400000; // 24 hours
+}
+function recordReport(maskedPlate){
+if(!maskedPlate||maskedPlate==='—') return;
+const 
