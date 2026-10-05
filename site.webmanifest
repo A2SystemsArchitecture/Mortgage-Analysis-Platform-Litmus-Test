@@ -4,8 +4,8 @@
   "description": "Honest mortgage analysis. No pressure. No agenda.",
   "start_url": "/platform.html",
   "display": "standalone",
-  "background_color": "#1a2332",
-  "theme_color": "#1a2332",
+  "background_color": "#0F1B3D",
+  "theme_color": "#0F1B3D",
   "icons": [
     {"src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png"},
     {"src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png"}

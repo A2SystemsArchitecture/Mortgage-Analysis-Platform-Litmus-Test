@@ -9,7 +9,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#1a2332">
+<meta name="theme-color" content="#0F1B3D">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -17,13 +17,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Mono:wght@300;400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --slate-bg:#eceff1;--slate-surface:#e0e7ea;--slate:#b0bec5;--slate-dim:#90a4ae;
-  --midnight:#1a2332;--midnight-mid:#243042;--midnight-lt:#2e3d52;
-  --teal:#00838f;--teal-mid:#0097a7;--teal-light:#e0f7fa;--teal-dim:#006670;--teal-muted:#b2ebf2;
-  --indigo:#4527a0;--indigo-mid:#5e35b1;--indigo-light:#ede7f6;--indigo-dim:#311b92;--indigo-muted:#d1c4e9;
-  --emerald:#2e7d52;--emerald-mid:#388e5e;--emerald-light:#e8f5ee;--emerald-dim:#1b5e38;--emerald-muted:#c8e6d4;
-  --ink:#1a2332;--white:#ffffff;--muted:#546e7a;--rule:#cfd8dc;
-  --warn:#6d4c00;--warn-lt:#fff8e6;--error:#c62828;--error-lt:#ffebee;
+  /* HomeTrue Refined Baseline — LOCKED web palette v1.0 */
+  --brand-navy:#0F1B3D;--brand-green:#1FA663;--brand-purple:#4E2E8F;--brand-gold:#D69A08;
+  --brand-charcoal:#1C253B;--brand-lavender:#E9E4F7;--brand-mist:#F4F2FA;--brand-white:#FFFFFF;
+  --slate-bg:#F4F2FA;--slate-surface:#E9E4F7;--slate:#C7C2D8;--slate-dim:#7B8190;
+  --midnight:#0F1B3D;--midnight-mid:#1C253B;--midnight-lt:#27345F;
+  --teal:#1FA663;--teal-mid:#1FA663;--teal-light:#EEF9F3;--teal-dim:#137A48;--teal-muted:#BFE6D2;
+  --indigo:#4E2E8F;--indigo-mid:#6845AD;--indigo-light:#E9E4F7;--indigo-dim:#3B216F;--indigo-muted:#CEC3E9;
+  --emerald:#1FA663;--emerald-mid:#2BB674;--emerald-light:#EEF9F3;--emerald-dim:#137A48;--emerald-muted:#BFE6D2;
+  --ink:#1C253B;--white:#FFFFFF;--muted:#596175;--rule:#D8D3E5;
+  --warn:#D69A08;--warn-lt:#FFF7DF;--error:#C62828;--error-lt:#FFEBEE;
   --fd:'Fraunces',serif;--fm:'DM Mono',monospace;--fb:'Plus Jakarta Sans',sans-serif;
   --texas:#a34719;--texas-mid:#c25520;--texas-light:#fdf0ea;--texas-dim:#7a3512;--texas-muted:#f5cdb8;
   --nc:#3a5a78;--nc-mid:#4a6d8e;--nc-light:#e8eef4;--nc-dim:#2a4558;--nc-muted:#b8ccd8;
@@ -49,11 +52,11 @@ body{background:var(--slate-bg);color:var(--ink);font-family:var(--fb);font-weig
 
 /* MASTHEAD */
 .mh{background:var(--midnight);padding:1.5rem 2rem 1.25rem;text-align:center;position:relative;overflow:hidden;}
-.mh::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(0,151,167,.12),transparent 60%),radial-gradient(ellipse at 80% 50%,rgba(46,125,82,.08),transparent 60%);}
+.mh::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(78,46,143,.18),transparent 60%),radial-gradient(ellipse at 80% 50%,rgba(31,166,99,.12),transparent 60%);}
 .mh-tag{font-family:var(--fm);font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(140,220,230,1.0);margin-bottom:1rem;position:relative;}
 .mh h1{font-family:var(--fd);font-size:clamp(2rem,5vw,3rem);font-weight:900;color:var(--white);line-height:1;letter-spacing:-.03em;position:relative;}
 .mh h1 .tr{color:var(--emerald-mid);}
-.mh-rule{width:2rem;height:2px;background:linear-gradient(90deg,rgba(0,200,220,.9),rgba(56,142,94,.9));margin:.5rem auto;position:relative;}
+.mh-rule{width:2.75rem;height:2px;background:linear-gradient(90deg,#D69A08,#4E2E8F,#1FA663);margin:.5rem auto;position:relative;}
 .mh-sub{font-family:var(--fm);font-size:.6rem;color:rgba(220,232,235,1.0);letter-spacing:.12em;position:relative;}
 .scope-b{display:inline-block;background:rgba(0,131,143,.25);border:1px solid rgba(0,151,167,.5);color:rgba(160,230,240,1.0);font-family:var(--fm);font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;padding:.2rem .65rem;border-radius:2px;margin-top:.35rem;position:relative;}
 
@@ -877,13 +880,13 @@ footer strong{color:rgba(220,232,235,1.0);}
   <div style="background:#fff;border-radius:12px;padding:2.5rem;max-width:480px;width:100%;text-align:center;">
     <div style="font-size:2rem;margin-bottom:1rem;">🏡</div>
     <div style="font-family:'Fraunces',serif;font-size:1.6rem;font-weight:900;color:#1a2332;margin-bottom:.5rem;line-height:1.15;">You've used both free analyses.</div>
-    <p style="font-size:.85rem;color:#546e7a;line-height:1.75;margin-bottom:1.5rem;">Full access opens July 1, 2026. Subscribe to HomeTrue Essentials or Complete and run unlimited analyses from launch day.</p>
+    <p style="font-size:.85rem;color:#546e7a;line-height:1.75;margin-bottom:1.5rem;">Full access opens November 1, 2026. Subscribe to HomeTrue Essentials or Complete and run unlimited analyses from launch day.</p>
     <div style="background:#e0f7fa;border:1px solid #b2ebf2;border-radius:8px;padding:1.1rem;margin-bottom:1.25rem;text-align:left;">
       <div style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:#006670;margin-bottom:.4rem;">What you unlocked today</div>
       <div style="font-size:.82rem;color:#1a2332;line-height:1.65;">✓ Tier 1 Pre-Offer analysis · Best &amp; worst case payment<br>✓ County-level property tax data<br>✓ No broker. No agenda. The honest number.</div>
     </div>
-    <a href="/" style="display:block;background:#1a2332;color:#fff;font-family:'Fraunces',serif;font-size:1rem;font-weight:700;padding:.85rem 2rem;border-radius:6px;text-decoration:none;margin-bottom:.75rem;">Return to Waitlist · Full Access July 1</a>
-    <p style="font-size:.65rem;color:#90a4ae;font-style:italic;">Essentials $19/mo · Complete $29/mo · Launch July 1, 2026</p>
+    <a href="/" style="display:block;background:#1a2332;color:#fff;font-family:'Fraunces',serif;font-size:1rem;font-weight:700;padding:.85rem 2rem;border-radius:6px;text-decoration:none;margin-bottom:.75rem;">Return to Waitlist · Full Access November 1</a>
+    <p style="font-size:.65rem;color:#90a4ae;font-style:italic;">Essentials $19/mo · Complete $29/mo · Launch November 1, 2026</p>
   </div>
 </div>
 
@@ -900,7 +903,7 @@ footer strong{color:rgba(220,232,235,1.0);}
     <div class="mh-sub">Honest mortgage analysis. No pressure. No agenda.</div>
     <div class="scope-b active-county-name">Select a Market</div>
   </div>
-  <div class="vs" id="avs">Rate verified:&nbsp;<span>Friday, May 15, 2026 · 9:00 AM ET</span>&nbsp;&nbsp;·&nbsp;<span style="color:#0097a7;font-weight:600;">6.36% (760+ credit)</span>·&nbsp;County:&nbsp;<span class="active-county-short">— Select a market —</span>&nbsp;·&nbsp;Tax:&nbsp;<span>—</span>&nbsp;·&nbsp;Source:&nbsp;<span>Freddie Mac PMMS</span></div>
+  <div class="vs" id="avs">Rate verified:&nbsp;<span>October 1, 2026</span>&nbsp;&nbsp;·&nbsp;<span style="color:#0097a7;font-weight:600;">7.28% · 30-year fixed national average</span>·&nbsp;County:&nbsp;<span class="active-county-short">— Select a market —</span>&nbsp;·&nbsp;Tax:&nbsp;<span>—</span>&nbsp;·&nbsp;Source:&nbsp;<span>Freddie Mac PMMS</span></div>
   <div class="county-selector-wrap">
     <div class="county-selector-inner" style="flex-direction:column;align-items:flex-start;gap:.6rem;">
       <div style="display:flex;align-items:flex-start;gap:.75rem;flex-wrap:wrap;">
@@ -1152,7 +1155,7 @@ footer strong{color:rgba(220,232,235,1.0);}
         <div class="wc dm" onclick="startDemo()" style="margin:0;padding:1.25rem;">
           <span class="wct">Option A — Free Demo</span>
           <span class="wcn" style="font-size:1rem;">Analyze Any Property</span>
-          <p class="wcd" style="font-size:.78rem;">Run a real Tier 1 analysis on any property in our 11 launch states. Your actual numbers — no fictional data.</p>
+          <p class="wcd" style="font-size:.78rem;">Run a real Tier 1 analysis on any property in a supported HomeTrue market. Your actual numbers — no fictional data.</p>
         </div>
 
         <div class="wc st" onclick="startG1()" style="margin:0;padding:1.25rem;">
@@ -1467,7 +1470,7 @@ footer strong{color:rgba(220,232,235,1.0);}
         <div class="dr"></div>
         <div class="ds"><span class="dn">Section 4 of 6</span><div class="dh">Analysis Completeness by Tier</div><div class="db">This tool operates at three tiers based on how far along you are in the home buying process. Tier 1 Pre-Offer uses publicly available county tax data and estimated ranges for insurance and other costs — appropriate before you have made an offer. Tier 2 Active Offer incorporates a confirmed or estimated insurance quote, reducing cost variance. Tier 3 Under Contract uses your locked Loan Estimate for the most complete input set. Results improve as you confirm more inputs. Your analysis displays which inputs are confirmed and which are estimated. No tier produces a guarantee or professional assessment.</div></div>
         <div class="dr"></div>
-        <div class="ds"><span class="dn">Section 5 of 6</span><div class="dh">Data Currency &amp; Verification Schedule</div><div class="db">Mortgage rate data is updated every Friday by 12:00 PM Eastern Time based on the Freddie Mac Primary Mortgage Market Survey published that same Thursday. In the event of a missed Friday update, data will be refreshed by Saturday 12:00 PM Eastern Time. All other financial inputs are verified on the first Friday of each month by 12:00 PM Eastern Time.</div></div>
+        <div class="ds"><span class="dn">Section 5 of 6</span><div class="dh">Data Currency &amp; Verification Schedule</div><div class="db">Mortgage rate data is updated every Friday by 7:00 AM Eastern Time based on the latest official Freddie Mac Primary Mortgage Market Survey release. In the event of a missed Friday update, data will be refreshed by Saturday 12:00 PM Eastern Time. All other financial inputs are verified on the first Friday of each month by 12:00 PM Eastern Time.</div></div>
         <div class="dr"></div>
         <div class="ds"><span class="dn">Section 6 of 6 — Data Accuracy Waiver</span><div class="dh">Your Responsibility for Input Accuracy</div><div class="db">The accuracy of this analysis depends entirely on the accuracy of the information you provide. If you enter incorrect, incomplete, or false information — whether intentionally or unintentionally — the analysis will produce inaccurate results. By accepting these terms, you acknowledge that the accuracy of your results is your responsibility. The developer and operator bear no liability for inaccuracies resulting from information you provided that was incorrect, incomplete, or false.</div></div>
       </div>
@@ -1605,7 +1608,7 @@ footer strong{color:rgba(220,232,235,1.0);}
           <div class="ff"><label>Credit Score Range</label><select id="fcr" onchange="chkRateDisc()"><option value="excellent">760+ Excellent</option><option value="very-good">720–759 Very Good</option><option value="good">680–719 Good</option><option value="fair">640–679 Fair</option></select></div>
           <div class="ff"><label>Primary Residence?</label><select id="fpr"><option value="yes">Yes — Primary long-term</option><option value="no">No — Investment</option></select></div>
           <div class="ff ffu" id="rate-opt-wrap">
-            <label>Interest Rate — Optional (leave blank to use current market range of 6.00–6.75%)</label>
+            <label>Interest Rate — Optional (leave blank to use current HomeTrue planning range of 7.03–7.67%)</label>
             <input type="number" id="f-rate-opt" placeholder="e.g. 6.50" step="0.01" min="2" max="15" oninput="chkRateDisc()">
             <div class="fn">If you have a quoted rate from a lender, enter it here. It will override the market range for both best and worst case scenarios.</div>
             <div id="rate-disc-warn" style="display:none; margin-top:.6rem;">
@@ -1701,7 +1704,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <!-- ANALYSIS -->
 <div id="sa" class="screen">
   <div id="amh"></div>
-  <div class="vs" id="avs">Rate verified:&nbsp;<span>Friday, May 15, 2026 · 9:00 AM ET · 6.36% (760+ credit)</span>&nbsp;·&nbsp;County:&nbsp;<span class="active-county-short">Miami-Dade</span>&nbsp;·&nbsp;Tax:&nbsp;<span>1.30%</span>&nbsp;·&nbsp;Source:&nbsp;<span>Freddie Mac PMMS</span></div>
+  <div class="vs" id="avs">Rate verified:&nbsp;<span>October 1, 2026 · 7.28% · 30-year fixed national average</span>&nbsp;·&nbsp;County:&nbsp;<span class="active-county-short">Miami-Dade</span>&nbsp;·&nbsp;Tax:&nbsp;<span>1.30%</span>&nbsp;·&nbsp;Source:&nbsp;<span>Freddie Mac PMMS</span></div>
   <!-- TIER RIBBON -->
   <div class="tier-ribbon" id="tier-ribbon" style="display:none;">
     <div class="tier-ribbon-info">Current plan: <span id="ribbon-plan-name">Free</span></div>
@@ -3487,7 +3490,7 @@ const COUNTIES = {
 };
   // Active county — defaults to Miami-Dade
 let ACTIVE_COUNTY = 'miami-dade';
-let MKT = {rv:"Friday, May 15, 2026 · 9:00 AM ET · 6.36% (760+ credit)",ov:"Verified May 15, 2026",fm:6.36,br:6.11,wr:6.75,tr:COUNTIES['miami-dade'].tr,he:50000,fxb:42,fxw:85,fab:150,faw:400};
+let MKT = {rv:"October 1, 2026 · 7.28% · Freddie Mac PMMS 30-year fixed national average",ov:"Verified October 1, 2026",fm:7.28,br:7.03,wr:7.67,tr:COUNTIES['miami-dade'].tr,he:50000,fxb:42,fxw:85,fab:150,faw:400};
 function setCounty(key) {
   ACTIVE_COUNTY = key;
   const c = COUNTIES[key];
@@ -3905,7 +3908,7 @@ function bAnalysis(i,isDemo){
   const sw=i.wt-i.bt;
   const irb=i.ix?`<span style="color:var(--warn);font-style:italic;">Excluded</span>`:`<span class="${i.ic?'bv':'wv'}">${fmt(i.bi)}</span>${i.il==='ESTIMATED'?'<span class="utag">EST</span>':'<span class="ctag">CONF</span>'}`;
   const irw=i.ix?`<span style="color:var(--warn);font-style:italic;">Excluded</span>`:`<span class="${i.ic?'bv':'wv'}">${fmt(i.wi)}</span>${i.il==='ESTIMATED'?'<span class="utag">EST</span>':'<span class="ctag">CONF</span>'}`;
-  const bars=[6.00,6.23,6.33,6.50,6.75].map(r=>{const pi=cPI(i.loan,r);const pct=Math.round((r-5.5)/(7.5-5.5)*100);return`<div class="br"><span class="brl">${r}%</span><div class="btr"><div class="bf" style="width:${pct}%"></div></div><span class="bv2">${fmt(pi)}/mo</span></div>`;}).join('');
+  const rateFloor=MKT.br-.5,rateCeil=MKT.wr+.5;const bars=[MKT.br,(MKT.br+MKT.fm)/2,MKT.fm,(MKT.fm+MKT.wr)/2,MKT.wr].map(r=>{r=Math.round(r*100)/100;const pi=cPI(i.loan,r);const pct=Math.max(0,Math.min(100,Math.round((r-rateFloor)/(rateCeil-rateFloor)*100)));return`<div class="br"><span class="brl">${r.toFixed(2)}%</span><div class="btr"><div class="bf" style="width:${pct}%"></div></div><span class="bv2">${fmt(pi)}/mo</span></div>`;}).join('');
   const dtis=[
     [`Best case ${fmt(i.bt)} at ${fmt(i.ilo)}/mo`,(i.bt/i.ilo*100).toFixed(1)+'%',i.bt/i.ilo<.36?'do':'dw'],
     [`Best case ${fmt(i.bt)} at ${fmt(i.ihi)}/mo`,(i.bt/i.ihi*100).toFixed(1)+'%',i.bt/i.ihi<.36?'do':'dw'],
@@ -4049,7 +4052,7 @@ function bAnalysis(i,isDemo){
 }
 
 function loadDemo(tier){
-  const base={address:"Sample Property — Enter your own above",price:460000,dpct:3,damt:13800,loan:446200,byr:2008,rage:10,rtp:'tile',con:'cbs',sht:true,hoa:185,fld:'x',ilo:10000,ihi:13000,pri:true,crd:'excellent',br:6.00,wr:6.75};
+  const base={address:"Sample Property — Enter your own above",price:460000,dpct:3,damt:13800,loan:446200,byr:2008,rage:10,rtp:'tile',con:'cbs',sht:true,hoa:185,fld:'x',ilo:10000,ihi:13000,pri:true,crd:'excellent',br:MKT.br,wr:MKT.wr};
   base.bpi=cPI(base.loan,base.br);
   base.wpi=cPI(base.loan,base.wr);
   base.ty1=Math.round(460000*.013/12);
@@ -4096,10 +4099,11 @@ function showDT(t,btn){
 
 // ── CREDIT SCORE RATE RANGES ──
 const RATE_RANGES = {
-  'excellent':  { min: 6.00, max: 6.25, label: '760+ Excellent' },
-  'very-good':  { min: 6.25, max: 6.50, label: '720–759 Very Good' },
-  'good':       { min: 6.50, max: 6.875,label: '680–719 Good' },
-  'fair':       { min: 6.875,max: 7.25, label: '640–679 Fair' },
+  // HomeTrue planning ranges calibrated to the current Freddie Mac PMMS benchmark; not lender quotes.
+  'excellent':  { min: 6.92, max: 7.17, label: '760+ Excellent' },
+  'very-good':  { min: 7.17, max: 7.42, label: '720–759 Very Good' },
+  'good':       { min: 7.42, max: 7.795,label: '680–719 Good' },
+  'fair':       { min: 7.795,max: 8.17, label: '640–679 Fair' },
 };
 
 // ══════════════════════════
@@ -4780,7 +4784,7 @@ function calcAffordability() {
   const db = parseFloat(document.getElementById('aff-db').value) || 0;
   const cr = document.getElementById('aff-cr').value || 'excellent';
   const dpPct = parseFloat(document.getElementById('aff-dp').value) || 3;
-  const rate = RATE_RANGES[cr] ? (RATE_RANGES[cr].min + RATE_RANGES[cr].max) / 2 : 6.25;
+  const rate = RATE_RANGES[cr] ? (RATE_RANGES[cr].min + RATE_RANGES[cr].max) / 2 : MKT.fm;
 
   // Max monthly housing payment at 36% and 43% DTI
   const maxMoLow = il * 0.36 - db;
@@ -6906,11 +6910,11 @@ function showDemoUpgradePrompt(feature) {
         ${isPDF ? 'PDF Download' : 'Share Analysis'} is a paid feature
       </div>
       <p style="font-size:.82rem;color:#546e7a;line-height:1.75;margin-bottom:1.5rem;">
-        ${isPDF ? 'Download a full professional PDF of your analysis — yours to keep, share with your partner, or bring to your lender.' : 'Share a live link to your analysis with your partner, realtor, or family.'} Available from <strong>Essentials $19/mo</strong> on launch day July 1, 2026.
+        ${isPDF ? 'Download a full professional PDF of your analysis — yours to keep, share with your partner, or bring to your lender.' : 'Share a live link to your analysis with your partner, realtor, or family.'} Available from <strong>Essentials $19/mo</strong> on launch day November 1, 2026.
       </p>
 
       <div style="background:#eceff1;border-radius:8px;padding:1.1rem;margin-bottom:1.25rem;text-align:left;">
-        <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:#607080;margin-bottom:.6rem;">What unlocks at each plan · July 1, 2026</div>
+        <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:#607080;margin-bottom:.6rem;">What unlocks at each plan · November 1, 2026</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;">
           <div style="background:#e0f7fa;border-radius:6px;padding:.75rem;">
             <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:#006670;margin-bottom:.35rem;">Essentials · $19/mo</div>
@@ -6924,7 +6928,7 @@ function showDemoUpgradePrompt(feature) {
       </div>
 
       <a href="/" style="display:block;background:#1a2332;color:#fff;font-family:'Fraunces',serif;font-size:.95rem;font-weight:700;padding:.8rem 1.5rem;border-radius:6px;text-decoration:none;margin-bottom:.6rem;">
-        Return to Waitlist · Full Access July 1
+        Return to Waitlist · Full Access November 1
       </a>
       <p style="font-size:.65rem;color:#90a4ae;font-style:italic;">No credit card required to join waitlist. Subscribe at launch.</p>
     </div>`;
@@ -6946,7 +6950,7 @@ function updateDemoBanner() {
     } else {
       el.textContent = remaining > 0
         ? remaining + ' free analys' + (remaining === 1 ? 'is' : 'es') + ' remaining'
-        : 'Demo limit reached — Full access July 1';
+        : 'Demo limit reached — Full access November 1';
       el.style.color = remaining === 0 ? '#ff8a65' : 'rgba(255,255,255,.65)';
     }
   }
@@ -6966,12 +6970,12 @@ function lockTier3Demo() {
   tc3.style.opacity = '.6';
   tc3.style.cursor = 'not-allowed';
   tc3.onclick = function() {
-    alert('Tier 3 Under Contract analysis unlocks with HomeTrue Complete — $29/month — available July 1, 2026. Join the waitlist for early access.');
+    alert('Tier 3 Under Contract analysis unlocks with HomeTrue Complete — $29/month — available November 1, 2026. Join the waitlist for early access.');
   };
   const lock = document.getElementById('tc3-lock');
   if (lock) {
     lock.style.display = 'block';
-    lock.textContent = '🔒 Complete — $29/mo · Launches July 1, 2026';
+    lock.textContent = '🔒 Complete — $29/mo · Launches November 1, 2026';
     lock.style.background = 'var(--indigo-light)';
     lock.style.color = 'var(--indigo-dim)';
   }
@@ -7051,7 +7055,7 @@ function roscoeInit() {
     msgs.innerHTML = `<div class="roscoe-gate">
       <img src="${ROSCOE_SRC}" alt="Roscoe" style="width:64px;height:64px;object-fit:contain;">
       <div class="roscoe-gate-title">Hi, I'm Roscoe!</div>
-      <div class="roscoe-gate-sub">I'm HomeTrue's educational assistant — here to help you understand every part of the homebuying process. I'm available to Essentials and Complete subscribers starting July 1, 2026.</div>
+      <div class="roscoe-gate-sub">I'm HomeTrue's educational assistant — here to help you understand every part of the homebuying process. I'm available to Essentials and Complete subscribers starting November 1, 2026.</div>
       <button class="roscoe-gate-btn" onclick="roscoeToggle()">Got it, thanks Roscoe</button>
     </div>`;
     if (inputRow) inputRow.style.display = 'none';
@@ -7251,8 +7255,8 @@ HOMETRUE PLATFORM:
 - Tier 1 Pre-Offer: 85–90% accuracy. Insurance excluded.
 - Tier 2 Active Offer: 92–95% accuracy. Insurance included (confirmed quote or estimated with acknowledgment).
 - Tier 3 Under Contract: 95–98% accuracy. All inputs confirmed.
-- The platform covers 16 states and 79 counties
-- Rate data is sourced from Freddie Mac PMMS, verified every Friday by 12:00 PM ET
+- The platform covers all supported HomeTrue states and counties shown in the market selector
+- Rate data is sourced from Freddie Mac PMMS, verified every Friday by 7:00 AM ET
 - The tool is built to serve buyers — not brokers, not realtors, not lenders
 
 Keep responses conversational and appropriately concise — detailed when the question needs depth, brief when a simple answer serves better. Always be Roscoe: warm, honest, and completely on the buyer's side.
