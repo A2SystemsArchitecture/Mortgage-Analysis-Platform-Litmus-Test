@@ -48,10 +48,11 @@ launch_replacements = {
 for old,new in launch_replacements.items():
     replace_exact(old,new)
 
+# Update the calculation object before replacing generic display text embedded inside it.
+replace_exact('let MKT = {rv:"Friday, May 15, 2026 · 9:00 AM ET · 6.36% (760+ credit)",ov:"Verified May 15, 2026",fm:6.36,br:6.11,wr:6.75,', 'let MKT = {rv:"October 1, 2026 · 7.28% · Freddie Mac PMMS 30-year fixed national average",ov:"Verified October 1, 2026",fm:7.28,br:7.03,wr:7.67,')
 replace_exact('Friday, May 15, 2026 · 9:00 AM ET · 6.36% (760+ credit)', 'October 1, 2026 · 7.28% · 30-year fixed national average')
 replace_exact('Friday, May 15, 2026 · 9:00 AM ET', 'October 1, 2026')
 replace_exact('6.36% (760+ credit)', '7.28% · 30-year fixed national average')
-replace_exact('let MKT = {rv:"Friday, May 15, 2026 · 9:00 AM ET · 6.36% (760+ credit)",ov:"Verified May 15, 2026",fm:6.36,br:6.11,wr:6.75,', 'let MKT = {rv:"October 1, 2026 · 7.28% · Freddie Mac PMMS 30-year fixed national average",ov:"Verified October 1, 2026",fm:7.28,br:7.03,wr:7.67,')
 
 old_ranges = """const RATE_RANGES = {
   'excellent':  { min: 6.00, max: 6.25, label: '760+ Excellent' },
