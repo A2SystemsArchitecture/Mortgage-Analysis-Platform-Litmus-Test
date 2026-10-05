@@ -53,12 +53,12 @@ body{background:var(--slate-bg);color:var(--ink);font-family:var(--fb);font-weig
 /* MASTHEAD */
 .mh{background:var(--midnight);padding:1.5rem 2rem 1.25rem;text-align:center;position:relative;overflow:hidden;}
 .mh::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(78,46,143,.18),transparent 60%),radial-gradient(ellipse at 80% 50%,rgba(31,166,99,.12),transparent 60%);}
-.mh-tag{font-family:var(--fm);font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(140,220,230,1.0);margin-bottom:1rem;position:relative;}
+.mh-tag{font-family:var(--fm);font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:#E9E4F7;margin-bottom:1rem;position:relative;}
 .mh h1{font-family:var(--fd);font-size:clamp(2rem,5vw,3rem);font-weight:900;color:var(--white);line-height:1;letter-spacing:-.03em;position:relative;}
 .mh h1 .tr{color:var(--emerald-mid);}
 .mh-rule{width:2.75rem;height:2px;background:linear-gradient(90deg,#D69A08,#4E2E8F,#1FA663);margin:.5rem auto;position:relative;}
-.mh-sub{font-family:var(--fm);font-size:.6rem;color:rgba(220,232,235,1.0);letter-spacing:.12em;position:relative;}
-.scope-b{display:inline-block;background:rgba(0,131,143,.25);border:1px solid rgba(0,151,167,.5);color:rgba(160,230,240,1.0);font-family:var(--fm);font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;padding:.2rem .65rem;border-radius:2px;margin-top:.35rem;position:relative;}
+.mh-sub{font-family:var(--fm);font-size:.6rem;color:rgba(255,255,255,.86);letter-spacing:.12em;position:relative;}
+.scope-b{display:inline-block;background:rgba(78,46,143,.28);border:1px solid rgba(105,74,176,.70);color:#E9E4F7;font-family:var(--fm);font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;padding:.2rem .65rem;border-radius:2px;margin-top:.35rem;position:relative;}
 
 /* VERIFIED STRIP */
 .vs{background:var(--slate-bg);padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap;font-family:var(--fm);font-size:.72rem;letter-spacing:.07em;color:var(--muted);border-bottom:1px solid var(--rule);}
@@ -69,7 +69,7 @@ body{background:var(--slate-bg);color:var(--ink);font-family:var(--fb);font-weig
 .gh{background:var(--midnight);padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;}
 .gl{font-family:var(--fd);font-size:1.5rem;font-weight:900;color:var(--white);letter-spacing:-.02em;transition:opacity .15s;}.gl:hover{opacity:.8;}
 .gl .tr{color:var(--emerald-mid);}
-.gs{font-family:var(--fm);font-size:.6rem;letter-spacing:.12em;color:rgba(200,218,222,1.0);}
+.gs{font-family:var(--fm);font-size:.6rem;letter-spacing:.12em;color:rgba(255,255,255,.78);}
 .gb{padding:3rem 1.5rem;max-width:680px;margin:0 auto;}
 
 /* PROGRESS */
@@ -389,7 +389,7 @@ input:focus,select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 
 .roscoe-bubble{bottom:1.25rem;right:1.25rem;}}
 footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;padding:2rem 1.5rem;font-family:var(--fm);font-size:.65rem;letter-spacing:.05em;line-height:2.4;border-top:1px solid rgba(176,190,197,.15);}
 .nav-btns{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;flex-shrink:0;padding:.4rem 0;}
-.rate-warn-box{background:#fff8e6;border:1.5px solid #c8900a;border-left:4px solid #c8900a;border-radius:0 6px 6px 0;padding:1rem 1.25rem;}
+.rate-warn-box{background:#FFF7DF;border:1.5px solid #c8900a;border-left:4px solid #c8900a;border-radius:0 6px 6px 0;padding:1rem 1.25rem;}
 .rate-warn-lbl{font-family:var(--fm);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a5200;font-weight:500;margin-bottom:.4rem;}
 .rate-warn-msg{font-size:.85rem;color:#5a3c00;line-height:1.65;}
 .back-btn{display:inline-flex;align-items:center;gap:.35rem;padding:.55rem 1rem;border:1.5px solid var(--rule);border-radius:6px;background:var(--white);color:var(--muted);font-family:var(--fm);font-size:.6rem;letter-spacing:.08em;cursor:pointer;transition:all .2s;text-transform:uppercase;}
@@ -474,7 +474,7 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .state-toggle.active-ms{background:#8a5a3b;border-color:#8a5a3b;color:var(--white);}
 .state-toggle.hint-ms{border-color:rgba(138,90,59,.45);color:rgba(185,135,100,.9);}
 .state-toggle.hint-ms:hover{border-color:#8a5a3b;color:#8a5a3b;}
-.state-toggle.active-wv{background:#FCCF4D;border-color:#FCCF4D;color:#1a2332;}
+.state-toggle.active-wv{background:#FCCF4D;border-color:#FCCF4D;color:#0F1B3D;}
 .state-toggle.hint-wv{border-color:rgba(252,207,77,.45);color:rgba(252,207,77,.9);}
 .state-toggle.hint-wv:hover{border-color:#FCCF4D;color:#FCCF4D;}
 .state-toggle.active-de{background:#1a5276;border-color:#1a5276;color:var(--white);}
@@ -492,7 +492,7 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .state-toggle.active-nm{background:#c06080;border-color:#c06080;color:var(--white);}
 .state-toggle.hint-nm{border-color:rgba(192,96,128,.45);color:rgba(220,150,180,.9);}
 .state-toggle.hint-nm:hover{border-color:#c06080;color:#c06080;}
-.state-toggle.active-me{background:#c8a96e;border-color:#c8a96e;color:#1a2332;}
+.state-toggle.active-me{background:#c8a96e;border-color:#c8a96e;color:#0F1B3D;}
 .state-toggle.hint-me{border-color:rgba(200,169,110,.45);color:rgba(210,180,130,.9);}
 .state-toggle.hint-me:hover{border-color:#c8a96e;color:#c8a96e;}
 .state-toggle:hover:not(.active-fl):not(.active-tx):not(.active-nc):not(.active-sc):not(.active-tn):not(.active-al):not(.active-va):not(.active-ga):not(.active-az):not(.active-nv):not(.active-md){border-color:rgba(176,190,197,.6);color:rgba(176,190,197,.9);}
@@ -580,8 +580,8 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .county-pill.ms:hover{border-color:#8a5a3b;color:var(--white);background:rgba(138,90,59,.25);}
 .county-pill.ms.active{background:#8a5a3b;border-color:#8a5a3b;color:var(--white);}
 .county-pill.wv{border-color:rgba(252,207,77,.65);color:rgba(252,207,77,.95);height:auto;background:transparent;}
-.county-pill.wv:hover{border-color:#FCCF4D;color:#1a2332;background:rgba(252,207,77,.25);}
-.county-pill.wv.active{background:#FCCF4D;border-color:#FCCF4D;color:#1a2332;}
+.county-pill.wv:hover{border-color:#FCCF4D;color:#0F1B3D;background:rgba(252,207,77,.25);}
+.county-pill.wv.active{background:#FCCF4D;border-color:#FCCF4D;color:#0F1B3D;}
 .county-pill.de{border-color:rgba(26,82,118,.65);color:rgba(80,150,200,.95);height:auto;background:transparent;}
 .county-pill.de:hover{border-color:#1a5276;color:var(--white);background:rgba(26,82,118,.25);}
 .county-pill.de.active{background:#1a5276;border-color:#1a5276;color:var(--white);}
@@ -598,8 +598,8 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .county-pill.nm:hover{border-color:#c06080;color:var(--white);background:rgba(192,96,128,.25);}
 .county-pill.nm.active{background:#c06080;border-color:#c06080;color:var(--white);}
 .county-pill.me{border-color:rgba(200,169,110,.65);color:rgba(210,180,130,.95);height:auto;background:transparent;}
-.county-pill.me:hover{border-color:#c8a96e;color:#1a2332;background:rgba(200,169,110,.25);}
-.county-pill.me.active{background:#c8a96e;border-color:#c8a96e;color:#1a2332;}
+.county-pill.me:hover{border-color:#c8a96e;color:#0F1B3D;background:rgba(200,169,110,.25);}
+.county-pill.me.active{background:#c8a96e;border-color:#c8a96e;color:#0F1B3D;}
 /* Indiana pills */
 .county-pill.in{border-color:rgba(107,92,69,.55);color:rgba(145,125,95,.95);}
 .county-pill.in:hover{border-color:var(--indiana-mid);color:var(--white);background:rgba(107,92,69,.25);}
@@ -857,16 +857,16 @@ footer strong{color:rgba(220,232,235,1.0);}
 (function(){
   var pwd = prompt("Enter access code:");
   if(pwd !== "LSUTigers9193#6") {
-    document.documentElement.innerHTML = '<html><body><div style="font-family:sans-serif;text-align:center;padding:4rem;background:#1a2332;min-height:100vh;display:flex;align-items:center;justify-content:center;"><div><h2 style="font-family:serif;font-size:2rem;color:white;margin-bottom:1rem;">Home<span style="color:#388e5e;">True</span></h2><p style="color:rgba(200,218,222,.8);">Platform coming soon.</p></div></div></body></html>';
+    document.documentElement.innerHTML = '<html><body><div style="font-family:sans-serif;text-align:center;padding:4rem;background:#0F1B3D;min-height:100vh;display:flex;align-items:center;justify-content:center;"><div><h2 style="font-family:serif;font-size:2rem;color:white;margin-bottom:1rem;">Home<span style="color:#2BB674;">True</span></h2><p style="color:rgba(200,218,222,.8);">Platform coming soon.</p></div></div></body></html>';
     document.open();
-    document.write("<h1 style=\'font-family:sans-serif;text-align:center;padding:4rem;color:#1a2332;\'>HomeTrue — Platform coming soon.</h1>");
+    document.write("<h1 style=\'font-family:sans-serif;text-align:center;padding:4rem;color:#0F1B3D;\'>HomeTrue — Platform coming soon.</h1>");
     document.close();
     throw new Error("Access denied");
   }
 })();
 </script>
 <!-- DEMO BANNER -->
-<div id="demo-banner" style="background:#1e5a38;padding:.65rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;position:sticky;top:0;z-index:999;border-bottom:2px solid #2e7d52;">
+<div id="demo-banner" style="background:#1e5a38;padding:.65rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;position:sticky;top:0;z-index:999;border-bottom:2px solid #1FA663;">
   <div style="display:flex;align-items:center;gap:.75rem;">
     <div style="width:8px;height:8px;border-radius:50%;background:#2EE07A;flex-shrink:0;animation:pulse-dot 2s ease-in-out infinite;"></div>
     <span style="font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.9);">Waitlist Early Access · Free Demo</span>
@@ -879,14 +879,14 @@ footer strong{color:rgba(220,232,235,1.0);}
 <div id="demo-wall" style="display:none;position:fixed;inset:0;background:rgba(26,35,50,.96);z-index:9999;display:none;align-items:center;justify-content:center;padding:2rem;">
   <div style="background:#fff;border-radius:12px;padding:2.5rem;max-width:480px;width:100%;text-align:center;">
     <div style="font-size:2rem;margin-bottom:1rem;">🏡</div>
-    <div style="font-family:'Fraunces',serif;font-size:1.6rem;font-weight:900;color:#1a2332;margin-bottom:.5rem;line-height:1.15;">You've used both free analyses.</div>
-    <p style="font-size:.85rem;color:#546e7a;line-height:1.75;margin-bottom:1.5rem;">Full access opens November 1, 2026. Subscribe to HomeTrue Essentials or Complete and run unlimited analyses from launch day.</p>
-    <div style="background:#e0f7fa;border:1px solid #b2ebf2;border-radius:8px;padding:1.1rem;margin-bottom:1.25rem;text-align:left;">
-      <div style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:#006670;margin-bottom:.4rem;">What you unlocked today</div>
-      <div style="font-size:.82rem;color:#1a2332;line-height:1.65;">✓ Tier 1 Pre-Offer analysis · Best &amp; worst case payment<br>✓ County-level property tax data<br>✓ No broker. No agenda. The honest number.</div>
+    <div style="font-family:'Fraunces',serif;font-size:1.6rem;font-weight:900;color:#0F1B3D;margin-bottom:.5rem;line-height:1.15;">You've used both free analyses.</div>
+    <p style="font-size:.85rem;color:#596175;line-height:1.75;margin-bottom:1.5rem;">Full access opens November 1, 2026. Subscribe to HomeTrue Essentials or Complete and run unlimited analyses from launch day.</p>
+    <div style="background:#EEF9F3;border:1px solid #BFE6D2;border-radius:8px;padding:1.1rem;margin-bottom:1.25rem;text-align:left;">
+      <div style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:#137A48;margin-bottom:.4rem;">What you unlocked today</div>
+      <div style="font-size:.82rem;color:#0F1B3D;line-height:1.65;">✓ Tier 1 Pre-Offer analysis · Best &amp; worst case payment<br>✓ County-level property tax data<br>✓ No broker. No agenda. The honest number.</div>
     </div>
-    <a href="/" style="display:block;background:#1a2332;color:#fff;font-family:'Fraunces',serif;font-size:1rem;font-weight:700;padding:.85rem 2rem;border-radius:6px;text-decoration:none;margin-bottom:.75rem;">Return to Waitlist · Full Access November 1</a>
-    <p style="font-size:.65rem;color:#90a4ae;font-style:italic;">Essentials $19/mo · Complete $29/mo · Launch November 1, 2026</p>
+    <a href="/" style="display:block;background:#0F1B3D;color:#fff;font-family:'Fraunces',serif;font-size:1rem;font-weight:700;padding:.85rem 2rem;border-radius:6px;text-decoration:none;margin-bottom:.75rem;">Return to Waitlist · Full Access November 1</a>
+    <p style="font-size:.65rem;color:#7B8190;font-style:italic;">Essentials $19/mo · Complete $29/mo · Launch November 1, 2026</p>
   </div>
 </div>
 
@@ -903,7 +903,7 @@ footer strong{color:rgba(220,232,235,1.0);}
     <div class="mh-sub">Honest mortgage analysis. No pressure. No agenda.</div>
     <div class="scope-b active-county-name">Select a Market</div>
   </div>
-  <div class="vs" id="avs">Rate verified:&nbsp;<span>October 1, 2026</span>&nbsp;&nbsp;·&nbsp;<span style="color:#0097a7;font-weight:600;">7.28% · 30-year fixed national average</span>·&nbsp;County:&nbsp;<span class="active-county-short">— Select a market —</span>&nbsp;·&nbsp;Tax:&nbsp;<span>—</span>&nbsp;·&nbsp;Source:&nbsp;<span>Freddie Mac PMMS</span></div>
+  <div class="vs" id="avs">Rate verified:&nbsp;<span>October 1, 2026</span>&nbsp;&nbsp;·&nbsp;<span style="color:#1FA663;font-weight:600;">7.28% · 30-year fixed national average</span>·&nbsp;County:&nbsp;<span class="active-county-short">— Select a market —</span>&nbsp;·&nbsp;Tax:&nbsp;<span>—</span>&nbsp;·&nbsp;Source:&nbsp;<span>Freddie Mac PMMS</span></div>
   <div class="county-selector-wrap">
     <div class="county-selector-inner" style="flex-direction:column;align-items:flex-start;gap:.6rem;">
       <div style="display:flex;align-items:flex-start;gap:.75rem;flex-wrap:wrap;">
@@ -6904,33 +6904,33 @@ function showDemoUpgradePrompt(feature) {
 
   modal.innerHTML = `
     <div style="background:#fff;border-radius:12px;padding:2.25rem;max-width:500px;width:100%;text-align:center;position:relative;">
-      <button onclick="document.getElementById('demo-upgrade-modal').remove()" style="position:absolute;top:.75rem;right:1rem;background:none;border:none;font-size:1.2rem;color:#90a4ae;cursor:pointer;">✕</button>
+      <button onclick="document.getElementById('demo-upgrade-modal').remove()" style="position:absolute;top:.75rem;right:1rem;background:none;border:none;font-size:1.2rem;color:#7B8190;cursor:pointer;">✕</button>
       <div style="font-size:1.75rem;margin-bottom:.75rem;">${isPDF ? '📄' : '🔗'}</div>
-      <div style="font-family:'Fraunces',serif;font-size:1.35rem;font-weight:900;color:#1a2332;margin-bottom:.5rem;line-height:1.2;">
+      <div style="font-family:'Fraunces',serif;font-size:1.35rem;font-weight:900;color:#0F1B3D;margin-bottom:.5rem;line-height:1.2;">
         ${isPDF ? 'PDF Download' : 'Share Analysis'} is a paid feature
       </div>
-      <p style="font-size:.82rem;color:#546e7a;line-height:1.75;margin-bottom:1.5rem;">
+      <p style="font-size:.82rem;color:#596175;line-height:1.75;margin-bottom:1.5rem;">
         ${isPDF ? 'Download a full professional PDF of your analysis — yours to keep, share with your partner, or bring to your lender.' : 'Share a live link to your analysis with your partner, realtor, or family.'} Available from <strong>Essentials $19/mo</strong> on launch day November 1, 2026.
       </p>
 
-      <div style="background:#eceff1;border-radius:8px;padding:1.1rem;margin-bottom:1.25rem;text-align:left;">
+      <div style="background:#F4F2FA;border-radius:8px;padding:1.1rem;margin-bottom:1.25rem;text-align:left;">
         <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.12em;text-transform:uppercase;color:#607080;margin-bottom:.6rem;">What unlocks at each plan · November 1, 2026</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;">
-          <div style="background:#e0f7fa;border-radius:6px;padding:.75rem;">
-            <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:#006670;margin-bottom:.35rem;">Essentials · $19/mo</div>
-            <div style="font-size:.72rem;color:#1a2332;line-height:1.6;">✓ PDF Download<br>✓ Share Analysis<br>✓ Tier 1 &amp; Tier 2<br>✓ Closing Costs<br>✓ Homestead Guide<br>✓ Questions to Ask</div>
+          <div style="background:#EEF9F3;border-radius:6px;padding:.75rem;">
+            <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:#137A48;margin-bottom:.35rem;">Essentials · $19/mo</div>
+            <div style="font-size:.72rem;color:#0F1B3D;line-height:1.6;">✓ PDF Download<br>✓ Share Analysis<br>✓ Tier 1 &amp; Tier 2<br>✓ Closing Costs<br>✓ Homestead Guide<br>✓ Questions to Ask</div>
           </div>
-          <div style="background:#ede7f6;border-radius:6px;padding:.75rem;">
-            <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:#311b92;margin-bottom:.35rem;">Complete · $29/mo</div>
-            <div style="font-size:.72rem;color:#1a2332;line-height:1.6;">✓ Everything in Essentials<br>✓ Tier 3 Under Contract<br>✓ Two-Property Compare<br>✓ Rate Lock Analysis<br>✓ Full Cash-at-Close<br>✓ PDF with all tiers</div>
+          <div style="background:#E9E4F7;border-radius:6px;padding:.75rem;">
+            <div style="font-family:'DM Mono',monospace;font-size:.48rem;letter-spacing:.1em;text-transform:uppercase;color:#3B216F;margin-bottom:.35rem;">Complete · $29/mo</div>
+            <div style="font-size:.72rem;color:#0F1B3D;line-height:1.6;">✓ Everything in Essentials<br>✓ Tier 3 Under Contract<br>✓ Two-Property Compare<br>✓ Rate Lock Analysis<br>✓ Full Cash-at-Close<br>✓ PDF with all tiers</div>
           </div>
         </div>
       </div>
 
-      <a href="/" style="display:block;background:#1a2332;color:#fff;font-family:'Fraunces',serif;font-size:.95rem;font-weight:700;padding:.8rem 1.5rem;border-radius:6px;text-decoration:none;margin-bottom:.6rem;">
+      <a href="/" style="display:block;background:#0F1B3D;color:#fff;font-family:'Fraunces',serif;font-size:.95rem;font-weight:700;padding:.8rem 1.5rem;border-radius:6px;text-decoration:none;margin-bottom:.6rem;">
         Return to Waitlist · Full Access November 1
       </a>
-      <p style="font-size:.65rem;color:#90a4ae;font-style:italic;">No credit card required to join waitlist. Subscribe at launch.</p>
+      <p style="font-size:.65rem;color:#7B8190;font-style:italic;">No credit card required to join waitlist. Subscribe at launch.</p>
     </div>`;
 
   document.body.appendChild(modal);
@@ -6946,7 +6946,7 @@ function updateDemoBanner() {
   if (el) {
     if (IS_TESTER) {
       el.textContent = 'Tester Mode · Unlimited Access';
-      el.style.color = '#ffd54f';
+      el.style.color = '#D69A08';
     } else {
       el.textContent = remaining > 0
         ? remaining + ' free analys' + (remaining === 1 ? 'is' : 'es') + ' remaining'
