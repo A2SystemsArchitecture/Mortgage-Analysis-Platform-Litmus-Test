@@ -903,7 +903,7 @@ footer strong{color:rgba(220,232,235,1.0);}
     <div class="mh-sub">Honest mortgage analysis. No pressure. No agenda.</div>
     <div class="scope-b active-county-name">Select a Market</div>
   </div>
-  <div class="vs" id="avs">Rate verified:&nbsp;<span>October 1, 2026</span>&nbsp;&nbsp;·&nbsp;<span style="color:#1FA663;font-weight:600;">7.28% · 30-year fixed national average</span>·&nbsp;County:&nbsp;<span class="active-county-short">— Select a market —</span>&nbsp;·&nbsp;Tax:&nbsp;<span>—</span>&nbsp;·&nbsp;Source:&nbsp;<span>Freddie Mac PMMS</span></div>
+  <div class="vs" id="avs">Rate verified:&nbsp;<span>October 8, 2026</span>&nbsp;&nbsp;·&nbsp;<span style="color:#1FA663;font-weight:600;">7.40% · 30-year fixed national average</span>·&nbsp;County:&nbsp;<span class="active-county-short">— Select a market —</span>&nbsp;·&nbsp;Tax:&nbsp;<span>—</span>&nbsp;·&nbsp;Source:&nbsp;<span>Freddie Mac PMMS</span></div>
   <div class="county-selector-wrap">
     <div class="county-selector-inner" style="flex-direction:column;align-items:flex-start;gap:.6rem;">
       <div style="display:flex;align-items:flex-start;gap:.75rem;flex-wrap:wrap;">
@@ -1608,7 +1608,7 @@ footer strong{color:rgba(220,232,235,1.0);}
           <div class="ff"><label>Credit Score Range</label><select id="fcr" onchange="chkRateDisc()"><option value="excellent">760+ Excellent</option><option value="very-good">720–759 Very Good</option><option value="good">680–719 Good</option><option value="fair">640–679 Fair</option></select></div>
           <div class="ff"><label>Primary Residence?</label><select id="fpr"><option value="yes">Yes — Primary long-term</option><option value="no">No — Investment</option></select></div>
           <div class="ff ffu" id="rate-opt-wrap">
-            <label>Interest Rate — Optional (leave blank to use current HomeTrue planning range of 7.03–7.67%)</label>
+            <label>Interest Rate — Optional (leave blank to use current HomeTrue planning range of 7.15–7.79%)</label>
             <input type="number" id="f-rate-opt" placeholder="e.g. 6.50" step="0.01" min="2" max="15" oninput="chkRateDisc()">
             <div class="fn">If you have a quoted rate from a lender, enter it here. It will override the market range for both best and worst case scenarios.</div>
             <div id="rate-disc-warn" style="display:none; margin-top:.6rem;">
@@ -1704,7 +1704,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <!-- ANALYSIS -->
 <div id="sa" class="screen">
   <div id="amh"></div>
-  <div class="vs" id="avs">Rate verified:&nbsp;<span>October 1, 2026 · 7.28% · 30-year fixed national average</span>&nbsp;·&nbsp;County:&nbsp;<span class="active-county-short">Miami-Dade</span>&nbsp;·&nbsp;Tax:&nbsp;<span>1.30%</span>&nbsp;·&nbsp;Source:&nbsp;<span>Freddie Mac PMMS</span></div>
+  <div class="vs" id="avs">Rate verified:&nbsp;<span>October 8, 2026 · 7.40% · 30-year fixed national average</span>&nbsp;·&nbsp;County:&nbsp;<span class="active-county-short">Miami-Dade</span>&nbsp;·&nbsp;Tax:&nbsp;<span>1.30%</span>&nbsp;·&nbsp;Source:&nbsp;<span>Freddie Mac PMMS</span></div>
   <!-- TIER RIBBON -->
   <div class="tier-ribbon" id="tier-ribbon" style="display:none;">
     <div class="tier-ribbon-info">Current plan: <span id="ribbon-plan-name">Free</span></div>
@@ -3490,7 +3490,7 @@ const COUNTIES = {
 };
   // Active county — defaults to Miami-Dade
 let ACTIVE_COUNTY = 'miami-dade';
-let MKT = {rv:"October 1, 2026 · 7.28% · Freddie Mac PMMS 30-year fixed national average",ov:"Verified October 1, 2026",fm:7.28,br:7.03,wr:7.67,tr:COUNTIES['miami-dade'].tr,he:50000,fxb:42,fxw:85,fab:150,faw:400};
+let MKT = {rv:"October 8, 2026 · 7.40% · Freddie Mac PMMS 30-year fixed national average",ov:"Verified October 8, 2026",fm:7.40,br:7.15,wr:7.79,tr:COUNTIES['miami-dade'].tr,he:50000,fxb:42,fxw:85,fab:150,faw:400};
 function setCounty(key) {
   ACTIVE_COUNTY = key;
   const c = COUNTIES[key];
@@ -4100,10 +4100,10 @@ function showDT(t,btn){
 // ── CREDIT SCORE RATE RANGES ──
 const RATE_RANGES = {
   // HomeTrue planning ranges calibrated to the current Freddie Mac PMMS benchmark; not lender quotes.
-  'excellent':  { min: 6.92, max: 7.17, label: '760+ Excellent' },
-  'very-good':  { min: 7.17, max: 7.42, label: '720–759 Very Good' },
-  'good':       { min: 7.42, max: 7.795,label: '680–719 Good' },
-  'fair':       { min: 7.795,max: 8.17, label: '640–679 Fair' },
+  'excellent':  { min: 7.04, max: 7.29, label: '760+ Excellent' },
+  'very-good':  { min: 7.29, max: 7.54, label: '720–759 Very Good' },
+  'good':       { min: 7.54, max: 7.915,label: '680–719 Good' },
+  'fair':       { min: 7.915,max: 8.29, label: '640–679 Fair' },
 };
 
 // ══════════════════════════
