@@ -1,0 +1,31 @@
+name: Configure HomeTrue domain
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/configure-hometrue-domain.yml'
+
+permissions:
+  contents: read
+  pages: write
+
+jobs:
+  configure-domain:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set GitHub Pages custom domain
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          code=$(curl -sS -o /tmp/pages-response.json -w "%{http_code}" \
+            -X PUT \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/pages" \
+            -d '{"cname":"myhometrue.com"}')
+          cat /tmp/pages-response.json || true
+          echo "HTTP ${code}"
+          test "${code}" = "204"
