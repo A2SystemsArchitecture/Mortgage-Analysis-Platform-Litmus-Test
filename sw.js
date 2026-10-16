@@ -2,7 +2,7 @@
 // Cache-first strategy — serves platform from cache for instant load and offline use
 // Version bump triggers cache refresh on deploy
 
-const CACHE_NAME = 'hometrue-v2';
+const CACHE_NAME = 'hometrue-v3';
 const ASSETS = [
   '/platform.html',
   '/android-chrome-192x192.png',
