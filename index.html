@@ -13,7 +13,8 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:#1a2332;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;}
-.wrap{text-align:center;padding:2rem;}
+.wrap{text-align:center;padding:2rem;max-width:100%;}
+html,body{overflow-x:hidden;}
 .logo{display:inline-block;background:#fff;border-radius:14px;padding:.4rem 1.1rem;margin-bottom:1rem;}
 .logo img{display:block;width:min(440px,78vw);height:auto;}
 .headline{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:700;color:#E9E4F7;letter-spacing:.01em;margin-bottom:.6rem;}
@@ -21,7 +22,7 @@ body{background:#1a2332;min-height:100vh;display:flex;align-items:center;justify
 .tag{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(140,220,230,.8);margin-bottom:2rem;}
 .status{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(176,190,197,.5);}
 .email-wrap{margin-top:2rem;}
-.email-wrap input{background:rgba(255,255,255,.07);border:1px solid rgba(78,46,143,.6);border-radius:6px;padding:.65rem 1rem;font-family:'DM Mono',monospace;font-size:.8rem;color:#ffffff;width:260px;outline:none;}
+.email-wrap input{background:rgba(255,255,255,.07);border:1px solid rgba(78,46,143,.6);border-radius:6px;padding:.65rem 1rem;font-family:'DM Mono',monospace;font-size:.8rem;color:#ffffff;width:min(260px,70vw);outline:none;}
 .email-wrap input::placeholder{color:rgba(176,190,197,.35);}
 .email-wrap input:focus{border-color:#1FA663;}
 .email-wrap button{background:#4E2E8F;color:#ffffff;border:none;padding:.65rem 1.25rem;border-radius:6px;font-family:'DM Mono',monospace;font-size:.75rem;letter-spacing:.08em;cursor:pointer;margin-left:.5rem;transition:background .2s;}
