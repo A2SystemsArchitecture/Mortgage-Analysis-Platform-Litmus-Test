@@ -58,6 +58,8 @@ body{background:var(--slate-bg);color:var(--ink);font-family:var(--fb);font-weig
 .mh h1 .tr{color:var(--emerald-mid);}
 .mh-rule{width:2.75rem;height:2px;background:linear-gradient(90deg,#D69A08,#4E2E8F,#1FA663);margin:.5rem auto;position:relative;}
 .mh-sub{font-family:var(--fm);font-size:.6rem;color:rgba(255,255,255,.86);letter-spacing:.12em;position:relative;}
+.mh-logo-panel{display:inline-block;background:#fff;border-radius:12px;padding:.35rem .9rem;margin-bottom:.9rem;cursor:pointer;position:relative;}
+.mh-logo-panel img{display:block;height:clamp(64px,11vw,96px);width:auto;max-width:100%;}
 .mh-tagline{font-family:var(--fd);font-size:1.1rem;font-weight:400;color:#E9E4F7;letter-spacing:.01em;margin-bottom:.55rem;position:relative;}
 .scope-b{display:inline-block;background:rgba(78,46,143,.28);border:1px solid rgba(105,74,176,.70);color:#E9E4F7;font-family:var(--fm);font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;padding:.2rem .65rem;border-radius:2px;margin-top:.35rem;position:relative;}
 
@@ -899,7 +901,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <div id="sw" class="screen active">
   <div class="mh">
     <div class="mh-tag">Independent Buyer Tool · Florida · Georgia · Texas · North Carolina · South Carolina · Tennessee · Alabama · Virginia · Arizona · Nevada · New Mexico · Maryland · Indiana · Kansas · Kentucky · Louisiana · Maine · Missouri · Mississippi · Ohio · Pennsylvania · Arkansas · West Virginia · Delaware · Idaho · Utah</div>
-    <h1 style="cursor:pointer;" onclick="show('w')" title="↩ Return to Home">Home<span class="tr">True</span></h1>
+    <div class="mh-logo-panel" onclick="show('w')" title="↩ Return to Home"><img src="/brand/hometrue-horizontal-lockup.png" alt="HomeTrue: A clearer path to a brighter home." width="2172" height="724"></div>
     <div class="mh-rule"></div>
     <div class="mh-tagline">The Truth Before the Offer.</div>
     <div class="mh-sub">Honest mortgage analysis. No pressure. No agenda.</div>
