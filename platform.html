@@ -58,11 +58,12 @@ body{background:var(--slate-bg);color:var(--ink);font-family:var(--fb);font-weig
 .mh h1 .tr{color:var(--emerald-mid);}
 .mh-rule{width:2.75rem;height:2px;background:linear-gradient(90deg,#D69A08,#4E2E8F,#1FA663);margin:.5rem auto;position:relative;}
 .mh-sub{font-family:var(--fm);font-size:.6rem;color:rgba(255,255,255,.86);letter-spacing:.12em;position:relative;}
+.mh-tagline{font-family:var(--fd);font-size:1.1rem;font-weight:400;color:#E9E4F7;letter-spacing:.01em;margin-bottom:.55rem;position:relative;}
 .scope-b{display:inline-block;background:rgba(78,46,143,.28);border:1px solid rgba(105,74,176,.70);color:#E9E4F7;font-family:var(--fm);font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;padding:.2rem .65rem;border-radius:2px;margin-top:.35rem;position:relative;}
 
 /* VERIFIED STRIP */
-.vs{background:var(--slate-bg);padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap;font-family:var(--fm);font-size:.72rem;letter-spacing:.07em;color:var(--muted);border-bottom:1px solid var(--rule);}
-.vs span{color:var(--teal);font-weight:500;}
+.vs{background:var(--slate-bg);padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap;font-family:var(--fm);font-size:.95rem;letter-spacing:.07em;color:var(--muted);border-bottom:1px solid var(--rule);}
+.vs span{color:var(--teal);font-weight:400;}
 
 /* GATE LAYOUT */
 .gw{background:var(--slate-bg);min-height:100vh;}
@@ -371,7 +372,7 @@ input:focus,select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 
 .roscoe-dot:nth-child(2){animation-delay:.15s;}
 .roscoe-dot:nth-child(3){animation-delay:.3s;}
 @keyframes roscoe-bounce{0%,80%,100%{transform:translateY(0);}40%{transform:translateY(-5px);}}
-.roscoe-disclaimer{font-family:var(--fm);font-size:.65rem;letter-spacing:.05em;color:rgba(176,190,197,.75);padding:.4rem 1rem;text-align:center;border-top:1px solid rgba(255,255,255,.04);flex-shrink:0;font-weight:600;}
+.roscoe-disclaimer{font-family:var(--fm);font-size:.65rem;letter-spacing:.05em;color:rgba(176,190,197,.75);padding:.4rem 1rem;text-align:center;border-top:1px solid rgba(255,255,255,.04);flex-shrink:0;font-weight:400;}
 .roscoe-input-row{padding:.65rem .85rem;border-top:1px solid rgba(255,255,255,.06);display:flex;gap:.5rem;align-items:flex-end;flex-shrink:0;}
 .roscoe-input{flex:1;background:rgba(255,255,255,.07);border:1px solid rgba(0,151,167,.25);border-radius:8px;padding:.55rem .8rem;font-family:var(--fb);font-size:.82rem;color:var(--white);resize:none;min-height:38px;max-height:90px;line-height:1.45;outline:none;transition:border-color .15s;}
 .roscoe-input:focus{border-color:var(--teal);}
@@ -817,7 +818,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 .tp-opt{border:1.5px solid var(--rule);border-radius:8px;padding:.9rem 1rem;cursor:pointer;transition:all .2s;background:var(--white);}
 .tp-opt:hover{border-color:var(--teal);background:var(--teal-light);transform:translateY(-1px);}
 .tp-opt.cur{border-color:var(--slate);background:var(--slate-surface);opacity:.6;cursor:default;}
-@media(max-width:600px){.nav-btns{gap:.35rem;}.btn-sm{padding:.4rem .7rem;font-size:.68rem;}.vs{gap:.75rem;font-size:.65rem;padding:.6rem 1rem;}}
+@media(max-width:600px){.nav-btns{gap:.35rem;}.btn-sm{padding:.4rem .7rem;font-size:.68rem;}.vs{gap:.75rem;font-size:.8rem;padding:.6rem 1rem;}}
 @media(max-width:460px){.db2{flex-direction:column;}.at{padding:.75rem .8rem;font-size:.56rem;}.ip{grid-template-columns:1fr;}}
 
 /* DISTRICT SELECTOR */
@@ -900,10 +901,11 @@ footer strong{color:rgba(220,232,235,1.0);}
     <div class="mh-tag">Independent Buyer Tool · Florida · Georgia · Texas · North Carolina · South Carolina · Tennessee · Alabama · Virginia · Arizona · Nevada · New Mexico · Maryland · Indiana · Kansas · Kentucky · Louisiana · Maine · Missouri · Mississippi · Ohio · Pennsylvania · Arkansas · West Virginia · Delaware · Idaho · Utah</div>
     <h1 style="cursor:pointer;" onclick="show('w')" title="↩ Return to Home">Home<span class="tr">True</span></h1>
     <div class="mh-rule"></div>
+    <div class="mh-tagline">The Truth Before the Offer.</div>
     <div class="mh-sub">Honest mortgage analysis. No pressure. No agenda.</div>
     <div class="scope-b active-county-name">Select a Market</div>
   </div>
-  <div class="vs" id="avs">Rate verified:&nbsp;<span>October 8, 2026</span>&nbsp;&nbsp;·&nbsp;<span style="color:#1FA663;font-weight:600;">7.40% · 30-year fixed national average</span>·&nbsp;County:&nbsp;<span class="active-county-short">— Select a market —</span>&nbsp;·&nbsp;Tax:&nbsp;<span>—</span>&nbsp;·&nbsp;Source:&nbsp;<span>Freddie Mac PMMS</span></div>
+  <div class="vs" id="avs">Rate verified:&nbsp;<span>October 15, 2026</span>&nbsp;&nbsp;·&nbsp;<span style="color:#1FA663;font-weight:400;">7.40% · 30-year fixed national average</span>·&nbsp;County:&nbsp;<span class="active-county-short">— Select a market —</span>&nbsp;·&nbsp;Tax:&nbsp;<span>—</span>&nbsp;·&nbsp;Source:&nbsp;<span>Freddie Mac PMMS</span></div>
   <div class="county-selector-wrap">
     <div class="county-selector-inner" style="flex-direction:column;align-items:flex-start;gap:.6rem;">
       <div style="display:flex;align-items:flex-start;gap:.75rem;flex-wrap:wrap;">
@@ -1704,7 +1706,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <!-- ANALYSIS -->
 <div id="sa" class="screen">
   <div id="amh"></div>
-  <div class="vs" id="avs">Rate verified:&nbsp;<span>October 8, 2026 · 7.40% · 30-year fixed national average</span>&nbsp;·&nbsp;County:&nbsp;<span class="active-county-short">Miami-Dade</span>&nbsp;·&nbsp;Tax:&nbsp;<span>1.30%</span>&nbsp;·&nbsp;Source:&nbsp;<span>Freddie Mac PMMS</span></div>
+  <div class="vs" id="avs">Rate verified:&nbsp;<span>October 15, 2026 · 7.40% · 30-year fixed national average</span>&nbsp;·&nbsp;County:&nbsp;<span class="active-county-short">Miami-Dade</span>&nbsp;·&nbsp;Tax:&nbsp;<span>1.30%</span>&nbsp;·&nbsp;Source:&nbsp;<span>Freddie Mac PMMS</span></div>
   <!-- TIER RIBBON -->
   <div class="tier-ribbon" id="tier-ribbon" style="display:none;">
     <div class="tier-ribbon-info">Current plan: <span id="ribbon-plan-name">Free</span></div>
@@ -3490,7 +3492,7 @@ const COUNTIES = {
 };
   // Active county — defaults to Miami-Dade
 let ACTIVE_COUNTY = 'miami-dade';
-let MKT = {rv:"October 8, 2026 · 7.40% · Freddie Mac PMMS 30-year fixed national average",ov:"Verified October 1, 2026",fm:7.40,br:7.15,wr:7.79,tr:COUNTIES['miami-dade'].tr,he:50000,fxb:42,fxw:85,fab:150,faw:400};
+let MKT = {rv:"October 15, 2026 · 7.40% · Freddie Mac PMMS 30-year fixed national average",ov:"Verified October 1, 2026",fm:7.40,br:7.15,wr:7.79,tr:COUNTIES['miami-dade'].tr,he:50000,fxb:42,fxw:85,fab:150,faw:400};
 function setCounty(key) {
   ACTIVE_COUNTY = key;
   const c = COUNTIES[key];
