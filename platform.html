@@ -883,13 +883,13 @@ footer strong{color:rgba(220,232,235,1.0);}
   <div style="background:#fff;border-radius:12px;padding:2.5rem;max-width:480px;width:100%;text-align:center;">
     <div style="font-size:2rem;margin-bottom:1rem;">🏡</div>
     <div style="font-family:'Fraunces',serif;font-size:1.6rem;font-weight:900;color:#0F1B3D;margin-bottom:.5rem;line-height:1.15;">You've used both free analyses.</div>
-    <p style="font-size:.85rem;color:#596175;line-height:1.75;margin-bottom:1.5rem;">Full access opens November 1, 2026. Subscribe to HomeTrue Essentials or Complete and run unlimited analyses from launch day.</p>
+    <p style="font-size:.85rem;color:#596175;line-height:1.75;margin-bottom:1.5rem;">Full access will be available after launch. Subscribe to HomeTrue Essentials or Complete and run unlimited analyses from launch day.</p>
     <div style="background:#EEF9F3;border:1px solid #BFE6D2;border-radius:8px;padding:1.1rem;margin-bottom:1.25rem;text-align:left;">
       <div style="font-family:'DM Mono',monospace;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;color:#137A48;margin-bottom:.4rem;">What you unlocked today</div>
       <div style="font-size:.82rem;color:#0F1B3D;line-height:1.65;">✓ Tier 1 Pre-Offer analysis · Best &amp; worst case payment<br>✓ County-level property tax data<br>✓ No broker. No agenda. The honest number.</div>
     </div>
-    <a href="/" style="display:block;background:#0F1B3D;color:#fff;font-family:'Fraunces',serif;font-size:1rem;font-weight:700;padding:.85rem 2rem;border-radius:6px;text-decoration:none;margin-bottom:.75rem;">Return to Waitlist · Full Access November 1</a>
-    <p style="font-size:.65rem;color:#7B8190;font-style:italic;">Essentials $19/mo · Complete $29/mo · Launch November 1, 2026</p>
+    <a href="/" style="display:block;background:#0F1B3D;color:#fff;font-family:'Fraunces',serif;font-size:1rem;font-weight:700;padding:.85rem 2rem;border-radius:6px;text-decoration:none;margin-bottom:.75rem;">Return to Waitlist</a>
+    <p style="font-size:.65rem;color:#7B8190;font-style:italic;">Essentials $19/mo · Complete $29/mo · Launch details coming soon</p>
   </div>
 </div>
 
@@ -1857,7 +1857,7 @@ const COUNTIES = {
     paUrl:'https://www.bcpao.us/exemptions',
     paName:'Brevard County Property Appraiser',
     notes:'Brevard County (Melbourne, Palm Bay, Cocoa Beach) has an effective tax rate of 0.95% — below the national median.',
-    state:'fl',
+    state:'fl', closingModel:'fl',
     districts:[
       {id:'bre-uninc',label:'Unincorporated / Merritt Island',tr:0.0095},
       {id:'bre-melbourne',label:'Melbourne',tr:0.0108},
@@ -6931,7 +6931,7 @@ function showDemoUpgradePrompt(feature) {
       </div>
 
       <a href="/" style="display:block;background:#0F1B3D;color:#fff;font-family:'Fraunces',serif;font-size:.95rem;font-weight:700;padding:.8rem 1.5rem;border-radius:6px;text-decoration:none;margin-bottom:.6rem;">
-        Return to Waitlist · Full Access November 1
+        Return to Waitlist
       </a>
       <p style="font-size:.65rem;color:#7B8190;font-style:italic;">No credit card required to join waitlist. Subscribe at launch.</p>
     </div>`;

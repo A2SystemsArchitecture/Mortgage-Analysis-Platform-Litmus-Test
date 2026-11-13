@@ -1,4 +1,7 @@
 {
+  "redirects": [
+    { "source": "/", "destination": "/platform.html", "permanent": false }
+  ],
   "functions": {
     "api/roscoe.js": {
       "memory": 1024,
