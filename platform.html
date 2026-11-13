@@ -1611,7 +1611,7 @@ footer strong{color:rgba(220,232,235,1.0);}
           <div class="ff"><label>Credit Score Range</label><select id="fcr" onchange="chkRateDisc()"><option value="excellent">760+ Excellent</option><option value="very-good">720–759 Very Good</option><option value="good">680–719 Good</option><option value="fair">640–679 Fair</option></select></div>
           <div class="ff"><label>Primary Residence?</label><select id="fpr"><option value="yes">Yes — Primary long-term</option><option value="no">No — Investment</option></select></div>
           <div class="ff ffu" id="rate-opt-wrap">
-            <label>Interest Rate — Optional (leave blank to use current HomeTrue planning range of 6.93–7.57%)</label>
+            <label>Interest Rate — Optional (leave blank to use current HomeTrue planning range of 6.86–7.50%)</label>
             <input type="number" id="f-rate-opt" placeholder="e.g. 6.50" step="0.01" min="2" max="15" oninput="chkRateDisc()">
             <div class="fn">If you have a quoted rate from a lender, enter it here. It will override the market range for both best and worst case scenarios.</div>
             <div id="rate-disc-warn" style="display:none; margin-top:.6rem;">
@@ -4103,10 +4103,10 @@ function showDT(t,btn){
 // ── CREDIT SCORE RATE RANGES ──
 const RATE_RANGES = {
   // HomeTrue planning ranges calibrated to the current Freddie Mac PMMS benchmark; not lender quotes.
-  'excellent':  { min: 6.82, max: 7.07, label: '760+ Excellent' },
-  'very-good':  { min: 7.07, max: 7.32, label: '720–759 Very Good' },
-  'good':       { min: 7.32, max: 7.695,label: '680–719 Good' },
-  'fair':       { min: 7.695,max: 8.07, label: '640–679 Fair' },
+  'excellent':  { min: 6.75, max: 7.00, label: '760+ Excellent' },
+  'very-good':  { min: 7.00, max: 7.25, label: '720–759 Very Good' },
+  'good':       { min: 7.25, max: 7.625,label: '680–719 Good' },
+  'fair':       { min: 7.625,max: 8.00, label: '640–679 Fair' },
 };
 
 // ══════════════════════════
