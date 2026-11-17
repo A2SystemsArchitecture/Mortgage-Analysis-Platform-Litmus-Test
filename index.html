@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HomeTrue | Launching November 1</title>
-<meta name="description" content="The Truth Before the Offer. Honest mortgage analysis. No pressure. No agenda. Launching November 1.">
+<title>HomeTrue | Launch Information</title>
+<meta name="description" content="The Truth Before the Offer. Honest mortgage analysis. No pressure. No agenda. Launch date to be confirmed.">
 <meta name="theme-color" content="#1a2332">
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -37,22 +37,14 @@ html,body{overflow-x:hidden;}
   <div class="headline">The Truth Before the Offer.</div>
   <div class="rule"></div>
   <div class="tag">Honest mortgage analysis. No pressure. No agenda.</div>
-  <div class="status">Launching November 1</div>
+  <div class="status">Launch date to be confirmed</div>
   <div class="email-wrap">
-    <input type="email" id="email" placeholder="your@email.com">
-    <button onclick="notify()">Notify Me</button>
-    <div class="legal">No spam. Launch notification only.</div>
-    <div class="confirm" id="confirm">✓ You're on the list.</div>
+    <input type="email" id="email" placeholder="Email signup not yet available" disabled aria-label="Email signup not yet available">
+    <button disabled aria-disabled="true">Coming Soon</button>
+    <div class="legal">Email notifications are not accepting signups yet.</div>
+    
   </div>
 </div>
-<script>
-function notify(){
-  var e=document.getElementById('email');
-  if(e.value&&e.value.includes('@')){
-    document.getElementById('confirm').style.display='block';
-    e.value='';
-  }
-}
-</script>
+
 </body>
 </html>
