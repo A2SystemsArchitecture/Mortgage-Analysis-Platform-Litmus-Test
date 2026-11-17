@@ -19,17 +19,21 @@ header{padding:2.1rem 1.2rem 1.4rem;text-align:center}
 h1,h2{font-family:'Fraunces',Georgia,serif;line-height:1.3}
 h1{font-size:clamp(1.75rem,4vw,2.35rem);margin:1.3rem 0 .2rem}
 .subtitle{font-family:'DM Mono',monospace;font-size:.67rem;letter-spacing:.13em;text-transform:uppercase;color:#91d9c0}
-main{width:min(760px,calc(100% - 2.5rem));margin:1.4rem auto 3rem}
-section{padding:1.45rem 0 1.3rem;border-top:1px solid rgba(233,228,247,.16)}
-h2{font-size:1.35rem;margin:0 0 .75rem}
-p{font-size:1rem;margin:.7rem 0;color:rgba(233,228,247,.91)}
-ul{padding-left:1.3rem;color:rgba(233,228,247,.91)}
-li{margin:.35rem 0}
-.emph{font-weight:700;color:#91d9c0}
-.tagline{text-align:center;font-family:'Fraunces',Georgia,serif;font-size:1.25rem;color:#e9e4f7}
-footer{text-align:center;font-family:'DM Mono',monospace;font-size:.68rem;padding:1rem 1rem 2rem}
-a{color:#91d9c0;text-underline-offset:3px}
-@media(max-width:520px){main{width:calc(100% - 2rem)}section{padding:1.2rem 0}p{font-size:.96rem}}
+main{width:min(920px,calc(100% - 2.5rem));margin:1.4rem auto 3rem}
+.intro{text-align:center;max-width:720px;margin:0 auto 2rem;color:rgba(233,228,247,.87)}
+.intro p{font-size:1rem;line-height:1.7}
+.info-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-bottom:1.3rem}
+.info-card{border:1px solid rgba(233,228,247,.17);border-radius:10px;padding:1.25rem 1.4rem;background:rgba(255,255,255,.035)}
+.info-card h2{font-family:'Fraunces',Georgia,serif;font-size:1.27rem;line-height:1.3;margin:0 0 .75rem;color:#e9e4f7}
+.info-card p{font-size:.92rem;line-height:1.65;margin:.48rem 0}
+.info-card ul{padding-left:1.25rem;margin:.6rem 0;color:rgba(233,228,247,.91)}
+.info-card li{font-size:.92rem;line-height:1.6;margin:.35rem 0}
+.info-card .emph{font-weight:700;color:#91d9c0}
+.info-card.wide{grid-column:1/-1}
+.pill{font-family:'DM Mono',monospace;color:#91d9c0;font-size:.61rem;letter-spacing:.09em;text-transform:uppercase;margin-bottom:.45rem}
+.note{font-size:.81rem;color:rgba(233,228,247,.73);margin:.85rem 0 0;line-height:1.6}
+.tagline{text-align:center;font-family:'Fraunces',Georgia,serif;font-size:1.25rem;color:#e9e4f7;margin:2rem 0 .5rem}
+@media(max-width:650px){main{width:calc(100% - 2rem)}.info-grid{grid-template-columns:1fr}.info-card.wide{grid-column:auto}.info-card{padding:1.1rem}.intro p{font-size:.94rem}}
 </style>
 </head>
 <body>
@@ -39,36 +43,67 @@ a{color:#91d9c0;text-underline-offset:3px}
   <div class="subtitle">The Truth Before the Offer</div>
 </header>
 <main>
-  <section>
-    <h2>Why HomeTrue Exists</h2>
-    <p>HomeTrue began with a personal experience. Watching family members navigate the homebuying process highlighted how difficult it can be to understand the potential costs before making an offer.</p>
-    <p>The purchase price is only part of the picture. Property taxes, homeowners insurance, mortgage insurance, homeowners association fees, and possible flood coverage can materially affect the monthly cost of owning a home.</p>
-    <p>HomeTrue was created to help buyers explore a more complete picture of those potential costs before making important decisions.</p>
-  </section>
-  <section>
-    <h2>Our Philosophy</h2>
-    <p>HomeTrue is built on the principles of education and servant leadership. We believe people deserve clear information and the freedom to decide for themselves.</p>
-    <p>We do not tell people what to buy, where to live, or which professionals to hire. Our role is to explain financial scenarios and help people understand the numbers.</p>
-    <p class="emph">We measure our success by whether people understand their situation better, not by whether they purchase a home.</p>
-  </section>
-  <section>
-    <h2>Our Independence, Privacy, and Advertising</h2>
-    <p>HomeTrue's analysis is designed to serve the person using it, not parties involved in a potential real estate transaction.</p>
-    <p>Our policy is not to sell customers' personal information, home-search details, financial inputs, or purchase plans to lenders, real estate agents, advertisers, or lead buyers. We do not sell mortgage leads or accept commissions for referring users to lenders or real estate professionals.</p>
-    <p>General consumer-brand advertising, such as advertising for everyday products, may be considered in the future. This is different from selling a customer's information or steering their home purchase. Any such advertising must be clearly distinguishable from HomeTrue's educational analysis and must not influence its calculations or recommendations.</p>
-    <p>We intend to keep advertisers separate from the homebuying information users provide. Service providers needed to operate HomeTrue, such as payment processors, may process information to provide those services. Our privacy disclosures will explain the relevant practices.</p>
-  </section>
-  <section>
-    <h2>What HomeTrue Does</h2>
-    <p>HomeTrue provides educational estimates of potential monthly homeownership costs using available information and stated assumptions. These may include principal and interest, property taxes, homeowners insurance, mortgage insurance, homeowners association fees, and flood insurance.</p>
-    <p>Financial scenarios help users understand how changes in assumptions, such as interest rates or down payments, may affect estimated costs. Some inputs or expenses may be unavailable, incomplete, or subject to change.</p>
-  </section>
-  <section>
-    <h2>What HomeTrue Does Not Do</h2>
-    <p>HomeTrue is an educational information platform, not a mortgage lender, mortgage broker, real estate brokerage, financial adviser, law firm, tax adviser, or insurance provider.</p>
-    <p>We do not originate loans, accept loan applications, approve financing, lock interest rates, or provide binding loan or insurance quotes. We do not direct users toward a particular property, lender, or real estate agent.</p>
-    <p>HomeTrue's estimates are not guarantees of affordability, eligibility, accuracy, or future expenses. Actual terms and costs may differ. Users should verify important information with appropriate licensed professionals before making financial decisions.</p>
-  </section>
+  <div class="intro">
+    <p>HomeTrue helps prospective buyers understand the potential monthly costs of owning a home before making an offer. Our approach is educational, independent, and centered on the person making the decision.</p>
+  </div>
+  <div class="info-grid">
+    <section class="info-card">
+      <div class="pill">Our beginning</div>
+      <h2>Why We Exist</h2>
+      <p>HomeTrue grew from watching family members navigate the homebuying process and realizing how difficult it can be to see the full range of potential costs early on.</p>
+      <p>Our purpose is to help buyers explore a clearer financial picture before committing.</p>
+    </section>
+    <section class="info-card">
+      <div class="pill">Our values</div>
+      <h2>Education &amp; Servant Leadership</h2>
+      <ul>
+        <li>Explain the numbers without directing the decision.</li>
+        <li>Respect each buyer's choice of home and professionals.</li>
+        <li>Put understanding ahead of whether a purchase happens.</li>
+      </ul>
+      <p class="emph">Success means greater understanding, not a completed home purchase.</p>
+    </section>
+    <section class="info-card wide">
+      <div class="pill">Our commitments</div>
+      <h2>Independence, Privacy &amp; Advertising</h2>
+      <div class="info-grid" style="margin:0">
+        <div>
+          <p class="emph">We do not sell mortgage leads or accept lender or real estate referral commissions.</p>
+          <p>Our policy is not to sell customers' personal information, home-search details, financial inputs, or purchase plans to outside parties.</p>
+        </div>
+        <div>
+          <p><strong>General consumer advertising may appear in the future.</strong> Advertising must remain separate from HomeTrue's educational analysis and must not influence its calculations.</p>
+          <p>Service providers, including payment processors, may handle information needed to operate the platform. Our privacy disclosures explain these practices.</p>
+        </div>
+      </div>
+    </section>
+    <section class="info-card">
+      <div class="pill">Our service</div>
+      <h2>What HomeTrue Does</h2>
+      <p>Provides educational estimates and scenarios for potential monthly homeownership costs, which may include:</p>
+      <ul>
+        <li>Mortgage principal and interest</li>
+        <li>Property taxes and homeowners insurance</li>
+        <li>Mortgage insurance, HOA fees, and flood coverage</li>
+      </ul>
+      <p class="note">Results depend on available data, user inputs, and assumptions. Some costs may be missing or change.</p>
+    </section>
+    <section class="info-card">
+      <div class="pill">Our boundaries</div>
+      <h2>What HomeTrue Does Not Do</h2>
+      <ul>
+        <li>Make homebuying decisions or recommend specific properties or providers.</li>
+        <li>Originate loans, accept applications, approve financing, or lock rates.</li>
+        <li>Provide binding mortgage or insurance quotes, or legal, tax, or financial advice.</li>
+      </ul>
+      <p class="note">HomeTrue is not a mortgage lender, broker, real estate brokerage, financial adviser, law firm, tax adviser, or insurer.</p>
+    </section>
+    <section class="info-card wide">
+      <div class="pill">Important information</div>
+      <h2>Estimates, Not Guarantees</h2>
+      <p>HomeTrue's financial estimates are not guarantees of affordability, loan eligibility, accuracy, or future expenses. Actual rates, terms, and costs may differ. Verify important figures with appropriate licensed professionals before making financial decisions.</p>
+    </section>
+  </div>
   <p class="tagline">HomeTrue. The Truth Before the Offer.</p>
 </main>
 <footer><a href="/">Return to HomeTrue</a></footer>
