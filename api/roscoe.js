@@ -1,4 +1,10 @@
 export default async function handler(req, res) {
+  // Fail closed until authenticated Complete entitlement and server-side
+  // usage/rate/budget controls are deployed. Do not use a client-side flag.
+  // This prevents unauthenticated requests from incurring API costs.
+  res.setHeader('Cache-Control', 'no-store');
+  return res.status(503).json({ error: 'Roscoe is temporarily unavailable while access protection is completed.' });
+
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
