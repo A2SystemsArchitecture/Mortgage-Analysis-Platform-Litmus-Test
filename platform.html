@@ -3515,7 +3515,7 @@ function setCounty(key) {
   if(sb) sb.textContent = c.name + ' · ' + stateLabel;
   // Update verified strip
   const vs = document.getElementById('avs');
-  if(vs) vs.innerHTML = `Rate verified:&nbsp;<span>${MKT.rv}</span>&nbsp;·&nbsp;State:&nbsp;<span>${stateLabel}</span>&nbsp;·&nbsp;County:&nbsp;<span>${c.short}</span>&nbsp;·&nbsp;Tax:&nbsp;<span>${(c.tr*100).toFixed(2)}%</span>&nbsp;·&nbsp;Source:&nbsp;<span>Freddie Mac PMMS</span>`;
+  if(vs) vs.innerHTML = `National mortgage-rate benchmark:&nbsp;<span>${MKT.rv}</span>&nbsp;·&nbsp;State:&nbsp;<span>${stateLabel}</span>&nbsp;·&nbsp;County:&nbsp;<span>${c.short}</span>&nbsp;·&nbsp;Planning tax estimate:&nbsp;<span>${(c.tr*100).toFixed(2)}%</span>&nbsp;·&nbsp;Local tax data:&nbsp;<span>verification in progress</span>`;
 }
 
 // ── DEMO MODE — WAITLIST EARLY ACCESS ──
