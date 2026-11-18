@@ -5704,16 +5704,40 @@ function buildHomesteadGuide(inp) {
   const c = COUNTIES[ACTIVE_COUNTY] || {};
   const model = c.closingModel || (c.state === 'fl' ? 'fl' : 'unverified');
 
-  let deadlineHtml = '';
-  if (closingDate) {
-    const cd = new Date(closingDate);
-    const deadlineYear = cd.getFullYear() + 1;
-    const deadlineLabel = model === 'fl' ? `March 1, ${deadlineYear}` : model === 'texas' ? `April 30, ${deadlineYear}` : model === 'ga' ? `April 1, ${deadlineYear}` : model === 'sc' ? `January 15, ${deadlineYear}` : model === 'tn' ? `April 5, ${deadlineYear}` : model === 'al' ? `October 1, ${deadlineYear}` : model === 'va' ? `June 30, ${deadlineYear}` : model === 'arizona' ? `March 1, ${deadlineYear}` : model === 'nevada' ? `File after closing` : model === 'maryland' ? `Apply after purchase; qualifying credit is not immediate` : `June 1, ${deadlineYear}`;
-    deadlineHtml = `<div class="hg-deadline"><span class="hg-dl-lbl">Your Filing Deadline</span><div class="hg-dl-date">${deadlineLabel}</div><div class="hg-dl-sub">Based on your expected closing. File as soon as possible after closing — do not wait until the deadline.</div></div>`;
-  } else {
-    const deadlineLabel = model === 'fl' ? 'March 1 of the year after closing' : model === 'texas' ? 'April 30 of the tax year' : model === 'ga' ? 'April 1 of the tax year' : model === 'sc' ? 'January 15 of the following year' : model === 'tn' ? 'April 5 of the tax year' : model === 'al' ? 'October 1 of the year of purchase' : model === 'va' ? 'June 30 — contact your locality' : model === 'arizona' ? 'March 1 of the tax year' : model === 'nevada' ? 'File with County Recorder after closing' : model === 'maryland' ? 'Apply for Homestead Tax Credit through Maryland OneStop after purchase; future benefits depend on qualification' : 'June 1 of the tax year';
-    deadlineHtml = `<div class="hg-deadline"><span class="hg-dl-lbl">Filing Deadline</span><div class="hg-dl-date">${deadlineLabel}</div><div class="hg-dl-sub">Enter your expected closing date below for your specific deadline.</div><div style="margin-top:.75rem;"><label style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--emerald-dim);display:block;margin-bottom:.3rem;">Expected Closing Date</label><input type="date" id="hg-closing-date" style="padding:.5rem .75rem;border:1.5px solid var(--emerald-muted);border-radius:6px;font-family:var(--fb);font-size:.9rem;color:var(--midnight);background:var(--white);" onchange="refreshHomesteadGuide()"></div></div>`;
-  }
+  // State-specific schedules are not determined by a generic "closing year + 1".
+  // When there is no uniform filing deadline, ask the customer to confirm the
+  // current date with the official assessor instead of inventing a date.
+  const applicationGuidance = {
+    fl:'March 1 of the eligible tax year; must qualify as of January 1',
+    ga:'April 1 of the eligible tax year; primary residence as of January 1',
+    texas:'April 30 of the tax year; ask appraisal district about late filing',
+    nc:'June 1 of the tax year for qualified relief programs',
+    sc:'Confirm legal-residence application and elderly/disability relief deadlines with your county assessor/auditor',
+    tn:'Check the current Tax Relief filing deadline with the county trustee',
+    al:'October 1 is the assessment/eligibility date, not an automatic statewide application deadline; check county',
+    va:'Local programs and deadlines vary by city/county',
+    arizona:'Check primary-residence designation requirements with the county assessor',
+    nevada:'Homestead Declaration is optional creditor protection; file with the county recorder after closing',
+    maryland:'Submit one-time Homestead Tax Credit eligibility application through Maryland OneStop after purchase',
+    louisiana:'Apply for the homestead exemption with the parish assessor; check current parish deadline',
+    arkansas:'Apply for homestead tax credit through county assessor; verify the relevant tax-year deadline',
+    mississippi:'Generally file January 1 through April 1 with the county tax assessor',
+    westvirginia:'Check the July 1 through December 1 application window with your county assessor',
+    delaware:'County and eligibility rules vary; confirm filing deadline with county property office',
+    idaho:'For tax year 2026, apply by the last business day of the tax year with county assessor',
+    kentucky:'Apply with your county Property Valuation Administrator; age/disability eligibility required',
+    utah:'From January 1, 2027, ownership changes require Form TC-473A; confirm county deadline',
+    newmexico:'Apply for any Head of Family Exemption with the county assessor; confirm exact tax-year deadline',
+    maine:'April 1 of the eligible tax year after meeting the 12-month ownership requirement',
+    indiana:'2027-payable homestead deduction filing deadline: January 15, 2027; verify later years',
+    ohio:'Check current-year homestead filing date with county auditor; age/disability criteria apply',
+    missouri:'No universal homeowner property-tax exemption; check specific local relief programs',
+    pennsylvania:'Homestead exclusions and deadlines vary by school district and county',
+    kansas:'Homestead Refund uses state income-tax filing rules; check current filing season'
+  };
+  const deadlineLabel = applicationGuidance[model] || 'Confirm requirements with the responsible county office';
+  const safeLabel = 'Application or Eligibility Guidance';
+  let deadlineHtml = `<div class="hg-deadline"><span class="hg-dl-lbl">${safeLabel}</span><div class="hg-dl-date">${deadlineLabel}</div><div class="hg-dl-sub">Government deadlines and eligibility can change. Confirm with the official state or local office before filing.</div>${!closingDate?'<div style="margin-top:.75rem;"><label style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--emerald-dim);display:block;margin-bottom:.3rem;">Expected Closing Date</label><input type="date" id="hg-closing-date" style="padding:.5rem .75rem;border:1.5px solid var(--emerald-muted);border-radius:6px;font-family:var(--fb);font-size:.9rem;color:var(--midnight);background:var(--white);" onchange="refreshHomesteadGuide()"></div>':''}</div>`;
 
   const annualSavings = inp.ty1 * 12 - inp.ty2 * 12;
 
