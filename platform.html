@@ -1750,7 +1750,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 </div>
 
 <script>
-// ── COUNTY DATA — all verified May 2026 ──
+// ── COUNTY DATA — historical estimates; 2026 tax/district/exemption verification pending ──
 const COUNTIES = {
   'miami-dade': {
     name:'Miami-Dade County', short:'Miami-Dade',
@@ -4784,6 +4784,8 @@ function calcAffordability() {
   const dpPct = parseFloat(document.getElementById('aff-dp').value) || 3;
   const rate = RATE_RANGES[cr] ? (RATE_RANGES[cr].min + RATE_RANGES[cr].max) / 2 : MKT.fm;
 
+  // Illustrative DTI scenarios, not mortgage qualification or underwriting approval.
+  // Estimated rates and exclusions require parcel-specific verification.
   // Max monthly housing payment at 36% and 43% DTI
   const maxMoLow = il * 0.36 - db;
   const maxMoHigh = ih * 0.43 - db;
@@ -4831,6 +4833,8 @@ function calcAffordability() {
     </div>
   `).join('');
 
+  // The affordability output uses the selected county/district effective rate as an illustration.
+  // The calculation is not a parcel tax bill, and homestead benefits are excluded until verified.
   // Savings assessment
   const needed3 = priceMid * 0.03 + priceMid * 0.035 + moHigh * 3;
   const savingsWrap = document.getElementById('aff-savings-wrap');
@@ -7250,11 +7254,11 @@ ${analysisContext}
 HOMETRUE PLATFORM:
 - HomeTrue is an educational mortgage analysis tool — not a broker, not a realtor, not a lender
 - It produces best-case and worst-case monthly payment analysis before buyers commit to anything
-- Tier 1 Pre-Offer: 85–90% accuracy. Insurance excluded.
-- Tier 2 Active Offer: 92–95% accuracy. Insurance included (confirmed quote or estimated with acknowledgment).
-- Tier 3 Under Contract: 95–98% accuracy. All inputs confirmed.
+- Tier 1 Pre-Offer: Preliminary educational estimate; homeowners insurance excluded.
+- Tier 2 Active Offer: More inputs may be available; verify taxes, insurance and fees.
+- Tier 3 Under Contract: User inputs may be confirmed, but no numerical accuracy percentage is established.
 - The platform covers all supported HomeTrue states and counties shown in the market selector
-- Rate data is sourced from Freddie Mac PMMS, verified every Friday by 7:00 AM ET
+- Freddie Mac PMMS is a benchmark, not a lender quote. Confirm the most recent publication date before describing it as current.
 - The tool is built to serve buyers — not brokers, not realtors, not lenders
 
 Keep responses conversational and appropriately concise — detailed when the question needs depth, brief when a simple answer serves better. Always be Roscoe: warm, honest, and completely on the buyer's side.
