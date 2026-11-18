@@ -5618,7 +5618,9 @@ function buildClosingCosts(inp) {
       Math.min(Math.max(mdRoundedDeed-750000,0),250000)*0.02156 +
       Math.max(mdRoundedDeed-1000000,0)*0.0227;
     const mdRecordRate = mdPrinceGeorges ? 0.0055 : 0.007;
-    const stateRecordation = Math.round((mdMontgomery ? mdMontgomeryRecordation : mdRoundedDeed*mdRecordRate)/2);
+    const mdPrincipalResidenceDeduction = mdMontgomery && inp.pri ? Math.min(mdRoundedDeed,100000)*0.0089 : 0; // Montgomery official: first $100k excluded with principal residence affidavit
+    const mdRecordationPayable = mdMontgomery ? Math.max(0,mdMontgomeryRecordation-mdPrincipalResidenceDeduction) : mdRoundedDeed*mdRecordRate;
+    const stateRecordation = Math.round(mdRecordationPayable/2);
     // Prince George's imposes an additional local transfer levy on security instruments.
     const mdLoanLocalTransfer = mdPrinceGeorges ? Math.round(loan * mdLocalRate / 2) : 0;
     const recordingFee = 120;
@@ -5632,7 +5634,7 @@ function buildClosingCosts(inp) {
     govSection = `<div class="cc-section"><div class="cc-section-title">Government Transfer Taxes &amp; Recording</div>
       <div class="cc-row"><div class="cc-item">State Transfer Tax — Assumed Buyer Half<span class="cc-note">0.5% statewide total, assumed equal split; qualifying first-time buyer seller-funded</span></div><div class="cc-val">${fmt(stateTransferTax)}</div></div>
       <div class="cc-row"><div class="cc-item">County Transfer Tax — Assumed Buyer Half<span class="cc-note">County rate ${(mdLocalRate*100).toFixed(2)}% total, assumed equal split; confirm qualifying relief and agreement</span></div><div class="cc-val">${fmt(countyTransferTax)}</div></div>
-      <div class="cc-row"><div class="cc-item">County Recordation Tax — Assumed Buyer Half<span class="cc-note">County-specific tax on the deed; assumed equal split; purchase-money mortgage may qualify for exemption</span></div><div class="cc-val">${fmt(stateRecordation)}</div></div>
+      <div class="cc-row"><div class="cc-item">County Recordation Tax — Assumed Buyer Half<span class="cc-note">County-specific tax on deed; Montgomery qualifying principal residences get first $100,000 of deed consideration exempt with affidavit. Estimated equal split; deed of trust may receive purchase-money exemption</span></div><div class="cc-val">${fmt(stateRecordation)}</div></div>
       ${mdPrinceGeorges ? `<div class="cc-row"><div class="cc-item">Prince George's Local Transfer Tax on Mortgage<span class="cc-note">1.4% local rate, assumed buyer half; special county rule</span></div><div class="cc-val">${fmt(mdLoanLocalTransfer)}</div></div>` : ''}
       <div class="cc-row"><div class="cc-item">Recording Fees<span class="cc-note">Circuit Court recording</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
       <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
