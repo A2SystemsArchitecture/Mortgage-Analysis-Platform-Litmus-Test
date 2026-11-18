@@ -5134,8 +5134,8 @@ function buildClosingCosts(inp) {
       <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Attorney Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
     reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. SC property taxes due January 15. Your assessed value is 4% of market value for owner-occupied primary residences.`;
   } else if (model === 'tn') {
-    const transferTaxBuyer = Math.round(p * 0.0037);
-    const mortgageRecordTax = Math.round(Math.max(0,loan-2000)*0.00115); // TN $0.115/$100 above the first $2000
+    const transferTaxBuyer = Math.round(p * 0.0037 * 100)/100; // TN $0.37 per $100, retain cents
+    const mortgageRecordTax = Math.round(Math.max(0,loan-2000)*0.00115*100)/100; // TN $0.115 per $100 above $2,000, retain cents // TN $0.115/$100 above the first $2000
     const recordingFee = 110;
     const titleSearch = 275;
     const titleInsLender = Math.round(loan * 0.00375);
@@ -5467,7 +5467,7 @@ function buildClosingCosts(inp) {
     reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. New Mexico property taxes due in two installments — first half November 10 of the bill year, second half April 10 of the following year. Your lender will collect monthly escrow. No statewide real estate transfer tax; verify local recording and other closing charges. File Head of Family Exemption ($2,000 off assessed value) with your county assessor immediately after closing.`;
 
   } else if (model === 'maine') {
-    const transferTax = Math.round((Math.ceil(p/500)*2.20 + (p>1000000 ? Math.ceil((p-1000000)/500)*3.80 : 0))/2);
+    const transferTax = Math.round(((Math.ceil(p/500)*2.20 + (p>1000000 ? Math.ceil((p-1000000)/500)*3.80 : 0))/2)*100)/100; // Exact buyer half rounded to cents
     const recordingFee = 50;
     const titleSearch = 300;
     const titleInsLender = Math.round(loan * 0.00375);
