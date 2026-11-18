@@ -845,6 +845,11 @@ footer strong{color:rgba(220,232,235,1.0);}
 .fz-btn.sel-ve .fz-code{color:var(--error);}
 .fz-btn.sel-unk .fz-code{color:var(--muted);}
 .fz-desc{font-size:.68rem;color:var(--muted);line-height:1.3;}
+
+/* 2027 planning caveat: persists until every applicable estimate is confirmed */
+.tax-planning-note{display:flex;align-items:flex-start;justify-content:center;gap:.75rem;flex-wrap:wrap;margin:0;padding:.65rem 1.25rem;background:#FFF5DE;border-bottom:1px solid #DEB96B;color:#4A381B;text-align:center;font-size:.76rem;line-height:1.45}
+.tax-planning-note strong{white-space:nowrap;font-weight:700}
+.tax-planning-note span{max-width:860px}
 </style>
 <script>
   if ('serviceWorker' in navigator) {
@@ -902,6 +907,7 @@ footer strong{color:rgba(220,232,235,1.0);}
     <div class="scope-b active-county-name">Select a Market</div>
   </div>
   <div class="vs" id="avs">Rate verified:&nbsp;<span>November 12, 2026</span>&nbsp;&nbsp;·&nbsp;<span style="color:#1FA663;font-weight:400;">7.11% · 30-year fixed national average</span>·&nbsp;County:&nbsp;<span class="active-county-short">— Select a market —</span>&nbsp;·&nbsp;Tax:&nbsp;<span>—</span>&nbsp;·&nbsp;Source:&nbsp;<span>Freddie Mac PMMS</span></div>
+  <div class="tax-planning-note" role="note"><strong>2027 Property Tax Planning Estimate</strong><span>HomeTrue uses enacted 2027 rules where applicable and the latest published local tax rates. Some 2027 rates or exemption eligibility remain unconfirmed. The actual tax bill depends on the property's assessed value, taxing district, eligibility and closing date.</span></div>
   <div class="county-selector-wrap">
     <div class="county-selector-inner" style="flex-direction:column;align-items:flex-start;gap:.6rem;">
       <div style="display:flex;align-items:flex-start;gap:.75rem;flex-wrap:wrap;">
