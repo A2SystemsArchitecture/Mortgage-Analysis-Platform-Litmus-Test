@@ -2635,7 +2635,7 @@ const COUNTIES = {
     paName:"Maryland SDAT",
     notes:"Prince George's County (College Park · Bowie · Hyattsville · Laurel · Greenbelt) effective tax rate ~1.14% — highest of Maryland markets. Directly borders DC to the east and northeast. State and county transfer taxes and recordation taxes apply at closing. Maryland Homestead Tax Credit caps assessment increases for primary residences.",
     state:'md', closingModel:'maryland',
-    heNote:"Maryland Homestead Tax Credit: caps annual taxable assessment increases at 10% (or Prince George's County cap) for primary residences. Apply with SDAT at sdat.dat.maryland.gov after first full year of ownership."
+    heNote:"Maryland Homestead Tax Credit: caps annual taxable assessment increases at 10% (or Prince George's County cap) for primary residences. Apply through Maryland OneStop after purchase; approval and applicable assessment-year requirements still govern."
   ,
     districts:[
       {id:'pg-bowie',label:'Bowie (uninc)',tr:0.0114},
@@ -2652,7 +2652,7 @@ const COUNTIES = {
     paName:'Maryland SDAT',
     notes:'Anne Arundel County (Annapolis · Glen Burnie · Severna Park · Crofton · Pasadena) effective tax rate ~0.83%. Directly borders Baltimore City and County. Strong Naval Academy and government/defense sector buyer market. Maryland Homestead Tax Credit limits annual assessment increases for primary residences. State and county transfer taxes + recordation tax apply at closing.',
     state:'md', closingModel:'maryland',
-    heNote:'Maryland Homestead Tax Credit: caps annual taxable assessment increases at 10% (or Anne Arundel County cap) for primary residences. Apply with SDAT at sdat.dat.maryland.gov after first full year of ownership.',
+    heNote:'Maryland Homestead Tax Credit: caps annual taxable assessment increases at 10% (or Anne Arundel County cap) for primary residences. Apply through Maryland OneStop after purchase; approval and applicable assessment-year requirements still govern.',
     districts:[
       {id:'aa-uninc',label:'Unincorporated Anne Arundel',tr:0.0109},
       {id:'aa-annapolis',label:'City of Annapolis',tr:0.0143},
@@ -5246,7 +5246,7 @@ function buildClosingCosts(inp) {
       <div class="cc-row"><div class="cc-item">Lender's Title Insurance<span class="cc-note">Required by lender</span></div><div class="cc-val">${fmt(titleInsLender)}</div></div>
       <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
       <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Escrow Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
-    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Nevada property taxes paid semi-annually — due August 15 and January 15. The qualifying primary-residence TAX-BILL increase is generally capped at 3% under Nevada's tax-abatement rules; assessed values are not limited by that number.`;
+    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Nevada property taxes are payable in four installments: third Monday in August, first Monday in October, first Monday in January, first Monday in March. The qualifying primary-residence TAX-BILL increase is generally capped at 3% under Nevada's tax-abatement rules; assessed values are not limited by that number.`;
   } else if (model === 'louisiana') {
     // Louisiana civil law notarial system
     // NO state transfer tax (constitutional prohibition post-2011)
@@ -5706,10 +5706,10 @@ function buildHomesteadGuide(inp) {
   if (closingDate) {
     const cd = new Date(closingDate);
     const deadlineYear = cd.getFullYear() + 1;
-    const deadlineLabel = model === 'fl' ? `March 1, ${deadlineYear}` : model === 'texas' ? `April 30, ${deadlineYear}` : model === 'ga' ? `April 1, ${deadlineYear}` : model === 'sc' ? `January 15, ${deadlineYear}` : model === 'tn' ? `April 5, ${deadlineYear}` : model === 'al' ? `October 1, ${deadlineYear}` : model === 'va' ? `June 30, ${deadlineYear}` : model === 'arizona' ? `March 1, ${deadlineYear}` : model === 'nevada' ? `File after closing` : model === 'maryland' ? `After first full year of ownership` : `June 1, ${deadlineYear}`;
+    const deadlineLabel = model === 'fl' ? `March 1, ${deadlineYear}` : model === 'texas' ? `April 30, ${deadlineYear}` : model === 'ga' ? `April 1, ${deadlineYear}` : model === 'sc' ? `January 15, ${deadlineYear}` : model === 'tn' ? `April 5, ${deadlineYear}` : model === 'al' ? `October 1, ${deadlineYear}` : model === 'va' ? `June 30, ${deadlineYear}` : model === 'arizona' ? `March 1, ${deadlineYear}` : model === 'nevada' ? `File after closing` : model === 'maryland' ? `Apply after purchase; qualifying credit is not immediate` : `June 1, ${deadlineYear}`;
     deadlineHtml = `<div class="hg-deadline"><span class="hg-dl-lbl">Your Filing Deadline</span><div class="hg-dl-date">${deadlineLabel}</div><div class="hg-dl-sub">Based on your expected closing. File as soon as possible after closing — do not wait until the deadline.</div></div>`;
   } else {
-    const deadlineLabel = model === 'fl' ? 'March 1 of the year after closing' : model === 'texas' ? 'April 30 of the tax year' : model === 'ga' ? 'April 1 of the tax year' : model === 'sc' ? 'January 15 of the following year' : model === 'tn' ? 'April 5 of the tax year' : model === 'al' ? 'October 1 of the year of purchase' : model === 'va' ? 'June 30 — contact your locality' : model === 'arizona' ? 'March 1 of the tax year' : model === 'nevada' ? 'File with County Recorder after closing' : model === 'maryland' ? 'Apply with SDAT after first full year of ownership' : 'June 1 of the tax year';
+    const deadlineLabel = model === 'fl' ? 'March 1 of the year after closing' : model === 'texas' ? 'April 30 of the tax year' : model === 'ga' ? 'April 1 of the tax year' : model === 'sc' ? 'January 15 of the following year' : model === 'tn' ? 'April 5 of the tax year' : model === 'al' ? 'October 1 of the year of purchase' : model === 'va' ? 'June 30 — contact your locality' : model === 'arizona' ? 'March 1 of the tax year' : model === 'nevada' ? 'File with County Recorder after closing' : model === 'maryland' ? 'Apply for Homestead Tax Credit through Maryland OneStop after purchase; future benefits depend on qualification' : 'June 1 of the tax year';
     deadlineHtml = `<div class="hg-deadline"><span class="hg-dl-lbl">Filing Deadline</span><div class="hg-dl-date">${deadlineLabel}</div><div class="hg-dl-sub">Enter your expected closing date below for your specific deadline.</div><div style="margin-top:.75rem;"><label style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--emerald-dim);display:block;margin-bottom:.3rem;">Expected Closing Date</label><input type="date" id="hg-closing-date" style="padding:.5rem .75rem;border:1.5px solid var(--emerald-muted);border-radius:6px;font-family:var(--fb);font-size:.9rem;color:var(--midnight);background:var(--white);" onchange="refreshHomesteadGuide()"></div></div>`;
   }
 
@@ -6123,7 +6123,7 @@ function buildHomesteadGuide(inp) {
       <div class="ar"></div>
       <div class="nt nt-em" style="margin-bottom:1.5rem;">
         <span class="nl nl-em">${c.name} — Tennessee</span>
-        <p>Tennessee has <strong>no universal homestead exemption</strong>. The state Tax Relief program is income-limited (65+, disabled, or qualifying veteran with income subject to the published 2026 income limit of $38,470 for qualifying elderly/disabled homeowners) and provides up to $134/year against your bill. What every TN buyer gets automatically: property assessed at <strong>25% of appraised value</strong> — on a $400,000 home, your taxable base is $100,000.</p>
+        <p>Tennessee has <strong>no universal homestead exemption</strong>. The state Tax Relief program reimburses qualifying homeowners for eligible property-tax expenses. For 2026, the income limit for qualifying elderly or disabled homeowners is $38,470; disabled-veteran eligibility follows different rules. Reimbursement varies by actual property and local taxes. What every TN buyer gets automatically: property assessed at <strong>25% of appraised value</strong> — on a $400,000 home, your taxable base is $100,000.</p>
       </div>
       ${deadlineHtml}
       <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">25% assessment ratio — applies automatically, no filing needed</div><div class="hg-desc">Your tax bill = (appraised value × 25%) × local millage rate. No separate application required for this structural protection.</div></div></div>
@@ -6197,14 +6197,14 @@ function buildHomesteadGuide(inp) {
       <div class="ar"></div>
       <div class="nt nt-em" style="margin-bottom:1.5rem;">
         <span class="nl nl-em">${c.name} — Nevada</span>
-        <p>Nevada has <strong>no universal homestead property tax exemption</strong> for standard homeowners. The Nevada Homestead Declaration (NRS 115) protects up to $605,000 of home equity from general creditor claims — but does not reduce your property tax bill. The primary tax protection is Nevada's <strong>3% annual assessment increase cap</strong> for primary residences.</p>
+        <p>Nevada has <strong>no universal homestead property tax exemption</strong> for standard homeowners. The Nevada Homestead Declaration (NRS 115) protects up to $605,000 of home equity from general creditor claims — but does not reduce your property tax bill. The primary tax protection is Nevada's <strong>3% annual increase limit on qualifying property-tax bills</strong>, rather than a limit on assessed property value.</p>
         ${c.heNote ? `<p style="margin-top:.5rem;">${c.heNote}</p>` : ''}
       </div>
       ${deadlineHtml}
       <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">File a Homestead Declaration with the County Recorder</div><div class="hg-desc">File a Declaration of Homestead with your County Recorder immediately after closing to protect up to $605,000 of equity from general creditor claims. This is straightforward and inexpensive — typically a notarized form.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open County Assessor Portal</a></div></div>
-      <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">3% annual assessment cap — applies automatically to primary residences</div><div class="hg-desc">Nevada caps annual increases in your assessed value at 3% (or the CPI rate, if lower) for owner-occupied primary residences. In Las Vegas and Reno where appreciation has been significant, this cap provides meaningful long-term protection.</div></div></div>
+      <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">3% annual property-tax bill increase limit for qualifying primary residences</div><div class="hg-desc">Nevada generally limits annual property-tax bill increases to 3% for qualifying owner-occupied single-family residences. The cap does not prevent assessed values from changing by more than 3%. In Las Vegas and Reno where appreciation has been significant, this cap provides meaningful long-term protection.</div></div></div>
       <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">Veteran and disability exemptions</div><div class="hg-desc">Qualified veterans and disabled persons may qualify for a property tax exemption. Contact your County Assessor for current exemption amounts and income/disability requirements.</div></div></div>
-      <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Property taxes paid semi-annually — August 15 and January 15</div><div class="hg-desc">First installment due August 15. Second installment due January 15. Verify your escrow reflects the correct combined county + school district rate.</div></div></div>
+      <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Property taxes payable in up to four installments</div><div class="hg-desc">Property taxes may be paid in four installments: third Monday in August, first Monday in October, first Monday in January and first Monday in March. Check the county bill and its exact payment dates. Verify your escrow reflects the correct combined county + school district rate.</div></div></div>
       <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
     </div>`;
   }
@@ -6216,7 +6216,7 @@ function buildHomesteadGuide(inp) {
       <div class="ar"></div>
       <div class="nt nt-em" style="margin-bottom:1.5rem;">
         <span class="nl nl-em">${c.name} — Maryland</span>
-        <p>Maryland's <strong>Homestead Tax Credit</strong> caps annual increases in your taxable assessment at 10% (or lower county cap) for primary residences. This is not an exemption from the base tax — it's a credit that limits how fast your bill can grow year-over-year. You must apply with SDAT after your first full year of ownership. It provides significant long-term protection in fast-appreciating markets like Montgomery County.</p>
+        <p>Maryland's <strong>Homestead Tax Credit</strong> caps annual increases in your taxable assessment at 10% (or lower county cap) for primary residences. This is not an exemption from the base tax — it's a credit that limits how fast your bill can grow year-over-year. You can submit the one-time Homestead Tax Credit eligibility application through Maryland OneStop after buying your home. The credit itself depends on meeting state occupancy and assessment-increase rules. It provides significant long-term protection in fast-appreciating markets like Montgomery County.</p>
         ${c.heNote ? `<p style="margin-top:.5rem;">${c.heNote}</p>` : ''}
       </div>
       ${deadlineHtml}
