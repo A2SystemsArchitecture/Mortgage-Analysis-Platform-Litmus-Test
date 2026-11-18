@@ -5134,17 +5134,19 @@ function buildClosingCosts(inp) {
     reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. SC property taxes due January 15. Your assessed value is 4% of market value for owner-occupied primary residences.`;
   } else if (model === 'tn') {
     const transferTaxBuyer = Math.round(p * 0.0037);
+    const mortgageRecordTax = Math.round(Math.max(0,loan-2000)*0.00115); // TN $0.115/$100 above the first $2000
     const recordingFee = 110;
     const titleSearch = 275;
     const titleInsLender = Math.round(loan * 0.00375);
     const titleInsOwner = Math.round(p * 0.00300);
     const settlementFee = 600;
-    govTotal = transferTaxBuyer + recordingFee;
+    govTotal = transferTaxBuyer + mortgageRecordTax + recordingFee;
     titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
-    stateNote = `<span class="nl" style="color:var(--tn-dim);">${countyName} — Tennessee</span><p>Tennessee has <strong>no state income tax</strong>. Property assessed at <strong>25% of appraised value</strong>. The $0.37 per $100 realty transfer tax is legally payable by the buyer (unless the contract allocates costs differently). <strong>No universal homestead exemption</strong> — income-limited relief for seniors/disabled (subject to the published 2026 income limit of $38,470 for qualifying elderly/disabled homeowners). Confirm all figures against your official Closing Disclosure.</p>`;
+    stateNote = `<span class="nl" style="color:var(--tn-dim);">${countyName} — Tennessee</span><p>Tennessee has <strong>no state income tax</strong>. Property assessed at <strong>25% of appraised value</strong>. The $0.37 per $100 realty transfer tax is legally payable by the buyer (unless the contract allocates costs differently). Tennessee also charges a mortgage recordation tax of $0.115 per $100 on loan principal above the first $2,000, subject to any applicable exemption. <strong>No universal homestead exemption</strong> — income-limited relief for seniors/disabled (subject to the published 2026 income limit of $38,470 for qualifying elderly/disabled homeowners). Confirm all figures against your official Closing Disclosure.</p>`;
     govSection = `<div class="cc-section"><div class="cc-section-title">Government Taxes &amp; Recording Fees</div>
       <div class="cc-row"><div class="cc-item">Realty Transfer Tax — Buyer's Share<span class="cc-note">$0.37 per $100 of sale consideration; buyer liability shown, subject to contract</span></div><div class="cc-val">${fmt(transferTaxBuyer)}</div></div>
       
+      <div class="cc-row"><div class="cc-item">Mortgage Recordation Tax<span class="cc-note">$0.115 per $100 of principal above first $2,000; exemptions may apply</span></div><div class="cc-val">${fmt(mortgageRecordTax)}</div></div>
       <div class="cc-row"><div class="cc-item">Recording Fees<span class="cc-note">County Register of Deeds</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
       <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
     titleSection = `<div class="cc-section"><div class="cc-section-title">Title &amp; Settlement Fees</div>
