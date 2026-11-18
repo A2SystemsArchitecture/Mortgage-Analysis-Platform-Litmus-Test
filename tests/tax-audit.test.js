@@ -9,7 +9,8 @@ const source = fs.readFileSync(path.join(__dirname, '..', 'platform.html'), 'utf
 const start = source.indexOf('const COUNTIES = {');
 const end = source.indexOf('\n};', start);
 assert.ok(start >= 0 && end > start, 'COUNTIES object must exist');
-const counties = vm.runInNewContext(source.slice(start, end + 2).replace(/^const COUNTIES = /, ''), {}, { timeout: 5000 });
+const literal = source.slice(start, end + 2).replace(/^const COUNTIES = /, '').replace(/;\s*$/, '');
+const counties = vm.runInNewContext('(' + literal + ')', {}, { timeout: 5000 });
 const rows = Object.entries(counties);
 const stateCodes = new Set(['al','ar','az','de','fl','ga','id','in','ks','ky','la','md','me','mo','ms','nc','nm','nv','oh','pa','sc','tn','tx','ut','va','wv']);
 
