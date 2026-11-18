@@ -10,3 +10,11 @@ const body="\nlet ACTIVE_COUNTY='miami-dade';\nlet MKT={tr:COUNTIES[ACTIVE_COUNT
 const r=new Function(source+'\n'+body)();
 assert.equal(r.markets,124);assert.equal(r.states,26);assert.equal(r.checked,372);
 console.log('PASS: '+r.checked+' arithmetic tests across '+r.states+' states and '+r.markets+' markets.');
+const counties=new Function(html.slice(a,b)+'\nreturn COUNTIES;')();
+const wvRate=(classOneCents)=>classOneCents*2/100*.60/100; // West Virginia Class II = 2x Class I; taxable assessment 60%
+// State classification: https://tax.wv.gov/Business/PropertyTax/Pages/PropertyTaxClassifications.aspx
+// State levy scaling: https://tax.wv.gov/Business/PropertyTax/Pages/PropertyTaxRates.aspx
+assert(Math.abs(counties['cabell-wv'].tr-wvRate(68.40))<1e-10,'Cabell WV Class II rate must not use Class I levy');
+assert(Math.abs(counties['kanawha-wv'].tr-wvRate(62.99))<1e-10,'Kanawha WV Class II rate must not use Class I levy');
+console.log('PASS: West Virginia Class II residential levy conversion for Cabell and Kanawha.');
+
