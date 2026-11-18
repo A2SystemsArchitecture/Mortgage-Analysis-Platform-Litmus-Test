@@ -5000,19 +5000,19 @@ function buildClosingCosts(inp) {
 
   if (model === 'fl') {
     // Florida closing cost model
-    const deedStamp = Math.round(p * 0.007);
-    const mortgageStamp = Math.round(loan * 0.0035);
+    const deedStamp = Math.round(Math.ceil(p/100) * (ACTIVE_COUNTY === 'miami-dade' ? 0.60 : 0.70) * 100)/100; // Miami-Dade assumes a single-family home; special surtax depends on property type
+    const mortgageStamp = Math.round(Math.ceil(loan/100)*0.35*100)/100;
     const intangibleTax = Math.round(loan * 0.002);
     const recordingFee = 185;
     const titleSearch = 250;
     const titleInsLender = Math.round(loan * 0.00575);
     const titleInsOwner = Math.round(p * 0.00575);
     const settlementFee = 595;
-    govTotal = deedStamp + mortgageStamp + intangibleTax + recordingFee;
+    govTotal = mortgageStamp + intangibleTax + recordingFee; // Deed stamp shown separately: normally seller-funded, but legally negotiable
     titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
     stateNote = `<span class="nl nl-tl">${countyName} — Florida</span><p>Florida has some of the highest closing costs in the nation due to documentary stamp taxes and intangible taxes on mortgages. Figures calculated for a ${fmt(p)} purchase. ${tier < 3 ? 'Figures are estimates — confirm all amounts with your title company and lender before closing.' : 'Confirm all figures against your official Closing Disclosure.'}</p>`;
     govSection = `<div class="cc-section"><div class="cc-section-title">Government Taxes &amp; Recording Fees</div>
-      <div class="cc-row"><div class="cc-item">Documentary Stamp Tax — Deed<span class="cc-note">$0.70 per $100 of purchase price — paid by seller in most FL transactions, verify in contract</span></div><div class="cc-val">${fmt(deedStamp)}</div></div>
+      <div class="cc-row"><div class="cc-item">Documentary Stamp Tax — Deed (Seller's Assumed Share)<span class="cc-note">${ACTIVE_COUNTY === 'miami-dade' ? '$0.60 per $100 in Miami-Dade for single-family residence; other transfers may add surtax' : '$0.70 per $100 of consideration'}; normally funded by seller; excluded from buyer subtotal, but all nonexempt parties remain legally liable</span></div><div class="cc-val">${fmt(deedStamp)}</div></div>
       <div class="cc-row"><div class="cc-item">Documentary Stamp Tax — Mortgage<span class="cc-note">$0.35 per $100 of loan amount — paid by buyer</span></div><div class="cc-val">${fmt(mortgageStamp)}</div></div>
       <div class="cc-row"><div class="cc-item">Intangible Tax on Mortgage<span class="cc-note">$0.20 per $100 of loan amount — Florida specific</span></div><div class="cc-val">${fmt(intangibleTax)}</div></div>
       <div class="cc-row"><div class="cc-item">Recording Fees<span class="cc-note">Clerk of Courts — deed and mortgage recording</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
