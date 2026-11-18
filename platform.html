@@ -5369,7 +5369,7 @@ function buildClosingCosts(inp) {
     const settlementFee = 550;
     govTotal = transferTax + recordingFee;
     titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
-    stateNote = `<span class="nl" style="color:#1a5276;">${countyName} — Delaware</span><p>Delaware has a <strong>4% real estate transfer tax</strong> — split equally 2% buyer / 2% seller by statute, though the split is negotiable in your contract. Delaware property is assessed at <strong>100% of market value</strong> following the completed county-wide reassessment. Property taxes are due <strong>September 30</strong> annually. Delaware has no universal homestead exemption for standard buyers — the exemption is restricted to homeowners age 65+ with very limited income. Confirm all figures against your official Closing Disclosure.</p>`;
+    stateNote = `<span class="nl" style="color:#1a5276;">${countyName} — Delaware</span><p>Delaware has a <strong>4% real estate transfer tax</strong> — split equally 2% buyer / 2% seller by statute, though the split is negotiable in your contract. Delaware property is assessed at <strong>100% of market value</strong> following the completed county-wide reassessment. Property tax payment dates differ by county and tax year. For New Castle County's 2026-2027 bills, special legislation permits a December 31, 2026 payment deadline; confirm the official current bill. Delaware has no universal homestead exemption for standard buyers — the exemption is restricted to homeowners age 65+ with very limited income. Confirm all figures against your official Closing Disclosure.</p>`;
     govSection = `<div class="cc-section"><div class="cc-section-title">Government &amp; Transfer Tax</div>
       <div class="cc-row"><div class="cc-item">Delaware Transfer Tax — Buyer's Share (2%)<span class="cc-note">4% total — split 2% buyer / 2% seller by statute. Your contract may negotiate a different split.</span></div><div class="cc-val">${fmt(transferTax)}</div></div>
       <div class="cc-row"><div class="cc-item">Recording Fees — County Recorder<span class="cc-note">Deed and mortgage recording at the county recorder's office.</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
@@ -5380,7 +5380,7 @@ function buildClosingCosts(inp) {
       <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended — one-time premium</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
       <div class="cc-row"><div class="cc-item">Settlement / Closing Fee</div><div class="cc-val">${fmt(settlementFee)}</div></div>
       <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Settlement Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
-    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Delaware transfer tax: 4% total — your 2% buyer share is ${fmt(transferTax)} on this purchase price. Taxes due September 30 annually. Property assessed at 100% of market value post-reassessment. No homestead exemption for standard buyers — budget for full tax rate.`;
+    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Delaware transfer tax: 4% total — your 2% buyer share is ${fmt(transferTax)} on this purchase price. For 2026-2027 New Castle County bills, due December 31, 2026 under special law. Other years and districts require checking the issued bill. Property assessed at 100% of market value post-reassessment. No homestead exemption for standard buyers — budget for full tax rate.`;
 
   } else if (model === 'idaho') {
     const recordingFee = 75;
@@ -5710,7 +5710,7 @@ function buildHomesteadGuide(inp) {
   // current date with the official assessor instead of inventing a date.
   const applicationGuidance = {
     fl:'March 1 of the eligible tax year; must qualify as of January 1',
-    ga:'April 1 of the eligible tax year; primary residence as of January 1',
+    ga:'Generally April 1 for current tax year; later applications may be allowed through the 45-day assessment-notice appeal period. Must qualify as of January 1',
     texas:'April 30 of the tax year; ask appraisal district about late filing',
     nc:'June 1 of the tax year for qualified relief programs',
     sc:'Confirm legal-residence application and elderly/disability relief deadlines with your county assessor/auditor',
@@ -6091,7 +6091,7 @@ function buildHomesteadGuide(inp) {
       <div class="ar"></div>
       <div class="nt nt-em" style="margin-bottom:1.5rem;">
         <span class="nl nl-em">${c.name} — Georgia Homestead Exemption</span>
-        <p>Georgia's standard homestead exemption is a <strong>$2,000 reduction from the assessed value</strong> for state taxes — and most counties add a larger local exemption on top of that. Because Georgia assesses property at <strong>40% of fair market value</strong>, your taxable base is already significantly lower than your purchase price before any exemption is applied. Apply by April 1 with the County Board of Tax Assessors.</p>
+        <p>Georgia's standard homestead exemption is a <strong>$2,000 reduction from the assessed value</strong> for eligible COUNTY and SCHOOL property taxes, with statutory exceptions — and most counties add a larger local exemption on top of that. Because Georgia assesses property at <strong>40% of fair market value</strong>, your taxable base is already significantly lower than your purchase price before any exemption is applied. Apply with the county tax commissioner or assessor, ordinarily by April 1; Georgia also permits filing during the 45-day assessment notice appeal window, subject to state requirements.</p>
         ${c.heNote ? `<p style="margin-top:.5rem;color:var(--georgia-dim);font-weight:500;">⚠ ${c.heNote}</p>` : ''}
       </div>
       ${deadlineHtml}
