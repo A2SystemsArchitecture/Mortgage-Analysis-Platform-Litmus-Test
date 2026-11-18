@@ -5512,18 +5512,18 @@ function buildClosingCosts(inp) {
 
   } else if (model === 'ohio') {
     const recordingFee = 28; // Ohio county recorder per-page fee
-    const conveyanceFee = Math.round(p / 1000); // $1 per $1,000 — paid by SELLER
+    const conveyanceFee = Math.round(p / 1000); // Ohio mandatory state conveyance fee, seller assumed; county surcharge up to $3/$1000 excluded
     const titleSearch = 275;
     const titleInsLender = Math.round(loan * 0.00375);
     const titleInsOwner = Math.round(p * 0.00325);
     const settlementFee = 600;
     govTotal = recordingFee;
     titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
-    stateNote = `<span class="nl" style="color:var(--ohio-dim);">${countyName} — Ohio</span><p>Ohio has <strong>no state real estate transfer tax</strong>. The county conveyance fee of $1 per $1,000 of sale price (${fmt(conveyanceFee)}) is paid by the <strong>seller</strong>. Ohio is a <strong>title company state</strong> — not attorney-closed. Ohio assesses property at <strong>35% of appraised value</strong>. There is <strong>no universal homestead exemption</strong> — the exemption is limited to homeowners 65+ or permanently disabled. Standard buyers should not expect a tax reduction. Confirm all figures against your official Closing Disclosure.</p>`;
+    stateNote = `<span class="nl" style="color:var(--ohio-dim);">${countyName} — Ohio</span><p>Ohio requires a statewide conveyance fee of $1 per $1,000 of transferred value (${fmt(conveyanceFee)}), plus any additional county-authorized fee of up to $3 per $1,000. The seller usually pays these fees under the purchase agreement; HomeTrue excludes them from assumed buyer costs until allocation is confirmed. Ohio is a <strong>title company state</strong> — not attorney-closed. Ohio assesses property at <strong>35% of appraised value</strong>. There is <strong>no universal homestead exemption</strong> — the exemption is limited to homeowners 65+ or permanently disabled. Standard buyers should not expect a tax reduction. Confirm all figures against your official Closing Disclosure.</p>`;
     govSection = `<div class="cc-section"><div class="cc-section-title">Government &amp; Recording Fees</div>
       <div class="cc-row"><div class="cc-item">Recording Fees<span class="cc-note">County Recorder — deed and mortgage recording</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
-      <div class="cc-row"><div class="cc-item">County Conveyance Fee<span class="cc-note">$1 per $1,000 of sale price — paid by seller (${fmt(conveyanceFee)})</span></div><div class="cc-val">Seller</div></div>
-      <div class="cc-row"><div class="cc-item">No State Transfer Tax<span class="cc-note">Ohio has no state real estate transfer tax — $0</span></div><div class="cc-val">$0</div></div>
+      <div class="cc-row"><div class="cc-item">County Conveyance Fee<span class="cc-note">Mandatory $1 per $1,000 statewide plus any county surcharge up to $3 per $1,000; seller assumed (${fmt(conveyanceFee)} statewide portion)</span></div><div class="cc-val">Seller</div></div>
+      <div class="cc-row"><div class="cc-item">No Additional State Deed Stamp Tax<span class="cc-note">Mandatory statewide conveyance fee is listed separately as a seller-assumed expense; $0 additional state deed stamp tax</span></div><div class="cc-val">$0</div></div>
       <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
     titleSection = `<div class="cc-section"><div class="cc-section-title">Title &amp; Settlement Fees</div>
       <div class="cc-row"><div class="cc-item">Title Search &amp; Exam</div><div class="cc-val">${fmt(titleSearch)}</div></div>
