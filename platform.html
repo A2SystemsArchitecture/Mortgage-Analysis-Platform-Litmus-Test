@@ -4657,10 +4657,10 @@ function buildPDF(inp) {
   // Tax note
   doc.setFillColor(232,245,238); doc.roundedRect(M,y,CW,20,2,2,'F');
   doc.setTextColor(27,94,56); doc.setFontSize(7); doc.setFont('helvetica','bold');
-  doc.text('HOMESTEAD EXEMPTION — FILE IMMEDIATELY AFTER CLOSING', M+4, y+7);
+  doc.text('PROPERTY TAX RELIEF - VERIFY ELIGIBILITY', M+4, y+7);
   doc.setFont('helvetica','normal');
-  doc.text(`Saves ${fmt(inp.ty1-inp.ty2)}/month from Year 2 onward. Deadline: March 1 of following tax year.`, M+4, y+13);
-  doc.text('File online at miamidade.gov/pa — approximately 15 minutes.', M+4, y+18);
+  doc.text(`This estimate excludes unverified tax relief; local rules determine savings.`, M+4, y+13);
+  doc.text('Check your local assessor for eligibility and filing deadlines.', M+4, y+18);
 
   addFooter(doc, inp);
 
@@ -4670,7 +4670,7 @@ function buildPDF(inp) {
 
   const worstRows = [
     ['P&I Payment', `${fmtR(inp.wr)} · Without lender comparison`, fmt(inp.wpi), fmt(inp.wpi*12)],
-    ['Property Taxes (Year 1)', 'Reassessed · No exemption', fmt(inp.ty1), fmt(inp.ty1*12)],
+    ['Property Taxes (Year 1)', 'Planning estimate; actual bill varies', fmt(inp.ty1), fmt(inp.ty1*12)],
     ['HOA', 'Confirmed monthly fee', fmt(inp.hoa), fmt(inp.hoa*12)],
     ['Homeowners Insurance', inp.ix?'Excluded — obtain quote':inp.il, inp.ix?'—':fmt(inp.wi), inp.ix?'—':fmt(inp.wi*12)],
     ...(inp.wp>0?[['PMI', 'Without shopping lenders', fmt(inp.wp), fmt(inp.wp*12)]]: []),
