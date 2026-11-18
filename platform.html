@@ -5283,22 +5283,23 @@ function buildClosingCosts(inp) {
 
   } else if (model === 'arkansas') {
     // Arkansas closing model
-    // NO documentary stamp tax, NO intangible tax, NO transfer tax
+    // Real property transfer tax: $3.30 per $1,000 or fraction; default 50/50 buyer/seller
     // Attorney or title company — varies by transaction
     // Taxes paid one year in arrears — due October 15
     const recordingFee = 75;
+    const transferTaxBuyer = p > 100 ? Math.round(Math.ceil(p/1000)*3.30/2) : 0;
     const titleSearch = 275;
     const titleInsLender = Math.round(loan * 0.00375);
     const titleInsOwner = Math.round(p * 0.00325);
     const settlementFee = 550;
-    govTotal = recordingFee;
+    govTotal = recordingFee + transferTaxBuyer;
     titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
-    stateNote = `<span class="nl" style="color:#5a5f55;">${countyName} — Arkansas</span><p>Arkansas has <strong>no documentary stamp tax, no intangible tax, and no real estate transfer tax</strong> — one of the cleanest closing cost structures in the country. Recording fees are modest. Closings are handled by title companies or attorneys depending on the transaction. Property taxes are paid <strong>one year in arrears</strong> and are due October 15 annually. The Arkansas homestead credit ($500/year) applies from Year 1 after a one-time application with the county assessor. Confirm all figures against your official Closing Disclosure.</p>`;
+    stateNote = `<span class="nl" style="color:#5a5f55;">${countyName} — Arkansas</span><p>Arkansas charges a <strong>real property transfer tax of $3.30 per $1,000 or fraction</strong> of the sale price for taxable transfers over $100. Unless the parties agree otherwise, the buyer and seller each pay half. Recording fees are modest. Closings are handled by title companies or attorneys depending on the transaction. Property taxes are paid <strong>one year in arrears</strong> and are due October 15 annually. Qualifying homesteads may receive up to a $675 annual tax credit starting with assessment year 2026 after approval by the county assessor. Confirm all figures against your official Closing Disclosure.</p>`;
     govSection = `<div class="cc-section"><div class="cc-section-title">Government &amp; Recording Fees</div>
-      <div class="cc-row"><div class="cc-item">Recording Fees — County Clerk<span class="cc-note">Deed and mortgage recording. No transfer tax in Arkansas.</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
-      <div class="cc-row"><div class="cc-item">No Documentary Stamp Tax<span class="cc-note">Arkansas does not impose a deed stamp tax — $0</span></div><div class="cc-val">$0</div></div>
+      <div class="cc-row"><div class="cc-item">Recording Fees — County Clerk<span class="cc-note">Deed and mortgage recording; transfer tax is listed separately.</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
+      <div class="cc-row"><div class="cc-item">Real Property Transfer Tax — Buyer's Default Half<span class="cc-note">Half of $3.30 per $1,000 or fraction; parties can negotiate responsibility</span></div><div class="cc-val">${fmt(transferTaxBuyer)}</div></div>
       <div class="cc-row"><div class="cc-item">No Intangible Tax<span class="cc-note">Arkansas does not impose an intangible tax on mortgages — $0</span></div><div class="cc-val">$0</div></div>
-      <div class="cc-row"><div class="cc-item">No Transfer Tax<span class="cc-note">Arkansas has no real estate transfer tax — $0</span></div><div class="cc-val">$0</div></div>
+      
       <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
     titleSection = `<div class="cc-section"><div class="cc-section-title">Title &amp; Settlement Fees</div>
       <div class="cc-row"><div class="cc-item">Title Search &amp; Examination</div><div class="cc-val">${fmt(titleSearch)}</div></div>
@@ -5306,7 +5307,7 @@ function buildClosingCosts(inp) {
       <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended — one-time premium</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
       <div class="cc-row"><div class="cc-item">Settlement / Closing Fee<span class="cc-note">Title company or attorney coordination fee</span></div><div class="cc-val">${fmt(settlementFee)}</div></div>
       <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Settlement Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
-    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Arkansas property taxes are paid one year in arrears — due October 15 annually. Your lender will collect escrow monthly. The Arkansas Homestead Credit ($500/year) reduces your tax bill starting in Year 1 — apply with your county assessor after closing.`;
+    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Arkansas property taxes are paid one year in arrears — due October 15 annually. Your lender will collect escrow monthly. An eligible Arkansas homestead may receive up to $675 per year in approved tax credit; confirm filing, eligibility and the first applicable assessment year with the assessor.`;
 
   } else if (model === 'mississippi') {
     const recordingFee = 75;
