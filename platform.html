@@ -5512,7 +5512,7 @@ function buildClosingCosts(inp) {
 
   } else if (model === 'ohio') {
     const recordingFee = 28; // Ohio county recorder per-page fee
-    const conveyanceFee = Math.round(p / 1000); // Ohio mandatory state conveyance fee, seller assumed; county surcharge up to $3/$1000 excluded
+    const conveyanceFee = Math.round((p/1000)*100)/100; // Ohio statewide fee $1 per $1,000 of value, preserve cents; seller assumed; county surcharge up to $3/$1000 excluded
     const titleSearch = 275;
     const titleInsLender = Math.round(loan * 0.00375);
     const titleInsOwner = Math.round(p * 0.00325);
