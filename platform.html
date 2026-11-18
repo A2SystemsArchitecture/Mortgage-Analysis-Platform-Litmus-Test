@@ -2291,7 +2291,7 @@ const COUNTIES = {
     fxb:25, fxw:45, fab:55, faw:130,
     paUrl:'https://www.shelbycountytn.gov/460/Taxes',
     paName:'Shelby County Trustee',
-    notes:'Shelby County (Memphis) effective tax rate ~0.59%. Tennessee assesses residential at 25% of appraised value. No state income tax. TN realty transfer tax at closing. No universal homestead exemption — income-limited relief available for seniors/disabled (subject to the published 2026 income limit of $38,470 for qualifying elderly/disabled homeowners). Apply at trustee by April 5.',
+    notes:'Shelby County (Memphis) effective tax rate ~0.59%. Tennessee assesses residential at 25% of appraised value. No state income tax. TN realty transfer tax at closing. No universal homestead exemption — income-limited relief available for seniors/disabled (subject to the published 2026 property-tax relief program limit of $38,470 based on 2025 household income for qualifying elderly/disabled homeowners). Apply at trustee by April 5.',
     state:'tn', closingModel:'tn',
     districts:[
       {id:'she-memphis',label:'Memphis City',tr:0.0105},
@@ -2307,7 +2307,7 @@ const COUNTIES = {
     fxb:25, fxw:45, fab:55, faw:130,
     paUrl:'https://padctn.org',
     paName:'Davidson County Property Assessor (PADCTN)',
-    notes:'Davidson County (Nashville) effective tax rate ~0.96%. Tennessee 25% assessment ratio applies. No state income tax. TN realty transfer tax at closing. Income-limited tax relief for seniors/disabled (subject to the published 2026 income limit of $38,470 for qualifying elderly/disabled homeowners). Apply at trustee by April 5.',
+    notes:'Davidson County (Nashville) effective tax rate ~0.96%. Tennessee 25% assessment ratio applies. No state income tax. TN realty transfer tax at closing. Income-limited tax relief for seniors/disabled (subject to the published 2026 property-tax relief program limit of $38,470 based on 2025 household income for qualifying elderly/disabled homeowners). Apply at trustee by April 5.',
     state:'tn', closingModel:'tn',
     districts:[
       {id:'dav-nashville',label:'Nashville Metro (Consolidated)',tr:0.0096},
@@ -5143,7 +5143,7 @@ function buildClosingCosts(inp) {
     const settlementFee = 600;
     govTotal = transferTaxBuyer + mortgageRecordTax + recordingFee;
     titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
-    stateNote = `<span class="nl" style="color:var(--tn-dim);">${countyName} — Tennessee</span><p>Tennessee has <strong>no state income tax</strong>. Property assessed at <strong>25% of appraised value</strong>. The $0.37 per $100 realty transfer tax is legally payable by the buyer (unless the contract allocates costs differently). Tennessee also charges a mortgage recordation tax of $0.115 per $100 on loan principal above the first $2,000, subject to any applicable exemption. <strong>No universal homestead exemption</strong> — income-limited relief for seniors/disabled (subject to the published 2026 income limit of $38,470 for qualifying elderly/disabled homeowners). Confirm all figures against your official Closing Disclosure.</p>`;
+    stateNote = `<span class="nl" style="color:var(--tn-dim);">${countyName} — Tennessee</span><p>Tennessee has <strong>no state income tax</strong>. Property assessed at <strong>25% of appraised value</strong>. The $0.37 per $100 realty transfer tax is legally payable by the buyer (unless the contract allocates costs differently). Tennessee also charges a mortgage recordation tax of $0.115 per $100 on loan principal above the first $2,000, subject to any applicable exemption. <strong>No universal homestead exemption</strong> — income-limited relief for seniors/disabled (subject to the published 2026 property-tax relief program limit of $38,470 based on 2025 household income for qualifying elderly/disabled homeowners). Confirm all figures against your official Closing Disclosure.</p>`;
     govSection = `<div class="cc-section"><div class="cc-section-title">Government Taxes &amp; Recording Fees</div>
       <div class="cc-row"><div class="cc-item">Realty Transfer Tax — Buyer's Share<span class="cc-note">$0.37 per $100 of sale consideration; buyer liability shown, subject to contract</span></div><div class="cc-val">${fmt(transferTaxBuyer)}</div></div>
       
@@ -6150,11 +6150,11 @@ function buildHomesteadGuide(inp) {
       <div class="ar"></div>
       <div class="nt nt-em" style="margin-bottom:1.5rem;">
         <span class="nl nl-em">${c.name} — Tennessee</span>
-        <p>Tennessee has <strong>no universal homestead exemption</strong>. The state Tax Relief program reimburses qualifying homeowners for eligible property-tax expenses. For 2026, the income limit for qualifying elderly or disabled homeowners is $38,470; disabled-veteran eligibility follows different rules. Reimbursement varies by actual property and local taxes. What every TN buyer gets automatically: property assessed at <strong>25% of appraised value</strong> — on a $400,000 home, your taxable base is $100,000.</p>
+        <p>Tennessee has <strong>no universal homestead exemption</strong>. The state Tax Relief program reimburses qualifying homeowners for eligible property-tax expenses. For the 2026 property-tax program, the income limit for qualifying elderly or disabled homeowners is $38,470 based on household income during 2025; disabled-veteran eligibility follows different rules. Reimbursement varies by actual property and local taxes. What every TN buyer gets automatically: property assessed at <strong>25% of appraised value</strong> — on a $400,000 home, your taxable base is $100,000.</p>
       </div>
       ${deadlineHtml}
       <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">25% assessment ratio — applies automatically, no filing needed</div><div class="hg-desc">Your tax bill = (appraised value × 25%) × local millage rate. No separate application required for this structural protection.</div></div></div>
-      <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">Apply for Tax Relief if you qualify — deadline April 5</div><div class="hg-desc">File at your County Trustee's office. Required: proof of age/disability, income documentation, recorded deed. Veterans with 100% service-connected disability have no income limit.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open County Trustee Portal</a></div></div>
+      <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">Apply for Tax Relief after your tax bill arrives; deadline depends on delinquency date</div><div class="hg-desc">For the 2026 property-tax relief program, apply after receiving your tax bill. The filing deadline is 35 days after the bill's delinquency date, and the property tax must also be paid by that deadline. Apply through your county trustee or collecting official with supporting documents. Elderly and disabled applicants must meet the published income limits; disabled veterans follow different rules.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open County Trustee Portal</a></div></div>
       <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">Tax bills mailed October — due last day of February</div><div class="hg-desc">1.5%/month penalty after that. Verify your escrow reflects the correct combined county + city millage rate.</div></div></div>
       <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
     </div>`;
