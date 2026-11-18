@@ -5031,8 +5031,8 @@ function buildClosingCosts(inp) {
     // NO documentary stamp tax, NO intangible tax
     // Seller pays owner's title policy by custom — buyer pays lender's policy
     const recordingFee = 125;
-    const titleSearch = 275;
-    const titleInsLender = Math.round(loan * 0.00375); // Lender's policy at simultaneous issue rate (~$100 flat for TX, simplified here)
+    const titleSearch = 0; // Texas basic title premium includes standard title examination; do not charge again in buyer estimate
+    const titleInsLender = 103; // TDI simultaneous owner+loan policy R-5: $100 lender premium + $3 guaranty fee effective Oct 1, 2026. Endorsements excluded.
     const settlementFee = 550;
     const surveyFee = 500; // Texas requires survey in most transactions
     govTotal = recordingFee;
@@ -5044,8 +5044,8 @@ function buildClosingCosts(inp) {
       <div class="cc-row"><div class="cc-item">No Intangible Tax<span class="cc-note">Texas does not tax the mortgage note — $0</span></div><div class="cc-val">$0</div></div>
       <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
     titleSection = `<div class="cc-section"><div class="cc-section-title">Title &amp; Settlement Fees</div>
-      <div class="cc-row"><div class="cc-item">Title Search &amp; Exam<span class="cc-note">Public records search — may be included in premium for Texas title companies</span></div><div class="cc-val">${fmt(titleSearch)}</div></div>
-      <div class="cc-row"><div class="cc-item">Lender's Title Insurance (Buyer Pays)<span class="cc-note">Promulgated TDI rate — simultaneous issue rate applies when issued with owner's policy at same time</span></div><div class="cc-val">${fmt(titleInsLender)}</div></div>
+      <div class="cc-row"><div class="cc-item">Title Search &amp; Exam<span class="cc-note">Included in the Texas regulated basic title premium; no duplicate buyer charge assumed</span></div><div class="cc-val">${fmt(titleSearch)}</div></div>
+      <div class="cc-row"><div class="cc-item">Lender's Title Insurance (Buyer Pays)<span class="cc-note">Texas TDI R-5: $100 simultaneous policy when a qualifying owner's policy is also issued, plus $3 lender policy guaranty fee from October 1, 2026. Additional lender endorsements may cost extra</span></div><div class="cc-val">${fmt(titleInsLender)}</div></div>
       <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Customarily paid by seller in Texas — not a buyer cost in most transactions. Verify in your contract.</span></div><div class="cc-val">Seller</div></div>
       <div class="cc-row"><div class="cc-item">Survey Fee<span class="cc-note">Required in most Texas transactions — boundary survey of the property</span></div><div class="cc-val">${fmt(surveyFee)}</div></div>
       <div class="cc-row"><div class="cc-item">Settlement / Escrow Fee<span class="cc-note">Split equally between buyer and seller by custom in most Texas counties</span></div><div class="cc-val">${fmt(settlementFee)}</div></div>
