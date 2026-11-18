@@ -3838,10 +3838,12 @@ function genAnalysis(){
 }
 
 function effectiveMarketValueDeduction(c){
-  // County effective rates are stored as a percentage of home value.
-  // Georgia's $2,000 standard deduction is from the 40% ASSESSED value, not the home price.
-  if(c && c.state==='ga')return (c.he||0)/0.40;
-  return c ? (c.he||0) : 0;
+  // A single combined effective rate cannot accurately represent exemptions
+  // limited to individual taxing units or a tax year.
+  // Do not subtract an exemption against all levies without separate levy rates.
+  if(!c) return 0;
+  if(['fl','ga','tx','la','in'].includes(c.state)) return 0;
+  return c.he||0;
 }
 
 function collectInp(){
