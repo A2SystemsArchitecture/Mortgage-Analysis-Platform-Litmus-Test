@@ -40,6 +40,19 @@ The items below are **officially supported rules or jurisdictional components**,
 - Do not assert that any of the 124 county or 319 district rate fields are independently validated yet.
 - Before release, reconcile outputs against current official property-tax calculators or bills for representative properties in each jurisdiction.
 
+## Verified 2026-27 jurisdiction-level rates (added November 17, 2026)
+
+These are **published rates for specific levy scopes**, NOT certified 2027 marketwide effective purchase-price tax rates. Full details and source URLs are recorded in [official jurisdiction evidence](audits/HomeTrue-2026-27-official-jurisdiction-evidence.csv).
+
+- **Durham County, NC:** 2026-27 county-only levy $0.5792 per $100 assessed value; City of Durham county+city $1.0163; Durham portion of Chapel Hill $1.0792; Fire/Rescue District 950 $0.6621. Each rate applies only to the named jurisdiction. [Durham County official rates](https://dconc.gov/Tax-Administration/Payment-Options-and-Collections/Tax-Rates1).
+- **Guilford County, NC:** 2026-27 county-only $0.7895 per $100; applicable city/special levies add to the county rate. [Guilford County official schedule](https://www.guilfordcountync.gov/index.php/government/departments-and-agencies/tax-department/2026-2027-tax-property-rates).
+- **Clark County, NV:** 2026-27 *District 100* levy $2.5017 per $100 **assessed value**, not market value. Nevada uses 35% of *taxable value* to derive assessed value, and additional tax caps may affect the bill. [Clark County Treasurer, district 100](https://treasurer.co.clark.nv.us/TaxRate-District/tcaDetails.aspx?fy=20262027&tca=100+++++++), [Nevada NRS 361.225](https://www.leg.state.nv.us/NRS/NRS-361.html).
+- **Washoe County, NV:** 2026-27 Reno area 1000 combined levy $3.6600 per $100 assessed value; Truckee Meadows FPD area 4000 combined $3.2402. [Washoe County district schedule](https://washoecounty.gov/treas/files/2026-27%20Combined%20Rates%20FINAL.pdf).
+- **Fulton County, GA:** 2026 adopted *county general-fund* operating levy 8.87 mills. Not the combined property rate. [Fulton County announcement](https://www.fultoncountyga.gov/News/2026/10/08/Fulton-County-Keeps-Millage-Rate-Flat-For-5th-Year).
+- **Miami-Dade County, FL:** FY 2026-27 adopted *countywide operating* rate 4.574 mills. Not a composite school+municipal+special levy. [Miami-Dade ordinance](https://www.miamidade.gov/govaction/legistarfiles/Matters/Y2026/261531.pdf).
+
+**Audit implication:** We now possess selected current, official jurisdiction-level levy rates, but none of these proves that HomeTrue's single blended rate for any of its 124 markets is an appropriate 2027 parcel-specific number. Do not overwrite HomeTrue's effective rates with raw millage without first matching the taxable/assessed base, exact district, exemptions, and billing year.
+
 ## Verified source-code inventory
 - 124 records / 26 states / 319 district choices.
 - One effective-rate placeholder per market, sometimes with district selections; not parcel-level official tax bills.
