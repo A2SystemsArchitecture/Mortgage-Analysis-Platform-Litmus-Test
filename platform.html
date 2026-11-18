@@ -5110,7 +5110,7 @@ function buildClosingCosts(inp) {
       <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Attorney Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
     reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Georgia property taxes are due October–December annually. Remember: your assessed value is 40% of fair market value — your tax bill will reflect the assessed value, not the purchase price.`;
   } else if (model === 'sc') {
-    const deedRecordingFee = Math.round(Math.ceil(loan / 500) * 0.185) + 125;
+    const deedRecordingFee = 125; // ordinary recording placeholder, excludes seller's deed-value excise fee
     const titleSearch = 300;
     const titleInsLender = Math.round(loan * 0.00375);
     const titleInsOwner = Math.round(p * 0.00300);
@@ -5119,10 +5119,10 @@ function buildClosingCosts(inp) {
     const transferTax = Math.round(Math.ceil(p / 500) * 1.85);
     govTotal = deedRecordingFee;
     titleTotal = titleSearch + titleInsLender + titleInsOwner + attorneyFee + settlementFee;
-    stateNote = `<span class="nl" style="color:var(--sc-dim);">${countyName} — South Carolina</span><p>South Carolina is an <strong>attorney-closed state</strong>. SC assesses owner-occupied primary residences at <strong>4% of market value</strong>. Deed recording fee of $1.85 per $500 paid by buyer. State transfer tax (${fmt(transferTax)}) customarily paid by seller. SC Homestead Exemption limited to 65+ or disabled homeowners. Confirm all figures against your official Closing Disclosure.</p>`;
+    stateNote = `<span class="nl" style="color:var(--sc-dim);">${countyName} — South Carolina</span><p>South Carolina is an <strong>attorney-closed state</strong>. SC assesses owner-occupied primary residences at <strong>4% of market value</strong>. The deed recording fee is $1.85 per $500 or fraction of the PROPERTY value; generally the seller's legal obligation. It is shown separately and excluded from assumed buyer costs. Routine recording charges are estimates. SC Homestead Exemption limited to 65+ or disabled homeowners. Confirm all figures against your official Closing Disclosure.</p>`;
     govSection = `<div class="cc-section"><div class="cc-section-title">Government &amp; Recording Fees</div>
-      <div class="cc-row"><div class="cc-item">Deed Recording Fee (Buyer Pays)<span class="cc-note">$1.85 per $500 of loan amount</span></div><div class="cc-val">${fmt(deedRecordingFee)}</div></div>
-      <div class="cc-row"><div class="cc-item">State Transfer Tax<span class="cc-note">$1.85 per $500 of purchase price — customarily seller-paid (${fmt(transferTax)})</span></div><div class="cc-val">Seller</div></div>
+      <div class="cc-row"><div class="cc-item">Deed Recording Fee (Buyer Pays)<span class="cc-note">Estimated local document-recording charge; does not include seller's deed recording fee</span></div><div class="cc-val">${fmt(deedRecordingFee)}</div></div>
+      <div class="cc-row"><div class="cc-item">State Transfer Tax<span class="cc-note">$1.85 per $500 or fraction of property value; generally imposed on grantor/seller (${fmt(transferTax)})</span></div><div class="cc-val">Seller</div></div>
       <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
     titleSection = `<div class="cc-section"><div class="cc-section-title">Title, Attorney &amp; Settlement</div>
       <div class="cc-row"><div class="cc-item">Closing Attorney Fee<span class="cc-note">SC is attorney-closed — required buyer cost</span></div><div class="cc-val">${fmt(attorneyFee)}</div></div>
@@ -5471,7 +5471,7 @@ function buildClosingCosts(inp) {
     const attorneyFee = 800;
     govTotal = transferTax + recordingFee;
     titleTotal = titleSearch + titleInsLender + titleInsOwner + attorneyFee;
-    const transferNote = p > 1000000 ? ` (includes additional $3.80/$500 rate on portion over $1M per November 2025 law)` : ` ($2.20 per $500 of purchase price — buyer's share)`;
+    const transferNote = p > 1000000 ? ` (includes buyer's half of additional $3.80/$500 on portion over $1M)` : ` (statewide rate is $2.20 per $500; buyer share calculated as half)`;
     stateNote = `<span class="nl" style="color:#c8a96e;">${countyName} — Maine</span><p>Maine's Real Estate Transfer Tax is split 50/50 between buyer and seller at <strong>$2.20 per $500</strong> of purchase price (total tax; generally half is paid by the buyer). For homes over $1,000,000, an additional $3.80 per $500 applies to the portion above $1M — effective November 1, 2025. <strong>MSHA first-time homebuyer program participants are exempt from transfer tax entirely</strong> — confirm with your lender if you qualify. Maine is an <strong>attorney-closed state</strong>. Property taxes are billed semi-annually — due dates vary by municipality. File for the <strong>Homestead Exemption ($25,000 off assessed value)</strong> with your municipal assessor by April 1 — requires 12 months of ownership. Confirm all figures against your official Closing Disclosure.</p>`;
     govSection = `<div class="cc-section"><div class="cc-section-title">Government &amp; Recording Fees</div>
       <div class="cc-row"><div class="cc-item">Real Estate Transfer Tax — Buyer's Share<span class="cc-note">Buyer's half of $2.20 per $500 of purchase price (plus buyer's half of additional tax above $1 million)${transferNote}</span></div><div class="cc-val">${fmt(transferTax)}</div></div>
@@ -5576,7 +5576,7 @@ function buildClosingCosts(inp) {
     reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Pennsylvania property taxes paid semi-annually — dates vary by municipality. Homestead exclusion (where available) must be filed with the county assessment office.`;
 
   } else if (model === 'kansas') {
-    const mortgageRegTax = Math.round(loan * 0.001); // 0.1% of loan amount
+    const mortgageRegTax = 0; // Kansas mortgage registration tax repealed effective Jan 1, 2019
     const recordingFee = 30;
     const titleSearch = 275;
     const titleInsLender = Math.round(loan * 0.00375);
@@ -5584,9 +5584,9 @@ function buildClosingCosts(inp) {
     const settlementFee = 575;
     govTotal = mortgageRegTax + recordingFee;
     titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
-    stateNote = `<span class="nl" style="color:var(--kansas-dim);">${countyName} — Kansas</span><p>Kansas has <strong>no documentary stamp tax and no real estate transfer tax</strong>. The mortgage registration tax of 0.1% of loan amount (${fmt(mortgageRegTax)}) is modest and paid by the buyer. Kansas is a <strong>title company state</strong> — not attorney-closed. Property assessed at <strong>11.5% of appraised value</strong>. There is <strong>no universal homestead exemption</strong> — income-limited refund program only. Confirm all figures against your official Closing Disclosure.</p>`;
+    stateNote = `<span class="nl" style="color:var(--kansas-dim);">${countyName} — Kansas</span><p>Kansas has <strong>no documentary stamp tax and no real estate transfer tax</strong>. Kansas no longer charges a mortgage registration tax on new mortgages recorded since January 1, 2019. Kansas is a <strong>title company state</strong> — not attorney-closed. Property assessed at <strong>11.5% of appraised value</strong>. There is <strong>no universal homestead exemption</strong> — income-limited refund program only. Confirm all figures against your official Closing Disclosure.</p>`;
     govSection = `<div class="cc-section"><div class="cc-section-title">Government Taxes &amp; Recording</div>
-      <div class="cc-row"><div class="cc-item">Mortgage Registration Tax<span class="cc-note">0.1% of loan amount — Kansas specific, very modest</span></div><div class="cc-val">${fmt(mortgageRegTax)}</div></div>
+      <div class="cc-row"><div class="cc-item">Mortgage Registration Tax<span class="cc-note">Repealed for mortgages recorded on or after January 1, 2019</span></div><div class="cc-val">${fmt(mortgageRegTax)}</div></div>
       <div class="cc-row"><div class="cc-item">Recording Fees<span class="cc-note">County Register of Deeds</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
       <div class="cc-row"><div class="cc-item">No Real Estate Transfer Tax<span class="cc-note">Kansas has no deed transfer tax — $0</span></div><div class="cc-val">$0</div></div>
       <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
