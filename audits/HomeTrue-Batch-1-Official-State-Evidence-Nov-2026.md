@@ -50,3 +50,15 @@ South Carolina:
 - For 2027 FL Amendment 3 implementation, DOR announced future guidance and forms, which must be reviewed when issued.
 - All state guides, local variations and projected amounts still require the comprehensive line-by-line evidence reconciliation under the user-approved 100% standard.
 - No state is approved. Save and continue in existing review branch; do not promote to production. 
+
+## Second verified state-law reconciliation, 2026-11-18
+- GEORGIA: Signed May 11, 2026 SB 33/Act 461 makes the previously optional statewide base-year homestead exemption mandatory; Georgia DOR reports the statewide FLOAT is applicable starting January 1, 2027. The live HomeTrue calculator has no valid per-property base-year value and therefore does not claim a guaranteed reduction. Updated Georgia guide rather than inventing an amount.
+  https://gov.georgia.gov/document/2026-signed-legislation/sb-33/download
+  https://www.legis.ga.gov/legislation/69550
+  https://dor.georgia.gov/document/document-document/caveat-2026-opening-session/download
+- ALABAMA: DOR 7% cap for Class II/Class III taxable assessed-value growth, effective collections October 1, 2025, with exceptions. Not a cap on total tax bills; updated guide to state that.
+  https://www.revenue.alabama.gov/property-tax/7-cap-information-hb73-act-2024-344/
+- FLORIDA: DOR PTO 26-21 says non-homestead assessment-growth cap reduces from 10% to 5% for 2027; updated guide to distinguish this from initial purchased-home assessment.
+  https://floridarevenue.com/property/Documents/PTO_BUL_26-21.pdf
+- Government tax regression on same current code: 13 independently calculated checks passed for 6 fictional scenarios; prior 372 arithmetic smoke and 124 guide renders pass. These remain partial statutory checks, not state approval.
+- 2026-11-18 review code source last checked: platform.html sha fb3f9b4dfe4924e6a44793a75235846349000d19.
