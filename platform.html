@@ -5226,16 +5226,17 @@ function buildClosingCosts(inp) {
     reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Arizona property taxes are paid semi-annually — due October 1 and March 1. Verify your specific county's millage rate. The Limited Property Value system protects you from rapid year-over-year assessment increases.`;
   } else if (model === 'nevada') {
     const recordingFee = 45;
-    const transferTax = Math.round(Math.ceil((p - 100) / 500) * 1.95); // $1.95 per $500 above $100
+    const nvTransferRate = ACTIVE_COUNTY === 'clark' ? 2.55 : ACTIVE_COUNTY === 'washoe' ? 2.05 : 1.95;
+    const transferTax = p > 100 ? Math.ceil(p / 500) * nvTransferRate : 0; // correct county levy on full value above $100 threshold
     const titleSearch = 275;
     const titleInsLender = Math.round(loan * 0.00375);
     const titleInsOwner = Math.round(p * 0.00325);
     const settlementFee = 600; // Escrow company — NV is escrow-closed
     govTotal = recordingFee + transferTax;
     titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
-    stateNote = `<span class="nl" style="color:var(--nevada-dim);">${countyName} — Nevada</span><p>Nevada has <strong>no state income tax</strong>. The state real property transfer tax is only $1.95 per $500 of value above $100 — very modest. Nevada is an <strong>escrow-closed state</strong>. Property assessed at <strong>35% of taxable value</strong> with annual assessment increases capped at 3% for primary residences. No mortgage intangible tax. Confirm all figures against your official Closing Disclosure.</p>`;
+    stateNote = `<span class="nl" style="color:var(--nevada-dim);">${countyName} — Nevada</span><p>Nevada has <strong>no state income tax</strong>. The deed transfer tax for this county is ${fmt(nvTransferRate)} per $500 or fraction of the property's total value when value exceeds $100. It may be allocated between buyer and seller in the purchase agreement; the full amount is shown as a conservative planning estimate. Nevada is an <strong>escrow-closed state</strong>. Property assessed at <strong>35% of taxable value</strong> with annual assessment increases capped at 3% for primary residences. No mortgage intangible tax. Confirm all figures against your official Closing Disclosure.</p>`;
     govSection = `<div class="cc-section"><div class="cc-section-title">Government Taxes &amp; Recording Fees</div>
-      <div class="cc-row"><div class="cc-item">Real Property Transfer Tax<span class="cc-note">$1.95 per $500 of value above $100 — very modest compared to other states</span></div><div class="cc-val">${fmt(transferTax)}</div></div>
+      <div class="cc-row"><div class="cc-item">Real Property Transfer Tax<span class="cc-note">${fmt(nvTransferRate)} per $500 or fraction of full property value, if value exceeds $100; buyer share depends on contract</span></div><div class="cc-val">${fmt(transferTax)}</div></div>
       <div class="cc-row"><div class="cc-item">Recording Fees<span class="cc-note">County Recorder</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
       <div class="cc-row"><div class="cc-item">No Mortgage Intangible Tax<span class="cc-note">Nevada does not impose a mortgage tax — $0</span></div><div class="cc-val">$0</div></div>
       <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
