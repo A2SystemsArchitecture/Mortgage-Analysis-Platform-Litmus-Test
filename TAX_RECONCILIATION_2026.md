@@ -3,6 +3,20 @@
 **Branch:** tax-corrections-audit-nov-2026  
 **Deployment:** No production release authorized.
 
+### Critical future-year update: Florida Amendment 3 approved November 3, 2026
+- **Official Florida Department of Revenue Bulletin PTO 26-21, dated November 5, 2026** confirms Amendment 3 was approved by Florida voters.
+- Effective January 1, 2027, first applies to **2027 tax roll**. No retroactive application to 2026 bills.
+- For qualified eligible homeowners, **non-school assessed-value homestead exemption up to $150,000 in 2027; up to $250,000 in 2028**; later years inflation adjusted. These amounts are not blanket exemptions from school taxes.
+- People who were **not Florida residents as of December 31, 2026** have a different schedule: $25,000 school-assessed-value exemption and up to $50,000 non-school exemption upon qualifying; eligibility for larger exemption begins with fifth year of exemption. Exact application to an individual requires qualification and additional implementing guidance.
+- Non-homestead assessment-increase cap falls from 10% to 5%, with statutory and school-levy nuances to confirm before calculating effects.
+- **2027 launch blocker**: HomeTrue's fixed `he:50000`, single effective `tr`, and unconditional Year 2+ assumptions cannot reflect this change. Need date of residency, year, property status, assessed value, and school/non-school levy allocation; do not simply replace `he` with 150000.
+- [Official Florida DOR 2026-11-05 bulletin](https://floridarevenue.com/property/Documents/PTO_BUL_26-21.pdf); [Florida Senate passed resolution](https://www.flsenate.gov/Session/Bill/2026F/1F/BillText/er/PDF).
+
+### South Carolina additional verified rule
+- South Carolina DOR confirms qualifying legal primary residences receive **4% assessment ratio** and generally an exemption from **school operating taxes** (not necessarily school debt taxes). Applying a single market-value effective rate without assessing property eligibility and school debt versus operations cannot accurately represent a parcel.
+- [South Carolina DOR Property Tax Exemptions](https://www.dor.sc.gov/property/property-tax-exemptions); [South Carolina Property Tax Manual](https://dor.sc.gov/sites/dor/files/Documents/Policy%20Manuals/SCTIED-2025%20Edition-Complete.pdf).
+- Exact 2026 rates for all six SC market records remain **unverified**.
+
 ## Supplemental official-source verification, November 17, 2026
 
 The items below are **officially supported rules or jurisdictional components**, not certification of a countywide effective tax rate or parcel tax bill. They are NOT automatically substituted into public calculations without a complete jurisdiction-aware method.
