@@ -5079,7 +5079,7 @@ function buildClosingCosts(inp) {
       <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended — one-time premium protects your ownership permanently</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
       <div class="cc-row"><div class="cc-item">Settlement / Escrow Fee<span class="cc-note">Administrative closing costs — often bundled with attorney fee</span></div><div class="cc-val">${fmt(settlementFee)}</div></div>
       <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Attorney Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
-    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. NC property tax bills are issued in July and due January 5 — confirm your escrow calculation reflects the correct county and city combined rate.`;
+    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. NC real-property taxes are due September 1 and may be paid without interest through January 5 of the following year — confirm your escrow calculation reflects the correct county and city combined rate.`;
 
   } else if (model === 'ga') {
     // Georgia closing cost model
