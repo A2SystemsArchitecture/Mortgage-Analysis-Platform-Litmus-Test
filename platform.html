@@ -5087,7 +5087,7 @@ function buildClosingCosts(inp) {
     // Intangible recording tax: $1.50 per $500 of loan amount — buyer pays
     // Attorney-closed state — required buyer cost
     const transferTax = Math.round(p * 0.001); // $1 per $1,000 — seller cost, shown for reference
-    const intangibleRecordingTax = Math.round(Math.ceil(loan / 500) * 1.50); // $1.50 per $500
+    const intangibleRecordingTax = Math.min(25000,Math.ceil(loan / 500) * 1.50); // Georgia DOR: $1.50 per $500 or fraction, $25,000 maximum per note // $1.50 per $500
     const recordingFee = 120;
     const titleSearch = 275;
     const titleInsLender = Math.round(loan * 0.00375);
@@ -5158,7 +5158,7 @@ function buildClosingCosts(inp) {
       <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Settlement Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
     reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. TN property taxes billed October, due last day of February. Assessed value is 25% of appraised value.`;
   } else if (model === 'al') {
-    const deedRecordTax = Math.ceil(Math.max(0,p-loan)/500)*0.50; // purchase with simultaneously taxed mortgage; assessed on excess consideration
+    const deedRecordTax = Math.max(0.50,Math.ceil(Math.max(0,p-loan)/500)*0.50); // Alabama recorded deed: minimum $0.50; assumes taxable purchase loan simultaneously recorded // purchase with simultaneously taxed mortgage; assessed on excess consideration
     const mortRecordingTax = Math.ceil(loan/100)*0.15;
     const recordingFee = 110;
     const titleSearch = 275;
