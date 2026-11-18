@@ -3940,7 +3940,7 @@ function bAnalysis(i,isDemo){
     "Shop 4–5 lenders. Get Loan Estimate documents from each. Rate spread can be 0.25–0.50% on the same day.",
     "File Homestead Exemption with your county Property Appraiser or Tax office immediately after closing. Confirm the deadline for your specific county.",
     "Get a wind mitigation inspection ($75–$150) if the property has hurricane shutters or a newer roof.",
-    `Budget Year 1 at ${fmt(Math.round((i.wt+i.bt)/2))}+ (full tax, no exemption). From Year 2 drops ~${fmt(i.ty1-i.ty2)}/month.`,
+    `Budget from the full planning tax estimate (${fmt(i.ty1)}/month); reductions shown are conditional and should be confirmed on the official tax bill.`,
   ].map((x,n)=>`<div class="cki"><span class="ckn">${String(n+1).padStart(2,'0')}.</span><span>${x}</span></div>`).join('');
 
   document.getElementById('amh').innerHTML=`<div class="mh"><div class="mh-tag">HomeTrue Analysis${isDemo?' · DEMO':''}</div><h1 style="font-size:clamp(1.3rem,2.5vw,1.9rem);margin-bottom:.25rem;cursor:pointer;" onclick="show('w')" title="↩ Return to Home">Home<span class="tr">True</span></h1><div style="font-family:var(--fd);font-size:clamp(1rem,2vw,1.4rem);font-weight:600;color:rgba(255,255,255,.9);margin-bottom:.25rem;">${i.address}</div><div class="mh-rule"></div><div class="mh-sub">${tl} · ${i.dpct}% Down · Loan: ${fmt(i.loan)} · ${COUNTIES[ACTIVE_COUNTY]?COUNTIES[ACTIVE_COUNTY].short:'Selected County'}</div><div style="margin-top:.75rem;"><span style="display:inline-flex;align-items:center;padding:.25rem .75rem;border-radius:3px;font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;background:var(--${tc}-light);color:var(--${tc}-dim);border:1px solid var(--${tc}-muted);">${tl}</span></div></div>`;
@@ -3952,7 +3952,7 @@ function bAnalysis(i,isDemo){
   ${i.il==='ESTIMATED'?`<div class="nt nt-wn"><span class="nl nl-wn">Insurance — Unconfirmed Estimate</span><p>Estimates can differ from actual quotes by <strong>$200–$400/month</strong>. Obtain a confirmed quote before committing.</p></div>`:''}
   <div class="nt nt-tl"><span class="nl nl-tl">Tax Methodology — Purchase Price Basis</span><p>Taxes from <strong>${fmt(i.price)} purchase price</strong> — not taxes on record. Year 1: ${fmt(i.ty1)}/mo. Year 2+ planning estimate: <strong>${fmt(i.ty2)}/mo</strong>.</p></div>
   <div class="scs">
-    <div class="sc scb"><span class="scl">Best Case Scenario</span><div class="sct">${fmt(i.bt)}<span style="font-size:1rem;">/mo</span></div><div class="scs2">Year 2+ · Homestead Exemption applied</div><span class="scr">${fmtR(i.br)} · 30-yr Fixed</span></div>
+    <div class="sc scb"><span class="scl">Best Case Scenario</span><div class="sct">${fmt(i.bt)}<span style="font-size:1rem;">/mo</span></div><div class="scs2">Year 2+ · Planning estimate; eligibility not assumed</div><span class="scr">${fmtR(i.br)} · 30-yr Fixed</span></div>
     <div class="sc scw"><span class="scl">Worst Case Scenario</span><div class="sct">${fmt(i.wt)}<span style="font-size:1rem;">/mo</span></div><div class="scs2">Year 1 · Reassessed · All adverse</div><span class="scr">${fmtR(i.wr)} · 30-yr Fixed</span></div>
   </div>
   <div class="db2">
@@ -3975,7 +3975,7 @@ function bAnalysis(i,isDemo){
       <tr class="tr2"><td>TOTAL MONTHLY</td><td class="bv">${fmt(i.bt)}</td><td class="wv">${fmt(i.wt)}</td><td class="dv">+${fmt(sw)}</td></tr>
     </tbody>
   </table>
-  <div class="pb2"><span class="pbl">Recommended Budget Planning Number</span><div class="pbn">${fmt(i.pn)} / month</div><p class="pbd">Midpoint between scenarios. Year 1 runs closer to ${fmt(i.ty1)}/mo taxes. From Year 2, Homestead Exemption saves ${fmt(i.ty1-i.ty2)}/month — file immediately after closing.</p></div>
+  <div class="pb2"><span class="pbl">Recommended Budget Planning Number</span><div class="pbn">${fmt(i.pn)} / month</div><p class="pbd">Midpoint between scenarios. Plan for approximately ${fmt(i.ty1)}/month in property taxes before verified relief. A future exemption may lower property taxes, but HomeTrue does not calculate unverified savings from combined rates.</p></div>
   ${buildRateContext(i)}
   <h3 style="font-family:var(--fd);font-size:1.1rem;margin:1.5rem 0 .75rem;color:var(--midnight);">DTI Analysis · Income Range ${fmt(i.ilo)}–${fmt(i.ihi)}/mo</h3>
   <div class="dt">${dtis.map(d=>`<div class="dr2"><span class="drl">${d[0]}</span><span class="${d[2]}">${d[1]} — ${d[2]==='do'?'Healthy':d[2]==='dw'?'Tight / Qualifiable':'Near Ceiling'}</span></div>`).join('')}</div>
@@ -3985,12 +3985,12 @@ function bAnalysis(i,isDemo){
 <div id="tb2" class="as"><div class="cw">
   <div class="ae em">Section II — Best Case</div><h2 class="at2">Everything Breaks Your Way</h2><div class="ar"></div>
   <div class="sg">
-    <div class="stc e"><span class="sl">Monthly Total</span><div class="sv">${fmt(i.bt)}</div><div class="sn">Year 2+ planning estimate Exemption</div></div>
+    <div class="stc e"><span class="sl">Monthly Total</span><div class="sv">${fmt(i.bt)}</div><div class="sn">Year 2+ planning estimate</div></div>
     <div class="stc e"><span class="sl">Interest Rate</span><div class="sv">${fmtR(i.br)}</div><div class="sn">Achievable with 4–5 lender quotes</div></div>
-    <div class="stc e"><span class="sl">Tax (Yr 2+)</span><div class="sv">${fmt(i.ty2)}</div><div class="sn">After Homestead Exemption</div></div>
+    <div class="stc e"><span class="sl">Tax (Yr 2+)</span><div class="sv">${fmt(i.ty2)}</div><div class="sn">Planning amount before unverified exemptions</div></div>
     <div class="stc e"><span class="sl">Loan Amount</span><div class="sv">${fmt(i.loan)}</div><div class="sn">${i.dpct}% down on ${fmt(i.price)}</div></div>
   </div>
-  <div class="nt nt-em"><span class="nl nl-em">Tax Detail — Best Case (Year 2+)</span><p>${fmt(i.price)} × 1.3% = ${fmt(i.price*.013)}/yr. Homestead Exemption −$50,000 → ${fmt((i.price-50000)*.013)}/yr = <strong>${fmt(i.ty2)}/month</strong>. File with Miami-Dade Property Appraiser immediately. Deadline: March 1 of following tax year. Year 1: <strong>${fmt(i.ty1)}/month</strong>.</p></div>
+  <div class="nt nt-em"><span class="nl nl-em">Tax Detail — Best Case (Year 2+)</span><p>For ${COUNTIES[ACTIVE_COUNTY].name}, the current planning tax rate is <strong>${(MKT.tr*100).toFixed(2)}%</strong> of purchase price. A ${fmt(i.price)} home therefore has an estimated pre-exemption tax of <strong>${fmt(i.ty1)}/month</strong>. The Year 2+ planning amount is <strong>${fmt(i.ty2)}/month</strong>. This is not a verified parcel tax bill; exemptions and credits depend on eligibility and the applicable local taxing units.</p></div>
   <table class="bt">
     <thead><tr><th>Component</th><th>Monthly</th><th>Annual</th><th>Notes</th></tr></thead>
     <tbody>
