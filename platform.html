@@ -3938,7 +3938,7 @@ function bAnalysis(i,isDemo){
     "Request HOA financials and reserve study. Florida post-Surfside legislation requires funded reserves.",
     `Budget total cash: ${fmt(i.damt)} down + ${fmt(i.price*.03)}–${fmt(i.price*.04)} closing + ${fmt(i.wt*3)} reserves = ${fmt(i.damt+i.price*.03+i.wt*3)}+ needed.`,
     "Shop 4–5 lenders. Get Loan Estimate documents from each. Rate spread can be 0.25–0.50% on the same day.",
-    "File Homestead Exemption with your county Property Appraiser or Tax office immediately after closing. Confirm the deadline for your specific county.",
+    "Check primary-residence tax relief with the relevant county or state office; filing and eligibility differ by state.",
     "Get a wind mitigation inspection ($75–$150) if the property has hurricane shutters or a newer roof.",
     `Budget from the full planning tax estimate (${fmt(i.ty1)}/month); reductions shown are conditional and should be confirmed on the official tax bill.`,
   ].map((x,n)=>`<div class="cki"><span class="ckn">${String(n+1).padStart(2,'0')}.</span><span>${x}</span></div>`).join('');
@@ -3948,7 +3948,7 @@ function bAnalysis(i,isDemo){
   document.getElementById('ac').innerHTML=`
 <div id="tc" class="as v"><div class="cw">
   <div class="ae tl">Section I</div><h2 class="at2">Side-by-Side Scenario Comparison</h2><div class="ar"></div>
-  ${i.tier===1?`<div class="nt nt-wn"><span class="nl nl-wn">Tier 1 — Insurance Excluded</span><p>South Florida range: <strong>$230–$500/month</strong>. Up to <strong>$270/month</strong> not in your totals. Get an actual quote before any commitment.</p></div>`:''}
+  ${i.tier===1?`<div class="nt nt-wn"><span class="nl nl-wn">Tier 1 — Insurance Excluded</span><p>Homeowners insurance is excluded from this estimate. Obtain a property-specific insurance quote before making a commitment; costs vary greatly by home and location.</p></div>`:''}
   ${i.il==='ESTIMATED'?`<div class="nt nt-wn"><span class="nl nl-wn">Insurance — Unconfirmed Estimate</span><p>Estimates can differ from actual quotes by <strong>$200–$400/month</strong>. Obtain a confirmed quote before committing.</p></div>`:''}
   <div class="nt nt-tl"><span class="nl nl-tl">Tax Methodology — Purchase Price Basis</span><p>Taxes from <strong>${fmt(i.price)} purchase price</strong> — not taxes on record. Year 1: ${fmt(i.ty1)}/mo. Year 2+ planning estimate: <strong>${fmt(i.ty2)}/mo</strong>.</p></div>
   <div class="scs">
@@ -4007,24 +4007,23 @@ function bAnalysis(i,isDemo){
     <div class="ci"><div class="cit e">How to Achieve ${fmtR(i.br)}</div>
       <div class="cb">Get 4–5 lender quotes — spread can be 0.50%+ on the same day</div>
       <div class="cb">Ask about buying down the rate with points</div>
-      <div class="cb">Your credit score qualifies for best pricing tier</div>
-      <div class="cb">Lock when Freddie Mac weekly average dips (currently ${MKT.fm}%)</div>
-      <div class="cb">Credit unions often beat national banks on rate</div>
+      <div class="cb">Compare your actual credit-based quotes; advertised rates may not be available</div>
+      <div class="cb">Review rate-lock options and fees directly with your lender; weekly averages are not individual offers</div>
+      <div class="cb">Include credit unions and other lenders in your comparisons</div>
     </div>
-    <div class="ci"><div class="cit t">Homestead Exemption Plan</div>
-      <div class="cb">File with your county Property Appraiser or Tax office immediately after closing</div>
-      <div class="cb">Deadline: March 1 of the following tax year</div>
-      <div class="cb">Saves ~$650/year (~$54/month) from Year 2 onward</div>
-      <div class="cb">Activates Save Our Homes — 3% annual assessment cap</div>
-      <div class="cb">File online at miamidade.gov/pa — ~15 minutes</div>
+    <div class="ci"><div class="cit t">Property Tax Relief Check</div>
+      <div class="cb">Check whether you qualify for a primary-residence exemption in your selected state</div>
+      <div class="cb">Verify your county or city filing deadline from the official tax office</div>
+      <div class="cb">Do not assume any particular dollar savings before your exemption is approved</div>
+      <div class="cb">Request an updated tax estimate after official approval</div>
     </div>
   </div>
   ${i.bp>0?`<div class="pt"><div class="ptl">PMI Removal Timeline — Best Case</div>
-    <div class="pp"><span class="py">Month 0</span><span class="pd2">Close at ${fmt(i.price)}. LTV ${100-i.dpct}%. PMI ${fmt(i.bp)}/mo. Equity: ${fmt(i.damt)}. File Homestead Exemption immediately.</span></div>
-    <div class="pp"><span class="py">Year 1</span><span class="pd2">Pay ${fmt(i.ty1)}/mo tax (no exemption yet). Schedule wind mitigation inspection if applicable.</span></div>
-    <div class="pp"><span class="py">Year 2</span><span class="pd2">Homestead Exemption kicks in — tax drops to ${fmt(i.ty2)}/mo, saving ${fmt(i.ty1-i.ty2)}/month permanently.</span></div>
-    <div class="pp"><span class="py">Year 3–4</span><span class="pd2">With 3–4% appreciation, LTV approaches 85%. Order appraisal, request PMI cancellation — saves ${fmt(i.bp)}/mo = ${fmt(i.bp*12)}/yr.</span></div>
-    <div class="pp"><span class="py">Year 7–8</span><span class="pd2">Automatic PMI termination (Homeowners Protection Act) at 78% original LTV — guaranteed by federal law.</span></div>
+    <div class="pp"><span class="py">Month 0</span><span class="pd2">Close at ${fmt(i.price)}. LTV ${100-i.dpct}%. PMI ${fmt(i.bp)}/mo. Equity: ${fmt(i.damt)}. Check eligibility for any applicable property-tax relief.</span></div>
+    <div class="pp"><span class="py">Year 1</span><span class="pd2">Pay ${fmt(i.ty1)}/mo tax (no exemption yet). Check actual insurance pricing and property condition.</span></div>
+    <div class="pp"><span class="py">Year 2</span><span class="pd2">Property-tax estimate remains ${fmt(i.ty2)}/mo before unverified exemptions. Actual savings require approval and local tax figures.</span></div>
+    <div class="pp"><span class="py">Year 3–4</span><span class="pd2">Ask the loan servicer whether you qualify to cancel PMI, based on actual loan balance, loan type, payment history, and property value.</span></div>
+    <div class="pp"><span class="py">Year 7–8</span><span class="pd2">For qualifying conventional loans, automatic PMI termination generally follows federal rules at the scheduled 78% original-value threshold, subject to applicable conditions.</span></div>
   </div>`:''}
   <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
 </div></div>
@@ -4037,14 +4036,14 @@ function bAnalysis(i,isDemo){
     <div class="stc i"><span class="sl">Tax (Year 1)</span><div class="sv">${fmt(i.ty1)}</div><div class="sn">Reassessed at ${fmt(i.price)} — no exemption</div></div>
     <div class="stc i"><span class="sl">DTI at ${fmt(i.ilo)}</span><div class="sv">${(i.wt/i.ilo*100).toFixed(1)}%</div><div class="sn">${i.wt/i.ilo>.43?'Near lender ceiling':'Manageable'}</div></div>
   </div>
-  <div class="nt nt-in"><span class="nl nl-in">Tax Detail — Worst Case (Year 1)</span><p>${COUNTIES[ACTIVE_COUNTY]?COUNTIES[ACTIVE_COUNTY].name:'Your county'} reassesses at ${fmt(i.price)}. At 1.3% = ${fmt(i.price*.013)}/yr = <strong>${fmt(i.ty1)}/month</strong> in Year 1. Homestead Exemption does NOT apply Year 1. Budget ${fmt(i.ty1)}/month for taxes regardless of rate.</p></div>
+  <div class="nt nt-in"><span class="nl nl-in">Tax Detail — Worst Case (Year 1)</span><p>For ${COUNTIES[ACTIVE_COUNTY]?COUNTIES[ACTIVE_COUNTY].name:'the selected area'}, HomeTrue uses a planning tax rate of ${(MKT.tr*100).toFixed(2)}% of the assumed ${fmt(i.price)} value, or approximately <strong>${fmt(i.ty1)}/month</strong>. Actual assessments, local districts and eligible exemptions can change the result.</p></div>
   <table class="bt">
     <thead><tr><th>Component</th><th>Monthly</th><th>Annual</th><th>Risk Notes</th></tr></thead>
     <tbody>
       <tr><td>P&amp;I — ${fmtR(i.wr)} 30yr</td><td><strong style="color:var(--indigo);">${fmt(i.wpi)}</strong></td><td>${fmt(i.wpi*12)}</td><td class="nt2">Without lender comparison</td></tr>
       <tr><td>Property Taxes (Yr 1)</td><td><strong style="color:var(--indigo);">${fmt(i.ty1)}</strong></td><td>${fmt(i.ty1*12)}</td><td class="nt2">Reassessed at ${fmt(i.price)} — no exemption</td></tr>
       <tr><td>HOA</td><td><strong style="color:var(--indigo);">${fmt(i.hoa)}</strong></td><td>${fmt(i.hoa*12)}</td><td class="nt2">Fixed — verify no sub-HOAs</td></tr>
-      ${i.ix?`<tr><td>Homeowners Insurance</td><td><span style="color:var(--warn);font-style:italic;font-size:.85rem;">Excluded</span></td><td>—</td><td class="nt2">Ranges $230–$500/mo in South FL</td></tr>`:`<tr><td>Homeowners Insurance</td><td><strong style="color:var(--indigo);">${fmt(i.wi)}</strong></td><td>${fmt(i.wi*12)}</td><td class="nt2">${i.il}</td></tr>`}
+      ${i.ix?`<tr><td>Homeowners Insurance</td><td><span style="color:var(--warn);font-style:italic;font-size:.85rem;">Excluded</span></td><td>—</td><td class="nt2">Get an actual quote for the selected property</td></tr>`:`<tr><td>Homeowners Insurance</td><td><strong style="color:var(--indigo);">${fmt(i.wi)}</strong></td><td>${fmt(i.wi*12)}</td><td class="nt2">${i.il}</td></tr>`}
       ${i.wp>0?`<tr><td>PMI</td><td><strong style="color:var(--indigo);">${fmt(i.wp)}</strong></td><td>${fmt(i.wp*12)}</td><td class="nt2">Without shopping lenders on PMI</td></tr>`:''}
       <tr><td>Flood Insurance</td><td><strong style="color:var(--indigo);">${fmt(i.fw)}</strong></td><td>${fmt(i.fw*12)}</td><td class="nt2">${i.fld==='ae'?'Required by lender':'High-end if FEMA remapping'}</td></tr>
       ${i.ep>0?`<tr><td>Extra Principal</td><td><strong style="color:var(--indigo);">${fmt(i.ep)}</strong></td><td>${fmt(i.ep*12)}</td><td class="nt2">PMI acceleration — optional</td></tr>`:''}
