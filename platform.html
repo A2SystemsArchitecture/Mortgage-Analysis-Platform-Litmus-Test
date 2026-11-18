@@ -5600,21 +5600,37 @@ function buildClosingCosts(inp) {
     reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Kansas property taxes paid semi-annually — December 20 and May 10. No universal homestead exemption — income-limited refund program only for qualifying buyers.`;
 
   } else if (model === 'maryland') {
-    const stateTransferTax = Math.round(p * 0.005); // 0.5% state transfer tax — buyer pays
-    const countyTransferTax = Math.round(p * 0.010); // 1.0% county transfer tax for Montgomery (varies by county)
-    const stateRecordation = Math.round(loan * 0.00495); // $4.95 per $500 — closest approximation
+    const mdMontgomery = ACTIVE_COUNTY === 'montgomery-md';
+    const mdPrinceGeorges = ACTIVE_COUNTY === 'prince-georges';
+    const mdAnneArundel = ACTIVE_COUNTY === 'anne-arundel';
+    // Standard purchase by buyer who has NOT established first-time Maryland eligibility.
+    // Md. Real Property §14-104 presumes equal buyer/seller sharing absent contrary agreement.
+    const stateTransferTax = Math.round(p * 0.005 / 2);
+    const mdLocalRate = mdPrinceGeorges ? 0.014 : (mdAnneArundel && p >= 1000000 ? 0.015 : 0.010);
+    const countyTransferTax = Math.round(p * mdLocalRate / 2);
+    const mdRoundedDeed = Math.ceil(p / 500) * 500;
+    const mdMontgomeryRecordation = Math.min(mdRoundedDeed,500000)*0.0089 +
+      Math.min(Math.max(mdRoundedDeed-500000,0),100000)*0.0135 +
+      Math.min(Math.max(mdRoundedDeed-600000,0),150000)*0.0204 +
+      Math.min(Math.max(mdRoundedDeed-750000,0),250000)*0.02156 +
+      Math.max(mdRoundedDeed-1000000,0)*0.0227;
+    const mdRecordRate = mdPrinceGeorges ? 0.0055 : 0.007;
+    const stateRecordation = Math.round((mdMontgomery ? mdMontgomeryRecordation : mdRoundedDeed*mdRecordRate)/2);
+    // Prince George's imposes an additional local transfer levy on security instruments.
+    const mdLoanLocalTransfer = mdPrinceGeorges ? Math.round(loan * mdLocalRate / 2) : 0;
     const recordingFee = 120;
     const titleSearch = 325;
     const titleInsLender = Math.round(loan * 0.00400);
     const titleInsOwner = Math.round(p * 0.00325);
     const settlementFee = 650;
-    govTotal = stateTransferTax + countyTransferTax + stateRecordation + recordingFee;
+    govTotal = stateTransferTax + countyTransferTax + stateRecordation + mdLoanLocalTransfer + recordingFee;
     titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
-    stateNote = `<span class="nl" style="color:var(--maryland-dim);">${countyName} — Maryland</span><p>Maryland has both a <strong>state transfer tax (0.5%)</strong> and a <strong>county transfer tax</strong> (1.0% in Montgomery; varies by county) paid by the buyer. The state recordation tax (~$4.95 per $500 of consideration) is also a buyer cost. Maryland is NOT an attorney-closed state but attorney involvement is common. The Maryland Homestead Tax Credit caps annual taxable assessment increases for primary residences. Confirm all figures against your official Closing Disclosure.</p>`;
+    stateNote = `<span class="nl" style="color:var(--maryland-dim);">${countyName} — Maryland</span><p>Maryland's state transfer tax is 0.5% of home value, with county-specific transfer and recordation charges. This planning calculation assumes the usual 50/50 sharing between buyer and seller. A qualifying first-time Maryland buyer may have all or part of these taxes paid by the seller; other contract terms can change the allocation. Purchase-money mortgage recordation exemptions may apply. Maryland is NOT an attorney-closed state but attorney involvement is common. The Maryland Homestead Tax Credit caps annual taxable assessment increases for primary residences. Confirm all figures against your official Closing Disclosure.</p>`;
     govSection = `<div class="cc-section"><div class="cc-section-title">Government Transfer Taxes &amp; Recording</div>
-      <div class="cc-row"><div class="cc-item">State Transfer Tax (Buyer Pays)<span class="cc-note">0.5% of purchase price — first-time buyers may qualify for exemption</span></div><div class="cc-val">${fmt(stateTransferTax)}</div></div>
-      <div class="cc-row"><div class="cc-item">County Transfer Tax (Buyer Pays)<span class="cc-note">1.0% of purchase price — varies by county, verify with settlement company</span></div><div class="cc-val">${fmt(countyTransferTax)}</div></div>
-      <div class="cc-row"><div class="cc-item">State Recordation Tax<span class="cc-note">~$4.95 per $500 of loan — state recordation on deed of trust</span></div><div class="cc-val">${fmt(stateRecordation)}</div></div>
+      <div class="cc-row"><div class="cc-item">State Transfer Tax — Assumed Buyer Half<span class="cc-note">0.5% statewide total, assumed equal split; qualifying first-time buyer seller-funded</span></div><div class="cc-val">${fmt(stateTransferTax)}</div></div>
+      <div class="cc-row"><div class="cc-item">County Transfer Tax — Assumed Buyer Half<span class="cc-note">County rate ${(mdLocalRate*100).toFixed(2)}% total, assumed equal split; confirm qualifying relief and agreement</span></div><div class="cc-val">${fmt(countyTransferTax)}</div></div>
+      <div class="cc-row"><div class="cc-item">County Recordation Tax — Assumed Buyer Half<span class="cc-note">County-specific tax on the deed; assumed equal split; purchase-money mortgage may qualify for exemption</span></div><div class="cc-val">${fmt(stateRecordation)}</div></div>
+      ${mdPrinceGeorges ? `<div class="cc-row"><div class="cc-item">Prince George's Local Transfer Tax on Mortgage<span class="cc-note">1.4% local rate, assumed buyer half; special county rule</span></div><div class="cc-val">${fmt(mdLoanLocalTransfer)}</div></div>` : ''}
       <div class="cc-row"><div class="cc-item">Recording Fees<span class="cc-note">Circuit Court recording</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
       <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
     titleSection = `<div class="cc-section"><div class="cc-section-title">Title &amp; Settlement Fees</div>
