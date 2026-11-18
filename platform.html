@@ -3838,12 +3838,13 @@ function genAnalysis(){
 }
 
 function effectiveMarketValueDeduction(c){
-  // A single combined effective rate cannot accurately represent exemptions
-  // limited to individual taxing units or a tax year.
-  // Do not subtract an exemption against all levies without separate levy rates.
-  if(!c) return 0;
-  if(['fl','ga','tx','la','in'].includes(c.state)) return 0;
-  return c.he||0;
+  // The bundled county percentages are EFFECTIVE planning rates. They are not
+  // independently verified levy-by-levy schedules, and the user's primary
+  // residence selection does not prove exemption eligibility or a filing.
+  // Never subtract a lump-sum assessed-value deduction using this blended rate:
+  // doing so could double-count savings or apply relief to the wrong taxes.
+  // Explicit annual bill credits (heType:'credit') are treated separately.
+  return 0;
 }
 
 function collectInp(){
