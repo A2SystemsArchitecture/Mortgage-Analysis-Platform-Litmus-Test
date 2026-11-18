@@ -5181,8 +5181,8 @@ function buildClosingCosts(inp) {
       <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Settlement Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
     reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. AL property taxes due October 1, delinquent after December 31. Assessed value is 10% of market value for homestead properties.`;
   } else if (model === 'va') {
-    const deedRecordTax = Math.round(p * 0.003333);
-    const deedOfTrustTax = Math.round(loan * 0.003333);
+    const deedRecordTax = Math.round((Math.ceil(p/100)*0.25)*(4/3)*100)/100; // Virginia state $0.25 per $100 or fraction + assumed one-third local levy
+    const deedOfTrustTax = Math.round((Math.ceil(loan/100)*0.25)*(4/3)*100)/100; // state $0.25 per $100 or fraction + assumed one-third local levy
     const recordingFee = 100;
     const titleSearch = 300;
     const titleInsLender = Math.round(loan * 0.00375);
@@ -5191,7 +5191,7 @@ function buildClosingCosts(inp) {
     const grantorTax = Math.round(Math.ceil(p / 500) * 0.50);
     govTotal = deedRecordTax + deedOfTrustTax + recordingFee;
     titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
-    stateNote = `<span class="nl" style="color:var(--va-dim);">${countyName} — Virginia</span><p>Virginia has two buyer-paid recording taxes: a <strong>deed recordation tax</strong> (~$3.33 per $1,000 of purchase price) and a <strong>deed of trust tax</strong> (~$3.33 per $1,000 of loan amount). The grantor's tax (${fmt(grantorTax)}) is paid by the seller. Virginia has <strong>no universal homestead exemption</strong> — income-limited relief for elderly/disabled. Confirm all figures against your official Closing Disclosure.</p>`;
+    stateNote = `<span class="nl" style="color:var(--va-dim);">${countyName} — Virginia</span><p>Virginia imposes state recordation taxes of $0.25 per $100 or fraction for the deed and deed of trust, plus an applicable local tax generally up to one-third of the state tax. HomeTrue's planning figure includes the assumed one-third local amount; verify the actual locality and tax base. The grantor's tax (${fmt(grantorTax)}) is paid by the seller. Virginia has <strong>no universal homestead exemption</strong> — income-limited relief for elderly/disabled. Confirm all figures against your official Closing Disclosure.</p>`;
     govSection = `<div class="cc-section"><div class="cc-section-title">Government Recording Taxes</div>
       <div class="cc-row"><div class="cc-item">Deed Recordation Tax (State + Local)<span class="cc-note">~$3.33 per $1,000 of purchase price — buyer pays</span></div><div class="cc-val">${fmt(deedRecordTax)}</div></div>
       <div class="cc-row"><div class="cc-item">Deed of Trust Tax (State + Local)<span class="cc-note">~$3.33 per $1,000 of loan amount — buyer pays</span></div><div class="cc-val">${fmt(deedOfTrustTax)}</div></div>
