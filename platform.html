@@ -3868,9 +3868,10 @@ function collectInp(){
   let br=MKT.br,wr=MKT.wr;
   if(t===3){const lr=parseFloat(document.getElementById('flr').value);if(lr){br=lr;wr=lr;}}
   const bpi=cPI(loan,br),wpi=cPI(loan,wr);
-  let ty1=Math.round(price*MKT.tr/12),ty2=Math.max(0,COUNTIES[ACTIVE_COUNTY]&&COUNTIES[ACTIVE_COUNTY].heType==='credit'?Math.round((price*MKT.tr/12)-(MKT.he/12)):Math.round(Math.max(0,price-effectiveMarketValueDeduction(COUNTIES[ACTIVE_COUNTY]))*MKT.tr/12));
-  // Indiana SEA 1 (2025): automatic 10% homestead credit capped at $300/year — applies from first tax bill, no application required
-  if(COUNTIES[ACTIVE_COUNTY]&&COUNTIES[ACTIVE_COUNTY].sea1){const sea1Credit=Math.min((ty2*12)*0.10,300);ty2=Math.round((ty2*12-sea1Credit)/12);}
+  // Base estimate uses the stored area rate. Do not subtract a homestead
+  // exemption or credit without proof of buyer qualification and applicable
+  // tax district; primary-residence intent alone is not confirmation.
+  const ty1=Math.round(price*MKT.tr/12),ty2=ty1;
   // ty1Disp/ty2Disp aliases for clarity
   const ty1Disp=ty1, ty2Disp=ty2;
   let bi=0,wi=0,il='',ic=false,ix=false;
@@ -6387,10 +6388,10 @@ function checkShareURL() {
   inp.loan = inp.price - inp.damt;
   inp.bpi = cPI(inp.loan, inp.br);
   inp.wpi = cPI(inp.loan, MKT.wr);
+  // Reconstructed shared results must use the same conservative tax basis as
+  // the interactive calculator. Never automatically grant unverified relief.
   inp.ty1 = Math.round(inp.price * MKT.tr / 12);
-  inp.ty2 = Math.max(0,COUNTIES[ACTIVE_COUNTY]&&COUNTIES[ACTIVE_COUNTY].heType==='credit'?Math.round((inp.price*MKT.tr/12)-(MKT.he/12)):Math.round(Math.max(0,inp.price-effectiveMarketValueDeduction(COUNTIES[ACTIVE_COUNTY]))*MKT.tr/12));
-  // Indiana SEA 1 (2025): automatic 10% homestead credit capped at $300/year
-  if(COUNTIES[ACTIVE_COUNTY]&&COUNTIES[ACTIVE_COUNTY].sea1){const sea1Credit=Math.min((inp.ty2*12)*0.10,300);inp.ty2=Math.round((inp.ty2*12-sea1Credit)/12);}
+  inp.ty2 = inp.ty1;
   inp.wi = inp.bi > 0 ? inp.bi * 1.35 : 0;
   inp.il = inp.ic ? 'CONFIRMED' : inp.ix ? 'EXCLUDED' : 'ESTIMATED';
   const [bp, wp] = cPMI(inp.loan, inp.crd);
