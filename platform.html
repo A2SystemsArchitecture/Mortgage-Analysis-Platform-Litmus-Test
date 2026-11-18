@@ -3103,7 +3103,7 @@ const COUNTIES = {
     paName:'East Baton Rouge Parish Assessor',
     notes:'East Baton Rouge Parish (Baton Rouge/Zachary/Baker/Central) effective tax rate ~0.79% (verified: 94.05 parish+school mills outside city; 112 mills inside city limits per 2025 official millage table from ebrpa.org) — assessed at 10% of FMV. Homestead exemption: $75,000 FMV ($7,500 assessed value reduction). Taxes paid in ARREARS — due December 31. No state transfer tax. Louisiana civil law notarial closing system. Homeowners insurance avg: $2,710–$5,454/year for $300K–$400K home (2026 data). Flood: most of EBR is Zone X with some AE areas near Amite and Comite Rivers. Risk Rating 2.0 (2021) changed NFIP pricing — get a zone-specific quote.',
     state:'la', closingModel:'louisiana',
-    heNote:'Louisiana Homestead Exemption: $75,000 of fair market value is exempt from parish property taxes for your primary residence. File with the East Baton Rouge Parish Assessor at ebrpa.org by December 31 of the year you purchase. Annual savings: approximately $750–$800 depending on millage district. 100% service-connected disabled veterans pay zero property tax.',
+    heNote:'Louisiana Homestead Exemption: $75,000 of fair market value is exempt from parish property taxes for your primary residence. File with the East Baton Rouge Parish Assessor at ebrpa.org by December 31 of the year you purchase. The dollar saving depends on the parish and which local property-tax levies recognize the approved exemption. 100% service-connected disabled veterans pay zero property tax.',
     districts:[
       {id:'ebr-uninc',label:'Unincorporated EBR (parish + EBR school)',tr:0.0071},
       {id:'ebr-br',label:'City of Baton Rouge',tr:0.0088},
@@ -3318,7 +3318,7 @@ const COUNTIES = {
     paName:'Ada County Assessor',
     notes:'Ada County (Boise, Meridian, Eagle, Star, Kuna) effective tax rate 0.65% — verified from Idaho State Tax Commission EPB00129_12-04-2025, urban average 0.652%. Rate is post-Homeowner\'s Exemption effective rate; Tax Commission averages incorporate HE in the taxable base. Assessment at 100% of market value annually. No transfer tax. Escrow-closed state. Taxes due in two installments — December 20 and June 20. Homeowner\'s Exemption: 50% of value up to $125,000 maximum — apply by the last business day of the tax year at Ada County Assessor (2026 HB 843).',
     state:'id', closingModel:'idaho',
-    heNote:'Idaho Homeowner\'s Exemption: 50% of your home\'s value up to a maximum of $125,000 off assessed value. Must be owner-occupied primary residence. For the 2026 tax year, applications are accepted until the last business day of the year at the Ada County Assessor\'s office. Approved exemption renews automatically until ownership changes. The analysis above reflects the effective rate already accounting for the exemption — your actual Year 2 bill will reflect this savings.'
+    heNote:'Idaho Homeowner\'s Exemption: 50% of your home\'s value up to a maximum of $125,000 off assessed value. Must be owner-occupied primary residence. For the 2026 tax year, applications are accepted until the last business day of the year at the Ada County Assessor\'s office. Approved exemption renews automatically until ownership changes. The analysis above reflects the effective rate already accounting for the exemption — the actual tax reduction depends on approved eligibility and the applicable local tax bill.'
   },
   'canyon-id': {
     name:'Canyon County', short:'Canyon',
@@ -3328,7 +3328,7 @@ const COUNTIES = {
     paName:'Canyon County Assessor',
     notes:'Canyon County (Nampa, Caldwell, Middleton, Star) effective tax rate 0.69% — verified from Idaho State Tax Commission EPB00129_12-04-2025, urban average 0.692%. Canyon County 2025 levy sheets confirm Nampa code areas 0.647%–0.781% gross; Caldwell code areas 0.647%–0.748% gross. Tax Commission urban average is post-HE effective rate. No transfer tax. Escrow-closed. Taxes due December 20 and June 20. Homeowner\'s Exemption: 50% of value up to $125,000 — apply by the last business day of the tax year under 2026 HB 843.',
     state:'id', closingModel:'idaho',
-    heNote:'Idaho Homeowner\'s Exemption: 50% of your home\'s value up to a maximum of $125,000 off assessed value. Must be owner-occupied primary residence. For the 2026 tax year, applications are accepted until the last business day of the year at the Canyon County Assessor\'s office. Approved exemption renews automatically until ownership changes. The analysis above reflects the effective rate already accounting for the exemption — your actual Year 2 bill will reflect this savings.'
+    heNote:'Idaho Homeowner\'s Exemption: 50% of your home\'s value up to a maximum of $125,000 off assessed value. Must be owner-occupied primary residence. For the 2026 tax year, applications are accepted until the last business day of the year at the Canyon County Assessor\'s office. Approved exemption renews automatically until ownership changes. The analysis above reflects the effective rate already accounting for the exemption — the actual tax reduction depends on approved eligibility and the applicable local tax bill.'
   },
   'kootenai-id': {
     name:'Kootenai County', short:'Kootenai',
@@ -3338,7 +3338,7 @@ const COUNTIES = {
     paName:'Kootenai County Assessor',
     notes:'Kootenai County (Coeur d\'Alene, Post Falls, Hayden, Rathdrum) effective tax rate 0.54% — verified from Idaho State Tax Commission EPB00129_12-04-2025, urban average 0.541%. Lowest rate of three Idaho counties. Rapid market appreciation in CdA metro. No transfer tax. Escrow-closed. Taxes due December 20 and June 20. Homeowner\'s Exemption: 50% of value up to $125,000 — apply by the last business day of the tax year under 2026 HB 843.',
     state:'id', closingModel:'idaho',
-    heNote:'Idaho Homeowner\'s Exemption: 50% of your home\'s value up to a maximum of $125,000 off assessed value. Must be owner-occupied primary residence. For the 2026 tax year, applications are accepted until the last business day of the year at the Kootenai County Assessor\'s office. Approved exemption renews automatically until ownership changes. The analysis above reflects the effective rate already accounting for the exemption — your actual Year 2 bill will reflect this savings.'
+    heNote:'Idaho Homeowner\'s Exemption: 50% of your home\'s value up to a maximum of $125,000 off assessed value. Must be owner-occupied primary residence. For the 2026 tax year, applications are accepted until the last business day of the year at the Kootenai County Assessor\'s office. Approved exemption renews automatically until ownership changes. The analysis above reflects the effective rate already accounting for the exemption — the actual tax reduction depends on approved eligibility and the applicable local tax bill.'
   },
   'boone-ky': {
     name:'Boone County', short:'Boone',
@@ -3473,7 +3473,7 @@ const COUNTIES = {
       {id:'me-southportland', label:'South Portland', tr:0.0137},
       {id:'me-westbrook',     label:'Westbrook',      tr:0.0153},
     ],
-    heNote:'Maine Homestead Exemption: $25,000 off assessed value for your primary residence. Must have owned the property for at least 12 months as of April 1 of the tax year. File application with your municipal assessor by April 1. Renews automatically each year as long as you remain the primary resident and owner. Annual savings at Cumberland County rates: approximately $300–$382 ($25–$32/month). File immediately after closing — your first full year of savings begins the April 1 after you meet the 12-month ownership requirement.'
+    heNote:'Maine Homestead Exemption: $25,000 off assessed value for your primary residence. Must have owned the property for at least 12 months as of April 1 of the tax year. File application with your municipal assessor by April 1. Renews automatically each year as long as you remain the primary resident and owner. Potential dollar savings depend on the selected municipality, the local certified assessment ratio, and an approved application. File immediately after closing — your first full year of savings begins the April 1 after you meet the 12-month ownership requirement.'
   },
   'york-me': {
     name:'York County', short:'York',
@@ -3489,12 +3489,12 @@ const COUNTIES = {
       {id:'me-kennebunk',  label:'Kennebunk',   tr:0.0099},
       {id:'me-kittery',    label:'Kittery',     tr:0.0093},
     ],
-    heNote:'Maine Homestead Exemption: $25,000 off assessed value for your primary residence. Must have owned the property for at least 12 months as of April 1 of the tax year. File application with your municipal assessor by April 1. Renews automatically each year as long as you remain the primary resident and owner. Annual savings at York County rates: approximately $232–$372 ($19–$31/month) depending on your city. File immediately after closing — your first full year of savings begins the April 1 after you meet the 12-month ownership requirement.'
+    heNote:'Maine Homestead Exemption: $25,000 off assessed value for your primary residence. Must have owned the property for at least 12 months as of April 1 of the tax year. File application with your municipal assessor by April 1. Renews automatically each year as long as you remain the primary resident and owner. Potential dollar savings depend on the selected municipality, the local certified assessment ratio, and an approved application. File immediately after closing — your first full year of savings begins the April 1 after you meet the 12-month ownership requirement.'
   }
 };
   // Active county — defaults to Miami-Dade
 let ACTIVE_COUNTY = 'miami-dade';
-let MKT = {rv:"November 12, 2026 · 7.11% · Freddie Mac PMMS 30-year fixed national average",ov:"Verified October 1, 2026",fm:7.11,br:6.86,wr:7.50,tr:COUNTIES['miami-dade'].tr,he:50000,fxb:42,fxw:85,fab:150,faw:400};
+let MKT = {rv:"November 12, 2026 · 7.11% · Freddie Mac PMMS 30-year fixed national average",ov:"Property tax estimates are not certified parcel bills; verify with the local taxing authorities",fm:7.11,br:6.86,wr:7.50,tr:COUNTIES['miami-dade'].tr,he:50000,fxb:42,fxw:85,fab:150,faw:400};
 function setCounty(key) {
   ACTIVE_COUNTY = key;
   const c = COUNTIES[key];
@@ -3843,7 +3843,7 @@ function effectiveMarketValueDeduction(c){
   // residence selection does not prove exemption eligibility or a filing.
   // Never subtract a lump-sum assessed-value deduction using this blended rate:
   // doing so could double-count savings or apply relief to the wrong taxes.
-  // Explicit annual bill credits (heType:'credit') are treated separately.
+  // Explicit annual bill credits are also withheld from the automatic estimate until eligibility is established.
   return 0;
 }
 
@@ -5783,7 +5783,7 @@ function buildHomesteadGuide(inp) {
       <div class="hg-step"><div class="hg-num">3</div><div class="hg-content"><div class="hg-title">The deduction renews automatically</div><div class="hg-desc">Once granted, the Indiana homestead deduction renews automatically each year as long as you continue to own and occupy the property as your primary residence. You do not reapply each year.</div></div></div>
       <div class="hg-step"><div class="hg-num">4</div><div class="hg-content"><div class="hg-title">Notify your mortgage servicer after approval</div><div class="hg-desc">Once the deduction is confirmed, contact your mortgage servicer to recalculate your escrow. The lower tax bill should reduce your monthly payment starting the year after filing.</div></div></div>
       <div class="nt nt-tl" style="margin-top:1rem;"><span class="nl nl-tl">Indiana 1% Homestead Cap</span><p>Indiana law caps property taxes on homestead properties at 1% of gross assessed value annually. This means no matter how high the tax rate, your annual homestead property tax cannot exceed 1% of what your home is assessed at. In fast-appreciating markets this cap provides significant long-term protection.</p></div>
-      <div class="nt nt-em" style="margin-top:1rem;"><span class="nl nl-em">Senate Enrolled Act 1 — New Automatic Credit (2025 Law)</span><p>Beginning with 2026 property tax bills, every Indiana homestead automatically receives an additional <strong>10% credit on the annual tax bill, capped at $300 per year</strong>. This is separate from the assessment-year-specific standard deduction, which is $40,000 for assessment year 2026 and $30,000 for assessment year 2027; the full calculation has not yet been independently verified in HomeTrue. <strong>No application is required.</strong> Your county auditor identifies eligible homesteads and applies the credit automatically. The Year 2+ figure in your analysis already reflects this credit. For example: if your annual tax bill after deductions is $2,040, your SEA 1 credit is $204 — reducing the bill to $1,836 per year ($153/month). The credit is capped at $300, meaning homes with post-deduction tax bills above $3,000 annually receive the maximum $300 savings.</p></div>
+      <div class="nt nt-em" style="margin-top:1rem;"><span class="nl nl-em">Senate Enrolled Act 1 — New Automatic Credit (2025 Law)</span><p>Beginning with 2026 property tax bills, every Indiana homestead automatically receives an additional <strong>10% credit on the annual tax bill, capped at $300 per year</strong>. This is separate from the assessment-year-specific standard deduction, which is $40,000 for assessment year 2026 and $30,000 for assessment year 2027; the full calculation has not yet been independently verified in HomeTrue. <strong>No application is required.</strong> Your county auditor identifies eligible homesteads and applies the credit automatically. The Year 2+ planning estimate does not automatically include this credit because HomeTrue has not verified the selected property's eligibility. Confirm the approved credit on the official county tax bill. For example: if your annual tax bill after deductions is $2,040, your SEA 1 credit is $204 — reducing the bill to $1,836 per year ($153/month). The credit is capped at $300, meaning homes with post-deduction tax bills above $3,000 annually receive the maximum $300 savings.</p></div>
       <div style="text-align:center;margin:2rem 0 1rem;"><button class="dl-btn" onclick="demoPDFClick()">↓ Download Full PDF Analysis</button></div>
     </div>`;
   }
