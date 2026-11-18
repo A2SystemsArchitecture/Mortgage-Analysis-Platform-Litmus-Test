@@ -5554,7 +5554,7 @@ function buildClosingCosts(inp) {
 
   } else if (model === 'pennsylvania') {
     const stateTransferTax = Math.round(p * 0.01); // 1% buyer pays
-    const localTransferTax = Math.round(p * 0.01); // 1% seller pays by custom in most PA counties
+    const localTransferTax = null; // municipality/school-district rate varies; cannot infer from county
     const recordingFee = 120;
     const titleSearch = 300;
     const titleInsLender = Math.round(loan * 0.00400);
@@ -5562,10 +5562,10 @@ function buildClosingCosts(inp) {
     const settlementFee = 625;
     govTotal = stateTransferTax + recordingFee;
     titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
-    stateNote = `<span class="nl" style="color:var(--penn-dim);">${countyName} — Pennsylvania</span><p>Pennsylvania realty transfer tax totals <strong>2% of purchase price</strong> — 1% state + 1% local. By custom in most PA counties, the buyer pays the 1% state portion and the seller pays the 1% local portion. Attorney involvement at closing is <strong>common by local custom but not legally required</strong> in Pennsylvania. Homestead exclusion varies by county — Allegheny County offers $18,000 off assessed value. Confirm all figures against your official Closing Disclosure.</p>`;
+    stateNote = `<span class="nl" style="color:var(--penn-dim);">${countyName} — Pennsylvania</span><p>Pennsylvania's statewide realty transfer tax is <strong>1% of purchase price</strong>. Local municipality and school district transfer taxes are ADDITIONAL and vary by exact address, sometimes exceeding 1%. HomeTrue presently budgets the state 1% as the buyer's assumed contribution; local transfer tax is NOT included in this total and must be added after checking the address and purchase agreement. Attorney involvement at closing is <strong>common by local custom but not legally required</strong> in Pennsylvania. Homestead exclusion varies by county — Allegheny County offers $18,000 off assessed value. Confirm all figures against your official Closing Disclosure.</p>`;
     govSection = `<div class="cc-section"><div class="cc-section-title">Government Transfer Tax &amp; Recording</div>
-      <div class="cc-row"><div class="cc-item">State Realty Transfer Tax — Buyer Pays<span class="cc-note">1% of purchase price — state portion, buyer's responsibility</span></div><div class="cc-val">${fmt(stateTransferTax)}</div></div>
-      <div class="cc-row"><div class="cc-item">Local Realty Transfer Tax — Seller Pays<span class="cc-note">1% of purchase price — local portion, customarily seller-paid (${fmt(localTransferTax)}). Verify in your contract.</span></div><div class="cc-val">Seller</div></div>
+      <div class="cc-row"><div class="cc-item">State Realty Transfer Tax — Assumed Buyer Share<span class="cc-note">1% of purchase price is the statewide levy; the contract determines buyer versus seller payment</span></div><div class="cc-val">${fmt(stateTransferTax)}</div></div>
+      <div class="cc-row"><div class="cc-item">Local Realty Transfer Tax — Amount To Confirm<span class="cc-note">Local city and school district rates vary by exact property address. NOT included in buyer total; do not use subtotal as complete until checked.</span></div><div class="cc-val">Seller</div></div>
       <div class="cc-row"><div class="cc-item">Recording Fees<span class="cc-note">County Recorder of Deeds</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
       <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
     titleSection = `<div class="cc-section"><div class="cc-section-title">Title &amp; Settlement Fees</div>
