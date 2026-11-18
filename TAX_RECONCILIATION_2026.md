@@ -53,6 +53,31 @@ These are **published rates for specific levy scopes**, NOT certified 2027 marke
 
 **Audit implication:** We now possess selected current, official jurisdiction-level levy rates, but none of these proves that HomeTrue's single blended rate for any of its 124 markets is an appropriate 2027 parcel-specific number. Do not overwrite HomeTrue's effective rates with raw millage without first matching the taxable/assessed base, exact district, exemptions, and billing year.
 
+## Launch verification campaign | 62-market threshold
+
+**User's current threshold:** 62 out of 124 markets must clear all release checks. As of the November 17, 2026 research pass: **0/124 fully launch certified**, **15/124 have at least one documented official tax-rate component**, **33 official 2026/27 jurisdiction-rate evidence rows** (some are multiple entries for one market). State-level exemptions and a published rate alone do NOT pass a market.
+
+[Full 124-market gate-by-gate audit](audits/HomeTrue-2027-launch-verification-gates.csv) | [Official jurisdiction-rate evidence](audits/HomeTrue-2026-27-official-jurisdiction-evidence.csv)
+
+**Five mandatory gates for each market:**
+1. Official rate applicable to the relevant 2027 planning period, or clearly dated last-adopted rate (with conditional 2027 status).
+2. Correct geographic district, municipality, school/special levies and assessment base matched to the property scenario.
+3. Exemption law, buyer eligibility and effective tax/filing year modeled, including rental/primary-residence distinctions.
+4. Calculations reconciled against official county tax examples or representative actual parcel tax statements, with documented tests and expected values.
+5. Correct customer-facing preview and PDF disclosure of uncertain inputs, closing-year adjustments and caveats.
+
+A state county rate or effective-rate estimate alone does not pass these gates.
+
+### Newly verified official jurisdiction information
+- **Wake County, NC:** 2026 county rate $0.5371/$100 of assessed value; Raleigh municipal $0.3720; Cary $0.3675; Apex $0.3735; Holly Springs $0.3435. **These municipal rates are additions to the county rate** and the source warns fire/RTP district levies may apply. [Wake County PDF](https://s3.us-west-1.amazonaws.com/wakegov.com.if-us-west-1/s3fs-public/documents/2026-06/Tax%20Rates_Current%20to%202017.pdf). Rate year 2026, FY period 2026-27; no claim that the 2027-28 levy has been adopted.
+- **Durham County, NC:** FY 2026-27 county $0.5792; Durham City combined $1.0163; Chapel Hill (Durham side) combined $1.0792; specific fire-service districts have other rates. [County detailed tax table](https://dconc.gov/Tax-Administration/Payment-Options-and-Collections/Tax-Rates1).
+- **Guilford County, NC:** FY 2026-27 county tax $0.7895; High Point jurisdiction code 02 combined $1.5244 per $100; other rate codes vary. [Guilford published rate-code schedule](https://www.guilfordcountync.gov/index.php/government/departments-and-agencies/tax-department/2026-2027-tax-property-rates).
+- **Virginia:** 2026-27 official base rates per $100 assessed: Henrico $0.83 (some special districts add), Chesterfield $0.89, Hanover $0.81, Virginia Beach $0.97 (SSD rates differ), Chesapeake $1.01 (including mosquito control), Norfolk $1.23, Suffolk $1.06 citywide (Downtown $1.165; Route 17 $1.30). Details and direct primary links are in evidence CSV. HomeTrue's preexisting rates differ materially in some of these places.
+- **Utah 2027 PRIMARY RESIDENTIAL EXEMPTION:** 45% of qualifying fair market value is exempt and new owners beginning January 1, 2027 must file Form TC-473A to claim/continue the exemption, due September 15. The saved HomeTrue "he:0" fields in all four Utah markets cannot represent this reliably. [Utah Tax Commission](https://tax.utah.gov/propertytax/tax-relief/primary-residential-exemption/).
+- **Nevada Clark District 200:** officially listed FY 2026-27 **3.2782 per $100 assessed**. Corrected an initial unconfirmed transcription in evidence register to this official value; never use it as 3.2782% of the purchase price. [Treasurer's tax district details](https://treasurer.co.clark.nv.us/TaxRate-District/tcaDetails.aspx?fy=20262027&tca=200+++++++).
+
+**Do not merge:** Rates cannot be blindly copied from official tax tables into `tr` until their assessment base and applicability are modeled. No market certification achieved on this pass.
+
 ## Verified source-code inventory
 - 124 records / 26 states / 319 district choices.
 - One effective-rate placeholder per market, sometimes with district selections; not parcel-level official tax bills.
