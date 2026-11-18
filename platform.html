@@ -2662,7 +2662,7 @@ const COUNTIES = {
 // ── INDIANA ──
   'marion-in': {
     name:'Marion County', short:'Marion',
-    tr:0.0083, he:45000,
+    tr:0.0083, he:40000,
     fxb:20, fxw:38, fab:40, faw:95,
     paUrl:'https://www.indy.gov/activity/apply-for-a-homestead-deduction',
     paName:'Marion County Assessor',
@@ -2676,7 +2676,7 @@ const COUNTIES = {
     fvb:0,fvw:0},
   'hamilton-in': {
     name:'Hamilton County', short:'Hamilton',
-    tr:0.0067, he:45000,
+    tr:0.0067, he:40000,
     fxb:18, fxw:35, fab:38, faw:90,
     paUrl:'https://www.hamiltoncounty.in.gov/749/Homestead-Standard-Deduction',
     paName:'Hamilton County Assessor',
@@ -2693,7 +2693,7 @@ const COUNTIES = {
     fvb:0,fvw:0},
   'hendricks': {
     name:'Hendricks County', short:'Hendricks',
-    tr:0.0074, he:45000,
+    tr:0.0074, he:40000,
     fxb:18, fxw:35, fab:38, faw:90,
     paUrl:'https://www.co.hendricks.in.us/government/departments/assessor',
     paName:'Hendricks County Assessor',
@@ -2709,7 +2709,7 @@ const COUNTIES = {
     fvb:0,fvw:0},
   'johnson-in': {
     name:'Johnson County', short:'Johnson',
-    tr:0.0078, he:45000,
+    tr:0.0078, he:40000,
     fxb:18, fxw:35, fab:38, faw:90,
     paUrl:'https://www.co.johnson.in.us/departments/assessor',
     paName:'Johnson County Assessor',
@@ -2724,7 +2724,7 @@ const COUNTIES = {
     fvb:0,fvw:0},
   'boone-in': {
     name:'Boone County', short:'Boone',
-    tr:0.0065, he:45000,
+    tr:0.0065, he:40000,
     fxb:18, fxw:35, fab:38, faw:90,
     paUrl:'https://www.boonecounty.in.gov/departments/assessor',
     paName:'Boone County Assessor',
@@ -3840,7 +3840,8 @@ function genAnalysis(){
 function collectInp(){
   const t=S.tier;
   const price=parseFloat(document.getElementById('fp').value)||399000;
-  const dpct=parseFloat(document.getElementById('fd').value)||3;
+  const rawDownPayment=parseFloat(document.getElementById('fd').value);
+  const dpct=Number.isFinite(rawDownPayment)?rawDownPayment:3;
   const damt=price*dpct/100,loan=price-damt;
   const ilo=parseFloat(document.getElementById('fil').value)||10000;
   const ihi=parseFloat(document.getElementById('fih').value)||13000;
