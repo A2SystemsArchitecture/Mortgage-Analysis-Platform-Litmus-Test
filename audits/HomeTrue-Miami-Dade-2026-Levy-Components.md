@@ -1,0 +1,7 @@
+# Miami-Dade 2026 levy component reconciliation
+
+The [Miami-Dade County School Board's adopted 2026–27 budget announcement](https://news.dadeschools.net/cmnc/new/37871) states 6.623 school mills. [County legislative record 261531](https://www.miamidade.gov/govaction/matter.asp?file=true&matter=261531&yearFolder=Y2026) marks the 4.574 countywide operating mills adopted on September 17, 2026. [Official debt record 261532](https://www.miamidade.gov/govaction/legistarfiles/MinMatters/Y2026/261532min.pdf) separately lists countywide bonded debt; it is outside this two-component check.
+
+For a fictional qualifying property assessed at $100,000, the existing HomeTrue 2026 Florida function returned school taxable value $75,000, non-school taxable value $48,589, and $718.97 for the two selected levies. Independent calculation: (75,000 × 6,623 + 48,589 × 4,574) ÷ 1,000,000 = $718.971086 before cents rounding. The first scratch expected figure was wrong; recomputation using integer rate units confirmed the calculator result. This is a subtotal, not a property bill.
+
+The [official property appraiser estimator](https://apps.miamidadepa.gov/paonlinetools/taxes/taxestimator.aspx) says it uses 2026 adopted final-roll values and millage. A complete parcel-specific bundle, including applicable county debt, fire, library, municipality, other districts and non-ad valorem charges, remains open. The main buyer report planning rate was not replaced. Tax-roll year 2027 remains a separate verification checkpoint.
