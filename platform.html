@@ -1539,7 +1539,7 @@ footer strong{color:rgba(220,232,235,1.0);}
           <!-- LISTING REFERENCE INPUTS -->
           <div class="ff ffu">
             <label>Property Address (Selected County Only)</label>
-            <input type="text" id="fa" placeholder="e.g. 452 SE 20th Dr, Homestead, FL 33033">
+            <input type="text" id="fa" oninput="clearBuyerAnnualTax()" placeholder="e.g. 452 SE 20th Dr, Homestead, FL 33033">
           </div>
           <div class="ff">
             <label>MLS Number (Optional)</label>
@@ -1570,7 +1570,7 @@ footer strong{color:rgba(220,232,235,1.0);}
             </div>
           </div>
           <div class="ff"><label>Purchase Price ($)</label><input type="number" id="fp" placeholder="399000" min="50000"></div>
-          <div class="ff"><label for="f-annual-buyer-tax">Projected annual property tax for this buyer ($, optional)</label><input type="number" id="f-annual-buyer-tax" min="0" step="0.01" placeholder="Leave blank for planning estimate"><div class="fn">Use a verified projection after transfer. This amount is used for both tax scenarios.</div></div>
+          <div class="ff"><label for="f-annual-buyer-tax">Projected annual property tax for this buyer ($, optional)</label><input type="number" id="f-annual-buyer-tax" min="0" step="0.01" placeholder="Leave blank for planning estimate"><div class="fn">Use a verified projection after transfer. This amount is used for both tax scenarios and clears if you change the property location.</div></div>
           <div class="ff"><label>Down Payment</label><select id="fd"><option value="">Select</option><option value="3">3% — Conventional</option><option value="3.5">3.5% — FHA</option><option value="5">5%</option><option value="10">10%</option><option value="20">20% — No PMI</option></select></div>
           <div class="ff"><label>Year Built</label><input type="number" id="fb2" placeholder="1995" min="1900" max="2026"></div>
           <div class="ff"><label>Construction Type</label><select id="fcon"><option value="cbs">CBS — Concrete Block</option><option value="wood">Wood Frame</option><option value="unknown">Unknown</option></select></div>
@@ -3762,6 +3762,7 @@ function selectState(state, btn) {
 }
 
 function selectCounty(key, btn) {
+  clearBuyerAnnualTax();
   // Update active pill
   document.querySelectorAll('.county-pill').forEach(p => p.classList.remove('active'));
   if(btn) btn.classList.add('active');
@@ -3846,6 +3847,11 @@ function effectiveMarketValueDeduction(c){
   // doing so could double-count savings or apply relief to the wrong taxes.
   // Explicit annual bill credits are also withheld from the automatic estimate until eligibility is established.
   return 0;
+}
+
+function clearBuyerAnnualTax() {
+  const input = document.getElementById('f-annual-buyer-tax');
+  if (input) input.value = '';
 }
 
 function parseBuyerAnnualTax(value) {
@@ -6855,8 +6861,7 @@ function startComparison() {
   // Save current analysis as Property 1
   S2.prop1 = {...S.inp};
   S2.comparingProp2 = true;
-  const buyerTaxInput = document.getElementById('f-annual-buyer-tax');
-  if (buyerTaxInput) buyerTaxInput.value = '';
+  clearBuyerAnnualTax();
   // Reset for Property 2 entry
   S.tier = S.inp.tier;
   S.ins = null;
@@ -7803,6 +7808,7 @@ function renderDistrictPills(countyKey, preferredDistrictId) {
 }
 
 function selectDistrict(countyKey, district, btn, silent) {
+  if (!silent && ACTIVE_DISTRICT?.id !== district.id) clearBuyerAnnualTax();
   ACTIVE_DISTRICT = district;
   MKT.tr = district.tr;
   
