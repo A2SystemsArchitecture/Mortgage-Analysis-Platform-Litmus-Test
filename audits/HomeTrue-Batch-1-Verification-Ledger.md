@@ -8,7 +8,7 @@ Scope: Florida, Georgia, Alabama and South Carolina. Inventory reconciled to all
 |---|---:|---|
 | State with tested standalone property-tax rules | 4 / 4 | At least one rule for each state. No implication about remaining rules. |
 | Market with an evidenced local property-tax calculation exercised | 17 / 31 (54.8%) | Miami-Dade, Broward, Palm Beach, Martin, St. Lucie, Indian River, Brevard, Fulton, Gwinnett, Cobb, Cherokee, Forsyth, Shelby, Charleston, Berkeley, York and Dorchester. Historical cases count and are identified below. |
-| Market with an evidenced current-year district property-tax calculation exercised | 12 / 31 (38.7%) | Miami-Dade, Broward, Martin, St. Lucie, Indian River, Brevard, Fulton, Gwinnett, Cobb, Cherokee, Charleston, Berkeley and York. This includes standalone cases. |
+| Market with an evidenced current-year district property-tax calculation exercised | 13 / 31 (41.9%) | Miami-Dade, Broward, Martin, St. Lucie, Indian River, Brevard, Fulton, Gwinnett, Cobb, Cherokee, Charleston, Berkeley and York. This includes standalone cases. |
 | Market with an evidenced district correction in main buyer flow | 10 / 31 (32.3%) | Miami-Dade, Broward, Martin, St. Lucie, Indian River, Brevard, Fulton, Gwinnett, Cobb and Cherokee have verified pre-exemption choices. |
 | Market with full financial sign-off | 0 / 31 | Full rule, market and buyer-output reconciliation. |
 | State with full financial sign-off | 0 / 4 | Full statewide and local financial reconciliation. |
