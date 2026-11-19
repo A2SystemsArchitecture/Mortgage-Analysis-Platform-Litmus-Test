@@ -5824,41 +5824,41 @@ function applyTaxBillAdjustments(annualTax, credits, fees) {
 
 // York County Auditor, 2026 millage schedule: gross mills and approved legal-residence mills.
 const YORK_2026_TAX_LEVIES = [
-  [
-    "Rock Hill (RH)",
-    425,
-    209.9
-  ],
-  [
-    "Rock Hill (RL)",
-    430.8,
-    215.7
-  ],
-  [
-    "Fort Mill town",
-    583.6,
-    236.5
-  ],
-  [
-    "Unincorporated School District 1 base",
-    433.9,
-    172.1
-  ],
-  [
-    "Unincorporated School District 2 base",
-    415.5,
-    125.1
-  ],
-  [
-    "Unincorporated School District 3 base",
-    342.2,
-    127.1
-  ],
-  [
-    "Unincorporated School District 4 base",
-    508.5,
-    161.4
-  ]
+  ["Rock Hill (RH)",425,209.9],
+  ["Rock Hill (RL)",430.8,215.7],
+  ["Fort Mill town",583.6,236.5],
+  ["Unincorporated School District 1 base",433.9,172.1],
+  ["Unincorporated School District 2 base",415.5,125.1],
+  ["Unincorporated School District 3 base",342.2,127.1],
+  ["Unincorporated School District 4 base",508.5,161.4],
+  ["1BE · Bethel",438.9,177.1],
+  ["1BS · Bethesda",437.8,176],
+  ["1FCWSBS · Fishing Creek Watershed / Bethesda",439.9,178.1],
+  ["1FCWSNP · Fishing Creek Watershed / Newport",441,179.2],
+  ["1FCWSYR · Fishing Creek Watershed / York",436,174.2],
+  ["1NP · Newport",438.9,177.1],
+  ["1OK · Oakdale",438.9,177.1],
+  ["2BE · Bethel",420.5,130.1],
+  ["2LKWBE · Lake Wylie Recreation / Bethel",426.8,136.4],
+  ["2LKWCL · Lake Wylie Recreation / Clover",421.8,131.4],
+  ["2LKWNP · Lake Wylie Recreation / Newport",426.8,136.4],
+  ["2NP · Newport",420.5,130.1],
+  ["3BS · Bethesda",346.1,131],
+  ["3FCWSBS · Fishing Creek Watershed / Bethesda",348.2,133.1],
+  ["3FCWSLS · Fishing Creek Watershed / Lesslie",349.2,134.1],
+  ["3FCWSNP · Fishing Creek Watershed / Newport",349.3,134.2],
+  ["3FCWSOK · Fishing Creek Watershed / Oakdale",349.3,134.2],
+  ["3LS · Lesslie",347.1,132],
+  ["3NP · Newport",347.2,132.1],
+  ["3OK · Oakdale",347.2,132.1],
+  ["3RV · Riverview",352.2,137.1],
+  ["4FH · Flint Hill",518.5,171.4],
+  ["4RV · Riverview",518.5,171.4],
+  ["Clover town",548.1,257.7],
+  ["Hickory Grove town",463.3,201.5],
+  ["Sharon town",470.4,208.6],
+  ["Tega Cay city",582.6,235.5],
+  ["York city",532.7,270.9]
 ];
 
 function applyYork2026Levy(form, index) {
@@ -5881,7 +5881,7 @@ function buildStateTaxScenario(state, countyKey) {
         <option value="">Enter millage manually</option>
         ${YORK_2026_TAX_LEVIES.map(([name], index) => `<option value="${index}">${name}</option>`).join('')}
       </select></label>
-      <p>Match the exact district on the parcel record. Unincorporated base rates exclude fire and special-district overlays. <a href="https://www.yorkcountysc.gov/DocumentCenter/View/10267/2026-Millage-Rates" target="_blank" rel="noopener">York County Auditor millage schedule</a></p>` : ''}
+      <p>Match the exact district on the parcel record. Choose the matching overlay code when one appears on the parcel record. Unincorporated base choices exclude overlays. <a href="https://www.yorkcountysc.gov/DocumentCenter/View/10267/2026-Millage-Rates" target="_blank" rel="noopener">York County Auditor millage schedule</a></p>` : ''}
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:.75rem;margin:.75rem 0;">
       <label>Applicable market or appraised value ($)<br><input type="number" name="marketValue" min="0" step="0.01" required></label>
       ${scenario.rates.map((label, index) => `<label>${label} (mills)<br><input type="number" name="mills${index}" min="0" step="any" required></label>`).join('')}
