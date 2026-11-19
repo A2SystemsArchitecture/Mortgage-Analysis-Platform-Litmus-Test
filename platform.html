@@ -2458,11 +2458,13 @@ const COUNTIES = {
     fxb:20, fxw:40, fab:48, faw:115,
     paUrl:'https://www.shelbyal.com/179/Revenue-Commissioner',
     paName:'Shelby County Revenue Commissioner',
-    notes:'Shelby County AL (Hoover · Pelham · Helena) effective tax rate ~0.47% — lowest of Birmingham-area counties. Alabama 10% homestead assessment ratio. For eligible owners under age 65 who are not disabled, H-1 relief deducts $4,000 of assessed value from state taxes and $2,000 from applicable county taxes; special qualifications apply for additional exemptions. Bills are due October 1 and become delinquent after December 31.',
+    notes:'Alabama DOR October 2026 standard Shelby County rates: Pelham 58.0 mills; Alabaster 54.0; Helena (Shelby portion) 49.0; standard unincorporated county school district 44.0. These rates assume Alabama Class III residential 10% assessment and exclude homestead exemption and parcel fees. Shelby portions of Hoover, Birmingham and Vestavia Hills have different school rates; some municipalities cross county boundaries. Verify parcel location, county school district, any special levy and exemption with the Shelby County Revenue Commissioner. Bills are due October 1 and become delinquent after December 31.',
     state:'al', closingModel:'al',
     districts:[
-      {id:'sha-pelham',label:'Pelham / Helena / Alabaster',tr:0.0051},
-      {id:'sha-uninc',label:'Unincorporated Shelby',tr:0.0046},
+      {id:'sha-pelham',label:'Pelham (2026 standard Shelby district)',tr:0.1 * (6.5 + 7.5 + 30.0 + 14.0) / 1000},
+      {id:'sha-alabaster',label:'Alabaster (2026 standard Shelby district)',tr:0.1 * (6.5 + 7.5 + 30.0 + 10.0) / 1000},
+      {id:'sha-helena',label:'Helena (2026 Shelby portion)',tr:0.1 * (6.5 + 7.5 + 30.0 + 5.0) / 1000},
+      {id:'sha-uninc',label:'Unincorporated Shelby (2026 standard district)',tr:0.1 * (6.5 + 7.5 + 30.0) / 1000},
     ],
     fvb:0,fvw:0},
   'limestone': {
