@@ -3732,6 +3732,17 @@ function procInputs(){
   document.getElementById('t3x').style.display=t===3?'block':'none';
   const b=document.getElementById('ib');
   b.className='btn btn-fw '+(t===1?'btn-tl':t===2?'btn-in':'btn-em');
+  if (S.affPrefill) {
+    const { priceMid, dpPct, il, ih, cr } = S.affPrefill;
+    document.getElementById('fp').value = priceMid;
+    document.getElementById('fd').value = dpPct;
+    document.getElementById('fil').value = il;
+    document.getElementById('fih').value = ih;
+    document.getElementById('fcr').value = cr;
+    S.affPrefill = null;
+    chkRateDisc();
+    updIBtn();
+  }
   show('i');
 }
 
@@ -4941,6 +4952,7 @@ function calcAffordability() {
     document.getElementById('aff-savings-wrap').textContent = 'Neither payment budget supports the minimum $5,000 price increment.';
     document.getElementById('aff-dti-wrap').innerHTML = '';
     S.affResult = null;
+    S.affPrefill = null;
     document.getElementById('aff-results').style.display = 'block';
     document.getElementById('aff-results').scrollIntoView({ behavior: 'smooth' });
     return;
