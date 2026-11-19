@@ -1959,7 +1959,7 @@ const COUNTIES = {
       {id:'ful-johnscreek',label:'Johns Creek (2026 base levy)',tr:0.4 * (8.870 + 0.169 + 17.950 + 3.434 + 0.247) / 1000},
       {id:'ful-alpharetta',label:'Alpharetta / Johns Creek (legacy planning rate)',tr:0.008},
       {id:'ful-roswell',label:'Roswell (2026 base levy)',tr:0.4 * (8.870 + 0.169 + 17.950 + 5.232) / 1000},
-      {id:'ful-uninc',label:'Unincorporated Fulton',tr:0.0085},
+      {id:'ful-uninc',label:'Unincorporated Fulton (legacy planning rate)',tr:0.0085,legacyOnly:true},
     ],
     fvb:0,fvw:0},
   'dekalb': {
@@ -7861,19 +7861,20 @@ function renderDistrictPills(countyKey, preferredDistrictId) {
   const container = document.getElementById('district-pills');
   ACTIVE_DISTRICT = null;
   const districts = c?.districts || [];
+  const selectableDistricts = districts.filter(district => !district.legacyOnly);
   const selected = preferredDistrictId === undefined
-    ? (districts.length > 1 ? districts[0] : null)
+    ? (selectableDistricts.length > 1 ? selectableDistricts[0] : null)
     : districts.find(district => district.id === preferredDistrictId);
   if (selected) selectDistrict(countyKey, selected, null, true);
   if (!row || !container) return;
 
-  if (districts.length <= 1) {
+  if (selectableDistricts.length <= 1) {
     row.classList.remove('visible');
     return;
   }
   
   container.innerHTML = '';
-  districts.forEach(function(d) {
+  selectableDistricts.forEach(function(d) {
     const btn = document.createElement('button');
     btn.className = 'district-pill' + (d === selected ? ' active' : '');
     btn.textContent = d.label;
