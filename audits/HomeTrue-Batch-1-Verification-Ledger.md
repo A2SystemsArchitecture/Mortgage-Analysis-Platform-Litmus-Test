@@ -73,6 +73,10 @@ These percentages describe distinct milestones. They are not an overall audit co
 - Fulton County's 2026 countywide operating and bond levies total 9.039 mills. Atlanta has a separate school system. The APS tax digest notice lists 20.500 mills, while the October 5 meeting record describes a 20.300-mill proposal and does not capture the vote. Neither rate is certified here as the adopted 2026 APS levy. The difference is $46.00 annually on a fictional $575,000 home at 40% assessment. [County resolution](https://fulton.legistar.com/LegislationDetail.aspx?ID=8260230&GUID=E8B46EDA-1D4F-4381-B28A-BC0CAE1F517F) · [APS notice](https://www.atlantapublicschools.us/about/departments/finance/budget-services/fy2027-budget)
 - Municipal item 26-O-1237 is identified in the council's budget announcement. Obtain the enacted schedule and the approved APS levy before replacing the City of Atlanta 1.10% planning rate. This entry covers Atlanta addresses in Fulton County. [Council announcement](https://citycouncil.atlantaga.gov/Home/Components/News/News/4564/)
 
+### Fulton follow-up: unincorporated residential selection
+
+- Fulton County's 2045 Comprehensive Plan documents no privately owned residential units in unincorporated Fulton. The calculator removes that choice for new residential scenarios while resolving existing links with the same legacy rate (`68daf4c`). Executed the district-rendering function with simulated controls to verify legacy restoration and default selection. [Fulton County Comprehensive Plan](https://dca.georgia.gov/document/document/fulton-county-comprehensive-plan-update-2025/download)
+
 ## Main buyer totals
 
 - `collectInp` and `checkShareURL` use the selected market/district planning multiplier and retain the unrounded monthly property-tax estimate internally. The monthly display rounds to a whole dollar. The affordability path likewise uses the selected planning multiplier. The standalone tax-guide output does not feed these paths.
