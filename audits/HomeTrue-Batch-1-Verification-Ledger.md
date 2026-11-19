@@ -7,9 +7,9 @@ Scope: Florida, Georgia, Alabama and South Carolina. Inventory reconciled to all
 | Checkpoint | Passed / scope | What the count measures |
 |---|---:|---|
 | State with tested standalone property-tax rules | 4 / 4 | At least one rule for each state. No implication about remaining rules. |
-| Market with an evidenced local property-tax calculation exercised | 8 / 31 (25.8%) | Gwinnett, Cobb, Forsyth, Shelby, Charleston, Berkeley, York and Dorchester. Historical cases count and are identified below. |
-| Market with an evidenced current-year district property-tax calculation exercised | 4 / 31 (12.9%) | Gwinnett, Charleston, Berkeley and York. This includes standalone cases. |
-| Market with an evidenced district correction in main buyer flow | 1 / 31 (3.2%) | Four named pre-exemption base district selections in Gwinnett. |
+| Market with an evidenced local property-tax calculation exercised | 9 / 31 (29.0%) | Miami-Dade, Gwinnett, Cobb, Forsyth, Shelby, Charleston, Berkeley, York and Dorchester. Historical cases count and are identified below. |
+| Market with an evidenced current-year district property-tax calculation exercised | 5 / 31 (16.1%) | Miami-Dade, Gwinnett, Charleston, Berkeley and York. This includes standalone cases. |
+| Market with an evidenced district correction in main buyer flow | 2 / 31 (6.5%) | Six Miami-Dade and four Gwinnett pre-exemption base districts. |
 | Market with full financial sign-off | 0 / 31 | Full rule, market and buyer-output reconciliation. |
 | State with full financial sign-off | 0 / 4 | Full statewide and local financial reconciliation. |
 
@@ -30,7 +30,7 @@ These percentages describe distinct milestones. They are not an overall audit co
 
 | State | Market | Evidence and open work |
 |---|---|---|
-| FL | Miami-Dade County | Official 2026 component evidence and closing cases saved. Complete district and 2027 reconciliation open. |
+| FL | Miami-Dade County | Six adopted 2026 base district rates feed the main pre-exemption estimate. The unincorporated standard homestead calculation passed separately. Parcel overlays, exemptions, fees and 2027 levies remain open. [Tests](../tests/hometrue-miami-dade-2026-districts.js) |
 | FL | Broward County | Closing charges benchmarked. District and buyer property tax open. |
 | FL | Palm Beach County | No locally reconciled property-tax case documented in this ledger. Verify district rates, qualifications, fees and buyer totals. |
 | FL | Martin County | No locally reconciled property-tax case documented in this ledger. Verify district rates, qualifications, fees and buyer totals. |
