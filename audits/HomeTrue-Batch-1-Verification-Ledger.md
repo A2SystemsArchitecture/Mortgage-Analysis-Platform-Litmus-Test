@@ -79,6 +79,11 @@ These percentages describe distinct milestones. They are not an overall audit co
 
 - Fulton County's 2045 Comprehensive Plan documents no privately owned residential units in unincorporated Fulton. The calculator removes that choice for new residential scenarios while resolving existing links with the same legacy rate (`68daf4c`). Executed the district-rendering function with simulated controls to verify legacy restoration and default selection. [Fulton County Comprehensive Plan](https://dca.georgia.gov/document/document/fulton-county-comprehensive-plan-update-2025/download)
 
+### Cobb follow-up: standard unincorporated district
+
+- Cobb commissioners adopted 8.46 county operating and 2.97 fire mills for 2026. The 2.45-mill Cumberland special district is outside this standard benchmark. The school district's 2026 notice proposed 18.70 mills; the final July 23 school action is still open. A general county information page shows a different fire rate, so use the dated adoption record. [County millage announcement](https://www.cobbcounty.gov/news/2027-budget-millage-information-updates) · [County vote](https://www.openpublica.com/meetings/cobbcounty-georgia-board-of-commissioners-2026-07-28-6a6a1c4755dd56a3321c56da) · [School notice](https://www.cobbk12.org/notice-of-property-tax-increase.131370) · [School meeting archive](https://portal.cobbk12.org/boardmeetingagenda/main/Archive.aspx)
+- The assessor confirms the full standard **2025** schedule was 30.13 mills. At 40% assessment, this is $6,929.90 for a fictional $575,000 home before exemptions and separate charges. The 2026 ordinary baseline would match if the school rate was adopted as proposed and no additional levy applies. HomeTrue's 0.68% planning multiplier gives $3,910.00. Pending 2026 school evidence, retain this comparison as a benchmark and leave the buyer rate unchanged. [Assessor's dated schedule](https://assessor.cobbcounty.gov/faqs/)
+
 ## Main buyer totals
 
 - `collectInp` and `checkShareURL` use the selected market/district planning multiplier and retain the unrounded monthly property-tax estimate internally. The monthly display rounds to a whole dollar. The affordability path likewise uses the selected planning multiplier. The standalone tax-guide output does not feed these paths.
