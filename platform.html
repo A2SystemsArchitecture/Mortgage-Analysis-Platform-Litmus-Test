@@ -5945,11 +5945,11 @@ function buildStateTaxScenario(state, countyKey) {
       ${scenario.rates.map((label, index) => `<label>${label} (mills)<br><input type="number" name="mills${index}" min="0" step="any" required></label>`).join('')}
       <label>Classification or exemption<br><select name="status" required><option value="">Select status</option><option value="no">${scenario.statuses[0]}</option><option value="yes">${scenario.statuses[1]}</option></select></label>
       ${state === 'sc' ? `<label>Other verified annual tax credits ($)<br><input type="number" name="credits" min="0" step="0.01" placeholder="0"></label>
-      <label>Verified annual bill fees ($)<br><input type="number" name="fees" min="0" step="0.01" placeholder="0"></label>` : ''}
+      <label>Verified annual bill fees ($)<br><input type="number" name="fees" min="0" step="0.01" placeholder="Leave blank if unknown"></label>` : ''}
     </div>
     <button class="btn bp" type="submit">Calculate property tax</button>
     <output aria-live="polite" style="display:block;margin-top:.75rem;"></output>
-    <p>Use official millage rates for the property and tax year. ${state === 'sc' ? 'Enter only verified annual credits and fees from the auditor. School operating relief is already applied in the 4% scenario.' : 'This estimate excludes special assessments and billing adjustments.'} Report and affordability totals still use the market planning rate.</p>
+    <p>Use official millage rates for the property and tax year. ${state === 'sc' ? 'Enter only verified annual credits and fees from the auditor. Leave fees blank if unknown, or enter 0 if verified. School operating relief is already applied in the 4% scenario.' : 'This estimate excludes special assessments and billing adjustments.'} Report and affordability totals still use the market planning rate.</p>
   </form>`;
 }
 
@@ -5976,6 +5976,7 @@ function showStateTaxScenario(form, state) {
     charlestonCredit = calculateCharleston2026SalesTaxCredit(fields.namedItem('marketValue').valueAsNumber, index);
   }
 
+  const feesEntered = state === 'sc' && fields.namedItem('fees').value !== '';
   const adjustments = state === 'sc' ? applyTaxBillAdjustments(result.annualTax,
     ...['credits', 'fees'].map(name => {
       const field = fields.namedItem(name);
@@ -5993,8 +5994,9 @@ function showStateTaxScenario(form, state) {
     'Estimated annual ad valorem tax ' + currency.format(result.annualTax),
     ...(charlestonCredit ? ['Charleston sales-tax credits ' + currency.format(charlestonCredit)] : []),
     ...(adjustments ? ['Annual tax after credits ' + currency.format(adjustments.netTax),
-      'Estimated annual bill including entered fees ' + currency.format(adjustments.amountDue)] : []),
-    'Monthly equivalent ' + currency.format((adjustments ? adjustments.amountDue : result.annualTax) / 12)].join(' | ');
+      feesEntered ? 'Estimated annual bill including entered fees ' + currency.format(adjustments.amountDue) : 'Bill fees are unknown'] : []),
+    (adjustments && !feesEntered ? 'Monthly tax before bill fees ' : 'Monthly equivalent ') +
+      currency.format((adjustments ? adjustments.amountDue : result.annualTax) / 12)].join(' | ');
 }
 
 function buildHomesteadGuide(inp) {
