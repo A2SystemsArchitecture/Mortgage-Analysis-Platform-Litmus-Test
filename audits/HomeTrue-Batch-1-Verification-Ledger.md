@@ -64,8 +64,8 @@ These percentages describe distinct milestones. They are not an overall audit co
 
 ### Fulton follow-up: Sandy Springs
 
-- The city's 2026 public notice lists **4.731 proposed city mills**. The November 3 morning hearing did not adopt the rate. The city's general tax explainer repeats 4.731 city mills but shows an older county/school breakdown. Final evening action remains to be sourced before changing the calculator. [2026 public notice](https://www.sandyspringsga.gov/news/proposed-property-tax-increase-hearings/) · [Morning hearing record](https://www.openpublica.com/meetings/sandysprings-georgia-city-council-2026-11-03-6ae9f97dbe45b19feab4ee65) · [Official meeting portal](https://sandyspringsga.civicclerk.com/)
-- Conditional benchmark: 26.989 confirmed county and school mills plus 4.731 proposed city mills = 31.720 mills. At 40% assessment, a fictional $575,000 home would produce $7,295.60 annually before exemptions or parcel-specific charges. The current 0.88% planning multiplier gives $5,060.00. Await the final city adoption record before counting this district as verified.
+- Signed Ordinance **2026-11-027**, adopted November 3, sets **4.731 city mills** for tax year 2026 (fiscal year 2027). [City ordinance register](https://www.sandyspringsga.gov/ordinances/city-council/)
+- The main calculator's Sandy Springs choice now uses 8.870 county + 0.169 county bond + 17.950 school + 4.731 city = 31.720 mills at 40% assessment (`5584599`). A fictional $575,000 home produces $7,295.60 annually before exemptions and separate charges; checked against the stored multiplier. The prior estimate was $5,060.00. Parcel and browser checks remain open. Fulton already counts in the market milestone through Roswell.
 - Alpharetta's city tax page lists a proposed 5.750 mills for 2026. HomeTrue currently groups Alpharetta and Johns Creek under one multiplier. Verify each city's adopted levy individually before assigning revised rates. [Alpharetta city tax page](https://www.alpharetta.ga.us/property-taxes)
 
 ## Main buyer totals
