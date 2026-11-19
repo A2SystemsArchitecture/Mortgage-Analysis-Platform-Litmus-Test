@@ -28,4 +28,7 @@ const rate = new Function('document', html.slice(dataStart, dataEnd) + '\nlet AC
   });
 assert.ok(Math.abs(rate[0] * 300000 - 4183.20) < 1e-8);
 assert.equal(Math.round(rate[0] * 300000 / 12), 349);
-assert.deepEqual(rate.slice(1), [0.0095, 0.01]);
+assert.equal(rate[1], 0.0095);
+// Lawrenceville's separate 3.26 city mills are added to Gwinnett's 31.6 mills.
+assert.ok(Math.abs(rate[2] * 300000 - 4183.20) < 1e-8);
+assert.equal(Math.round(rate[2] * 300000 / 12), 349);
