@@ -5928,6 +5928,18 @@ const BERKELEY_2026_TAX_LEVIES = [
   ["Base districts (1–8, 81, 99)",246.5,99.6]
 ];
 
+// County factor 0.000793; municipal factors in the Auditor's preset order.
+const BERKELEY_2026_CITY_CREDIT_FACTORS = [
+  0.001224, 0.000470, 0.001867, 0.000650, 0.002281, 0.000679,
+  0.001730, 0, 0, 0, 0.000573, 0, 0
+];
+
+function calculateBerkeley2026SalesTaxCredit(value, index) {
+  const factor = index === '' ? undefined : BERKELEY_2026_CITY_CREDIT_FACTORS[Number(index)];
+  if (!Number.isFinite(value) || value < 0 || factor === undefined) return null;
+  return (Math.round(value * 0.000793 * 100) + Math.round(value * factor * 100)) / 100;
+}
+
 function applyBerkeley2026Levy(form, index) {
   applyDistrictLevy(form, index, BERKELEY_2026_TAX_LEVIES);
 }
@@ -5948,11 +5960,13 @@ function buildStateTaxScenario(state, countyKey) {
     <span class="nl nl-em">${scenario.name} property tax scenario</span>
     <p>${scenario.note}</p>
     ${state === 'sc' && countyKey === 'berkeley-sc' ? `<label>Berkeley County 2026/2027 levy (optional)<br>
-      <select onchange="applyBerkeley2026Levy(this.form, this.value)">
+      <select name="berkeleyDistrict" onchange="applyBerkeley2026Levy(this.form, this.value)">
         <option value="">Enter millage manually</option>
         ${BERKELEY_2026_TAX_LEVIES.map(([name], index) => `<option value="${index}">${name}</option>`).join('')}
       </select></label>
-      <p>Match the district code on your parcel record. Enter applicable county or municipal credits and fees separately. <a href="https://berkeleycountysc.gov/dept/auditor/millage/" target="_blank" rel="noopener">Berkeley County Auditor millage schedule</a></p>` : ''}
+      <p>Match the district code on your parcel record. Use the taxable appraised value before the assessment ratio. <a href="https://berkeleycountysc.gov/dept/auditor/millage/" target="_blank" rel="noopener">Berkeley County Auditor millage schedule</a></p>
+      <label><input type="checkbox" name="berkeleySalesTaxCredit"> Apply published county and municipal sales-tax credits for this district</label>
+      <p>If selected, enter only additional verified credits and applicable fees below.</p>` : ''}
     ${state === 'sc' && countyKey === 'charleston-sc' ? `<label>2026 Charleston County levy (optional)<br>
       <select name="charlestonDistrict" onchange="applyCharleston2026Levy(this.form, this.value)">
         <option value="">Enter millage manually</option>
@@ -5991,16 +6005,21 @@ function showStateTaxScenario(form, state) {
     output.textContent = 'Enter a valid value, all millage rates and an applicable status.';
     return;
   }
-  let charlestonCredit = 0;
-  if (state === 'sc' && fields.namedItem('charlestonSalesTaxCredit')?.checked) {
-    const index = fields.namedItem('charlestonDistrict').value;
-    const district = index === '' ? null : CHARLESTON_2026_TAX_LEVIES[Number(index)];
+  let salesTaxCredit = 0;
+  const berkeleyCredit = fields.namedItem('berkeleySalesTaxCredit')?.checked;
+  const charlestonCredit = fields.namedItem('charlestonSalesTaxCredit')?.checked;
+  const creditCounty = berkeleyCredit ? 'Berkeley' : 'Charleston';
+  if (state === 'sc' && (berkeleyCredit || charlestonCredit)) {
+    const index = fields.namedItem(berkeleyCredit ? 'berkeleyDistrict' : 'charlestonDistrict').value;
+    const levies = berkeleyCredit ? BERKELEY_2026_TAX_LEVIES : CHARLESTON_2026_TAX_LEVIES;
+    const district = index === '' ? null : levies[Number(index)];
     if (!district || Math.abs(fields.namedItem('mills0').valueAsNumber - (district[1] - district[2])) > 1e-8
         || fields.namedItem('mills1').valueAsNumber !== district[2]) {
-      output.textContent = 'Select the matching Charleston district and use its published millage to apply the sales-tax credits.';
+      output.textContent = 'Select the matching ' + creditCounty + ' district and use its published millage to apply the sales-tax credits.';
       return;
     }
-    charlestonCredit = calculateCharleston2026SalesTaxCredit(fields.namedItem('marketValue').valueAsNumber, index);
+    const calculateCredit = berkeleyCredit ? calculateBerkeley2026SalesTaxCredit : calculateCharleston2026SalesTaxCredit;
+    salesTaxCredit = calculateCredit(fields.namedItem('marketValue').valueAsNumber, index);
   }
 
   const feesEntered = state === 'sc' && fields.namedItem('fees').value !== '';
@@ -6008,7 +6027,7 @@ function showStateTaxScenario(form, state) {
     ...['credits', 'fees'].map(name => {
       const field = fields.namedItem(name);
       const entered = field.value === '' ? 0 : field.valueAsNumber;
-      return name === 'credits' ? entered + charlestonCredit : entered;
+      return name === 'credits' ? entered + salesTaxCredit : entered;
     })) : null;
   if (state === 'sc' && !adjustments) {
     output.textContent = 'Enter valid bill adjustments. Credits cannot exceed the calculated ad valorem tax.';
@@ -6019,7 +6038,7 @@ function showStateTaxScenario(form, state) {
   const bases = scenario.rates.map((label, index) => label + ' taxable value ' + currency.format(result.taxableValues[index]));
   output.textContent = ['Assessed value ' + currency.format(result.assessedValue), ...bases,
     'Estimated annual ad valorem tax ' + currency.format(result.annualTax),
-    ...(charlestonCredit ? ['Charleston sales-tax credits ' + currency.format(charlestonCredit)] : []),
+    ...(salesTaxCredit ? [creditCounty + ' sales-tax credits ' + currency.format(salesTaxCredit)] : []),
     ...(adjustments ? ['Annual tax after credits ' + currency.format(adjustments.netTax),
       feesEntered ? 'Estimated annual bill including entered fees ' + currency.format(adjustments.amountDue) : 'Bill fees are unknown'] : []),
     (adjustments && !feesEntered ? 'Monthly tax before bill fees ' : 'Monthly equivalent ') +
