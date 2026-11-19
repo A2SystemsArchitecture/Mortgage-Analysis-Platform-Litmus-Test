@@ -3886,7 +3886,7 @@ function collectInp(){
   const bt=bpi+(pri?ty2:ty1)+hoa+bi+bp+fb;
   const wt=wpi+ty1+hoa+wi+wp+fw+ep;
   const pn=Math.round((bt+wt)/2/50)*50;
-  S.inp={address:document.getElementById('fa').value.trim()||'Property Address',price,dpct,damt,loan,byr,rage,rtp,con,sht,hoa,fld,ilo,ihi,pri,crd,br,wr,bpi,wpi,ty1,ty2,bi,wi,il,ic,ix,bp,wp,fb,fw,ep,bt,wt,pn,tier:t};
+  S.inp={countyKey:ACTIVE_COUNTY,districtId:ACTIVE_DISTRICT?.id || '',address:document.getElementById('fa').value.trim()||'Property Address',price,dpct,damt,loan,byr,rage,rtp,con,sht,hoa,fld,ilo,ihi,pri,crd,br,wr,bpi,wpi,ty1,ty2,bi,wi,il,ic,ix,bp,wp,fb,fw,ep,bt,wt,pn,tier:t};
   if(S2&&S2.comparingProp2) S2.comparingProp2=false;
 }
 
@@ -6516,6 +6516,11 @@ function shareAnalysis() {
     ix: inp.ix ? 1 : 0,
   });
 
+  if (Object.hasOwn(COUNTIES, inp.countyKey)) {
+    params.set('county', inp.countyKey);
+    if (inp.districtId) params.set('district', inp.districtId);
+  }
+
   const shareURL = window.location.origin + window.location.pathname + '?' + params.toString();
 
   if (navigator.clipboard) {
@@ -6542,8 +6547,16 @@ function checkShareURL() {
   const params = new URLSearchParams(window.location.search);
   if (!params.get('addr')) return;
 
+  const countyKey = params.get('county');
+  if (Object.hasOwn(COUNTIES, countyKey)) {
+    setCounty(countyKey);
+    renderDistrictPills(countyKey, params.get('district'));
+  }
+
   // Reconstruct inputs from URL
   const inp = {
+    countyKey: ACTIVE_COUNTY,
+    districtId: ACTIVE_DISTRICT?.id || '',
     address: params.get('addr'),
     price: parseFloat(params.get('price')) || 399000,
     dpct: parseFloat(params.get('dp')) || 3,
@@ -7519,32 +7532,31 @@ IF BUYER IS IN LIVINGSTON PARISH — Roscoe must proactively address flood risk:
 // ── DISTRICT SELECTOR ──
 let ACTIVE_DISTRICT = null;
 
-function renderDistrictPills(countyKey) {
+function renderDistrictPills(countyKey, preferredDistrictId) {
   const c = COUNTIES[countyKey];
   const row = document.getElementById('district-row');
   const container = document.getElementById('district-pills');
+  ACTIVE_DISTRICT = null;
+  const districts = c?.districts || [];
+  const selected = preferredDistrictId === undefined
+    ? (districts.length > 1 ? districts[0] : null)
+    : districts.find(district => district.id === preferredDistrictId);
+  if (selected) selectDistrict(countyKey, selected, null, true);
   if (!row || !container) return;
-  
-  if (!c || !c.districts || c.districts.length <= 1) {
+
+  if (districts.length <= 1) {
     row.classList.remove('visible');
     return;
   }
   
   container.innerHTML = '';
-  ACTIVE_DISTRICT = null;
-  
-  c.districts.forEach(function(d, i) {
+  districts.forEach(function(d) {
     const btn = document.createElement('button');
-    btn.className = 'district-pill' + (i === 0 ? ' active' : '');
+    btn.className = 'district-pill' + (d === selected ? ' active' : '');
     btn.textContent = d.label;
     btn.onclick = function() { selectDistrict(countyKey, d, btn); };
     container.appendChild(btn);
   });
-  
-  // Auto-select first district
-  if (c.districts.length > 0) {
-    selectDistrict(countyKey, c.districts[0], null, true);
-  }
   
   row.classList.add('visible');
 }
