@@ -4972,6 +4972,7 @@ function buildRateContext(inp) {
 }
 
 function buildClosingCosts(inp) {
+  const formatCharge = amount => amount.toLocaleString('en-US', {style: 'currency', currency: 'USD', minimumFractionDigits: Number.isInteger(amount) ? 0 : 2, maximumFractionDigits: 2});
   const p = inp.price;
   const loan = inp.loan;
   const tier = inp.tier;
@@ -5003,27 +5004,42 @@ function buildClosingCosts(inp) {
     // Florida closing cost model
     const deedStamp = Math.round(Math.ceil(p/100) * (ACTIVE_COUNTY === 'miami-dade' ? 0.60 : 0.70) * 100)/100; // Miami-Dade assumes a single-family home; special surtax depends on property type
     const mortgageStamp = Math.round(Math.ceil(loan/100)*0.35*100)/100;
-    const intangibleTax = Math.round(loan * 0.002);
+    const intangibleTax = Math.round(loan * 0.2) / 100;
     const recordingFee = 185;
     const titleSearch = 250;
-    const titleInsLender = Math.round(loan * 0.00575);
-    const titleInsOwner = Math.round(p * 0.00575);
+    // Florida Rule 69O-186.003: original single-conveyance risk premium.
+    const originalTitlePremium = coverage => {
+      const roundedCoverage = Math.ceil(coverage / 100) * 100;
+      const brackets = [
+        [0, 100000, 5.75],
+        [100000, 1000000, 5],
+        [1000000, 5000000, 2.50],
+        [5000000, 10000000, 2.25],
+        [10000000, Infinity, 2]
+      ];
+      const premium = brackets.reduce((total, [lower, upper, rate]) =>
+        total + Math.max(0, Math.min(upper, roundedCoverage) - lower) * rate / 1000, 0);
+      return Math.max(100, Math.round(premium * 100) / 100);
+    };
+    const titleInsOwner = p > 0 ? originalTitlePremium(p) : 0;
+    // Use simultaneous issue only where loan coverage is within the assumed owner's coverage.
+    const titleInsLender = loan > 0 ? (loan <= p ? 25 : originalTitlePremium(loan)) : 0;
     const settlementFee = 595;
     govTotal = mortgageStamp + intangibleTax + recordingFee; // Deed stamp shown separately: normally seller-funded, but legally negotiable
     titleTotal = titleSearch + titleInsLender + titleInsOwner + settlementFee;
-    stateNote = `<span class="nl nl-tl">${countyName} — Florida</span><p>Florida has some of the highest closing costs in the nation due to documentary stamp taxes and intangible taxes on mortgages. Figures calculated for a ${fmt(p)} purchase. ${tier < 3 ? 'Figures are estimates — confirm all amounts with your title company and lender before closing.' : 'Confirm all figures against your official Closing Disclosure.'}</p>`;
+    stateNote = `<span class="nl nl-tl">${countyName} — Florida</span><p>Florida charges documentary stamp taxes and a nonrecurring intangible tax on qualifying secured debt. Figures calculated for a ${fmt(p)} purchase. ${tier < 3 ? 'Figures are estimates — confirm all amounts with your title company and lender before closing.' : 'Confirm all figures against your official Closing Disclosure.'}</p>`;
     govSection = `<div class="cc-section"><div class="cc-section-title">Government Taxes &amp; Recording Fees</div>
-      <div class="cc-row"><div class="cc-item">Documentary Stamp Tax — Deed (Seller's Assumed Share)<span class="cc-note">${ACTIVE_COUNTY === 'miami-dade' ? '$0.60 per $100 in Miami-Dade for single-family residence; other transfers may add surtax' : '$0.70 per $100 of consideration'}; normally funded by seller; excluded from buyer subtotal, but all nonexempt parties remain legally liable</span></div><div class="cc-val">${fmt(deedStamp)}</div></div>
-      <div class="cc-row"><div class="cc-item">Documentary Stamp Tax — Mortgage<span class="cc-note">$0.35 per $100 of loan amount — paid by buyer</span></div><div class="cc-val">${fmt(mortgageStamp)}</div></div>
-      <div class="cc-row"><div class="cc-item">Intangible Tax on Mortgage<span class="cc-note">$0.20 per $100 of loan amount — Florida specific</span></div><div class="cc-val">${fmt(intangibleTax)}</div></div>
+      <div class="cc-row"><div class="cc-item">Documentary Stamp Tax — Deed (Seller's Assumed Share)<span class="cc-note">${ACTIVE_COUNTY === 'miami-dade' ? '$0.60 per $100 in Miami-Dade for single-family residence; other taxable transfers can add $0.45 per $100; estimate excludes that surtax' : '$0.70 per $100 of consideration'}; normally funded by seller; excluded from buyer subtotal, but all nonexempt parties remain legally liable</span></div><div class="cc-val">${formatCharge(deedStamp)}</div></div>
+      <div class="cc-row"><div class="cc-item">Documentary Stamp Tax — Mortgage<span class="cc-note">$0.35 per $100 of loan amount — paid by buyer</span></div><div class="cc-val">${formatCharge(mortgageStamp)}</div></div>
+      <div class="cc-row"><div class="cc-item">Intangible Tax on Mortgage<span class="cc-note">0.2% of eligible secured debt; lender liable and may pass through to buyer. Estimate assumes the full loan qualifies</span></div><div class="cc-val">${formatCharge(intangibleTax)}</div></div>
       <div class="cc-row"><div class="cc-item">Recording Fees<span class="cc-note">Clerk of Courts — deed and mortgage recording</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
-      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
+      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${formatCharge(govTotal)}</span></div></div>`;
     titleSection = `<div class="cc-section"><div class="cc-section-title">Title &amp; Settlement Fees</div>
       <div class="cc-row"><div class="cc-item">Title Search &amp; Exam<span class="cc-note">Public records search for liens, judgments, encumbrances</span></div><div class="cc-val">${fmt(titleSearch)}</div></div>
-      <div class="cc-row"><div class="cc-item">Lender's Title Insurance<span class="cc-note">Required by lender — protects lender's interest in property</span></div><div class="cc-val">${fmt(titleInsLender)}</div></div>
-      <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended — protects your ownership interest permanently</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
+      <div class="cc-row"><div class="cc-item">Lender's Title Insurance<span class="cc-note">${loan > p ? 'Standalone original-policy planning amount' : 'Financed purchase assumes eligible simultaneous issuance with the owner policy and budgets the $25 minimum'}; confirm eligibility and quote</span></div><div class="cc-val">${formatCharge(titleInsLender)}</div></div>
+      <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Original-policy risk premium assumes coverage equal to purchase price; reissue discounts, endorsements and payer allocation depend on the transaction</span></div><div class="cc-val">${formatCharge(titleInsOwner)}</div></div>
       <div class="cc-row"><div class="cc-item">Settlement / Closing Fee<span class="cc-note">Title company or attorney coordination fee</span></div><div class="cc-val">${fmt(settlementFee)}</div></div>
-      <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Settlement Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
+      <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Settlement Subtotal</span><span class="cc-total-val">${formatCharge(titleTotal)}</span></div></div>`;
     reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Hurricane deductible exposure: ${fmt(p*.02)}–${fmt(p*.05)} additional. Have all three buckets funded before making an offer.`;
 
   } else if (model === 'texas') {
@@ -5096,12 +5112,12 @@ function buildClosingCosts(inp) {
     const settlementFee = 250;
     govTotal = intangibleRecordingTax + recordingFee;
     titleTotal = titleSearch + titleInsLender + titleInsOwner + attorneyFee + settlementFee;
-    stateNote = `<span class="nl" style="color:var(--georgia-dim);">${countyName} — Georgia</span><p>Georgia is an <strong>attorney-closed state</strong> — a real estate attorney is required and is a buyer cost. Georgia's <strong>intangible recording tax</strong> of $1.50 per $500 of loan amount is paid by the buyer and recorded with the deed of trust. The state transfer tax of $1 per $1,000 is customarily paid by the seller. Georgia property is assessed at <strong>40% of fair market value</strong> — your assessed value will be significantly lower than your purchase price. Confirm all figures against your official Closing Disclosure.</p>`;
+    stateNote = `<span class="nl" style="color:var(--georgia-dim);">${countyName} — Georgia</span><p>Georgia is an <strong>attorney-closed state</strong> — a real estate attorney is required and is a buyer cost. Georgia's <strong>intangible recording tax</strong> of $1.50 per $500 of loan amount is collected from the holder of a qualifying long-term note and budgeted here as a buyer expense. The state transfer tax of $1 per $1,000 is customarily paid by the seller. Georgia property is assessed at <strong>40% of fair market value</strong> — assessor-determined fair market value can differ from the purchase price. Confirm all figures against your official Closing Disclosure.</p>`;
     govSection = `<div class="cc-section"><div class="cc-section-title">Government Taxes &amp; Recording Fees</div>
-      <div class="cc-row"><div class="cc-item">Intangible Recording Tax (Buyer Pays)<span class="cc-note">$1.50 per $500 of loan amount — Georgia specific, recorded with security deed</span></div><div class="cc-val">${fmt(intangibleRecordingTax)}</div></div>
+      <div class="cc-row"><div class="cc-item">Intangible Recording Tax (Assumed Buyer Cost)<span class="cc-note">$1.50 per $500 or fraction of a qualifying long-term note, up to $25,000 per note</span></div><div class="cc-val">${formatCharge(intangibleRecordingTax)}</div></div>
       <div class="cc-row"><div class="cc-item">Recording Fees<span class="cc-note">Clerk of Superior Court — deed and security deed recording</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
-      <div class="cc-row"><div class="cc-item">State Transfer Tax<span class="cc-note">$1 per $1,000 of purchase price — customarily paid by seller (${fmt(transferTax)} on this purchase)</span></div><div class="cc-val">Seller</div></div>
-      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
+      <div class="cc-row"><div class="cc-item">State Transfer Tax<span class="cc-note">$1 for the first $1,000 or fraction, then $0.10 per additional $100 or fraction; seller liable, contract may allocate cost (${formatCharge(transferTax)} on this purchase)</span></div><div class="cc-val">Seller</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${formatCharge(govTotal)}</span></div></div>`;
     titleSection = `<div class="cc-section"><div class="cc-section-title">Title, Attorney &amp; Settlement Fees</div>
       <div class="cc-row"><div class="cc-item">Closing Attorney Fee<span class="cc-note">Georgia is an attorney-closed state — attorney examines title and conducts closing. Required buyer cost.</span></div><div class="cc-val">${fmt(attorneyFee)}</div></div>
       <div class="cc-row"><div class="cc-item">Title Search &amp; Exam<span class="cc-note">Public records search — may be bundled into attorney fee</span></div><div class="cc-val">${fmt(titleSearch)}</div></div>
@@ -5117,14 +5133,14 @@ function buildClosingCosts(inp) {
     const titleInsOwner = Math.round(p * 0.00300);
     const attorneyFee = 850;
     const settlementFee = 250;
-    const transferTax = Math.round(Math.ceil(p / 500) * 1.85);
+    const transferTax = p > 100 ? Math.ceil(p / 500) * 185 / 100 : 0;
     govTotal = deedRecordingFee;
     titleTotal = titleSearch + titleInsLender + titleInsOwner + attorneyFee + settlementFee;
-    stateNote = `<span class="nl" style="color:var(--sc-dim);">${countyName} — South Carolina</span><p>South Carolina is an <strong>attorney-closed state</strong>. SC assesses approved qualifying legal residences at <strong>4% of market value</strong>; without approval the usual 6% classification may apply. The deed recording fee is $1.85 per $500 or fraction of taxable realty value. Its payment should be confirmed in the sales agreement; it is excluded from the assumed buyer subtotal here. It is shown separately and excluded from assumed buyer costs. Routine recording charges are estimates. SC Homestead Exemption is for qualifying age 65+, totally and permanently disabled, or legally blind homeowners. The state temporarily authorized additional relief for some qualifying recipients in tax year 2026; check with the county auditor. Confirm all figures against your official Closing Disclosure.</p>`;
+    stateNote = `<span class="nl" style="color:var(--sc-dim);">${countyName} — South Carolina</span><p>South Carolina is an <strong>attorney-closed state</strong>. SC assesses approved qualifying legal residences at <strong>4% of market value</strong>; without approval the usual 6% classification may apply. The deed recording fee is $1.85 per $500 or fraction of taxable realty value. Its payment should be confirmed in the sales agreement; it is excluded from the assumed buyer subtotal here. Routine recording charges are estimates. SC Homestead Exemption is for qualifying age 65+, totally and permanently disabled, or legally blind homeowners. The state temporarily authorized additional relief for some qualifying recipients in tax year 2026; check with the county auditor. Confirm all figures against your official Closing Disclosure.</p>`;
     govSection = `<div class="cc-section"><div class="cc-section-title">Government &amp; Recording Fees</div>
       <div class="cc-row"><div class="cc-item">Ordinary Document Recording Fee (Buyer Estimate)<span class="cc-note">Estimated local document-recording charge; does not include seller's deed recording fee</span></div><div class="cc-val">${fmt(deedRecordingFee)}</div></div>
-      <div class="cc-row"><div class="cc-item">State Transfer Tax<span class="cc-note">$1.85 per $500 or fraction of property value; generally imposed on grantor/seller (${fmt(transferTax)})</span></div><div class="cc-val">Seller</div></div>
-      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
+      <div class="cc-row"><div class="cc-item">Deed Recording Fee (State and County)<span class="cc-note">$1.85 per $500 or fraction of taxable realty value above the $100 exemption threshold; seller generally liable and buyer generally secondarily liable (${formatCharge(transferTax)})</span></div><div class="cc-val">Seller</div></div>
+      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${formatCharge(govTotal)}</span></div></div>`;
     titleSection = `<div class="cc-section"><div class="cc-section-title">Title, Attorney &amp; Settlement</div>
       <div class="cc-row"><div class="cc-item">Closing Attorney Fee<span class="cc-note">SC is attorney-closed — required buyer cost</span></div><div class="cc-val">${fmt(attorneyFee)}</div></div>
       <div class="cc-row"><div class="cc-item">Title Search &amp; Exam</div><div class="cc-val">${fmt(titleSearch)}</div></div>
@@ -5170,9 +5186,9 @@ function buildClosingCosts(inp) {
     stateNote = `<span class="nl" style="color:var(--al-dim);">${countyName} — Alabama</span><p>Alabama has <strong>some of the lowest effective property tax rates in the country</strong>. Residential homestead property assessed at <strong>10% of market value</strong>. Deed recording tax is $0.50 per $500 or fraction of the purchase price above a simultaneously recorded mortgage on which mortgage tax is paid. Mortgage recording tax is $0.15 per $100 or fraction of the loan. Both are included as conservative buyer planning costs; your agreement may allocate them differently. For eligible owners under age 65 who are not disabled, H-1 relief deducts $4,000 of assessed value from state taxes and $2,000 from applicable county taxes; special qualifications apply for additional exemptions. Confirm all figures against your official Closing Disclosure.</p>`;
     govSection = `<div class="cc-section"><div class="cc-section-title">Government Taxes &amp; Recording Fees</div>
       <div class="cc-row"><div class="cc-item">Deed Recordation Tax<span class="cc-note">$0.50 per $500 or fraction of excess price above a simultaneously taxed mortgage; buyer planning amount, allocation varies</span></div><div class="cc-val">${deedRecordTax.toLocaleString("en-US",{style:"currency",currency:"USD",minimumFractionDigits:2,maximumFractionDigits:2})}</div></div>
-      <div class="cc-row"><div class="cc-item">Mortgage Recording Tax<span class="cc-note">$0.15 per $100 or fraction of loan amount</span></div><div class="cc-val">${fmt(mortRecordingTax)}</div></div>
+      <div class="cc-row"><div class="cc-item">Mortgage Recording Tax<span class="cc-note">$0.15 per $100 or fraction of loan amount</span></div><div class="cc-val">${formatCharge(mortRecordingTax)}</div></div>
       <div class="cc-row"><div class="cc-item">Recording Fees<span class="cc-note">County Probate Court</span></div><div class="cc-val">${fmt(recordingFee)}</div></div>
-      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${fmt(govTotal)}</span></div></div>`;
+      <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${formatCharge(govTotal)}</span></div></div>`;
     titleSection = `<div class="cc-section"><div class="cc-section-title">Title &amp; Settlement Fees</div>
       <div class="cc-row"><div class="cc-item">Title Search &amp; Exam<span class="cc-note">Probate Court records</span></div><div class="cc-val">${fmt(titleSearch)}</div></div>
       <div class="cc-row"><div class="cc-item">Lender's Title Insurance</div><div class="cc-val">${fmt(titleInsLender)}</div></div>
@@ -5647,6 +5663,7 @@ function buildClosingCosts(inp) {
     reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. Maryland property taxes paid semi-annually. The Homestead Tax Credit must be applied for with SDAT — it kicks in after your first full year of ownership and caps assessment increases.`;
   }
   const closingTotal = govTotal + titleTotal + lenderTotal + prepaidTotal;
+  const formatClosingTotal = ['fl', 'ga', 'al', 'sc'].includes(model) ? formatCharge : fmt;
   const grandTotal = inp.damt + closingTotal + reserves3mo;
 
   return `
@@ -5682,11 +5699,11 @@ function buildClosingCosts(inp) {
       <div class="cash-consolidation">
         <div class="cash-con-title">Total Cash Needed at Close</div>
         <div class="cash-con-row"><span class="cash-con-lbl">Down Payment (${inp.dpct}%)</span><span class="cash-con-val">${fmt(inp.damt)}</span></div>
-        <div class="cash-con-row"><span class="cash-con-lbl">Total Closing Costs</span><span class="cash-con-val">${fmt(closingTotal)}</span></div>
+        <div class="cash-con-row"><span class="cash-con-lbl">Total Closing Costs</span><span class="cash-con-val">${formatClosingTotal(closingTotal)}</span></div>
         <div class="cash-con-row"><span class="cash-con-lbl">3-Month Housing Reserve</span><span class="cash-con-val">${fmt(reserves3mo)}</span></div>
         <div class="cash-con-grand">
           <span class="cash-con-grand-lbl">Estimated Cash Needed (excludes unconfirmed costs)</span>
-          <span class="cash-con-grand-val">${fmt(grandTotal)}</span>
+          <span class="cash-con-grand-val">${formatClosingTotal(grandTotal)}</span>
         </div>
         <p style="font-size:.75rem;color:rgba(176,190,197,.8);margin-top:.75rem;line-height:1.6;">${reserveNote}</p>
       </div>
