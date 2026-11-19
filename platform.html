@@ -5887,6 +5887,22 @@ const CHARLESTON_2026_TAX_LEVIES = [
   ["St. Paul's Fire District (TD 80, 81, 82, 83, 84)",281.2,136]
 ];
 
+// 2026 Charleston County Auditor millage card: city credit factors in preset order.
+const CHARLESTON_2026_CITY_CREDIT_FACTORS = [
+  0.00083, 0.00042, 0.00076, 0.00095, 0,
+  0.00028, 0, 0.00028, 0, 0.00016, 0.00017, 0, 0, 0, 0,
+  0.00014, 0.00168, 0, 0.00107, 0, 0, 0, 0
+];
+
+function calculateCharleston2026SalesTaxCredit(taxableAppraisedValue, index) {
+  if (!Number.isFinite(taxableAppraisedValue) || taxableAppraisedValue < 0 || index === '') return null;
+  const cityFactor = CHARLESTON_2026_CITY_CREDIT_FACTORS[Number(index)];
+  if (cityFactor === undefined) return null;
+  const countyCents = Math.round(taxableAppraisedValue * 0.0009 * 100);
+  const cityCents = Math.round(taxableAppraisedValue * cityFactor * 100);
+  return (countyCents + cityCents) / 100;
+}
+
 function applyYork2026Levy(form, index) {
   applyDistrictLevy(form, index, YORK_2026_TAX_LEVIES);
 }
@@ -5911,11 +5927,13 @@ function buildStateTaxScenario(state, countyKey) {
     <span class="nl nl-em">${scenario.name} property tax scenario</span>
     <p>${scenario.note}</p>
     ${state === 'sc' && countyKey === 'charleston-sc' ? `<label>2026 Charleston County levy (optional)<br>
-      <select onchange="applyCharleston2026Levy(this.form, this.value)">
+      <select name="charlestonDistrict" onchange="applyCharleston2026Levy(this.form, this.value)">
         <option value="">Enter millage manually</option>
         ${CHARLESTON_2026_TAX_LEVIES.map(([name], index) => `<option value="${index}">${name}</option>`).join('')}
       </select></label>
-      <p>Match the tax district code on the parcel record. Enter verified credits and fees separately. <a href="https://www.charlestoncounty.gov/departments/auditor/files/archived/2026-millage-breakdown.pdf?v=844" target="_blank" rel="noopener">Charleston County Auditor millage breakdown</a></p>` : ''}
+      <p>Match the tax district code on the parcel record. Use the taxable appraised value before the 4% or 6% ratio. <a href="https://www.charlestoncounty.gov/departments/auditor/files/archived/2026-millage-breakdown.pdf?v=844" target="_blank" rel="noopener">Charleston County Auditor millage breakdown</a></p>
+      <label><input type="checkbox" name="charlestonSalesTaxCredit"> Apply published county and city sales-tax credits for this district</label>
+      <p>If selected, enter only additional verified credits in the field below.</p>` : ''}
     ${state === 'sc' && countyKey === 'york-sc' ? `<label>2026 York County levy (optional)<br>
       <select onchange="applyYork2026Levy(this.form, this.value)">
         <option value="">Enter millage manually</option>
@@ -5946,10 +5964,23 @@ function showStateTaxScenario(form, state) {
     output.textContent = 'Enter a valid value, all millage rates and an applicable status.';
     return;
   }
+  let charlestonCredit = 0;
+  if (state === 'sc' && fields.namedItem('charlestonSalesTaxCredit')?.checked) {
+    const index = fields.namedItem('charlestonDistrict').value;
+    const district = index === '' ? null : CHARLESTON_2026_TAX_LEVIES[Number(index)];
+    if (!district || Math.abs(fields.namedItem('mills0').valueAsNumber - (district[1] - district[2])) > 1e-8
+        || fields.namedItem('mills1').valueAsNumber !== district[2]) {
+      output.textContent = 'Select the matching Charleston district and use its published millage to apply the sales-tax credits.';
+      return;
+    }
+    charlestonCredit = calculateCharleston2026SalesTaxCredit(fields.namedItem('marketValue').valueAsNumber, index);
+  }
+
   const adjustments = state === 'sc' ? applyTaxBillAdjustments(result.annualTax,
     ...['credits', 'fees'].map(name => {
       const field = fields.namedItem(name);
-      return field.value === '' ? 0 : field.valueAsNumber;
+      const entered = field.value === '' ? 0 : field.valueAsNumber;
+      return name === 'credits' ? entered + charlestonCredit : entered;
     })) : null;
   if (state === 'sc' && !adjustments) {
     output.textContent = 'Enter valid bill adjustments. Credits cannot exceed the calculated ad valorem tax.';
@@ -5960,6 +5991,7 @@ function showStateTaxScenario(form, state) {
   const bases = scenario.rates.map((label, index) => label + ' taxable value ' + currency.format(result.taxableValues[index]));
   output.textContent = ['Assessed value ' + currency.format(result.assessedValue), ...bases,
     'Estimated annual ad valorem tax ' + currency.format(result.annualTax),
+    ...(charlestonCredit ? ['Charleston sales-tax credits ' + currency.format(charlestonCredit)] : []),
     ...(adjustments ? ['Annual tax after credits ' + currency.format(adjustments.netTax),
       'Estimated annual bill including entered fees ' + currency.format(adjustments.amountDue)] : []),
     'Monthly equivalent ' + currency.format((adjustments ? adjustments.amountDue : result.annualTax) / 12)].join(' | ');
