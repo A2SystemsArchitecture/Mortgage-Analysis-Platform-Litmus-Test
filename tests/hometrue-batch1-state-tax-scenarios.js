@@ -23,7 +23,7 @@ assert.ok(dataStart >= 0 && dataEnd > dataStart && selectorStart >= 0 && selecto
 const rate = new Function('document', html.slice(dataStart, dataEnd) + '\nlet ACTIVE_DISTRICT; const MKT = {};\n' +
   html.slice(selectorStart, selectorEnd) +
   "\nselectDistrict('gwinnett', COUNTIES.gwinnett.districts.find(d => d.id === 'gwin-uninc'), null, true);" +
-  "\nconst unincorporated = MKT.tr; selectDistrict('gwinnett', COUNTIES.gwinnett.districts.find(d => d.id === 'gwin-suwanee'), null, true); return [unincorporated, COUNTIES.gwinnett.tr, COUNTIES.gwinnett.districts[0].tr, MKT.tr];")({
+  "\nconst unincorporated = MKT.tr; selectDistrict('gwinnett', COUNTIES.gwinnett.districts.find(d => d.id === 'gwin-suwanee'), null, true); const suwanee = MKT.tr; selectDistrict('gwinnett', COUNTIES.gwinnett.districts.find(d => d.id === 'gwin-duluth'), null, true); return [unincorporated, COUNTIES.gwinnett.tr, COUNTIES.gwinnett.districts[0].tr, suwanee, MKT.tr];")({
     querySelectorAll: () => [], getElementById: () => null
   });
 assert.ok(Math.abs(rate[0] * 300000 - 4183.20) < 1e-8);
@@ -35,3 +35,6 @@ assert.equal(Math.round(rate[2] * 300000 / 12), 349);
 
 assert.ok(Math.abs(rate[3] * 300000 - 4383.60) < 1e-8);
 assert.equal(Math.round(rate[3] * 300000 / 12), 365);
+
+assert.ok(Math.abs(rate[4] * 300000 - 4578.12) < 1e-8);
+assert.equal(Math.round(rate[4] * 300000 / 12), 382);
