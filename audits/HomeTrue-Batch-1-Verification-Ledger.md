@@ -98,6 +98,8 @@ These percentages describe distinct milestones. They are not an overall audit co
 
 Commit `418c493` displays “No price fits” when a scenario cannot support the smallest price increment. A viable scenario remains available when the other fails. When neither fits, the calculator clears prior price, savings and DTI results and resets the estimate passed to the buyer form. Simulated tests covered all five selectable down payments (3%, 3.5%, 5%, 10%, 20%) and budgets with one or both scenarios unavailable. Zero down is outside the current affordability selector.
 
+Commit `844db80` fixes the affordability handoff. The detailed buyer form now consumes the saved price, down payment, income and credit range once after the disclosure and tier screens. An empty affordability result clears any pending handoff. Simulated form checks verified the values and confirmed that reopening the form preserves subsequent manual edits. Live browser verification remains open because the preview requires Vercel sign-in and local Chromium could not start.
+
 ## Main buyer totals
 
 - `collectInp` and `checkShareURL` use the selected market/district planning multiplier and retain the unrounded monthly property-tax estimate internally. The monthly display rounds to a whole dollar. The affordability path likewise uses the selected planning multiplier. The standalone tax-guide output does not feed these paths.
