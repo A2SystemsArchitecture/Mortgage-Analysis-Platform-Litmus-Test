@@ -5777,6 +5777,12 @@ const STATE_TAX_SCENARIOS = {
     statuses: ['No standard exemption', 'Approved $2,000 standard exemption'],
     note: 'Uses the ordinary 40% assessment ratio. Put municipal school levies and bonded-debt levies in Other levies. Enter each levy only once. Local exemptions, the 2026 grant and floating homestead relief are excluded.'
   },
+  cobb: {
+    name: 'Cobb County, Georgia',
+    rates: ['County general and eligible Cobb school general levies', 'Other levies'],
+    statuses: ['No basic homestead exemption', 'Approved Cobb basic homestead exemption'],
+    note: 'Uses the ordinary 40% assessment ratio. The $10,000 deduction applies to county general and eligible Cobb school general levies. Put fire, bond, city and independent school levies in Other levies. Enter each levy once. Other relief, including floating exemptions and grants, is excluded.'
+  },
   al: {
     name: 'Alabama Class III residential',
     rates: ['State levies', 'County levies eligible for H-1', 'Other levies'],
@@ -5798,9 +5804,10 @@ function calculateStateTaxScenario(state, marketValue, mills, approved) {
       || ![marketValue, ...mills].every(value => Number.isFinite(value) && value >= 0)) {
     return null;
   }
-  const assessedValue = marketValue * (state === 'ga' ? 0.4 : state === 'al' ? 0.1 : approved ? 0.04 : 0.06);
+  const assessedValue = marketValue * ((state === 'ga' || state === 'cobb') ? 0.4 : state === 'al' ? 0.1 : approved ? 0.04 : 0.06);
   let deductions = [0, 0];
   if (state === 'ga' && approved) deductions = [2000, 0];
+  if (state === 'cobb' && approved) deductions = [10000, 0];
   if (state === 'al') deductions = approved ? [4000, 2000, 0] : [0, 0, 0];
   if (state === 'sc' && approved) deductions = [assessedValue, 0];
   const taxableValues = deductions.map(deduction => Math.max(0, assessedValue - deduction));
@@ -6258,7 +6265,7 @@ function buildHomesteadGuide(inp) {
         <p>Georgia's standard homestead exemption is a <strong>$2,000 reduction from the assessed value</strong> for eligible COUNTY and SCHOOL property taxes, with statutory exceptions — and local exemptions can change the amount and which levies it applies to. Georgia generally assesses residential property at <strong>40% of fair market value</strong> before applicable deductions. For tax year 2026 only, qualifying existing homesteads also receive a one-time $18,000 assessed-value reduction under Georgia's Homeowner Tax Relief Grant. This 2026 grant must not be automatically applied to 2027 or later estimates. Georgia SB 33 (HOME Act of 2026) makes the statewide base-year (floating) homestead exemption mandatory for local taxing authorities from 2027; the actual savings depend on the home's approved base-year value, annual changes, and local taxes and are not assumed in HomeTrue's blended-rate estimate. Apply with the county tax commissioner or assessor, ordinarily by April 1; Georgia also permits filing during the 45-day assessment notice appeal window, subject to state requirements.</p>
         ${c.heNote ? `<p style="margin-top:.5rem;color:var(--georgia-dim);font-weight:500;">⚠ ${c.heNote}</p>` : ''}
       </div>
-      ${buildStateTaxScenario('ga')}
+      ${buildStateTaxScenario(ACTIVE_COUNTY === 'cobb' ? 'cobb' : 'ga')}
       ${deadlineHtml}
       <h3 style="font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--midnight);margin:1.5rem 0 1rem;">Step-by-Step Filing Instructions</h3>
       <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">Confirm eligibility immediately after closing</div><div class="hg-desc">You must own and occupy the property as your legal primary residence as of January 1 of the tax year. You cannot claim homestead on more than one property. Married couples are entitled to only one homestead exemption across all jurisdictions.</div></div></div>
