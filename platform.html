@@ -5911,6 +5911,27 @@ function applyCharleston2026Levy(form, index) {
   applyDistrictLevy(form, index, CHARLESTON_2026_TAX_LEVIES);
 }
 
+// Berkeley County Auditor 2026/2027 schedule, revised September 18, 2026.
+const BERKELEY_2026_TAX_LEVIES = [
+  ["Hanahan (09)",325.5,178.6],
+  ["Charleston (11)",328.5,181.6],
+  ["Jamestown (12)",282.5,135.6],
+  ["Bonneau (13)",268.3,121.4],
+  ["St. Stephen (14)",345.5,198.6],
+  ["Moncks Corner (15)",320.3,173.4],
+  ["Goose Creek (18)",306.5,159.6],
+  ["North Charleston (21)",338,191.1],
+  ["Goose Creek Parks & Playgrounds (28)",257,110.1],
+  ["Sangaree Special District (48)",295,148.1],
+  ["Summerville (68)",312.5,165.6],
+  ["Devon Forest (78)",257,110.1],
+  ["Base districts (1–8, 81, 99)",246.5,99.6]
+];
+
+function applyBerkeley2026Levy(form, index) {
+  applyDistrictLevy(form, index, BERKELEY_2026_TAX_LEVIES);
+}
+
 function applyDistrictLevy(form, index, levies) {
   if (index === '') return;
   const district = levies[Number(index)];
@@ -5926,6 +5947,12 @@ function buildStateTaxScenario(state, countyKey) {
   return `<form class="nt nt-em" style="margin-bottom:1.5rem;" onsubmit="showStateTaxScenario(this, '${state}'); return false;" oninput="this.querySelector('output').textContent = '';">
     <span class="nl nl-em">${scenario.name} property tax scenario</span>
     <p>${scenario.note}</p>
+    ${state === 'sc' && countyKey === 'berkeley-sc' ? `<label>Berkeley County 2026/2027 levy (optional)<br>
+      <select onchange="applyBerkeley2026Levy(this.form, this.value)">
+        <option value="">Enter millage manually</option>
+        ${BERKELEY_2026_TAX_LEVIES.map(([name], index) => `<option value="${index}">${name}</option>`).join('')}
+      </select></label>
+      <p>Match the district code on your parcel record. Enter applicable county or municipal credits and fees separately. <a href="https://berkeleycountysc.gov/dept/auditor/millage/" target="_blank" rel="noopener">Berkeley County Auditor millage schedule</a></p>` : ''}
     ${state === 'sc' && countyKey === 'charleston-sc' ? `<label>2026 Charleston County levy (optional)<br>
       <select name="charlestonDistrict" onchange="applyCharleston2026Levy(this.form, this.value)">
         <option value="">Enter millage manually</option>
