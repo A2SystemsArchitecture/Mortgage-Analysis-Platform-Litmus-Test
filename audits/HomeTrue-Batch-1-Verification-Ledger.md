@@ -7,9 +7,9 @@ Scope: Florida, Georgia, Alabama and South Carolina. Inventory reconciled to all
 | Checkpoint | Passed / scope | What the count measures |
 |---|---:|---|
 | State with tested standalone property-tax rules | 4 / 4 | At least one rule for each state. No implication about remaining rules. |
-| Market with an evidenced local property-tax calculation exercised | 16 / 31 (51.6%) | Miami-Dade, Broward, Palm Beach, Martin, St. Lucie, Indian River, Brevard, Fulton, Gwinnett, Cobb, Forsyth, Shelby, Charleston, Berkeley, York and Dorchester. Historical cases count and are identified below. |
-| Market with an evidenced current-year district property-tax calculation exercised | 12 / 31 (38.7%) | Miami-Dade, Broward, Martin, St. Lucie, Indian River, Brevard, Fulton, Gwinnett, Cobb, Charleston, Berkeley and York. This includes standalone cases. |
-| Market with an evidenced district correction in main buyer flow | 9 / 31 (29.0%) | Miami-Dade, Broward, Martin, St. Lucie, Indian River, Brevard, Fulton, Gwinnett and Cobb have verified pre-exemption choices. |
+| Market with an evidenced local property-tax calculation exercised | 17 / 31 (54.8%) | Miami-Dade, Broward, Palm Beach, Martin, St. Lucie, Indian River, Brevard, Fulton, Gwinnett, Cobb, Cherokee, Forsyth, Shelby, Charleston, Berkeley, York and Dorchester. Historical cases count and are identified below. |
+| Market with an evidenced current-year district property-tax calculation exercised | 12 / 31 (38.7%) | Miami-Dade, Broward, Martin, St. Lucie, Indian River, Brevard, Fulton, Gwinnett, Cobb, Cherokee, Charleston, Berkeley and York. This includes standalone cases. |
+| Market with an evidenced district correction in main buyer flow | 10 / 31 (32.3%) | Miami-Dade, Broward, Martin, St. Lucie, Indian River, Brevard, Fulton, Gwinnett, Cobb and Cherokee have verified pre-exemption choices. |
 | Market with full financial sign-off | 0 / 31 | Full rule, market and buyer-output reconciliation. |
 | State with full financial sign-off | 0 / 4 | Full statewide and local financial reconciliation. |
 
@@ -41,7 +41,7 @@ These percentages describe distinct milestones. They are not an overall audit co
 | GA | DeKalb County | No locally reconciled property-tax case documented in this ledger. Verify district rates, qualifications, fees and buyer totals. |
 | GA | Gwinnett County | Four named 2026 base districts feed main pre-exemption estimate. Exemptions, overlays and bill totals open. [Tests](../tests/hometrue-batch1-state-tax-scenarios.js) |
 | GA | Cobb County | 2025 ordinary unincorporated benchmark and standalone basic homestead deduction tested. Final 2026 rates open. [Checkpoint](HomeTrue-Cobb-Local-Reconciliation.md) |
-| GA | Cherokee County | Earlier register records official components. Complete levies, eligibility and buyer totals open. |
+| GA | Cherokee County | The Tax Commissioner lists 26.949 mills for unincorporated Cherokee for tax year 2026. Commit `1c00939` applies it at 40% assessment. Both buyer tax scenarios returned $6,198.27 annually for a fictional $575,000 home before exemptions and separate charges, compared with $3,910.00 previously. Tested with simulated form inputs. Canton, Woodstock, parcel adjustments and browser checks remain open. [Tax Commissioner rate schedule](https://www.cherokeecountytax.com/property.html) |
 | GA | Forsyth County | 2025 benchmark and official local exemption guidance checked. Final 2026 rates and local exemption calculation open. [Checkpoint](HomeTrue-Forsyth-Cumming-Local-Reconciliation.md) |
 | GA | Clayton County | No locally reconciled property-tax case documented in this ledger. Verify district rates, qualifications, fees and buyer totals. |
 | GA | Hall County | No locally reconciled property-tax case documented in this ledger. Verify district rates, qualifications, fees and buyer totals. |
