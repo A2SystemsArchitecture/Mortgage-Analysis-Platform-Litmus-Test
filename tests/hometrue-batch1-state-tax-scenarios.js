@@ -1,0 +1,41 @@
+// Official rule references: https://dor.georgia.gov/property-tax-homestead-exemptions
+// https://www.revenue.alabama.gov/property-tax/homestead-exemptions/
+// https://dor.sc.gov/sites/dor/files/Documents/Policy%20Manuals/SCTIED-2025-Chapter%205.pdf
+const fs = require('node:fs');
+const path = require('node:path');
+const assert = require('node:assert/strict');
+const html = fs.readFileSync(path.join(__dirname, '..', 'platform.html'), 'utf8');
+const start = html.indexOf('const STATE_TAX_SCENARIOS =');
+const end = html.indexOf('function buildHomesteadGuide(', start);
+assert.ok(start >= 0 && end > start);
+for (const state of ['al', 'sc']) assert.ok(html.includes("buildStateTaxScenario('" + state + "')"));
+// Charleston County Auditor 2026 millage card, page 2.
+// Berkeley County Auditor 2026/2027 computation: https://berkeleycountysc.gov/dept/auditor/computation/
+// Shelby County Montevallo (2012 historical example); Gwinnett County 2026 millage.
+assert.ok(html.includes("buildStateTaxScenario(ACTIVE_COUNTY === 'cobb' ? 'cobb' : 'ga')"));
+new Function(html.slice(start, end) + "\nconst examples = [\n ['ga', 300000, [20, 5], true, 120000, [118000, 120000], 2960],\n ['ga', 300000, [20, 5], false, 120000, [120000, 120000], 3000],\n ['cobb', 300000, [27.16, 2.97], true, 120000, [110000, 120000], 3344],\n ['cobb', 300000, [27.16, 2.97], false, 120000, [120000, 120000], 3615.6],\n ['cobb', 20000, [27.16, 2.97], true, 8000, [0, 8000], 23.76],\n ['al', 300000, [6.5, 20, 5], true, 30000, [26000, 28000, 30000], 879],\n ['al', 30000, [6.5, 20, 5], true, 3000, [0, 1000, 3000], 35],\n ['sc', 300000, [100, 150], true, 12000, [0, 12000], 1800],\n ['sc', 300000, [100, 150], false, 18000, [18000, 18000], 4500]\n];\nfor (const [state, value, rates, approved, assessedValue, taxableValues, annualTax] of examples) {\n const result = calculateStateTaxScenario(state, value, rates, approved);\n if (result.assessedValue !== assessedValue || JSON.stringify(result.taxableValues) !== JSON.stringify(taxableValues) || Math.abs(result.annualTax - annualTax) > 1e-8) throw Error(state + JSON.stringify(result));\n}\nif (calculateStateTaxScenario('al', 300000, [6.5, 20], true) || calculateStateTaxScenario('ga', 300000, [-1, 5], true)) throw Error('Invalid inputs accepted');\nconst output = {};\nconst fields = {marketValue:{valueAsNumber:300000}, mills0:{valueAsNumber:100}, mills1:{valueAsNumber:150}, status:{value:'yes'}, credits:{value:''}, fees:{value:''}};\nshowStateTaxScenario({elements:{namedItem:name=>fields[name]},querySelector:()=>output}, 'sc');\nif (!output.textContent.includes('$1,800.00') || !output.textContent.includes('$150.00')) throw Error(output.textContent);\nfor (const state of ['ga', 'al', 'sc', 'cobb']) {\n if (!buildStateTaxScenario(state).includes(\"showStateTaxScenario(this, '\"+state+\"')\")) throw Error(state);\n}\n\nconst charleston = calculateStateTaxScenario('sc', 200000, [145.2, 155.6], true);\nconst bill = applyTaxBillAdjustments(charleston.annualTax, 180 + 166, 154);\nif (Math.abs(charleston.annualTax - 1244.80) > 0.000001 ||\n    Math.abs(bill.netTax - 898.80) > 0.000001 ||\n    Math.abs(bill.amountDue - 1052.80) > 0.000001) throw Error('County sample mismatch');\nif (applyTaxBillAdjustments(100, 101, 0) || applyTaxBillAdjustments(100, 0, -1)) throw Error('Accepted invalid bill adjustments');\nfields.marketValue.valueAsNumber = 200000;\nfields.mills0.valueAsNumber = 145.2;\nfields.mills1.valueAsNumber = 155.6;\nfields.credits = {value:'346', valueAsNumber:346};\nfields.fees = {value:'154', valueAsNumber:154};\nshowStateTaxScenario({elements:{namedItem:name=>fields[name]},querySelector:()=>output}, 'sc');\nif (!output.textContent.includes('$898.80') || !output.textContent.includes('$1,052.80')) throw Error(output.textContent);\n\nconst berkeley = calculateStateTaxScenario('sc', 100000, [146.9, 99.6], true);\nconst berkeleyBill = applyTaxBillAdjustments(berkeley.annualTax, 79.30, 79.88 + 99 + 48);\nif (berkeley.assessedValue !== 4000 || Math.abs(berkeley.annualTax - 398.40) > 0.000001 ||\n    Math.abs(berkeleyBill.netTax - 319.10) > 0.000001 ||\n    Math.abs(berkeleyBill.amountDue - 545.98) > 0.000001) throw Error('Berkeley County sample mismatch');\nfields.marketValue.valueAsNumber = 100000;\nfields.mills0.valueAsNumber = 146.9;\nfields.mills1.valueAsNumber = 99.6;\nfields.credits = {value:'79.30', valueAsNumber:79.30};\nfields.fees = {value:'226.88', valueAsNumber:226.88};\nshowStateTaxScenario({elements:{namedItem:name=>fields[name]},querySelector:()=>output}, 'sc');\nif (!output.textContent.includes('$319.10') || !output.textContent.includes('$545.98')) throw Error(output.textContent);\n\nconst shelby = calculateStateTaxScenario('al', 100000, [6.5, 7.5, 37], true);\nconst shelbyBefore = calculateStateTaxScenario('al', 100000, [6.5, 7.5, 37], false);\nif (shelby.annualTax !== 469 || shelbyBefore.annualTax !== 510) throw Error('Montevallo example mismatch');\nconst gwinnett = calculateStateTaxScenario('ga', 300000, [0, 34.86], false);\nif (gwinnett.assessedValue !== 120000 || Math.abs(gwinnett.annualTax - 4183.20) > 0.000001) throw Error('Gwinnett levy scenario mismatch');\n")();
+console.log('Passed Batch 1 scenarios, including the Shelby and Gwinnett benchmarks.');
+
+const dataStart = html.indexOf('const COUNTIES = {');
+const dataEnd = html.indexOf('\n};', dataStart) + 3;
+const selectorStart = html.indexOf('function selectDistrict(');
+const selectorEnd = html.indexOf('function selectFloodZone(', selectorStart);
+assert.ok(dataStart >= 0 && dataEnd > dataStart && selectorStart >= 0 && selectorEnd > selectorStart);
+const rate = new Function('document', html.slice(dataStart, dataEnd) + '\nlet ACTIVE_DISTRICT; const MKT = {};\n' +
+  html.slice(selectorStart, selectorEnd) +
+  "\nselectDistrict('gwinnett', COUNTIES.gwinnett.districts.find(d => d.id === 'gwin-uninc'), null, true);" +
+  "\nconst unincorporated = MKT.tr; selectDistrict('gwinnett', COUNTIES.gwinnett.districts.find(d => d.id === 'gwin-suwanee'), null, true); const suwanee = MKT.tr; selectDistrict('gwinnett', COUNTIES.gwinnett.districts.find(d => d.id === 'gwin-duluth'), null, true); return [unincorporated, COUNTIES.gwinnett.tr, COUNTIES.gwinnett.districts[0].tr, suwanee, MKT.tr];")({
+    querySelectorAll: () => [], getElementById: () => null
+  });
+assert.ok(Math.abs(rate[0] * 300000 - 4183.20) < 1e-8);
+assert.equal(Math.round(rate[0] * 300000 / 12), 349);
+assert.equal(rate[1], 0.0095);
+// Lawrenceville's separate 3.26 city mills are added to Gwinnett's 31.6 mills.
+assert.ok(Math.abs(rate[2] * 300000 - 4183.20) < 1e-8);
+assert.equal(Math.round(rate[2] * 300000 / 12), 349);
+
+assert.ok(Math.abs(rate[3] * 300000 - 4383.60) < 1e-8);
+assert.equal(Math.round(rate[3] * 300000 / 12), 365);
+
+assert.ok(Math.abs(rate[4] * 300000 - 4578.12) < 1e-8);
+assert.equal(Math.round(rate[4] * 300000 / 12), 382);
