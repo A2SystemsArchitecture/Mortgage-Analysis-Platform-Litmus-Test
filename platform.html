@@ -2444,12 +2444,12 @@ const COUNTIES = {
     fxb:20, fxw:40, fab:50, faw:120,
     paUrl:'https://www.madisoncountyal.gov/departments/revenue',
     paName:'Madison County Revenue Commissioner',
-    notes:'Madison County (Huntsville) effective tax rate ~0.56%. Huntsville is one of the fastest-growing tech markets in the Southeast — NASA, Redstone Arsenal. Alabama 10% homestead assessment ratio. Standard homestead exemption up to $4,000 assessed value. Bills are due October 1 and become delinquent after December 31.',
+    notes:'The existing Madison County selections use Alabama Department of Revenue October 2026 standard district millages: Huntsville 58.0, Madison City 69.5, and unincorporated improvements subject to county fire tax 36.5 mills. Huntsville and Madison also extend into Limestone County, which has different rates. Unincorporated land without taxable improvements may not owe the 3.0-mill fire component. Alabama Class III owner-occupied residential property is assessed at 10% of appraised value; homestead exemptions are not automatically applied. Confirm the parcel county, municipal/school district, fire-tax applicability, exemptions, and separate charges. Bills are due October 1 and delinquent after December 31.',
     state:'al', closingModel:'al',
     districts:[
-      {id:'mad-huntsville',label:'Huntsville',tr:0.0062},
-      {id:'mad-madison',label:'Madison City',tr:0.0058},
-      {id:'mad-uninc',label:'Unincorporated Madison',tr:0.0054},
+      {id:'mad-huntsville',label:'Huntsville (Madison County, 2026 standard levy)',tr:0.1 * (6.5 + 11.0 + 5.5 + 35.0) / 1000},
+      {id:'mad-madison',label:'Madison City (Madison County, 2026 standard levy)',tr:0.1 * (6.5 + 11.0 + 5.5 + 46.5) / 1000},
+      {id:'mad-uninc',label:'Unincorporated Madison (2026 improvements/fire district)',tr:0.1 * (6.5 + 14.0 + 16.0) / 1000},
     ],
     fvb:0,fvw:0},
   'shelby-al': {
@@ -2471,11 +2471,11 @@ const COUNTIES = {
     fxb:18, fxw:38, fab:45, faw:110,
     paUrl:'https://www.limestoneal.gov/revenue',
     paName:'Limestone County Revenue Commissioner',
-    notes:'Limestone County (Athens) effective tax rate ~0.35% — one of the lowest in Alabama. Directly north of Madison County (Huntsville). Alabama 10% homestead assessment ratio. Bills are due October 1 and become delinquent after December 31.',
+    notes:'The October 2026 Alabama Department of Revenue standard Limestone County schedule gives Athens 40.0 mills and unincorporated District 1 30.0 mills. Huntsville and Madison on the Limestone side have separate municipality and school levy combinations and must not use Madison County selections; confirm exact parcel boundaries and any special districts. Alabama Class III owner-occupied residential property is assessed at 10% of appraised value, and homestead exemptions and other charges require separate eligibility and jurisdiction checks. Bills are due October 1 and delinquent after December 31.',
     state:'al', closingModel:'al',
     districts:[
-      {id:'lim-athens',label:'Athens',tr:0.004},
-      {id:'lim-uninc',label:'Unincorporated Limestone',tr:0.0035},
+      {id:'lim-athens',label:'Athens (Limestone County, 2026 standard levy)',tr:0.1 * (6.5 + 13.5 + 10.0 + 10.0) / 1000},
+      {id:'lim-uninc',label:'Unincorporated Limestone (2026 county-school levy)',tr:0.1 * (6.5 + 13.5 + 10.0) / 1000},
     ],
     fvb:0,fvw:0},
   // ── VIRGINIA ──
