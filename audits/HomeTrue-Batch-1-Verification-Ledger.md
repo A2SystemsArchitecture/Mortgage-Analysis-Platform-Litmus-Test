@@ -88,6 +88,12 @@ These percentages describe distinct milestones. They are not an overall audit co
 
 - On July 28, council ratified **4.692 municipal mills** (ordinance 8534) and **17.970 school mills**. Added the standard Marietta City Schools base levy to the buyer calculator in `fce38ff`. The standard calculation combines 8.460 county + 4.692 municipal + 17.970 school = **31.122 mills**. Tested district selection and buyer input collection with simulated inputs. A fictional $575,000 home assessed at 40% produced **$7,158.06** annually before relief or separate charges, versus **$4,600.00** previously. Confirm school district and special levies by parcel, particularly for annexed areas. Browser, affordability, share and parcel checks remain open. [Council vote](https://www.openpublica.com/meetings/marietta-georgia-city-council-archive-view-2026-07-28-6a6a1b7655dd56a3321c56d7) · [City ordinance register](https://secure.mariettaga.gov/city/ordinances.aspx)
 
+### Cobb follow-up: Smyrna and Kennesaw
+
+- Smyrna's 2026 hearing notice shows **8.990 proposed city mills**. Item **ATH2026-091** was scheduled for adoption at the July 20 evening meeting. The recorded vote and levy schedule remain open. [City hearing notice](https://www.smyrnaga.gov/Home/Components/Calendar/Event/26262/181?curm=7&cury=2026) · [July 20 meeting index](https://www.docketcity.com/ga/smyrna/meeting/113933)
+- Kennesaw's notice identifies separate operating and bond levies and an August 3 final hearing. Georgia's 2025 digest lists **7.750 operating + 1.400 bond mills** for Kennesaw. These historical rates do not establish the 2026 rates. The August 3 adoption record remains open. [Kennesaw hearing notice](https://www.kennesaw-ga.gov/press-release-announcing-property-tax-increase-2026/) · [City meeting portal](https://www.kennesaw-ga.gov/city-clerk/publicmeetings/) · [Georgia 2025 digest](https://dor.georgia.gov/document/document/2025-georgia-county-ad-valorem-tax-digest-millage-ratespdf/download)
+- HomeTrue still uses 0.75% for Smyrna and 0.72% for Kennesaw. Before replacing either rate, confirm the final municipal levies and which county service or special-district assessments apply inside the relevant city limits.
+
 ## Main buyer totals
 
 - `collectInp` and `checkShareURL` use the selected market/district planning multiplier and retain the unrounded monthly property-tax estimate internally. The monthly display rounds to a whole dollar. The affordability path likewise uses the selected planning multiplier. The standalone tax-guide output does not feed these paths.
