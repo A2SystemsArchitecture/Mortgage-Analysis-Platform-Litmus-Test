@@ -3871,7 +3871,8 @@ function collectInp(){
   // Base estimate uses the stored area rate. Do not subtract a homestead
   // exemption or credit without proof of buyer qualification and applicable
   // tax district; primary-residence intent alone is not confirmation.
-  const ty1=Math.round(price*MKT.tr/12),ty2=ty1;
+  const annualTax1 = price * MKT.tr, annualTax2 = annualTax1;
+  const ty1=Math.round(annualTax1/12),ty2=ty1;
   // ty1Disp/ty2Disp aliases for clarity
   const ty1Disp=ty1, ty2Disp=ty2;
   let bi=0,wi=0,il='',ic=false,ix=false;
@@ -3886,7 +3887,7 @@ function collectInp(){
   const bt=bpi+(pri?ty2:ty1)+hoa+bi+bp+fb;
   const wt=wpi+ty1+hoa+wi+wp+fw+ep;
   const pn=Math.round((bt+wt)/2/50)*50;
-  S.inp={countyKey:ACTIVE_COUNTY,districtId:ACTIVE_DISTRICT?.id || '',address:document.getElementById('fa').value.trim()||'Property Address',price,dpct,damt,loan,byr,rage,rtp,con,sht,hoa,fld,ilo,ihi,pri,crd,br,wr,bpi,wpi,ty1,ty2,bi,wi,il,ic,ix,bp,wp,fb,fw,ep,bt,wt,pn,tier:t};
+  S.inp={countyKey:ACTIVE_COUNTY,districtId:ACTIVE_DISTRICT?.id || '',address:document.getElementById('fa').value.trim()||'Property Address',price,dpct,damt,loan,byr,rage,rtp,con,sht,hoa,fld,ilo,ihi,pri,crd,br,wr,bpi,wpi,ty1,ty2,annualTax1,annualTax2,bi,wi,il,ic,ix,bp,wp,fb,fw,ep,bt,wt,pn,tier:t};
   if(S2&&S2.comparingProp2) S2.comparingProp2=false;
 }
 
@@ -3894,6 +3895,9 @@ function cPI(l,r){const m=r/100/12,n=360;return Math.round(l*m*Math.pow(1+m,n)/(
 function cIns(c,a,r,s,y){let b=c==='cbs'?270:380;if(r==='tile')b-=30;if(a>20)b+=100;else if(a>15)b+=50;if(s)b-=40;if(y>=2002)b-=20;return[Math.max(200,b-40),Math.min(500,b+80)];}
 function cPMI(l,c){const rs={excellent:[.003,.005],'very-good':[.0035,.0055],good:[.005,.007],fair:[.007,.009]};const[lo,hi]=rs[c]||[.003,.005];return[Math.round(l*lo/12),Math.round(l*hi/12)];}
 function fmt(n){return'$'+Math.round(n).toLocaleString();}
+function fmtAnnualPropertyTax(value, monthly) {
+  return (value ?? monthly * 12).toLocaleString('en-US', {style:'currency', currency:'USD'});
+}
 function fmtR(r){return r.toFixed(2)+'%';}
 
 function bG3(){
@@ -3996,7 +4000,7 @@ function bAnalysis(i,isDemo){
     <thead><tr><th>Component</th><th>Monthly</th><th>Annual</th><th>Notes</th></tr></thead>
     <tbody>
       <tr><td>P&amp;I — ${fmtR(i.br)}, 30yr</td><td><strong>${fmt(i.bpi)}</strong></td><td>${fmt(i.bpi*12)}</td><td class="nt2">Shop 4–5 lenders; best credit tier</td></tr>
-      <tr><td>Property Taxes (Yr 2+)</td><td><strong>${fmt(i.ty2)}</strong></td><td>${fmt(i.ty2*12)}</td><td class="nt2">Planning estimate; exemption must be checked</td></tr>
+      <tr><td>Property Taxes (Yr 2+)</td><td><strong>${fmt(i.ty2)}</strong></td><td>${fmtAnnualPropertyTax(i.annualTax2, i.ty2)}</td><td class="nt2">Planning estimate; exemption must be checked</td></tr>
       <tr><td>HOA</td><td><strong>${fmt(i.hoa)}</strong></td><td>${fmt(i.hoa*12)}</td><td class="nt2">Confirmed — verify no sub-HOAs</td></tr>
       ${i.ix?`<tr><td>Homeowners Insurance</td><td><span style="color:var(--warn);font-style:italic;font-size:.85rem;">Excluded</span></td><td>—</td><td class="nt2">Obtain actual quote before committing</td></tr>`:`<tr><td>Homeowners Insurance</td><td><strong>${fmt(i.bi)}</strong></td><td>${fmt(i.bi*12)}</td><td class="nt2">${i.il}</td></tr>`}
       ${i.bp>0?`<tr><td>PMI (${i.dpct}% down)</td><td><strong>${fmt(i.bp)}</strong></td><td>${fmt(i.bp*12)}</td><td class="nt2">Shop lenders on PMI separately</td></tr>`:''}
@@ -4042,7 +4046,7 @@ function bAnalysis(i,isDemo){
     <thead><tr><th>Component</th><th>Monthly</th><th>Annual</th><th>Risk Notes</th></tr></thead>
     <tbody>
       <tr><td>P&amp;I — ${fmtR(i.wr)} 30yr</td><td><strong style="color:var(--indigo);">${fmt(i.wpi)}</strong></td><td>${fmt(i.wpi*12)}</td><td class="nt2">Without lender comparison</td></tr>
-      <tr><td>Property Taxes (Yr 1)</td><td><strong style="color:var(--indigo);">${fmt(i.ty1)}</strong></td><td>${fmt(i.ty1*12)}</td><td class="nt2">Reassessed at ${fmt(i.price)} — no exemption</td></tr>
+      <tr><td>Property Taxes (Yr 1)</td><td><strong style="color:var(--indigo);">${fmt(i.ty1)}</strong></td><td>${fmtAnnualPropertyTax(i.annualTax1, i.ty1)}</td><td class="nt2">Reassessed at ${fmt(i.price)} — no exemption</td></tr>
       <tr><td>HOA</td><td><strong style="color:var(--indigo);">${fmt(i.hoa)}</strong></td><td>${fmt(i.hoa*12)}</td><td class="nt2">Fixed — verify no sub-HOAs</td></tr>
       ${i.ix?`<tr><td>Homeowners Insurance</td><td><span style="color:var(--warn);font-style:italic;font-size:.85rem;">Excluded</span></td><td>—</td><td class="nt2">Get an actual quote for the selected property</td></tr>`:`<tr><td>Homeowners Insurance</td><td><strong style="color:var(--indigo);">${fmt(i.wi)}</strong></td><td>${fmt(i.wi*12)}</td><td class="nt2">${i.il}</td></tr>`}
       ${i.wp>0?`<tr><td>PMI</td><td><strong style="color:var(--indigo);">${fmt(i.wp)}</strong></td><td>${fmt(i.wp*12)}</td><td class="nt2">Without shopping lenders on PMI</td></tr>`:''}
@@ -4070,8 +4074,10 @@ function loadDemo(tier){
   const base={address:"Sample Property — Enter your own above",price:460000,dpct:3,damt:13800,loan:446200,byr:2008,rage:10,rtp:'tile',con:'cbs',sht:true,hoa:185,fld:'x',ilo:10000,ihi:13000,pri:true,crd:'excellent',br:MKT.br,wr:MKT.wr};
   base.bpi=cPI(base.loan,base.br);
   base.wpi=cPI(base.loan,base.wr);
-  base.ty1=Math.round(460000*.013/12);
-  base.ty2=Math.round(410000*.013/12);
+  base.annualTax1=460000*.013;
+  base.ty1=Math.round(base.annualTax1/12);
+  base.annualTax2=410000*.013;
+  base.ty2=Math.round(base.annualTax2/12);
   base.tier=tier;
 
   if(tier===1){
@@ -4621,7 +4627,7 @@ function buildPDF(inp) {
 
   const bestRows = [
     ['P&I Payment', `${fmtR(inp.br)} · 30yr Fixed`, fmt(inp.bpi), fmt(inp.bpi*12)],
-    ['Property Taxes (Year 2+)', 'Estimated; exemption depends on eligibility', fmt(inp.ty2), fmt(inp.ty2*12)],
+    ['Property Taxes (Year 2+)', 'Estimated; exemption depends on eligibility', fmt(inp.ty2), fmtAnnualPropertyTax(inp.annualTax2, inp.ty2)],
     ['HOA', 'Monthly fee', fmt(inp.hoa), fmt(inp.hoa*12)],
     ['Homeowners Insurance', inp.ix?'Excluded at Tier 1':inp.il, inp.ix?'—':fmt(inp.bi), inp.ix?'—':fmt(inp.bi*12)],
     ...(inp.bp>0?[['PMI', `${inp.dpct}% down payment`, fmt(inp.bp), fmt(inp.bp*12)]]: []),
@@ -4670,7 +4676,7 @@ function buildPDF(inp) {
 
   const worstRows = [
     ['P&I Payment', `${fmtR(inp.wr)} · Without lender comparison`, fmt(inp.wpi), fmt(inp.wpi*12)],
-    ['Property Taxes (Year 1)', 'Planning estimate; actual bill varies', fmt(inp.ty1), fmt(inp.ty1*12)],
+    ['Property Taxes (Year 1)', 'Planning estimate; actual bill varies', fmt(inp.ty1), fmtAnnualPropertyTax(inp.annualTax1, inp.ty1)],
     ['HOA', 'Confirmed monthly fee', fmt(inp.hoa), fmt(inp.hoa*12)],
     ['Homeowners Insurance', inp.ix?'Excluded — obtain quote':inp.il, inp.ix?'—':fmt(inp.wi), inp.ix?'—':fmt(inp.wi*12)],
     ...(inp.wp>0?[['PMI', 'Without shopping lenders', fmt(inp.wp), fmt(inp.wp*12)]]: []),
@@ -6124,7 +6130,7 @@ function buildHomesteadGuide(inp) {
   const safeLabel = 'Application or Eligibility Guidance';
   let deadlineHtml = `<div class="hg-deadline"><span class="hg-dl-lbl">${safeLabel}</span><div class="hg-dl-date">${deadlineLabel}</div><div class="hg-dl-sub">Government deadlines and eligibility can change. Confirm with the official state or local office before filing.</div>${!closingDate?'<div style="margin-top:.75rem;"><label style="font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--emerald-dim);display:block;margin-bottom:.3rem;">Expected Closing Date</label><input type="date" id="hg-closing-date" style="padding:.5rem .75rem;border:1.5px solid var(--emerald-muted);border-radius:6px;font-family:var(--fb);font-size:.9rem;color:var(--midnight);background:var(--white);" onchange="refreshHomesteadGuide()"></div>':''}</div>`;
 
-  const annualSavings = inp.ty1 * 12 - inp.ty2 * 12;
+  const annualSavings = (inp.annualTax1 ?? inp.ty1 * 12) - (inp.annualTax2 ?? inp.ty2 * 12);
 
   if (model === 'louisiana') {
     const isLivingston = ACTIVE_COUNTY === 'livingston';
@@ -6805,7 +6811,9 @@ function checkShareURL() {
   inp.wpi = cPI(inp.loan, MKT.wr);
   // Reconstructed shared results must use the same conservative tax basis as
   // the interactive calculator. Never automatically grant unverified relief.
-  inp.ty1 = Math.round(inp.price * MKT.tr / 12);
+  inp.annualTax1 = inp.price * MKT.tr;
+  inp.annualTax2 = inp.annualTax1;
+  inp.ty1 = Math.round(inp.annualTax1 / 12);
   inp.ty2 = inp.ty1;
   inp.wi = inp.bi > 0 ? inp.bi * 1.35 : 0;
   inp.il = inp.ic ? 'CONFIRMED' : inp.ix ? 'EXCLUDED' : 'ESTIMATED';
