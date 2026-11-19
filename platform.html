@@ -3872,7 +3872,7 @@ function collectInp(){
   // exemption or credit without proof of buyer qualification and applicable
   // tax district; primary-residence intent alone is not confirmation.
   const annualTax1 = price * MKT.tr, annualTax2 = annualTax1;
-  const ty1=Math.round(annualTax1/12),ty2=ty1;
+  const ty1=annualTax1/12,ty2=ty1;
   // ty1Disp/ty2Disp aliases for clarity
   const ty1Disp=ty1, ty2Disp=ty2;
   let bi=0,wi=0,il='',ic=false,ix=false;
@@ -4075,9 +4075,9 @@ function loadDemo(tier){
   base.bpi=cPI(base.loan,base.br);
   base.wpi=cPI(base.loan,base.wr);
   base.annualTax1=460000*.013;
-  base.ty1=Math.round(base.annualTax1/12);
+  base.ty1=base.annualTax1/12;
   base.annualTax2=410000*.013;
-  base.ty2=Math.round(base.annualTax2/12);
+  base.ty2=base.annualTax2/12;
   base.tier=tier;
 
   if(tier===1){
@@ -6813,7 +6813,7 @@ function checkShareURL() {
   // the interactive calculator. Never automatically grant unverified relief.
   inp.annualTax1 = inp.price * MKT.tr;
   inp.annualTax2 = inp.annualTax1;
-  inp.ty1 = Math.round(inp.annualTax1 / 12);
+  inp.ty1 = inp.annualTax1 / 12;
   inp.ty2 = inp.ty1;
   inp.wi = inp.bi > 0 ? inp.bi * 1.35 : 0;
   inp.il = inp.ic ? 'CONFIRMED' : inp.ix ? 'EXCLUDED' : 'ESTIMATED';
