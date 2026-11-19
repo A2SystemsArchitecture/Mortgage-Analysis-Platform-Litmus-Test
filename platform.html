@@ -5733,17 +5733,33 @@ function calculateFlorida2026AdValorem(assessedValue, schoolMills, nonSchoolMill
   return Number.isFinite(annualTax) ? {schoolBase, nonSchoolBase, annualTax} : null;
 }
 
-function showFlorida2026AdValorem(form) {
+function calculateFlorida2027AdValorem(assessedValue, schoolMills, nonSchoolMills, status) {
+  const nonSchoolCaps = {none: 0, transitional: 50000, enhanced: 150000};
+  if (!Object.hasOwn(nonSchoolCaps, status)
+      || ![assessedValue, schoolMills, nonSchoolMills].every(value => Number.isFinite(value) && value >= 0)) {
+    return null;
+  }
+
+  const schoolBase = Math.max(0, assessedValue - (status === 'none' ? 0 : 25000));
+  const nonSchoolBase = Math.max(0, assessedValue - nonSchoolCaps[status]);
+  const annualTax = (schoolBase * schoolMills + nonSchoolBase * nonSchoolMills) / 1000;
+  return Number.isFinite(annualTax) ? {schoolBase, nonSchoolBase, annualTax} : null;
+}
+
+function showFloridaAdValorem(form) {
   const fields = form.elements;
-  const result = calculateFlorida2026AdValorem(
-    fields.namedItem('assessment').valueAsNumber,
-    fields.namedItem('school').valueAsNumber,
-    fields.namedItem('nonSchool').valueAsNumber,
-    fields.namedItem('homestead').value === 'approved'
-  );
+  const values = ['assessment', 'school', 'nonSchool'].map(name => fields.namedItem(name).valueAsNumber);
+  const year = fields.namedItem('taxYear').value;
+  const status = fields.namedItem('homestead').value;
+  let result = null;
+  if (year === '2026' && ['none', 'approved'].includes(status)) {
+    result = calculateFlorida2026AdValorem(...values, status === 'approved');
+  } else if (year === '2027') {
+    result = calculateFlorida2027AdValorem(...values, status);
+  }
   const output = form.querySelector('output');
   if (!result) {
-    output.textContent = 'Enter a valid assessed value and both millage rates.';
+    output.textContent = 'Enter assessed value and both millage rates, and select a homestead status applicable to the tax year.';
     return;
   }
 
@@ -6322,18 +6338,19 @@ function buildHomesteadGuide(inp) {
         <p>For the 2026 tax roll, qualifying owners can generally exempt up to $25,000 of assessed value from school and non-school ad valorem taxes, with an additional non-school exemption of up to $26,411 on assessed value above $50,000. Special benefit assessments are excluded from the first exemption. Florida Constitutional Amendment 3 takes effect January 1, 2027. For homeowners eligible for the increased exemption, up to $150,000 of assessed value is exempt from non-school property taxes in 2027, increasing to $250,000 in 2028 (with inflation adjustments thereafter). Amendment 3 also lowers the annual assessment-growth cap for non-homestead property from 10% to 5%, beginning with the 2027 tax roll. This cap does not determine the initial assessment after a purchase. A person who was not a Florida resident on December 31, 2026 receives, when otherwise eligible, $25,000 of exemption for school taxes and up to $50,000 for non-school taxes until the fifth year of exemption, when the increased exemption can begin. Actual school and non-school rates, residence history and approval determine the benefit. The market planning total uses a blended rate and does not provide an exemption savings figure. Save Our Homes limits qualifying annual assessed-value increases to the lower of 3% or CPI. ${COUNTIES[ACTIVE_COUNTY] ? '<strong>' + COUNTIES[ACTIVE_COUNTY].name + '</strong> planning rate applied to purchase price: ' + (COUNTIES[ACTIVE_COUNTY].tr*100).toFixed(2) + '%.' : ''}</p>
       </div>
 
-      <form class="nt nt-em" style="margin-bottom:1.5rem;" onsubmit="showFlorida2026AdValorem(this); return false;" oninput="this.querySelector('output').textContent = '';">
-        <span class="nl nl-em">Florida 2026 property tax scenario</span>
-        <p>Use 2026 assessed value and the combined school and non-school millage rates for the property from the county appraiser or tax notice. One mill equals $1 per $1,000 of taxable value.</p>
+      <form class="nt nt-em" style="margin-bottom:1.5rem;" onsubmit="showFloridaAdValorem(this); return false;" oninput="this.querySelector('output').textContent = '';">
+        <span class="nl nl-em">Florida property tax scenario</span>
+        <p>Use the selected tax year's assessed value and the combined school and non-school millage rates for the property from the county appraiser or tax notice. One mill equals $1 per $1,000 of taxable value.</p>
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:.75rem;margin:.75rem 0;">
-          <label>2026 assessed value ($)<br><input type="number" name="assessment" min="0" step="0.01" required></label>
+          <label>Assessed value ($)<br><input type="number" name="assessment" min="0" step="0.01" required></label>
           <label>School millage<br><input type="number" name="school" min="0" step="any" required></label>
           <label>Non-school millage<br><input type="number" name="nonSchool" min="0" step="any" required></label>
-          <label>2026 standard homestead status<br><select name="homestead" required><option value="">Select status</option><option value="approved">Approved</option><option value="none">No standard exemption</option></select></label>
+          <label>Tax year<br><select name="taxYear" required><option value="2026">2026</option><option value="2027">2027</option></select></label>
+          <label>Standard homestead status<br><select name="homestead" required><option value="">Select status</option><option value="none">No standard exemption (either year)</option><option value="approved">Approved standard exemption (2026)</option><option value="enhanced">Eligible for enhanced exemption (2027)</option><option value="transitional">Eligible for transitional exemption (2027)</option></select></label>
         </div>
-        <button class="btn bp" type="submit">Calculate 2026 tax</button>
+        <button class="btn bp" type="submit">Calculate property tax</button>
         <output aria-live="polite" style="display:block;margin-top:.75rem;"></output>
-        <p>This scenario excludes special assessments, other exemptions and billing adjustments. The report and affordability totals still use the market planning rate.</p>
+        <p>Use this scenario when school and non-school levies start from the same assessed value. Confirm your 2027 exemption category with the county property appraiser. This scenario excludes special assessments, other exemptions and billing adjustments. The report and affordability totals still use the market planning rate.</p>
       </form>
 
       ${deadlineHtml}
