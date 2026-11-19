@@ -1570,6 +1570,7 @@ footer strong{color:rgba(220,232,235,1.0);}
             </div>
           </div>
           <div class="ff"><label>Purchase Price ($)</label><input type="number" id="fp" placeholder="399000" min="50000"></div>
+          <div class="ff"><label for="f-annual-buyer-tax">Projected annual property tax for this buyer ($, optional)</label><input type="number" id="f-annual-buyer-tax" min="0" step="0.01" placeholder="Leave blank for planning estimate"><div class="fn">Use a verified projection after transfer. This amount is used for both tax scenarios.</div></div>
           <div class="ff"><label>Down Payment</label><select id="fd"><option value="">Select</option><option value="3">3% — Conventional</option><option value="3.5">3.5% — FHA</option><option value="5">5%</option><option value="10">10%</option><option value="20">20% — No PMI</option></select></div>
           <div class="ff"><label>Year Built</label><input type="number" id="fb2" placeholder="1995" min="1900" max="2026"></div>
           <div class="ff"><label>Construction Type</label><select id="fcon"><option value="cbs">CBS — Concrete Block</option><option value="wood">Wood Frame</option><option value="unknown">Unknown</option></select></div>
@@ -3847,6 +3848,12 @@ function effectiveMarketValueDeduction(c){
   return 0;
 }
 
+function parseBuyerAnnualTax(value) {
+  if (typeof value !== 'string' || !/^\d+(?:\.\d{1,2})?$/.test(value.trim())) return null;
+  const amount = Number(value);
+  return Number.isFinite(amount) && amount >= 0 ? amount : null;
+}
+
 function collectInp(){
   const t=S.tier;
   const price=parseFloat(document.getElementById('fp').value)||399000;
@@ -3871,7 +3878,8 @@ function collectInp(){
   // Base estimate uses the stored area rate. Do not subtract a homestead
   // exemption or credit without proof of buyer qualification and applicable
   // tax district; primary-residence intent alone is not confirmation.
-  const annualTax1 = price * MKT.tr, annualTax2 = annualTax1;
+  const buyerAnnualTax = parseBuyerAnnualTax(document.getElementById('f-annual-buyer-tax')?.value);
+  const annualTax1 = buyerAnnualTax ?? price * MKT.tr, annualTax2 = annualTax1;
   const ty1=annualTax1/12,ty2=ty1;
   // ty1Disp/ty2Disp aliases for clarity
   const ty1Disp=ty1, ty2Disp=ty2;
@@ -3887,7 +3895,7 @@ function collectInp(){
   const bt=bpi+(pri?ty2:ty1)+hoa+bi+bp+fb;
   const wt=wpi+ty1+hoa+wi+wp+fw+ep;
   const pn=Math.round((bt+wt)/2/50)*50;
-  S.inp={countyKey:ACTIVE_COUNTY,districtId:ACTIVE_DISTRICT?.id || '',address:document.getElementById('fa').value.trim()||'Property Address',price,dpct,damt,loan,byr,rage,rtp,con,sht,hoa,fld,ilo,ihi,pri,crd,br,wr,bpi,wpi,ty1,ty2,annualTax1,annualTax2,bi,wi,il,ic,ix,bp,wp,fb,fw,ep,bt,wt,pn,tier:t};
+  S.inp={countyKey:ACTIVE_COUNTY,districtId:ACTIVE_DISTRICT?.id || '',address:document.getElementById('fa').value.trim()||'Property Address',price,dpct,damt,loan,byr,rage,rtp,con,sht,hoa,fld,ilo,ihi,pri,crd,br,wr,bpi,wpi,ty1,ty2,annualTax1,annualTax2,buyerAnnualTax,bi,wi,il,ic,ix,bp,wp,fb,fw,ep,bt,wt,pn,tier:t};
   if(S2&&S2.comparingProp2) S2.comparingProp2=false;
 }
 
@@ -3945,7 +3953,7 @@ function bAnalysis(i,isDemo){
     "Shop 4–5 lenders. Get Loan Estimate documents from each. Rate spread can be 0.25–0.50% on the same day.",
     "Check primary-residence tax relief with the relevant county or state office; filing and eligibility differ by state.",
     "Get a wind mitigation inspection ($75–$150) if the property has hurricane shutters or a newer roof.",
-    `Budget from the full planning tax estimate (${fmt(i.ty1)}/month); reductions shown are conditional and should be confirmed on the official tax bill.`,
+    i.buyerAnnualTax != null ? `Budget from the entered buyer tax projection (${fmt(i.ty1)}/month).` : `Budget from the full planning tax estimate (${fmt(i.ty1)}/month); reductions shown are conditional and should be confirmed on the official tax bill.`,
   ].map((x,n)=>`<div class="cki"><span class="ckn">${String(n+1).padStart(2,'0')}.</span><span>${x}</span></div>`).join('');
 
   document.getElementById('amh').innerHTML=`<div class="mh"><div class="mh-tag">HomeTrue Analysis${isDemo?' · DEMO':''}</div><h1 style="font-size:clamp(1.3rem,2.5vw,1.9rem);margin-bottom:.25rem;cursor:pointer;" onclick="show('w')" title="↩ Return to Home">Home<span class="tr">True</span></h1><div style="font-family:var(--fd);font-size:clamp(1rem,2vw,1.4rem);font-weight:600;color:rgba(255,255,255,.9);margin-bottom:.25rem;">${i.address}</div><div class="mh-rule"></div><div class="mh-sub">${tl} · ${i.dpct}% Down · Loan: ${fmt(i.loan)} · ${COUNTIES[ACTIVE_COUNTY]?COUNTIES[ACTIVE_COUNTY].short:'Selected County'}</div><div style="margin-top:.75rem;"><span style="display:inline-flex;align-items:center;padding:.25rem .75rem;border-radius:3px;font-family:var(--fm);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;background:var(--${tc}-light);color:var(--${tc}-dim);border:1px solid var(--${tc}-muted);">${tl}</span></div></div>`;
@@ -3955,7 +3963,7 @@ function bAnalysis(i,isDemo){
   <div class="ae tl">Section I</div><h2 class="at2">Side-by-Side Scenario Comparison</h2><div class="ar"></div>
   ${i.tier===1?`<div class="nt nt-wn"><span class="nl nl-wn">Tier 1 — Insurance Excluded</span><p>Homeowners insurance is excluded from this estimate. Obtain a property-specific insurance quote before making a commitment; costs vary greatly by home and location.</p></div>`:''}
   ${i.il==='ESTIMATED'?`<div class="nt nt-wn"><span class="nl nl-wn">Insurance — Unconfirmed Estimate</span><p>Estimates can differ from actual quotes by <strong>$200–$400/month</strong>. Obtain a confirmed quote before committing.</p></div>`:''}
-  <div class="nt nt-tl"><span class="nl nl-tl">Tax Methodology — Purchase Price Basis</span><p>Taxes from <strong>${fmt(i.price)} purchase price</strong> — not taxes on record. Year 1: ${fmt(i.ty1)}/mo. Year 2+ planning estimate: <strong>${fmt(i.ty2)}/mo</strong>.</p></div>
+  ${i.buyerAnnualTax != null ? '<div class="nt nt-tl"><p>Buyer-entered annual property-tax projection is used for both scenarios.</p></div>' : `<div class="nt nt-tl"><span class="nl nl-tl">Tax Methodology — Purchase Price Basis</span><p>Taxes from <strong>${fmt(i.price)} purchase price</strong> — not taxes on record. Year 1: ${fmt(i.ty1)}/mo. Year 2+ planning estimate: <strong>${fmt(i.ty2)}/mo</strong>.</p></div>`}
   <div class="scs">
     <div class="sc scb"><span class="scl">Best Case Scenario</span><div class="sct">${fmt(i.bt)}<span style="font-size:1rem;">/mo</span></div><div class="scs2">Year 2+ · Planning estimate; eligibility not assumed</div><span class="scr">${fmtR(i.br)} · 30-yr Fixed</span></div>
     <div class="sc scw"><span class="scl">Worst Case Scenario</span><div class="sct">${fmt(i.wt)}<span style="font-size:1rem;">/mo</span></div><div class="scs2">Year 1 · Reassessed · All adverse</div><span class="scr">${fmtR(i.wr)} · 30-yr Fixed</span></div>
@@ -3971,7 +3979,7 @@ function bAnalysis(i,isDemo){
     <tbody>
       <tr><td class="rl">Interest Rate</td><td class="bv">${fmtR(i.br)}</td><td class="wv">${fmtR(i.wr)}</td><td class="dv">+${(i.wr-i.br).toFixed(2)}%</td></tr>
       <tr><td class="rl">P&amp;I Payment</td><td class="bv">${fmt(i.bpi)}</td><td class="wv">${fmt(i.wpi)}</td><td class="dv">+${fmt(i.wpi-i.bpi)}</td></tr>
-      <tr><td class="rl">Property Taxes<span class="rn">Purchase price basis</span></td><td class="bv">${fmt(i.ty2)}<span class="rn">Year 2+ estimate</span></td><td class="wv">${fmt(i.ty1)}<span class="rn">Yr 1 — no exemption</span></td><td class="dv">+${fmt(i.ty1-i.ty2)}</td></tr>
+      <tr><td class="rl">Property Taxes${i.buyerAnnualTax != null ? '<span class="rn">Buyer projection</span>' : `<span class="rn">Purchase price basis</span>`}</td><td class="bv">${fmt(i.ty2)}<span class="rn">Year 2+ estimate</span></td><td class="wv">${fmt(i.ty1)}${i.buyerAnnualTax != null ? '<span class="rn">Year 1 projection</span>' : `<span class="rn">Yr 1 — no exemption</span>`}</td><td class="dv">+${fmt(i.ty1-i.ty2)}</td></tr>
       <tr><td class="rl">HOA</td><td class="bv">${fmt(i.hoa)}</td><td class="wv">${fmt(i.hoa)}</td><td class="dv">—</td></tr>
       <tr><td class="rl">Homeowners Insurance</td><td>${irb}</td><td>${irw}</td><td class="dv">${i.ix?'—':'+'+fmt(i.wi-i.bi)}</td></tr>
       ${i.bp>0?`<tr><td class="rl">PMI (${i.dpct}% down)</td><td class="bv">${fmt(i.bp)}</td><td class="wv">${fmt(i.wp)}</td><td class="dv">+${fmt(i.wp-i.bp)}</td></tr>`:''}
@@ -3980,7 +3988,7 @@ function bAnalysis(i,isDemo){
       <tr class="tr2"><td>TOTAL MONTHLY</td><td class="bv">${fmt(i.bt)}</td><td class="wv">${fmt(i.wt)}</td><td class="dv">+${fmt(sw)}</td></tr>
     </tbody>
   </table>
-  <div class="pb2"><span class="pbl">Recommended Budget Planning Number</span><div class="pbn">${fmt(i.pn)} / month</div><p class="pbd">Midpoint between scenarios. Plan for approximately ${fmt(i.ty1)}/month in property taxes before verified relief. A future exemption may lower property taxes, but HomeTrue does not calculate unverified savings from combined rates.</p></div>
+  <div class="pb2"><span class="pbl">Recommended Budget Planning Number</span><div class="pbn">${fmt(i.pn)} / month</div><p class="pbd">Midpoint between scenarios. ${i.buyerAnnualTax != null ? 'Uses your entered property-tax projection.' : `Plan for approximately ${fmt(i.ty1)}/month in property taxes before verified relief. A future exemption may lower property taxes, but HomeTrue does not calculate unverified savings from combined rates.`}</p></div>
   ${buildRateContext(i)}
   <h3 style="font-family:var(--fd);font-size:1.1rem;margin:1.5rem 0 .75rem;color:var(--midnight);">DTI Analysis · Income Range ${fmt(i.ilo)}–${fmt(i.ihi)}/mo</h3>
   <div class="dt">${dtis.map(d=>`<div class="dr2"><span class="drl">${d[0]}</span><span class="${d[2]}">${d[1]} — ${d[2]==='do'?'Healthy':d[2]==='dw'?'Tight / Qualifiable':'Near Ceiling'}</span></div>`).join('')}</div>
@@ -3992,15 +4000,15 @@ function bAnalysis(i,isDemo){
   <div class="sg">
     <div class="stc e"><span class="sl">Monthly Total</span><div class="sv">${fmt(i.bt)}</div><div class="sn">Year 2+ planning estimate</div></div>
     <div class="stc e"><span class="sl">Interest Rate</span><div class="sv">${fmtR(i.br)}</div><div class="sn">Achievable with 4–5 lender quotes</div></div>
-    <div class="stc e"><span class="sl">Tax (Yr 2+)</span><div class="sv">${fmt(i.ty2)}</div><div class="sn">Planning amount before unverified exemptions</div></div>
+    <div class="stc e"><span class="sl">Tax (Yr 2+)</span><div class="sv">${fmt(i.ty2)}</div><div class="sn">${i.buyerAnnualTax != null ? 'Buyer-entered annual projection' : `Planning amount before unverified exemptions`}</div></div>
     <div class="stc e"><span class="sl">Loan Amount</span><div class="sv">${fmt(i.loan)}</div><div class="sn">${i.dpct}% down on ${fmt(i.price)}</div></div>
   </div>
-  <div class="nt nt-em"><span class="nl nl-em">Tax Detail — Best Case (Year 2+)</span><p>For ${COUNTIES[ACTIVE_COUNTY].name}, the current planning tax rate is <strong>${(MKT.tr*100).toFixed(2)}%</strong> of purchase price. A ${fmt(i.price)} home therefore has an estimated pre-exemption tax of <strong>${fmt(i.ty1)}/month</strong>. The Year 2+ planning amount is <strong>${fmt(i.ty2)}/month</strong>. This is not a verified parcel tax bill; exemptions and credits depend on eligibility and the applicable local taxing units.</p></div>
+  ${i.buyerAnnualTax != null ? '<div class="nt nt-tl"><p>Buyer-entered annual property-tax projection is used for both scenarios.</p></div>' : `<div class="nt nt-em"><span class="nl nl-em">Tax Detail — Best Case (Year 2+)</span><p>For ${COUNTIES[ACTIVE_COUNTY].name}, the current planning tax rate is <strong>${(MKT.tr*100).toFixed(2)}%</strong> of purchase price. A ${fmt(i.price)} home therefore has an estimated pre-exemption tax of <strong>${fmt(i.ty1)}/month</strong>. The Year 2+ planning amount is <strong>${fmt(i.ty2)}/month</strong>. This is not a verified parcel tax bill; exemptions and credits depend on eligibility and the applicable local taxing units.</p></div>`}
   <table class="bt">
     <thead><tr><th>Component</th><th>Monthly</th><th>Annual</th><th>Notes</th></tr></thead>
     <tbody>
       <tr><td>P&amp;I — ${fmtR(i.br)}, 30yr</td><td><strong>${fmt(i.bpi)}</strong></td><td>${fmt(i.bpi*12)}</td><td class="nt2">Shop 4–5 lenders; best credit tier</td></tr>
-      <tr><td>Property Taxes (Yr 2+)</td><td><strong>${fmt(i.ty2)}</strong></td><td>${fmtAnnualPropertyTax(i.annualTax2, i.ty2)}</td><td class="nt2">Planning estimate; exemption must be checked</td></tr>
+      <tr><td>Property Taxes (Yr 2+)</td><td><strong>${fmt(i.ty2)}</strong></td><td>${fmtAnnualPropertyTax(i.annualTax2, i.ty2)}</td><td class="nt2">${i.buyerAnnualTax != null ? 'Buyer-entered annual projection' : `Planning estimate; exemption must be checked`}</td></tr>
       <tr><td>HOA</td><td><strong>${fmt(i.hoa)}</strong></td><td>${fmt(i.hoa*12)}</td><td class="nt2">Confirmed — verify no sub-HOAs</td></tr>
       ${i.ix?`<tr><td>Homeowners Insurance</td><td><span style="color:var(--warn);font-style:italic;font-size:.85rem;">Excluded</span></td><td>—</td><td class="nt2">Obtain actual quote before committing</td></tr>`:`<tr><td>Homeowners Insurance</td><td><strong>${fmt(i.bi)}</strong></td><td>${fmt(i.bi*12)}</td><td class="nt2">${i.il}</td></tr>`}
       ${i.bp>0?`<tr><td>PMI (${i.dpct}% down)</td><td><strong>${fmt(i.bp)}</strong></td><td>${fmt(i.bp*12)}</td><td class="nt2">Shop lenders on PMI separately</td></tr>`:''}
@@ -4025,8 +4033,8 @@ function bAnalysis(i,isDemo){
   </div>
   ${i.bp>0?`<div class="pt"><div class="ptl">PMI Removal Timeline — Best Case</div>
     <div class="pp"><span class="py">Month 0</span><span class="pd2">Close at ${fmt(i.price)}. LTV ${100-i.dpct}%. PMI ${fmt(i.bp)}/mo. Equity: ${fmt(i.damt)}. Check eligibility for any applicable property-tax relief.</span></div>
-    <div class="pp"><span class="py">Year 1</span><span class="pd2">Pay ${fmt(i.ty1)}/mo tax (no exemption yet). Check actual insurance pricing and property condition.</span></div>
-    <div class="pp"><span class="py">Year 2</span><span class="pd2">Property-tax estimate remains ${fmt(i.ty2)}/mo before unverified exemptions. Actual savings require approval and local tax figures.</span></div>
+    <div class="pp"><span class="py">Year 1</span><span class="pd2">${i.buyerAnnualTax != null ? 'Uses your entered property-tax projection.' : `Pay ${fmt(i.ty1)}/mo tax (no exemption yet). Check actual insurance pricing and property condition.`}</span></div>
+    <div class="pp"><span class="py">Year 2</span><span class="pd2">${i.buyerAnnualTax != null ? 'Uses your entered property-tax projection.' : `Property-tax estimate remains ${fmt(i.ty2)}/mo before unverified exemptions. Actual savings require approval and local tax figures.`}</span></div>
     <div class="pp"><span class="py">Year 3–4</span><span class="pd2">Ask the loan servicer whether you qualify to cancel PMI, based on actual loan balance, loan type, payment history, and property value.</span></div>
     <div class="pp"><span class="py">Year 7–8</span><span class="pd2">For qualifying conventional loans, automatic PMI termination generally follows federal rules at the scheduled 78% original-value threshold, subject to applicable conditions.</span></div>
   </div>`:''}
@@ -4038,15 +4046,15 @@ function bAnalysis(i,isDemo){
   <div class="sg">
     <div class="stc i"><span class="sl">Monthly Total</span><div class="sv">${fmt(i.wt)}</div><div class="sn">Year 1 · All adverse assumptions</div></div>
     <div class="stc i"><span class="sl">Interest Rate</span><div class="sv">${fmtR(i.wr)}</div><div class="sn">Without competitive lender shopping</div></div>
-    <div class="stc i"><span class="sl">Tax (Year 1)</span><div class="sv">${fmt(i.ty1)}</div><div class="sn">Reassessed at ${fmt(i.price)} — no exemption</div></div>
+    <div class="stc i"><span class="sl">Tax (Year 1)</span><div class="sv">${fmt(i.ty1)}</div><div class="sn">${i.buyerAnnualTax != null ? 'Buyer-entered annual projection' : `Reassessed at ${fmt(i.price)} — no exemption`}</div></div>
     <div class="stc i"><span class="sl">DTI at ${fmt(i.ilo)}</span><div class="sv">${(i.wt/i.ilo*100).toFixed(1)}%</div><div class="sn">${i.wt/i.ilo>.43?'Near lender ceiling':'Manageable'}</div></div>
   </div>
-  <div class="nt nt-in"><span class="nl nl-in">Tax Detail — Worst Case (Year 1)</span><p>For ${COUNTIES[ACTIVE_COUNTY]?COUNTIES[ACTIVE_COUNTY].name:'the selected area'}, HomeTrue uses a planning tax rate of ${(MKT.tr*100).toFixed(2)}% of the assumed ${fmt(i.price)} value, or approximately <strong>${fmt(i.ty1)}/month</strong>. Actual assessments, local districts and eligible exemptions can change the result.</p></div>
+  ${i.buyerAnnualTax != null ? '<div class="nt nt-tl"><p>Buyer-entered annual property-tax projection is used for both scenarios.</p></div>' : `<div class="nt nt-in"><span class="nl nl-in">Tax Detail — Worst Case (Year 1)</span><p>For ${COUNTIES[ACTIVE_COUNTY]?COUNTIES[ACTIVE_COUNTY].name:'the selected area'}, HomeTrue uses a planning tax rate of ${(MKT.tr*100).toFixed(2)}% of the assumed ${fmt(i.price)} value, or approximately <strong>${fmt(i.ty1)}/month</strong>. Actual assessments, local districts and eligible exemptions can change the result.</p></div>`}
   <table class="bt">
     <thead><tr><th>Component</th><th>Monthly</th><th>Annual</th><th>Risk Notes</th></tr></thead>
     <tbody>
       <tr><td>P&amp;I — ${fmtR(i.wr)} 30yr</td><td><strong style="color:var(--indigo);">${fmt(i.wpi)}</strong></td><td>${fmt(i.wpi*12)}</td><td class="nt2">Without lender comparison</td></tr>
-      <tr><td>Property Taxes (Yr 1)</td><td><strong style="color:var(--indigo);">${fmt(i.ty1)}</strong></td><td>${fmtAnnualPropertyTax(i.annualTax1, i.ty1)}</td><td class="nt2">Reassessed at ${fmt(i.price)} — no exemption</td></tr>
+      <tr><td>Property Taxes (Yr 1)</td><td><strong style="color:var(--indigo);">${fmt(i.ty1)}</strong></td><td>${fmtAnnualPropertyTax(i.annualTax1, i.ty1)}</td><td class="nt2">${i.buyerAnnualTax != null ? 'Buyer-entered annual projection' : `Reassessed at ${fmt(i.price)} — no exemption`}</td></tr>
       <tr><td>HOA</td><td><strong style="color:var(--indigo);">${fmt(i.hoa)}</strong></td><td>${fmt(i.hoa*12)}</td><td class="nt2">Fixed — verify no sub-HOAs</td></tr>
       ${i.ix?`<tr><td>Homeowners Insurance</td><td><span style="color:var(--warn);font-style:italic;font-size:.85rem;">Excluded</span></td><td>—</td><td class="nt2">Get an actual quote for the selected property</td></tr>`:`<tr><td>Homeowners Insurance</td><td><strong style="color:var(--indigo);">${fmt(i.wi)}</strong></td><td>${fmt(i.wi*12)}</td><td class="nt2">${i.il}</td></tr>`}
       ${i.wp>0?`<tr><td>PMI</td><td><strong style="color:var(--indigo);">${fmt(i.wp)}</strong></td><td>${fmt(i.wp*12)}</td><td class="nt2">Without shopping lenders on PMI</td></tr>`:''}
@@ -4627,7 +4635,7 @@ function buildPDF(inp) {
 
   const bestRows = [
     ['P&I Payment', `${fmtR(inp.br)} · 30yr Fixed`, fmt(inp.bpi), fmt(inp.bpi*12)],
-    ['Property Taxes (Year 2+)', 'Estimated; exemption depends on eligibility', fmt(inp.ty2), fmtAnnualPropertyTax(inp.annualTax2, inp.ty2)],
+    ['Property Taxes (Year 2+)', inp.buyerAnnualTax != null ? 'Buyer-entered projection' : 'Estimated; exemption depends on eligibility', fmt(inp.ty2), fmtAnnualPropertyTax(inp.annualTax2, inp.ty2)],
     ['HOA', 'Monthly fee', fmt(inp.hoa), fmt(inp.hoa*12)],
     ['Homeowners Insurance', inp.ix?'Excluded at Tier 1':inp.il, inp.ix?'—':fmt(inp.bi), inp.ix?'—':fmt(inp.bi*12)],
     ...(inp.bp>0?[['PMI', `${inp.dpct}% down payment`, fmt(inp.bp), fmt(inp.bp*12)]]: []),
@@ -4676,7 +4684,7 @@ function buildPDF(inp) {
 
   const worstRows = [
     ['P&I Payment', `${fmtR(inp.wr)} · Without lender comparison`, fmt(inp.wpi), fmt(inp.wpi*12)],
-    ['Property Taxes (Year 1)', 'Planning estimate; actual bill varies', fmt(inp.ty1), fmtAnnualPropertyTax(inp.annualTax1, inp.ty1)],
+    ['Property Taxes (Year 1)', inp.buyerAnnualTax != null ? 'Buyer-entered projection' : 'Planning estimate; actual bill varies', fmt(inp.ty1), fmtAnnualPropertyTax(inp.annualTax1, inp.ty1)],
     ['HOA', 'Confirmed monthly fee', fmt(inp.hoa), fmt(inp.hoa*12)],
     ['Homeowners Insurance', inp.ix?'Excluded — obtain quote':inp.il, inp.ix?'—':fmt(inp.wi), inp.ix?'—':fmt(inp.wi*12)],
     ...(inp.wp>0?[['PMI', 'Without shopping lenders', fmt(inp.wp), fmt(inp.wp*12)]]: []),
@@ -6747,6 +6755,8 @@ function shareAnalysis() {
     if (inp.districtId) params.set('district', inp.districtId);
   }
 
+  if (inp.buyerAnnualTax != null) params.set('buyerTax', inp.buyerAnnualTax);
+
   const shareURL = window.location.origin + window.location.pathname + '?' + params.toString();
 
   if (navigator.clipboard) {
@@ -6811,7 +6821,8 @@ function checkShareURL() {
   inp.wpi = cPI(inp.loan, MKT.wr);
   // Reconstructed shared results must use the same conservative tax basis as
   // the interactive calculator. Never automatically grant unverified relief.
-  inp.annualTax1 = inp.price * MKT.tr;
+  inp.buyerAnnualTax = parseBuyerAnnualTax(params.get('buyerTax'));
+  inp.annualTax1 = inp.buyerAnnualTax ?? inp.price * MKT.tr;
   inp.annualTax2 = inp.annualTax1;
   inp.ty1 = inp.annualTax1 / 12;
   inp.ty2 = inp.ty1;
@@ -6844,6 +6855,8 @@ function startComparison() {
   // Save current analysis as Property 1
   S2.prop1 = {...S.inp};
   S2.comparingProp2 = true;
+  const buyerTaxInput = document.getElementById('f-annual-buyer-tax');
+  if (buyerTaxInput) buyerTaxInput.value = '';
   // Reset for Property 2 entry
   S.tier = S.inp.tier;
   S.ins = null;
@@ -7683,7 +7696,7 @@ Loan amount: $${Math.round(i.loan).toLocaleString()}
 Analysis tier: Tier ${i.tier}
 Best case rate: ${i.br}% — P&I: $${i.bpi}/month
 Worst case rate: ${i.wr}% — P&I: $${i.wpi}/month
-Property taxes Year 1: $${i.ty1}/month | Year 2+ planning estimate: $${i.ty2}/month
+Property taxes Year 1: ${i.ty1}/month | Year 2+: ${i.ty2}/month | Basis: ${i.buyerAnnualTax != null ? 'buyer-entered annual projection' : 'area planning rate'}
 HOA: $${i.hoa}/month
 Insurance: ${i.ix ? 'Excluded (Tier 1)' : '$' + i.bi + '/month (' + i.il + ')'}
 PMI: ${i.bp > 0 ? '$' + i.bp + '–$' + i.wp + '/month' : 'None (20%+ down)'}
