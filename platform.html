@@ -5940,8 +5940,17 @@ function calculateBerkeley2026SalesTaxCredit(value, index) {
   return (Math.round(value * 0.000793 * 100) + Math.round(value * factor * 100)) / 100;
 }
 
+// Published municipal charges are reference amounts. Other parcel fees can apply.
+const BERKELEY_2026_MUNICIPAL_FEES = {5: 175, 6: 195, 10: 176.25};
+
 function applyBerkeley2026Levy(form, index) {
   applyDistrictLevy(form, index, BERKELEY_2026_TAX_LEVIES);
+  const feeNote = form.querySelector('.berkeley-fee-reference');
+  if (!feeNote) return;
+  const fee = BERKELEY_2026_MUNICIPAL_FEES[index];
+  feeNote.textContent = fee === undefined ? ''
+    : 'Published municipal fee: $' + fee.toFixed(2)
+      + '. Verify it applies to the parcel and include it once in the total fee input.';
 }
 
 function applyDistrictLevy(form, index, levies) {
@@ -5965,6 +5974,7 @@ function buildStateTaxScenario(state, countyKey) {
         ${BERKELEY_2026_TAX_LEVIES.map(([name], index) => `<option value="${index}">${name}</option>`).join('')}
       </select></label>
       <p>Match the district code on your parcel record. Use the taxable appraised value before the assessment ratio. <a href="https://berkeleycountysc.gov/dept/auditor/millage/" target="_blank" rel="noopener">Berkeley County Auditor millage schedule</a></p>
+      <p class="berkeley-fee-reference" aria-live="polite"></p>
       <label><input type="checkbox" name="berkeleySalesTaxCredit"> Apply published county and municipal sales-tax credits for this district</label>
       <p>If selected, enter only additional verified credits and applicable fees below.</p>` : ''}
     ${state === 'sc' && countyKey === 'charleston-sc' ? `<label>2026 Charleston County levy (optional)<br>
