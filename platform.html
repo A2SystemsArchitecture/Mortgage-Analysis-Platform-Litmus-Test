@@ -5808,6 +5808,13 @@ function calculateStateTaxScenario(state, marketValue, mills, approved) {
   return Number.isFinite(annualTax) ? {assessedValue, taxableValues, annualTax} : null;
 }
 
+function applyTaxBillAdjustments(annualTax, credits, fees) {
+  if (![annualTax, credits, fees].every(value => Number.isFinite(value) && value >= 0) || credits > annualTax) {
+    return null;
+  }
+  return {netTax: annualTax - credits, amountDue: annualTax - credits + fees};
+}
+
 function buildStateTaxScenario(state) {
   const scenario = STATE_TAX_SCENARIOS[state];
   return `<form class="nt nt-em" style="margin-bottom:1.5rem;" onsubmit="showStateTaxScenario(this, '${state}'); return false;" oninput="this.querySelector('output').textContent = '';">
@@ -5817,10 +5824,12 @@ function buildStateTaxScenario(state) {
       <label>Applicable market or appraised value ($)<br><input type="number" name="marketValue" min="0" step="0.01" required></label>
       ${scenario.rates.map((label, index) => `<label>${label} (mills)<br><input type="number" name="mills${index}" min="0" step="any" required></label>`).join('')}
       <label>Classification or exemption<br><select name="status" required><option value="">Select status</option><option value="no">${scenario.statuses[0]}</option><option value="yes">${scenario.statuses[1]}</option></select></label>
+      ${state === 'sc' ? `<label>Other verified annual tax credits ($)<br><input type="number" name="credits" min="0" step="0.01" placeholder="0"></label>
+      <label>Verified annual bill fees ($)<br><input type="number" name="fees" min="0" step="0.01" placeholder="0"></label>` : ''}
     </div>
     <button class="btn bp" type="submit">Calculate property tax</button>
     <output aria-live="polite" style="display:block;margin-top:.75rem;"></output>
-    <p>Use official millage rates for the property and tax year. This estimate excludes special assessments and billing adjustments. Report and affordability totals still use the market planning rate.</p>
+    <p>Use official millage rates for the property and tax year. ${state === 'sc' ? 'Enter only verified annual credits and fees from the auditor. School operating relief is already applied in the 4% scenario.' : 'This estimate excludes special assessments and billing adjustments.'} Report and affordability totals still use the market planning rate.</p>
   </form>`;
 }
 
@@ -5835,11 +5844,23 @@ function showStateTaxScenario(form, state) {
     output.textContent = 'Enter a valid value, all millage rates and an applicable status.';
     return;
   }
+  const adjustments = state === 'sc' ? applyTaxBillAdjustments(result.annualTax,
+    ...['credits', 'fees'].map(name => {
+      const field = fields.namedItem(name);
+      return field.value === '' ? 0 : field.valueAsNumber;
+    })) : null;
+  if (state === 'sc' && !adjustments) {
+    output.textContent = 'Enter valid bill adjustments. Credits cannot exceed the calculated ad valorem tax.';
+    return;
+  }
+
   const currency = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'});
   const bases = scenario.rates.map((label, index) => label + ' taxable value ' + currency.format(result.taxableValues[index]));
   output.textContent = ['Assessed value ' + currency.format(result.assessedValue), ...bases,
     'Estimated annual ad valorem tax ' + currency.format(result.annualTax),
-    'Monthly equivalent ' + currency.format(result.annualTax / 12)].join(' | ');
+    ...(adjustments ? ['Annual tax after credits ' + currency.format(adjustments.netTax),
+      'Estimated annual bill including entered fees ' + currency.format(adjustments.amountDue)] : []),
+    'Monthly equivalent ' + currency.format((adjustments ? adjustments.amountDue : result.annualTax) / 12)].join(' | ');
 }
 
 function buildHomesteadGuide(inp) {
