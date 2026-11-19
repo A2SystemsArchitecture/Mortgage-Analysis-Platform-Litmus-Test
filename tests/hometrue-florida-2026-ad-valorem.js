@@ -1,0 +1,10 @@
+const fs = require('node:fs');
+const path = require('node:path');
+const assert = require('node:assert/strict');
+const html = fs.readFileSync(path.join(__dirname, '..', 'platform.html'), 'utf8');
+const start = html.indexOf('function calculateFlorida2026AdValorem(');
+const end = html.indexOf('function buildHomesteadGuide(', start);
+assert.ok(start >= 0 && end > start);
+assert.ok(html.includes('onsubmit="showFlorida2026AdValorem(this); return false;"'));
+new Function(html.slice(start, end) + "const checks = [\n[100000, 6, 10, true, 75000, 48589, 935.89],\n[100000, 6, 10, false, 100000, 100000, 1600],\n[20000, 6, 10, true, 0, 0, 0],\n[50000, 6, 10, true, 25000, 25000, 400],\n[60000, 6, 10, true, 35000, 25000, 460],\n[76411, 6, 10, true, 51411, 25000, 558.466]\n];\nfor (const [v, s, n, h, school, nonSchool, annual] of checks) {\n  const result = calculateFlorida2026AdValorem(v, s, n, h);\n  if (result.schoolBase !== school || result.nonSchoolBase !== nonSchool || Math.abs(result.annualTax - annual) > 1e-8) throw Error('Unexpected result for ' + v);\n}\nfor (const inputs of [[100000, NaN, 10, true], [-1, 6, 10, true], [100000, 6, -1, true], [100000, 6, 10, null]]) {\n  if (calculateFlorida2026AdValorem(...inputs) !== null) throw Error('Accepted invalid inputs');\n}\nconst resultOutput = {};\nconst field = {assessment:{valueAsNumber:100000}, school:{valueAsNumber:6}, nonSchool:{valueAsNumber:10}, homestead:{value:'approved'}};\nshowFlorida2026AdValorem({elements:{namedItem:name=>field[name]},querySelector:()=>resultOutput});\nif (!resultOutput.textContent.includes('$935.89') || !resultOutput.textContent.includes('$77.99')) throw Error(resultOutput.textContent);\n")();
+console.log('Florida 2026: six calculation scenarios, four invalid-input checks and one form-output check passed.');
