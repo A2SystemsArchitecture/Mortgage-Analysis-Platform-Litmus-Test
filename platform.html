@@ -2012,10 +2012,10 @@ const COUNTIES = {
     fxb:25, fxw:45, fab:65, faw:140,
     paUrl:'https://www.cherokeega.com/tax-assessors/',
     paName:'Cherokee County Tax Assessors',
-    notes:'The 2026 unincorporated Cherokee base estimate includes county, school, fire and park bond levies before exemptions and separate charges. Canton and Woodstock use planning rates. Standard homestead: $5,000 off assessed value for county and school taxes. Apply by April 1.',
+    notes:'The 2026 unincorporated Cherokee base estimate includes county, school, fire and park bond levies before exemptions and separate charges. Canton uses the 2026 standard county-and-city base levy; Woodstock remains a planning rate. Standard homestead: $5,000 off assessed value for county and school taxes. Apply by April 1.',
     state:'ga', closingModel:'ga',
     districts:[
-      {id:'cher-canton',label:'Canton',tr:0.0075},
+      {id:'cher-canton',label:'Canton (2026 standard base levy)',tr:0.4 * (23.926 + 5.250) / 1000},
       {id:'cher-woodstock',label:'Woodstock',tr:0.0072},
       {id:'cher-uninc',label:'Unincorporated Cherokee (2026 base levy)',tr:0.4 * 26.949 / 1000},
     ],
