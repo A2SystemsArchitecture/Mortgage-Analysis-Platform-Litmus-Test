@@ -5953,6 +5953,28 @@ function applyBerkeley2026Levy(form, index) {
       + '. Verify it applies to the parcel and include it once in the total fee input.';
 }
 
+// Dorchester County Auditor official 2025 chart. Historical tax year only.
+const DORCHESTER_2025_TAX_LEVIES = [
+  ["200 · Unincorporated (county fire)",360.8,165.6],
+  ["203 · North Charleston fire contract",360.8,165.6],
+  ["205 · Summers Corner (county fire)",360.8,165.6],
+  ["207 · Town of Summerville",405.6,210.4],
+  ["208 · City of North Charleston",431.1,235.9],
+  ["221 · Dorchester/Oakbrook (county fire)",360.8,165.6],
+  ["250 · Lincolnville",360.8,165.6],
+  ["271 · Summerville/Oakbrook",405.6,210.4],
+  ["273 · Summerville/Midtown",405.6,210.4],
+  ["400 · Unincorporated (county fire)",372.2,151.6],
+  ["403 · Harleyville",480.2,259.6],
+  ["405 · St. George",446,225.4],
+  ["406 · Ridgeville",428.9,208.3],
+  ["415 · Reevesville",372.2,151.6]
+];
+
+function applyDorchester2025Levy(form, index) {
+  applyDistrictLevy(form, index, DORCHESTER_2025_TAX_LEVIES);
+}
+
 function applyDistrictLevy(form, index, levies) {
   if (index === '') return;
   const district = levies[Number(index)];
@@ -5968,6 +5990,12 @@ function buildStateTaxScenario(state, countyKey) {
   return `<form class="nt nt-em" style="margin-bottom:1.5rem;" onsubmit="showStateTaxScenario(this, '${state}'); return false;" oninput="this.querySelector('output').textContent = '';">
     <span class="nl nl-em">${scenario.name} property tax scenario</span>
     <p>${scenario.note}</p>
+    ${state === 'sc' && countyKey === 'dorchester-sc' ? `<label>Dorchester County 2025 levy (historical)<br>
+      <select onchange="applyDorchester2025Levy(this.form, this.value)">
+        <option value="">Enter applicable millage manually</option>
+        ${DORCHESTER_2025_TAX_LEVIES.map(([name], index) => `<option value="${index}">${name}</option>`).join('')}
+      </select></label>
+      <p>Use a preset for a 2025 comparison. Enter verified rates manually for other tax years and match the district code on the parcel record. <a href="https://www.dorchestercountysc.gov/home/showpublisheddocument/26232/638963039769330000" target="_blank" rel="noopener">Dorchester County Auditor 2025 millage chart</a></p>` : ''}
     ${state === 'sc' && countyKey === 'berkeley-sc' ? `<label>Berkeley County 2026/2027 levy (optional)<br>
       <select name="berkeleyDistrict" onchange="applyBerkeley2026Levy(this.form, this.value)">
         <option value="">Enter millage manually</option>
