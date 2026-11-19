@@ -62,6 +62,12 @@ These percentages describe distinct milestones. They are not an overall audit co
 | AL | Shelby County | Historical Montevallo H-1 example matched. Current rates and eligibility scenarios open. [Checkpoint](HomeTrue-Gwinnett-Shelby-Local-Reconciliation.md) |
 | AL | Limestone County | No locally reconciled property-tax case documented in this ledger. Verify district rates, qualifications, fees and buyer totals. |
 
+### Fulton follow-up: Sandy Springs
+
+- The city's 2026 public notice lists **4.731 proposed city mills**. The November 3 morning hearing did not adopt the rate. The city's general tax explainer repeats 4.731 city mills but shows an older county/school breakdown. Final evening action remains to be sourced before changing the calculator. [2026 public notice](https://www.sandyspringsga.gov/news/proposed-property-tax-increase-hearings/) · [Morning hearing record](https://www.openpublica.com/meetings/sandysprings-georgia-city-council-2026-11-03-6ae9f97dbe45b19feab4ee65) · [Official meeting portal](https://sandyspringsga.civicclerk.com/)
+- Conditional benchmark: 26.989 confirmed county and school mills plus 4.731 proposed city mills = 31.720 mills. At 40% assessment, a fictional $575,000 home would produce $7,295.60 annually before exemptions or parcel-specific charges. The current 0.88% planning multiplier gives $5,060.00. Await the final city adoption record before counting this district as verified.
+- Alpharetta's city tax page lists a proposed 5.750 mills for 2026. HomeTrue currently groups Alpharetta and Johns Creek under one multiplier. Verify each city's adopted levy individually before assigning revised rates. [Alpharetta city tax page](https://www.alpharetta.ga.us/property-taxes)
+
 ## Main buyer totals
 
 - `collectInp` and `checkShareURL` use the selected market/district planning multiplier and retain the unrounded monthly property-tax estimate internally. The monthly display rounds to a whole dollar. The affordability path likewise uses the selected planning multiplier. The standalone tax-guide output does not feed these paths.
