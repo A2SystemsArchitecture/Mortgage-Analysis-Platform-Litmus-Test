@@ -4904,33 +4904,27 @@ function calcAffordability() {
   const maxMoLow = il * 0.36 - db;
   const maxMoHigh = ih * 0.43 - db;
 
-  // Work back from monthly payment to price
-  // Payment = P&I + tax + estimated insurance + PMI + flood
-  // Solve for loan amount from P&I
-  function priceFromPayment(mo) {
-    // Iterative — start with estimate
-    let price = mo * 12 / 0.065;
-    for (let i = 0; i < 20; i++) {
-      const down = price * dpPct / 100;
-      const loan = price - down;
-      const r = rate / 100 / 12, n = 360;
-      const pi = loan * r * Math.pow(1+r,n) / (Math.pow(1+r,n)-1);
-      const tax = Math.max(0, price * MKT.tr / 12); // current county/district rate; no unverified exemptions
-      const pmi = dpPct < 20 ? loan * 0.004 / 12 : 0;
-      const ins = 280; // estimated
-      const flood = 55;
-      const total = pi + tax + pmi + ins + flood;
-      price = price * (mo / total);
-    }
-    return Math.round(price / 5000) * 5000;
+  const loanFraction = 1 - dpPct / 100;
+  const monthlyRate = rate / 1200;
+  const principalAndInterest = monthlyRate === 0
+    ? 1 / 360
+    : monthlyRate / (1 - Math.pow(1 + monthlyRate, -360));
+  const mortgageInsurance = dpPct < 20 ? 0.004 / 12 : 0;
+  const monthlyCostPerDollar = loanFraction * (principalAndInterest + mortgageInsurance)
+    + MKT.tr / 12;
+  const lowFixedCosts = 280 + 55;
+  const highFixedCosts = 300 + 75;
+
+  function priceFromPayment(budget, fixedCosts) {
+    return Math.max(0, Math.floor((budget - fixedCosts) / monthlyCostPerDollar / 5000) * 5000);
   }
 
-  const priceLow = priceFromPayment(maxMoLow);
-  const priceHigh = priceFromPayment(maxMoHigh);
+  const priceLow = priceFromPayment(maxMoLow, lowFixedCosts);
+  const priceHigh = priceFromPayment(maxMoHigh, highFixedCosts);
   const priceMid = Math.round((priceLow + priceHigh) / 2 / 5000) * 5000;
 
-  const moLow = cPI(priceLow * (1 - dpPct/100), rate) + Math.max(0, priceLow * MKT.tr / 12) + 280 + 55;
-  const moHigh = cPI(priceHigh * (1 - dpPct/100), rate) + Math.max(0, priceHigh * MKT.tr / 12) + 300 + 75;
+  const moLow = priceLow * monthlyCostPerDollar + lowFixedCosts;
+  const moHigh = priceHigh * monthlyCostPerDollar + highFixedCosts;
 
   document.getElementById('aff-price-low').textContent = fmt(priceLow);
   document.getElementById('aff-price-high').textContent = fmt(priceHigh);
