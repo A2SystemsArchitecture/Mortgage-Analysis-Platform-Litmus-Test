@@ -1,0 +1,7 @@
+# Forsyth and Cumming local reconciliation
+
+Cumming's [official administration page](https://www.cityofcumming.net/administration) confirms the city has no municipal property tax. The [official county filing guide](https://sfile.forsythco.com/smartfile/Filing/FilingType/Info/HOMESTEAD) confirms S1 assessed-value reductions of $8,000 on county operations and fire and $2,000 on school operations, ordinary filing by April 1, and separate L1 and floating relief. HomeTrue's Forsyth guidance now reflects these verified facts.
+
+The county's [2025 adoption notice](https://www.forsythco.com/News/forsyth-county-commission-adopts-millage-rates-2025) lists 24.522 total mills. With $300,000 market value and a 40% assessment ratio, $120,000 assessed × .024522 = $2,942.64 before exemptions and fees. The standalone Georgia function returned $2,942.64 when tested with those inputs. This is a historical base levy benchmark.
+
+Third-party 2026 sources report or project 4.727 county operating mills. The link to the county is a notice of intent and returned HTTP 403 in this audit. A final adopted 2026 county and school schedule was not verified, so the draft district estimate inputs were retained. The draft currently has separate effective planning multipliers for Cumming and unincorporated Forsyth. The difference cannot be attributed to a Cumming municipal property tax. The standalone state scenario does not calculate Forsyth local S1, L1 or floating relief. Parcel- and market-level sign-off remains open. No deployment.
