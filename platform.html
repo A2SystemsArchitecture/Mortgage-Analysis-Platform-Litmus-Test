@@ -4921,18 +4921,29 @@ function calcAffordability() {
 
   const priceLow = priceFromPayment(maxMoLow, lowFixedCosts);
   const priceHigh = priceFromPayment(maxMoHigh, highFixedCosts);
-  const priceMid = Math.round((priceLow + priceHigh) / 2 / 5000) * 5000;
+  const priceMid = priceLow && priceHigh
+    ? Math.round((priceLow + priceHigh) / 2 / 5000) * 5000
+    : priceLow || priceHigh;
 
   const moLow = priceLow * monthlyCostPerDollar + lowFixedCosts;
   const moHigh = priceHigh * monthlyCostPerDollar + highFixedCosts;
 
-  document.getElementById('aff-price-low').textContent = fmt(priceLow);
-  document.getElementById('aff-price-high').textContent = fmt(priceHigh);
-  document.getElementById('aff-mo-low').textContent = fmt(moLow) + '/mo';
-  document.getElementById('aff-mo-high').textContent = fmt(moHigh) + '/mo';
+  document.getElementById('aff-price-low').textContent = priceLow ? fmt(priceLow) : 'No price fits';
+  document.getElementById('aff-price-high').textContent = priceHigh ? fmt(priceHigh) : 'No price fits';
+  document.getElementById('aff-mo-low').textContent = priceLow ? fmt(moLow) + '/mo' : 'N/A';
+  document.getElementById('aff-mo-high').textContent = priceHigh ? fmt(moHigh) + '/mo' : 'N/A';
 
   // Down payment grid
   const dpGrid = document.getElementById('aff-dp-grid');
+  if (!priceMid) {
+    dpGrid.innerHTML = '';
+    document.getElementById('aff-savings-wrap').textContent = 'Neither payment budget supports the minimum $5,000 price increment.';
+    document.getElementById('aff-dti-wrap').innerHTML = '';
+    S.affResult = null;
+    document.getElementById('aff-results').style.display = 'block';
+    document.getElementById('aff-results').scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
   dpGrid.innerHTML = [3, 5, 20].map(pct => `
     <div class="aff-dp-card">
       <span class="aff-dp-pct">${pct}% Down</span>
@@ -4944,7 +4955,7 @@ function calcAffordability() {
   // The affordability output uses the selected county/district effective rate as an illustration.
   // The calculation is not a parcel tax bill, and homestead benefits are excluded until verified.
   // Savings assessment
-  const needed3 = priceMid * 0.03 + priceMid * 0.035 + moHigh * 3;
+  const needed3 = priceMid * 0.03 + priceMid * 0.035 + (priceHigh ? moHigh : moLow) * 3;
   const savingsWrap = document.getElementById('aff-savings-wrap');
   const savingsOk = sv >= needed3;
   savingsWrap.innerHTML = `
@@ -4957,7 +4968,7 @@ function calcAffordability() {
   // DTI bar
   const dtiPct = Math.round((moLow + db) / il * 100);
   const dtiColor = dtiPct <= 36 ? 'var(--emerald)' : dtiPct <= 43 ? 'var(--warn)' : 'var(--indigo)';
-  document.getElementById('aff-dti-wrap').innerHTML = `
+  document.getElementById('aff-dti-wrap').innerHTML = priceLow ? `
     <div class="dti-bar-wrap">
       <div style="font-family:var(--fm);font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;">DTI at Conservative Price · ${fmt(il)}/mo income</div>
       <div class="dti-bar-track"><div class="dti-bar-fill" style="width:${Math.min(dtiPct,100)}%;background:${dtiColor};"></div></div>
@@ -4965,7 +4976,7 @@ function calcAffordability() {
         <span>${dtiPct}% DTI</span><span style="color:${dtiColor};">${dtiPct<=36?'Healthy':dtiPct<=43?'Qualifiable':'Near ceiling'}</span>
       </div>
     </div>
-  `;
+  ` : '';
 
   // Store for feed-through
   S.affResult = { priceMid, dpPct, il, ih, cr };
