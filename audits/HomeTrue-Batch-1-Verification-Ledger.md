@@ -7,9 +7,9 @@ Scope: Florida, Georgia, Alabama and South Carolina. Inventory reconciled to all
 | Checkpoint | Passed / scope | What the count measures |
 |---|---:|---|
 | State with tested standalone property-tax rules | 4 / 4 | At least one rule for each state. No implication about remaining rules. |
-| Market with an evidenced local property-tax calculation exercised | 13 / 31 (41.9%) | Miami-Dade, Broward, Palm Beach, Martin, St. Lucie, Gwinnett, Cobb, Forsyth, Shelby, Charleston, Berkeley, York and Dorchester. Historical cases count and are identified below. |
-| Market with an evidenced current-year district property-tax calculation exercised | 8 / 31 (25.8%) | Miami-Dade, Broward, Martin, St. Lucie, Gwinnett, Charleston, Berkeley and York. This includes standalone cases. |
-| Market with an evidenced district correction in main buyer flow | 5 / 31 (16.1%) | Six Miami-Dade, eleven Broward, eleven Martin, seven St. Lucie and four Gwinnett pre-exemption district choices. |
+| Market with an evidenced local property-tax calculation exercised | 15 / 31 (48.4%) | Miami-Dade, Broward, Palm Beach, Martin, St. Lucie, Indian River, Brevard, Gwinnett, Cobb, Forsyth, Shelby, Charleston, Berkeley, York and Dorchester. Historical cases count and are identified below. |
+| Market with an evidenced current-year district property-tax calculation exercised | 10 / 31 (32.3%) | Miami-Dade, Broward, Martin, St. Lucie, Indian River, Brevard, Gwinnett, Charleston, Berkeley and York. This includes standalone cases. |
+| Market with an evidenced district correction in main buyer flow | 7 / 31 (22.6%) | Miami-Dade, Broward, Martin, St. Lucie, Indian River, Brevard and Gwinnett have verified pre-exemption choices. |
 | Market with full financial sign-off | 0 / 31 | Full rule, market and buyer-output reconciliation. |
 | State with full financial sign-off | 0 / 4 | Full statewide and local financial reconciliation. |
 
@@ -35,8 +35,8 @@ These percentages describe distinct milestones. They are not an overall audit co
 | FL | Palm Beach County | Tested a 2026 school and county operating subtotal. For $100,000 assessed with standard homestead, $75,000 × 6.287 / 1,000 plus $48,589 × 4.500 / 1,000 equals $690.1755 ($690.18). This is partial. Parcel overlays, fees and main district totals remain open. [Official final authority rates](https://pbcpao.gov/pdf/taxroll/2026%20Final%20vs%20Proposed%20Millage%20Rates.pdf) · [Parcel rate lookup instructions](https://pbcpao.gov/tax-roll.htm) |
 | FL | Martin County | Eleven final 2026 real-property levy codes feed the buyer estimate. Separate drainage charges and parcel exemptions remain open. [Official rates](https://www.pamartinfl.gov/millage-codes-tax-rates/458-2026-millage-codes-tax-rates) · [Tests](../tests/hometrue-martin-2026-districts.js) |
 | FL | St. Lucie County | Seven final 2026 rate groups feed the main buyer baseline by parcel district code. Tradition without a code remains a planning estimate. Parcel-specific relief and fees remain open. [Final chart](https://www.paslc.gov/DocumentCenter/View/686/2026-Final-Tax-Rates-PDF) · [Tests](../tests/hometrue-st-lucie-2026-districts.js) |
-| FL | Indian River County | No locally reconciled property-tax case documented in this ledger. Verify district rates, qualifications, fees and buyer totals. |
-| FL | Brevard County | No locally reconciled property-tax case documented in this ledger. Verify district rates, qualifications, fees and buyer totals. |
+| FL | Indian River County | Eleven official 2026 rate groups feed the buyer estimate by parcel tax code. Exemptions and separate fees remain open. [Final chart](https://www.ircpa.org/media/14226/2026-final-millages-chart.pdf) · [Tests](../tests/hometrue-indian-river-brevard-2026-districts.js) |
+| FL | Brevard County | All 38 final 2026 millage codes feed the buyer estimate. Exemptions and separate charges remain open. [Final chart](https://www.bcpao.us/Docs/Taxroll/2026/Millage_2026.pdf) · [Tests](../tests/hometrue-indian-river-brevard-2026-districts.js) |
 | GA | Fulton County | County operating levy evidence and closing cases saved. Complete school, municipal and special levies open. |
 | GA | DeKalb County | No locally reconciled property-tax case documented in this ledger. Verify district rates, qualifications, fees and buyer totals. |
 | GA | Gwinnett County | Four named 2026 base districts feed main pre-exemption estimate. Exemptions, overlays and bill totals open. [Tests](../tests/hometrue-batch1-state-tax-scenarios.js) |
