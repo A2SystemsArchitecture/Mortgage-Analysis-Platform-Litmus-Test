@@ -1907,7 +1907,7 @@ const COUNTIES = {
     notes:'Gwinnett County planning rate ~0.95%. The approved S1R exemption deducts $10,000 from county assessed value, $8,000 from school assessed value, and $7,000 from recreation assessed value. The county accepts applications year-round and lists the assessment notice appeal deadline for current-year relief.',
     state:'ga', closingModel:'ga',
     districts:[
-      {id:'gwin-lawrenceville',label:'Lawrenceville',tr:0.01},
+      {id:'gwin-lawrenceville',label:'Lawrenceville (base district)',tr:(31.6 + 3.26) / 1000 * 0.40},
       {id:'gwin-suwanee',label:'Suwanee',tr:0.009},
       {id:'gwin-duluth',label:'Duluth',tr:0.0092},
       {id:'gwin-uninc',label:'Unincorporated Gwinnett (base district)',tr:34.86 / 1000 * 0.40}, // 2026 tax schedule; ordinary assessment before exemptions and fees
