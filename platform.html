@@ -2039,11 +2039,11 @@ const COUNTIES = {
     fxb:28, fxw:50, fab:70, faw:150,
     paUrl:'https://www.claytoncountyga.gov/government/tax-assessor/homestead-exemptions',
     paName:'Clayton County Tax Assessors',
-    notes:'Clayton County effective tax rate ~0.97% — one of the higher rates in Metro Atlanta. Standard homestead: $10,000 off assessed value for county taxes. Apply by April 1.',
+    notes:'The standard 2026 county-fire districts use the net county M&O after the 3.468-mill local-option sales tax rollback (15.052 mills), school 20.000 and county fire 4.500. Jonesboro adds its 9.000-mill municipal rate. Clayton County official Resolution 2026-213 and the local Development Authority supply these rates. Buyer prices are assessed at the ordinary Georgia 40% ratio before verified homestead exemptions, special levies and parcel fees. Fire applies only where Clayton County Fire and Emergency Services serves the parcel, including unincorporated areas and Jonesboro. Confirm the actual tax district, county fire service, homestead qualifications and any extra charges on the parcel bill; do not add the 18.520 gross county rate again after using the 15.052 net county rate.',
     state:'ga', closingModel:'ga',
     districts:[
-      {id:'cla-jonesboro',label:'Jonesboro',tr:0.0105},
-      {id:'cla-uninc',label:'Unincorporated Clayton',tr:0.0097},
+      {id:'cla-jonesboro',label:'Jonesboro (2026 standard, county fire)',tr:0.4 * (15.052 + 20.000 + 4.500 + 9.000) / 1000},
+      {id:'cla-uninc',label:'Unincorporated Clayton (2026 standard, county fire)',tr:0.4 * (15.052 + 20.000 + 4.500) / 1000},
     ],
     fvb:0,fvw:0},
   'hall': {
