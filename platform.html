@@ -4934,6 +4934,7 @@ function calcAffordability() {
   document.getElementById('aff-mo-high').textContent = priceHigh ? fmt(moHigh) + '/mo' : 'N/A';
 
   // Down payment grid
+  document.getElementById('aff-to-analysis').disabled = !priceMid;
   const dpGrid = document.getElementById('aff-dp-grid');
   if (!priceMid) {
     dpGrid.innerHTML = '';
