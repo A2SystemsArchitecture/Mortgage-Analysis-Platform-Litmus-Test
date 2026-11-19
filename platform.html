@@ -5770,6 +5770,78 @@ function showFloridaAdValorem(form) {
     + ' | Monthly equivalent ' + currency.format(result.annualTax / 12);
 }
 
+const STATE_TAX_SCENARIOS = {
+  ga: {
+    name: 'Georgia',
+    rates: ['Levies eligible for the standard exemption', 'Other levies'],
+    statuses: ['No standard exemption', 'Approved $2,000 standard exemption'],
+    note: 'Uses the ordinary 40% assessment ratio. Put municipal school levies and bonded-debt levies in Other levies. Enter each levy only once. Local exemptions, the 2026 grant and floating homestead relief are excluded.'
+  },
+  al: {
+    name: 'Alabama Class III residential',
+    rates: ['State levies', 'County levies eligible for H-1', 'Other levies'],
+    statuses: ['No H-1 exemption', 'Approved H-1 exemption'],
+    note: 'Uses a 10% assessment ratio for Class III residential property. Enter each levy only once. H-1 reduces the state base by up to $4,000 and the eligible county base by up to $2,000. Use the jurisdiction’s appraised value applicable to the tax year. Local and other homestead relief are excluded.'
+  },
+  sc: {
+    name: 'South Carolina',
+    rates: ['School operating levies', 'Other levies, including school debt'],
+    statuses: ['Ordinary 6% residential classification', 'Approved 4% legal residence'],
+    note: 'Uses the applicable taxable market value before multiplying by the assessment ratio. Enter each levy only once. The 4% legal residence scenario excludes school operating levies. Separate homestead relief and other deductions are excluded.'
+  }
+};
+
+function calculateStateTaxScenario(state, marketValue, mills, approved) {
+  if (!Object.hasOwn(STATE_TAX_SCENARIOS, state)
+      || typeof approved !== 'boolean'
+      || mills.length !== STATE_TAX_SCENARIOS[state].rates.length
+      || ![marketValue, ...mills].every(value => Number.isFinite(value) && value >= 0)) {
+    return null;
+  }
+  const assessedValue = marketValue * (state === 'ga' ? 0.4 : state === 'al' ? 0.1 : approved ? 0.04 : 0.06);
+  let deductions = [0, 0];
+  if (state === 'ga' && approved) deductions = [2000, 0];
+  if (state === 'al') deductions = approved ? [4000, 2000, 0] : [0, 0, 0];
+  if (state === 'sc' && approved) deductions = [assessedValue, 0];
+  const taxableValues = deductions.map(deduction => Math.max(0, assessedValue - deduction));
+  const annualTax = taxableValues.reduce((sum, value, index) => sum + value * mills[index] / 1000, 0);
+  return Number.isFinite(annualTax) ? {assessedValue, taxableValues, annualTax} : null;
+}
+
+function buildStateTaxScenario(state) {
+  const scenario = STATE_TAX_SCENARIOS[state];
+  return `<form class="nt nt-em" style="margin-bottom:1.5rem;" onsubmit="showStateTaxScenario(this, '${state}'); return false;" oninput="this.querySelector('output').textContent = '';">
+    <span class="nl nl-em">${scenario.name} property tax scenario</span>
+    <p>${scenario.note}</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:.75rem;margin:.75rem 0;">
+      <label>Applicable market or appraised value ($)<br><input type="number" name="marketValue" min="0" step="0.01" required></label>
+      ${scenario.rates.map((label, index) => `<label>${label} (mills)<br><input type="number" name="mills${index}" min="0" step="any" required></label>`).join('')}
+      <label>Classification or exemption<br><select name="status" required><option value="">Select status</option><option value="no">${scenario.statuses[0]}</option><option value="yes">${scenario.statuses[1]}</option></select></label>
+    </div>
+    <button class="btn bp" type="submit">Calculate property tax</button>
+    <output aria-live="polite" style="display:block;margin-top:.75rem;"></output>
+    <p>Use official millage rates for the property and tax year. This estimate excludes special assessments and billing adjustments. Report and affordability totals still use the market planning rate.</p>
+  </form>`;
+}
+
+function showStateTaxScenario(form, state) {
+  const scenario = STATE_TAX_SCENARIOS[state];
+  const fields = form.elements;
+  const result = calculateStateTaxScenario(state, fields.namedItem('marketValue').valueAsNumber,
+    scenario.rates.map((_, index) => fields.namedItem('mills' + index).valueAsNumber),
+    {yes: true, no: false}[fields.namedItem('status').value]);
+  const output = form.querySelector('output');
+  if (!result) {
+    output.textContent = 'Enter a valid value, all millage rates and an applicable status.';
+    return;
+  }
+  const currency = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'});
+  const bases = scenario.rates.map((label, index) => label + ' taxable value ' + currency.format(result.taxableValues[index]));
+  output.textContent = ['Assessed value ' + currency.format(result.assessedValue), ...bases,
+    'Estimated annual ad valorem tax ' + currency.format(result.annualTax),
+    'Monthly equivalent ' + currency.format(result.annualTax / 12)].join(' | ');
+}
+
 function buildHomesteadGuide(inp) {
   const closingDateEl = document.getElementById('hg-closing-date');
   const closingDate = closingDateEl ? closingDateEl.value : '';
@@ -6165,6 +6237,7 @@ function buildHomesteadGuide(inp) {
         <p>Georgia's standard homestead exemption is a <strong>$2,000 reduction from the assessed value</strong> for eligible COUNTY and SCHOOL property taxes, with statutory exceptions — and local exemptions can change the amount and which levies it applies to. Georgia generally assesses residential property at <strong>40% of fair market value</strong> before applicable deductions. For tax year 2026 only, qualifying existing homesteads also receive a one-time $18,000 assessed-value reduction under Georgia's Homeowner Tax Relief Grant. This 2026 grant must not be automatically applied to 2027 or later estimates. Georgia SB 33 (HOME Act of 2026) makes the statewide base-year (floating) homestead exemption mandatory for local taxing authorities from 2027; the actual savings depend on the home's approved base-year value, annual changes, and local taxes and are not assumed in HomeTrue's blended-rate estimate. Apply with the county tax commissioner or assessor, ordinarily by April 1; Georgia also permits filing during the 45-day assessment notice appeal window, subject to state requirements.</p>
         ${c.heNote ? `<p style="margin-top:.5rem;color:var(--georgia-dim);font-weight:500;">⚠ ${c.heNote}</p>` : ''}
       </div>
+      ${buildStateTaxScenario('ga')}
       ${deadlineHtml}
       <h3 style="font-family:var(--fd);font-size:1.1rem;font-weight:700;color:var(--midnight);margin:1.5rem 0 1rem;">Step-by-Step Filing Instructions</h3>
       <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">Confirm eligibility immediately after closing</div><div class="hg-desc">You must own and occupy the property as your legal primary residence as of January 1 of the tax year. You cannot claim homestead on more than one property. Married couples are entitled to only one homestead exemption across all jurisdictions.</div></div></div>
@@ -6206,6 +6279,7 @@ function buildHomesteadGuide(inp) {
         <span class="nl nl-em">${c.name} — South Carolina</span>
         <p>The regular South Carolina Homestead Exemption removes the first <strong>$50,000 of fair market value</strong> from eligible taxes for qualified residents age 65+, totally and permanently disabled, or legally blind. For tax year 2026, South Carolina temporarily authorized an additional exemption for some qualifying recipients. Its amount and eligibility must be confirmed with the county auditor. Eligible owner-occupants may receive the special <strong>4% assessment ratio</strong> instead of the usual 6% ratio for other residential property, plus relief from school operating millage after county approval. School debt millage can still apply. These benefits are not automatic from purchase alone. Apply for Legal Residence status with your county assessor.</p>
       </div>
+      ${buildStateTaxScenario('sc')}
       ${deadlineHtml}
       <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">Apply for the 4% Legal Residence classification before the first property-tax penalty date</div><div class="hg-desc">A qualifying approved Legal Residence receives the 4% assessment ratio and an exemption from applicable school operating taxes. Without approval, the ordinary 6% residential classification may apply. The county assessor provides its own application and supporting-document requirements; file before the first penalty date on the property-tax notice.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open County Assessor Portal</a></div></div>
       <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">If 65+ or disabled — apply for Homestead Exemption by July 15</div><div class="hg-desc">File with the county auditor for the $50,000 fair market value exemption. Requires proof of age or disability and one full year of SC residence.</div></div></div>
@@ -6240,6 +6314,7 @@ function buildHomesteadGuide(inp) {
         <span class="nl nl-em">${c.name} — Alabama Homestead Exemption</span>
         <p>For qualifying Alabama homesteads, the H-1 exemption covers up to <strong>$4,000 of assessed value for state taxes</strong> and up to <strong>$2,000 for county taxes</strong>. Local additional exemptions and relief for older or disabled homeowners have separate eligibility rules. Qualifying owner-occupied residential property is generally assessed at <strong>10% of appraised value</strong>. Other property classifications may be assessed differently. For example, a $300,000 appraised value yields $30,000 in assessed value before exemptions. With the full H-1 amounts, the illustrative taxable bases are $26,000 for state taxes and $28,000 for applicable county taxes, before other relief. For older homeowners, permanently disabled homeowners and blind homeowners, exemptions vary by age, disability and income. Do not assume that $12,000 is a universal income cutoff or that all property taxes are waived. Under Alabama Act 2024-344, qualifying Class II and Class III properties generally have a 7% annual limit on increases in taxable assessed value beginning with tax collections in October 2025, subject to reassessment exceptions. This is not a 7% cap on the entire tax bill and does not guarantee a new buyer's tax amount.</p>
       </div>
+      ${buildStateTaxScenario('al')}
       ${deadlineHtml}
       <div class="hg-step"><div class="hg-num">1</div><div class="hg-content"><div class="hg-title">File homestead exemption at County Revenue Commissioner</div><div class="hg-desc">Must own and occupy as primary residence as of October 1. Bring AL driver's license showing property address, recorded deed, and Social Security number. Renews automatically.</div><a href="#" onclick="openPAPortal(event)" class="hg-portal-btn" style="margin-top:.75rem;" id="pa-portal-link">↗ Open County Revenue Commissioner Portal</a></div></div>
       <div class="hg-step"><div class="hg-num">2</div><div class="hg-content"><div class="hg-title">10% assessment classification for qualifying owner-occupied residential property</div><div class="hg-desc">At a typical 30-mill rate, a $350,000 home assessed at $35,000 generates ~$1,050/year in taxes — among the lowest in the nation.</div></div></div>
