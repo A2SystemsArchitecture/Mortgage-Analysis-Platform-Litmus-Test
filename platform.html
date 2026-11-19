@@ -5861,9 +5861,25 @@ const YORK_2026_TAX_LEVIES = [
   ["York city",532.7,270.9]
 ];
 
+const CHARLESTON_2026_TAX_LEVIES = [
+  ['City of Charleston (TD 34, 35, 36, 52, 63, 71, 72, 99)', 300.8, 155.6],
+  ['Mount Pleasant (TD 21)', 263.1, 117.9],
+  ['City of North Charleston (TD 43)', 310.3, 165.1],
+  ['Town of Summerville (TD 47)', 284.8, 139.6],
+  ['Northern Charleston Fire District (TD 42, 45, 48)', 234.6, 89.4]
+];
+
 function applyYork2026Levy(form, index) {
+  applyDistrictLevy(form, index, YORK_2026_TAX_LEVIES);
+}
+
+function applyCharleston2026Levy(form, index) {
+  applyDistrictLevy(form, index, CHARLESTON_2026_TAX_LEVIES);
+}
+
+function applyDistrictLevy(form, index, levies) {
   if (index === '') return;
-  const district = YORK_2026_TAX_LEVIES[Number(index)];
+  const district = levies[Number(index)];
   if (!district) return;
   const [, gross, legalResidence] = district;
   form.elements.namedItem('mills0').value = (gross - legalResidence).toFixed(1);
@@ -5876,6 +5892,12 @@ function buildStateTaxScenario(state, countyKey) {
   return `<form class="nt nt-em" style="margin-bottom:1.5rem;" onsubmit="showStateTaxScenario(this, '${state}'); return false;" oninput="this.querySelector('output').textContent = '';">
     <span class="nl nl-em">${scenario.name} property tax scenario</span>
     <p>${scenario.note}</p>
+    ${state === 'sc' && countyKey === 'charleston-sc' ? `<label>2026 Charleston County levy (optional)<br>
+      <select onchange="applyCharleston2026Levy(this.form, this.value)">
+        <option value="">Enter millage manually</option>
+        ${CHARLESTON_2026_TAX_LEVIES.map(([name], index) => `<option value="${index}">${name}</option>`).join('')}
+      </select></label>
+      <p>Match the tax district code on the parcel record. Enter verified credits and fees separately. <a href="https://www.charlestoncounty.gov/departments/auditor/files/archived/2026-millage-breakdown.pdf?v=844" target="_blank" rel="noopener">Charleston County Auditor millage breakdown</a></p>` : ''}
     ${state === 'sc' && countyKey === 'york-sc' ? `<label>2026 York County levy (optional)<br>
       <select onchange="applyYork2026Levy(this.form, this.value)">
         <option value="">Enter millage manually</option>
