@@ -5718,6 +5718,42 @@ function buildClosingCosts(inp) {
 // ══════════════════════════════════════
 // PRIORITY 3 — HOMESTEAD GUIDE
 // ══════════════════════════════════════
+function calculateFlorida2026AdValorem(assessedValue, schoolMills, nonSchoolMills, hasHomestead) {
+  const inputs = [assessedValue, schoolMills, nonSchoolMills];
+  if (!inputs.every(value => Number.isFinite(value) && value >= 0)
+      || typeof hasHomestead !== 'boolean') {
+    return null;
+  }
+
+  const generalExemption = hasHomestead ? Math.min(assessedValue, 25000) : 0;
+  const additionalExemption = hasHomestead ? Math.min(Math.max(0, assessedValue - 50000), 26411) : 0;
+  const schoolBase = assessedValue - generalExemption;
+  const nonSchoolBase = schoolBase - additionalExemption;
+  const annualTax = (schoolBase * schoolMills + nonSchoolBase * nonSchoolMills) / 1000;
+  return Number.isFinite(annualTax) ? {schoolBase, nonSchoolBase, annualTax} : null;
+}
+
+function showFlorida2026AdValorem(form) {
+  const fields = form.elements;
+  const result = calculateFlorida2026AdValorem(
+    fields.namedItem('assessment').valueAsNumber,
+    fields.namedItem('school').valueAsNumber,
+    fields.namedItem('nonSchool').valueAsNumber,
+    fields.namedItem('homestead').value === 'approved'
+  );
+  const output = form.querySelector('output');
+  if (!result) {
+    output.textContent = 'Enter a valid assessed value and both millage rates.';
+    return;
+  }
+
+  const currency = new Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'});
+  output.textContent = 'School taxable value ' + currency.format(result.schoolBase)
+    + ' | Non-school taxable value ' + currency.format(result.nonSchoolBase)
+    + ' | Estimated annual ad valorem tax ' + currency.format(result.annualTax)
+    + ' | Monthly equivalent ' + currency.format(result.annualTax / 12);
+}
+
 function buildHomesteadGuide(inp) {
   const closingDateEl = document.getElementById('hg-closing-date');
   const closingDate = closingDateEl ? closingDateEl.value : '';
@@ -6283,8 +6319,22 @@ function buildHomesteadGuide(inp) {
 
       <div class="nt nt-em" style="margin-bottom:1.5rem;">
         <span class="nl nl-em">Florida homestead rules by tax year</span>
-        <p>For the 2026 tax roll, qualifying owners can generally exempt up to $25,000 of assessed value from school and non-school ad valorem taxes, with an additional non-school exemption of up to $26,411 on assessed value above $50,000. Special benefit assessments are excluded from the first exemption. Florida Constitutional Amendment 3 takes effect January 1, 2027. For homeowners eligible for the increased exemption, up to $150,000 of assessed value is exempt from non-school property taxes in 2027, increasing to $250,000 in 2028 (with inflation adjustments thereafter). Amendment 3 also lowers the annual assessment-growth cap for non-homestead property from 10% to 5%, beginning with the 2027 tax roll. This cap does not determine the initial assessment after a purchase. A person who was not a Florida resident on December 31, 2026 receives, when otherwise eligible, $25,000 of exemption for school taxes and up to $50,000 for non-school taxes until the fifth year of exemption, when the increased exemption can begin. Actual school and non-school rates, residence history and approval determine the benefit. HomeTrue has not independently calculated those parts, so its planning total is not a verified exemption savings figure. Save Our Homes limits qualifying annual assessed-value increases to the lower of 3% or CPI. ${COUNTIES[ACTIVE_COUNTY] ? '<strong>' + COUNTIES[ACTIVE_COUNTY].name + '</strong> planning rate applied to purchase price: ' + (COUNTIES[ACTIVE_COUNTY].tr*100).toFixed(2) + '%.' : ''}</p>
+        <p>For the 2026 tax roll, qualifying owners can generally exempt up to $25,000 of assessed value from school and non-school ad valorem taxes, with an additional non-school exemption of up to $26,411 on assessed value above $50,000. Special benefit assessments are excluded from the first exemption. Florida Constitutional Amendment 3 takes effect January 1, 2027. For homeowners eligible for the increased exemption, up to $150,000 of assessed value is exempt from non-school property taxes in 2027, increasing to $250,000 in 2028 (with inflation adjustments thereafter). Amendment 3 also lowers the annual assessment-growth cap for non-homestead property from 10% to 5%, beginning with the 2027 tax roll. This cap does not determine the initial assessment after a purchase. A person who was not a Florida resident on December 31, 2026 receives, when otherwise eligible, $25,000 of exemption for school taxes and up to $50,000 for non-school taxes until the fifth year of exemption, when the increased exemption can begin. Actual school and non-school rates, residence history and approval determine the benefit. The market planning total uses a blended rate and does not provide an exemption savings figure. Save Our Homes limits qualifying annual assessed-value increases to the lower of 3% or CPI. ${COUNTIES[ACTIVE_COUNTY] ? '<strong>' + COUNTIES[ACTIVE_COUNTY].name + '</strong> planning rate applied to purchase price: ' + (COUNTIES[ACTIVE_COUNTY].tr*100).toFixed(2) + '%.' : ''}</p>
       </div>
+
+      <form class="nt nt-em" style="margin-bottom:1.5rem;" onsubmit="showFlorida2026AdValorem(this); return false;" oninput="this.querySelector('output').textContent = '';">
+        <span class="nl nl-em">Florida 2026 property tax scenario</span>
+        <p>Use 2026 assessed value and the combined school and non-school millage rates for the property from the county appraiser or tax notice. One mill equals $1 per $1,000 of taxable value.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));gap:.75rem;margin:.75rem 0;">
+          <label>2026 assessed value ($)<br><input type="number" name="assessment" min="0" step="0.01" required></label>
+          <label>School millage<br><input type="number" name="school" min="0" step="any" required></label>
+          <label>Non-school millage<br><input type="number" name="nonSchool" min="0" step="any" required></label>
+          <label>2026 standard homestead status<br><select name="homestead" required><option value="">Select status</option><option value="approved">Approved</option><option value="none">No standard exemption</option></select></label>
+        </div>
+        <button class="btn bp" type="submit">Calculate 2026 tax</button>
+        <output aria-live="polite" style="display:block;margin-top:.75rem;"></output>
+        <p>This scenario excludes special assessments, other exemptions and billing adjustments. The report and affordability totals still use the market planning rate.</p>
+      </form>
 
       ${deadlineHtml}
 
