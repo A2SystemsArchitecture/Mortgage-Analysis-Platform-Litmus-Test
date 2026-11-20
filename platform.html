@@ -2078,11 +2078,11 @@ const COUNTIES = {
     fxb:25, fxw:45, fab:65, faw:140,
     paUrl:'https://www.paulding.gov/393/Tax-Assessors-Office',
     paName:'Paulding County Tax Assessors',
-    notes:'Paulding County effective tax rate ~0.80%. Standard homestead: $2,000 off assessed value. Apply by April 1.',
+    notes:'Paulding County August 11, 2026 adopted county rates: M&O 4.300, county fire 2.100, county bond 0.800 and county schools 17.800 mills, giving 25.000 mills where all four apply. The standard unincorporated county-fire district selection uses these adopted components before homestead relief and parcel charges. Actual fire-district and school boundary eligibility must be confirmed against the parcel tax record. Dallas is a separate municipal taxing authority and sends its own city tax bill; the Dallas selection remains an unverified planning rate pending an adopted 2026 city levy. Georgia homes ordinarily have a 40% assessed-value base before approved exemptions and relief. Do not automatically apply the usual $2,000 homestead allowance to all levy groups or prospective buyers. File eligible exemptions with the county by the applicable deadline.',
     state:'ga', closingModel:'ga',
     districts:[
       {id:'paul-dallas',label:'Dallas',tr:0.0088},
-      {id:'paul-uninc',label:'Unincorporated Paulding',tr:0.008},
+      {id:'paul-uninc',label:'Unincorporated Paulding (2026 standard county fire district)',tr:0.4 * (4.300 + 2.100 + 0.800 + 17.800) / 1000},
     ],
     fvb:0,fvw:0},
   'pickens': {
