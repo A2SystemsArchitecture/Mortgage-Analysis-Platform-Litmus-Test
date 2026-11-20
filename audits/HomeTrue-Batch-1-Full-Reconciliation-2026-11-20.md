@@ -21,7 +21,7 @@ Status key: **MAIN** = a prior district rate correction is documented in actual 
 | FL | Indian River | MAIN: eleven 2026 rate groups | Parcel codes, exemptions, separate charges, reports |
 | FL | Brevard | MAIN: 38 final 2026 millage codes | Parcel match, exemptions, non-ad-valorem, reports |
 | GA | Fulton | MAIN: Roswell, Sandy Springs, Alpharetta, Johns Creek cases | Atlanta city/APS adopted levy conflict, exemptions, parcel, browser/PDF |
-| GA | DeKalb | NO CASE in ledger | Official current district composite, eligibility, code comparison, tests |
+| GA | DeKalb | MAIN: 2026 official unincorporated district 04 separate 44.090-mill option added Nov 20; legacy district remains planning | Other city and district rates, homestead/EHOST/HTRG, fees, 2027, browser/PDF and buyer reports |
 | GA | Gwinnett | MAIN: four named 2026 districts | School/city boundaries, exemptions and reports |
 | GA | Cobb | MAIN: ordinary unincorporated 2026 composite; Marietta, Smyrna, Kennesaw follow-ups | Special districts, Smyrna adoption record, parcel, full buyer and reports |
 | GA | Cherokee | MAIN: unincorporated 2026 and additional municipality follow-ups | Boundary, individual local components, homestead, end-to-end |
@@ -47,11 +47,11 @@ Status key: **MAIN** = a prior district rate correction is documented in actual 
 
 ## Exact reconciled counts
 - FL: **7 MAIN; 0 STANDALONE; 0 PARTIAL; 0 NO CASE**
-- GA: **7 MAIN; 0 STANDALONE; 1 PARTIAL; 6 NO CASE**
+- GA: **8 MAIN; 0 STANDALONE; 1 PARTIAL; 5 NO CASE**
 - AL: **4 MAIN; 0 STANDALONE; 0 PARTIAL; 0 NO CASE**
 - SC: **0 MAIN; 3 STANDALONE; 1 PARTIAL; 2 NO CASE**
-- Total: **18 MAIN + 3 STANDALONE + 2 PARTIAL/HISTORICAL + 8 NO CASE = 31**.
-- Thus **21/31 current-year district case** (18 MAIN + 3 STANDALONE), **23/31 local case of any evidenced year/depth** (+2 PARTIAL), **0/31 fully signed off**.
+- Total: **19 MAIN + 3 STANDALONE + 2 PARTIAL/HISTORICAL + 7 NO CASE = 31**.
+- Thus **22/31 current-year district case** (19 MAIN + 3 STANDALONE), **24/31 local case of any evidenced year/depth** (+2 PARTIAL), **0/31 fully signed off**.
 
 ## Duplication identified
 1. Charleston was already researched **and** its official $1,052.80 sample and 23 official district presets had been checked before the November 20 repeated Charleston research. Do not re-present this as new.
@@ -68,10 +68,14 @@ Status key: **MAIN** = a prior district rate correction is documented in actual 
 
 ## Stop duplicate work. Resume in priority order
 1. **No municipality-wide research restart** on the 23 already documented markets. Check the existing local section, test, exact district and official source FIRST. Only investigate a specific missing rule, year, district, or failed test.
-2. For the **eight NO CASE** markets: DeKalb, Dawson, Pickens, Lumpkin, Richmond, Columbia (GA), Richland and Greenville (SC), collect current official district/source and compare against actual existing district choices.
+2. For the **seven remaining NO CASE** markets: Dawson, Pickens, Lumpkin, Richmond, Columbia (GA), Richland and Greenville (SC), collect current official district/source and compare against actual existing district choices.
 3. Complete **two PARTIAL**: Forsyth complete adopted 2026 levy and Dorchester 2026 schedule.
 4. Resolve known remaining *specific gaps* in the 21 other markets, beginning with SC standalone-versus-buyer integration and FL/GA exemptions, without unauthorized architecture change.
 5. Re-run the committed source/regression tests and end-to-end buyer, affordability, share, PDF and parcel example reconciliation before promotion. Update the 124-market gates only after verifying relevant fields, preserving all **full_launch_certified=false** until each of the five gates passes.
 6. No production merge, pricing/branding/appearance change, or public financial accuracy assertion is authorized by this report.
 
-**Bottom line:** Batch 1 is substantially researched but **not financially certified**. Work remaining is predominantly specific verification, integration and end-to-end tests, plus eight genuinely undocumented local cases. All progress measures must explicitly name what was checked.
+**Bottom line:** Batch 1 is substantially researched but **not financially certified**. Work remaining is predominantly specific verification, integration and end-to-end tests, plus seven remaining undocumented local cases. All progress measures must explicitly name what was checked.
+
+
+## Nov 20 post-reconciliation update: DeKalb, Georgia 2026 tax district 04
+An additional source-backed district case was completed on this review branch following the baseline 31-market reconciliation. DeKalb moves from **NO CASE** to **MAIN** only for its separately labeled District 04 illustration. [Official county-issued 2026 tax statement](https://publicaccess.dekalbtaxga.gov/Documents/2026_Website/1/1940761.pdf) shows **44.090 mills**, with 40% Georgia assessment before homestead and credits; sanitary, streetlight and stormwater costs are separately listed, not included in this rate. New code option `dek-uninc-04-2026` uses `0.4 * 44.090 / 1000`. The old generic `dek-uninc` rate is retained for backward compatibility. The main ledger, launch gates, government-source register and committed test were all updated. Arithmetic from saved actual district expression was evaluated for two fictional prices; the dedicated Node regression file and browser/PDF remain to be run. Revised milestone totals **24 local, 22 current-year, 19 in main buyer, 0 certified** out of 31. Seven markets remain without a documented local current-year or historical calculation.
