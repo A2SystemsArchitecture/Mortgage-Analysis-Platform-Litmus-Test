@@ -153,3 +153,22 @@ A state county rate or effective-rate estimate alone does not pass these gates.
 - Obtain final attorney review before public sales launch.
 
 **Conclusion:** This branch implements bounded corrections but is NOT a 26-state/124-market tax certification or a release-ready replacement.
+
+## November 20, 2026 continuation: Jefferson and Shelby County, Alabama, municipality boundary check
+
+**Official sources:** [Jefferson County Tax Assessor 2026 millage schedule](https://eringcapture.jccal.org/caportal/Custom/CA_MilageRate.aspx) and [City of Hoover published Jefferson/Shelby millage totals](https://www.hooveralabama.gov/981/Taxes-and-Incentives). The six source rows were added to `audits/HomeTrue-2026-27-official-jurisdiction-evidence.csv`.
+
+| Hoover taxing geography | Tax year / source scope | Published total (mills) |
+|---|---|---:|
+| Jefferson Birmingham division standard (municipal code 23) | Jefferson county 2026 | 72.6 |
+| Jefferson Birmingham division subdistrict 10 | Jefferson county 2026 | 62.6 |
+| Jefferson Bessemer division standard (municipal code 66) | Jefferson county 2026 | 72.6 |
+| Jefferson Bessemer division subdistrict 1 | Jefferson county 2026 | 69.1 |
+| Jefferson Bessemer division subdistrict 2 | Jefferson county 2026 | 66.1 |
+| Shelby portion of Hoover, standard published city total | Hoover city page; tax year not explicitly labeled | 66.5 |
+
+**Code-to-source comparison:** `platform.html` on the audit branch currently offers `jef-hoover` at `0.1 * 72.6 / 1000`, consistent with the **standard** Jefferson Hoover entry on the published 2026 assessor table, assuming Class III 10% assessed value. It does NOT offer the 62.6, 69.1, or 66.1 mill Hoover Jefferson subdistrict scenarios as selectable districts. `shelby-al` does not offer a Hoover Shelby selection, even though its notes acknowledge that geographic exception. Therefore code should not claim that selecting the county and Hoover name determines an accurate address-level bill. These entries represent **coverage gaps**, not proof that all existing county values are incorrect.
+
+**Independent arithmetic sample:** For a $400,000 fictional qualifying Class III residence, illustrative taxable assessment before exemptions = $40,000. At 72.6 mills, pre-exemption tax = $2,904; at 62.6 mills = $2,504; variance = $400 per year. Real assessed value, homestead benefits, other tax adjustments and special fees must be independently confirmed.
+
+**Release gate still fails:** Individual parcel must be linked to the correct county, division, municipality/subdistrict, applicable school levies, owner eligibility, and year. No 2027 millage certification and no live browser/PDF acceptance testing performed here. No production code changed.
