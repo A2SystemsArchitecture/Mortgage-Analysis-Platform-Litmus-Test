@@ -172,3 +172,16 @@ A state county rate or effective-rate estimate alone does not pass these gates.
 **Independent arithmetic sample:** For a $400,000 fictional qualifying Class III residence, illustrative taxable assessment before exemptions = $40,000. At 72.6 mills, pre-exemption tax = $2,904; at 62.6 mills = $2,504; variance = $400 per year. Real assessed value, homestead benefits, other tax adjustments and special fees must be independently confirmed.
 
 **Release gate still fails:** Individual parcel must be linked to the correct county, division, municipality/subdistrict, applicable school levies, owner eligibility, and year. No 2027 millage certification and no live browser/PDF acceptance testing performed here. No production code changed.
+
+## November 20, 2026: ALDOR October 2026 final millage reconciliation (Madison, Limestone, Shelby)
+**Controlling official PDF:** [ALDOR 2026 millage schedule dated November 19](https://www.revenue.alabama.gov/wp-content/uploads/2026/11/MILLS26-Formatted-11-19-2026.pdf), PDF pages 44, 47 and 60 (zero-indexed 43, 46, 59). This supersedes an earlier unverified draft URL ending `MILLS26-Final-11.16.26.pdf` that did not resolve. The 13 evidence entries have been added to `audits/HomeTrue-2026-27-official-jurisdiction-evidence.csv`.
+ 
+**Direct platform source comparison, `platform.html`, audit branch:** the existing standard district selections match the 2026 government table for Madison/Huntsville 58.0 mills; Madison/Madison City 69.5; Madison/unincorporated improvements with fire 36.5; Limestone/Athens 40.0; Limestone/unincorporated district 1 30.0; Shelby/Pelham 58.0; Shelby/Alabaster 54.0; Shelby/Helena 49.0; Shelby/unincorporated standard 44.0. These are matched standard millages, not verified actual tax bills.
+
+**Coverage gaps in displayed choices:**
+- Madison County unincorporated district 1 non-improvement property where 3-mill improvement-only fire component does not apply: **33.5 mills**, vs shown 36.5-mill improvement example. Important: a buyer of an improved residence should not automatically select the non-improvement case.
+- Limestone County Huntsville municipality: **55.0 mills** = state 6.5 + county 13.5 + school 0.0 + municipality 35.0. Distinct from Madison County Huntsville 58.0.
+- Limestone County Madison municipality: **72.0 mills** = state 6.5 + county 13.5 + school 0.0 + municipality 52.0. Distinct from Madison County Madison municipality 69.5.
+- Shelby County Hoover municipality: **66.5 mills** = state 6.5 + county 7.5 + school 22.0 + municipality 30.5, independently supported by City of Hoover. `shelby-al` lacks this district choice.
+
+**Limitation:** 2026 reference government rates and a Class III 10% illustrative assessment do not establish a precise real estate purchaser's reassessed taxable value, homestead exemptions, parcel boundary, additional fees, or 2027 adopted rates. Do not add fake single-county rates; any program changes need explicit choice labeling and regression tests. No production update authorized here.
