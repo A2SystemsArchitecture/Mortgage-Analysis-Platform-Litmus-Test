@@ -30,11 +30,12 @@ const ledger=fs.readFileSync(path.join(root,'audits','HomeTrue-Batch-1-Verificat
 const reconciliation=fs.readFileSync(path.join(root,'audits','HomeTrue-Batch-1-Full-Reconciliation-2026-11-20.md'),'utf8');
 for(const id of batch.map(r=>r[0]))assert.ok(reconciliation.includes('| '+lookup.get(id).state+' | '+lookup.get(id).market_name.replace(/ County$/,'').replace(/^St\. /,'St. ') )||reconciliation.includes(lookup.get(id).market_name.split(' County')[0]),'Reconciliation name must appear '+id);
 assert.ok(ledger.includes('28 / 31')&&ledger.includes('26 / 31')&&ledger.includes('21 / 31')&&ledger.includes('0 / 31'));
-// Cross-check that a newly counted current-year market is actually named in the
-// human-readable summary. Prevent another Richland 1ER list/count mismatch.
-const currentYearSummary=ledger.split('\\n').find(line=>line.startsWith('| Market with an evidenced current-year district property-tax calculation exercised |'));
+// Cross-check that a newly counted current-year market is named in the
+// human-readable summary, preventing omissions in the listed counties.
+const currentYearSummary=ledger.split('\n').find(line=>line.startsWith('| Market with an evidenced current-year district property-tax calculation exercised |'));
 assert.ok(currentYearSummary,'Missing current-year milestone summary');
-assert.match(currentYearSummary,/Richland \\(SC district 1ER\\)/,'Current-year summary must name source-backed Richland example');
-assert.match(currentYearSummary,/Greenville \\(SC\\)/,'Current-year summary must name source-backed Greenville example');
-assert.match(currentYearSummary,/Richmond \\(GA districts 001-004\\)/,'Current-year summary must name Richmond 2026 district example');
+assert.match(currentYearSummary,/Richland \(SC district 1ER\)/,'Current-year summary must name Richland district 1ER');
+assert.match(currentYearSummary,/Greenville \(SC\)/,'Current-year summary must name Greenville');
+assert.match(currentYearSummary,/Richmond \(GA districts 001-004\)/,'Current-year summary must name Richmond districts');
+
 console.log('Batch 1: 124 unique market IDs, 31 classified; 21 MAIN + 5 STANDALONE + 2 PARTIAL + 3 NO CASE; 0 certified.');
