@@ -13,7 +13,7 @@ const batch=rows.filter(r=>states.has(r[1]));
 assert.equal(batch.length,31);
 const counts={FL:7,GA:14,AL:4,SC:6};
 for(const [state,n]of Object.entries(counts))assert.equal(batch.filter(r=>r[1]===state).length,n);
-const statuses={MAIN_2026:20,STANDALONE_2026:4,PARTIAL_OR_HISTORICAL:2,NO_DOCUMENTED_LOCAL_CASE:5};
+const statuses={MAIN_2026:21,STANDALONE_2026:4,PARTIAL_OR_HISTORICAL:2,NO_DOCUMENTED_LOCAL_CASE:4};
 for(const [s,n]of Object.entries(statuses))assert.equal(batch.filter(r=>lookup.get(r[0]).batch1_existing_work_status===s).length,n,s);
 const workStatus=new Set(Object.keys(statuses));
 for(const row of batch){
@@ -29,5 +29,5 @@ for(const row of rows)assert.equal(lookup.get(row[0]).full_launch_certified,'fal
 const ledger=fs.readFileSync(path.join(root,'audits','HomeTrue-Batch-1-Verification-Ledger.md'),'utf8');
 const reconciliation=fs.readFileSync(path.join(root,'audits','HomeTrue-Batch-1-Full-Reconciliation-2026-11-20.md'),'utf8');
 for(const id of batch.map(r=>r[0]))assert.ok(reconciliation.includes('| '+lookup.get(id).state+' | '+lookup.get(id).market_name.replace(/ County$/,'').replace(/^St\. /,'St. ') )||reconciliation.includes(lookup.get(id).market_name.split(' County')[0]),'Reconciliation name must appear '+id);
-assert.ok(ledger.includes('26 / 31')&&ledger.includes('24 / 31')&&ledger.includes('20 / 31')&&ledger.includes('0 / 31'));
-console.log('Batch 1: 124 unique market IDs, 31 classified; 20 MAIN + 4 STANDALONE + 2 PARTIAL + 5 NO CASE; 0 certified.');
+assert.ok(ledger.includes('27 / 31')&&ledger.includes('25 / 31')&&ledger.includes('21 / 31')&&ledger.includes('0 / 31'));
+console.log('Batch 1: 124 unique market IDs, 31 classified; 21 MAIN + 4 STANDALONE + 2 PARTIAL + 4 NO CASE; 0 certified.');
