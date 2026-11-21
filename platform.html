@@ -2324,12 +2324,14 @@ const COUNTIES = {
     fxb:25, fxw:45, fab:55, faw:130,
     paUrl:'https://www.greenvillecounty.org/appsuite/taxassessor',
     paName:'Greenville County Assessor',
-    notes:'Greenville County 2026 Auditor schedule lists district 000 gross 248.9 mills (school operating 141.2) and City of Greenville district 500 gross 330.3 mills (school operating 141.2). These are two named reference districts, NOT rates for every unincorporated parcel or municipality. The separate South Carolina tax scenario offers 2026 district presets with the school operating portion removed for a qualifying approved legal residence. The main buyer-flow Greenville multipliers remain planning estimates and do not automatically calculate district taxes, legal-residence approval, school tax relief, municipal credits, exemptions, fees or 2027 rates. Match the exact tax district and approved 4% assessment status with Greenville County Auditor and Real Property Services. Ordinary non-approved residential assessment can be 6%; the separately qualified age/disability homestead exemption is not automatic.',
+    notes:'Greenville County Auditor published 2026 tax-district 000 gross 248.9 mills, including school M&O 141.2, leaving 107.7 mills for qualifying approved 4% legal residences after school operating millage removal. Two explicitly labeled source-derived 2026 District 000 buyer examples assume EITHER APPROVED 4% legal-residence classification (0.04 times 107.7 mills) OR non-approved 6% property classification (0.06 times gross 248.9 mills). A buyer may not choose the approved rate without assessor approval; neither option automatically grants homestead age or disability exemption, property-specific credits, special fees, rebates or 2027 rates. These are pre-credit, pre-fee price-based illustration only. School, city and fire taxes depend on the exact parcel tax district; the separate SC scenario also lists district 500 City of Greenville but its rates are NOT presumed applicable to district 000. Legacy city, Simpsonville and unincorporated choices remain planning-only.',
     state:'sc', closingModel:'sc',
     districts:[
-      {id:'grv-greenville',label:'City of Greenville',tr:0.0078},
-      {id:'grv-simpsonville',label:'Simpsonville / Mauldin',tr:0.007},
-      {id:'grv-uninc',label:'Unincorporated Greenville',tr:0.0068},
+      {id:'grv-greenville',label:'City of Greenville (legacy planning rate)',tr:0.0078},
+      {id:'grv-simpsonville',label:'Simpsonville / Mauldin (legacy planning rate)',tr:0.007},
+      {id:'grv-uninc',label:'Unincorporated Greenville (legacy planning rate)',tr:0.0068},
+      {id:'grv-district-000-2026-legal4',label:'District 000 (2026 approved 4% legal residence, school operating excluded)',tr:0.04 * 107.7 / 1000},
+      {id:'grv-district-000-2026-other6',label:'District 000 (2026 non-approved 6% classification, gross levy)',tr:0.06 * 248.9 / 1000},
     ],
     fvb:0,fvw:0},
   'york-sc': {
