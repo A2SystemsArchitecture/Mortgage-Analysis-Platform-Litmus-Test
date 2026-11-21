@@ -2310,12 +2310,14 @@ const COUNTIES = {
     fxb:28, fxw:48, fab:60, faw:140,
     paUrl:'https://www.richlandcountysc.gov/Departments/Assessor',
     paName:'Richland County Assessor',
-    notes:'Richland County tax-year 2026 official estimator shows one reference district 1ER at gross 466.9 mills and approved legal-residence 212.6 mills in its separate SC scenario. That does not validate other district or buyer estimates. Richland County tax estimates are planning percentages, not official 2026 parcel tax bills. The Richland County Auditor publishes a 2026 millage schedule with separate school, county, municipal and special-district codes; select and verify the actual parcel district before using those rates. Qualifying owner-occupied legal residences must receive approval for the 4% assessment classification instead of the ordinary 6% residential rate and may qualify for school operating millage relief; school debt levies can remain. The separate $50,000 homestead exemption requires independent age, blindness or disability eligibility. Main buyer totals do not automatically compute legal residence school operating credits, district fees or tax-specific sale credits. Confirm updated rates and every applicable credit with the official Auditor and Assessor, including any tax-year 2027 changes.',
+    notes:'Richland County official 2026 county tax estimator for a referenced parcel in district 1ER displays 466.9 mills gross and 212.6 mills for a qualifying approved legal residence after school operating millage relief, a 254.3-mill difference. Two separately named 2026 District 1ER buyer illustrations use, respectively, an APPROVED 4% assessed legal residence with 212.6 applicable mills or non-approved 6% ordinary assessed classification with 466.9 gross mills. These are limited county-estimator references for district 1ER, not issued parcel tax bills and not universal rates for Columbia, Irmo or all unincorporated Richland. The property-specific credits, county homestead age/disability exemptions, exemptions/credits provided by state law, eligible municipal tax relief, special fees, value reassessment and 2027 rates must NOT be inferred from these scenarios. Approval from assessor for 4% status and tax district confirmation is required. The three old district choices retain original numeric planning values.' ,
     state:'sc', closingModel:'sc',
     districts:[
-      {id:'ric-columbia',label:'Columbia',tr:0.0065},
-      {id:'ric-irmo',label:'Irmo',tr:0.0058},
-      {id:'ric-uninc',label:'Unincorporated Richland',tr:0.0055},
+      {id:'ric-columbia',label:'Columbia (legacy planning rate)',tr:0.0065},
+      {id:'ric-irmo',label:'Irmo (legacy planning rate)',tr:0.0058},
+      {id:'ric-uninc',label:'Unincorporated Richland (legacy planning rate)',tr:0.0055},
+      {id:'ric-district-1er-2026-legal4',label:'District 1ER (2026 county estimator, approved 4% legal residence)',tr:0.04 * 212.6 / 1000},
+      {id:'ric-district-1er-2026-other6',label:'District 1ER (2026 county estimator, non-approved 6% classification)',tr:0.06 * 466.9 / 1000},
     ],
     fvb:0,fvw:0},
   'greenville-sc': {
