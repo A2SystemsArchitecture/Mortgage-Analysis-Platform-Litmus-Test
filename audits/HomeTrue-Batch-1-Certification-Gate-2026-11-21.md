@@ -6,7 +6,7 @@
 - 124-market inventory retained; Batch 1 contains **31 unique markets**. Controlling detail: [Batch 1 verification ledger](HomeTrue-Batch-1-Verification-Ledger.md).
 - **30 / 31** markets have **some** documented local tax calculation, including older-year or incomplete cases.
 - **28 / 31** have a documented current-year (2026, or Berkeley 2026–27 period) district calculation.
-- **22 / 31** have documented main buyer district pre-exemption rate corrections in audit branch.
+- **23 / 31** have documented main buyer district pre-exemption rate corrections in audit branch.
 - **0 / 31** full market certifications; **0 / 4** state certifications. These milestones measure different requirements and cannot be consolidated into a percent complete.
 - The 124-market launch gate register is a separate five-gate release matrix, not a substitute for evidence ledger. Some `official_component_records=0` in existing markets still reflect stale provenance indexing. Never infer absence of research from this field.
 - [Dawson/Lumpkin source follow-up](HomeTrue-Dawson-Lumpkin-2026-Source-Followup.md) and the primary issued [Lumpkin tax-year 2026 courthouse parcel bill](https://lumpkincountyga.governmentwindow.com/pay_bill.html?bill_no=10410&tax_year=2026) added a documented Lumpkin 2026 Dahlonega district case. Parcel is exempt and does not prove actual household bill.
@@ -29,3 +29,8 @@
 
 ## Do-not-close decision
 A claimed "100% Batch 1 financial accuracy certification" would contradict the verified ledger and actual code/test coverage. **Batch 1 is not final**. No production or `main` changes, merger, pricing, visual changes, or unsupported certification are authorized by this record.
+
+## Same-day bounded correction and validation
+- Audit branch `platform.html` added `lump-dahlonega-2026` as a **separate** 2026 pre-exemption buyer district selection using county 8.877, school 12.929, city 2.964, city public safety 0.500 from official issued 2026 bill 2026-10410, with the government tax-exempt parcel source caveat. Existing legacy `lump-dahlonega` and `lump-uninc` IDs retained with their original planning rates. No change to main or production.
+- Re-fetched committed `platform.html`: **10/10 direct source and arithmetic checks pass**, comprising unique option ID, component presence, both legacy rates preserved, explicit source/qualification note, and five independent property-value formulas. No full browser, PDF, external Node runtime, fee, exemption eligibility, actual residential liability, or 2027 tax certification follows from these tests.
+- Ledger and 124-market verification gate have been reconciled to **30/31 local documented; 28/31 current-year; 23/31 main buyer-rate correction; 0/31 full certified**. Dawson remains missing a 2026 non-exempt full district tax statement; Forsyth full 2026 county/fire/bond and Dorchester full 2026 district rates remain incomplete. Other 31-market fee, exemptions, shared report, UI and final approval are also still open.
