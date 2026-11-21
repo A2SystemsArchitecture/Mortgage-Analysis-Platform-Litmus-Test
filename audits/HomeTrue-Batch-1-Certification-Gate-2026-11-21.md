@@ -6,7 +6,7 @@
 - 124-market inventory retained; Batch 1 contains **31 unique markets**. Controlling detail: [Batch 1 verification ledger](HomeTrue-Batch-1-Verification-Ledger.md).
 - **31 / 31** markets have **some** documented local tax calculation, including older-year or incomplete cases.
 - **30 / 31** have a documented current-year (2026, or Berkeley 2026–27 period) district calculation.
-- **27 / 31** have documented main buyer district pre-exemption rate corrections in audit branch.
+- **28 / 31** have documented main buyer district pre-exemption rate corrections in audit branch.
 - **0 / 31** full market certifications; **0 / 4** state certifications. These milestones measure different requirements and cannot be consolidated into a percent complete.
 - The 124-market launch gate register is a separate five-gate release matrix, not a substitute for evidence ledger. Some `official_component_records=0` in existing markets still reflect stale provenance indexing. Never infer absence of research from this field.
 - [Dawson/Lumpkin source follow-up](HomeTrue-Dawson-Lumpkin-2026-Source-Followup.md) and the primary issued [Lumpkin tax-year 2026 courthouse parcel bill](https://lumpkincountyga.governmentwindow.com/pay_bill.html?bill_no=10410&tax_year=2026) added a documented Lumpkin 2026 Dahlonega district case. Parcel is exempt and does not prove actual household bill.
@@ -88,3 +88,7 @@ A claimed "100% Batch 1 financial accuracy certification" would contradict the v
 ## November 21 Richland SC classified tax-district buyer cases
 - Existing official 2026 [county estimator district 1ER](https://www7.richlandcountysc.gov/AssessorApps/TaxEstimator/?tms=R14205-10-02) shows 466.9 gross and 212.6 mills after approved 4% legal residence school operating relief. New bounded buyer options for this DISTRICT ONLY are legal 4% factor 0.008504 and non-approved 6% factor 0.028014, prior legacy options retained. Re-fetched committed code: **14/14 direct rate and source-preservation checks pass**, but actual legal eligibility, parcel credits, fees, complete browser/PDF and 2027 rates remain untested.
 - Current milestones: **31/31 local evidence; 30/31 current-year district evidence; 27/31 main buyer source-backed choices; 0/31 full certification**. Four remaining SC main-buyer corrections are Charleston, Berkeley, York and Dorchester. Dorchester still missing 2026 original district rate case.
+
+## November 21 York County 2026 RH correction
+- Verified source-specific 2026 official Auditor Rock Hill RH total 425.0 mills at non-approved 6% and 209.9 mills for qualified 4% legal residence; **not special district RL**. Added two explicitly named classified buyer choices at 0.0255 and 0.008396 factors, original three legacy rates preserved. **14 direct committed-code checks pass**; no actual 4% approval, parcel credits, fees, live browser or PDF signoff. [York County Auditor](https://www.yorkcountysc.gov/156/Auditor).
+- **Now 31/31 local, 30/31 current-year district, 28/31 buyer-rate correction, 0/31 full certified**. Buyer correction gaps: Charleston, Berkeley, Dorchester; current-year 2026 rate-document gap: Dorchester.
