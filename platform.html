@@ -2342,12 +2342,14 @@ const COUNTIES = {
     fxb:25, fxw:45, fab:55, faw:130,
     paUrl:'https://www.yorkcountygov.com/150/Assessor',
     paName:'York County Assessor',
-    notes:'York County property-tax planning estimate. Approved 4% legal residences are exempt from school operating property tax. School general-obligation debt millage may still apply. Confirm your tax district and parcel-specific charges with the county auditor. Attorney-closed state. Confirm the separate 4% legal-residence application and homestead application deadlines with the county assessor and auditor.',
+    notes:'York County Auditor official 2026 millage levy list identifies specific Rock Hill tax district RH at gross 425.0 mills for non-approved 6% assessed classification and 209.9 mills for a qualified APPROVED 4% legal residence after school operating millage relief. Separately named 2026 RH District buyer examples compute those two exact cases on an assumed tax value before actual eligible exemptions, property sale tax adjustments, charges or municipal district variations. RH is not Rock Hill special landscape RL (430.8 and 215.7 mills) or an unincorporated/other York district. Approved 4% legal residence requires Assessor application and confirmation; do not infer qualification for an unapproved prospective buyer. 2027 millages, property-specific taxable values, fees and age/disability homestead relief are not certified. The original Rock Hill, Fort Mill and unincorporated percentages remain legacy planning figures.',
     state:'sc', closingModel:'sc',
     districts:[
-      {id:'yor-rockhill',label:'Rock Hill',tr:0.0052},
-      {id:'yor-fortmill',label:'Fort Mill',tr:0.0046},
-      {id:'yor-uninc',label:'Unincorporated York',tr:0.0044},
+      {id:'yor-rockhill',label:'Rock Hill (legacy planning rate)',tr:0.0052},
+      {id:'yor-fortmill',label:'Fort Mill (legacy planning rate)',tr:0.0046},
+      {id:'yor-uninc',label:'Unincorporated York (legacy planning rate)',tr:0.0044},
+      {id:'yor-rockhill-rh-2026-legal4',label:'Rock Hill RH (2026 approved 4% legal residence)',tr:0.04 * 209.9 / 1000},
+      {id:'yor-rockhill-rh-2026-other6',label:'Rock Hill RH (2026 non-approved 6% classification)',tr:0.06 * 425.0 / 1000},
     ],
     fvb:0,fvw:0},
   'berkeley-sc': {
