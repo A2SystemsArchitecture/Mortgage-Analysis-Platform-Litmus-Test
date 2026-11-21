@@ -2121,11 +2121,15 @@ const COUNTIES = {
     fxb:25, fxw:45, fab:65, faw:140,
     paUrl:'https://www.augustaga.gov/1340/Tax-Assessor',
     paName:'Richmond County Tax Assessor (Augusta)',
-    notes:'Richmond County (Augusta) effective tax rate ~0.84%. Standard homestead applies. Apply by April 1.',
+    notes:'Richmond County Tax Commissioner 2026 official net millage rates are District 001 Urban 28.284, District 002 County with fire 26.280, District 003 Hephzibah 24.939, and District 004 Blythe with fire 26.839 mills. Explicitly labeled 2026 options illustrate 40% Georgia assessed market value before eligible homestead, local credits, fees and other parcel adjustments. The old Augusta/Hephzibah percentages and county default remain legacy planning estimates for existing saved links, not adopted district tax bills. Confirm the exact tax district and taxable assessed value on the county parcel record. No 2027 adopted rate is claimed.',
     state:'ga', closingModel:'ga',
     districts:[
       {id:'rich-augusta',label:'Augusta-Richmond (Consolidated)',tr:0.0084},
       {id:'rich-hephzibah',label:'Hephzibah',tr:0.0078},
+      {id:'rich-2026-001',label:'2026 Tax District 001 Urban Augusta (before exemptions)',tr:0.4 * 28.284 / 1000},
+      {id:'rich-2026-002',label:'2026 Tax District 002 County with fire (before exemptions)',tr:0.4 * 26.280 / 1000},
+      {id:'rich-2026-003',label:'2026 Tax District 003 Hephzibah (before exemptions)',tr:0.4 * 24.939 / 1000},
+      {id:'rich-2026-004',label:'2026 Tax District 004 Blythe with fire (before exemptions)',tr:0.4 * 26.839 / 1000},
     ],
     fvb:0,fvw:0},
   'columbia': {
