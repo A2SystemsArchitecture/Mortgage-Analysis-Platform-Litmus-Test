@@ -2066,11 +2066,12 @@ const COUNTIES = {
     fxb:22, fxw:42, fab:60, faw:130,
     paUrl:'https://www.dawsoncounty.org/residents/tax-assessors-office',
     paName:'Dawson County Tax Assessors',
-    notes:'Dawson County buyer percentages are general planning inputs, NOT verified tax-year 2026 district rates or a parcel tax bill. Dawson County Schools published a 2026 tax digest notice showing a proposed 10.800 school M&O mills to be considered August 11, 2026; the notice alone does not prove final adoption. The county public record establishes 5.463 county mills for 2025, while an August 2026 meeting report describes continued 5.463 mills, but the signed 2026 county adoption and final 2026 school action require confirmation. Fiscal-year 2026 county budget tables and old rates are not proof of tax-year 2026 levies. The existing Dawsonville and unincorporated percentages are unverified estimates. Homestead relief is conditional and levy-specific; the former blanket $7,000 exemption claim has not been substantiated for every buyer. Confirm actual county, school, city and special-district 2026 levies, assessed value and eligible exemptions with Dawson County tax authorities. Do not treat these estimates as adopted 2027 rates.',
+    notes:'Dawson County Tax Commissioner issued tax-year 2026 bill 2026-3380 for non-exempt commercial parcel Map 114 004 in tax District 001. Its taxable assessed value $19,039,200, net county 5.463 mills after a sales-tax rollback from 9.131 displayed gross county mills, and school M&O 10.800 mills reconcile a 16.263-mill effective district levy and $309,634.51 total net bill, as displayed by the issued tax statement. The separately named 2026 District 001 option applies 40% Georgia ordinary assessment and 16.263 mills to a hypothetical property price BEFORE homestead deductions, other adjustments, fees and any classification-specific differences. Source property is commercial, not a residential tax bill. Do not assume its assessment, eligibility, district code, or future 2027 levy applies to other parcels. The legacy Dawsonville and unincorporated choices remain planning inputs and must not be treated as certified tax-year 2026 district bills. Dawsonville city generally describes its city millage as zero, but the web notice lacks a 2026 adoption date. Confirm individual parcel jurisdiction, exemptions, school eligibility and charges with the Tax Commissioner.',
     state:'ga', closingModel:'ga',
     districts:[
-      {id:'daw-dawsonville',label:'Dawsonville',tr:0.0065},
-      {id:'daw-uninc',label:'Unincorporated Dawson',tr:0.006},
+      {id:'daw-dawsonville',label:'Dawsonville (legacy planning rate)',tr:0.0065},
+      {id:'daw-uninc',label:'Unincorporated Dawson (legacy planning rate)',tr:0.006},
+      {id:'daw-district-001-2026',label:'District 001 (2026 billed levy, before exemptions)',tr:0.4 * (5.463 + 10.800) / 1000},
     ],
     fvb:0,fvw:0},
   'paulding': {
