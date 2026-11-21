@@ -6,7 +6,7 @@
 - 124-market inventory retained; Batch 1 contains **31 unique markets**. Controlling detail: [Batch 1 verification ledger](HomeTrue-Batch-1-Verification-Ledger.md).
 - **31 / 31** markets have **some** documented local tax calculation, including older-year or incomplete cases.
 - **30 / 31** have a documented current-year (2026, or Berkeley 2026–27 period) district calculation.
-- **28 / 31** have documented main buyer district pre-exemption rate corrections in audit branch.
+- **29 / 31** have documented main buyer district pre-exemption rate corrections in audit branch.
 - **0 / 31** full market certifications; **0 / 4** state certifications. These milestones measure different requirements and cannot be consolidated into a percent complete.
 - The 124-market launch gate register is a separate five-gate release matrix, not a substitute for evidence ledger. Some `official_component_records=0` in existing markets still reflect stale provenance indexing. Never infer absence of research from this field.
 - [Dawson/Lumpkin source follow-up](HomeTrue-Dawson-Lumpkin-2026-Source-Followup.md) and the primary issued [Lumpkin tax-year 2026 courthouse parcel bill](https://lumpkincountyga.governmentwindow.com/pay_bill.html?bill_no=10410&tax_year=2026) added a documented Lumpkin 2026 Dahlonega district case. Parcel is exempt and does not prove actual household bill.
@@ -92,3 +92,7 @@ A claimed "100% Batch 1 financial accuracy certification" would contradict the v
 ## November 21 York County 2026 RH correction
 - Verified source-specific 2026 official Auditor Rock Hill RH total 425.0 mills at non-approved 6% and 209.9 mills for qualified 4% legal residence; **not special district RL**. Added two explicitly named classified buyer choices at 0.0255 and 0.008396 factors, original three legacy rates preserved. **14 direct committed-code checks pass**; no actual 4% approval, parcel credits, fees, live browser or PDF signoff. [York County Auditor](https://www.yorkcountysc.gov/156/Auditor).
 - **Now 31/31 local, 30/31 current-year district, 28/31 buyer-rate correction, 0/31 full certified**. Buyer correction gaps: Charleston, Berkeley, Dorchester; current-year 2026 rate-document gap: Dorchester.
+
+## November 21 Berkeley SC audited millage pre-credit buyer choices
+- Primary [official Auditor 2026/27 schedule](https://berkeleycountysc.gov/dept/auditor/millage./), revised Sep 18 2026: base/standard 246.5 total, Goose Creek city district 18 306.5 total, school operations 146.9 mills. Added four separately named base/Goose Creek legal 4% and nonapproved 6% pre-credit and pre-fee illustrative buyer choices. Existing three market legacy options preserved. **17 direct code and arithmetic checks passed**. Credit amounts and basis (county 0.000793, Goose Creek 0.001730) and district 18 $195 sanitation require separate eligibility and calculation, and no full browser/PDF or homeowner tax bill certification was obtained.
+- Status **31/31 local calculations, 30/31 current-year district evidence, 29/31 buyer-rate corrections, 0/31 full market certified**. Uncorrected buyer markets Charleston and Dorchester. Dorchester current-year district schedule remains unverified.
