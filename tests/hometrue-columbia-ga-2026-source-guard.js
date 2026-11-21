@@ -1,21 +1,31 @@
-// Columbia County GA 2026 audit guard. DO NOT mistake the 2025 county/bond
-// rates for an adopted 2026 composite or increase audit milestone on school data alone.
-// Verified 2026 school source: https://4.files.edl.io/ed1f/07/23/26/133022-8623d27f-2122-4430-85fa-294b2aa00a4d.pdf
-// District adoption corroboration: https://www.ccboe.net/
-const assert=require('node:assert/strict');const fs=require('node:fs'),path=require('node:path');
+// Columbia County GA official FINAL 2026 Tax Calculation Workbook:
+// https://www.columbiacountyga.gov/DocumentCenter/View/10735/2026-Tax-Calculation-Workbook--Final
+// Source workbook worksheets: "All Other Districts", "G'Town", and "Harlem".
+// Official 2026 school PT-32.1:
+// https://4.files.edl.io/ed1f/07/23/26/133022-8623d27f-2122-4430-85fa-294b2aa00a4d.pdf
+// This tests illustrative buyer district multipliers BEFORE exemptions/fees,
+// not a certified entire buyer report or every tax district.
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const html=fs.readFileSync(path.join(__dirname,'..','platform.html'),'utf8');
-const a=html.indexOf("  'columbia': {"),b=html.indexOf('  // ── TEXAS ──',a);
-assert.ok(a>=0&&b>a);
-const c=new Function('return ({'+html.slice(a,b)+'})')().columbia;
-assert.match(c.notes,/adopted 14\.997-mill school rate/);
-assert.match(c.notes,/official signed resolution/);
-assert.match(c.notes,/planning estimates/);
-for(const [id,rate] of [['col-evans',.0082],['col-grovetown',.0085],['col-uninc',.008]]){
- const d=c.districts.find(x=>x.id===id);assert.ok(d);assert.equal(d.tr,rate,'Legacy rate preserved '+id);
+const a=html.indexOf("  'columbia': {"),b=html.indexOf('  // ── TEXAS ──',a);assert.ok(a>=0&&b>a);
+const county=new Function('return ({'+html.slice(a,b)+'})')().columbia;
+assert.match(county.notes,/county operating 4\.062 mills and county bond 0\.429 mills/);
+assert.match(county.notes,/before exemptions/);
+const uninc=4.062+0.429+2.788+14.997;
+const grovetown=4.062+0.429+14.997;
+assert.ok(Math.abs(uninc-22.276)<1e-10);assert.ok(Math.abs(grovetown-19.488)<1e-10);
+for(const [id,mills] of [['col-2026-uninc-fire',uninc],['col-2026-grovetown',grovetown]]){
+ const d=county.districts.find(x=>x.id===id);assert.ok(d);
+ assert.ok(Math.abs(d.tr-0.4*mills/1000)<1e-12,id);
+ for(const value of [192000,300000,475000,650000]){
+  assert.ok(Math.abs(d.tr*value-0.4*mills*value/1000)<1e-8,id+' '+value);
+ }
 }
-const oldSchool=16.234, currentSchool=14.997;
-assert.ok(Math.abs(oldSchool-currentSchool-1.237)<1e-10);
+for(const [id,rate] of [['col-evans',.0082],['col-grovetown',.0085],['col-uninc',.008]]){
+ assert.equal(county.districts.find(x=>x.id===id).tr,rate,'Legacy link '+id);
+}
+assert.equal(new Set(county.districts.map(d=>d.id)).size,county.districts.length);
 const csv=fs.readFileSync(path.join(__dirname,'..','audits','HomeTrue-2027-launch-verification-gates.csv'),'utf8');
 const line=csv.split(/\r?\n/).find(x=>x.startsWith('"columbia","GA"'));
-assert.ok(line);assert.match(line,/"NO_DOCUMENTED_LOCAL_CASE"/);assert.ok(!line.includes('"MAIN_2026"'));
-console.log('Columbia 2026 school evidence guard: school-only rate verified, no unverified county composite, existing links preserved.');
+assert.ok(line);assert.match(line,/"MAIN_2026"/);
+console.log('Columbia GA 2026: official workbook values and 8 price scenarios; old selections preserved, no full certification.');
