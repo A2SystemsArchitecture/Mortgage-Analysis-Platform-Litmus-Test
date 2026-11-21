@@ -2305,7 +2305,7 @@ const COUNTIES = {
     fxb:28, fxw:48, fab:60, faw:140,
     paUrl:'https://www.richlandcountysc.gov/Departments/Assessor',
     paName:'Richland County Assessor',
-    notes:'Richland County tax estimates are planning percentages, not official 2026 parcel tax bills. The Richland County Auditor publishes a 2026 millage schedule with separate school, county, municipal and special-district codes; select and verify the actual parcel district before using those rates. Qualifying owner-occupied legal residences must receive approval for the 4% assessment classification instead of the ordinary 6% residential rate and may qualify for school operating millage relief; school debt levies can remain. The separate $50,000 homestead exemption requires independent age, blindness or disability eligibility. Main buyer totals do not automatically compute legal residence school operating credits, district fees or tax-specific sale credits. Confirm updated rates and every applicable credit with the official Auditor and Assessor, including any tax-year 2027 changes.',
+    notes:'Richland County tax-year 2026 official estimator shows one reference district 1ER at gross 466.9 mills and approved legal-residence 212.6 mills in its separate SC scenario. That does not validate other district or buyer estimates. Richland County tax estimates are planning percentages, not official 2026 parcel tax bills. The Richland County Auditor publishes a 2026 millage schedule with separate school, county, municipal and special-district codes; select and verify the actual parcel district before using those rates. Qualifying owner-occupied legal residences must receive approval for the 4% assessment classification instead of the ordinary 6% residential rate and may qualify for school operating millage relief; school debt levies can remain. The separate $50,000 homestead exemption requires independent age, blindness or disability eligibility. Main buyer totals do not automatically compute legal residence school operating credits, district fees or tax-specific sale credits. Confirm updated rates and every applicable credit with the official Auditor and Assessor, including any tax-year 2027 changes.',
     state:'sc', closingModel:'sc',
     districts:[
       {id:'ric-columbia',label:'Columbia',tr:0.0065},
@@ -5945,6 +5945,16 @@ function applyTaxBillAdjustments(annualTax, credits, fees) {
   return {netTax: annualTax - credits, amountDue: annualTax - credits + fees};
 }
 
+// Richland County official tax-year 2026 estimator for tax district 1ER.
+// Rates: 466.9 mills at ordinary 6%, 212.6 mills at approved legal residence 4%.
+// Reference source: https://www7.richlandcountysc.gov/AssessorApps/TaxEstimator/?tms=R14205-10-02
+const RICHLAND_2026_TAX_LEVIES = [
+  ['1ER · East Richland (2026 county estimator reference)',466.9,212.6]
+];
+function applyRichland2026Levy(form, index) {
+  applyDistrictLevy(form, index, RICHLAND_2026_TAX_LEVIES);
+}
+
 // Greenville County Auditor 2026 millage sheet, 2026 tax districts 000 and 500.
 // Source: https://www.greenvillecounty.org/Auditor/Forms/millage_2026.pdf
 // Each row: [district label, gross mills, mills after approved school operating relief].
@@ -6125,6 +6135,12 @@ function buildStateTaxScenario(state, countyKey) {
   return `<form class="nt nt-em" style="margin-bottom:1.5rem;" onsubmit="showStateTaxScenario(this, '${state}'); return false;" oninput="this.querySelector('output').textContent = '';">
     <span class="nl nl-em">${scenario.name} property tax scenario</span>
     <p>${scenario.note}</p>
+    ${state === 'sc' && countyKey === 'richland' ? `<label>2026 Richland tax district (reference only)<br>
+      <select onchange="applyRichland2026Levy(this.form, this.value)">
+        <option value="">Enter millage manually</option>
+        ${RICHLAND_2026_TAX_LEVIES.map(([name], index) => `<option value="${index}">${name}</option>`).join('')}
+      </select></label>
+      <p>District 1ER only from the county tax-year 2026 estimator. Approved 4% legal residence has different school operating treatment than ordinary 6% residence. Credits, fees and parcel assessment must be checked separately. Other districts require their own verified millage; main buyer totals remain planning estimates. <a href="https://www.richlandcountysc.gov/Government/Elected-Offices/Auditor" target="_blank" rel="noopener">County Auditor</a></p>` : ''}
     ${state === 'sc' && countyKey === 'greenville-sc' ? `<label>2026 Greenville County district (optional)<br>
       <select onchange="applyGreenville2026Levy(this.form, this.value)">
         <option value="">Enter applicable millage manually</option>
