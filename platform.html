@@ -2092,12 +2092,13 @@ const COUNTIES = {
     fxb:20, fxw:40, fab:55, faw:120,
     paUrl:'https://www.pickenscountyga.gov/179/Tax-Assessor',
     paName:'Pickens County Tax Assessors',
-    notes:'Pickens County effective tax rate ~0.60%. Regular homestead: $5,000 off assessed value for county and school. HE exemption amount pending final verification for all tiers. Apply by April 1.',
+    notes:'Pickens County: the Board of Commissioners approved 2026 county 6.606 and school 10.600 mills, a combined 17.206 mills for the standard unincorporated example. A distinct 2026 unincorporated district is offered before exemptions and separately billed costs. The older unincorporated and Jasper selections remain legacy purchase-price planning percentages, NOT adopted 2026 parcel tax rates. The City of Jasper adopted an additional municipal 7.636 mills on October 15, 2026; its actual county, city, school, district and exemption application must be confirmed before using a complete buyer bill. Qualifying residential assessments are generally 40% of fair market value. Homestead amounts, special district levies, any state-funded 2026-only relief, fees and a newly purchased home 2027 bill are not automatically verified by the district rate. Confirm the district with the Pickens County Tax Commissioner.',
     state:'ga', closingModel:'ga',
     heNote:'*HE amount pending final verification',
     districts:[
       {id:'pick-jasper',label:'Jasper',tr:0.0065},
       {id:'pick-uninc',label:'Unincorporated Pickens',tr:0.006},
+      {id:'pick-uninc-2026',label:'Unincorporated Pickens (2026 adopted county + schools, before exemptions)',tr:0.4 * (6.606 + 10.600) / 1000},
     ],
     fvb:0,fvw:0},
   'lumpkin': {
