@@ -2315,7 +2315,7 @@ const COUNTIES = {
     fxb:25, fxw:45, fab:55, faw:130,
     paUrl:'https://www.greenvillecounty.org/appsuite/taxassessor',
     paName:'Greenville County Assessor',
-    notes:'Greenville County effective tax rate ~0.70%. Fastest-growing major city in SC. SC assesses at 4% primary residence rate. Attorney-closed state. Homestead exemption age/disability limited. Confirm the separate 4% legal-residence application and homestead application deadlines with the county assessor and auditor.',
+    notes:'Greenville County 2026 Auditor schedule lists district 000 gross 248.9 mills (school operating 141.2) and City of Greenville district 500 gross 330.3 mills (school operating 141.2). These are two named reference districts, NOT rates for every unincorporated parcel or municipality. The separate South Carolina tax scenario offers 2026 district presets with the school operating portion removed for a qualifying approved legal residence. The main buyer-flow Greenville multipliers remain planning estimates and do not automatically calculate district taxes, legal-residence approval, school tax relief, municipal credits, exemptions, fees or 2027 rates. Match the exact tax district and approved 4% assessment status with Greenville County Auditor and Real Property Services. Ordinary non-approved residential assessment can be 6%; the separately qualified age/disability homestead exemption is not automatic.',
     state:'sc', closingModel:'sc',
     districts:[
       {id:'grv-greenville',label:'City of Greenville',tr:0.0078},
@@ -5941,6 +5941,18 @@ function applyTaxBillAdjustments(annualTax, credits, fees) {
   return {netTax: annualTax - credits, amountDue: annualTax - credits + fees};
 }
 
+// Greenville County Auditor 2026 millage sheet, 2026 tax districts 000 and 500.
+// Source: https://www.greenvillecounty.org/Auditor/Forms/millage_2026.pdf
+// Each row: [district label, gross mills, mills after approved school operating relief].
+// Does not include property-specific fees/credits or other 134 Greenville tax districts.
+const GREENVILLE_2026_TAX_LEVIES = [
+  ['000 · Standard unincorporated, no fire district',248.9,107.7],
+  ['500 · City of Greenville',330.3,189.1]
+];
+function applyGreenville2026Levy(form, index) {
+  applyDistrictLevy(form, index, GREENVILLE_2026_TAX_LEVIES);
+}
+
 // York County Auditor, 2026 millage schedule: gross mills and approved legal-residence mills.
 const YORK_2026_TAX_LEVIES = [
   ["Rock Hill (RH)",425,209.9],
@@ -6109,6 +6121,12 @@ function buildStateTaxScenario(state, countyKey) {
   return `<form class="nt nt-em" style="margin-bottom:1.5rem;" onsubmit="showStateTaxScenario(this, '${state}'); return false;" oninput="this.querySelector('output').textContent = '';">
     <span class="nl nl-em">${scenario.name} property tax scenario</span>
     <p>${scenario.note}</p>
+    ${state === 'sc' && countyKey === 'greenville-sc' ? `<label>2026 Greenville County district (optional)<br>
+      <select onchange="applyGreenville2026Levy(this.form, this.value)">
+        <option value="">Enter applicable millage manually</option>
+        ${GREENVILLE_2026_TAX_LEVIES.map(([name], index) => `<option value="${index}">${name}</option>`).join('')}
+      </select></label>
+      <p>Two reference districts only. An unincorporated property with a fire district or special levy requires its own 2026 code. Match the code to your parcel. The 4% legal-residence school operating relief applies only after approval, and actual bill credits and fees are separate. <a href="https://www.greenvillecounty.org/Auditor/Forms/millage_2026.pdf" target="_blank" rel="noopener">Greenville County Auditor 2026 millage sheet</a></p>` : ''}
     ${state === 'sc' && countyKey === 'dorchester-sc' ? `<label>Dorchester County 2025 levy (historical)<br>
       <select onchange="applyDorchester2025Levy(this.form, this.value)">
         <option value="">Enter applicable millage manually</option>
