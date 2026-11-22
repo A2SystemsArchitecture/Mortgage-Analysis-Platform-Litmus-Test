@@ -13,11 +13,11 @@ let ACTIVE_COUNTY='miami-dade',ACTIVE_DISTRICT=null;
 const fields={}, output={innerHTML:''};
 const document={getElementById:id=>id==='g3c'?output:({value:String(fields[id]??'')})};
 `+html.slice(parseStart,helpersEnd)+html.slice(helpersEnd,summaryEnd)+`
-return (quote,rate,buyerTax,down=5)=>{
+return (quote,rate,buyerTax,down=5,pmi='')=>{
   S.tier=3;S.ins=null;ACTIVE_DISTRICT=null;
   Object.assign(fields,{fp:350000,fd:down,fil:10000,fih:12000,fb2:2020,fry:2020,fcon:'cbs',frt:'asphalt',
     fsh:'no',fh:100,ffl:'x',fpr:'no',fcr:'good',fa:'Fictional Property',
-    fit3:quote,flr:rate,fcp:'', 'f-annual-buyer-tax':buyerTax});
+    fit3:quote,flr:rate,fcp:pmi, 'f-annual-buyer-tax':buyerTax});
   collectInp(); bG3();
   return {inp:{...S.inp},disclosure:output.innerHTML};
 };`)(COUNTIES);
@@ -44,4 +44,19 @@ assert.match(entered.disclosure,/Buyer-entered projection; official parcel asses
 assert.equal(entered.inp.buyerAnnualTax,4800);
 assert.doesNotMatch(entered.disclosure,/All inputs confirmed/i);
 assert.ok(html.includes('Verify Remaining Inputs'));
+
+const invalidRate=test('300','-1','4200',5,'-15');
+assert.equal(invalidRate.inp.br,7.03,'Invalid negative locked rate must not replace planning benchmark');
+assert.equal(invalidRate.inp.lockedRateConfirmed,false);
+assert.ok(invalidRate.inp.bp>=0,'Negative PMI input cannot reduce buyer monthly payment');
+assert.equal(invalidRate.inp.pmiConfirmed,false);
+const highRate=test('300','16','4200',5,'');
+assert.equal(highRate.inp.br,7.03,'Rate outside the form maximum must not be used');
+assert.equal(highRate.inp.lockedRateConfirmed,false);
+const minimumRate=test('300','2','4200',5,'0');
+assert.equal(minimumRate.inp.br,2);
+assert.equal(minimumRate.inp.lockedRateConfirmed,true);
+assert.equal(minimumRate.inp.bp,0,'Explicit nonnegative monthly PMI is carried through');
+assert.equal(minimumRate.inp.pmiConfirmed,true);
+
 console.log('PASS: Tier 3 never claims unverified tax or missing quote/locked rate to be confirmed; three real buyer scenarios.');
