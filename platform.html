@@ -8032,7 +8032,7 @@ function renderDistrictPills(countyKey, preferredDistrictId) {
     // described as a confirmed parcel-specific district rate.
     MKT.tr = c.tr;
     const taxDisplay = document.getElementById('planning-tax-rate');
-    if (taxDisplay) taxDisplay.textContent = (c.tr * 100).toFixed(2) + '%';
+    if (taxDisplay) taxDisplay.textContent = batch1NeedsVerifiedTaxBasis() ? 'District required' : (c.tr * 100).toFixed(2) + '%';
     const districtStatus = document.getElementById('planning-district-status');
     if (districtStatus) districtStatus.textContent = 'Unconfirmed; county-only planning rate';
     const taxYearDisplay = document.getElementById('planning-tax-year');
@@ -8073,7 +8073,7 @@ function selectDistrict(countyKey, district, btn, silent) {
   
   // Display the explicitly chosen district, while preserving the planning caveat.
   const taxDisplay = document.getElementById('planning-tax-rate');
-  if (taxDisplay) taxDisplay.textContent = (district.tr * 100).toFixed(2) + '%';
+  if (taxDisplay) taxDisplay.textContent = batch1NeedsVerifiedTaxBasis() && !(district.taxYear || district.taxPeriod) ? 'Unverified rate' : (district.tr * 100).toFixed(2) + '%';
   const districtStatus = document.getElementById('planning-district-status');
   if (districtStatus) districtStatus.textContent = district.label + ' (selected; parcel not verified)';
   const taxYearDisplay = document.getElementById('planning-tax-year');
