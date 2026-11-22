@@ -112,6 +112,19 @@ jobs:
           name: batch1-thirty-pdf-smoke-fixtures
           path: audit-results/pdf-thirty/
           if-no-files-found: warn
+      - name: Install isolated browser test dependency
+        run: npm install --no-save --ignore-scripts --no-audit --no-fund playwright@1.56.1
+      - name: Install headless Chromium
+        run: npx playwright install chromium --with-deps
+      - name: Browser test actual district selectors and shared buyer reports
+        run: node tests/hometrue-batch1-browser-thirty.js
+      - name: Preserve browser smoke screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: batch1-thirty-browser-smoke
+          path: audit-results/browser-thirty/
+          if-no-files-found: warn
       - name: Save certification gate evidence
         if: always()
         uses: actions/upload-artifact@v4
