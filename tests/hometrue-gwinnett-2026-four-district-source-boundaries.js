@@ -18,6 +18,11 @@ const c=new Function(html.slice(i,j+3)+'\nreturn COUNTIES;')().gwinnett;
 assert.equal(c.state,'ga');
 const options=Object.fromEntries(c.districts.map(d=>[d.id,d]));
 assert.equal(c.districts.length,4,'All Gwinnett buyer choices need source re-review when modified');
+// City of Suwanee official property-tax guidance: Gwinnett homestead exemptions
+// are not applied to the separate Suwanee municipal property tax bill.
+// https://www.suwanee.com/government/city-hall/business-services-department/property-taxes
+assert.ok(c.notes.includes("Gwinnett County homestead exemptions do not apply to Suwanee's separately billed city property tax"),'Suwanee city homestead warning missing');
+assert.ok(c.notes.includes('Neither homestead nor city fee is automatically applied'),'No unsupported automatic city exemption/fee');
 const cases=[
  {id:'gwin-uninc',county:34.86,city:0,year:'2026',scope:'2026 official full listed unincorporated code'},
  {id:'gwin-lawrenceville',county:31.6,city:3.26,year:'2026',scope:'2026 official county and separate-city sources'},
@@ -37,4 +42,4 @@ for(const x of cases){
   assert.ok(Math.abs(value*d.tr-taxFromSeparateAuthorities)<1e-7,x.id+'/'+value);
  }
 }
-console.log('PASS Gwinnett 4/4 source-component arithmetic, 12/12 fictional gross tax splits, correctly withheld two incomplete 2026 municipal source years. Full market source gate and actual buyer net liability NOT certified.');
+console.log('PASS Gwinnett 4/4 source-component arithmetic, 12/12 fictional gross tax splits, correctly withheld two incomplete 2026 municipal source years, and preserved no-Suwanee-city-homestead disclosure. Full market source gate and actual buyer net liability NOT certified.');
