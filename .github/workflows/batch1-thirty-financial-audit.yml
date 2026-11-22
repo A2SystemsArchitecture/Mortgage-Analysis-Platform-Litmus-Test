@@ -46,6 +46,7 @@ jobs:
             tests/hometrue-st-lucie-2026-districts.js \
             tests/hometrue-st-lucie-2026-independent-authority.js \
             tests/hometrue-indian-river-brevard-2026-districts.js \
+            tests/hometrue-brevard-2026-official-composites.js \
             tests/hometrue-indian-river-2026-independent-authority.js \
             tests/hometrue-dekalb-ga-2026-district04.js \
             tests/hometrue-batch1-state-tax-scenarios.js \
