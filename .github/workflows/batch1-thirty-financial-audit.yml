@@ -65,7 +65,8 @@ jobs:
             tests/hometrue-batch1-thirty-buyer-math.js \
             tests/hometrue-batch1-rate-year-policy.js \
             tests/hometrue-batch1-tier3-input-truth.js \
-            tests/hometrue-sc-deed-transfer-boundaries.js
+            tests/hometrue-sc-deed-transfer-boundaries.js \
+            tests/hometrue-gwinnett-lawrenceville-2026-bills.js
           do
             if [ ! -f "$file" ]; then
               printf 'MISSING\t%s\n' "$file" | tee -a audit-results/results.tsv
