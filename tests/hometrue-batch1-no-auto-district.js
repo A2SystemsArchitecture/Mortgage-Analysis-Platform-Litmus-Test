@@ -17,6 +17,7 @@ const row={classList:{add(){},remove(){}}};
 const container={innerHTML:'',items:[],appendChild(btn){btn.classList={add(){},remove(){}};this.items.push(btn)}};
 const rate={textContent:''},annual={value:'1052.80'};
 const document={
+ createElement(){return {className:'',textContent:'',onclick:null}},
  getElementById(id){return ({'district-row':row,'district-pills':container,'vs-tax':rate,'f-annual-buyer-tax':annual})[id]||null},
  querySelectorAll(){return container.items}
 };
