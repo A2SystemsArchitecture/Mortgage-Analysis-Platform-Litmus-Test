@@ -54,7 +54,14 @@ jobs:
             tests/hometrue-pickens-ga-2026-adopted.js \
             tests/hometrue-greenville-sc-2026-districts.js \
             tests/hometrue-richmond-ga-2026-districts.js \
-            tests/hometrue-columbia-ga-2026-source-guard.js
+            tests/hometrue-columbia-ga-2026-source-guard.js \
+            tests/hometrue-batch1-no-auto-district.js \
+            tests/hometrue-buyer-tax-location-reset.js \
+            tests/hometrue-share-tax-district.js \
+            tests/hometrue-richland-sc-2026-1er.js \
+            tests/hometrue-batch1-exact-charges.js \
+            tests/hometrue-state-closing-tax-cases.js \
+            tests/hometrue-sc-bill-fees.js
           do
             if [ ! -f "$file" ]; then
               printf 'MISSING\t%s\n' "$file" | tee -a audit-results/results.tsv
