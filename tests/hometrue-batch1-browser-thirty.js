@@ -122,6 +122,34 @@ fs.mkdirSync(folder,{recursive:true});
     return buyerTaxBasisReady();
   });
   assert.equal(dorchesterStillDeferred,true,'Deferred Dorchester unexpectedly restricted by Batch 1 guard');
+  // The affordability calculator also must refuse fictional price ceilings
+  // based only on an unverified generic county rate.
+  let affordabilityTaxGuards=0;
+  for(const key of keys){
+    const out=await page.evaluate(key=>{
+      selectCounty(key);
+      const d=COUNTIES[key].districts.find(d=>d.taxYear==='2026'||d.taxPeriod==='FY 2026/27');
+      calcAffordability();
+      const blocked={
+        message:document.getElementById('aff-price-low')?.textContent,
+        disabled:document.getElementById('aff-to-analysis')?.disabled,
+        result:S.affResult
+      };
+      selectDistrict(key,d,null,false);
+      calcAffordability();
+      const ready={
+        message:document.getElementById('aff-price-low')?.textContent,
+        disabled:document.getElementById('aff-to-analysis')?.disabled,
+        result:!!S.affResult
+      };
+      return {blocked,ready};
+    },key);
+    assert.equal(out.blocked.message,'Tax district needed','Affordability source gate skipped '+key);
+    assert.equal(out.blocked.disabled,true);
+    assert.equal(out.blocked.result,null);
+    assert.ok(out.ready.result && out.ready.message!=='Tax district needed'&&!out.ready.disabled,'Valid selected district failed '+key);
+    affordabilityTaxGuards++;
+  }
   // Exercise all 30 actual browser share-link reconstructions against the
   // source-backed district planning factor, without representing it as a bill.
   let sharedReports=0;
@@ -190,6 +218,6 @@ fs.mkdirSync(folder,{recursive:true});
   const unknown=await page.evaluate(()=>({annual:S.inp.annualTax1,district:S.inp.districtId,selected:ACTIVE_DISTRICT?.id}));
   assert.equal(unknown.district,'');assert.ok(!unknown.selected);
   assert.ok(Math.abs(unknown.annual-2850)<0.01,'Unverified district did not revert to county planning basis');
-  console.log(JSON.stringify({countiesChecked:keys.length,multichoiceMarkets:multiple,manualSelectionChecks:manual,buyerTaxBasisGuards:verifiedBasisGuards,dorchesterDeferredUnaffected:dorchesterStillDeferred,thirtyMarketSourceYearChecks:thirtyMarketYearChecks,floridaTaxYearChecks:floridaYearChecks,palmBeachUnknownTaxYear:pbUnknown.year,sharedReportsChecked:sharedReports,sharePaymentRoundTrips:roundTrips,sharedKnownDistrict:known,sharedUnknownDistrict:unknown,screenshots:2},null,2));
+  console.log(JSON.stringify({countiesChecked:keys.length,multichoiceMarkets:multiple,manualSelectionChecks:manual,affordabilityTaxGuards:affordabilityTaxGuards,buyerTaxBasisGuards:verifiedBasisGuards,dorchesterDeferredUnaffected:dorchesterStillDeferred,thirtyMarketSourceYearChecks:thirtyMarketYearChecks,floridaTaxYearChecks:floridaYearChecks,palmBeachUnknownTaxYear:pbUnknown.year,sharedReportsChecked:sharedReports,sharePaymentRoundTrips:roundTrips,sharedKnownDistrict:known,sharedUnknownDistrict:unknown,screenshots:2},null,2));
  }finally{await browser.close();}
 })().catch(err=>{console.error(err.stack||err);process.exitCode=1});
