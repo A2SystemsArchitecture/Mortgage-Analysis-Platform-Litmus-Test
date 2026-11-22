@@ -1570,7 +1570,7 @@ footer strong{color:rgba(220,232,235,1.0);}
             </div>
           </div>
           <div class="ff"><label>Purchase Price ($)</label><input type="number" id="fp" placeholder="399000" min="50000"></div>
-          <div class="ff"><label for="f-annual-buyer-tax">Projected annual property tax for this buyer ($, optional)</label><input type="number" id="f-annual-buyer-tax" min="0" step="0.01" placeholder="Leave blank for planning estimate"><div class="fn">Use a verified projection after transfer. This amount is used for both tax scenarios and clears if you change the property location.</div></div>
+          <div class="ff"><label for="f-annual-buyer-tax">Projected annual property tax for this buyer ($, optional)</label><input type="number" id="f-annual-buyer-tax" min="0" step="0.01" placeholder="Leave blank for planning estimate"><div class="fn">In Florida, Georgia, Alabama and South Carolina (Dorchester deferred), you must select a documented official-rate tax district or enter a buyer-specific annual tax projection. County-only planning percentages are not sufficient for a new buyer analysis. The entered amount clears when you change location. Exemptions, credits and other charges still require verification.</div></div>
           <div class="ff"><label>Down Payment</label><select id="fd"><option value="">Select</option><option value="3">3% — Conventional</option><option value="3.5">3.5% — FHA</option><option value="5">5%</option><option value="10">10%</option><option value="20">20% — No PMI</option></select></div>
           <div class="ff"><label>Year Built</label><input type="number" id="fb2" placeholder="1995" min="1900" max="2026"></div>
           <div class="ff"><label>Construction Type</label><select id="fcon"><option value="cbs">CBS — Concrete Block</option><option value="wood">Wood Frame</option><option value="unknown">Unknown</option></select></div>
@@ -3799,6 +3799,7 @@ function updIBtn(){
   const rdWarn=document.getElementById('rate-disc-warn');
   const rdAck=document.getElementById('rate-disc-ack');
   if(rdWarn&&rdWarn.style.display==='block'&&rdAck&&!rdAck.checked) ok=false;
+  if (!buyerTaxBasisReady()) ok=false;
   document.getElementById('ib').disabled=!ok;
 }
 
@@ -3810,6 +3811,10 @@ function proc3(){
   if(!document.getElementById('fp').value){alert('Please enter a purchase price.');return;}
   if(!document.getElementById('fd').value){alert('Please select a down payment.');return;}
   if(!document.getElementById('fa').value.trim()){alert('Please enter the property address.');return;}
+  if (!buyerTaxBasisReady()) {
+    alert('For this market, select a documented official-rate taxing district or enter a buyer-specific annual property-tax projection from the local authority. The county planning percentage alone is not sufficient for an accurate new analysis.');
+    return;
+  }
   collectInp();bG3();show('g3');
 }
 
@@ -3973,6 +3978,22 @@ function parseBuyerAnnualTax(value) {
   if (typeof value !== 'string' || !/^\d+(?:\.\d{1,2})?$/.test(value.trim())) return null;
   const amount = Number(value);
   return Number.isFinite(amount) && amount >= 0 ? amount : null;
+}
+
+// Batch 1 financial accuracy guard: do not quote a precise buyer payment
+// using an unidentified county-wide planning factor for the 30 audit markets.
+// Dorchester is expressly deferred. Older shared examples remain labeled
+// unverified; new buyer analyses must identify a documented tax district or
+// provide a separately obtained buyer-specific annual tax projection.
+function batch1NeedsVerifiedTaxBasis() {
+  const c = COUNTIES[ACTIVE_COUNTY];
+  return c && ['fl','ga','al','sc'].includes(c.state) && ACTIVE_COUNTY !== 'dorchester-sc';
+}
+function buyerTaxBasisReady() {
+  if (!batch1NeedsVerifiedTaxBasis()) return true;
+  const annualInput = document.getElementById('f-annual-buyer-tax');
+  if (parseBuyerAnnualTax(annualInput?.value) !== null) return true;
+  return !!(ACTIVE_DISTRICT && (ACTIVE_DISTRICT.taxYear || ACTIVE_DISTRICT.taxPeriod));
 }
 
 function collectInp(){
