@@ -43,6 +43,7 @@ jobs:
             tests/hometrue-martin-2026-districts.js \
             tests/hometrue-martin-2026-independent-authority.js \
             tests/hometrue-st-lucie-2026-districts.js \
+            tests/hometrue-st-lucie-2026-independent-authority.js \
             tests/hometrue-indian-river-brevard-2026-districts.js \
             tests/hometrue-indian-river-2026-independent-authority.js \
             tests/hometrue-dekalb-ga-2026-district04.js \
