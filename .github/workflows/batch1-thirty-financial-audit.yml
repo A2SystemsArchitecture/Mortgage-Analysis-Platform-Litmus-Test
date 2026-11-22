@@ -31,6 +31,12 @@ jobs:
           failed=0
           found=0
           for file in \
+            tests/hometrue-florida-2026-ad-valorem.js \
+            tests/hometrue-three-state-recordation.js \
+            tests/hometrue-batch1-millage-source-regression.js \
+            tests/hometrue-batch1-tax-tests.js \
+            tests/hometrue-state-closing-smoke.js \
+            tests/hometrue-five-state-tax-guide-rules.js \
             tests/hometrue-miami-dade-2026-districts.js \
             tests/hometrue-broward-2026-districts.js \
             tests/hometrue-palm-beach-2026-unincorporated.js \
