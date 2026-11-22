@@ -87,6 +87,7 @@ jobs:
         if: always()
         shell: bash
         run: |
+          set +e
           node tests/hometrue-batch1-excluding-dorchester-gate.js > audit-financial-gate.json 2>&1
           rc=$?
           cat audit-financial-gate.json
