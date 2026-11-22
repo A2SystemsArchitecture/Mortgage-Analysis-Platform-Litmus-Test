@@ -71,3 +71,16 @@ An actual source-code mismatch existed in the buyer's shared report. The origina
 **Executed audit evidence:** https://github.com/A2SystemsArchitecture/Mortgage-Analysis-Platform-Litmus-Test/actions/runs/45029604180 completed successfully: **33/33 financial regression scripts**, **30/30 synthetic PDFs**, **30/30 existing browser shared-report cases**, and **30/30 NEW browser round trips** comparing original and reopened best/worst monthly totals, P&I, taxes, insurance, PMI, flood and escrow components in all thirty markets. The 30 new round trips use deliberately different best and worst rates and amounts, ensuring the previous silent discrepancy would be detected.
 
 Scope preserved: 30 Batch 1 markets, Dorchester deferred, no merge, no production deployment. **Full financial certification remains 0/30**, pending real local levy/exemption/fee/geography evidence and sign-off.
+
+
+## November 22 buyer Tier 3 accuracy: unverified inputs must never be labeled confirmed
+
+The real buyer interface and confirmation flow asserted **"All Inputs Confirmed"** for Tier 3 while `collectInp()` still estimated tax from the market planning factor and could default to $285 insurance despite no entered insurance quote. For an omitted Tier 3 locked interest rate, it silently retained the market-planning benchmark. This is a financial-data provenance error, independent of the underlying rate and arithmetic.
+
+**Corrected on the audit branch**: Tier 3 labels now read "Verify Remaining Inputs"; the confirmation checklist discloses whether annual property tax is an unverified market planning amount or a buyer-supplied projection, the selected district remains unverified for the parcel, and the rate and PMI inputs are disclosed when not confirmed. A missing Tier 3 insurance quote now remains **estimated** rather than being designated confirmed. No automatically calculated homestead or district eligibility is claimed.
+
+**Executed results:** https://github.com/A2SystemsArchitecture/Mortgage-Analysis-Platform-Litmus-Test/actions/runs/45041582157 : **34/34 regression scripts passed**, including 3 new actual Tier 3 buyer scenario tests, **30/30 PDF fixture generations**, and **30/30 buyer share-link payment round trips** in the real browser. Changes remain confined to the audit branch. This corrects misleading completeness language and input status, **not** the outstanding governmental tax levy, local exemption and fee verification.
+
+**Source recheck for Florida exemption path:** Florida DOR's November 2026 Amendment 3 bulletin https://floridarevenue.com/property/Documents/PTO_BUL_26-21.pdf confirms the approved 2027 $150,000 non-school homestead cap subject to eligibility and residency transition; the existing standalone 2027 calculation uses separate school and non-school bases. That does not validate any of the seven Florida market's actual parcel composite rates or justify automatic reduction of the main buyer payment.
+
+30-market full financial certification remains **0/30**; deferred Dorchester and production unchanged.
