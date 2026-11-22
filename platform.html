@@ -4027,7 +4027,7 @@ function collectInp(){
   const ty1Disp=ty1, ty2Disp=ty2;
   let bi=0,wi=0,il='',ic=false,ix=false;
   if(t===1){ix=true;il='EXCLUDED';}
-  else if(t===2&&S.ins==='a'){const c=parseFloat(document.getElementById('fic').value)||285;bi=wi=c;il='CONFIRMED';ic=true;}
+  else if(t===2&&S.ins==='a'){const v=parseFloat(document.getElementById('fic').value);const confirmed=Number.isFinite(v)&&v>0;bi=wi=confirmed?v:285;il=confirmed?'CONFIRMED':'ESTIMATED';ic=confirmed;}
   else if(t===2&&S.ins==='b'){[bi,wi]=cIns(con,rage,rtp,sht,byr);il='ESTIMATED';}
   else if(t===3){const v=parseFloat(document.getElementById('fit3').value);const confirmed=Number.isFinite(v)&&v>0;bi=wi=confirmed?v:285;il=confirmed?'CONFIRMED':'ESTIMATED';ic=confirmed;}
   let bp=0,wp=0;
