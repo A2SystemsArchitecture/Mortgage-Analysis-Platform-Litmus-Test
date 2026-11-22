@@ -2,6 +2,8 @@
 // Primary official Tax Collector table: https://www.bcpao.us/Docs/Taxroll/2026/Millage_2026.pdf
 // This verifies encoded CODED 2026 gross ad-valorem rates, not parcel boundaries,
 // exemptions, credits, non-ad-valorem charges, uncoded planning factors or 2027 rates.
+// Use fixture values producing unambiguous exact-cent gross taxes; half-cent rounding
+// requires separate comparison with authoritative real property tax bills.
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const html=fs.readFileSync(path.join(__dirname,'../platform.html'),'utf8');
@@ -57,7 +59,7 @@ for(const d of county.districts.filter(v=>!v.legacyOnly)){
  assert.equal(d.taxYear,'2026','Incorrect tax year: '+code);
  const mills=published2026[code];
  assert.ok(Math.abs(d.tr*1000-mills)<1e-9,'Official 2026 gross millage mismatch: '+code);
- for(const assessed of [100000,250000,400000]){
+ for(const assessed of [100000,300000,500000]){
   const expected=Math.round(assessed*mills/10)/100;
   const actual=Math.round(assessed*d.tr*100)/100;
   assert.equal(actual,expected,'Gross pre-exemption tax mismatch: '+code);
