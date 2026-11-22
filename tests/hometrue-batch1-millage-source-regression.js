@@ -12,7 +12,8 @@ const html = fs.readFileSync(path.resolve(__dirname, '../platform.html'), 'utf8'
 function rateFor(id) {
   const lines = html.split(/\r?\n/).filter(line => line.includes("{id:'" + id + "'"));
   assert.equal(lines.length, 1, 'Missing or duplicate district ID: ' + id);
-  const match = lines[0].match(/\{id:'[^']+',label:'[^']*',tr:([^}]+)\}/);
+  // District objects now carry taxYear metadata after tr; stop at the next comma.
+  const match = lines[0].match(/\{id:'[^']+',label:'[^']*',tr:([^,}]+)/);
   assert.ok(match, 'District rate expression unavailable: ' + id);
   const expr = match[1].trim();
   assert.match(expr, /^[0-9.\s()+*/-]+$/, 'Non-arithmetic expression: ' + id);
