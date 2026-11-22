@@ -1,0 +1,26 @@
+// Governance test: authorization changes the eligible source year, not financial verification.
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const base=path.resolve(__dirname,'../audits');
+const doc=fs.readFileSync(path.join(base,'HomeTrue-Batch-1-Rate-Year-Decision-Required-2026-11-22.md'),'utf8');
+const csv=fs.readFileSync(path.join(base,'HomeTrue-2027-launch-verification-gates.csv'),'utf8');
+const gate=fs.readFileSync(path.resolve(__dirname,'hometrue-batch1-excluding-dorchester-gate.js'),'utf8');
+assert.ok(doc.includes('Approved rate-year policy (user authorized November 22, 2026)'));
+assert.ok(doc.includes('latest officially adopted applicable property-tax rates'));
+assert.ok(doc.includes('No market is auto-certified'));
+const parse=line=>{const a=[];let i=0;while(i<line.length){if(line[i++]!=='"')throw Error('CSV format');let s='',closed=false;while(i<line.length){if(line[i]==='"'&&line[i+1]==='"'){s+='"';i+=2}else if(line[i]==='"'){i++;closed=true;break}else s+=line[i++]}if(!closed)throw Error('CSV quote');a.push(s);if(i<line.length){if(line[i++]!==',')throw Error('CSV delimiter')}}return a};
+const lines=csv.trimEnd().split(/\r?\n/).map(parse);
+const names=lines.shift();assert.equal(lines.length,124);
+const idx={};names.forEach((n,i)=>idx[n]=i);
+assert.ok(idx.complete_composite_2027_rate_verified>=0);
+assert.ok(idx.batch1_latest_adopted_composite_verified>=0);
+const selected=lines.filter(r=>['FL','GA','AL','SC'].includes(r[idx.state])&&r[idx.market_id]!=='dorchester-sc');
+assert.equal(selected.length,30);
+assert.ok(selected.every(r=>r[idx.batch1_latest_adopted_composite_verified]==='false'));
+assert.ok(selected.every(r=>r[idx.full_launch_certified]==='false'));
+assert.ok(gate.includes("'batch1_latest_adopted_composite_verified'"));
+assert.ok(gate.includes("'exemption_rules_and_eligibility_verified'"));
+assert.ok(gate.includes("'district_geography_verified'"));
+assert.ok(gate.includes("'calculator_scenario_tests_passed'"));
+assert.ok(gate.includes("'full_launch_certified'"));
+console.log('PASS: approved latest-adopted rate policy, 30-market scope, unchanged non-rate certification protections, 0 auto-certifications.');
