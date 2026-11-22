@@ -1954,11 +1954,11 @@ const COUNTIES = {
     state:'ga', closingModel:'ga',
     districts:[
       {id:'ful-atlanta',label:'City of Atlanta',tr:0.011},
-      {id:'ful-sandysprings',label:'Sandy Springs (2026 base levy)',tr:0.4 * (8.870 + 0.169 + 17.950 + 4.731) / 1000},
-      {id:'ful-alpharetta-2026',label:'Alpharetta (2026 base levy)',tr:0.4 * (8.870 + 0.169 + 17.950 + 5.050 + 0.700) / 1000},
-      {id:'ful-johnscreek',label:'Johns Creek (2026 base levy)',tr:0.4 * (8.870 + 0.169 + 17.950 + 3.434 + 0.247) / 1000},
+      {id:'ful-sandysprings',label:'Sandy Springs (2026 base levy)',tr:0.4 * (8.870 + 0.169 + 17.950 + 4.731) / 1000 ,taxYear:'2026'},
+      {id:'ful-alpharetta-2026',label:'Alpharetta (2026 base levy)',tr:0.4 * (8.870 + 0.169 + 17.950 + 5.050 + 0.700) / 1000 ,taxYear:'2026'},
+      {id:'ful-johnscreek',label:'Johns Creek (2026 base levy)',tr:0.4 * (8.870 + 0.169 + 17.950 + 3.434 + 0.247) / 1000 ,taxYear:'2026'},
       {id:'ful-alpharetta',label:'Alpharetta / Johns Creek (legacy planning rate)',tr:0.008},
-      {id:'ful-roswell',label:'Roswell (2026 base levy)',tr:0.4 * (8.870 + 0.169 + 17.950 + 5.232) / 1000},
+      {id:'ful-roswell',label:'Roswell (2026 base levy)',tr:0.4 * (8.870 + 0.169 + 17.950 + 5.232) / 1000 ,taxYear:'2026'},
       {id:'ful-uninc',label:'Unincorporated Fulton (legacy planning rate)',tr:0.0085,legacyOnly:true},
     ],
     fvb:0,fvw:0},
@@ -1973,7 +1973,7 @@ const COUNTIES = {
     districts:[
       {id:'dek-decatur',label:'Decatur City',tr:0.0105},
       {id:'dek-uninc',label:'Unincorporated DeKalb / Tucker (planning rate, verify district)',tr:0.0093},
-      {id:'dek-uninc-04-2026',label:'Unincorporated DeKalb tax district 04 (2026 bill, before credits)',tr:0.4 * 44.090 / 1000},
+      {id:'dek-uninc-04-2026',label:'Unincorporated DeKalb tax district 04 (2026 bill, before credits)',tr:0.4 * 44.090 / 1000 ,taxYear:'2026'},
       {id:'dek-dunwoody',label:'Dunwoody',tr:0.0085},
     ],
     fvb:0,fvw:0},
@@ -2001,10 +2001,10 @@ const COUNTIES = {
     notes:'The 2026 standard unincorporated Cobb estimate includes county operating, fire and school levies before exemptions or separate charges. Confirm whether your parcel falls in a special district. The Marietta base estimate applies to parcels in Marietta City Schools. The Kennesaw estimate includes city operating and bond levies. The Smyrna estimate includes the published city rate and Cobb school and county levies. Cobb County School District describes a $10,000 basic homestead deduction for county general and school general taxes for eligible homeowners. City and special-district levies and exemptions can differ. Apply by the deadline on your assessment notice for current-year relief.',
     state:'ga', closingModel:'ga',
     districts:[
-      {id:'cob-marietta',label:'Marietta (2026 city schools base levy)',tr:0.4 * (8.460 + 4.692 + 17.970) / 1000},
-      {id:'cob-smyrna',label:'Smyrna (2026 standard base levy)',tr:0.4 * (8.460 + 18.700 + 8.990) / 1000},
-      {id:'cob-kennesaw',label:'Kennesaw (2026 standard base levy)',tr:0.4 * (8.460 + 18.700 + 7.750 + 1.400) / 1000},
-      {id:'cob-uninc',label:'Unincorporated Cobb (2026 standard base levy)',tr:0.4 * (8.46 + 2.97 + 18.70) / 1000},
+      {id:'cob-marietta',label:'Marietta (2026 city schools base levy)',tr:0.4 * (8.460 + 4.692 + 17.970) / 1000 ,taxYear:'2026'},
+      {id:'cob-smyrna',label:'Smyrna (2026 standard base levy)',tr:0.4 * (8.460 + 18.700 + 8.990) / 1000 ,taxYear:'2026'},
+      {id:'cob-kennesaw',label:'Kennesaw (2026 standard base levy)',tr:0.4 * (8.460 + 18.700 + 7.750 + 1.400) / 1000 ,taxYear:'2026'},
+      {id:'cob-uninc',label:'Unincorporated Cobb (2026 standard base levy)',tr:0.4 * (8.46 + 2.97 + 18.70) / 1000 ,taxYear:'2026'},
     ],
     fvb:0,fvw:0},
   'cherokee': {
@@ -2016,9 +2016,9 @@ const COUNTIES = {
     notes:'The 2026 unincorporated Cherokee base estimate includes county, school, fire and park bond levies before exemptions and separate charges. Canton and Woodstock use documented 2026 standard incorporated county-and-city base levies, before exemptions and parcel-specific charges. Standard homestead: $5,000 off assessed value for county and school taxes. Apply by April 1.',
     state:'ga', closingModel:'ga',
     districts:[
-      {id:'cher-canton',label:'Canton (2026 standard base levy)',tr:0.4 * (23.926 + 5.250) / 1000},
-      {id:'cher-woodstock',label:'Woodstock (2026 standard base levy)',tr:0.4 * (23.926 + 5.130 + 0.520) / 1000},
-      {id:'cher-uninc',label:'Unincorporated Cherokee (2026 base levy)',tr:0.4 * 26.949 / 1000},
+      {id:'cher-canton',label:'Canton (2026 standard base levy)',tr:0.4 * (23.926 + 5.250) / 1000 ,taxYear:'2026'},
+      {id:'cher-woodstock',label:'Woodstock (2026 standard base levy)',tr:0.4 * (23.926 + 5.130 + 0.520) / 1000 ,taxYear:'2026'},
+      {id:'cher-uninc',label:'Unincorporated Cherokee (2026 base levy)',tr:0.4 * 26.949 / 1000 ,taxYear:'2026'},
     ],
     fvb:0,fvw:0},
   'forsyth': {
@@ -2032,7 +2032,7 @@ const COUNTIES = {
     districts:[
       {id:'for-cumming',label:'Cumming (legacy planning rate)',tr:0.0102},
       {id:'for-uninc',label:'Unincorporated Forsyth (legacy planning rate)',tr:0.0098},
-      {id:'for-district-001-2026',label:'District 001 (2026 billed rates, before exemptions)',tr:0.4 * (4.727 + 0.300 + 15.208 + 1.418 + 2.805) / 1000},
+      {id:'for-district-001-2026',label:'District 001 (2026 billed rates, before exemptions)',tr:0.4 * (4.727 + 0.300 + 15.208 + 1.418 + 2.805) / 1000 ,taxYear:'2026'},
     ],
     fvb:0,fvw:0},
   'clayton': {
@@ -2044,8 +2044,8 @@ const COUNTIES = {
     notes:'The standard 2026 county-fire districts use the net county M&O after the 3.468-mill local-option sales tax rollback (15.052 mills), school 20.000 and county fire 4.500. Jonesboro adds its 9.000-mill municipal rate. Clayton County official Resolution 2026-213 and the local Development Authority supply these rates. Buyer prices are assessed at the ordinary Georgia 40% ratio before verified homestead exemptions, special levies and parcel fees. Fire applies only where Clayton County Fire and Emergency Services serves the parcel, including unincorporated areas and Jonesboro. Confirm the actual tax district, county fire service, homestead qualifications and any extra charges on the parcel bill; do not add the 18.520 gross county rate again after using the 15.052 net county rate.',
     state:'ga', closingModel:'ga',
     districts:[
-      {id:'cla-jonesboro',label:'Jonesboro (2026 standard, county fire)',tr:0.4 * (15.052 + 20.000 + 4.500 + 9.000) / 1000},
-      {id:'cla-uninc',label:'Unincorporated Clayton (2026 standard, county fire)',tr:0.4 * (15.052 + 20.000 + 4.500) / 1000},
+      {id:'cla-jonesboro',label:'Jonesboro (2026 standard, county fire)',tr:0.4 * (15.052 + 20.000 + 4.500 + 9.000) / 1000 ,taxYear:'2026'},
+      {id:'cla-uninc',label:'Unincorporated Clayton (2026 standard, county fire)',tr:0.4 * (15.052 + 20.000 + 4.500) / 1000 ,taxYear:'2026'},
     ],
     fvb:0,fvw:0},
   'hall': {
@@ -2057,8 +2057,8 @@ const COUNTIES = {
     notes:'Hall County Tax Commissioner 2026 adopted millage chart: standard unincorporated district 001 totals 24.192 mills (county, Hall school M&O and bond, county fire, emergency, development and parks); Gainesville district 004 totals 14.221 mills (county 4.100 plus separate Gainesville city and school 10.121). These districts are distinct: do not add Hall County Schools or county fire tax to Gainesville district 004. The remaining county default percentage is a planning rate, not a certified parcel total. Georgia residential property ordinarily uses a 40% assessment before eligibility-based homestead exemptions, credits and other charges. Check the exact parcel tax district and any special assessments with the Hall County Tax Commissioner; homestead filing and deductions require confirmation.',
     state:'ga', closingModel:'ga',
     districts:[
-      {id:'hal-gainesville',label:'Gainesville (2026 tax district 004)',tr:0.4 * (3.565 + 0.535 + 0.722 + 6.092 + 0.896 + 0.712 + 1.299 + 0.400) / 1000},
-      {id:'hal-uninc',label:'Unincorporated Hall (2026 tax district 001)',tr:0.4 * (3.565 + 15.490 + 1.000 + 2.005 + 0.535 + 1.160 + 0.437) / 1000},
+      {id:'hal-gainesville',label:'Gainesville (2026 tax district 004)',tr:0.4 * (3.565 + 0.535 + 0.722 + 6.092 + 0.896 + 0.712 + 1.299 + 0.400) / 1000 ,taxYear:'2026'},
+      {id:'hal-uninc',label:'Unincorporated Hall (2026 tax district 001)',tr:0.4 * (3.565 + 15.490 + 1.000 + 2.005 + 0.535 + 1.160 + 0.437) / 1000 ,taxYear:'2026'},
     ],
     fvb:0,fvw:0},
   'dawson': {
@@ -2072,7 +2072,7 @@ const COUNTIES = {
     districts:[
       {id:'daw-dawsonville',label:'Dawsonville (legacy planning rate)',tr:0.0065},
       {id:'daw-uninc',label:'Unincorporated Dawson (legacy planning rate)',tr:0.006},
-      {id:'daw-district-001-2026',label:'District 001 (2026 billed levy, before exemptions)',tr:0.4 * (5.463 + 10.800) / 1000},
+      {id:'daw-district-001-2026',label:'District 001 (2026 billed levy, before exemptions)',tr:0.4 * (5.463 + 10.800) / 1000 ,taxYear:'2026'},
     ],
     fvb:0,fvw:0},
   'paulding': {
@@ -2085,7 +2085,7 @@ const COUNTIES = {
     state:'ga', closingModel:'ga',
     districts:[
       {id:'paul-dallas',label:'Dallas',tr:0.0088},
-      {id:'paul-uninc',label:'Unincorporated Paulding (2026 standard county fire district)',tr:0.4 * (4.300 + 2.100 + 0.800 + 17.800) / 1000},
+      {id:'paul-uninc',label:'Unincorporated Paulding (2026 standard county fire district)',tr:0.4 * (4.300 + 2.100 + 0.800 + 17.800) / 1000 ,taxYear:'2026'},
     ],
     fvb:0,fvw:0},
   'pickens': {
@@ -2100,7 +2100,7 @@ const COUNTIES = {
     districts:[
       {id:'pick-jasper',label:'Jasper',tr:0.0065},
       {id:'pick-uninc',label:'Unincorporated Pickens',tr:0.006},
-      {id:'pick-uninc-2026',label:'Unincorporated Pickens (2026 adopted county + schools, before exemptions)',tr:0.4 * (6.606 + 10.600) / 1000},
+      {id:'pick-uninc-2026',label:'Unincorporated Pickens (2026 adopted county + schools, before exemptions)',tr:0.4 * (6.606 + 10.600) / 1000 ,taxYear:'2026'},
     ],
     fvb:0,fvw:0},
   'lumpkin': {
@@ -2114,7 +2114,7 @@ const COUNTIES = {
     heNote:'*HE amount pending final verification',
     districts:[
       {id:'lump-dahlonega',label:'Dahlonega (legacy planning rate)',tr:0.0072},
-      {id:'lump-dahlonega-2026',label:'Dahlonega (2026 bill district, before exemptions)',tr:0.4 * (8.877 + 12.929 + 2.964 + 0.500) / 1000},
+      {id:'lump-dahlonega-2026',label:'Dahlonega (2026 bill district, before exemptions)',tr:0.4 * (8.877 + 12.929 + 2.964 + 0.500) / 1000 ,taxYear:'2026'},
       {id:'lump-uninc',label:'Unincorporated Lumpkin (legacy planning rate)',tr:0.0065},
     ],
     fvb:0,fvw:0},
@@ -2129,10 +2129,10 @@ const COUNTIES = {
     districts:[
       {id:'rich-augusta',label:'Augusta-Richmond (Consolidated)',tr:0.0084},
       {id:'rich-hephzibah',label:'Hephzibah',tr:0.0078},
-      {id:'rich-2026-001',label:'2026 Tax District 001 Urban Augusta (before exemptions)',tr:0.4 * 28.284 / 1000},
-      {id:'rich-2026-002',label:'2026 Tax District 002 County with fire (before exemptions)',tr:0.4 * 26.280 / 1000},
-      {id:'rich-2026-003',label:'2026 Tax District 003 Hephzibah (before exemptions)',tr:0.4 * 24.939 / 1000},
-      {id:'rich-2026-004',label:'2026 Tax District 004 Blythe with fire (before exemptions)',tr:0.4 * 26.839 / 1000},
+      {id:'rich-2026-001',label:'2026 Tax District 001 Urban Augusta (before exemptions)',tr:0.4 * 28.284 / 1000 ,taxYear:'2026'},
+      {id:'rich-2026-002',label:'2026 Tax District 002 County with fire (before exemptions)',tr:0.4 * 26.280 / 1000 ,taxYear:'2026'},
+      {id:'rich-2026-003',label:'2026 Tax District 003 Hephzibah (before exemptions)',tr:0.4 * 24.939 / 1000 ,taxYear:'2026'},
+      {id:'rich-2026-004',label:'2026 Tax District 004 Blythe with fire (before exemptions)',tr:0.4 * 26.839 / 1000 ,taxYear:'2026'},
     ],
     fvb:0,fvw:0},
   'columbia': {
@@ -2147,8 +2147,8 @@ const COUNTIES = {
       {id:'col-evans',label:'Evans / Martinez',tr:0.0082},
       {id:'col-grovetown',label:'Grovetown',tr:0.0085},
       {id:'col-uninc',label:'Unincorporated Columbia',tr:0.008},
-      {id:'col-2026-uninc-fire',label:'2026 Unincorporated Columbia, county fire district (before exemptions)',tr:0.4 * (4.062 + 0.429 + 2.788 + 14.997) / 1000},
-      {id:'col-2026-grovetown',label:'2026 City of Grovetown (county workbook, before exemptions)',tr:0.4 * 19.488 / 1000},
+      {id:'col-2026-uninc-fire',label:'2026 Unincorporated Columbia, county fire district (before exemptions)',tr:0.4 * (4.062 + 0.429 + 2.788 + 14.997) / 1000 ,taxYear:'2026'},
+      {id:'col-2026-grovetown',label:'2026 City of Grovetown (county workbook, before exemptions)',tr:0.4 * 19.488 / 1000 ,taxYear:'2026'},
     ],
     fvb:0,fvw:0},
   // ── TEXAS ──
@@ -2302,10 +2302,10 @@ const COUNTIES = {
       {id:'cha-northcharleston',label:'North Charleston (legacy planning rate)',tr:0.0054},
       {id:'cha-summerville',label:'Summerville, Charleston portion (legacy planning rate)',tr:0.0049},
       {id:'cha-uninc',label:'Unincorporated Charleston (legacy planning rate)',tr:0.0048},
-      {id:'cha-city-2026-legal4',label:'City Charleston TD 34/35/36/52/63/71/72/99 (2026 approved 4% legal residence)',tr:0.04 * (300.8 - 145.2) / 1000},
-      {id:'cha-city-2026-other6',label:'City Charleston TD 34/35/36/52/63/71/72/99 (2026 non-approved 6%)',tr:0.06 * 300.8 / 1000},
-      {id:'cha-mtpleasant-21-2026-legal4',label:'Mount Pleasant TD 21 (2026 approved 4% legal residence)',tr:0.04 * (263.1 - 145.2) / 1000},
-      {id:'cha-mtpleasant-21-2026-other6',label:'Mount Pleasant TD 21 (2026 non-approved 6%)',tr:0.06 * 263.1 / 1000},
+      {id:'cha-city-2026-legal4',label:'City Charleston TD 34/35/36/52/63/71/72/99 (2026 approved 4% legal residence)',tr:0.04 * (300.8 - 145.2) / 1000 ,taxYear:'2026'},
+      {id:'cha-city-2026-other6',label:'City Charleston TD 34/35/36/52/63/71/72/99 (2026 non-approved 6%)',tr:0.06 * 300.8 / 1000 ,taxYear:'2026'},
+      {id:'cha-mtpleasant-21-2026-legal4',label:'Mount Pleasant TD 21 (2026 approved 4% legal residence)',tr:0.04 * (263.1 - 145.2) / 1000 ,taxYear:'2026'},
+      {id:'cha-mtpleasant-21-2026-other6',label:'Mount Pleasant TD 21 (2026 non-approved 6%)',tr:0.06 * 263.1 / 1000 ,taxYear:'2026'},
     ],
     fvb:170,fvw:430},
   'richland': {
@@ -2320,8 +2320,8 @@ const COUNTIES = {
       {id:'ric-columbia',label:'Columbia (legacy planning rate)',tr:0.0065},
       {id:'ric-irmo',label:'Irmo (legacy planning rate)',tr:0.0058},
       {id:'ric-uninc',label:'Unincorporated Richland (legacy planning rate)',tr:0.0055},
-      {id:'ric-district-1er-2026-legal4',label:'District 1ER (2026 county estimator, approved 4% legal residence)',tr:0.04 * 212.6 / 1000},
-      {id:'ric-district-1er-2026-other6',label:'District 1ER (2026 county estimator, non-approved 6% classification)',tr:0.06 * 466.9 / 1000},
+      {id:'ric-district-1er-2026-legal4',label:'District 1ER (2026 county estimator, approved 4% legal residence)',tr:0.04 * 212.6 / 1000 ,taxYear:'2026'},
+      {id:'ric-district-1er-2026-other6',label:'District 1ER (2026 county estimator, non-approved 6% classification)',tr:0.06 * 466.9 / 1000 ,taxYear:'2026'},
     ],
     fvb:0,fvw:0},
   'greenville-sc': {
@@ -2336,8 +2336,8 @@ const COUNTIES = {
       {id:'grv-greenville',label:'City of Greenville (legacy planning rate)',tr:0.0078},
       {id:'grv-simpsonville',label:'Simpsonville / Mauldin (legacy planning rate)',tr:0.007},
       {id:'grv-uninc',label:'Unincorporated Greenville (legacy planning rate)',tr:0.0068},
-      {id:'grv-district-000-2026-legal4',label:'District 000 (2026 approved 4% legal residence, school operating excluded)',tr:0.04 * 107.7 / 1000},
-      {id:'grv-district-000-2026-other6',label:'District 000 (2026 non-approved 6% classification, gross levy)',tr:0.06 * 248.9 / 1000},
+      {id:'grv-district-000-2026-legal4',label:'District 000 (2026 approved 4% legal residence, school operating excluded)',tr:0.04 * 107.7 / 1000 ,taxYear:'2026'},
+      {id:'grv-district-000-2026-other6',label:'District 000 (2026 non-approved 6% classification, gross levy)',tr:0.06 * 248.9 / 1000 ,taxYear:'2026'},
     ],
     fvb:0,fvw:0},
   'york-sc': {
@@ -2352,8 +2352,8 @@ const COUNTIES = {
       {id:'yor-rockhill',label:'Rock Hill (legacy planning rate)',tr:0.0052},
       {id:'yor-fortmill',label:'Fort Mill (legacy planning rate)',tr:0.0046},
       {id:'yor-uninc',label:'Unincorporated York (legacy planning rate)',tr:0.0044},
-      {id:'yor-rockhill-rh-2026-legal4',label:'Rock Hill RH (2026 approved 4% legal residence)',tr:0.04 * 209.9 / 1000},
-      {id:'yor-rockhill-rh-2026-other6',label:'Rock Hill RH (2026 non-approved 6% classification)',tr:0.06 * 425.0 / 1000},
+      {id:'yor-rockhill-rh-2026-legal4',label:'Rock Hill RH (2026 approved 4% legal residence)',tr:0.04 * 209.9 / 1000 ,taxYear:'2026'},
+      {id:'yor-rockhill-rh-2026-other6',label:'Rock Hill RH (2026 non-approved 6% classification)',tr:0.06 * 425.0 / 1000 ,taxYear:'2026'},
     ],
     fvb:0,fvw:0},
   'berkeley-sc': {
@@ -2368,10 +2368,10 @@ const COUNTIES = {
       {id:'ber-goosecreek',label:'Goose Creek (legacy planning rate)',tr:0.0048},
       {id:'ber-summerville',label:'Summerville, Berkeley portion (legacy planning rate)',tr:0.0044},
       {id:'ber-uninc',label:'Unincorporated Berkeley (legacy planning rate)',tr:0.0042},
-      {id:'ber-standard-2026-legal4',label:'Standard districts 01-08/81/99 (2026/27 approved 4% legal residence)',tr:0.04 * (246.5 - 146.9) / 1000},
-      {id:'ber-standard-2026-other6',label:'Standard districts 01-08/81/99 (2026/27 non-approved 6%)',tr:0.06 * 246.5 / 1000},
-      {id:'ber-goosecreek-18-2026-legal4',label:'Goose Creek district 18 (2026/27 approved 4% legal residence)',tr:0.04 * (306.5 - 146.9) / 1000},
-      {id:'ber-goosecreek-18-2026-other6',label:'Goose Creek district 18 (2026/27 non-approved 6%)',tr:0.06 * 306.5 / 1000},
+      {id:'ber-standard-2026-legal4',label:'Standard districts 01-08/81/99 (2026/27 approved 4% legal residence)',tr:0.04 * (246.5 - 146.9) / 1000 ,taxPeriod:'FY 2026/27'},
+      {id:'ber-standard-2026-other6',label:'Standard districts 01-08/81/99 (2026/27 non-approved 6%)',tr:0.06 * 246.5 / 1000 ,taxPeriod:'FY 2026/27'},
+      {id:'ber-goosecreek-18-2026-legal4',label:'Goose Creek district 18 (2026/27 approved 4% legal residence)',tr:0.04 * (306.5 - 146.9) / 1000 ,taxPeriod:'FY 2026/27'},
+      {id:'ber-goosecreek-18-2026-other6',label:'Goose Creek district 18 (2026/27 non-approved 6%)',tr:0.06 * 306.5 / 1000 ,taxPeriod:'FY 2026/27'},
     ],
     fvb:140,fvw:350},
   'dorchester-sc': {
@@ -2456,11 +2456,11 @@ const COUNTIES = {
     notes:'The five Jefferson County district selections use the county tax authority’s published 2026 standard rates before exemptions. Birmingham, Hoover, Homewood, Vestavia Hills and unincorporated locations have additional subdistrict combinations with different rates. Hoover’s Shelby County side is separate. Confirm the exact municipality, school and subdistrict on the county property record. The 10% assessment ratio applies to qualifying Class III residential property. The H-1 and any other applicable exemptions are not automatically included in the buyer planning amounts. The official county rates are displayed as percent of assessed value and are converted here to mills before multiplying by 10% assessed market value. Property-tax bills and closing charges require separate verification.',
     state:'al', closingModel:'al',
     districts:[
-      {id:'jef-birmingham',label:'Birmingham City (2026 standard district, verify subdistrict)',tr:0.1 * 72.5 / 1000},
-      {id:'jef-hoover',label:'Hoover, Jefferson County (2026 standard district)',tr:0.1 * 72.6 / 1000},
-      {id:'jef-vestavia',label:'Vestavia Hills (2026 standard district, verify subdistrict)',tr:0.1 * 92.6 / 1000},
-      {id:'jef-homewood',label:'Homewood (2026 standard district, verify subdistrict)',tr:0.1 * 75.0 / 1000},
-      {id:'jef-uninc',label:'Unincorporated Jefferson (2026 standard district, verify subdistrict)',tr:0.1 * 50.1 / 1000},
+      {id:'jef-birmingham',label:'Birmingham City (2026 standard district, verify subdistrict)',tr:0.1 * 72.5 / 1000 ,taxYear:'2026'},
+      {id:'jef-hoover',label:'Hoover, Jefferson County (2026 standard district)',tr:0.1 * 72.6 / 1000 ,taxYear:'2026'},
+      {id:'jef-vestavia',label:'Vestavia Hills (2026 standard district, verify subdistrict)',tr:0.1 * 92.6 / 1000 ,taxYear:'2026'},
+      {id:'jef-homewood',label:'Homewood (2026 standard district, verify subdistrict)',tr:0.1 * 75.0 / 1000 ,taxYear:'2026'},
+      {id:'jef-uninc',label:'Unincorporated Jefferson (2026 standard district, verify subdistrict)',tr:0.1 * 50.1 / 1000 ,taxYear:'2026'},
     ],
     fvb:0,fvw:0},
   'madison-al': {
@@ -2472,9 +2472,9 @@ const COUNTIES = {
     notes:'The existing Madison County selections use Alabama Department of Revenue October 2026 standard district millages: Huntsville 58.0, Madison City 69.5, and unincorporated improvements subject to county fire tax 36.5 mills. Huntsville and Madison also extend into Limestone County, which has different rates. Unincorporated land without taxable improvements may not owe the 3.0-mill fire component. Alabama Class III owner-occupied residential property is assessed at 10% of appraised value; homestead exemptions are not automatically applied. Confirm the parcel county, municipal/school district, fire-tax applicability, exemptions, and separate charges. Bills are due October 1 and delinquent after December 31.',
     state:'al', closingModel:'al',
     districts:[
-      {id:'mad-huntsville',label:'Huntsville (Madison County, 2026 standard levy)',tr:0.1 * (6.5 + 11.0 + 5.5 + 35.0) / 1000},
-      {id:'mad-madison',label:'Madison City (Madison County, 2026 standard levy)',tr:0.1 * (6.5 + 11.0 + 5.5 + 46.5) / 1000},
-      {id:'mad-uninc',label:'Unincorporated Madison (2026 improvements/fire district)',tr:0.1 * (6.5 + 14.0 + 16.0) / 1000},
+      {id:'mad-huntsville',label:'Huntsville (Madison County, 2026 standard levy)',tr:0.1 * (6.5 + 11.0 + 5.5 + 35.0) / 1000 ,taxYear:'2026'},
+      {id:'mad-madison',label:'Madison City (Madison County, 2026 standard levy)',tr:0.1 * (6.5 + 11.0 + 5.5 + 46.5) / 1000 ,taxYear:'2026'},
+      {id:'mad-uninc',label:'Unincorporated Madison (2026 improvements/fire district)',tr:0.1 * (6.5 + 14.0 + 16.0) / 1000 ,taxYear:'2026'},
     ],
     fvb:0,fvw:0},
   'shelby-al': {
@@ -2486,10 +2486,10 @@ const COUNTIES = {
     notes:'Alabama DOR October 2026 standard Shelby County rates: Pelham 58.0 mills; Alabaster 54.0; Helena (Shelby portion) 49.0; standard unincorporated county school district 44.0. These rates assume Alabama Class III residential 10% assessment and exclude homestead exemption and parcel fees. Shelby portions of Hoover, Birmingham and Vestavia Hills have different school rates; some municipalities cross county boundaries. Verify parcel location, county school district, any special levy and exemption with the Shelby County Revenue Commissioner. Bills are due October 1 and become delinquent after December 31.',
     state:'al', closingModel:'al',
     districts:[
-      {id:'sha-pelham',label:'Pelham (2026 standard Shelby district)',tr:0.1 * (6.5 + 7.5 + 30.0 + 14.0) / 1000},
-      {id:'sha-alabaster',label:'Alabaster (2026 standard Shelby district)',tr:0.1 * (6.5 + 7.5 + 30.0 + 10.0) / 1000},
-      {id:'sha-helena',label:'Helena (2026 Shelby portion)',tr:0.1 * (6.5 + 7.5 + 30.0 + 5.0) / 1000},
-      {id:'sha-uninc',label:'Unincorporated Shelby (2026 standard district)',tr:0.1 * (6.5 + 7.5 + 30.0) / 1000},
+      {id:'sha-pelham',label:'Pelham (2026 standard Shelby district)',tr:0.1 * (6.5 + 7.5 + 30.0 + 14.0) / 1000 ,taxYear:'2026'},
+      {id:'sha-alabaster',label:'Alabaster (2026 standard Shelby district)',tr:0.1 * (6.5 + 7.5 + 30.0 + 10.0) / 1000 ,taxYear:'2026'},
+      {id:'sha-helena',label:'Helena (2026 Shelby portion)',tr:0.1 * (6.5 + 7.5 + 30.0 + 5.0) / 1000 ,taxYear:'2026'},
+      {id:'sha-uninc',label:'Unincorporated Shelby (2026 standard district)',tr:0.1 * (6.5 + 7.5 + 30.0) / 1000 ,taxYear:'2026'},
     ],
     fvb:0,fvw:0},
   'limestone': {
@@ -2501,8 +2501,8 @@ const COUNTIES = {
     notes:'The October 2026 Alabama Department of Revenue standard Limestone County schedule gives Athens 40.0 mills and unincorporated District 1 30.0 mills. Huntsville and Madison on the Limestone side have separate municipality and school levy combinations and must not use Madison County selections; confirm exact parcel boundaries and any special districts. Alabama Class III owner-occupied residential property is assessed at 10% of appraised value, and homestead exemptions and other charges require separate eligibility and jurisdiction checks. Bills are due October 1 and delinquent after December 31.',
     state:'al', closingModel:'al',
     districts:[
-      {id:'lim-athens',label:'Athens (Limestone County, 2026 standard levy)',tr:0.1 * (6.5 + 13.5 + 10.0 + 10.0) / 1000},
-      {id:'lim-uninc',label:'Unincorporated Limestone (2026 county-school levy)',tr:0.1 * (6.5 + 13.5 + 10.0) / 1000},
+      {id:'lim-athens',label:'Athens (Limestone County, 2026 standard levy)',tr:0.1 * (6.5 + 13.5 + 10.0 + 10.0) / 1000 ,taxYear:'2026'},
+      {id:'lim-uninc',label:'Unincorporated Limestone (2026 county-school levy)',tr:0.1 * (6.5 + 13.5 + 10.0) / 1000 ,taxYear:'2026'},
     ],
     fvb:0,fvw:0},
   // ── VIRGINIA ──
@@ -8020,7 +8020,7 @@ function selectDistrict(countyKey, district, btn, silent) {
   const districtStatus = document.getElementById('planning-district-status');
   if (districtStatus) districtStatus.textContent = district.label + ' (selected; parcel not verified)';
   const taxYearDisplay = document.getElementById('planning-tax-year');
-  if (taxYearDisplay) taxYearDisplay.textContent = district.taxYear ? 'Tax year ' + district.taxYear + ' (not a 2027 rate)' : 'Not verified';
+  if (taxYearDisplay) taxYearDisplay.textContent = district.taxYear ? 'Tax year ' + district.taxYear + ' (not a 2027 rate)' : (district.taxPeriod ? district.taxPeriod + ' (not verified as tax year 2027)' : 'Not verified');
 }
 
 // ── FLOOD ZONE SELECTOR ──
