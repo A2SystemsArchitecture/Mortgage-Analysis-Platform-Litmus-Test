@@ -35,6 +35,7 @@ annual.value='1052.80';
 const b=container.items.find(b=>b.textContent==='Other district');
 b.onclick();
 if(ACTIVE_DISTRICT.id!=='b'||MKT.tr!==0.021||annual.value!=='')throw Error('explicit district selection');
+container.items=[]; // Fake DOM's innerHTML does not remove its manually stored children.
 renderDistrictPills('single');
 if(ACTIVE_DISTRICT!==null||MKT.tr!==0.012)throw Error('single district was assumed without confirmation');
 if(!row.classList||container.items.length!==1||container.items[0].textContent!=='Only district')throw Error('sole documented district is not offered');
