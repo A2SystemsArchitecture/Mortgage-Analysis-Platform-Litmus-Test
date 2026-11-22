@@ -57,6 +57,7 @@ jobs:
             tests/hometrue-columbia-ga-2026-source-guard.js \
             tests/hometrue-batch1-reconciliation-guard.js \
             tests/hometrue-batch1-affordability-savings.js \
+            tests/hometrue-batch1-tier2-insurance-quote-truth.js \
             tests/hometrue-batch1-no-auto-district.js \
             tests/hometrue-buyer-tax-location-reset.js \
             tests/hometrue-share-tax-district.js \
