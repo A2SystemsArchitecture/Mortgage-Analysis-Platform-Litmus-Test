@@ -8027,7 +8027,10 @@ function renderDistrictPills(countyKey, preferredDistrictId) {
   }
   if (!row || !container) return;
 
-  if (selectableDistricts.length <= 1) {
+  // Even one source-backed district must be explicitly selectable; hiding it
+  // would leave the buyer unable to establish the required tax basis.
+  if (selectableDistricts.length === 0) {
+    container.innerHTML = '';
     row.classList.remove('visible');
     return;
   }
