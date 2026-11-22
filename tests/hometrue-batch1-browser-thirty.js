@@ -29,13 +29,13 @@ fs.mkdirSync(folder,{recursive:true});
    const before=await page.evaluate(key=>{
      selectCounty(key);
      const c=COUNTIES[key],choices=(c.districts||[]).filter(d=>!d.legacyOnly);
-     return {name:c.name,tr:c.tr,market:MKT.tr,choices:choices.length,selected:ACTIVE_DISTRICT?.id||'',taxDisplay:document.getElementById('vs-tax')?.textContent||''};
+     return {name:c.name,tr:c.tr,market:MKT.tr,choices:choices.length,selected:ACTIVE_DISTRICT?.id||'',taxDisplay:document.getElementById('planning-district-status')?.textContent||''};
    },key);
    assert.equal(before.selected,'','Automatic district selection: '+key);
    assert.ok(Math.abs(before.tr-before.market)<1e-12,'County fallback mismatch '+key);
    if(before.choices>1){
     multiple++;
-    assert.ok(before.taxDisplay.includes('unconfirmed'),'Missing unconfirmed rate label '+key);
+    assert.ok(before.taxDisplay.includes('Unconfirmed'),'Missing unconfirmed rate label '+key);
     const chosen=await page.evaluate(()=>{
       const b=document.querySelector('#district-pills .district-pill');
       if(!b)throw Error('Missing selectable district');
