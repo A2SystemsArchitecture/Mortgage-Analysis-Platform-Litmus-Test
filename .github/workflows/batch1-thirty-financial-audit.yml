@@ -55,6 +55,7 @@ jobs:
             tests/hometrue-greenville-sc-2026-districts.js \
             tests/hometrue-richmond-ga-2026-districts.js \
             tests/hometrue-columbia-ga-2026-source-guard.js \
+            tests/hometrue-batch1-reconciliation-guard.js \
             tests/hometrue-batch1-no-auto-district.js \
             tests/hometrue-buyer-tax-location-reset.js \
             tests/hometrue-share-tax-district.js \
