@@ -16,11 +16,15 @@ assert.ok(idx.complete_composite_2027_rate_verified>=0);
 assert.ok(idx.batch1_latest_adopted_composite_verified>=0);
 const selected=lines.filter(r=>['FL','GA','AL','SC'].includes(r[idx.state])&&r[idx.market_id]!=='dorchester-sc');
 assert.equal(selected.length,30);
-assert.ok(selected.every(r=>r[idx.batch1_latest_adopted_composite_verified]==='false'));
+for(const r of selected){
+  const sourceGate=r[idx.batch1_latest_adopted_composite_verified];
+  assert.ok(['true','false'].includes(sourceGate),'Invalid latest-adopted-rate gate state');
+  if(sourceGate==='true')assert.match(r[idx.reason],/RATE-COMPOSITE GATE ONLY|SOURCE-RATE GATE ONLY/,'Verified partial rate gate requires explicit bounded evidence');
+}
 assert.ok(selected.every(r=>r[idx.full_launch_certified]==='false'));
 assert.ok(gate.includes("'batch1_latest_adopted_composite_verified'"));
 assert.ok(gate.includes("'exemption_rules_and_eligibility_verified'"));
 assert.ok(gate.includes("'district_geography_verified'"));
 assert.ok(gate.includes("'calculator_scenario_tests_passed'"));
 assert.ok(gate.includes("'full_launch_certified'"));
-console.log('PASS: approved latest-adopted rate policy, 30-market scope, unchanged non-rate certification protections, 0 auto-certifications.');
+console.log('PASS: approved latest-adopted rate policy, 30-market scope, unchanged non-rate certification protections, no auto-certifications; evidence-backed partial rate verification allowed.');
