@@ -95,6 +95,33 @@ fs.mkdirSync(folder,{recursive:true});
     else assert.equal(status.year,'FY 2026/27 (not verified as tax year 2027)');
     thirtyMarketYearChecks++;
   }
+  // Reject silent generic county fallback in all 30 markets for NEW buyer reports.
+  // A documented tax-district choice or buyer-supplied annual tax allows progress.
+  let verifiedBasisGuards=0;
+  for(const key of keys){
+    const guard=await page.evaluate(key=>{
+      document.getElementById('f-annual-buyer-tax').value='';
+      selectCounty(key);
+      const unknownBlocked=!buyerTaxBasisReady();
+      const district=COUNTIES[key].districts.find(d=>d.taxYear==='2026'||d.taxPeriod==='FY 2026/27');
+      selectDistrict(key,district,null,false);
+      const officialDistrictAllowed=buyerTaxBasisReady();
+      selectCounty(key);
+      const tax=document.getElementById('f-annual-buyer-tax');
+      tax.value='4800.25';
+      const suppliedProjectionAllowed=buyerTaxBasisReady();
+      tax.value='';
+      return {unknownBlocked,officialDistrictAllowed,suppliedProjectionAllowed};
+    },key);
+    assert.deepEqual(guard,{unknownBlocked:true,officialDistrictAllowed:true,suppliedProjectionAllowed:true},'Buyer tax basis guard: '+key);
+    verifiedBasisGuards++;
+  }
+  const dorchesterStillDeferred=await page.evaluate(()=>{
+    document.getElementById('f-annual-buyer-tax').value='';
+    selectCounty('dorchester-sc');
+    return buyerTaxBasisReady();
+  });
+  assert.equal(dorchesterStillDeferred,true,'Deferred Dorchester unexpectedly restricted by Batch 1 guard');
   // Exercise all 30 actual browser share-link reconstructions against the
   // source-backed district planning factor, without representing it as a bill.
   let sharedReports=0;
@@ -163,6 +190,6 @@ fs.mkdirSync(folder,{recursive:true});
   const unknown=await page.evaluate(()=>({annual:S.inp.annualTax1,district:S.inp.districtId,selected:ACTIVE_DISTRICT?.id}));
   assert.equal(unknown.district,'');assert.ok(!unknown.selected);
   assert.ok(Math.abs(unknown.annual-2850)<0.01,'Unverified district did not revert to county planning basis');
-  console.log(JSON.stringify({countiesChecked:keys.length,multichoiceMarkets:multiple,manualSelectionChecks:manual,thirtyMarketSourceYearChecks:thirtyMarketYearChecks,floridaTaxYearChecks:floridaYearChecks,palmBeachUnknownTaxYear:pbUnknown.year,sharedReportsChecked:sharedReports,sharePaymentRoundTrips:roundTrips,sharedKnownDistrict:known,sharedUnknownDistrict:unknown,screenshots:2},null,2));
+  console.log(JSON.stringify({countiesChecked:keys.length,multichoiceMarkets:multiple,manualSelectionChecks:manual,buyerTaxBasisGuards:verifiedBasisGuards,dorchesterDeferredUnaffected:dorchesterStillDeferred,thirtyMarketSourceYearChecks:thirtyMarketYearChecks,floridaTaxYearChecks:floridaYearChecks,palmBeachUnknownTaxYear:pbUnknown.year,sharedReportsChecked:sharedReports,sharePaymentRoundTrips:roundTrips,sharedKnownDistrict:known,sharedUnknownDistrict:unknown,screenshots:2},null,2));
  }finally{await browser.close();}
 })().catch(err=>{console.error(err.stack||err);process.exitCode=1});
