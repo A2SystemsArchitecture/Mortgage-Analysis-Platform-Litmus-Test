@@ -5285,13 +5285,13 @@ function buildClosingCosts(inp) {
     const titleInsOwner = Math.round(p * 0.00300);
     const attorneyFee = 850;
     const settlementFee = 250;
-    const transferTax = p > 100 ? Math.ceil(p / 500) * 185 / 100 : 0;
+    const transferTax = p >= 100 ? Math.ceil(p / 500) * 185 / 100 : 0;
     govTotal = deedRecordingFee;
     titleTotal = titleSearch + titleInsLender + titleInsOwner + attorneyFee + settlementFee;
     stateNote = `<span class="nl" style="color:var(--sc-dim);">${countyName} — South Carolina</span><p>South Carolina is an <strong>attorney-closed state</strong>. SC assesses approved qualifying legal residences at <strong>4% of market value</strong>; without approval the usual 6% classification may apply. The deed recording fee is $1.85 per $500 or fraction of taxable realty value. Its payment should be confirmed in the sales agreement; it is excluded from the assumed buyer subtotal here. Routine recording charges are estimates. SC Homestead Exemption is for qualifying age 65+, totally and permanently disabled, or legally blind homeowners. The state temporarily authorized additional relief for some qualifying recipients in tax year 2026; check with the county auditor. Confirm all figures against your official Closing Disclosure.</p>`;
     govSection = `<div class="cc-section"><div class="cc-section-title">Government &amp; Recording Fees</div>
       <div class="cc-row"><div class="cc-item">Ordinary Document Recording Fee (Buyer Estimate)<span class="cc-note">Estimated local document-recording charge; does not include seller's deed recording fee</span></div><div class="cc-val">${fmt(deedRecordingFee)}</div></div>
-      <div class="cc-row"><div class="cc-item">Deed Recording Fee (State and County)<span class="cc-note">$1.85 per $500 or fraction of taxable realty value above the $100 exemption threshold; seller generally liable and buyer generally secondarily liable (${formatCharge(transferTax)})</span></div><div class="cc-val">Seller</div></div>
+      <div class="cc-row"><div class="cc-item">Deed Recording Fee (State and County)<span class="cc-note">$1.85 for a taxable transfer valued at $100–$500, then per additional $500 or fraction; seller generally liable and buyer generally secondarily liable (${formatCharge(transferTax)})</span></div><div class="cc-val">Seller</div></div>
       <div class="cc-total-row"><span class="cc-total-lbl">Government Subtotal</span><span class="cc-total-val">${formatCharge(govTotal)}</span></div></div>`;
     titleSection = `<div class="cc-section"><div class="cc-section-title">Title, Attorney &amp; Settlement</div>
       <div class="cc-row"><div class="cc-item">Closing Attorney Fee<span class="cc-note">SC is attorney-closed — required buyer cost</span></div><div class="cc-val">${fmt(attorneyFee)}</div></div>
@@ -5300,7 +5300,7 @@ function buildClosingCosts(inp) {
       <div class="cc-row"><div class="cc-item">Owner's Title Insurance<span class="cc-note">Strongly recommended</span></div><div class="cc-val">${fmt(titleInsOwner)}</div></div>
       <div class="cc-row"><div class="cc-item">Settlement / Escrow Fee</div><div class="cc-val">${fmt(settlementFee)}</div></div>
       <div class="cc-total-row"><span class="cc-total-lbl">Title &amp; Attorney Subtotal</span><span class="cc-total-val">${fmt(titleTotal)}</span></div></div>`;
-    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. SC property taxes due January 15. Your assessed value is 4% of market value for owner-occupied primary residences.`;
+    reserveNote = `6-month reserve recommended: ${fmt(inp.damt + (govTotal+titleTotal+lenderTotal+prepaidTotal) + reserves6mo)}. SC property taxes due January 15. A 4% legal-residence assessment requires approval; without approval the 6% classification may apply.`;
   } else if (model === 'tn') {
     const transferTaxBuyer = Math.round(p * 0.0037 * 100)/100; // TN $0.37 per $100, retain cents
     const mortgageRecordTax = Math.round(Math.max(0,loan-2000)*0.00115*100)/100; // TN $0.115 per $100 above $2,000, retain cents // TN $0.115/$100 above the first $2000
