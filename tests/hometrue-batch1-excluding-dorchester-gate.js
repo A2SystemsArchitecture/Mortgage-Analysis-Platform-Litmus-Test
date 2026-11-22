@@ -41,7 +41,7 @@ const checks = [
  'batch1_local_case_documented',
  'batch1_current_year_district_case_documented',
  'batch1_main_buyer_district_correction_documented',
- 'complete_composite_2027_rate_verified',
+ // Authorized November 22: require current officially adopted composite with actual year,\n // not an unavailable 2027-only rate. Retain the historical 2027 field in the CSV.\n 'batch1_latest_adopted_composite_verified',
  'exemption_rules_and_eligibility_verified',
  'district_geography_verified',
  'calculator_scenario_tests_passed',
