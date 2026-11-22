@@ -47,3 +47,16 @@ These counters do not mean prior official sources or partial tax tests are absen
 - Record primary evidence, test fixtures, effective dates and independent reviewer decisions market-by-market. Only then consider changing a market's `full_launch_certified` flag.
 
 **Decision:** Financial tests are passing but the thirty-market complete tax/fee/exemption and 2027 launch sign-off remains blocked. Dorchester remains deferred only, not waived. Do not merge or deploy.
+
+
+## November 22 additional financial-code correction: published PMMS benchmark
+
+Freddie Mac official November 19, 2026 PMMS 30-year fixed benchmark: **7.28%**, up from 7.11% on November 12. Primary official reference: https://www.freddiemac.com/pmms ; archive https://www.freddiemac.com/pmms/pmms_archives .
+
+Reconciled against GitHub `main`, which already contained 7.28% / 7.03% buyer-best / 7.67% buyer-worst. The audit branch had lagged at 7.11% / 6.86% / 7.50%. Updated audit branch's benchmark date, rate, buyer planning rates and optional-interest rate label to 7.28% / 7.03% / 7.67%, preserving the property-tax verification warning. No production change.
+
+New test `tests/hometrue-batch1-thirty-buyer-math.js` executes the actual buyer `collectInp()` source for **90 fictional scenarios** across all **30 included markets**: each market has one county-only rate baseline, one manually entered $1,052.80 annual tax case and one zero-tax input case. Checks monthly and annual tax consistency, buyer choice handling, best/worst monthly total composition and interest-rate values. It is a calculation-path test, **not** evidence that zero property tax is legally due or any local levy, exemption or credit is correct.
+
+**GitHub Actions verified execution**: https://github.com/A2SystemsArchitecture/Mortgage-Analysis-Platform-Litmus-Test/actions/runs/45028414287 : **32/32 regression scripts pass; 90/90 buyer math scenarios pass; 30/30 synthetic three-page PDFs generate; 30/30 browser share reports pass.** All of these are technical scenario validations only. Date and address/district source-year verification, property eligibility, credits, non-ad valorem charges and full legal/financial approval remain open. 30-market full certification stays **0/30**.
+
+The separate affordability tool's `RATE_RANGES` credit tiers are planning assumptions, not verified Freddie Mac individual-credit-tier quotes; do not reinterpret their values as PMMS or represent them as lender offers.
