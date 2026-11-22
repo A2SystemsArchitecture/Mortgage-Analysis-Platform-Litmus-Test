@@ -6907,7 +6907,14 @@ function shareAnalysis() {
     crd: inp.crd,
     pri: inp.pri ? 1 : 0,
     br: inp.br,
+    wr: inp.wr,
     bi: inp.bi,
+    wi: inp.wi,
+    bp: inp.bp,
+    wp: inp.wp,
+    fb: inp.fb,
+    fw: inp.fw,
+    ep: inp.ep,
     ic: inp.ic ? 1 : 0,
     ix: inp.ix ? 1 : 0,
   });
@@ -6941,6 +6948,14 @@ function showToast() {
   setTimeout(() => t.classList.remove('show'), 3000);
 }
 
+// Only finite nonnegative currency amounts are accepted from a shared scenario.
+// Missing/invalid values use the legacy planning calculation; zero is meaningful.
+function parseShareAmount(raw) {
+  if (raw == null || !/^\\d+(?:\\.\\d{1,2})?$/.test(raw)) return null;
+  const value = Number(raw);
+  return Number.isFinite(value) && value >= 0 ? value : null;
+}
+
 function checkShareURL() {
   const params = new URLSearchParams(window.location.search);
   if (!params.get('addr')) return;
@@ -6971,7 +6986,7 @@ function checkShareURL() {
     crd: params.get('crd') || 'excellent',
     pri: params.get('pri') === '1',
     br: parseFloat(params.get('br')) || MKT.br,
-    wr: parseFloat(params.get('br')) || MKT.wr,
+    wr: parseFloat(params.get('wr')) || MKT.wr,
     bi: parseFloat(params.get('bi')) || 0,
     ic: params.get('ic') === '1',
     ix: params.get('ix') === '1',
@@ -6980,7 +6995,7 @@ function checkShareURL() {
   inp.damt = inp.price * inp.dpct / 100;
   inp.loan = inp.price - inp.damt;
   inp.bpi = cPI(inp.loan, inp.br);
-  inp.wpi = cPI(inp.loan, MKT.wr);
+  inp.wpi = cPI(inp.loan, inp.wr);
   // Reconstructed shared results must use the same conservative tax basis as
   // the interactive calculator. Never automatically grant unverified relief.
   inp.buyerAnnualTax = parseBuyerAnnualTax(params.get('buyerTax'));
@@ -6988,14 +7003,16 @@ function checkShareURL() {
   inp.annualTax2 = inp.annualTax1;
   inp.ty1 = inp.annualTax1 / 12;
   inp.ty2 = inp.ty1;
-  inp.wi = inp.bi > 0 ? inp.bi * 1.35 : 0;
+  // Carry forward the actual original scenario, not a newly invented insurance multiplier.
+  // Older links without a separate worst-case premium retain a labeled estimated fallback.
+  inp.wi = parseShareAmount(params.get('wi')) ?? (inp.bi > 0 ? inp.bi * 1.35 : 0);
   inp.il = inp.ic ? 'CONFIRMED' : inp.ix ? 'EXCLUDED' : 'ESTIMATED';
   const [bp, wp] = cPMI(inp.loan, inp.crd);
-  inp.bp = inp.dpct < 20 ? bp : 0;
-  inp.wp = inp.dpct < 20 ? wp : 0;
-  inp.fb = (inp.fld==='ve'||inp.fld==='ae') ? MKT.fab : MKT.fxb;
-  inp.fw = (inp.fld==='ve'||inp.fld==='ae') ? MKT.faw : MKT.fxw;
-  inp.ep = inp.dpct < 20 ? Math.round(inp.loan * 0.002 / 12) : 0;
+  inp.bp = inp.dpct < 20 ? (parseShareAmount(params.get('bp')) ?? bp) : 0;
+  inp.wp = inp.dpct < 20 ? (parseShareAmount(params.get('wp')) ?? wp) : 0;
+  inp.fb = parseShareAmount(params.get('fb')) ?? ((inp.fld==='ve'||inp.fld==='ae') ? MKT.fab : MKT.fxb);
+  inp.fw = parseShareAmount(params.get('fw')) ?? ((inp.fld==='ve'||inp.fld==='ae') ? MKT.faw : MKT.fxw);
+  inp.ep = inp.dpct < 20 ? (parseShareAmount(params.get('ep')) ?? Math.round(inp.loan * 0.002 / 12)) : 0;
   inp.bt = inp.bpi + (inp.pri ? inp.ty2 : inp.ty1) + inp.hoa + inp.bi + inp.bp + inp.fb;
   inp.wt = inp.wpi + inp.ty1 + inp.hoa + inp.wi + inp.wp + inp.fw + inp.ep;
   inp.pn = Math.round((inp.bt + inp.wt) / 2 / 50) * 50;
