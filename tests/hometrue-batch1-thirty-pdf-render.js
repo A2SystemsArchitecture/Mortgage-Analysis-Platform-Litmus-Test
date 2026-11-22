@@ -17,17 +17,21 @@ assert.equal(markets.length,30,'Unexpected 30-market roster');
 const outdir=path.resolve(__dirname,'../audit-results/pdf-thirty');
 fs.mkdirSync(outdir,{recursive:true});
 const saved=[];
-const originalSave=jsPDF.prototype.save;
-jsPDF.prototype.save=function(filename) {
- const bytes=Buffer.from(this.output('arraybuffer'));
- assert.ok(bytes.subarray(0,5).equals(Buffer.from('%PDF-')),'Bad PDF header');
- assert.equal(this.internal.getNumberOfPages(),3,'Expected three report pages');
- assert.ok(bytes.length>4000,'PDF too small');
- const outfile=path.join(outdir,filename);
- fs.writeFileSync(outfile,bytes);
- saved.push({filename,bytes:bytes.length});
-};
-try{
+// jsPDF defines save on the document instance rather than on its prototype.
+function TrackingJsPDF(options) {
+ const doc=new jsPDF(options);
+ doc.save=function(filename) {
+  const bytes=Buffer.from(doc.output('arraybuffer'));
+  assert.ok(bytes.subarray(0,5).equals(Buffer.from('%PDF-')),'Bad PDF header');
+  assert.equal(doc.internal.getNumberOfPages(),3,'Expected three report pages');
+  assert.ok(bytes.length>4000,'PDF too small');
+  const outfile=path.join(outdir,filename);
+  fs.writeFileSync(outfile,bytes);
+  saved.push({filename,bytes:bytes.length});
+ };
+ return doc;
+}
+{
  const fixture=new Function('COUNTIES','jsPDF',`
   const window={jspdf:{jsPDF}};
   const fmt=n=>'$'+Math.round(n).toLocaleString('en-US');
@@ -51,6 +55,6 @@ try{
     buildPDF(input);
   };`)(COUNTIES,jsPDF);
  for(const market of markets)fixture(market.key,market.name);
-}finally{jsPDF.prototype.save=originalSave;}
+}
 assert.equal(saved.length,30,'Missing PDF reports');
 console.log(JSON.stringify({scope:'30 fictional PDF smoke samples; excludes Dorchester',success:saved.length,totalBytes:saved.reduce((n,x)=>n+x.bytes,0)},null,2));
