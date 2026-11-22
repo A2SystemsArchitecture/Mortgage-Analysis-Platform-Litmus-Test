@@ -6951,7 +6951,7 @@ function showToast() {
 // Only finite nonnegative currency amounts are accepted from a shared scenario.
 // Missing/invalid values use the legacy planning calculation; zero is meaningful.
 function parseShareAmount(raw) {
-  if (raw == null || !/^\\d+(?:\\.\\d{1,2})?$/.test(raw)) return null;
+  if (raw == null || !/^\d+(?:\.\d{1,2})?$/.test(raw)) return null;
   const value = Number(raw);
   return Number.isFinite(value) && value >= 0 ? value : null;
 }
