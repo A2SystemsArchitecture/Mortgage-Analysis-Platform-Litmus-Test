@@ -4959,6 +4959,24 @@ function prefillInputs(){
 // PRIORITY 2 — AFFORDABILITY CALCULATOR
 // ══════════════════════════════════════
 function calcAffordability() {
+  // A misleading county-wide tax percentage cannot support a reliable
+  // purchase-price affordability recommendation for Batch 1.
+  if (batch1NeedsVerifiedTaxBasis() && !(ACTIVE_DISTRICT && (ACTIVE_DISTRICT.taxYear || ACTIVE_DISTRICT.taxPeriod))) {
+    document.getElementById('aff-price-low').textContent = 'Tax district needed';
+    document.getElementById('aff-price-high').textContent = 'Tax district needed';
+    document.getElementById('aff-mo-low').textContent = 'N/A';
+    document.getElementById('aff-mo-high').textContent = 'N/A';
+    document.getElementById('aff-to-analysis').disabled = true;
+    document.getElementById('aff-dp-grid').innerHTML = '';
+    document.getElementById('aff-savings-wrap').textContent = 'Select an official-rate tax district for this market before calculating an affordable home price. A generic county planning percentage can materially understate property taxes.';
+    document.getElementById('aff-dti-wrap').innerHTML = '';
+    S.affResult = null;
+    S.affPrefill = null;
+    const results = document.getElementById('aff-results');
+    results.style.display = 'block';
+    results.scrollIntoView({behavior:'smooth'});
+    return;
+  }
   const il = parseFloat(document.getElementById('aff-il').value) || 10000;
   const ih = parseFloat(document.getElementById('aff-ih').value) || 13000;
   const sv = parseFloat(document.getElementById('aff-sv').value) || 0;
