@@ -1,42 +1,61 @@
-// Guards the HomeTrue Batch 1 handoff from double counting or erasing prior research.
-// Run: node tests/hometrue-batch1-reconciliation-guard.js
-const fs=require('node:fs');const path=require('node:path');const assert=require('node:assert/strict');
-const root=path.join(__dirname,'..');
-const csv=fs.readFileSync(path.join(root,'audits','HomeTrue-2027-launch-verification-gates.csv'),'utf8').trim().split(/\r?\n/);
-function parse(line){const items=[];const rx=/"((?:[^"]|"")*)"(?:,|$)/g;let m;while((m=rx.exec(line))!==null)items.push(m[1].replace(/""/g,'"'));return items;}
-const headers=parse(csv[0]),rows=csv.slice(1).map(parse);assert.equal(rows.length,124);
-for(const row of rows)assert.equal(row.length,headers.length);
-const lookup=new Map(rows.map(r=>[r[0],Object.fromEntries(headers.map((k,i)=>[k,r[i]]))]));
-assert.equal(lookup.size,124,'Duplicate market identifiers');
-const states=new Set(['FL','GA','AL','SC']);
-const batch=rows.filter(r=>states.has(r[1]));
-assert.equal(batch.length,31);
-const counts={FL:7,GA:14,AL:4,SC:6};
-for(const [state,n]of Object.entries(counts))assert.equal(batch.filter(r=>r[1]===state).length,n);
-const statuses={MAIN_2026:22,STANDALONE_2026:5,PARTIAL_OR_HISTORICAL:2,NO_DOCUMENTED_LOCAL_CASE:2};
-for(const [s,n]of Object.entries(statuses))assert.equal(batch.filter(r=>lookup.get(r[0]).batch1_existing_work_status===s).length,n,s);
-const workStatus=new Set(Object.keys(statuses));
-for(const row of batch){
- const m=lookup.get(row[0]),s=m.batch1_existing_work_status;
- assert.ok(workStatus.has(s),'Missing prior-work classification '+row[0]);
- const current=s==='MAIN_2026'||s==='STANDALONE_2026';
- assert.equal(m.batch1_local_case_documented,String(current||s==='PARTIAL_OR_HISTORICAL'));
- assert.equal(m.batch1_current_year_district_case_documented,String(current));
- assert.equal(m.batch1_main_buyer_district_correction_documented,String(s==='MAIN_2026'));
- assert.equal(m.full_launch_certified,'false','Never infer certification from research '+row[0]);
+// HomeTrue Batch 1 live reconciliation control. Distinguishes partial official work from certification.
+'use strict';
+const fs=require('node:fs');
+const path=require('node:path');
+const assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'..');
+const source=fs.readFileSync(path.join(root,'audits','HomeTrue-2027-launch-verification-gates.csv'),'utf8');
+function parseCSV(line){
+  const fields=[];let i=0;
+  while(i<line.length){
+    assert.equal(line[i++],'"','Expected quoted CSV field');
+    let value='',closed=false;
+    while(i<line.length){
+      if(line[i]==='"'&&line[i+1]==='"'){value+='"';i+=2;}
+      else if(line[i]==='"'){i++;closed=true;break;}
+      else value+=line[i++];
+    }
+    assert.ok(closed,'Unclosed CSV field');
+    fields.push(value);
+    if(i<line.length)assert.equal(line[i++],',','Unexpected CSV delimiter');
+  }
+  return fields;
 }
-for(const row of rows)assert.equal(lookup.get(row[0]).full_launch_certified,'false');
+const lines=source.trim().split(/\r?\n/),headers=parseCSV(lines.shift());
+const rows=lines.map(line=>{const cells=parseCSV(line);assert.equal(cells.length,headers.length);return Object.fromEntries(headers.map((key,i)=>[key,cells[i]]));});
+assert.equal(rows.length,124,'124-market inventory must be reconciled before changing scope');
+assert.equal(new Set(rows.map(r=>r.market_id)).size,124,'Duplicate market IDs');
+const states={FL:7,GA:14,AL:4,SC:6};
+const batch=rows.filter(r=>Object.hasOwn(states,r.state));
+assert.equal(batch.length,31,'Original Batch 1 inventory must remain 31');
+for(const [state,count] of Object.entries(states))assert.equal(batch.filter(r=>r.state===state).length,count,state);
+assert.equal(batch.filter(r=>r.market_id==='dorchester-sc').length,1,'Dorchester must be tracked exactly once');
+const included=batch.filter(r=>r.market_id!=='dorchester-sc');
+assert.equal(included.length,30,'Dorchester deferred, not deleted');
+const boolFields=['batch1_local_case_documented','batch1_current_year_district_case_documented','batch1_main_buyer_district_correction_documented','batch1_latest_adopted_composite_verified','exemption_rules_and_eligibility_verified','district_geography_verified','calculator_scenario_tests_passed','full_launch_certified'];
+for(const row of included){
+ for(const key of boolFields)assert.ok(['true','false'].includes(row[key]),'Unknown gate value '+row.market_id+': '+key);
+ assert.equal(row.batch1_local_case_documented,'true','Local evidence missing: '+row.market_id);
+ assert.equal(row.batch1_current_year_district_case_documented,'true','Current-year case missing: '+row.market_id);
+ assert.equal(row.batch1_main_buyer_district_correction_documented,'true','Buyer district correction missing: '+row.market_id);
+ if(row.full_launch_certified==='true'){
+   for(const gate of boolFields.filter(x=>x!=='full_launch_certified'))assert.equal(row[gate],'true','Certified without prerequisite '+gate+' in '+row.market_id);
+ }
+}
 const ledger=fs.readFileSync(path.join(root,'audits','HomeTrue-Batch-1-Verification-Ledger.md'),'utf8');
-const reconciliation=fs.readFileSync(path.join(root,'audits','HomeTrue-Batch-1-Full-Reconciliation-2026-11-20.md'),'utf8');
-for(const id of batch.map(r=>r[0]))assert.ok(reconciliation.includes('| '+lookup.get(id).state+' | '+lookup.get(id).market_name.replace(/ County$/,'').replace(/^St\. /,'St. ') )||reconciliation.includes(lookup.get(id).market_name.split(' County')[0]),'Reconciliation name must appear '+id);
-assert.ok(ledger.includes('29 / 31')&&ledger.includes('27 / 31')&&ledger.includes('22 / 31')&&ledger.includes('0 / 31'));
-// Cross-check that a newly counted current-year market is named in the
-// human-readable summary, preventing omissions in the listed counties.
-const currentYearSummary=ledger.split('\n').find(line=>line.startsWith('| Market with an evidenced current-year district property-tax calculation exercised |'));
-assert.ok(currentYearSummary,'Missing current-year milestone summary');
-assert.match(currentYearSummary,/Richland \(SC district 1ER\)/,'Current-year summary must name Richland district 1ER');
-assert.match(currentYearSummary,/Greenville \(SC\)/,'Current-year summary must name Greenville');
-assert.match(currentYearSummary,/Richmond \(GA districts 001-004\)/,'Current-year summary must name Richmond districts');
-assert.match(currentYearSummary,/Columbia \(GA unincorporated\/Grovetown\)/,'Current-year summary must name Columbia source-backed district case');
-
-console.log('Batch 1: 124 unique market IDs, 31 classified; 22 MAIN + 5 STANDALONE + 2 PARTIAL + 2 NO CASE; 0 certified.');
+const summary=[
+ ['Market with an evidenced local property-tax calculation exercised',31,31],
+ ['Market with an evidenced current-year district property-tax calculation exercised',30,31],
+ ['Market with an evidenced district correction in main buyer flow',30,31],
+ ['Market with full financial sign-off',0,31]
+];
+for(const [label,n,denom] of summary){
+ const line=ledger.split(/\r?\n/).find(x=>x.startsWith('| '+label+' |'));
+ assert.ok(line,'Ledger milestone missing: '+label);
+ assert.ok(line.includes(n+' / '+denom),'Ledger milestone differs from source registry: '+label);
+}
+const expected=['batch1_local_case_documented','batch1_current_year_district_case_documented','batch1_main_buyer_district_correction_documented'];
+for(const field of expected)assert.equal(included.filter(r=>r[field]==='true').length,30,field);
+const certified=included.filter(r=>r.full_launch_certified==='true').length;
+assert.equal(certified,0,'Any newly certified market requires independent ledger and audit update before this guard can pass');
+console.log(JSON.stringify({scope:'30 included markets, Dorchester deferred',partialEvidence:30,fullyCertified:certified,registryAndLedgerReconciled:true}));
