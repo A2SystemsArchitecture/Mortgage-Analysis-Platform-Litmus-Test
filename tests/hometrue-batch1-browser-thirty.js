@@ -78,6 +78,23 @@ fs.mkdirSync(folder,{recursive:true});
   });
   assert.equal(pbUnknown.year,'Not verified');
   assert.equal(pbUnknown.known,false);
+  // Verify supported latest-adopted-year disclosure in each of 30 active Batch 1 markets.
+  // Only a documented district example is checked, not actual parcel mapping.
+  let thirtyMarketYearChecks=0;
+  for(const key of keys){
+    const status=await page.evaluate(key=>{
+      selectCounty(key);
+      const d=(COUNTIES[key].districts||[]).find(d=>d.taxYear==='2026'||d.taxPeriod==='FY 2026/27');
+      if(!d)throw Error('No evidence-backed 2026 district rate for '+key);
+      selectDistrict(key,d,null,false);
+      return {year:document.getElementById('planning-tax-year')?.textContent,
+        district:ACTIVE_DISTRICT?.id,sourceYear:d.taxYear||d.taxPeriod};
+    },key);
+    assert.ok(status.year&&status.year!=='Not verified',key+' missing adopted rate-year label');
+    if(status.sourceYear==='2026')assert.equal(status.year,'Tax year 2026 (not a 2027 rate)');
+    else assert.equal(status.year,'FY 2026/27 (not verified as tax year 2027)');
+    thirtyMarketYearChecks++;
+  }
   // Exercise all 30 actual browser share-link reconstructions against the
   // source-backed district planning factor, without representing it as a bill.
   let sharedReports=0;
@@ -146,6 +163,6 @@ fs.mkdirSync(folder,{recursive:true});
   const unknown=await page.evaluate(()=>({annual:S.inp.annualTax1,district:S.inp.districtId,selected:ACTIVE_DISTRICT?.id}));
   assert.equal(unknown.district,'');assert.ok(!unknown.selected);
   assert.ok(Math.abs(unknown.annual-2850)<0.01,'Unverified district did not revert to county planning basis');
-  console.log(JSON.stringify({countiesChecked:keys.length,multichoiceMarkets:multiple,manualSelectionChecks:manual,floridaTaxYearChecks:floridaYearChecks,palmBeachUnknownTaxYear:pbUnknown.year,sharedReportsChecked:sharedReports,sharePaymentRoundTrips:roundTrips,sharedKnownDistrict:known,sharedUnknownDistrict:unknown,screenshots:2},null,2));
+  console.log(JSON.stringify({countiesChecked:keys.length,multichoiceMarkets:multiple,manualSelectionChecks:manual,thirtyMarketSourceYearChecks:thirtyMarketYearChecks,floridaTaxYearChecks:floridaYearChecks,palmBeachUnknownTaxYear:pbUnknown.year,sharedReportsChecked:sharedReports,sharePaymentRoundTrips:roundTrips,sharedKnownDistrict:known,sharedUnknownDistrict:unknown,screenshots:2},null,2));
  }finally{await browser.close();}
 })().catch(err=>{console.error(err.stack||err);process.exitCode=1});
