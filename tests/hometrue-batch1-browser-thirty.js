@@ -72,6 +72,36 @@ fs.mkdirSync(folder,{recursive:true});
     assert.ok(result.visible,'Shared report not visible '+key);
     sharedReports++;
   }
+  // A shared report must preserve the exact original best/worst buyer payment
+  // instead of silently recalculating with today's default mortgage/insurance/PMI rates.
+  let roundTrips=0;
+  for(const key of keys){
+    const initial=url+'?tester=true&addr=Fictional+Market&price=300000&county='+encodeURIComponent(key);
+    await page.goto(initial,{waitUntil:'domcontentloaded',timeout:45000});
+    const original=await page.evaluate(()=>{
+      checkShareURL();
+      PLAN.tier='complete';
+      const i=S.inp;
+      // Distinct best and worst interest rates and insurance/PMI/flood amounts.
+      Object.assign(i,{br:6.54,wr:8.25,bi:275,wi:420,bp:130,wp:220,fb:64,fw:310,ep:42});
+      i.bpi=cPI(i.loan,i.br);i.wpi=cPI(i.loan,i.wr);
+      i.bt=i.bpi+i.ty1+i.hoa+i.bi+i.bp+i.fb;
+      i.wt=i.wpi+i.ty1+i.hoa+i.wi+i.wp+i.fw+i.ep;
+      Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async u=>{window.__sharedAuditUrl=u;}}});
+      shareAnalysis();
+      return {url:window.__sharedAuditUrl,br:i.br,wr:i.wr,bpi:i.bpi,wpi:i.wpi,bi:i.bi,wi:i.wi,bp:i.bp,wp:i.wp,fb:i.fb,fw:i.fw,ep:i.ep,bt:i.bt,wt:i.wt,annualTax:i.annualTax1};
+    });
+    assert.ok(original.url?.includes('wr=8.25')&&original.url.includes('wi=420'),'Link did not preserve financial inputs: '+key);
+    await page.goto(original.url,{waitUntil:'domcontentloaded',timeout:45000});
+    await page.evaluate(()=>checkShareURL());
+    const rebuilt=await page.evaluate(()=>{
+      const i=S.inp;
+      return {br:i.br,wr:i.wr,bpi:i.bpi,wpi:i.wpi,bi:i.bi,wi:i.wi,bp:i.bp,wp:i.wp,fb:i.fb,fw:i.fw,ep:i.ep,bt:i.bt,wt:i.wt,annualTax:i.annualTax1};
+    });
+    for(const [field,value] of Object.entries(rebuilt))
+      assert.ok(Math.abs(value-original[field])<0.001, 'Shared '+field+' changed: '+key+' '+value+' vs '+original[field]);
+    roundTrips++;
+  }
   await page.evaluate(()=>selectCounty('gwinnett'));
   await page.screenshot({path:path.join(folder,'district-planning-example.png'),fullPage:true});
   await page.goto(url+'?addr=Fictional+Example&price=300000&county=gwinnett&district=gwin-uninc',{waitUntil:'domcontentloaded',timeout:45000});
@@ -85,6 +115,6 @@ fs.mkdirSync(folder,{recursive:true});
   const unknown=await page.evaluate(()=>({annual:S.inp.annualTax1,district:S.inp.districtId,selected:ACTIVE_DISTRICT?.id}));
   assert.equal(unknown.district,'');assert.ok(!unknown.selected);
   assert.ok(Math.abs(unknown.annual-2850)<0.01,'Unverified district did not revert to county planning basis');
-  console.log(JSON.stringify({countiesChecked:keys.length,multichoiceMarkets:multiple,manualSelectionChecks:manual,sharedReportsChecked:sharedReports,sharedKnownDistrict:known,sharedUnknownDistrict:unknown,screenshots:2},null,2));
+  console.log(JSON.stringify({countiesChecked:keys.length,multichoiceMarkets:multiple,manualSelectionChecks:manual,sharedReportsChecked:sharedReports,sharePaymentRoundTrips:roundTrips,sharedKnownDistrict:known,sharedUnknownDistrict:unknown,screenshots:2},null,2));
  }finally{await browser.close();}
 })().catch(err=>{console.error(err.stack||err);process.exitCode=1});
