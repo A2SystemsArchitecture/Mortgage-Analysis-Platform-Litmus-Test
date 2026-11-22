@@ -53,7 +53,7 @@ function TrackingJsPDF(options) {
       fld:'x',bt:1970.69+tax+250+55,wt:2183.04+tax+330+75,pn:2550
     };
     buildPDF(input);
-  };`)(COUNTIES,jsPDF);
+  };`)(COUNTIES,TrackingJsPDF);
  for(const market of markets)fixture(market.key,market.name);
 }
 assert.equal(saved.length,30,'Missing PDF reports');
