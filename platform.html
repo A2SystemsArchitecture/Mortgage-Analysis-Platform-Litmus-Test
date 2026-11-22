@@ -906,7 +906,7 @@ footer strong{color:rgba(220,232,235,1.0);}
     <div class="mh-sub">Honest mortgage analysis. No pressure. No agenda.</div>
     <div class="scope-b active-county-name">Select a Market</div>
   </div>
-  <div class="vs" id="avs">Rate verified:&nbsp;<span>November 12, 2026</span>&nbsp;&nbsp;·&nbsp;<span style="color:#1FA663;font-weight:400;">7.11% · 30-year fixed national average</span>·&nbsp;County:&nbsp;<span class="active-county-short">— Select a market —</span>&nbsp;·&nbsp;Tax:&nbsp;<span>—</span>&nbsp;·&nbsp;Source:&nbsp;<span>Freddie Mac PMMS</span></div>
+  <div class="vs" id="avs">Rate verified:&nbsp;<span>November 19, 2026</span>&nbsp;&nbsp;·&nbsp;<span style="color:#1FA663;font-weight:400;">7.28% · 30-year fixed national average</span>·&nbsp;County:&nbsp;<span class="active-county-short">— Select a market —</span>&nbsp;·&nbsp;Tax:&nbsp;<span>—</span>&nbsp;·&nbsp;Source:&nbsp;<span>Freddie Mac PMMS</span></div>
   <div class="tax-planning-note" role="note"><strong>2027 Property Tax Planning Estimate</strong><span>HomeTrue uses enacted 2027 rules where applicable and the latest published local tax rates. Some 2027 rates or exemption eligibility remain unconfirmed. The actual tax bill depends on the property's assessed value, taxing district, eligibility and closing date.</span></div>
   <div class="county-selector-wrap">
     <div class="county-selector-inner" style="flex-direction:column;align-items:flex-start;gap:.6rem;">
@@ -1613,7 +1613,7 @@ footer strong{color:rgba(220,232,235,1.0);}
           <div class="ff"><label>Credit Score Range</label><select id="fcr" onchange="chkRateDisc()"><option value="excellent">760+ Excellent</option><option value="very-good">720–759 Very Good</option><option value="good">680–719 Good</option><option value="fair">640–679 Fair</option></select></div>
           <div class="ff"><label>Primary Residence?</label><select id="fpr"><option value="yes">Yes — Primary long-term</option><option value="no">No — Investment</option></select></div>
           <div class="ff ffu" id="rate-opt-wrap">
-            <label>Interest Rate — Optional (leave blank to use current HomeTrue planning range of 6.86–7.50%)</label>
+            <label>Interest Rate — Optional (leave blank to use current HomeTrue planning range of 7.03–7.67%)</label>
             <input type="number" id="f-rate-opt" placeholder="e.g. 6.50" step="0.01" min="2" max="15" oninput="chkRateDisc()">
             <div class="fn">If you have a quoted rate from a lender, enter it here. It will override the market range for both best and worst case scenarios.</div>
             <div id="rate-disc-warn" style="display:none; margin-top:.6rem;">
@@ -1709,7 +1709,7 @@ footer strong{color:rgba(220,232,235,1.0);}
 <!-- ANALYSIS -->
 <div id="sa" class="screen">
   <div id="amh"></div>
-  <div class="vs" id="avs">Rate verified:&nbsp;<span>November 12, 2026 · 7.11% · 30-year fixed national average</span>&nbsp;·&nbsp;County:&nbsp;<span class="active-county-short">Miami-Dade</span>&nbsp;·&nbsp;Tax:&nbsp;<span>1.30%</span>&nbsp;·&nbsp;Source:&nbsp;<span>Freddie Mac PMMS</span></div>
+  <div class="vs" id="avs">Rate verified:&nbsp;<span>November 19, 2026 · 7.28% · 30-year fixed national average</span>&nbsp;·&nbsp;County:&nbsp;<span class="active-county-short">Miami-Dade</span>&nbsp;·&nbsp;Tax:&nbsp;<span>1.30%</span>&nbsp;·&nbsp;Source:&nbsp;<span>Freddie Mac PMMS</span></div>
   <!-- TIER RIBBON -->
   <div class="tier-ribbon" id="tier-ribbon" style="display:none;">
     <div class="tier-ribbon-info">Current plan: <span id="ribbon-plan-name">Free</span></div>
@@ -3599,7 +3599,7 @@ const COUNTIES = {
 };
   // Active county — defaults to Miami-Dade
 let ACTIVE_COUNTY = 'miami-dade';
-let MKT = {rv:"November 12, 2026 · 7.11% · Freddie Mac PMMS 30-year fixed national average",ov:"Property tax estimates are not certified parcel bills; verify with the local taxing authorities",fm:7.11,br:6.86,wr:7.50,tr:COUNTIES['miami-dade'].tr,he:50000,fxb:42,fxw:85,fab:150,faw:400};
+let MKT = {rv:"November 19, 2026 · 7.28% · Freddie Mac PMMS 30-year fixed national average",ov:"Property tax estimates are not certified parcel bills; verify with the local taxing authorities",fm:7.28,br:7.03,wr:7.67,tr:COUNTIES['miami-dade'].tr,he:50000,fxb:42,fxw:85,fab:150,faw:400};
 function setCounty(key) {
   ACTIVE_COUNTY = key;
   const c = COUNTIES[key];
