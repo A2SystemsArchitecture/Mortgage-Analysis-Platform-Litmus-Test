@@ -1,0 +1,102 @@
+name: Batch 1 thirty-market financial audit (no deployment)
+on:
+  push:
+    branches:
+      - tax-corrections-audit-nov-2026
+    paths:
+      - '.github/workflows/batch1-thirty-financial-audit.yml'
+      - 'tests/**'
+      - 'platform.html'
+      - 'audits/HomeTrue-2027-launch-verification-gates.csv'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout audit branch
+        uses: actions/checkout@v4
+      - name: Install Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Run existing Batch 1 market arithmetic regressions (no Dorchester)
+        shell: bash
+        run: |
+          set +e
+          mkdir -p audit-results
+          : > audit-results/results.tsv
+          failed=0
+          found=0
+          for file in \
+            tests/hometrue-miami-dade-2026-districts.js \
+            tests/hometrue-broward-2026-districts.js \
+            tests/hometrue-palm-beach-2026-unincorporated.js \
+            tests/hometrue-martin-2026-districts.js \
+            tests/hometrue-st-lucie-2026-districts.js \
+            tests/hometrue-indian-river-brevard-2026-districts.js \
+            tests/hometrue-dekalb-ga-2026-district04.js \
+            tests/hometrue-batch1-state-tax-scenarios.js \
+            tests/hometrue-clayton-ga-2026-districts.js \
+            tests/hometrue-hall-ga-2026-districts.js \
+            tests/hometrue-paulding-ga-2026-unincorporated.js \
+            tests/hometrue-charleston-2026-sales-tax-credit.js \
+            tests/hometrue-york-2026-levies.js \
+            tests/hometrue-berkeley-2026-sales-tax-credit.js \
+            tests/hometrue-jefferson-al-2026-districts.js \
+            tests/hometrue-madison-limestone-al-2026.js \
+            tests/hometrue-shelby-al-2026-districts.js \
+            tests/hometrue-cherokee-canton-2026.js \
+            tests/hometrue-cherokee-woodstock-2026.js \
+            tests/hometrue-sc-2026-homestead-guidance.js \
+            tests/hometrue-pickens-ga-2026-adopted.js \
+            tests/hometrue-greenville-sc-2026-districts.js \
+            tests/hometrue-richmond-ga-2026-districts.js \
+            tests/hometrue-columbia-ga-2026-source-guard.js
+          do
+            if [ ! -f "$file" ]; then
+              printf 'MISSING\t%s\n' "$file" | tee -a audit-results/results.tsv
+              failed=$((failed+1))
+              continue
+            fi
+            found=$((found+1))
+            echo "::group::$file"
+            node "$file" > "audit-results/$(basename "$file").log" 2>&1
+            rc=$?
+            cat "audit-results/$(basename "$file").log"
+            echo "::endgroup::"
+            if [ "$rc" -eq 0 ]; then
+              printf 'PASS\t%s\n' "$file" | tee -a audit-results/results.tsv
+            else
+              printf 'FAIL-%s\t%s\n' "$rc" "$file" | tee -a audit-results/results.tsv
+              failed=$((failed+1))
+            fi
+          done
+          echo "Found $found test files; problems $failed"
+          test "$failed" -eq 0
+      - name: Save financial test logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: batch1-thirty-regression-evidence
+          path: audit-results/
+          if-no-files-found: warn
+      - name: Evaluate thirty-market certification gate (expected blocked until evidence complete)
+        if: always()
+        shell: bash
+        run: |
+          node tests/hometrue-batch1-excluding-dorchester-gate.js > audit-financial-gate.json 2>&1
+          rc=$?
+          cat audit-financial-gate.json
+          echo "gate_exit_code=$rc" >> "$GITHUB_STEP_SUMMARY"
+          echo "The gate status is reported as evidence, not waived."
+          exit 0
+      - name: Save certification gate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: batch1-thirty-gate-evidence
+          path: audit-financial-gate.json
+          if-no-files-found: warn
