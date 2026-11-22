@@ -1132,7 +1132,7 @@ footer strong{color:rgba(220,232,235,1.0);}
   </div>
   <!-- DISTRICT SELECTOR — appears after county selection -->
   <div class="district-row" id="district-row">
-    <span class="district-sel-lbl">Select your city or specific area for precise tax calculation</span>
+    <span class="district-sel-lbl">Select the applicable tax district. Until selected, the displayed county rate is only a planning estimate, not a verified property tax bill.</span>
     <div class="district-pills" id="district-pills"></div>
   </div>
   <div class="c" style="max-width:900px;">
@@ -3908,7 +3908,7 @@ function selectCounty(key, btn) {
   const calibText = document.getElementById('county-calibration-text');
   if(calibNote && calibTitle && calibText) {
     calibTitle.textContent = c.short + ' County';
-    calibText.textContent = 'This tool is calibrated for ' + c.name + ' properties. Tax rate: ' + (c.tr*100).toFixed(2) + '%. Using it in a different county will produce inaccurate results.';
+    calibText.textContent = 'Planning estimate for ' + c.name + ': ' + (c.tr*100).toFixed(2) + '% before property-specific taxes and exemptions. Confirm your tax district and local charges; this is not a verified tax bill.';
     calibNote.style.display = 'block';
   }
 }
@@ -7941,10 +7941,19 @@ function renderDistrictPills(countyKey, preferredDistrictId) {
   ACTIVE_DISTRICT = null;
   const districts = c?.districts || [];
   const selectableDistricts = districts.filter(district => !district.legacyOnly);
-  const selected = preferredDistrictId === undefined
-    ? (selectableDistricts.length > 1 ? selectableDistricts[0] : null)
-    : districts.find(district => district.id === preferredDistrictId);
+  // Never silently assign the first taxing district to an unknown property.
+  const selected = preferredDistrictId == null
+    ? null
+    : selectableDistricts.find(district => district.id === preferredDistrictId) || null;
   if (selected) selectDistrict(countyKey, selected, null, true);
+  else {
+    // A county-level planning factor can remain visible, but must never be
+    // described as a confirmed parcel-specific district rate.
+    MKT.tr = c.tr;
+    const taxDisplay = document.getElementById('vs-tax');
+    if (taxDisplay) taxDisplay.textContent =
+      (c.tr * 100).toFixed(2) + '% (county planning estimate; tax district unconfirmed)';
+  }
   if (!row || !container) return;
 
   if (selectableDistricts.length <= 1) {
@@ -7978,7 +7987,7 @@ function selectDistrict(countyKey, district, btn, silent) {
   // Update verified strip tax display
   const taxDisplay = document.getElementById('vs-tax');
   if (taxDisplay) {
-    taxDisplay.textContent = (district.tr * 100).toFixed(2) + '% (' + district.label + ')';
+    taxDisplay.textContent = (district.tr * 100).toFixed(2) + '% (' + district.label + '; pre-exemption planning rate)';
   }
 }
 
