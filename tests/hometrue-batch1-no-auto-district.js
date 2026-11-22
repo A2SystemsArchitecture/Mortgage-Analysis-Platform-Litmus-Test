@@ -5,7 +5,7 @@ const html=fs.readFileSync(path.join(__dirname,'../platform.html'),'utf8');
 const start=html.indexOf('function renderDistrictPills(');
 const end=html.indexOf('// ── FLOOD ZONE SELECTOR',start);
 assert.ok(start>=0&&end>start,'district functions present');
-assert.ok(html.includes('tax district unconfirmed'),'county planning caveat');
+assert.ok(html.includes('Unconfirmed; county-only planning rate'),'county planning caveat');
 assert.ok(html.includes('not a verified property tax bill'),'user-facing tax uncertainty');
 const run=new Function(`
 const COUNTIES={
@@ -15,17 +15,17 @@ const COUNTIES={
 let ACTIVE_DISTRICT={id:'stale'},MKT={tr:0.999};
 const row={classList:{add(){},remove(){}}};
 const container={innerHTML:'',items:[],appendChild(btn){btn.classList={add(){},remove(){}};this.items.push(btn)}};
-const rate={textContent:''},annual={value:'1052.80'};
+const rate={textContent:''},status={textContent:''},annual={value:'1052.80'};
 const document={
  createElement(){return {className:'',textContent:'',onclick:null}},
- getElementById(id){return ({'district-row':row,'district-pills':container,'vs-tax':rate,'f-annual-buyer-tax':annual})[id]||null},
+ getElementById(id){return ({'district-row':row,'district-pills':container,'planning-tax-rate':rate,'planning-district-status':status,'f-annual-buyer-tax':annual})[id]||null},
  querySelectorAll(){return container.items}
 };
 function clearBuyerAnnualTax(){annual.value=''}
 `+html.slice(start,end)+`
 renderDistrictPills('example');
 if(ACTIVE_DISTRICT!==null)throw Error('first district auto-selected');
-if(MKT.tr!==0.009||!rate.textContent.includes('unconfirmed'))throw Error('county planning fallback');
+if(MKT.tr!==0.009||!status.textContent.includes('Unconfirmed'))throw Error('county planning fallback');
 if(container.items.some(b=>b.className.includes('active')))throw Error('first pill active');
 renderDistrictPills('example','b');
 if(ACTIVE_DISTRICT.id!=='b'||MKT.tr!==0.021)throw Error('known saved district');
