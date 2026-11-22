@@ -4015,7 +4015,7 @@ function collectInp(){
   const pri=document.getElementById('fpr').value==='yes';
   const crd=document.getElementById('fcr').value||'excellent';
   let br=MKT.br,wr=MKT.wr;
-  if(t===3){const lr=parseFloat(document.getElementById('flr').value);if(lr){br=lr;wr=lr;}}
+  if(t===3){const lr=parseFloat(document.getElementById('flr').value);if(Number.isFinite(lr)&&lr>=2&&lr<=15){br=lr;wr=lr;}}
   const bpi=cPI(loan,br),wpi=cPI(loan,wr);
   // Base estimate uses the stored area rate. Do not subtract a homestead
   // exemption or credit without proof of buyer qualification and applicable
@@ -4031,14 +4031,16 @@ function collectInp(){
   else if(t===2&&S.ins==='b'){[bi,wi]=cIns(con,rage,rtp,sht,byr);il='ESTIMATED';}
   else if(t===3){const v=parseFloat(document.getElementById('fit3').value);const confirmed=Number.isFinite(v)&&v>0;bi=wi=confirmed?v:285;il=confirmed?'CONFIRMED':'ESTIMATED';ic=confirmed;}
   let bp=0,wp=0;
-  if(dpct<20){[bp,wp]=cPMI(loan,crd);if(t===3){const cp=parseFloat(document.getElementById('fcp').value);if(cp)bp=wp=cp;}}
+  if(dpct<20){[bp,wp]=cPMI(loan,crd);if(t===3){const rawPmi=document.getElementById('fcp').value.trim();const cp=Number(rawPmi);if(rawPmi!==''&&Number.isFinite(cp)&&cp>=0)bp=wp=cp;}}
   const fb=fld==='ve'?MKT.fab:fld==='ae'?MKT.fab:MKT.fxb,fw=fld==='ve'?MKT.faw:fld==='ae'?MKT.faw:MKT.fxw;
   const ep=dpct<20?Math.round(loan*0.002/12):0;
   const bt=bpi+(pri?ty2:ty1)+hoa+bi+bp+fb;
   const wt=wpi+ty1+hoa+wi+wp+fw+ep;
   const pn=Math.round((bt+wt)/2/50)*50;
-  const lockedRateConfirmed = t===3 && Number.isFinite(parseFloat(document.getElementById('flr').value)) && parseFloat(document.getElementById('flr').value)>0;
-  const pmiConfirmed = t===3 && dpct>=20;
+  const lockedRateValue = parseFloat(document.getElementById('flr').value);
+  const lockedRateConfirmed = t===3 && Number.isFinite(lockedRateValue) && lockedRateValue>=2 && lockedRateValue<=15;
+  const rawConfirmedPmi = t===3 ? document.getElementById('fcp').value.trim() : '';
+  const pmiConfirmed = t===3 && (dpct>=20 || (rawConfirmedPmi!=='' && Number.isFinite(Number(rawConfirmedPmi)) && Number(rawConfirmedPmi)>=0));
   S.inp={lockedRateConfirmed,pmiConfirmed,countyKey:ACTIVE_COUNTY,districtId:ACTIVE_DISTRICT?.id || '',address:document.getElementById('fa').value.trim()||'Property Address',price,dpct,damt,loan,byr,rage,rtp,con,sht,hoa,fld,ilo,ihi,pri,crd,br,wr,bpi,wpi,ty1,ty2,annualTax1,annualTax2,buyerAnnualTax,bi,wi,il,ic,ix,bp,wp,fb,fw,ep,bt,wt,pn,tier:t};
   if(S2&&S2.comparingProp2) S2.comparingProp2=false;
 }
