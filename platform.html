@@ -1511,7 +1511,7 @@ footer strong{color:rgba(220,232,235,1.0);}
       <div class="tcs">
         <div class="tc" id="tc1" onclick="selTier(1)"><div class="tck">✓</div><span class="tn">Tier 1</span><span class="tna">Pre-Offer</span><span class="ta">County Tax Data · Estimated Costs</span><p class="td">Still evaluating. Haven't made an offer. Insurance excluded with full caveat.</p></div>
         <div class="tc" id="tc2" onclick="selTier(2)"><div class="tck">✓</div><span class="tn">Tier 2</span><span class="tna">Active Offer</span><span class="ta">More Inputs · Lower Variance</span><p class="td">Offer in or imminent. Insurance: confirmed quote or acknowledged estimate.</p><div id="tc2-lock" style="display:none;font-family:var(--fm);font-size:.55rem;color:var(--teal-dim);margin-top:.5rem;padding:.25rem .5rem;background:var(--teal-light);border-radius:4px;">🔒 Essentials — $19/mo</div></div>
-        <div class="tc" id="tc3" onclick="selTier(3)"><div class="tck">✓</div><span class="tn">Tier 3</span><span class="tna">Under Contract</span><span class="ta">All Inputs Confirmed</span><p class="td">Contract signed. All inputs confirmed — rate lock and insurance quote required.</p><div id="tc3-lock" style="display:none;font-family:var(--fm);font-size:.55rem;color:var(--indigo-dim);margin-top:.5rem;padding:.25rem .5rem;background:var(--indigo-light);border-radius:4px;">🔒 Complete — $29/mo</div></div>
+        <div class="tc" id="tc3" onclick="selTier(3)"><div class="tck">✓</div><span class="tn">Tier 3</span><span class="tna">Under Contract</span><span class="ta">Verify Remaining Inputs</span><p class="td">Contract signed. Confirm rate lock, insurance quote, property taxes and applicable fees.</p><div id="tc3-lock" style="display:none;font-family:var(--fm);font-size:.55rem;color:var(--indigo-dim);margin-top:.5rem;padding:.25rem .5rem;background:var(--indigo-light);border-radius:4px;">🔒 Complete — $29/mo</div></div>
       </div>
       <button class="btn btn-fw btn-mn" id="tb" disabled onclick="procInputs()" style="margin-top:1rem;">Continue with Selected Tier</button>
     </div>
@@ -1744,7 +1744,7 @@ footer strong{color:rgba(220,232,235,1.0);}
       <div style="display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.25rem;">
         <div class="tp-opt" id="tp1" onclick="pickTier(1)"><div style="display:flex;justify-content:space-between;align-items:center;"><div><span style="font-family:var(--fm);font-size:.58rem;letter-spacing:.1em;color:var(--teal-mid);display:block;margin-bottom:.2rem;">TIER 1</span><strong style="color:var(--midnight);">Pre-Offer — County Tax Data · Estimated Costs</strong></div><span style="font-family:var(--fm);font-size:.62rem;color:var(--teal-dim);background:var(--teal-light);padding:.2rem .6rem;border-radius:3px;">Teal</span></div></div>
         <div class="tp-opt" id="tp2" onclick="pickTier(2)"><div style="display:flex;justify-content:space-between;align-items:center;"><div><span style="font-family:var(--fm);font-size:.58rem;letter-spacing:.1em;color:var(--indigo-mid);display:block;margin-bottom:.2rem;">TIER 2</span><strong style="color:var(--midnight);">Active Offer — More Inputs · Lower Variance</strong></div><span style="font-family:var(--fm);font-size:.62rem;color:var(--indigo-dim);background:var(--indigo-light);padding:.2rem .6rem;border-radius:3px;">Indigo</span></div></div>
-        <div class="tp-opt" id="tp3" onclick="pickTier(3)"><div style="display:flex;justify-content:space-between;align-items:center;"><div><span style="font-family:var(--fm);font-size:.58rem;letter-spacing:.1em;color:var(--emerald-mid);display:block;margin-bottom:.2rem;">TIER 3</span><strong style="color:var(--midnight);">Under Contract — All Inputs Confirmed</strong></div><span style="font-family:var(--fm);font-size:.62rem;color:var(--emerald-dim);background:var(--emerald-light);padding:.2rem .6rem;border-radius:3px;">Emerald</span></div></div>
+        <div class="tp-opt" id="tp3" onclick="pickTier(3)"><div style="display:flex;justify-content:space-between;align-items:center;"><div><span style="font-family:var(--fm);font-size:.58rem;letter-spacing:.1em;color:var(--emerald-mid);display:block;margin-bottom:.2rem;">TIER 3</span><strong style="color:var(--midnight);">Under Contract — Verify Remaining Inputs</strong></div><span style="font-family:var(--fm);font-size:.62rem;color:var(--emerald-dim);background:var(--emerald-light);padding:.2rem .6rem;border-radius:3px;">Emerald</span></div></div>
       </div>
       <button class="btn btn-ol btn-fw" onclick="closeTierPicker()">Cancel — Stay on Current Analysis</button>
     </div>
@@ -4008,7 +4008,7 @@ function collectInp(){
   if(t===1){ix=true;il='EXCLUDED';}
   else if(t===2&&S.ins==='a'){const c=parseFloat(document.getElementById('fic').value)||285;bi=wi=c;il='CONFIRMED';ic=true;}
   else if(t===2&&S.ins==='b'){[bi,wi]=cIns(con,rage,rtp,sht,byr);il='ESTIMATED';}
-  else if(t===3){const c=parseFloat(document.getElementById('fit3').value)||285;bi=wi=c;il='CONFIRMED';ic=true;}
+  else if(t===3){const v=parseFloat(document.getElementById('fit3').value);const confirmed=Number.isFinite(v)&&v>0;bi=wi=confirmed?v:285;il=confirmed?'CONFIRMED':'ESTIMATED';ic=confirmed;}
   let bp=0,wp=0;
   if(dpct<20){[bp,wp]=cPMI(loan,crd);if(t===3){const cp=parseFloat(document.getElementById('fcp').value);if(cp)bp=wp=cp;}}
   const fb=fld==='ve'?MKT.fab:fld==='ae'?MKT.fab:MKT.fxb,fw=fld==='ve'?MKT.faw:fld==='ae'?MKT.faw:MKT.fxw;
@@ -4016,7 +4016,9 @@ function collectInp(){
   const bt=bpi+(pri?ty2:ty1)+hoa+bi+bp+fb;
   const wt=wpi+ty1+hoa+wi+wp+fw+ep;
   const pn=Math.round((bt+wt)/2/50)*50;
-  S.inp={countyKey:ACTIVE_COUNTY,districtId:ACTIVE_DISTRICT?.id || '',address:document.getElementById('fa').value.trim()||'Property Address',price,dpct,damt,loan,byr,rage,rtp,con,sht,hoa,fld,ilo,ihi,pri,crd,br,wr,bpi,wpi,ty1,ty2,annualTax1,annualTax2,buyerAnnualTax,bi,wi,il,ic,ix,bp,wp,fb,fw,ep,bt,wt,pn,tier:t};
+  const lockedRateConfirmed = t===3 && Number.isFinite(parseFloat(document.getElementById('flr').value)) && parseFloat(document.getElementById('flr').value)>0;
+  const pmiConfirmed = t===3 && dpct>=20;
+  S.inp={lockedRateConfirmed,pmiConfirmed,countyKey:ACTIVE_COUNTY,districtId:ACTIVE_DISTRICT?.id || '',address:document.getElementById('fa').value.trim()||'Property Address',price,dpct,damt,loan,byr,rage,rtp,con,sht,hoa,fld,ilo,ihi,pri,crd,br,wr,bpi,wpi,ty1,ty2,annualTax1,annualTax2,buyerAnnualTax,bi,wi,il,ic,ix,bp,wp,fb,fw,ep,bt,wt,pn,tier:t};
   if(S2&&S2.comparingProp2) S2.comparingProp2=false;
 }
 
@@ -4032,14 +4034,19 @@ function fmtR(r){return r.toFixed(2)+'%';}
 function bG3(){
   const i=S.inp;
   const tl={1:'Tier 1 — Pre-Offer Estimate',2:'Tier 2 — Active Offer Analysis',3:'Tier 3 — Under Contract Precision'};
-  const al={1:'County tax data with estimated costs',2:'More confirmed inputs, lower variance',3:'All inputs confirmed'};
+  const al={1:'County tax data with estimated costs',2:'More confirmed inputs, lower variance',3:'Contract inputs provided; taxes and fees may be unverified'};
   const est=[];
   if(i.ix)est.push('Homeowners Insurance: Excluded');
   else if(i.il==='ESTIMATED')est.push('Homeowners Insurance: Estimated — unconfirmed');
-  if(S.tier<3&&i.bp>0)est.push('PMI: Estimated range');
+  if(i.bp>0 && (S.tier<3 || !i.pmiConfirmed)) est.push('PMI: Estimated range');
+  if(i.buyerAnnualTax == null) est.push('Property Tax: Unverified planning estimate; no approved exemptions assumed');
+  else est.push('Property Tax: Buyer-entered projection; official parcel assessment and eligibility not verified by HomeTrue');
+  if(!i.districtId) est.push('Property Tax District: Not verified');
+  else est.push('Property Tax District: Buyer-selected; parcel location not independently verified');
+  if(i.tier === 3 && !i.lockedRateConfirmed) est.push('Mortgage Rate: Planning benchmark; no locked rate entered');
   const cs=[
     ['Tier &amp; Completeness',`You are receiving a <strong>${tl[S.tier]}</strong>. Input completeness: <strong>${al[S.tier]}</strong>.`],
-    ['Estimated Inputs',est.length?`Estimated inputs: <strong>${est.join('; ')}</strong>. Review all caveats before any financial decision.`:`<strong>All inputs confirmed.</strong>`],
+    ['Estimated Inputs',est.length?`Estimated inputs: <strong>${est.join('; ')}</strong>. Review all caveats before any financial decision.`:`<strong>Review the source and eligibility of each financial input before relying on this analysis.</strong>`],
     ['Not Professional Advice','This analysis is an educational tool. It does not constitute financial, legal, real estate, or mortgage advice.'],
     ['Data Currency',`Mortgage rate last verified: <strong>${MKT.rv}</strong>. All other inputs: <strong>${MKT.ov}</strong>.`],
     ['Your Information','You confirm all information you provided is accurate and complete to the best of your knowledge.'],
