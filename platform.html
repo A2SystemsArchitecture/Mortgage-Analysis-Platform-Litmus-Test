@@ -5044,13 +5044,15 @@ function calcAffordability() {
   // The affordability output uses the selected county/district effective rate as an illustration.
   // The calculation is not a parcel tax bill, and homestead benefits are excluded until verified.
   // Savings assessment
-  const needed3 = priceMid * 0.03 + priceMid * 0.035 + (priceHigh ? moHigh : moLow) * 3;
+  // Savings must use the buyer's selected down payment, not a hardcoded 3%.
+  // Closing costs (3.5%) and three-month reserves remain planning assumptions.
+  const savingsNeeded = priceMid * dpPct / 100 + priceMid * 0.035 + (priceHigh ? moHigh : moLow) * 3;
   const savingsWrap = document.getElementById('aff-savings-wrap');
-  const savingsOk = sv >= needed3;
+  const savingsOk = sv >= savingsNeeded;
   savingsWrap.innerHTML = `
     <div class="nt ${savingsOk ? 'nt-em' : 'nt-wn'}" style="margin:0;">
       <span class="nl ${savingsOk ? 'nl-em' : 'nl-wn'}">Savings Assessment</span>
-      <p>You have <strong>${fmt(sv)}</strong> available. To close on ${fmt(priceMid)} with 3% down you need approximately <strong>${fmt(needed3)}</strong> (down payment + closing costs + 3-month reserve). ${savingsOk ? 'Your savings cover this comfortably.' : 'You may need additional savings before you are ready to close.'}</p>
+      <p>You have <strong>${fmt(sv)}</strong> available. To close on ${fmt(priceMid)} with ${dpPct}% down you need approximately <strong>${fmt(savingsNeeded)}</strong> (selected down payment + assumed 3.5% closing costs + 3-month reserve). ${savingsOk ? 'Your savings meet these planning assumptions.' : 'Your savings fall below these planning assumptions.'} Actual closing costs and required reserves must be independently verified.</p>
     </div>
   `;
 
