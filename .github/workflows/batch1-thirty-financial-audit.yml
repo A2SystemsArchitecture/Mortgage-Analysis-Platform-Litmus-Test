@@ -101,6 +101,17 @@ jobs:
           echo "gate_exit_code=$rc" >> "$GITHUB_STEP_SUMMARY"
           echo "The gate status is reported as evidence, not waived."
           exit 0
+      - name: Install isolated PDF test dependency
+        run: npm install --no-save --ignore-scripts --no-audit --no-fund jspdf@2.5.1
+      - name: Render real three-page PDFs for thirty fictional markets
+        run: node tests/hometrue-batch1-thirty-pdf-render.js
+      - name: Preserve PDF smoke fixtures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: batch1-thirty-pdf-smoke-fixtures
+          path: audit-results/pdf-thirty/
+          if-no-files-found: warn
       - name: Save certification gate evidence
         if: always()
         uses: actions/upload-artifact@v4
