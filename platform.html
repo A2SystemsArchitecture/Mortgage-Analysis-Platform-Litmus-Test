@@ -3620,7 +3620,7 @@ function setCounty(key) {
   if(sb) sb.textContent = c.name + ' · ' + stateLabel;
   // Update verified strip
   const vs = document.getElementById('avs');
-  if(vs) vs.innerHTML = `National mortgage-rate benchmark:&nbsp;<span>${MKT.rv}</span>&nbsp;·&nbsp;State:&nbsp;<span>${stateLabel}</span>&nbsp;·&nbsp;County:&nbsp;<span>${c.short}</span>&nbsp;·&nbsp;Planning tax estimate:&nbsp;<span>${(c.tr*100).toFixed(2)}%</span>&nbsp;·&nbsp;Local tax data:&nbsp;<span>verification in progress</span>`;
+  if(vs) vs.innerHTML = `National mortgage-rate benchmark:&nbsp;<span>${MKT.rv}</span>&nbsp;·&nbsp;State:&nbsp;<span>${stateLabel}</span>&nbsp;·&nbsp;County:&nbsp;<span>${c.short}</span>&nbsp;·&nbsp;Planning tax estimate:&nbsp;<span id="planning-tax-rate">${(c.tr*100).toFixed(2)}%</span>&nbsp;·&nbsp;District:&nbsp;<span id="planning-district-status">Unconfirmed; county-only planning rate</span>&nbsp;·&nbsp;Local tax data:&nbsp;<span>verification in progress</span>`;
 }
 
 // ── DEMO MODE — WAITLIST EARLY ACCESS ──
@@ -7950,9 +7950,10 @@ function renderDistrictPills(countyKey, preferredDistrictId) {
     // A county-level planning factor can remain visible, but must never be
     // described as a confirmed parcel-specific district rate.
     MKT.tr = c.tr;
-    const taxDisplay = document.getElementById('vs-tax');
-    if (taxDisplay) taxDisplay.textContent =
-      (c.tr * 100).toFixed(2) + '% (county planning estimate; tax district unconfirmed)';
+    const taxDisplay = document.getElementById('planning-tax-rate');
+    if (taxDisplay) taxDisplay.textContent = (c.tr * 100).toFixed(2) + '%';
+    const districtStatus = document.getElementById('planning-district-status');
+    if (districtStatus) districtStatus.textContent = 'Unconfirmed; county-only planning rate';
   }
   if (!row || !container) return;
 
@@ -7984,11 +7985,11 @@ function selectDistrict(countyKey, district, btn, silent) {
   });
   if (btn) btn.classList.add('active');
   
-  // Update verified strip tax display
-  const taxDisplay = document.getElementById('vs-tax');
-  if (taxDisplay) {
-    taxDisplay.textContent = (district.tr * 100).toFixed(2) + '% (' + district.label + '; pre-exemption planning rate)';
-  }
+  // Display the explicitly chosen district, while preserving the planning caveat.
+  const taxDisplay = document.getElementById('planning-tax-rate');
+  if (taxDisplay) taxDisplay.textContent = (district.tr * 100).toFixed(2) + '%';
+  const districtStatus = document.getElementById('planning-district-status');
+  if (districtStatus) districtStatus.textContent = district.label + ' (selected; parcel not verified)';
 }
 
 // ── FLOOD ZONE SELECTOR ──
