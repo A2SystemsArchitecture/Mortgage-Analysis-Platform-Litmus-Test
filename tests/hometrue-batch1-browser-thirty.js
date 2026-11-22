@@ -47,6 +47,31 @@ fs.mkdirSync(folder,{recursive:true});
     manual++;
    }
   }
+  // Exercise all 30 actual browser share-link reconstructions against the
+  // source-backed district planning factor, without representing it as a bill.
+  let sharedReports=0;
+  for(const key of keys) {
+    const d=await page.evaluate(key=>{
+      const c=COUNTIES[key],choice=(c.districts||[]).find(x=>!x.legacyOnly);
+      return {id:choice?.id||'',factor:choice?.tr??c.tr};
+    },key);
+    const shareUrl=url+'?tester=true&addr=Fictional+Market&price=300000&county='+encodeURIComponent(key)+'&district='+encodeURIComponent(d.id);
+    await page.goto(shareUrl,{waitUntil:'domcontentloaded',timeout:45000});
+    await page.evaluate(()=>checkShareURL());
+    const result=await page.evaluate(()=>({
+      annual:S.inp.annualTax1,
+      annual2:S.inp.annualTax2,
+      monthly:S.inp.ty1,
+      actualDistrict:S.inp.districtId,
+      visible:document.getElementById('sa')?.classList.contains('active')||false
+    }));
+    const expected=300000*d.factor;
+    assert.ok(Math.abs(result.annual-expected)<0.01,'Shared annual tax mismatch '+key);
+    assert.ok(Math.abs(result.annual2-expected)<0.01&&Math.abs(result.monthly*12-expected)<0.01,'Shared monthly/year mismatch '+key);
+    assert.equal(result.actualDistrict,d.id,'Shared district mismatch '+key);
+    assert.ok(result.visible,'Shared report not visible '+key);
+    sharedReports++;
+  }
   await page.evaluate(()=>selectCounty('gwinnett'));
   await page.screenshot({path:path.join(folder,'district-planning-example.png'),fullPage:true});
   await page.goto(url+'?addr=Fictional+Example&price=300000&county=gwinnett&district=gwin-uninc',{waitUntil:'domcontentloaded',timeout:45000});
@@ -60,6 +85,6 @@ fs.mkdirSync(folder,{recursive:true});
   const unknown=await page.evaluate(()=>({annual:S.inp.annualTax1,district:S.inp.districtId,selected:ACTIVE_DISTRICT?.id}));
   assert.equal(unknown.district,'');assert.ok(!unknown.selected);
   assert.ok(Math.abs(unknown.annual-2850)<0.01,'Unverified district did not revert to county planning basis');
-  console.log(JSON.stringify({countiesChecked:keys.length,multichoiceMarkets:multiple,manualSelectionChecks:manual,sharedKnownDistrict:known,sharedUnknownDistrict:unknown,screenshots:2},null,2));
+  console.log(JSON.stringify({countiesChecked:keys.length,multichoiceMarkets:multiple,manualSelectionChecks:manual,sharedReportsChecked:sharedReports,sharedKnownDistrict:known,sharedUnknownDistrict:unknown,screenshots:2},null,2));
  }finally{await browser.close();}
 })().catch(err=>{console.error(err.stack||err);process.exitCode=1});
