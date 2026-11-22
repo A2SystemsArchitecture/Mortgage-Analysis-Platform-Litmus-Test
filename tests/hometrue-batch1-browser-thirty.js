@@ -38,7 +38,6 @@ fs.mkdirSync(folder,{recursive:true});
     assert.ok(before.taxDisplay.includes('unconfirmed'),'Missing unconfirmed rate label '+key);
     const chosen=await page.evaluate(()=>{
       const b=document.querySelector('#district-pills .district-pill');
-      assertDummy=b!==null;
       if(!b)throw Error('Missing selectable district');
       const value=b.textContent;
       b.click();
