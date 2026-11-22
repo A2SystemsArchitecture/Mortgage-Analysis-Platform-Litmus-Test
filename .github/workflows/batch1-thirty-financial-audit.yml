@@ -61,7 +61,8 @@ jobs:
             tests/hometrue-richland-sc-2026-1er.js \
             tests/hometrue-batch1-exact-charges.js \
             tests/hometrue-state-closing-tax-cases.js \
-            tests/hometrue-sc-bill-fees.js
+            tests/hometrue-sc-bill-fees.js \
+            tests/hometrue-batch1-thirty-buyer-math.js
           do
             if [ ! -f "$file" ]; then
               printf 'MISSING\t%s\n' "$file" | tee -a audit-results/results.tsv
