@@ -8,7 +8,10 @@ const html = fs.readFileSync(path.join(__dirname, '..', 'platform.html'), 'utf8'
 const start = html.indexOf('const STATE_TAX_SCENARIOS =');
 const end = html.indexOf('function buildHomesteadGuide(', start);
 assert.ok(start >= 0 && end > start);
-for (const state of ['al', 'sc']) assert.ok(html.includes("buildStateTaxScenario('" + state + "')"));
+// Alabama invokes the scenario directly; South Carolina now passes the county key
+// so jurisdiction-specific legal-residence examples can be shown.
+assert.ok(html.includes("buildStateTaxScenario('al')"));
+assert.ok(html.includes("buildStateTaxScenario('sc', ACTIVE_COUNTY)"));
 // Charleston County Auditor 2026 millage card, page 2.
 // Berkeley County Auditor 2026/2027 computation: https://berkeleycountysc.gov/dept/auditor/computation/
 // Shelby County Montevallo (2012 historical example); Gwinnett County 2026 millage.
