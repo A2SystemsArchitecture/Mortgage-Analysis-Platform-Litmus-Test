@@ -47,6 +47,37 @@ fs.mkdirSync(folder,{recursive:true});
     manual++;
    }
   }
+  // Rate-year decision: show the real documented tax year, never claim a 2027 rate.
+  // Source-backed 2026 Florida code choices were reconciled in the tax district
+  // ledger. Undocumented city planning choices must remain year-unverified.
+  let floridaYearChecks=0;
+  for(const key of ['miami-dade','broward','palm-beach','martin','st-lucie','indian-river','brevard']){
+    const recorded=await page.evaluate(key=>{
+      selectCounty(key);
+      const first=(COUNTIES[key].districts||[]).find(x=>x.taxYear==='2026');
+      if(!first)throw Error('Missing a 2026 evidenced district in '+key);
+      selectDistrict(key,first,null,false);
+      return {year:document.getElementById('planning-tax-year')?.textContent,
+              id:ACTIVE_DISTRICT?.id,raw:first.taxYear};
+    },key);
+    assert.equal(recorded.year,'Tax year 2026 (not a 2027 rate)','Wrong selected tax year '+key);
+    assert.equal(recorded.raw,'2026');
+    floridaYearChecks++;
+    const unselected=await page.evaluate(key=>{
+      selectCounty(key);
+      return document.getElementById('planning-tax-year')?.textContent;
+    },key);
+    assert.equal(unselected,'Not verified','Wrong default county tax-year status '+key);
+  }
+  const pbUnknown=await page.evaluate(()=>{
+    selectCounty('palm-beach');
+    const x=COUNTIES['palm-beach'].districts.find(d=>d.id==='pb-boca');
+    if(!x)throw Error('Missing Palm Beach Boca planning option');
+    selectDistrict('palm-beach',x,null,false);
+    return {year:document.getElementById('planning-tax-year')?.textContent,known:!!x.taxYear};
+  });
+  assert.equal(pbUnknown.year,'Not verified');
+  assert.equal(pbUnknown.known,false);
   // Exercise all 30 actual browser share-link reconstructions against the
   // source-backed district planning factor, without representing it as a bill.
   let sharedReports=0;
@@ -115,6 +146,6 @@ fs.mkdirSync(folder,{recursive:true});
   const unknown=await page.evaluate(()=>({annual:S.inp.annualTax1,district:S.inp.districtId,selected:ACTIVE_DISTRICT?.id}));
   assert.equal(unknown.district,'');assert.ok(!unknown.selected);
   assert.ok(Math.abs(unknown.annual-2850)<0.01,'Unverified district did not revert to county planning basis');
-  console.log(JSON.stringify({countiesChecked:keys.length,multichoiceMarkets:multiple,manualSelectionChecks:manual,sharedReportsChecked:sharedReports,sharePaymentRoundTrips:roundTrips,sharedKnownDistrict:known,sharedUnknownDistrict:unknown,screenshots:2},null,2));
+  console.log(JSON.stringify({countiesChecked:keys.length,multichoiceMarkets:multiple,manualSelectionChecks:manual,floridaTaxYearChecks:floridaYearChecks,palmBeachUnknownTaxYear:pbUnknown.year,sharedReportsChecked:sharedReports,sharePaymentRoundTrips:roundTrips,sharedKnownDistrict:known,sharedUnknownDistrict:unknown,screenshots:2},null,2));
  }finally{await browser.close();}
 })().catch(err=>{console.error(err.stack||err);process.exitCode=1});
