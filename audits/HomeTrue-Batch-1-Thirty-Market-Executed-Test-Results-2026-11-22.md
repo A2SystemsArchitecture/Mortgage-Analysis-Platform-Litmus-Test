@@ -60,3 +60,14 @@ New test `tests/hometrue-batch1-thirty-buyer-math.js` executes the actual buyer 
 **GitHub Actions verified execution**: https://github.com/A2SystemsArchitecture/Mortgage-Analysis-Platform-Litmus-Test/actions/runs/45028414287 : **32/32 regression scripts pass; 90/90 buyer math scenarios pass; 30/30 synthetic three-page PDFs generate; 30/30 browser share reports pass.** All of these are technical scenario validations only. Date and address/district source-year verification, property eligibility, credits, non-ad valorem charges and full legal/financial approval remain open. 30-market full certification stays **0/30**.
 
 The separate affordability tool's `RATE_RANGES` credit tiers are planning assumptions, not verified Freddie Mac individual-credit-tier quotes; do not reinterpret their values as PMMS or represent them as lender offers.
+
+
+## November 22 share-link financial consistency defect corrected
+
+An actual source-code mismatch existed in the buyer's shared report. The original calculator computed `wpi=cPI(loan,wr)` from the selected worst-case interest rate, but link sharing wrote only `br`, and reopening rebuilt `wr` from `br` while calculating the worst-case payment using the **current market default** instead. Reopened links also calculated the worst insurance premium using an invented **1.35× multiplier** rather than the original calculated scenario. Tier 3 PMI/flood/escrow components could also silently diverge.
+
+**Change:** The share generator now preserves the original scenario's `br,wr,bi,wi,bp,wp,fb,fw,ep`. The shared-report parser reconstructs `wpi` using the serialized `wr` and preserves the original buyer payment components, with nonnegative finite amount parsing and compatibility fallbacks for older links without these fields. Annual buyer-entered property taxes and explicitly chosen districts remain preserved. These changes do **not** verify whether a source rate, fee or exemption was correct.
+
+**Executed audit evidence:** https://github.com/A2SystemsArchitecture/Mortgage-Analysis-Platform-Litmus-Test/actions/runs/45029604180 completed successfully: **33/33 financial regression scripts**, **30/30 synthetic PDFs**, **30/30 existing browser shared-report cases**, and **30/30 NEW browser round trips** comparing original and reopened best/worst monthly totals, P&I, taxes, insurance, PMI, flood and escrow components in all thirty markets. The 30 new round trips use deliberately different best and worst rates and amounts, ensuring the previous silent discrepancy would be detected.
+
+Scope preserved: 30 Batch 1 markets, Dorchester deferred, no merge, no production deployment. **Full financial certification remains 0/30**, pending real local levy/exemption/fee/geography evidence and sign-off.
