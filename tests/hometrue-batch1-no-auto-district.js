@@ -22,6 +22,7 @@ const document={
  querySelectorAll(){return container.items}
 };
 function clearBuyerAnnualTax(){annual.value=''}
+function batch1NeedsVerifiedTaxBasis(){return false;}
 `+html.slice(start,end)+`
 renderDistrictPills('example');
 if(ACTIVE_DISTRICT!==null)throw Error('first district auto-selected');
