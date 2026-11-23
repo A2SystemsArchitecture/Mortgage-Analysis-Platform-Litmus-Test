@@ -4051,7 +4051,8 @@ function collectInp(){
   const con=document.getElementById('fcon').value||'cbs';
   const rtp=document.getElementById('frt').value||'asphalt';
   const sht=document.getElementById('fsh').value==='yes';
-  const hoa=parseFloat(document.getElementById('fh').value)||0;
+  const hoaInput=Number(document.getElementById('fh').value);
+  const hoa=Number.isFinite(hoaInput)&&hoaInput>=0?hoaInput:0;
   const fld=document.getElementById('ffl').value||'x';
   const pri=document.getElementById('fpr').value==='yes';
   const crd=document.getElementById('fcr').value||'excellent';
