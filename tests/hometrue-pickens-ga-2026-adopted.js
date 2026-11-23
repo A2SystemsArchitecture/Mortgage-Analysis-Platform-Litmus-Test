@@ -10,6 +10,11 @@ const byId=id=>market.districts.find(d=>d.id===id);
 assert.ok(byId('pick-uninc-2026'),'Adopted 2026 option exists');
 assert.equal(byId('pick-uninc').tr,.006,'Legacy unincorporated links preserved');
 assert.equal(byId('pick-jasper').tr,.0065,'Legacy Jasper links preserved');
+for(const id of ['pick-jasper','pick-uninc']){
+ const historic=byId(id);
+ assert.match(historic.label,/historical planning, tax year unverified/,'Old unsourced tax options must be visibly qualified');
+ assert.ok(!historic.taxYear&&!historic.taxPeriod,'Legacy tax district must not qualify as adopted-year evidence');
+}
 const county=6.606,school=10.600,jasper=7.636;
 assert.ok(Math.abs(county+school-17.206)<1e-10);
 assert.ok(Math.abs(county+school+jasper-24.842)<1e-10,'Jasper adopted county school city sum, before special levies and exemptions');
