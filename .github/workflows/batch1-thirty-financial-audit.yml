@@ -50,6 +50,7 @@ jobs:
             tests/hometrue-palm-beach-2026-final-components.js \
             tests/hometrue-palm-beach-2026-final-vs-proposed-guard.js \
             tests/hometrue-palm-beach-delray-2026-enacted-city-millage.js \
+            tests/hometrue-palm-beach-2026-eight-final-code-composites.js \
             tests/hometrue-martin-2026-districts.js \
             tests/hometrue-martin-2026-independent-authority.js \
             tests/hometrue-st-lucie-2026-districts.js \
