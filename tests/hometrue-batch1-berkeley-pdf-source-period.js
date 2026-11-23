@@ -5,7 +5,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
 const src=fs.readFileSync(path.resolve(__dirname,'../platform.html'),'utf8');
-const start=src.indexOf("  'berkeley': {");
+const start=src.indexOf("  'berkeley-sc': {");
 const end=src.indexOf("\n  'dorchester-sc': {",start);
 assert.ok(start>0 && end>start,'Berkeley district configuration missing');
 const block=src.slice(start,end);
