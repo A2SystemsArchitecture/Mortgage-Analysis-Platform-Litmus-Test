@@ -73,6 +73,7 @@ jobs:
             tests/hometrue-pickens-ga-2026-adopted.js \
             tests/hometrue-greenville-sc-2026-districts.js \
             tests/hometrue-richmond-ga-2026-districts.js \
+            tests/hometrue-richmond-ga-2026-official-four-districts.js \
             tests/hometrue-columbia-ga-2026-source-guard.js \
             tests/hometrue-batch1-reconciliation-guard.js \
             tests/hometrue-batch1-affordability-savings.js \
