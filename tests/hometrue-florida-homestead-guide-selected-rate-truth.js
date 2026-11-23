@@ -8,7 +8,7 @@ const path=require('node:path');
 const assert=require('node:assert/strict');
 const html=fs.readFileSync(path.join(__dirname,'../platform.html'),'utf8');
 const start=html.indexOf('// Florida homestead guide (default)');
-const end=html.indexOf('function calculateFlorida2026AdValorem(',start);
+const end=html.indexOf('onsubmit="showFloridaAdValorem(this); return false;"',start);
 assert.ok(start>=0&&end>start,'Florida homestead guide unavailable');
 const guide=html.slice(start,end);
 assert.ok(guide.includes('A generic county planning factor is not an adopted parcel tax rate'),'Unverified generic fallback is labeled');
