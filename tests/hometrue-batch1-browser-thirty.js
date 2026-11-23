@@ -218,6 +218,34 @@ fs.mkdirSync(folder,{recursive:true});
   const unknown=await page.evaluate(()=>({annual:S.inp.annualTax1,district:S.inp.districtId,selected:ACTIVE_DISTRICT?.id}));
   assert.equal(unknown.district,'');assert.ok(!unknown.selected);
   assert.ok(Math.abs(unknown.annual-2850)<0.01,'Unverified district did not revert to county planning basis');
-  console.log(JSON.stringify({countiesChecked:keys.length,multichoiceMarkets:multiple,manualSelectionChecks:manual,affordabilityTaxGuards:affordabilityTaxGuards,buyerTaxBasisGuards:verifiedBasisGuards,dorchesterDeferredUnaffected:dorchesterStillDeferred,thirtyMarketSourceYearChecks:thirtyMarketYearChecks,floridaTaxYearChecks:floridaYearChecks,palmBeachUnknownTaxYear:pbUnknown.year,sharedReportsChecked:sharedReports,sharePaymentRoundTrips:roundTrips,sharedKnownDistrict:known,sharedUnknownDistrict:unknown,screenshots:2},null,2));
+  // Replay TWO official 2026 Gwinnett issued bills through the actual browser
+  // share/report reconstruction. These are existing-owner historical bill facts,
+  // not automatically verified future buyer tax entitlements.
+  // 2026 Tax Commissioner originals:
+  // https://www.gwinnetttaxcommissioner.com/PropTaxBill/R3001A188.pdf
+  // https://www.gwinnetttaxcommissioner.com/PropTaxBill/R6174%20203.pdf
+  let realBillShareChecks=0;
+  for (const scenario of [
+    {price:493200,billed:5533.49,label:'2026 S1R actual homeowner bill, includes 448.22 in assessments'},
+    {price:243400,billed:3781.78,label:'2026 temporary appealed bill, includes 387.82 in assessments'}
+  ]) {
+    const u=url+'?tester=true&addr=Historical+2026+Tax+Bill&price='+scenario.price+
+      '&county=gwinnett&district=gwin-uninc&buyerTax='+scenario.billed;
+    await page.goto(u,{waitUntil:'domcontentloaded',timeout:45000});
+    await page.evaluate(()=>checkShareURL());
+    const got=await page.evaluate(()=>({
+      annual:S.inp.annualTax1,annual2:S.inp.annualTax2,
+      monthly:S.inp.ty1,buyerTax:S.inp.buyerAnnualTax,
+      district:S.inp.districtId,bestTaxInMonthly:S.inp.bt-S.inp.bpi-S.inp.hoa-S.inp.bi-S.inp.bp-S.inp.fb
+    }));
+    assert.equal(got.annual,scenario.billed,scenario.label+' annual');
+    assert.equal(got.annual2,scenario.billed,scenario.label+' future-year placeholder');
+    assert.equal(got.buyerTax,scenario.billed,scenario.label+' entered bill override');
+    assert.equal(got.district,'gwin-uninc',scenario.label+' district');
+    assert.ok(Math.abs(got.monthly-scenario.billed/12)<0.000001,scenario.label+' monthly');
+    assert.ok(Math.abs(got.bestTaxInMonthly-scenario.billed/12)<0.000001,scenario.label+' best-case reconciliation');
+    realBillShareChecks++;
+  }
+  console.log(JSON.stringify({realBillShareChecks, countiesChecked:keys.length,multichoiceMarkets:multiple,manualSelectionChecks:manual,affordabilityTaxGuards:affordabilityTaxGuards,buyerTaxBasisGuards:verifiedBasisGuards,dorchesterDeferredUnaffected:dorchesterStillDeferred,thirtyMarketSourceYearChecks:thirtyMarketYearChecks,floridaTaxYearChecks:floridaYearChecks,palmBeachUnknownTaxYear:pbUnknown.year,sharedReportsChecked:sharedReports,sharePaymentRoundTrips:roundTrips,sharedKnownDistrict:known,sharedUnknownDistrict:unknown,screenshots:2},null,2));
  }finally{await browser.close();}
 })().catch(err=>{console.error(err.stack||err);process.exitCode=1});
