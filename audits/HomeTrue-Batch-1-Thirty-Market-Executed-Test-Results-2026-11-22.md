@@ -204,3 +204,15 @@ Reconciled latest existing GitHub buyer registry against the Alabama Department 
 Commit `c1f75b7` added `tests/hometrue-alabama-2026-official-composites.js` (nine official district composite guard cases, four fictional property values each). Commit `6446a08` included it in the non-deploying audit Actions workflow. Re-fetched committed source and test and independently executed all **9/9 code composite and 36/36 component-split fictional price comparisons** without failures using direct JS source evaluation; no claim that this evaluation ran the GitHub-hosted workflow. Commit `bf2ca45` advances **only** the three source-rate gate cells in the 124-market register. The re-fetched register confirms **11/30 source-rate gates**, **0/30 complete financial certifications**, Dorchester excluded.
 
 These sourced standard millages do not certify property address matching, full municipal alternatives, actual homeowner eligibility, homestead exemption, non-ad-valorem levies and service fees, transaction closing allocation or exact net buyer quotes. No change to `platform.html`, merger, production, or full-certification fields.
+
+
+## November 22 Hall GA official source-rate composite gate (12/30)
+
+Visually inspected primary Hall County Tax Commissioner [2026 Revised Millage Chart](https://hallcountytax.org/wp-content/uploads/2026/09/2026-Revised-Millage-Chart-Website.pdf), PDF page 1. Exactly the two buyer-selectable 2026 Hall districts were independently reconciled against official taxing-authority rows:
+
+- `hal-uninc`: County authority **001**, county M&O 3.565 + school M&O 15.490 + school bond 1.000 + county fire 2.005 + emergency 0.535 + development 1.160 + parks 0.437 = **24.192 mills**.
+- `hal-gainesville`: Gainesville **004**, county M&O 3.565 + emergency 0.535 + city M&O 0.722 + Gainesville schools 6.092 + parks 0.896 + police 0.712 + city fire 1.299 + city debt service 0.400 = **14.221 mills**. Do not add unincorporated Hall schools or county fire to Gainesville 004.
+
+New regression `tests/hometrue-hall-ga-2026-official-composites.js` committed as `3270152`, included in the non-deploying GitHub Actions audit workflow in `ee89646`. Actual committed `platform.html` district factors independently executed for **2/2 exact source district composites and 10/10 fictional assessed-value examples**, no numerical mismatch. This was direct source execution, not a completed GitHub Actions run.
+
+Only Hall's `batch1_latest_adopted_composite_verified` source-rate flag was switched to true in `5e4be6f`. After re-fetching the register, the correct bounded milestone is **12/30** official 2026 rate-source gates, with **0/30** full market financial certifications. The source chart publishes other Hall districts, but HomeTrue does not yet offer all of them; address matching, assessed valuation/exemptions/credits, fees, buyer net liability, PDF and share output verification remain OPEN. Dorchester still deferred, no production change.
