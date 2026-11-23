@@ -160,6 +160,16 @@ jobs:
       - name: Render real three-page PDFs for thirty fictional markets
         if: always()
         run: node tests/hometrue-batch1-thirty-pdf-render.js
+      - name: Reconcile two actual issued Gwinnett 2026 bills through rendered buyer PDFs
+        if: always()
+        run: node tests/hometrue-batch1-two-real-gwinnett-bill-pdfs.js
+      - name: Archive independently reconciled real-tax-bill PDF fixtures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: batch1-gwinnett-2026-two-real-bill-pdfs
+          path: audit-results/pdf-real-bill/
+          if-no-files-found: warn
       - name: Preserve PDF smoke fixtures
         if: always()
         uses: actions/upload-artifact@v4
