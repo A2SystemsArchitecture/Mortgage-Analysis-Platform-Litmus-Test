@@ -2182,14 +2182,14 @@ const COUNTIES = {
     fxb:25, fxw:45, fab:65, faw:140,
     paUrl:'https://columbiacountyga.gov/departments/tax-assessor',
     paName:'Columbia County Tax Assessor',
-    notes:'Columbia County official FINAL 2026 Tax Calculation Workbook directly displays county operating 4.062 mills and county bond 0.429 mills, comprising the 4.491 county combined levy, plus 2.788 mills for unincorporated fire areas and 14.997 school mills. Its Grovetown worksheet reports 19.488 total mills with city levy zero; the illustrated standard unincorporated county/fire/school total is 22.276 mills. Two new separately labeled 2026 options use 40 percent ordinary Georgia assessment of illustrative market value before exemptions, special district fees and other parcel-specific adjustments. Original Evans/Martinez, Grovetown, and unincorporated rates are legacy planning estimates only and remain for saved links. No countywide tax promise, City Harlem composite or 2027 adopted levy is asserted; confirm parcel district, taxable assessed value, exemptions and actual bill with the Columbia County Tax Commissioner.',
+    notes:'Columbia County official FINAL 2026 Tax Calculation Workbook directly displays county operating 4.062 mills and county bond 0.429 mills, comprising the 4.491 county combined levy, plus 2.788 mills for unincorporated fire areas and 14.997 school mills. CRITICAL GROVETOWN LIMITATION: the county 2026 Grovetown worksheet reports 19.488 mills for county plus schools but a ZERO city levy in that calculation. Grovetown confirms its property tax is billed and collected by the Columbia County Tax Commissioner, so this 19.488-mill county worksheet subtotal must not be presented as a complete city parcel composite. The former 2026 Grovetown selection is retained only as an unverified county-and-school subtotal, not a verified year-2026 buyer district. Confirm the final applicable municipal levy, combined county tax code, and actual issued parcel bill before using a complete estimate; the standard unincorporated county/fire/school illustration is separately 22.276 mills. Two new separately labeled 2026 options use 40 percent ordinary Georgia assessment of illustrative market value before exemptions, special district fees and other parcel-specific adjustments. Original Evans/Martinez, Grovetown, and unincorporated rates are legacy planning estimates only and remain for saved links. No countywide tax promise, City Harlem composite or 2027 adopted levy is asserted; confirm parcel district, taxable assessed value, exemptions and actual bill with the Columbia County Tax Commissioner.',
     state:'ga', closingModel:'ga',
     districts:[
       {id:'col-evans',label:'Evans / Martinez',tr:0.0082},
       {id:'col-grovetown',label:'Grovetown',tr:0.0085},
       {id:'col-uninc',label:'Unincorporated Columbia',tr:0.008},
       {id:'col-2026-uninc-fire',label:'2026 Unincorporated Columbia, county fire district (before exemptions)',tr:0.4 * (4.062 + 0.429 + 2.788 + 14.997) / 1000 ,taxYear:'2026'},
-      {id:'col-2026-grovetown',label:'2026 City of Grovetown (county workbook, before exemptions)',tr:0.4 * 19.488 / 1000 ,taxYear:'2026'},
+      {id:'col-2026-grovetown',label:'Grovetown 2026 county + school ONLY (city tax omitted, unverified)',tr:0.4 * 19.488 / 1000},
     ],
     fvb:0,fvw:0},
   // ── TEXAS ──
