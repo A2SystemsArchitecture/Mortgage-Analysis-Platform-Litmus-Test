@@ -52,6 +52,7 @@ jobs:
             tests/hometrue-dekalb-ga-2026-district04.js \
             tests/hometrue-batch1-state-tax-scenarios.js \
             tests/hometrue-cobb-2026-official-levy-composites.js \
+            tests/hometrue-fulton-ga-2026-four-city-source-components.js \
             tests/hometrue-clayton-ga-2026-districts.js \
             tests/hometrue-clayton-ga-2026-official-composites.js \
             tests/hometrue-hall-ga-2026-districts.js \
