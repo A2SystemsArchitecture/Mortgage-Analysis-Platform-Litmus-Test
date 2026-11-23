@@ -26,8 +26,8 @@ for(const [id,options] of Object.entries({
 }
 // Gwinnett's 2026 Duluth city and county levies are distinct, and city
 // stormwater fees must not be presented as included in value-based tax.
-const duluth=configs.gwinnett.split('\\n').find(line=>line.includes("id:'gwin-duluth'"));
-assert.match(duluth,/31\\.6\\s*\\+\\s*6\\.551/,'Preserve separately billed county/city millages');
+const duluth=configs.gwinnett.split('\n').find(line=>line.includes("id:'gwin-duluth'"));
+assert.match(duluth,/31\.6\s*\+\s*6\.551/,'Preserve separately billed county/city millages');
 assert.match(configs.gwinnett,/O2026-36/,'Disclose the separate Duluth stormwater fee ordinance');
 const gross=(31.6+6.551)/1000*0.40*400000;
 assert.equal(Math.round(gross*100)/100,6104.16,'Duluth $400k fictional pre-exemption arithmetic');
