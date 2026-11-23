@@ -14,6 +14,16 @@ assert.match(county.notes,/before exemptions/);
 const uninc=4.062+0.429+2.788+14.997;
 const grovetown=4.062+0.429+14.997;
 assert.ok(Math.abs(uninc-22.276)<1e-10);assert.ok(Math.abs(grovetown-19.488)<1e-10);
+// County workbook Grovetown 19.488 mills excludes city levy; city confirms
+// county Tax Commissioner collects Grovetown city property tax.
+// https://www.cityofgrovetown.com/200/Property-Taxes-and-Fees
+// Therefore the county+school subtotal must NOT authorize new full-city analysis.
+const grovetownOption=county.districts.find(d=>d.id==='col-2026-grovetown');
+assert.ok(grovetownOption.label.includes('city tax omitted, unverified'));
+assert.ok(!grovetownOption.taxYear&&!grovetownOption.taxPeriod,'Incomplete city tax cannot be stamped adopted full 2026 district');
+assert.equal(county.districts.find(d=>d.id==='col-2026-uninc-fire').taxYear,'2026');
+assert.match(county.notes,/ZERO city levy/);
+assert.match(county.notes,/must not be presented as a complete city parcel composite/);
 for(const [id,mills] of [['col-2026-uninc-fire',uninc],['col-2026-grovetown',grovetown]]){
  const d=county.districts.find(x=>x.id===id);assert.ok(d);
  assert.ok(Math.abs(d.tr-0.4*mills/1000)<1e-12,id);
@@ -28,4 +38,4 @@ assert.equal(new Set(county.districts.map(d=>d.id)).size,county.districts.length
 const csv=fs.readFileSync(path.join(__dirname,'..','audits','HomeTrue-2027-launch-verification-gates.csv'),'utf8');
 const line=csv.split(/\r?\n/).find(x=>x.startsWith('"columbia","GA"'));
 assert.ok(line);assert.match(line,/"MAIN_2026"/);
-console.log('Columbia GA 2026: official workbook values and 8 price scenarios; old selections preserved, no full certification.');
+console.log('Columbia GA 2026: official workbook values and 8 price scenarios; Grovetown city omitted and blocked as dated full district; old selections preserved, no full certification.');
