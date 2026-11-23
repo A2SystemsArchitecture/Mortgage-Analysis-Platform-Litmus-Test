@@ -57,6 +57,13 @@ const dawsonCity=configs.dawson.split('\n').find(line=>line.includes("id:'daw-da
 assert.ok(dawsonCity,'Dawsonville buyer selector missing');
 assert.match(dawsonCity,/legacy planning rate/,'Unknown combined city district must remain planning');
 assert.doesNotMatch(dawsonCity,/taxYear\s*:/,'Cannot certify a full district from city levy alone');
+// Official City of Cumming administration says no CITY property tax since 1986.
+// An unverified buyer planning composite must not be mislabeled as city tax.
+assert.match(configs.forsyth,/no city property tax since 1986/,
+  'Official Cumming no-city-property-tax statement missing');
+const cumming=configs.forsyth.split('\n').find(line=>line.includes("id:'for-cumming'"));
+assert.ok(cumming && cumming.includes('legacy planning rate'),'Cumming district remains planning');
+assert.doesNotMatch(cumming,/taxYear\s*:/,'City has no tax but the combined code is unverified');
 const csv=fs.readFileSync(path.resolve(__dirname,'../audits/HomeTrue-2027-launch-verification-gates.csv'),'utf8');
 function quotedCells(line){
  return [...line.matchAll(/"((?:[^"]|"")*)"(?:,|$)/g)].map(m=>m[1].replace(/""/g,'"'));
