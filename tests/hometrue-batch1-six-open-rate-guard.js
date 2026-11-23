@@ -34,6 +34,8 @@ assert.equal(Math.round(gross*100)/100,6104.16,'Duluth $400k fictional pre-exemp
 // Lumpkin's issued government-owned sample bill is not proof that its
 // 2026 county millage matches the later revised adoption resolution.
 assert.match(configs.lumpkin,/Resolution 2026-57/,'Missing revised 2026 Lumpkin millage warning');
+assert.match(configs.lumpkin,/12\.929 school M&O mills/,'Lumpkin pre-adoption 2026 school rate provenance absent');
+assert.match(configs.lumpkin,/adoption vote has not been independently verified/,'Lumpkin school adoption is incorrectly assumed');
 assert.match(configs.lumpkin,/government-owned/,'Lumpkin source parcel must be identified as exempt government property');
 for (const id of ['lump-dahlonega','lump-uninc']) {
  const row=configs.lumpkin.split('\n').find(line=>line.includes("id:'"+id+"'"));
