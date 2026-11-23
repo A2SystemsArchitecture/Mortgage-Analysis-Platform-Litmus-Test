@@ -4742,8 +4742,8 @@ function buildPDF(inp) {
     doc.text(`HomeTrue · ${COUNTIES[inp.countyKey || ACTIVE_COUNTY]?.name || 'Selected County'} · National mortgage benchmark: ${MKT.fm}%`, M, pageH - 16);
     const taxCounty = COUNTIES[inp.countyKey || ACTIVE_COUNTY];
     const taxDistrict = (taxCounty?.districts || []).find(d => d.id === inp.districtId);
-    const sourceTaxYear = taxDistrict?.taxYear || 'not verified';
-    doc.text(`Property tax source year: ${sourceTaxYear} · ${inp.buyerAnnualTax != null ? 'Buyer-entered projection' : 'Unverified planning estimate'} · Attorney review pending`, M, pageH - 11);
+    const sourceTaxPeriod = taxDistrict?.taxYear ? 'tax year ' + taxDistrict.taxYear : taxDistrict?.taxPeriod ? taxDistrict.taxPeriod : 'not verified';
+    doc.text(`Property tax source period: ${sourceTaxPeriod} · ${inp.buyerAnnualTax != null ? 'Buyer-entered projection' : 'Unverified planning estimate'} · Attorney review pending`, M, pageH - 11);
     doc.text('This analysis is an educational tool. It does not constitute financial, legal, real estate, or mortgage advice.', M, pageH - 6);
   }
 
