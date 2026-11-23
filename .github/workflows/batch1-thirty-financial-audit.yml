@@ -103,6 +103,7 @@ jobs:
             tests/hometrue-gwinnett-lawrenceville-2026-bills.js \
             tests/hometrue-gwinnett-2026-issued-bill-fee-reconciliation.js \
             tests/hometrue-gwinnett-2026-issued-homestead-net-bill.js \
+            tests/hometrue-gwinnett-2026-s1r-authority-discrepancy-guard.js \
             tests/hometrue-forsyth-homestead-source-and-deadline.js \
             tests/hometrue-gwinnett-2026-four-district-source-boundaries.js \
             tests/hometrue-charleston-official-bill-buyer-reconciliation.js \
