@@ -407,3 +407,23 @@ A live browser opened the county FAQ `https://www.columbiacountyga.gov/faq.aspx?
 - Crucial primary-source FULL SAMPLE RECONCILIATION: at tax value **$200,000**, official City Charleston owner-occupied 4% example shows gross **$2,406.40**, county credit **$180.00** = 0.00090 × $200k, city credit **$166.00** = 0.00083 × $200k, school relief **$1,161.60** = 0.04 × $200k × 145.2/1000; net tax **$898.80**, plus solid waste **$154.00**, resulting **$1,052.80 due**, independently recalculated exactly. Tax credits and solid waste are NOT implemented as automatic rate changes in the main buyer estimate, to avoid false discounts. City Charleston district variations, closing applicability, SC temporary homestead eligibility, and 2027 remain uncertified.
 - **17 direct source and arithmetic checks passed** on committed code, covering four district choices, five legacy rates, components and school relief, source credits and fee disclosure, twelve sample values and the official full sample amount due. NOT full browser/PDF rendered buyer-report/end-to-end test.
 - Count now **31/31 some local calculation, 30/31 current-year district example, 30/31 main buyer rate correction, 0/31 full financial certification**. Dorchester SC is now the **sole remaining market without a 2026 source-backed main buyer option or current-year district case**.
+
+
+### November 23: Palm Beach 2026 eight additional final district-code composite reconciliations
+
+**Rate-source milestone promoted, NOT full financial launch certification.** Direct Palm Beach County Property Appraiser **2026 FINAL versus PROPOSED taxing-authority schedule**: https://pbcpao.gov/pdf/taxroll/2026%20Final%20vs%20Proposed%20Millage%20Rates.pdf . Government-hosted PBC Property Appraiser **2026 PROPOSED tax-DISTRICT code composite** table, reproduced as page 16 in Town of Lantana official FY2026/27 budget: https://d3n9y02raazwpg.cloudfront.net/lantanafl/a71dedfd-9a77-11f1-bb61-005056a89546-f2ab0976-5ca0-4868-8c25-a05a0fd264aa-1788439915.pdf . Reconcile the proposed all-authority code composite by subtracting *each applicable* adopted final-minus-proposed authority reduction. All other PBC listed taxing authorities' final figures were unchanged. Results in full adopted tax-year **2026 gross ad valorem composite mills**:
+
+| Precise five-digit tax district | Proposed all-authority mills | Authority reduction | Final 2026 composite mills |
+|---|---:|---:|---:|
+| West Palm Beach 74402-74407 and 74982-74983 | 20.3961 | 0.0505 city | 20.3456 |
+| West Palm Beach DDA 84407 | 22.3961 | 0.0505 city + 1.0300 DDA | 21.3156 |
+| Boca Raton 06154-06155 | 16.9090 | 0 | 16.9090 |
+| Boca Raton 06625 | 15.8759 | 0 | 15.8759 |
+| Boynton Beach 08983-08987 | 19.9620 | 0.5448 city | 19.4172 |
+| Delray Beach 12983-12987 | 18.6780 | 0.0870 city | 18.5910 |
+| Delray Beach DDA 88984-88987 | 19.6780 | 0.0870 city | 19.5910 |
+| Wellington 73482-73486 | 18.6892 | 0 | 18.6892 |
+
+The pre-existing **unincorporated standard 16.2192** was already independently verified against all 12 published 2026 authorities, now also corroborated by the PBC code table. The eight **new selectable, source-year-labeled code choices** in `platform.html` preserve the five historical **city-name only** entries without tax-year claims. Those historical entries **cannot** satisfy the new buyer's required documented district basis unless the buyer supplies a separate annual projection. The five-digit district must be independently matched to the actual parcel via the Property Appraiser before treating any of these tax calculations as an applicable property estimate. These source rates are BEFORE assessed-value caps, school versus non-school homestead deductions, portability, special non-ad valorem fees and owner eligibility. They are *not* actual buyer net-tax estimates.
+
+Independent executable source and pricing checks: `tests/hometrue-palm-beach-2026-eight-final-code-composites.js` validates all eight code totals and 24 illustrative gross ad valorem cases; `tests/hometrue-palm-beach-2026-final-vs-proposed-guard.js` preserves the unknown-code safeguards. Governing register advances **only** Palm Beach `batch1_latest_adopted_composite_verified=true`. Across Batch 1 this specific source-rate gate is now **25/30**. Palm Beach `exemption_rules_and_eligibility_verified=false`, `district_geography_verified=false`, `calculator_scenario_tests_passed=false` and `full_launch_certified=false` correctly remain blocked. This is a verified financial source advance, not launch approval. Dorchester remains deferred and production unchanged.
