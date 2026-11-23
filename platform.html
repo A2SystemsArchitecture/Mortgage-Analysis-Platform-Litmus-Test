@@ -8017,11 +8017,11 @@ When discussing specific dollar amounts or financial decisions, include language
 CURRENT CONTEXT:
 - Active county: ${countyName}
 - Active state: ${stateName}
-- Active district: ${ACTIVE_DISTRICT ? ACTIVE_DISTRICT.label : 'County average — no district selected'}
-- District tax rate: ${ACTIVE_DISTRICT ? (ACTIVE_DISTRICT.tr * 100).toFixed(2) + '%' : 'County average'}
+- Active district: ${ACTIVE_DISTRICT ? ACTIVE_DISTRICT.label : 'NO DISTRICT SELECTED; the county default is not verified for a buyer parcel'}
+- District tax rate: ${ACTIVE_DISTRICT ? (ACTIVE_DISTRICT.tr * 100).toFixed(2) + '% gross illustrative pre-exemption rate; tax source year ' + (ACTIVE_DISTRICT.taxYear || 'unverified') + '; parcel applicability and exemptions still require verification' : 'NOT ESTABLISHED; do not quote the county default as a verified district rate'}
 - Flood zone: ${(document.getElementById('ffl')||{value:'unknown'}).value.toUpperCase()}
 - Current screen: ${currentScreen}
-- Tax rate: ${county.tr ? (county.tr * 100).toFixed(2) + '%' : 'not set'}
+- County default property-tax factor: UNVERIFIED planning fallback, not an adopted parcel-specific rate. Never state the county default factor as a verified buyer tax rate.
 - Homestead exemption: NOT VERIFIED FOR THIS BUYER. Do not interpret county.he or a generic county amount as an automatic, universal or certified exemption. Exemption types, owner eligibility, school/county/city levy applicability and tax year require confirmation with the relevant taxing authorities; never subtract an assumed amount without verified evidence.
 - Closing model: ${county.closingModel || 'standard'}
 ${analysisContext}
