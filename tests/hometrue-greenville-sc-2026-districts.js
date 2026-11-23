@@ -35,4 +35,18 @@ assert.ok(aMarket>=0&&bMarket>aMarket);
 const market=new Function('return ({'+html.slice(aMarket,bMarket)+'})')()['greenville-sc'];
 assert.equal(market.districts.find(x=>x.id==='grv-greenville').tr,.0078,'Keep main buyer planning percentage unchanged');
 assert.equal(market.districts.find(x=>x.id==='grv-uninc').tr,.0068,'Keep main buyer planning percentage unchanged');
+const sourced=market.districts.filter(x=>x.taxYear==='2026');
+assert.equal(sourced.length,2,'Only exact district 000 options have verified 2026 source');
+for(const [id,ratio,mills] of [
+ ['grv-district-000-2026-legal4',.04,107.7],
+ ['grv-district-000-2026-other6',.06,248.9]
+]){
+ const d=sourced.find(x=>x.id===id);assert.ok(d,id);
+ assert.ok(Math.abs(d.tr-ratio*mills/1000)<1e-12);
+ for(const price of [125000,200000,300000,575000,850000]){
+  assert.ok(Math.abs(price*d.tr-price*ratio*mills/1000)<1e-7,id+'/'+price);
+ }
+}
+assert.ok(market.notes.includes('Legacy city, Simpsonville and unincorporated choices remain planning-only.'));
+
 console.log('Greenville 2026 district 000/500: school/other rates, 12 tax examples and standalone selection passed.');
