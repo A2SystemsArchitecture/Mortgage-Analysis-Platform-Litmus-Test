@@ -36,6 +36,7 @@ jobs:
             tests/hometrue-batch1-buyer-parcel-fees-input-disclosure.js \
             tests/hometrue-florida-2026-ad-valorem.js \
             tests/hometrue-florida-homestead-guide-selected-rate-truth.js \
+            tests/hometrue-dawson-2026-senior-exemption-eligibility.js \
             tests/hometrue-batch1-millage-source-regression.js \
             tests/hometrue-batch1-tax-tests.js \
             tests/hometrue-state-closing-smoke.js \
