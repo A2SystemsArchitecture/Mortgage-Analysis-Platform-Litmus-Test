@@ -43,6 +43,7 @@ assert.equal(cents(billedTax+387.82)/100,3781.78);
 assert.equal(cents((25.01*12))/100,300.12);
 assert.equal(cents(.55*70)/100,38.50);
 assert.equal(cents((2.46/100)*2000)/100,49.20);
+assert.ok(counties.gwinnett.notes.includes('$387.82') && counties.gwinnett.notes.includes('ONE-PARCEL billed example') && counties.gwinnett.notes.includes('not automatically included in the planning tax estimate'), 'Buyer notes must explicitly disclose county parcel fees as unmodeled and not a universal flat fee');
 assert.ok(!counties.gwinnett.notes.includes('All parcel fees are included'),
  'HomeTrue must not claim all parcel fees included');
 console.log('PASS original 2026 TEMPORARY Gwinnett bill R6174 203: 34.86 mills, $3393.96 line-item taxes, $387.82 parcel fees, $3781.78 total; composite one-cent rounding difference. No general certification.');
