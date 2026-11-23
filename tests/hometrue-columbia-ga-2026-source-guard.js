@@ -19,11 +19,12 @@ assert.ok(Math.abs(uninc-22.276)<1e-10);assert.ok(Math.abs(grovetown-19.488)<1e-
 // https://www.cityofgrovetown.com/200/Property-Taxes-and-Fees
 // Therefore the county+school subtotal must NOT authorize new full-city analysis.
 const grovetownOption=county.districts.find(d=>d.id==='col-2026-grovetown');
-assert.ok(grovetownOption.label.includes('city tax omitted, unverified'));
+assert.ok(grovetownOption.label.includes('city tax omitted, historical subtotal'));
 assert.ok(!grovetownOption.taxYear&&!grovetownOption.taxPeriod,'Incomplete city tax cannot be stamped adopted full 2026 district');
 assert.equal(county.districts.find(d=>d.id==='col-2026-uninc-fire').taxYear,'2026');
 assert.match(county.notes,/ZERO city levy/);
-assert.match(county.notes,/must not be presented as a complete city parcel composite/);
+assert.match(county.notes,/officially adopted a separate 6.948-mill 2026 municipal levy/);
+assert.match(county.notes,/NOT a complete city parcel composite/);
 for(const [id,mills] of [['col-2026-uninc-fire',uninc],['col-2026-grovetown',grovetown]]){
  const d=county.districts.find(x=>x.id===id);assert.ok(d);
  assert.ok(Math.abs(d.tr-0.4*mills/1000)<1e-12,id);
@@ -31,6 +32,21 @@ for(const [id,mills] of [['col-2026-uninc-fire',uninc],['col-2026-grovetown',gro
   assert.ok(Math.abs(d.tr*value-0.4*mills*value/1000)<1e-8,id+' '+value);
  }
 }
+// July 13 2026 City of Grovetown Council signed minutes page 4 officially
+// and unanimously approve 6.948 mills, which must be ADDED to the county
+// workbook city-omitting subtotal rather than assumed to be zero.
+// https://www.cityofgrovetown.com/AgendaCenter/ViewFile/Minutes/_07132026-309
+const fullCity=county.districts.find(d=>d.id==='col-2026-grovetown-full');
+assert.ok(fullCity,'New buyer-safe 2026 Grovetown total is required');
+assert.equal(fullCity.taxYear,'2026');
+assert.match(fullCity.label,/adopted county \+ school \+ city/);
+assert.ok(Math.abs(grovetown+6.948-26.436)<1e-10);
+assert.ok(Math.abs(fullCity.tr-.4*26.436/1000)<1e-12);
+for(const price of [125000,192000,300000,475000,650000,850000]){
+ const independent=[4.062,.429,14.997,6.948].reduce((sum,mill)=>sum+price*.4*mill/1000,0);
+ assert.ok(Math.abs(price*fullCity.tr-independent)<1e-7,'Grovetown all 2026 levies '+price);
+}
+assert.ok(fullCity.tr>grovetownOption.tr,'City tax must increase the annual estimate');
 for(const [id,rate] of [['col-evans',.0082],['col-grovetown',.0085],['col-uninc',.008]]){
  assert.equal(county.districts.find(x=>x.id===id).tr,rate,'Legacy link '+id);
 }
