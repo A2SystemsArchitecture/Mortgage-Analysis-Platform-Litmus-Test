@@ -27,6 +27,7 @@ for (const id of ids) {
   assert.doesNotMatch(line,/taxYear\s*:/,'Do not assign a 2026 tax year to unidentified municipality tax code: '+id);
 }
 assert.equal(Object.keys(officialFinalMunicipalMills).length,ids.length);
+assert.match(block,/paUrl:'https:\/\/pbcpao\.gov\/homestead-exemption\.htm'/,'Palm Beach buyer guide must use current official property appraiser homestead page');
 // Independently read source-published unincorporated component list in source:
 const base = block.split('\n').find(x=>x.includes("id:'pb-uninc'"));
 assert.ok(base && base.includes("taxYear:'2026'"),'Missing sourced unincorporated option');
