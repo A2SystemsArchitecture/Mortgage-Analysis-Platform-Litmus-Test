@@ -32,6 +32,7 @@ jobs:
           found=0
           for file in \
             tests/hometrue-batch1-market-config-parse.js \
+            tests/hometrue-batch1-roscoe-homestead-evidence-guard.js \
             tests/hometrue-florida-2026-ad-valorem.js \
             tests/hometrue-batch1-millage-source-regression.js \
             tests/hometrue-batch1-tax-tests.js \
