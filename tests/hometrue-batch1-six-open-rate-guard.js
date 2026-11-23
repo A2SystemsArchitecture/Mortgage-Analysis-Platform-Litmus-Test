@@ -37,6 +37,10 @@ assert.match(configs.lumpkin,/Resolution 2026-57/,'Missing revised 2026 Lumpkin 
 assert.match(configs.lumpkin,/12\.929 school M&O mills/,'Lumpkin pre-adoption 2026 school rate provenance absent');
 assert.match(configs.lumpkin,/adoption vote has not been independently verified/,'Lumpkin school adoption is incorrectly assumed');
 assert.match(configs.lumpkin,/government-owned/,'Lumpkin source parcel must be identified as exempt government property');
+assert.match(configs.lumpkin,/2026 tax-information brochure/,'Lumpkin 2026 official exemption source missing');
+assert.match(configs.lumpkin,/\$30,000 assessed-value relief against school taxes/,'Lumpkin eligible 62+ school relief not disclosed');
+assert.match(configs.lumpkin,/\$60,000/,'Lumpkin 65+ county\/city assessed relief not disclosed');
+assert.match(configs.lumpkin,/NOT automatically applied/,'Lumpkin exemptions must not silently be granted');
 for (const id of ['lump-dahlonega','lump-uninc']) {
  const row=configs.lumpkin.split('\n').find(line=>line.includes("id:'"+id+"'"));
  assert.ok(row && !/taxYear\s*:/.test(row),'Legacy Lumpkin rate falsely stamped current-year: '+id);
