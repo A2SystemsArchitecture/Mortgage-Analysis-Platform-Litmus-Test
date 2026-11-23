@@ -23,3 +23,17 @@ Controlling register: `audits/HomeTrue-2027-launch-verification-gates.csv`. The 
 ## Enforcement
 
 Maintain all six flags false until verified. No claims of 30/30 certified. Thirty-market full financial certification remains **0/30** in the reviewed register: exemptions/eligibility, parcel geography, buyer scenario certification, and final signoff are each 0/30. Following an authoritative code correction, rerun all applicable Node, PDF, and browser regressions and save run artifacts. The financial release gate must remain blocking throughout.
+
+## November 23 official Palm Beach final-vs-proposed authority reconciliation
+
+Direct Palm Beach Property Appraiser **official 2026 FINAL** authority schedule, not the earlier proposed rate column: https://pbcpao.gov/pdf/taxroll/2026%20Final%20vs%20Proposed%20Millage%20Rates.pdf . Confirmed municipality **authority components only** (not all-in parcel tax-code composites):
+
+| Municipality | 2026 FINAL municipal mills | 2026 PROPOSED municipal mills | Certification consequence |
+|---|---:|---:|---|
+| West Palm Beach | 8.0803 | 8.1308 | Source final differs from proposal; city planning option still has unknown parcel code |
+| Boca Raton | 3.6476 | 3.6476 | City component confirmed only |
+| Boynton Beach | 7.2052 | 7.7500 | Source final differs from proposal |
+| Delray Beach | 6.3501 | 6.4371 | Separate debt-service levy 0.0289; parcel applicability unknown |
+| Wellington | 2.4700 | 2.4700 | City component confirmed only |
+
+The same official chart supports 12 existing standard-unincorporated components totaling **16.2192 mills**. GitHub review rechecked the actual branch `platform.html` arithmetic and confirmed all five other named Palm Beach city options explicitly say tax code unverified/planning only and do **not** claim a verified 2026 tax year. Added `tests/hometrue-palm-beach-2026-final-vs-proposed-guard.js` to the Batch 1 CI suite so later edits cannot silently promote these city options. This is an official partial-source advance, **not** a complete 2026 parcel district-composite verification or final tax liability determination. Palm Beach's composite and all full financial gates remain false.
