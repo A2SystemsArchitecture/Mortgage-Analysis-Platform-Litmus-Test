@@ -21,6 +21,7 @@ assert.equal(c.districts.length,4,'All Gwinnett buyer choices need source re-rev
 // City of Suwanee official property-tax guidance: Gwinnett homestead exemptions
 // are not applied to the separate Suwanee municipal property tax bill.
 // https://www.suwanee.com/government/city-hall/business-services-department/property-taxes
+assert.match(options['gwin-suwanee'].label,/city rate year unverified/i,'Suwanee city source-year warning must be visible in the buyer selector');
 assert.ok(c.notes.includes('For tax year 2026, Gwinnett County homestead exemptions do not automatically reduce the separately billed Suwanee city property tax'),'2026 city exemption statement missing');
 assert.ok(c.notes.includes('HB 1074'),'2027 Suwanee municipal relief law must be disclosed');
 assert.ok(c.notes.includes('January 1, 2027'),'2027 effective date missing');
