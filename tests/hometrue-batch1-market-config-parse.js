@@ -22,4 +22,12 @@ for(const id of ids){
  }
 }
 assert.ok(counties['dorchester-sc'],'Deferred Dorchester must not be silently deleted');
-console.log('PASS: actual market config parses; 30 Batch 1 markets have valid district model and Dorchester remains deferred.');
+// Compile ALL five inline scripts as well as the county literal. A malformed
+// note in the main script must not silently disable the entire platform.
+const scripts=[...src.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)]
+ .map(m=>m[1].trim()).filter(Boolean);
+assert.ok(scripts.length>=3,'Expected HomeTrue application scripts missing');
+for(let i=0;i<scripts.length;i++){
+ assert.doesNotThrow(()=>new Function(scripts[i]),'Script block '+i+' must compile');
+}
+console.log('PASS: all '+scripts.length+' inline scripts compile; 30 Batch 1 market models parse, Dorchester deferred.');
