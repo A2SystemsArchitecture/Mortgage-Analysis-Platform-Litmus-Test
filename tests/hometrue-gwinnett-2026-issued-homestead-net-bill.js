@@ -44,4 +44,6 @@ assert.equal(totalCents+44822,553349);
 assert.equal(cents(293.70+479.70+1018.53),179193);
 assert.equal(lines[7].voe+lines[7].exemption+lines[7].grant,0,'school bond must not inherit school homestead deduction');
 assert.ok(src.includes('NOT VERIFIED FOR THIS BUYER.'),'Existing owner exemptions must not transfer without verification');
+assert.ok(src.includes('ZERO homestead or homeowner-credit deduction for school bond'),'Buyer notes must preserve different school operating and bond deductions');
+assert.ok(src.includes('do NOT presume these owner-specific figures will transfer to a buyer or repeat in 2027'),'Existing homeowner relief cannot be assumed for buyer');
 console.log('PASS: 2026 Gwinnett issued S1R residential homestead bill: 8/8 tax-base and levy calculations, $1,596.27 county + $3,489 school, $448.22 assessments, $5,533.49 billed; credits and eligibility not generalized.');
