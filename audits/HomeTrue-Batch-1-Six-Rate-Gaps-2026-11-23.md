@@ -37,3 +37,11 @@ Direct Palm Beach Property Appraiser **official 2026 FINAL** authority schedule,
 | Wellington | 2.4700 | 2.4700 | City component confirmed only |
 
 The same official chart supports 12 existing standard-unincorporated components totaling **16.2192 mills**. GitHub review rechecked the actual branch `platform.html` arithmetic and confirmed all five other named Palm Beach city options explicitly say tax code unverified/planning only and do **not** claim a verified 2026 tax year. Added `tests/hometrue-palm-beach-2026-final-vs-proposed-guard.js` to the Batch 1 CI suite so later edits cannot silently promote these city options. This is an official partial-source advance, **not** a complete 2026 parcel district-composite verification or final tax liability determination. Palm Beach's composite and all full financial gates remain false.
+
+## November 23 Duluth and Suwanee adoption corroboration, primary proof still open
+
+Public reports on Duluth August 24, 2026 meeting independently describe a five-to-zero council adoption of Ordinance O2026-37 at **6.551 city mills** (not the whole-property 2026 composite): https://citizenportal.ai/articles/11051498/georgia/gwinnett-county/duluth-city/city-of-duluth-adopts-2026-millage-rate-at-6551-mills and https://citizenportal.ai/articles/9591226/georgia/gwinnett-county/duluth-city/duluth-adopts-2026-tax-millage-at-6551-mills . The existing buyer code uses **6.551** but intentionally does not stamp it as officially verified for 2026. Retrieve the city-certified ordinance, adopted minutes, or official tax bill before changing this source-year status. Even after municipal adoption is verified, school/county boundaries, exemptions and separately assessed fees remain unverified.
+
+Suwanee's **official September 2, 2026 announcement** explicitly calls **4.93 mills proposed** pending September 22 council action: https://www.suwanee.com/Home/Components/News/News/1230/159 . Its current property taxes page states 4.93 mills without providing an adoption-date document: https://www.suwanee.com/government/city-hall/business-services-department/property-taxes . No signed September 22 adoption retrieved in this pass; do not stamp 2026 merely because the municipal site has a live rate.
+
+**No production or market certification change justified from these leads.**
