@@ -50,6 +50,7 @@ jobs:
             tests/hometrue-brevard-2026-official-composites.js \
             tests/hometrue-indian-river-2026-independent-authority.js \
             tests/hometrue-dekalb-ga-2026-district04.js \
+            tests/hometrue-dekalb-ga-2026-official-district-codes.js \
             tests/hometrue-batch1-state-tax-scenarios.js \
             tests/hometrue-cobb-2026-official-levy-composites.js \
             tests/hometrue-fulton-ga-2026-four-city-source-components.js \
