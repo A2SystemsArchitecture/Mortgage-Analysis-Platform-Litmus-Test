@@ -12,4 +12,8 @@ for(const id of ['forsyth','gwinnett','fulton','palm-beach']){
  assert.ok(counties[id],id+' exists');
  assert.ok(Object.hasOwn(counties[id],'he'),id+' contains legacy planner value');
 }
+assert.ok(html.includes('NO DISTRICT SELECTED; the county default is not verified for a buyer parcel'),'No county average can stand in for parcel geography');
+assert.ok(html.includes('gross illustrative pre-exemption rate; tax source year '),'Selected district needs source-year classification');
+assert.ok(html.includes('UNVERIFIED planning fallback, not an adopted parcel-specific rate'),'Generic county factor must not be authenticated');
+assert.ok(!html.includes("- Tax rate: ${county.tr ?"),'Roscoe must not present generic county.tr as tax fact');
 console.log('PASS Roscoe distinguishes legacy planner homestead placeholders from buyer-specific, levy-specific and tax-year-specific verified entitlements.');
