@@ -92,7 +92,8 @@ jobs:
             tests/hometrue-sc-deed-transfer-boundaries.js \
             tests/hometrue-gwinnett-lawrenceville-2026-bills.js \
             tests/hometrue-gwinnett-2026-four-district-source-boundaries.js \
-            tests/hometrue-charleston-official-bill-buyer-reconciliation.js
+            tests/hometrue-charleston-official-bill-buyer-reconciliation.js \
+            tests/hometrue-charleston-2026-official-source-classified.js
           do
             if [ ! -f "$file" ]; then
               printf 'MISSING\t%s\n' "$file" | tee -a audit-results/results.tsv
