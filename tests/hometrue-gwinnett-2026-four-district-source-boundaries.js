@@ -29,7 +29,7 @@ assert.ok(c.notes.includes('reported election results favored approval'),'Report
 assert.ok(c.notes.includes('individual eligibility have not been validated'),'No automatic 2027 exemption qualification');
 assert.ok(c.notes.includes('$73.95'),'Conditional city savings illustration missing');
 assert.equal(Math.round(15000*4.93/1000*100)/100,73.95,'Illustrative maximum city savings arithmetic');
-assert.ok(c.notes.includes('Neither homestead nor city fee is automatically applied'),'No unsupported automatic city exemption/fee');
+assert.ok(c.notes.includes('Neither homestead relief nor these city fees are automatically applied to buyer planning totals'),'No unsupported automatic city exemption/fee');
 const cases=[
  {id:'gwin-uninc',county:34.86,city:0,year:'2026',scope:'2026 official full listed unincorporated code'},
  {id:'gwin-lawrenceville',county:31.6,city:3.26,year:'2026',scope:'2026 official county and separate-city sources'},
