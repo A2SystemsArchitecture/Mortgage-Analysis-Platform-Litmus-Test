@@ -1,3 +1,9 @@
+# Historical audit snapshot, now superseded for Palm Beach
+
+On November 23, 2026, a subsequent official-source reconstruction advanced Palm Beach's **2026 adopted composite rate verification** to true (the 8 code-specific final totals plus already adopted standard unincorporated). The current controlling gate is **25/30**, with **five open rate-source markets: Fulton, Gwinnett, Forsyth, Dawson, and Lumpkin**. The original six-row history below is retained as provenance and MUST NOT be treated as the live status. Refer to the current CSV register and the appended November 23 Palm Beach section of the main verification ledger. All thirty financial net-buyer signoffs remain incomplete.
+
+---
+
 # HomeTrue Batch 1: six open adopted-composite gates (November 23, 2026)
 
 Branch: `tax-corrections-audit-nov-2026`. Scope: FL, GA, AL, SC, 30 markets, Dorchester excluded. No release or production changes. This is source triage, NOT adoption certification.
