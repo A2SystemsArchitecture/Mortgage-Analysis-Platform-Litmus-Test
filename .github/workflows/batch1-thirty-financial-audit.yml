@@ -61,6 +61,7 @@ jobs:
             tests/hometrue-paulding-dallas-2026-source-year-guard.js \
             tests/hometrue-charleston-2026-sales-tax-credit.js \
             tests/hometrue-york-2026-levies.js \
+            tests/hometrue-york-2026-official-rock-hill-rh.js \
             tests/hometrue-berkeley-2026-sales-tax-credit.js \
             tests/hometrue-berkeley-2026-official-buyer-composites.js \
             tests/hometrue-jefferson-al-2026-districts.js \
