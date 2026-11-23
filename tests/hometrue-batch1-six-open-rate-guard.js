@@ -24,6 +24,13 @@ for(const [id,options] of Object.entries({
   assert.doesNotMatch(row,/\btaxYear\s*:/,'Unsupported rate year added to '+option);
  }
 }
+// Gwinnett's 2026 Duluth city and county levies are distinct, and city
+// stormwater fees must not be presented as included in value-based tax.
+const duluth=configs.gwinnett.split('\\n').find(line=>line.includes("id:'gwin-duluth'"));
+assert.match(duluth,/31\\.6\\s*\\+\\s*6\\.551/,'Preserve separately billed county/city millages');
+assert.match(configs.gwinnett,/O2026-36/,'Disclose the separate Duluth stormwater fee ordinance');
+const gross=(31.6+6.551)/1000*0.40*400000;
+assert.equal(Math.round(gross*100)/100,6104.16,'Duluth $400k fictional pre-exemption arithmetic');
 const csv=fs.readFileSync(path.resolve(__dirname,'../audits/HomeTrue-2027-launch-verification-gates.csv'),'utf8');
 // The actual release gate independently validates all 124 rows and 30 included markets.
 // This source guard confirms no open-market row was silently promoted due to a partial lead.
