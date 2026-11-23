@@ -49,6 +49,14 @@ for (const id of ['lump-dahlonega','lump-uninc']) {
 // After verified primary evidence and accompanying buyer regressions are saved,
 // the controlling release gate may legitimately advance one of these markets.
 // Reject duplicated or malformed register entries, not future progress.
+// Dawsonville's city zero levy is an adopted 2026 component, NOT a countywide
+// district composite. Source: August 17, 2026 council approved minutes.
+assert.match(configs.dawson,/tax-year 2026 CITY municipal levy was rolled back to zero/,
+  'Omitted official Dawsonville 2026 city rollback');
+const dawsonCity=configs.dawson.split('\n').find(line=>line.includes("id:'daw-dawsonville'"));
+assert.ok(dawsonCity,'Dawsonville buyer selector missing');
+assert.match(dawsonCity,/legacy planning rate/,'Unknown combined city district must remain planning');
+assert.doesNotMatch(dawsonCity,/taxYear\s*:/,'Cannot certify a full district from city levy alone');
 const csv=fs.readFileSync(path.resolve(__dirname,'../audits/HomeTrue-2027-launch-verification-gates.csv'),'utf8');
 function quotedCells(line){
  return [...line.matchAll(/"((?:[^"]|"")*)"(?:,|$)/g)].map(m=>m[1].replace(/""/g,'"'));
