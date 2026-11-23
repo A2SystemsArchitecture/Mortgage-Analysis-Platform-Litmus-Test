@@ -66,6 +66,7 @@ jobs:
             tests/hometrue-alabama-2026-official-composites.js \
             tests/hometrue-shelby-al-2026-districts.js \
             tests/hometrue-cherokee-canton-2026.js \
+            tests/hometrue-cherokee-ga-2026-official-composites.js \
             tests/hometrue-cherokee-woodstock-2026.js \
             tests/hometrue-sc-2026-homestead-guidance.js \
             tests/hometrue-pickens-ga-2026-adopted.js \
