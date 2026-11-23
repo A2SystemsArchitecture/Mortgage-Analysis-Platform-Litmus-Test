@@ -61,6 +61,7 @@ jobs:
             tests/hometrue-jefferson-al-2026-districts.js \
             tests/hometrue-jefferson-al-2026-official-standard-rates.js \
             tests/hometrue-madison-limestone-al-2026.js \
+            tests/hometrue-alabama-2026-official-composites.js \
             tests/hometrue-shelby-al-2026-districts.js \
             tests/hometrue-cherokee-canton-2026.js \
             tests/hometrue-cherokee-woodstock-2026.js \
