@@ -20,4 +20,7 @@ assert.ok(!guide.includes('(COUNTIES[ACTIVE_COUNTY].tr*100).toFixed(2)'),'No cou
 assert.ok(guide.includes('Florida Constitutional Amendment 3 takes effect January 1, 2027.'),'Keep 2027 legal status');
 assert.ok(guide.includes('up to $150,000 of assessed value'),'Keep 2027 non-school exemption limit');
 assert.ok(guide.includes('up to $50,000 for non-school taxes until the fifth year'),'Keep residency qualification');
+assert.ok(html.includes('This separate homestead what-if scenario does not alter your buyer report or affordability totals.'),'Homestead what-if must not claim it changes buyer estimates');
+assert.ok(html.includes('Those totals use their own selected tax district or buyer-supplied annual projection when available'),'Distinguish actual buyer tax basis');
+assert.ok(!html.includes('The report and affordability totals still use the market planning rate.'),'Outdated generic county-rate claim must not reappear');
 console.log('PASS: Florida homestead guide no longer misidentifies generic county percentage as the selected buyer tax rate; 2027 status and exemptions remain disclosed.');
