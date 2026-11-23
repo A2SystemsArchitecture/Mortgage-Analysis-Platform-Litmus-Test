@@ -19,12 +19,12 @@ let ACTIVE_COUNTY='', ACTIVE_DISTRICT=null;
 const fields={};
 const document={getElementById:id=>({value:''+ (fields[id]??'')})};
 `+html.slice(parseStart,parseEnd)+html.slice(calcStart,calcEnd)+html.slice(mathStart,mathEnd)+`
-return (key,price,overridden)=>{
+return (key,price,overridden,monthlyHoa=0)=>{
   ACTIVE_COUNTY=key; MKT.tr=COUNTIES[key].tr;
   // A named district must be explicitly selected; we use county-only factor here.
   ACTIVE_DISTRICT=null;
   Object.assign(fields,{fp:price,fd:20,fil:10000,fih:13000,fb2:2020,fry:2020,
-    fcon:'cbs',frt:'asphalt',fsh:'no',fh:0,ffl:'x',fpr:'no',fcr:'excellent',fa:'Fictional '+key,
+    fcon:'cbs',frt:'asphalt',fsh:'no',fh:monthlyHoa,ffl:'x',fpr:'no',fcr:'excellent',fa:'Fictional '+key,
     'f-annual-buyer-tax':overridden===null?'':String(overridden)});
   collectInp();
   return {...S.inp};
@@ -46,6 +46,14 @@ for(const key of roster){
    assert.equal(got.wr,7.67,key+' benchmark worst');
    runs++;
  }
+}
+// Regression: negative or invalid homeowner-association charges must not create
+// an artificial credit that understates monthly affordability.
+for (const [input,expected] of [[-500,0],['not-a-number',0],[175.25,175.25]]) {
+  const got=harness('miami-dade',400000,null,input);
+  assert.equal(got.hoa,expected,'HOA input sanitation: '+input);
+  assert.ok(Math.abs(got.bt-(got.bpi+got.ty1+got.hoa+got.bi+got.bp+got.fb))<0.0001);
+  assert.ok(Math.abs(got.wt-(got.wpi+got.ty1+got.hoa+got.wi+got.wp+got.fw+got.ep))<0.0001);
 }
 assert.ok(html.includes('November 19, 2026 · 7.28% · Freddie Mac PMMS'));
 assert.ok(html.includes('fm:7.28,br:7.03,wr:7.67'));
