@@ -57,6 +57,7 @@ jobs:
             tests/hometrue-hall-ga-2026-districts.js \
             tests/hometrue-hall-ga-2026-official-composites.js \
             tests/hometrue-paulding-ga-2026-unincorporated.js \
+            tests/hometrue-paulding-ga-2026-official-composite.js \
             tests/hometrue-paulding-dallas-2026-source-year-guard.js \
             tests/hometrue-charleston-2026-sales-tax-credit.js \
             tests/hometrue-york-2026-levies.js \
