@@ -1838,10 +1838,23 @@ const COUNTIES = {
     fxb:40, fxw:80, fab:140, faw:380,
     paUrl:'https://pbcpao.gov/homestead-exemption.htm',
     paName:'Palm Beach County Property Appraiser',
-    notes:'The standard 2026 unincorporated Palm Beach base incorporates the official county, fire, library, school, water, navigation, child services and health levies, before exemptions and non-ad valorem charges. Delray Beach City Commission officially adopted Resolution 157-26 on September 22, 2026, establishing FY 2026/27 city OPERATING 6.3501 mills plus CITY DEBT 0.0289 mills, totaling 6.3790 CITY mills. This adopted city portion is NOT the full property tax district levy; school, county, water and special authority overlays still depend on parcel tax code and must be added only when applicable. Do not confuse the city-only total with the 2026 buyer composite or stamp the Delray planning rate as verified. Other city or area choices remain planning estimates, not certified parcel rates. Confirm the actual tax district and Total Certified Millage Rate in Property Tax Detail on the Property Appraiser’s parcel page.',
+    notes:'The standard 2026 unincorporated Palm Beach base incorporates the official county, fire, library, school, water, navigation, child services and health levies, before exemptions and non-ad valorem charges. Delray Beach City Commission officially adopted Resolution 157-26 on September 22, 2026, establishing FY 2026/27 city OPERATING 6.3501 mills plus CITY DEBT 0.0289 mills, totaling 6.3790 CITY mills. This adopted city portion is NOT the full property tax district levy; school, county, water and special authority overlays still depend on parcel tax code and must be added only when applicable. Do not confuse the city-only total with the 2026 buyer composite or stamp the Delray planning rate as verified. Eight explicitly CODED, full 2026 adopted ad valorem composites for West Palm Beach, Boca Raton, Boynton Beach, Delray Beach and Wellington are now reconstructed from the PBC Property Appraiser proposed district-code schedule reproduced in the Town of Lantana FY2026/27 budget and the PBC Property Appraiser’s final-vs-proposed taxing-authority chart. Final adjusted figures include West Palm Beach 20.3456 mills, West Palm Beach DDA 21.3156, Boca Raton 16.9090 or 15.8759 depending on code, Boynton Beach 19.4172, Delray Beach 18.5910, Delray Beach DDA 19.5910 and Wellington 18.6892. The listed ranges are NOT parcel geolocation, homestead relief or non-ad valorem assessments. The buyer must match the exact five-digit tax district in the Property Appraiser tax detail; a city name or ZIP code alone is insufficient. Other city or area choices remain planning estimates, not certified parcel rates. Confirm the actual tax district and Total Certified Millage Rate in Property Tax Detail on the Property Appraiser’s parcel page.',
     state:'fl', closingModel:'fl',
     districts:[
       {id:'pb-uninc',label:'Unincorporated Palm Beach (2026 standard base, verify parcel)',tr:(4.5000 + 0.0210 + 3.4581 + 0.5491 + 0.0948 + 0.1026 + 0.0327 + 0.0270 + 3.0390 + 3.2480 + 0.4908 + 0.6561) / 1000,taxYear:'2026'},
+      // 2026 full parcel-code composites reconstructed from PBC Property Appraiser
+      // PROPOSED code totals reproduced in the Town of Lantana FY2026/27 budget
+      // and the Property Appraiser FINAL-vs-PROPOSED 2026 authority differences.
+      // Only usable where the parcel tax-district code matches the named code;
+      // no homestead reduction, parcel fees or cross-code inference is implied.
+      {id:'pb-wpb-74402-2026',label:'West Palm Beach codes 74402-74407 / 74982-74983 (2026 final)',tr:(20.3961 - 0.0505) / 1000,taxYear:'2026'},
+      {id:'pb-wpb-dda-84407-2026',label:'West Palm Beach DDA code 84407 (2026 final)',tr:(22.3961 - 0.0505 - 1.0300) / 1000,taxYear:'2026'},
+      {id:'pb-boca-06154-2026',label:'Boca Raton codes 06154-06155 (2026 final)',tr:16.9090 / 1000,taxYear:'2026'},
+      {id:'pb-boca-06625-2026',label:'Boca Raton code 06625 (2026 final)',tr:15.8759 / 1000,taxYear:'2026'},
+      {id:'pb-boynton-08983-2026',label:'Boynton Beach codes 08983-08987 (2026 final)',tr:(19.9620 - 0.5448) / 1000,taxYear:'2026'},
+      {id:'pb-delray-12983-2026',label:'Delray Beach codes 12983-12987 (2026 final)',tr:(18.6780 - 0.0870) / 1000,taxYear:'2026'},
+      {id:'pb-delray-dda-88984-2026',label:'Delray Beach DDA codes 88984-88987 (2026 final)',tr:(19.6780 - 0.0870) / 1000,taxYear:'2026'},
+      {id:'pb-wellington-73482-2026',label:'Wellington codes 73482-73486 (2026 final)',tr:18.6892 / 1000,taxYear:'2026'},
       {id:'pb-wpb',label:'West Palm Beach (tax code unverified; planning only)',tr:0.0128},
       {id:'pb-boca',label:'Boca Raton (tax code unverified; planning only)',tr:0.0115},
       {id:'pb-boynton',label:'Boynton Beach (tax code unverified; planning only)',tr:0.012},
