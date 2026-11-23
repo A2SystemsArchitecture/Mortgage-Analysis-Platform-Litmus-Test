@@ -173,3 +173,18 @@ jobs:
           name: batch1-thirty-gate-evidence
           path: audit-financial-gate.json
           if-no-files-found: warn
+
+  financial-release-gate:
+    name: Financial certification must actually pass (no deployment)
+    needs: audit
+    if: always()
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout audit branch
+        uses: actions/checkout@v4
+      - name: Install Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Enforce all thirty markets financially certified
+        run: node tests/hometrue-batch1-excluding-dorchester-gate.js
