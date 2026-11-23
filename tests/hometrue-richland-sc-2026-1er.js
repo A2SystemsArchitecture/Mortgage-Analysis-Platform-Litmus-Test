@@ -21,4 +21,25 @@ const market=new Function('return ({'+html.slice(x,y)+'})')().richland;
 assert.equal(market.districts.find(d=>d.id==='ric-columbia').tr,.0065);
 assert.equal(market.districts.find(d=>d.id==='ric-irmo').tr,.0058);
 assert.equal(market.districts.find(d=>d.id==='ric-uninc').tr,.0055);
+
+const sourceOptions=market.districts.filter(d=>d.taxYear==='2026');
+assert.equal(sourceOptions.length,2,'Every additional current-year Richland option requires a district-specific primary source');
+for(const [id,ratio,mills] of [
+ ['ric-district-1er-2026-legal4',.04,212.6],
+ ['ric-district-1er-2026-other6',.06,466.9]
+]){
+ const d=sourceOptions.find(x=>x.id===id);
+ assert.ok(d,id);assert.equal(d.taxYear,'2026');
+ assert.ok(Math.abs(d.tr-ratio*mills/1000)<1e-12,id);
+ for(const value of [125000,200000,350000,575000,1140500]){
+  assert.ok(Math.abs(d.tr*value-value*ratio*mills/1000)<1e-7,id+'/'+value);
+ }
+}
+// Primary county estimator actually displays tax $31,949.97 and a separately
+// applied $1,990.17 sales-tax credit yielding $29,959.80 for its 6% scenario.
+const estimatorGross=1140500*.06*.4669;
+assert.ok(Math.abs(estimatorGross-31949.97)<.005,'Official estimated gross');
+assert.ok(Math.abs(Math.round(estimatorGross*100)/100-1990.17-29959.80)<.005,'Official net after displayed credit');
+assert.match(market.notes,/property-specific credits/);
+
 console.log('Richland 1ER 2026 standalone scenario: 6 tax results and 1 rate difference check passed; main buyer legacy rates unchanged.');
