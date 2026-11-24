@@ -103,6 +103,7 @@ jobs:
             tests/hometrue-state-closing-tax-cases.js \
             tests/hometrue-sc-bill-fees.js \
             tests/hometrue-batch1-thirty-buyer-math.js \
+            tests/hometrue-batch1-share-math.js \
             tests/hometrue-batch1-rate-year-policy.js \
             tests/hometrue-batch1-tier3-input-truth.js \
             tests/hometrue-sc-deed-transfer-boundaries.js \
@@ -159,7 +160,7 @@ jobs:
       - name: Install isolated PDF test dependency
         if: always()
         run: npm install --no-save --ignore-scripts --no-audit --no-fund jspdf@2.5.1
-      - name: Render real three-page PDFs for thirty fictional markets
+      - name: Render 150 real three-page PDFs for thirty fictional markets
         if: always()
         run: node tests/hometrue-batch1-thirty-pdf-render.js
       - name: Reconcile two actual issued Gwinnett 2026 bills through rendered buyer PDFs
