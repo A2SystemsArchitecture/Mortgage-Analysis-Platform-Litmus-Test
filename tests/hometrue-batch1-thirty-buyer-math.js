@@ -19,11 +19,11 @@ let ACTIVE_COUNTY='', ACTIVE_DISTRICT=null;
 const fields={};
 const document={getElementById:id=>({value:''+ (fields[id]??'')})};
 `+html.slice(parseStart,parseEnd)+html.slice(calcStart,calcEnd)+html.slice(mathStart,mathEnd)+`
-return (key,price,overridden,monthlyHoa=0)=>{
+return (key,price,overridden,monthlyHoa=0,down=20)=>{
   ACTIVE_COUNTY=key; MKT.tr=COUNTIES[key].tr;
   // A named district must be explicitly selected; we use county-only factor here.
   ACTIVE_DISTRICT=null;
-  Object.assign(fields,{fp:price,fd:20,fil:10000,fih:13000,fb2:2020,fry:2020,
+  Object.assign(fields,{fp:price,fd:down,fil:10000,fih:13000,fb2:2020,fry:2020,
     fcon:'cbs',frt:'asphalt',fsh:'no',fh:monthlyHoa,ffl:'x',fpr:'no',fcr:'excellent',fa:'Fictional '+key,
     'f-annual-buyer-tax':overridden===null?'':String(overridden)});
   collectInp();
@@ -31,8 +31,16 @@ return (key,price,overridden,monthlyHoa=0)=>{
 };`)(COUNTIES);
 let runs=0;
 for(const key of roster){
- for(const [price,override] of [[300000,null],[575000,1052.80],[400000,0]]){
-   const got=harness(key,price,override);
+ for(const down of [3,3.5,5,10,20]) for(const [price,override] of [[300000,null],[575000,1052.80],[400000,0]]){
+   const got=harness(key,price,override,0,down);
+   const loan=price*(1-down/100);
+   const payment=(rate)=>Math.round(loan*(rate/1200)/(1-Math.pow(1+rate/1200,-360)));
+   assert.equal(got.dpct,down,key+' down percentage');
+   assert.ok(Math.abs(got.loan-loan)<0.001,key+' loan');
+   assert.equal(got.bpi,payment(7.03),key+' best P&I');
+   assert.equal(got.wpi,payment(7.67),key+' worst P&I');
+   assert.equal(got.bp,down<20?Math.round(loan*.003/12):0,key+' best PMI estimate');
+   assert.equal(got.wp,down<20?Math.round(loan*.005/12):0,key+' worst PMI estimate');
    const expected=override===null?price*COUNTIES[key].tr:override;
    assert.ok(Math.abs(got.annualTax1-expected)<0.001,key+' annual');
    assert.ok(Math.abs(got.annualTax2-expected)<0.001,key+' annual yr2');
@@ -58,4 +66,5 @@ for (const [input,expected] of [[-500,0],['not-a-number',0],[175.25,175.25]]) {
 assert.ok(html.includes('November 19, 2026 · 7.28% · Freddie Mac PMMS'));
 assert.ok(html.includes('fm:7.28,br:7.03,wr:7.67'));
 assert.ok(!html.includes('November 12, 2026 · 7.11%'));
+assert.equal(runs,450);
 console.log(JSON.stringify({markets:roster.length,buyerCalculationScenarios:runs,benchmark:'2026-11-19:7.28',pass:true}));
