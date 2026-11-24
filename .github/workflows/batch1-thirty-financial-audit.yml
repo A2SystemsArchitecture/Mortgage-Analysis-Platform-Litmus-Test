@@ -215,5 +215,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
+      - name: Require successful financial regression, PDF and browser audit
+        if: ${{ needs.audit.result != 'success' }}
+        run: |
+          echo 'BLOCKED: the financial audit job did not pass.'
+          exit 1
       - name: Enforce all thirty markets financially certified
         run: node tests/hometrue-batch1-excluding-dorchester-gate.js
