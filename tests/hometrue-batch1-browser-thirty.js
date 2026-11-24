@@ -153,28 +153,38 @@ fs.mkdirSync(folder,{recursive:true});
   // Exercise all 30 actual browser share-link reconstructions against the
   // source-backed district planning factor, without representing it as a bill.
   let sharedReports=0;
-  for(const key of keys) {
+  for(const key of keys) for(const down of [3,3.5,5,10,20]) {
     const d=await page.evaluate(key=>{
       const c=COUNTIES[key],choice=(c.districts||[]).find(x=>!x.legacyOnly);
       return {id:choice?.id||'',factor:choice?.tr??c.tr};
     },key);
-    const shareUrl=url+'?tester=true&addr=Fictional+Market&price=300000&county='+encodeURIComponent(key)+'&district='+encodeURIComponent(d.id);
+    const shareUrl=url+'?tester=true&addr=Fictional+Market&price=300000&dp='+down+'&county='+encodeURIComponent(key)+'&district='+encodeURIComponent(d.id);
     await page.goto(shareUrl,{waitUntil:'domcontentloaded',timeout:45000});
     await page.evaluate(()=>checkShareURL());
     const result=await page.evaluate(()=>({
       annual:S.inp.annualTax1,
       annual2:S.inp.annualTax2,
       monthly:S.inp.ty1,
+      down:S.inp.dpct,loan:S.inp.loan,br:S.inp.br,wr:S.inp.wr,bpi:S.inp.bpi,wpi:S.inp.wpi,bp:S.inp.bp,wp:S.inp.wp,
       actualDistrict:S.inp.districtId,
       visible:document.getElementById('sa')?.classList.contains('active')||false
     }));
     const expected=300000*d.factor;
+    const loan=300000*(1-down/100);
+    const payment=r=>Math.round(loan*(r/1200)/(1-Math.pow(1+r/1200,-360)));
+    assert.equal(result.down,down,key+' share down payment');
+    assert.ok(Math.abs(result.loan-loan)<0.001,key+' shared loan');
+    assert.equal(result.bpi,payment(result.br),key+' shared best P&I');
+    assert.equal(result.wpi,payment(result.wr),key+' shared worst P&I');
+    assert.equal(result.bp,down<20?Math.round(loan*.003/12):0,key+' shared best PMI');
+    assert.equal(result.wp,down<20?Math.round(loan*.005/12):0,key+' shared worst PMI');
     assert.ok(Math.abs(result.annual-expected)<0.01,'Shared annual tax mismatch '+key);
     assert.ok(Math.abs(result.annual2-expected)<0.01&&Math.abs(result.monthly*12-expected)<0.01,'Shared monthly/year mismatch '+key);
     assert.equal(result.actualDistrict,d.id,'Shared district mismatch '+key);
     assert.ok(result.visible,'Shared report not visible '+key);
     sharedReports++;
   }
+  assert.equal(sharedReports,150,'Missing market/down-payment shared-report combinations');
   // A shared report must preserve the exact original best/worst buyer payment
   // instead of silently recalculating with today's default mortgage/insurance/PMI rates.
   let roundTrips=0;
