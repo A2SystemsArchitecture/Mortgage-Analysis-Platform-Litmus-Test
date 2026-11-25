@@ -265,6 +265,6 @@ fs.mkdirSync(folder,{recursive:true});
     assert.ok(Math.abs(got.bestTaxInMonthly-scenario.billed/12)<0.000001,scenario.label+' best-case reconciliation');
     realBillShareChecks++;
   }
-  console.log(JSON.stringify({realBillShareChecks, countiesChecked:keys.length,multichoiceMarkets:multiple,manualSelectionChecks:manual,affordabilityTaxGuards:affordabilityTaxGuards,buyerTaxBasisGuards:verifiedBasisGuards,dorchesterDeferredUnaffected:dorchesterStillDeferred,thirtyMarketSourceYearChecks:thirtyMarketYearChecks,floridaTaxYearChecks:floridaYearChecks,palmBeachUnknownTaxYear:pbUnknown.year,sharedReportsChecked:sharedReports,sharePaymentRoundTrips:roundTrips,sharedKnownDistrict:known,sharedUnknownDistrict:unknown,screenshots:2},null,2));
+  console.log(JSON.stringify({realBillShareChecks, countiesChecked:keys.length,multichoiceMarkets:multiple,manualSelectionChecks:manual,affordabilityTaxGuards:affordabilityTaxGuards,buyerTaxBasisGuards:verifiedBasisGuards,dorchesterDeferredUnaffected:dorchesterGuard,thirtyMarketSourceYearChecks:thirtyMarketYearChecks,floridaTaxYearChecks:floridaYearChecks,palmBeachUnknownTaxYear:pbUnknown.year,sharedReportsChecked:sharedReports,sharePaymentRoundTrips:roundTrips,sharedKnownDistrict:known,sharedUnknownDistrict:unknown,screenshots:2},null,2));
  }finally{await browser.close();}
 })().catch(err=>{console.error(err.stack||err);process.exitCode=1});
