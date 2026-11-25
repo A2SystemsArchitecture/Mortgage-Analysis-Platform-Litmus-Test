@@ -4040,13 +4040,18 @@ function parseBuyerAnnualTax(value) {
 }
 
 // Batch 1 financial accuracy guard: do not quote a precise buyer payment
-// using an unidentified county-wide planning factor for the 30 audit markets.
-// Dorchester is expressly deferred. Older shared examples remain labeled
+// using an unidentified county-wide planning factor for all 31 Batch 1 markets,
+// including Dorchester County SC (guard extended to Dorchester on 2026-11-25;
+// it was previously carved out). Older shared examples remain labeled
 // unverified; new buyer analyses must identify a documented tax district or
 // provide a separately obtained buyer-specific annual tax projection.
 function batch1NeedsVerifiedTaxBasis() {
   const c = COUNTIES[ACTIVE_COUNTY];
-  return c && ['fl','ga','al','sc'].includes(c.state) && ACTIVE_COUNTY !== 'dorchester-sc';
+  return c && ['fl','ga','al','sc'].includes(c.state);
+}
+function marketHasTaxYearDistrict() {
+  const c = COUNTIES[ACTIVE_COUNTY];
+  return !!(c && (c.districts || []).some(d => d.taxYear || d.taxPeriod));
 }
 function buyerTaxBasisReady() {
   if (!batch1NeedsVerifiedTaxBasis()) return true;
@@ -5030,7 +5035,9 @@ function calcAffordability() {
     document.getElementById('aff-mo-high').textContent = 'N/A';
     document.getElementById('aff-to-analysis').disabled = true;
     document.getElementById('aff-dp-grid').innerHTML = '';
-    document.getElementById('aff-savings-wrap').textContent = 'Select an official-rate tax district for this market before calculating an affordable home price. A generic county planning percentage can materially understate property taxes.';
+    document.getElementById('aff-savings-wrap').textContent = marketHasTaxYearDistrict()
+      ? 'Select an official-rate tax district for this market before calculating an affordable home price. A generic county planning percentage can materially understate property taxes.'
+      : 'HomeTrue does not yet have an adopted, tax-year-labeled district rate for this market, so it cannot calculate an affordable home price here. A generic county planning percentage can materially understate property taxes. Enter your own annual property-tax estimate in the detailed analysis, or check back after this market is verified.';
     document.getElementById('aff-dti-wrap').innerHTML = '';
     S.affResult = null;
     S.affPrefill = null;

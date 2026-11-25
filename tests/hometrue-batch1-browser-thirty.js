@@ -116,12 +116,21 @@ fs.mkdirSync(folder,{recursive:true});
     assert.deepEqual(guard,{unknownBlocked:true,officialDistrictAllowed:true,suppliedProjectionAllowed:true},'Buyer tax basis guard: '+key);
     verifiedBasisGuards++;
   }
-  const dorchesterStillDeferred=await page.evaluate(()=>{
-    document.getElementById('f-annual-buyer-tax').value='';
+  // Dorchester is inside the Batch 1 guard (31-market scope, 2026-11-25). It has no tax-year-labeled
+  // district yet, so it must be blocked until the buyer supplies an annual tax projection.
+  const dorchesterGuard=await page.evaluate(()=>{
+    const tax=document.getElementById('f-annual-buyer-tax');
+    tax.value='';
     selectCounty('dorchester-sc');
-    return buyerTaxBasisReady();
+    const blockedWithoutTax=!buyerTaxBasisReady();
+    tax.value='4800.25';
+    const allowedWithSuppliedTax=buyerTaxBasisReady();
+    tax.value='';
+    calcAffordability();
+    const affordabilityBlocked=document.getElementById('aff-price-low')?.textContent==='Tax district needed'&&document.getElementById('aff-to-analysis')?.disabled===true;
+    return {blockedWithoutTax,allowedWithSuppliedTax,affordabilityBlocked};
   });
-  assert.equal(dorchesterStillDeferred,true,'Deferred Dorchester unexpectedly restricted by Batch 1 guard');
+  assert.deepEqual(dorchesterGuard,{blockedWithoutTax:true,allowedWithSuppliedTax:true,affordabilityBlocked:true},'Dorchester must be inside the Batch 1 tax-basis guard');
   // The affordability calculator also must refuse fictional price ceilings
   // based only on an unverified generic county rate.
   let affordabilityTaxGuards=0;

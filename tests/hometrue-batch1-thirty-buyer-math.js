@@ -1,4 +1,4 @@
-// Execute actual buyer input calculator for every non-Dorchester Batch 1 market.
+// Execute actual buyer input calculator for all 31 Batch 1 markets, including Dorchester (extended 2026-11-25; earlier runs covered 30).
 // Fictional scenarios: unconfirmed baseline, explicit tax amount and zero amount.
 // Checks arithmetic only; not actual parcel tax eligibility or levies.
 'use strict';
@@ -11,8 +11,9 @@ const mathStart=calcEnd,mathEnd=html.indexOf('function bG3(',mathStart);
 assert.ok(dataStart>=0&&dataEnd>dataStart&&parseStart>=0&&mathStart>calcStart&&mathEnd>mathStart,'Source blocks missing');
 const COUNTIES=new Function(html.slice(dataStart,dataEnd)+'\nreturn COUNTIES;')();
 const marketCSV=fs.readFileSync(path.join(__dirname,'../audits/HomeTrue-2027-launch-verification-gates.csv'),'utf8');
-const roster=[...marketCSV.matchAll(/^"([^"]+)","(FL|GA|AL|SC)"/gm)].map(x=>x[1]).filter(k=>k!=='dorchester-sc');
-assert.equal(roster.length,30);
+const roster=[...marketCSV.matchAll(/^"([^"]+)","(FL|GA|AL|SC)"/gm)].map(x=>x[1]);
+assert.equal(roster.length,31);
+assert.ok(roster.includes('dorchester-sc'),'Dorchester must be included');
 const harness=new Function('COUNTIES',`
 const S={tier:1,inp:{}}, S2=null, MKT={tr:0,br:7.03,wr:7.67,fxb:42,fxw:85,fab:150,faw:400};
 let ACTIVE_COUNTY='', ACTIVE_DISTRICT=null;
@@ -66,5 +67,5 @@ for (const [input,expected] of [[-500,0],['not-a-number',0],[175.25,175.25]]) {
 assert.ok(html.includes('November 19, 2026 · 7.28% · Freddie Mac PMMS'));
 assert.ok(html.includes('fm:7.28,br:7.03,wr:7.67'));
 assert.ok(!html.includes('November 12, 2026 · 7.11%'));
-assert.equal(runs,450);
+assert.equal(runs,465);
 console.log(JSON.stringify({markets:roster.length,buyerCalculationScenarios:runs,benchmark:'2026-11-19:7.28',pass:true}));

@@ -1,4 +1,4 @@
-// Audit evidence inventory for each buyer-selectable tax district in the original 30 markets.
+// Audit evidence inventory for each buyer-selectable tax district in all 31 Batch 1 markets, including Dorchester.
 // Tax-year metadata and buyer-option presence are NOT certification of a levy or parcel match.
 'use strict';
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
@@ -6,8 +6,8 @@ const root=path.resolve(__dirname,'..'),html=fs.readFileSync(path.join(root,'pla
 const start=html.indexOf('const COUNTIES = {'),end=html.indexOf('\n};',start)+3;
 assert.ok(start>=0&&end>start,'County source block must exist');
 const COUNTIES=new Function(html.slice(start,end)+'\nreturn COUNTIES;')();
-const markets=Object.entries(COUNTIES).filter(([key,c])=>['fl','ga','al','sc'].includes(c.state)&&key!=='dorchester-sc');
-assert.equal(markets.length,30,'The included Batch 1 market count must be 30');
+const markets=Object.entries(COUNTIES).filter(([key,c])=>['fl','ga','al','sc'].includes(c.state));
+assert.equal(markets.length,31,'The included Batch 1 market count must be 31');
 const esc=v=>'"'+String(v??'').replaceAll('"','""')+'"';
 const header=['market_id','state','district_id','district_label','tax_year','tax_period','legacy_only','effective_purchase_price_rate','year_metadata_present','official_primary_source_independently_verified','parcel_boundary_and_eligibility_verified'];
 const rows=[];

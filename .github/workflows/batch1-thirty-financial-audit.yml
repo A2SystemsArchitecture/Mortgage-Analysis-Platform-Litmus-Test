@@ -1,4 +1,4 @@
-name: Batch 1 thirty-market financial audit (no deployment)
+name: Batch 1 thirty-one-market financial audit (no deployment)
 on:
   push:
     branches:
@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Run existing Batch 1 market arithmetic regressions (no Dorchester)
+      - name: Run Batch 1 market arithmetic regressions (31 markets including Dorchester where the script is market-wide)
         shell: bash
         run: |
           set +e
@@ -94,6 +94,8 @@ jobs:
             tests/hometrue-batch1-certification-gate-integrity.js \
             tests/hometrue-batch1-six-open-rate-guard.js \
             tests/hometrue-batch1-affordability-savings.js \
+            tests/hometrue-batch1-no-price-fits.js \
+            tests/hometrue-batch1-thirty-one-gate-integrity.js \
             tests/hometrue-batch1-tier2-insurance-quote-truth.js \
             tests/hometrue-batch1-no-auto-district.js \
             tests/hometrue-buyer-tax-location-reset.js \
@@ -146,21 +148,23 @@ jobs:
           name: batch1-thirty-regression-evidence
           path: audit-results/
           if-no-files-found: warn
-      - name: Evaluate thirty-market certification gate (expected blocked until evidence complete)
+      - name: Evaluate 31-market certification gate (expected blocked until evidence complete)
         if: always()
         shell: bash
         run: |
           set +e
-          node tests/hometrue-batch1-excluding-dorchester-gate.js > audit-financial-gate.json 2>&1
+          node tests/hometrue-batch1-thirty-one-market-gate.js > audit-financial-gate.json 2>&1
           rc=$?
           cat audit-financial-gate.json
-          echo "gate_exit_code=$rc" >> "$GITHUB_STEP_SUMMARY"
+          echo "gate31_exit_code=$rc" >> "$GITHUB_STEP_SUMMARY"
+          node tests/hometrue-batch1-excluding-dorchester-gate.js > audit-financial-gate-30-historical.json 2>&1
+          echo "historical_30_market_gate_exit_code=$?" >> "$GITHUB_STEP_SUMMARY"
           echo "The gate status is reported as evidence, not waived."
           exit 0
       - name: Install isolated PDF test dependency
         if: always()
         run: npm install --no-save --ignore-scripts --no-audit --no-fund jspdf@2.5.1
-      - name: Render 150 real three-page PDFs for thirty fictional markets
+      - name: Render 155 real three-page PDFs for 31 fictional markets
         if: always()
         run: node tests/hometrue-batch1-thirty-pdf-render.js
       - name: Reconcile two actual issued Gwinnett 2026 bills through rendered buyer PDFs
@@ -201,7 +205,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: batch1-thirty-gate-evidence
-          path: audit-financial-gate.json
+          path: |
+            audit-financial-gate.json
+            audit-financial-gate-30-historical.json
           if-no-files-found: warn
 
   financial-release-gate:
@@ -221,5 +227,5 @@ jobs:
         run: |
           echo 'BLOCKED: the financial audit job did not pass.'
           exit 1
-      - name: Enforce all thirty markets financially certified
-        run: node tests/hometrue-batch1-excluding-dorchester-gate.js
+      - name: Enforce all 31 markets financially certified (includes Dorchester)
+        run: node tests/hometrue-batch1-thirty-one-market-gate.js

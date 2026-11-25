@@ -1,4 +1,4 @@
-// Generate real PDF smoke fixtures for all 30 Batch 1 markets at five down payments except Dorchester.
+// Generate real PDF smoke fixtures for all 31 Batch 1 markets (including Dorchester since 2026-11-25) at five down payments.
 // Run after: npm install --no-save --ignore-scripts jspdf@2.5.1
 // These are fictional planning outputs, not verified property-specific bills.
 'use strict';
@@ -11,9 +11,9 @@ assert.ok(x>=0&&y>x&&p>=0&&q>p,'Cannot isolate buyer report generator');
 const COUNTIES=new Function(html.slice(x,y)+'\nreturn COUNTIES;')();
 const csv=fs.readFileSync(path.join(__dirname,'../audits/HomeTrue-2027-launch-verification-gates.csv'),'utf8');
 const markets=[...csv.matchAll(/^"([^"]+)","(FL|GA|AL|SC)","([^"]+)"/gm)]
- .filter(m=>m[1]!=='dorchester-sc')
  .map(m=>({key:m[1],state:m[2],name:m[3]}));
-assert.equal(markets.length,30,'Unexpected 30-market roster');
+assert.equal(markets.length,31,'Unexpected 31-market roster');
+assert.ok(markets.some(m=>m.key==='dorchester-sc'),'Dorchester must be included');
 const outdir=path.resolve(__dirname,'../audit-results/pdf-thirty');
 fs.mkdirSync(outdir,{recursive:true});
 const saved=[];
@@ -62,5 +62,5 @@ function TrackingJsPDF(options) {
   };`)(COUNTIES,TrackingJsPDF);
  for(const market of markets)for(const down of [3,3.5,5,10,20])fixture(market.key,market.name,down);
 }
-assert.equal(saved.length,150,'Missing PDF reports');
-console.log(JSON.stringify({scope:'150 fictional PDF smoke samples; excludes Dorchester',success:saved.length,totalBytes:saved.reduce((n,x)=>n+x.bytes,0)},null,2));
+assert.equal(saved.length,155,'Missing PDF reports');
+console.log(JSON.stringify({scope:'155 fictional PDF smoke samples; 31 markets including Dorchester',success:saved.length,totalBytes:saved.reduce((n,x)=>n+x.bytes,0)},null,2));
