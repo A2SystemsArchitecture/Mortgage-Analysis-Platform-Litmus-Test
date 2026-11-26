@@ -18,7 +18,7 @@ Register flags changed: none
 
 ## Open issues found
 
-1. Miami-Dade chart conflict: the district rows total 19.9544 (Miami) and 16.8983 (UMSA), but the chart's district code list prints 19.9878 and 16.9317. Both differ by 0.0334. The app uses the row totals. Resolve before certifying.
+1. RESOLVED 2026-11-26 (A2 read of chart): 19.9878 and 16.9317 sit in the Total Millage 2025 column. The 2026 column matches the app. Original note: Miami-Dade chart conflict: the district rows total 19.9544 (Miami) and 16.8983 (UMSA), but the chart's district code list prints 19.9878 and 16.9317. Both differ by 0.0334. The app uses the row totals. Resolve before certifying.
 2. Berkeley SC year label: the official Auditor page is titled "Millage for 2025/2026" and marked "Revised 9-18-2023." The app labels Berkeley rates 2026/27, and its 6% rates match this page (246.5 standard, 306.5 Goose Creek). The outside research also labeled them 2026/2027. The 2026/27 label is unproven.
 3. Fulton FCS year label: the bulletin says "2027 Millage Rate" without saying fiscal or tax year. The value matches the app; the year still needs the rate resolution.
 4. Atlanta 11.37: the cited document is the city's FY 2026 revenue manual and references 2025 rates. Not accepted as the 2026 tax-year rate.
@@ -46,3 +46,16 @@ The source map now shows 12 A, 9 B and 10 C, out of 31.
 ## Not provided
 
 The outside researcher declined Task 4 (real tax bills). Alternative: run each county's official tax estimator with set test values. No real household data is needed.
+
+## Update 2026-11-26
+
+- Charleston: A2 confirmed on the 2026 card, page 1: 300.8 and 263.1, sample calculation 0.3008. Status: matched against official card.
+- Berkeley: phone confirmation of the 2026 year label still open.
+
+## Spec decisions by A2, 2026-11-26 (recorded, NOT BUILT)
+
+1. Florida homestead: show 2026, 2027 and 2028 tax rolls side by side, and make the buyer's Florida residency status explicit. Do not pick one year from the closing date. Residents as of Dec. 31, 2026: up to $150,000 (2027) and $250,000 (2028) non-school. Newcomers: $25,000 school and up to $50,000 non-school, with the increase from the fifth exemption year (DOR PTO 26-21).
+2. No address: show no tax amount until the buyer enters an address or selects a district.
+3. Unclear district match: show no rate or calculation. List the possible districts for the buyer to confirm.
+
+Any build needs a full spec read-back and explicit confirmation first. Gate and disclaimer text for these displays needs attorney review.
