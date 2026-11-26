@@ -13,6 +13,7 @@ Register flags changed: none
 | Miami-Dade, Unincorporated | 16.8983 total | 0.0168983 | same |
 | Cherokee, Unincorporated | 5.712 + 16.450 + 1.500 + 0.264 + 3.023 = 26.949, tax year 2026 | 0.4 x 26.949 = 0.0107796 | cherokeecountytax.com (Tax Commissioner) |
 | Richmond 001 / 002 / 003 / 004 | 28.284 / 26.28 / 24.939 / 26.839, tax year 2026 | 0.4 x each, exact | arctax.com (Richmond County Tax Commissioner) |
+| Broward 0012 / 0013 / 0311 / 0312 / 9312 / 0512 / 0513 / 3312 / 3313 | 19.0149 / 17.8563 / 18.5338 / 18.4026 / 19.3865 / 21.9985 / 20.8399 / 17.5663 / 16.4077, 2026 column (page does not say adopted) | all 9 exact | bcpa.net/millage.asp (checked 2026-11-26) |
 | Fulton County Schools | 17.95 approved Oct. 23, 2026 | 17.950 | FCS board bulletin |
 
 ## Open issues found
@@ -22,7 +23,7 @@ Register flags changed: none
 3. Fulton FCS year label: the bulletin says "2027 Millage Rate" without saying fiscal or tax year. The value matches the app; the year still needs the rate resolution.
 4. Atlanta 11.37: the cited document is the city's FY 2026 revenue manual and references 2025 rates. Not accepted as the 2026 tax-year rate.
 5. Brevard: the official 2026 PDF does not pair codes to totals in readable form. Not verified.
-6. Charleston and Broward: the official pages did not load in this check. Not verified.
+6. Charleston: the official PDF still does not load for automated access (retried 2026-11-26). Not verified. Needs a manual read of 300.8 (City TD 34/35/36/52/63/71/72/99), 263.1 (Mt Pleasant TD 21) and 145.2 (school operating).
 
 ## Florida homestead change with launch impact
 
