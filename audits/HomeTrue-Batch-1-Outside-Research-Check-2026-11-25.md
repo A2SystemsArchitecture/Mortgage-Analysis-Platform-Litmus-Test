@@ -59,3 +59,8 @@ The outside researcher declined Task 4 (real tax bills). Alternative: run each c
 3. Unclear district match: show no rate or calculation. List the possible districts for the buyer to confirm.
 
 Any build needs a full spec read-back and explicit confirmation first. Gate and disclaimer text for these displays needs attorney review.
+
+## Update 2026-11-26 (afternoon)
+
+- Palm Beach: VERIFIED against pbcpao.gov "2026 Final vs Proposed Millage Rates." All 9 dated app options rebuild exactly from the 2026 final authority rates. Unincorporated = 16.2192. Each city option = countywide levies plus city operating and debt (WPB 20.3456, WPB DDA 21.3156, Boca 06154 16.9090, Boca 06625 15.8759, Boynton 19.4172, Delray 18.5910, Delray DDA 19.5910, Wellington 18.6892). Which authorities apply to each code is inferred from the exact totals, not printed per code.
+- Martin: partial. The DR-422 certification confirms BCC operating 6.5614, fire/rescue 2.6376, stormwater 0.5722, parks 0.1474, districts 1 to 5, CSC 0.3618, and SFWMD. School lines are unlabeled in the extracted text. Stuart, Jupiter Island and Indiantown fall past the first fetch window. Code totals are not yet rebuilt.
