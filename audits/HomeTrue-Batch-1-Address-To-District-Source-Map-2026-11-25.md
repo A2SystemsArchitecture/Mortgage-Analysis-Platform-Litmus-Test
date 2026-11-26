@@ -9,8 +9,8 @@ Product code changed: none
 
 | Status | Markets | Count |
 |---|---|---|
-| A: official source returns a tax district field | 7 Florida counties, Fulton, DeKalb, Charleston | 10 / 31 |
-| B: official service found, tax district field not seen | Forsyth, Cherokee, Hall, Richmond, Richland, Greenville, York, Berkeley, Dorchester, Jefferson, Limestone | 11 / 31 |
+| A: official source returns a tax district field | 7 Florida counties, Fulton, DeKalb, Cherokee, Charleston, Greenville | 12 / 31 |
+| B: official service found, tax district field not seen | Forsyth (layer 0 confirmed has none), Hall, Richmond, Richland, York, Berkeley, Dorchester, Jefferson, Limestone | 9 / 31 |
 | C: no public queryable service found | Cobb, Gwinnett, Clayton, Paulding, Columbia, Dawson, Pickens, Lumpkin, Madison, Shelby | 10 / 31 |
 | Source codes matched to app district IDs | none | 0 / 31 |
 | Missing-address rule written | none | 0 / 31 |
