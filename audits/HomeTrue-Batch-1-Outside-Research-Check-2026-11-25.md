@@ -114,3 +114,13 @@ The researcher named these sources, but the links did not survive the relay:
 The Paulding fire 2.100 and bond 0.800 now have a reported source.
 
 Jonesboro fire: UNRESOLVED. Clayton describes the 4.500 fire levy as unincorporated, and some Jonesboro-addressed parcels sit in the fire district. A blanket Jonesboro rate that includes 4.500 cannot be certified. This needs address-level district data (see the source map) or a split option. Spec decision.
+
+## Update 2026-11-26 (18:40): URLs opened directly by this audit
+
+- Hall: VERIFIED. hallcountytax.org "2026 Millage Rates as Set by the Hall County Board of Commissioners": unincorporated levies 3.565, 15.490, 1.000, 2.005, 0.535, 1.160 and 0.437, total 24.192, all matching the app. Gainesville row: 3.565 + 0.535 = 4.1 (county bill), 0.722 + 6.092 + 0.896 + 0.712 + 1.299 + 0.400 = 10.121, total 14.221. The app's 8 components and 14.221 total match; per-levy labels are not printed in the row. Aug. 27, 2026 minutes: Item 33 (county levy, rates listed) and Item 34 (school district levy) both approved 4-0.
+- Clayton Schools: VERIFIED. The notice proposes 20.000 (rollback 19.528). The Oct. 5, 2026 summary records "Final Adoption of the 2026 (FY2027) Millage Rate" as submitted, 5-1.
+- Clayton fire scope: the county announcement ties the 4.500 rate to "the unincorporated area" only. Parcel 05204D B005 shows tax district 8 "COUNTY FIRE" with a Jonesboro mailing address, which does not prove the parcel is inside city limits. Jonesboro fire stays UNRESOLVED.
+- Jonesboro: NOT VERIFIED FOR 2026. The Oct. 14, 2025 minutes approve Res. 2025-007, "FY26 Millage Rate of 9 mills," voted Aug. 25, 2025. An Aug. 2025 vote on FY26 sets the 2025 tax-year levy. The researcher's "effective Jan. 1, 2026" does not appear in the document. The app labels 9.000 as 2026. The 2026 tax-year (FY27) rate is still needed.
+- Paulding Schools: VERIFIED. The June 11, 2026 report reads "adopt the 2026 Maintenance and Operations (M&O) Millage Rate of 17.800"; school bond is 0.000 (E-SPLOST). No vote count is printed.
+- Paulding county 4.300 / fire 2.100 / bond 0.800: NOT VERIFIED. The LinkedIn recap blocks automated access, and a social post is not an adoption record. Minutes or the resolution are needed.
+- Jasper: NOT VERIFIED. The Oct. 15, 2026 minutes PDF has no readable text. Needs a screenshot.
