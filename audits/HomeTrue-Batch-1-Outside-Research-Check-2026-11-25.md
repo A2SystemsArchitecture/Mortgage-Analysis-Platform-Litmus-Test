@@ -100,3 +100,17 @@ A2 relayed a second researcher's findings without URLs or screenshots. All value
 | Jasper | 7.636, adopted Oct. 15, 2026, 4-1 | 7.636 | Consistent; source needed |
 
 Still open with no reported source: Paulding fire 2.100 and bond 0.800, adoption of Paulding county 4.300, and whether Jonesboro parcels pay the Clayton fire district tax.
+
+## Update 2026-11-26 (18:30): source descriptions, URLs still missing
+
+The researcher named these sources, but the links did not survive the relay:
+- Hall 2026 millage chart and Aug. 27 minutes
+- Clayton Schools notice and Oct. 5 adoption summary
+- Jonesboro Oct. 14, 2025 minutes (Res. 2025-007, 9.000, effective Jan. 1, 2026)
+- Paulding Schools June 11, 2026 minutes (17.800)
+- Paulding County Aug. 11 meeting recap transcript (4.300, 2.100, 0.800, 17.800; a recap, not signed resolutions or minutes)
+- Jasper Oct. 15, 2026 minutes (7.636, 4-1)
+
+The Paulding fire 2.100 and bond 0.800 now have a reported source.
+
+Jonesboro fire: UNRESOLVED. Clayton describes the 4.500 fire levy as unincorporated, and some Jonesboro-addressed parcels sit in the fire district. A blanket Jonesboro rate that includes 4.500 cannot be certified. This needs address-level district data (see the source map) or a split option. Spec decision.
