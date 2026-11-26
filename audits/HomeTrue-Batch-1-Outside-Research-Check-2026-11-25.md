@@ -84,3 +84,19 @@ Any build needs a full spec read-back and explicit confirmation first. Gate and 
 - Martin: VERIFIED, 11 of 11 dated options, by rebuilding each code total from the 2026 DR-422 final certifications (script check, all exact to 4 decimals). Components used: BCC 6.5614; fire/rescue 2.6376; stormwater 0.5722; parks 0.1474; district MSTUs D1 0.0637, D2 0, D3 0.0378, D4 0.0450, D5 0.0635; A-61 (Hutchinson Island) 0.1799; school 4.8770 (2.6590 + 1.0150 + 0.7480 + 0.4550); CSC 0.3618; SFWMD 0.2301; Stuart 4.9500 + 0.1250 debt; Sewall's Point 3.2700; Ocean Breeze 0.8293; Indiantown 1.8250; Jupiter Island 2.8259 + 0.9593 beach + 0.1880 debt. Caveats: (1) FIND 0.0270 is not in the fetched text and is inferred from the exact totals; (2) the school lines print unlabeled; (3) which MSTUs apply to each municipality is inferred from the exact totals. Legacy mar-uninc (0.0091) carries no code and stays unverified.
 - Clayton: COUNTY LEVIES VERIFIED (A2 screenshots of Resolution 2026-213, signed Sept. 24, 2026; chair and vice chair signed "Opposed," three commissioners signed). Section 1 sets county M&O at 18.5200 and the county fire district at 4.5000. Section 2 sets the LOST credit at 3.4680. Net rates: 19.552 for property subject to the fire district tax, 15.0520 for incorporated areas. App county 15.052 and fire 4.500 match. Still open: school 20.000 and Jonesboro city 9.000 (not in this resolution), and whether Jonesboro parcels pay the county fire district tax (the app's Jonesboro option includes it).
 - Hall: COUNTY LEVIES MATCH (A2-supplied text of "2026 Tax Levy Resolutions - Hall County Districts," Parts I-VI, plus a screenshot of PT-32.1 Countywide). Rates: county M&O 3.565; unincorporated fire 2.005; incorporated fire district 3.50; emergency services 0.535 countywide incl. Gainesville; development services 1.160 unincorporated; parks 0.437, which excludes Gainesville. The PT-32.1 certifies the final 2026 countywide rate as 3.565 (rollback 3.124, 14.12% increase). App hal-uninc uses 3.565, 2.005, 0.535, 1.160 and 0.437, all matching; the app's Gainesville option correctly omits parks and county fire. Caveats: the resolution copies are unsigned agenda attachments (item 559/2026, Aug. 27, 2026), so adoption needs the meeting minutes. Not covered: Hall school 15.490 and 1.000, and Gainesville's 0.722, 6.092, 0.896, 0.712, 1.299 and 0.400 (city and city-school levies).
+
+## Update 2026-11-26 (evening): relayed findings, no source links
+
+A2 relayed a second researcher's findings without URLs or screenshots. All values agree with the app, but none is certified until the source link or image is on record.
+
+| Item | Reported | App | Status |
+|---|---|---|---|
+| Hall unincorporated total (Tax Commissioner 2026 chart) | 24.192 | 3.565+15.490+1.000+2.005+0.535+1.160+0.437 = 24.192 | Consistent; source needed |
+| Gainesville combined | 14.221 | sum of 8 components = 14.221 | Consistent; source needed |
+| Hall adoption | Aug. 27 minutes, county and school levies 4-0 | n/a | Source needed |
+| Clayton County Schools | 20.000, adopted Oct. 5, 5-1 | 20.000 | Consistent; source needed |
+| Jonesboro | 9.000, approved Oct. 14, 2025, effective Jan. 1, 2026 | 9.000 | Consistent; the 2025 approval date for a 2026 rate needs confirming |
+| Paulding County Schools | 17.800 (June 11 minutes; Aug. 11 county recap). District five-year history shows 17.675 "pending adoption" | 17.800 | Consistent; conflicting 17.675 record noted |
+| Jasper | 7.636, adopted Oct. 15, 2026, 4-1 | 7.636 | Consistent; source needed |
+
+Still open with no reported source: Paulding fire 2.100 and bond 0.800, adoption of Paulding county 4.300, and whether Jonesboro parcels pay the Clayton fire district tax.
