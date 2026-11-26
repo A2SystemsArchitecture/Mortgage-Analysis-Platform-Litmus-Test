@@ -124,3 +124,10 @@ Jonesboro fire: UNRESOLVED. Clayton describes the 4.500 fire levy as unincorpora
 - Paulding Schools: VERIFIED. The June 11, 2026 report reads "adopt the 2026 Maintenance and Operations (M&O) Millage Rate of 17.800"; school bond is 0.000 (E-SPLOST). No vote count is printed.
 - Paulding county 4.300 / fire 2.100 / bond 0.800: NOT VERIFIED. The LinkedIn recap blocks automated access, and a social post is not an adoption record. Minutes or the resolution are needed.
 - Jasper: NOT VERIFIED. The Oct. 15, 2026 minutes PDF has no readable text. Needs a screenshot.
+
+## Update 2026-11-26 (19:00)
+
+- Jonesboro fire: RESOLVED. The Clayton "2024 Millage Rates" chart (dated 10/28/2025) lists tax district 4 Jonesboro as county + school + Fire 4.146 + city 8.500 = 47.512. Jonesboro city parcels sit in the fire district, so including the fire levy in the app's Jonesboro option is structurally correct.
+- Jonesboro rate: still NOT VERIFIED for 2026. The chart puts the 2024 rate at 8.500, which supports reading Res. 2025-007's 9.000 (FY26) as the 2025 tax-year rate. The 2026 notices on jonesboroga.com (CNID 10669, 10676) are images only. Needs a screenshot of the notice.
+- Jasper: TENTATIVE ONLY. jasper-ga.us/finance.htm says the City "has tentatively adopted a millage rate of 7.636 mills for 2026" (rollback 6.092), with adoption scheduled for Oct. 15, 2026. The Oct. 15 minutes PDF is a scan. Needs a screenshot to confirm the final vote.
+- Paulding county 4.300 / fire 2.100 / bond 0.800: NOT VERIFIED. The municode agenda link failed. The Tax Commissioner page lists no rates (bills mailed Sept. 11, due Nov. 15, 2026). No adoption record yet.
