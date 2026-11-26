@@ -68,3 +68,4 @@ Any build needs a full spec read-back and explicit confirmation first. Gate and 
 - Brevard: NOT VERIFIED. The bcpao.us 2026 millage PDF prints a TOTALS line whose first 15 values match the app's first 15 code values in the same order. The extracted text does not pair codes with totals, so code alignment is unproven. Needs a screenshot or the millage-code lookup.
 - Clayton: NOT VERIFIED. Resolution 2026-213 PDF is a scan with no readable text. Needs a screenshot.
 - Hall: NOT VERIFIED. Agenda item 4843 (item 559/2026, Aug. 27, 2026) approves the 2026 tax levy resolution but prints no rates. The rates sit in the attachment "2026 Tax Levy Resolutions - Hall County Districts." Needs that attachment.
+- Columbia: NOT VERIFIED. The official page now links "Download the 2026 Tax Calculation Workbook (XLSX)" (DocumentCenter/View/10735). The file arrives as binary and the workspace network blocks a direct download. Needs the file attached.
