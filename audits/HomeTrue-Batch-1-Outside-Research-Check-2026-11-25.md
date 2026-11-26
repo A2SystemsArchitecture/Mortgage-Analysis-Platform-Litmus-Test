@@ -23,7 +23,7 @@ Register flags changed: none
 3. Fulton FCS year label: the bulletin says "2027 Millage Rate" without saying fiscal or tax year. The value matches the app; the year still needs the rate resolution.
 4. Atlanta 11.37: the cited document is the city's FY 2026 revenue manual and references 2025 rates. Not accepted as the 2026 tax-year rate.
 5. Brevard: the official 2026 PDF does not pair codes to totals in readable form. Not verified.
-6. Charleston: the official PDF still does not load for automated access (retried 2026-11-26). Not verified. Needs a manual read of 300.8 (City TD 34/35/36/52/63/71/72/99), 263.1 (Mt Pleasant TD 21) and 145.2 (school operating).
+6. Charleston: the official PDF blocks automated access. On 2026-11-26 A2 relayed a read of the card titled "2026 MILLAGE LEVY": City TD 34/35/36/52/63/71/72/99 = 300.8 (82.0 city + 218.8 countywide), Mt Pleasant TD 21 = 263.1 (44.3 + 218.8), school operating 145.2 inside the 218.8. All three match the app. The card does not say adopted or approved. Status: matched by relayed read, not fetched directly by this audit. The 218.8 sub-levy breakdown sits in the Auditor's separate 2026-millage-breakdown.pdf, which nobody has checked.
 
 ## Florida homestead change with launch impact
 
