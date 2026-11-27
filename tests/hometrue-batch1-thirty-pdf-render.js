@@ -8,6 +8,9 @@ const html=fs.readFileSync(path.join(__dirname,'../platform.html'),'utf8');
 const x=html.indexOf('const COUNTIES = {'),y=html.indexOf('\n};',x)+3;
 const p=html.indexOf('function buildPDF('),q=html.indexOf('function showTierPicker(',p);
 assert.ok(x>=0&&y>x&&p>=0&&q>p,'Cannot isolate buyer report generator');
+// Live exemption-label helpers (spec 2026-11-26) so the PDF renders the approved label.
+const eh=html.indexOf('// Exemption display (spec 2026-11-26'),ee=html.indexOf('function fmtR(',eh);
+assert.ok(eh>=0&&ee>eh,'Cannot isolate exemption label helpers');
 const COUNTIES=new Function(html.slice(x,y)+'\nreturn COUNTIES;')();
 const csv=fs.readFileSync(path.join(__dirname,'../audits/HomeTrue-2027-launch-verification-gates.csv'),'utf8');
 const markets=[...csv.matchAll(/^"([^"]+)","(FL|GA|AL|SC)","([^"]+)"/gm)]
@@ -17,12 +20,18 @@ assert.ok(markets.some(m=>m.key==='dorchester-sc'),'Dorchester must be included'
 const outdir=path.resolve(__dirname,'../audit-results/pdf-thirty');
 fs.mkdirSync(outdir,{recursive:true});
 const saved=[];
+let currentKey='',labelled=0,scLabelled=0;
 const filenames=new Set();
 // jsPDF defines save on the document instance rather than on its prototype.
 function TrackingJsPDF(options) {
  const doc=new jsPDF(options);
  doc.save=function(filename) {
   const bytes=Buffer.from(doc.output('arraybuffer'));
+  const text=bytes.toString('latin1');
+  assert.ok(text.includes('Estimated property tax before homestead and other exemptions.'),'Exemption label missing '+filename);
+  const sc=text.includes('Some South Carolina counties apply a local option sales tax credit');
+  assert.equal(sc,/-sc-|richland|greenville-sc|york-sc|berkeley-sc|dorchester-sc|charleston-sc/i.test(currentKey),'SC note scope '+filename);
+  labelled++; if(sc) scLabelled++;
   assert.ok(bytes.subarray(0,5).equals(Buffer.from('%PDF-')),'Bad PDF header');
   assert.equal(doc.internal.getNumberOfPages(),3,'Expected three report pages');
   assert.ok(bytes.length>4000,'PDF too small');
@@ -41,6 +50,7 @@ function TrackingJsPDF(options) {
   const fmtR=r=>r.toFixed(2)+'%';
   const fmtAnnualPropertyTax=(n,monthly)=>(n??monthly*12).toLocaleString('en-US',{style:'currency',currency:'USD'});
   let ACTIVE_COUNTY='',MKT={fm:7.28,rv:'Fictional mortgage-rate benchmark; no parcel tax verification'};
+  `+html.slice(eh,ee)+`
   `+html.slice(p,q)+`
   return (key,name,down) => {
     ACTIVE_COUNTY=key;
@@ -60,7 +70,9 @@ function TrackingJsPDF(options) {
     };
     buildPDF(input);
   };`)(COUNTIES,TrackingJsPDF);
- for(const market of markets)for(const down of [3,3.5,5,10,20])fixture(market.key,market.name,down);
+ for(const market of markets)for(const down of [3,3.5,5,10,20]){currentKey=market.key;fixture(market.key,market.name,down);}
 }
 assert.equal(saved.length,155,'Missing PDF reports');
-console.log(JSON.stringify({scope:'155 fictional PDF smoke samples; 31 markets including Dorchester',success:saved.length,totalBytes:saved.reduce((n,x)=>n+x.bytes,0)},null,2));
+assert.equal(labelled,155,'Exemption label on every PDF');
+assert.equal(scLabelled,30,'SC note on 6 SC markets x 5 down payments');
+console.log(JSON.stringify({scope:'155 fictional PDF smoke samples; 31 markets including Dorchester',success:saved.length,exemptionLabelled:labelled,scNoteLabelled:scLabelled,totalBytes:saved.reduce((n,x)=>n+x.bytes,0)},null,2));

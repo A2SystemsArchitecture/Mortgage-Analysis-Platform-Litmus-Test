@@ -14,6 +14,7 @@ const run=new Function('dpPct','savings',`
  const S={affResult:null,affPrefill:null};
  const fmt=n=>'$'+Math.round(n).toLocaleString('en-US');
  const batch1NeedsVerifiedTaxBasis=()=>false;
+ const exemptionNoteHtml=()=>''; // exemption label covered by hometrue-batch1-exemption-label.js
  ${fn}
  calcAffordability();
  return {price:S.affResult?.priceMid,down:S.affResult?.dpPct,text:nodes['aff-savings-wrap'].innerHTML};

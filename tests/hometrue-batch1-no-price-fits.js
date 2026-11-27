@@ -24,6 +24,7 @@ const run=new Function('dpPct','il','ih',`
  const fmt=n=>'$'+Math.round(n).toLocaleString('en-US');
  let ACTIVE_COUNTY='miami-dade',ACTIVE_DISTRICT={taxYear:'2026'};
  const batch1NeedsVerifiedTaxBasis=()=>false;
+ const exemptionNoteHtml=()=>''; // exemption label covered by hometrue-batch1-exemption-label.js
  const show=()=>{S.shown=true;};
  ${fn}
  function affToAnalysis(){ if(!S.affResult) return; S.affPrefill=S.affResult; show('g1'); }

@@ -95,6 +95,7 @@ jobs:
             tests/hometrue-batch1-six-open-rate-guard.js \
             tests/hometrue-batch1-affordability-savings.js \
             tests/hometrue-batch1-no-price-fits.js \
+            tests/hometrue-batch1-exemption-label.js \
             tests/hometrue-batch1-thirty-one-gate-integrity.js \
             tests/hometrue-batch1-tier2-insurance-quote-truth.js \
             tests/hometrue-batch1-no-auto-district.js \

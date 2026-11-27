@@ -1,7 +1,7 @@
 # Spec: Property Tax Exemption Display (Launch)
 
 Date: 2026-11-26
-Status: DRAFT. Awaiting A2's explicit confirmation and attorney review of all buyer-facing text.
+Status: CONFIRMED by A2 2026-11-27; attorney approved both notes exactly as drafted. BUILT on audit branch (no merge, no deploy).
 Decision by A2, 2026-11-26: launch with the before-exemption tax, clearly labeled; add exemption estimates later.
 
 ## 1. Calculation (no change)
