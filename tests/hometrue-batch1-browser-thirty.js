@@ -227,7 +227,9 @@ fs.mkdirSync(folder,{recursive:true});
       return {url:window.__sharedAuditUrl,br:i.br,wr:i.wr,bpi:i.bpi,wpi:i.wpi,bi:i.bi,wi:i.wi,bp:i.bp,wp:i.wp,fb:i.fb,fw:i.fw,ep:i.ep,bt:i.bt,wt:i.wt,annualTax:i.annualTax1};
     });
     assert.ok(original.url?.includes('wr=8.25')&&original.url.includes('wi=420'),'Link did not preserve financial inputs: '+key);
-    await page.goto(original.url,{waitUntil:'domcontentloaded',timeout:45000});
+    // Shared links drop the tester flag. With no live market, a public visitor correctly sees
+    // "coming soon"; this round-trip checks an ACTIVE market's math, so reopen through the tester route.
+    await page.goto(original.url+'&tester=true',{waitUntil:'domcontentloaded',timeout:45000});
     await page.evaluate(()=>checkShareURL());
     const rebuilt=await page.evaluate(()=>{
       const i=S.inp;
