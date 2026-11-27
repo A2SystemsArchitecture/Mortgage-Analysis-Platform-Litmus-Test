@@ -1,7 +1,7 @@
 # Spec: Per-Market Activation and "Coming Soon" (January 4, 2027 launch)
 
 Date: 2026-11-27
-Status: DRAFT. Approach approved by A2 2026-11-27. Awaiting A2's confirmation of this written spec and attorney review of the "coming soon" wording.
+Status: CONFIRMED by A2 2026-11-27; attorney approved the coming-soon wording as drafted. BUILT on audit branch (no merge, no deploy).
 
 ## Decision (A2, 2026-11-27)
 On January 4, 2027, every market that has passed its gates goes live. Markets still in verification show "coming soon" and turn on individually once they pass. One failing county does not hold its state.

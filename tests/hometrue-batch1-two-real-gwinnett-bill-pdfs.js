@@ -3,6 +3,8 @@
 // SOURCE: https://www.gwinnetttaxcommissioner.com/PropTaxBill/R6174%20203.pdf
 // NOT proof that the seller's exemptions, value offset, or special fees transfer to a buyer.
 'use strict';
+// Market activation (spec 2026-11-27): this test checks an ACTIVE market's math; activation itself is covered by hometrue-market-activation.js.
+globalThis.marketActiveGuard=()=>true;globalThis.isMarketActive=()=>true;globalThis.showMarketComingSoon=()=>'';globalThis.hideMarketComingSoon=()=>{};
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const {jsPDF}=require('jspdf');
 const html=fs.readFileSync(path.join(__dirname,'../platform.html'),'utf8');

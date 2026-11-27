@@ -443,6 +443,9 @@ footer{background:var(--midnight);color:rgba(176,190,197,.82);text-align:center;
 .county-selector-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;}
 .county-sel-lbl{font-family:var(--fm);font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(176,190,197,.6);flex-shrink:0;}
 .county-pills{display:flex;gap:.4rem;flex-wrap:wrap;}
+.county-pill.coming-soon{opacity:.45;cursor:not-allowed;}
+.county-pill .cs-tag{font-size:.5rem;letter-spacing:.06em;margin-left:.3rem;opacity:.9;}
+#market-coming-soon{display:none;margin:.5rem 1.5rem;padding:.6rem .9rem;border-radius:6px;background:#FFF7DF;color:#0F1B3D;font-size:.82rem;line-height:1.5;}
 .county-pill{padding:.3rem .75rem;border-radius:20px;font-family:var(--fm);font-size:.58rem;letter-spacing:.08em;cursor:pointer;border:1px solid rgba(176,190,197,.2);background:transparent;color:rgba(176,190,197,.6);transition:all .2s;white-space:nowrap;}
 .county-pill:hover{border-color:var(--teal-mid);color:var(--teal-mid);}
 .county-pill.active{background:var(--teal);border-color:var(--teal);color:var(--white);}
@@ -1125,6 +1128,7 @@ footer strong{color:rgba(220,232,235,1.0);}
       </div>
     </div>
   </div>
+  <div id="market-coming-soon" role="status" aria-live="polite"></div>
   <div class="county-selector-wrap" id="county-note-bar" style="display:none;padding:.6rem 1.5rem;">
     <div style="max-width:900px;margin:0 auto;">
       <span style="font-family:var(--fm);font-size:.6rem;color:var(--teal-mid);" id="county-note-text"></span>
@@ -3690,6 +3694,44 @@ function setCounty(key) {
 const DEMO_MAX = 2;
 const DEMO_KEY = 'ht_demo_count';
 const IS_TESTER = new URLSearchParams(window.location.search).get('tester') === 'true';
+// Market activation (spec 2026-11-27). A market goes live only after every gate passes AND A2 approves it in writing.
+// Starts empty: no public market is live until A2 approves the first list. Testers reach every market.
+const ACTIVE_MARKETS = [];
+// Attorney-approved wording (2026-11-27): do not edit without attorney review.
+function marketComingSoonText(key) {
+  const c = COUNTIES[key || ACTIVE_COUNTY];
+  return 'Coming soon. HomeTrue is still verifying property tax and cost data for ' + (c && c.name ? c.name : 'this market') + '. Analysis for this market opens once verification is complete.';
+}
+function isMarketActive(key) { return IS_TESTER || ACTIVE_MARKETS.includes(key || ACTIVE_COUNTY); }
+function showMarketComingSoon(key) {
+  const text = marketComingSoonText(key);
+  const el = document.getElementById('market-coming-soon');
+  if (el) { el.textContent = text; el.style.display = 'block'; }
+  return text;
+}
+function hideMarketComingSoon() {
+  const el = document.getElementById('market-coming-soon');
+  if (el) { el.textContent = ''; el.style.display = 'none'; }
+}
+function marketActiveGuard(key, quiet) {
+  if (isMarketActive(key)) return true;
+  const text = showMarketComingSoon(key);
+  if (!quiet) alert(text);
+  return false;
+}
+function markComingSoonPills() {
+  document.querySelectorAll('.county-pill').forEach(p => {
+    const m = (p.getAttribute('onclick') || '').match(/selectCounty\('([^']+)'/);
+    if (!m) return;
+    const off = !isMarketActive(m[1]);
+    p.classList.toggle('coming-soon', off);
+    if (off) {
+      p.setAttribute('aria-disabled', 'true');
+      p.title = 'Coming soon';
+      if (!p.querySelector('.cs-tag')) p.insertAdjacentHTML('beforeend', '<span class="cs-tag">Coming soon</span>');
+    }
+  });
+}
 function getDemoCount(){ if(IS_TESTER) return 0; try{ return parseInt(localStorage.getItem(DEMO_KEY)||'0'); }catch(e){ return 0; } }
 function incDemoCount(){ if(IS_TESTER) return; try{ localStorage.setItem(DEMO_KEY, getDemoCount()+1); }catch(e){} }
 function demoExhausted(){ if(IS_TESTER) return false; return getDemoCount() >= DEMO_MAX; }
@@ -3866,9 +3908,10 @@ function updIBtn(){
 
 setInterval(updIBtn,600);
 // Check for shared analysis URL on load
-window.addEventListener("load",()=>{checkShareURL();initPlan();});
+window.addEventListener("load",()=>{markComingSoonPills();checkShareURL();initPlan();});
 
 function proc3(){
+  if (!marketActiveGuard()) return;
   if(!document.getElementById('fp').value){alert('Please enter a purchase price.');return;}
   if(!document.getElementById('fd').value){alert('Please select a down payment.');return;}
   if(!document.getElementById('fa').value.trim()){alert('Please enter the property address.');return;}
@@ -3943,6 +3986,8 @@ function selectState(state, btn) {
 }
 
 function selectCounty(key, btn) {
+  if (!isMarketActive(key)) { showMarketComingSoon(key); return; }
+  hideMarketComingSoon();
   clearBuyerAnnualTax();
   // Update active pill
   document.querySelectorAll('.county-pill').forEach(p => p.classList.remove('active'));
@@ -3992,6 +4037,7 @@ function initPlan() {
 }
 
 function genAnalysis(){
+  if (!marketActiveGuard()) return;
   // Check if this is Property 2 in comparison mode
   if(S2 && S2.comparingProp2 && S2.prop1){
     collectInp();
@@ -4704,6 +4750,7 @@ function prefillInputs() {
 
 // ── PDF DOWNLOAD ──
 function downloadPDF() {
+  if (!marketActiveGuard(S.inp && S.inp.countyKey)) return;
   if (!canAccess('pdf')) { showUpgradeFlow('essentials'); return; }
   const inp = S.inp;
   if (!inp || !inp.address) {
@@ -4724,6 +4771,7 @@ function downloadPDF() {
 }
 
 function buildPDF(inp) {
+  if (!marketActiveGuard(inp && inp.countyKey)) return;
   const { jsPDF } = window.jspdf;
   const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
   const W = 210, M = 18, CW = W - M * 2;
@@ -5069,6 +5117,7 @@ function prefillInputs(){
 // PRIORITY 2 — AFFORDABILITY CALCULATOR
 // ══════════════════════════════════════
 function calcAffordability() {
+  if (!marketActiveGuard()) return;
   // A misleading county-wide tax percentage cannot support a reliable
   // purchase-price affordability recommendation for Batch 1.
   if (batch1NeedsVerifiedTaxBasis() && !(ACTIVE_DISTRICT && (ACTIVE_DISTRICT.taxYear || ACTIVE_DISTRICT.taxPeriod))) {
@@ -5192,6 +5241,7 @@ function calcAffordability() {
 }
 
 function affToAnalysis() {
+  if (!marketActiveGuard()) return;
   if (!S.affResult) return;
   const r = S.affResult;
   show('g1');
@@ -7051,6 +7101,7 @@ function refreshHomesteadGuide() {
 // PRIORITY 4 — SAVE & SHARE
 // ══════════════════════════════════════
 function shareAnalysis() {
+  if (!marketActiveGuard(S.inp && S.inp.countyKey)) return;
   if (!canAccess('share')) { showUpgradeFlow('essentials'); return; }
   const inp = S.inp;
   if (!inp || !inp.address) return;
@@ -7127,6 +7178,7 @@ function checkShareURL() {
   if (!params.get('addr')) return;
 
   const countyKey = params.get('county');
+  if (!marketActiveGuard(Object.hasOwn(COUNTIES, countyKey) ? countyKey : ACTIVE_COUNTY)) return;
   if (Object.hasOwn(COUNTIES, countyKey)) {
     setCounty(countyKey);
     renderDistrictPills(countyKey, params.get('district'));

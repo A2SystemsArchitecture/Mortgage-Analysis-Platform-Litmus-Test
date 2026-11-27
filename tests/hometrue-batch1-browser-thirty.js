@@ -18,7 +18,20 @@ fs.mkdirSync(folder,{recursive:true});
   const page=await browser.newPage({viewport:{width:1280,height:900}});
   page.on('dialog',async d=>{await d.accept(code)});
   const url=pathToFileURL(path.resolve(__dirname,'../platform.html')).href;
+  // Market activation (spec 2026-11-27): the public build ships with no live market.
+  // Check that first, then run the math checks through the tester route.
   await page.goto(url,{waitUntil:'domcontentloaded',timeout:45000});
+  await page.waitForFunction(()=>document.querySelectorAll('.county-pill.coming-soon').length>0,null,{timeout:15000});
+  const publicView=await page.evaluate(()=>{
+    const before=ACTIVE_COUNTY; selectCounty('broward');
+    const msg=document.getElementById('market-coming-soon');
+    return {before,after:ACTIVE_COUNTY,shown:msg&&msg.style.display==='block',text:msg?msg.textContent:'',
+      marked:document.querySelectorAll('.county-pill.coming-soon').length,pills:document.querySelectorAll('.county-pill').length};
+  });
+  assert.equal(publicView.after,publicView.before,'Public visitor selected an inactive market');
+  assert.ok(publicView.shown&&publicView.text.startsWith('Coming soon. HomeTrue is still verifying property tax and cost data for Broward County.'),'Coming-soon message not shown');
+  assert.equal(publicView.marked,publicView.pills,'Every market pill must show coming soon while no market is live');
+  await page.goto(url+'?tester=true',{waitUntil:'domcontentloaded',timeout:45000});
   const check=await page.evaluate(()=>({
    loaded:typeof selectCounty==='function'&&typeof renderDistrictPills==='function',
    counties:typeof COUNTIES!=='undefined'?Object.keys(COUNTIES).length:0
@@ -226,13 +239,13 @@ fs.mkdirSync(folder,{recursive:true});
   }
   await page.evaluate(()=>selectCounty('gwinnett'));
   await page.screenshot({path:path.join(folder,'district-planning-example.png'),fullPage:true});
-  await page.goto(url+'?addr=Fictional+Example&price=300000&county=gwinnett&district=gwin-uninc',{waitUntil:'domcontentloaded',timeout:45000});
+  await page.goto(url+'?tester=true&addr=Fictional+Example&price=300000&county=gwinnett&district=gwin-uninc',{waitUntil:'domcontentloaded',timeout:45000});
   await page.evaluate(()=>checkShareURL());
   const known=await page.evaluate(()=>({annual:S.inp.annualTax1,district:S.inp.districtId,selected:ACTIVE_DISTRICT?.id}));
   assert.equal(known.district,'gwin-uninc');assert.equal(known.selected,'gwin-uninc');
   assert.ok(Math.abs(known.annual-4183.20)<0.01,'Shared report changed annual tax');
   await page.screenshot({path:path.join(folder,'shared-report-example.png'),fullPage:true});
-  await page.goto(url+'?addr=Fictional+Example&price=300000&county=gwinnett&district=invalid',{waitUntil:'domcontentloaded',timeout:45000});
+  await page.goto(url+'?tester=true&addr=Fictional+Example&price=300000&county=gwinnett&district=invalid',{waitUntil:'domcontentloaded',timeout:45000});
   await page.evaluate(()=>checkShareURL());
   const unknown=await page.evaluate(()=>({annual:S.inp.annualTax1,district:S.inp.districtId,selected:ACTIVE_DISTRICT?.id}));
   assert.equal(unknown.district,'');assert.ok(!unknown.selected);

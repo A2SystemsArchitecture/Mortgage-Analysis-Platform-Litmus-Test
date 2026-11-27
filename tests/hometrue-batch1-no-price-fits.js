@@ -3,6 +3,8 @@
 // Executes the live calcAffordability() and affToAnalysis() source with a stubbed DOM.
 // Not a browser test; no parcel, tax-rate or market certification is claimed.
 'use strict';
+// Market activation (spec 2026-11-27): this test checks an ACTIVE market's math; activation itself is covered by hometrue-market-activation.js.
+globalThis.marketActiveGuard=()=>true;globalThis.isMarketActive=()=>true;globalThis.showMarketComingSoon=()=>'';globalThis.hideMarketComingSoon=()=>{};
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
 const src=fs.readFileSync(path.join(__dirname,'../platform.html'),'utf8');
 const start=src.indexOf('function calcAffordability()');

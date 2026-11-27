@@ -1,3 +1,5 @@
+// Market activation (spec 2026-11-27): this test checks an ACTIVE market's math; activation itself is covered by hometrue-market-activation.js.
+globalThis.marketActiveGuard=()=>true;globalThis.isMarketActive=()=>true;globalThis.showMarketComingSoon=()=>'';globalThis.hideMarketComingSoon=()=>{};
 const fs = require('node:fs');
 const path = require('node:path');
 const assert = require('node:assert/strict');
