@@ -57,3 +57,19 @@ Structural finding: fees vary by city, service area and often by parcel (stormwa
 Existing app capability: the optional "Projected annual property tax for this buyer" input already tells buyers to include solid waste, stormwater, streetlight and other non-ad valorem charges.
 
 Decision needed from A2 (see the report to A2 dated 2026-11-27).
+
+## Update 2026-11-27 (10:20): parcel-level fee data availability (option 1 feasibility)
+
+Statewide source exists:
+- Every Florida tax collector must submit its non-ad valorem roll to DOR annually, due Dec. 15 (floridarevenue.com, Tax Collector Non-Ad Valorem Reporting).
+- DOR's roll layout (navlayout.pdf) carries the PA parcel number, tax year, total non-ad valorem assessments for the parcel, and per-levy detail.
+- The same parcel number joins to the NAL roll, which carries the site address and TAX_AUTH_CD.
+- Public posting: not confirmed. DOR's download page lists only NAL, SDF and NAP. Data Portal folder listings render by script and could not be read. Obtain the roll by Chapter 119 public records request to DOR (PTOTechnology@floridarevenue.com, 850-717-6570) or to each tax collector.
+
+County sources:
+- Miami-Dade PA: bulk data files at $50 per file (bbs.miamidadepa.gov); fee content unconfirmed.
+- Broward PA: Non-Ad Valorem Recap by levy with rates and parcel counts (e.g., Broward County Garbage $390, June 1 2026 recap); per-parcel needs a data request.
+- Palm Beach PA: "AA" real property file published at TRIM and certified roll (Public Services, 561-355-2881); fee content unconfirmed.
+- St. Lucie PA: free CAMA downloads; Martin PA: free data reports; Indian River PA: free CAMA extract; Brevard PA: free parcel/GIS files. Fee content unconfirmed for all four.
+
+Conclusion: option 1 is feasible for Florida if the 2026 non-ad valorem rolls come through a public records request. The 2026 rolls are due to DOR by Dec. 15, 2026, ahead of the Jan. 4 target. Remaining gates: the request, cost, attorney review of reuse, and an architecture decision (preloaded data vs. server).
