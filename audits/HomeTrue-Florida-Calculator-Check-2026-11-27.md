@@ -73,3 +73,24 @@ County sources:
 - St. Lucie PA: free CAMA downloads; Martin PA: free data reports; Indian River PA: free CAMA extract; Brevard PA: free parcel/GIS files. Fee content unconfirmed for all four.
 
 Conclusion: option 1 is feasible for Florida if the 2026 non-ad valorem rolls come through a public records request. The 2026 rolls are due to DOR by Dec. 15, 2026, ahead of the Jan. 4 target. Remaining gates: the request, cost, attorney review of reuse, and an architecture decision (preloaded data vs. server).
+
+## Update 2026-11-27 (afternoon): no-email search for free parcel-level fee data
+
+A2 ruled out emails and records requests (holiday delays). Result of checking each county's own public downloads:
+
+| County | Free per-parcel fee amount? | Source checked | Finding |
+|---|---|---|---|
+| Indian River | YES | IRCPA CAMA extract data dictionary (ircpa.org/media/1673/cama_extract_data_dictionary.pdf) | VALUES table has "Non-Valorem Tax Amount" per property per year, plus Ad-Valorem and Total Tax Amount. Situs Address in PROPERTY table. Free download. |
+| St. Lucie | Not confirmed | paslc.gov CAMA downloads | Assessment file holds "various values"; fee field not described. Must open the file headers to confirm. |
+| Martin | Not confirmed | pamartinfl.gov data downloads (15 free exports) | No export lists a fee or tax amount field. Real Master has assessed values only. |
+| Brevard | Not confirmed | bcpao.us WebData.zip (223 MB, dated 05/19/2025) | Fields not described; file dates to the 2025 roll. |
+| Palm Beach | No free source | pbcpao.gov Public Services notice | AA, NAL, CAMA and Certified Tax Roll files sold by request; fee content not stated. |
+| Broward | No | bcpa.net | Non-ad valorem recap by levy only (rate and parcel count), not by parcel. |
+| Miami-Dade | No per-parcel file | PA bulk files $50 each; county open data | County open data has a DSWM Service Area GIS layer (in or out of the county garbage area). Gives district-level, not parcel-level. |
+| Statewide (DOR) | No | floridarevenue.com | Per-parcel NAV roll submitted by Dec 15; not posted for download. |
+
+Every tax collector shows each parcel's bill online, line by line, but only as a lookup page for people. A static GitHub Pages app cannot pull from those sites, and bulk copying them would need terms and attorney review.
+
+Key fact for the spec: non-ad valorem fees attach to the parcel, not the owner. Unlike ad valorem tax, they do not reset on sale. The current bill's fee lines are the best available estimate of what a buyer pays next year, subject to annual rate changes.
+
+Conclusion: parcel-exact fees by address are possible now for Indian River only. St. Lucie and Brevard need the file opened to confirm (both free downloads). The other four have no free per-parcel source without a records request.
