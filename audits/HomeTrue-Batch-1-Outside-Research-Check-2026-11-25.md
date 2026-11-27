@@ -136,3 +136,16 @@ Jonesboro fire: UNRESOLVED. Clayton describes the 4.500 fire levy as unincorpora
 - Jonesboro: unchanged. The second screenshot repeats the tentative 12.500 notice; the Sept. 23 notice (CNID 10676) is still needed.
 - Jonesboro (19:05): UNSOURCED CLAIM RECEIVED. A relayed answer says council adopted 9.000 net M&O on Sept. 23, 2026, rejecting a 10.000 option presented Sept. 16, with 12.500 as the advertised ceiling. No URL, minutes, ordinance, or vote count came with it. If confirmed, the app's 9.000 is correct. Status stays OPEN until an official record is on file.
 - Jonesboro (19:17): two Sept. 23, 2026 meeting attachments opened. (1) A blank draft "Resolution No. 2026-___" setting the tax year 2026 rate "at ___ mills." (2) A "Millage Rate Options, FY2027 Budget" notice listing options from 8.898 (rollback) to 12.5, including 9.0 and 10; it says the rate "will be set" Sept. 23, 2026. Neither records adoption. 9.000 is a listed option, which is consistent with the relayed claim but does not prove it. Still OPEN: the Sept. 23 minutes (likely approved at the next October 2026 council meeting) or the executed resolution is needed.
+
+## Update 2026-11-26 (19:32): third research batch (43 lines, 9 NOT FOUND)
+
+Rates: no new adoption records. These failed to load: the Jonesboro Oct. 13 agenda (municode), the Atlanta council news item, the Lumpkin newsflash, and the Forsyth homestead page. The Dawson tax page lists no rates. The Berkeley, FCS and Atlanta revenue-manual links were already checked. Jonesboro, Paulding, Duluth, Forsyth, Dawson, Lumpkin/Dahlonega, Dorchester and Atlanta 2026 rates remain OPEN.
+
+Exemption evidence collected (official county pages):
+- Gwinnett: regular homestead $10,000 off assessed value (county), $7,000 (recreation), $4,000 (school); value-offset freeze on the county portion only.
+- Cherokee: $5,000 county and $2,000 state/school basic; county M&O base-year freeze; statewide floating homestead (CPI) on all levies except school; senior school exemption at 62+ after 5 years.
+- Hall: county opted out of HB 581, school did not. HB 1268 (county) and HB 1270 (school) cap increases at 3% in unincorporated areas (base year 2023). No exemption applies to bond millage.
+- Richland: 4% legal residence ratio plus full school operating credit; the $50,000 homestead applies only to 65+, disabled or blind owners. The county page does not explain the LOST credit base.
+- Madison AL: homestead roughly $48/yr savings in most cases plus the 10% class; over-65 exempts the state portion.
+
+App finding: platform.html labels its rates "before exemptions" throughout. The app does not compute homestead exemptions. The exemption gate is therefore a spec decision (model them, or show pre-exemption tax with a clear label), not a data check alone.
