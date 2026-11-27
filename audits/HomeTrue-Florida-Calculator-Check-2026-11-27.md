@@ -26,3 +26,19 @@ The gaps run in opposite directions. They do not cancel reliably.
 ## 3. Status
 - calculator_scenario_tests_passed stays FALSE for all 7 Florida markets.
 - Needed: (1) A2 decision on the value basis (100% conservative vs. the county's own method) and on non-ad valorem handling (exclude and label, or add county/city fee amounts); (2) a run of each county's official estimator at fixed test prices in a browser, recorded with screenshots.
+
+## Update 2026-11-27 (05:00): value basis per county, from official estimator pages
+
+| County | Official estimator value basis | Non-ad valorem in estimator |
+|---|---|---|
+| Broward | Purchase price as entered ("based upon the tax rates currently available and the purchase price you have entered") | Excluded: "Fire, Garbage, Light, Drainage, Improvement or Safe Neighborhood Assessment" |
+| Palm Beach | Purchase price as entered (FAQ: "Enter your purchase price") | Not stated |
+| Martin | Market value from qualified sales; may be "higher or lower than what you paid" | Excluded; "must be added" for full taxes |
+| St. Lucie | Assumes assessed value equals market value; resets to full market value on sale. The page cites 2024 millage (stale) | Not stated |
+| Miami-Dade | Parcel-specific, from 2026 roll values; no purchase-price rule stated | Appears included, with a caveat for new parcels |
+| Brevard | Not stated on the page | Shown as a separate line |
+| Indian River | Estimator page not readable | Tax Collector: bill combines ad valorem and non-ad valorem (e.g. solid waste) |
+
+Finding: no Batch 1 Florida source states a percentage discount (Pinellas 85% and Lake 90% are other counties). Broward and Palm Beach tax the purchase price as entered. Applying an unsourced discount would be an estimate, so the app's 100%-of-price basis STAYS. Gap A closes for value basis; the label already says actual values vary.
+
+Gap B (non-ad valorem fees) stays OPEN. Next: collect official 2026 non-ad valorem schedules by district/city for the 7 counties.
