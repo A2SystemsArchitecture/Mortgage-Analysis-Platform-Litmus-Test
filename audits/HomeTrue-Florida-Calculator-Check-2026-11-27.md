@@ -94,3 +94,11 @@ Every tax collector shows each parcel's bill online, line by line, but only as a
 Key fact for the spec: non-ad valorem fees attach to the parcel, not the owner. Unlike ad valorem tax, they do not reset on sale. The current bill's fee lines are the best available estimate of what a buyer pays next year, subject to annual rate changes.
 
 Conclusion: parcel-exact fees by address are possible now for Indian River only. St. Lucie and Brevard need the file opened to confirm (both free downloads). The other four have no free per-parcel source without a records request.
+
+## Update 2026-11-27 (14:10): fee inventory, step 1 started
+
+Broward source located: bcpa.net "2026 Tax Roll Information" posts the 2026 Final Non-Ad Valorem Recap (10 pages, every levy with rate and parcel count) and a 2026 Final Adopted Fire Rates folder.
+Sample levies on the final recap: Broward County Garbage $390.00; Coral Springs Solid Waste $464.00; Davie Solid Waste $347.12; Davie Stormwater $60.00.
+Text extraction through the page reader garbles columns and stops after page 1. Numbers from it are NOT entered. The original PDFs must be parsed in the workspace, which is blocked: county hosts refused by the workspace network allowlist (ircpa.org, bcpao.us, paslc.gov, gisweb.miamidade.gov tested; all 403).
+Fire rates folder blocked to the page reader (robots).
+Several levies bill by unit (e.g., Fort Lauderdale stormwater by area), so each home's units must come from the PA parcel files, which need the same downloads.
