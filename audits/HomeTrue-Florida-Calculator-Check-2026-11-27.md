@@ -42,3 +42,18 @@ The gaps run in opposite directions. They do not cancel reliably.
 Finding: no Batch 1 Florida source states a percentage discount (Pinellas 85% and Lake 90% are other counties). Broward and Palm Beach tax the purchase price as entered. Applying an unsourced discount would be an estimate, so the app's 100%-of-price basis STAYS. Gap A closes for value basis; the label already says actual values vary.
 
 Gap B (non-ad valorem fees) stays OPEN. Next: collect official 2026 non-ad valorem schedules by district/city for the 7 counties.
+
+## Update 2026-11-27 (05:15): non-ad valorem (fee) research, first pass
+
+Sample official findings (not yet entered anywhere):
+- Miami-Dade: residential solid waste collection fee $702 per household in the county Waste Collection Service Area; the FY 2026-27 budget keeps it at $702 (DSWM). Applies to unincorporated areas and participating cities only.
+- Port St. Lucie: stormwater $195 residential (FY 26/27 proposed budget-in-brief); the FY 25/26 solid waste fee was $467.33, and council approved a FY 26/27 increase (final amount not yet confirmed from an official source).
+- Indian River: 2026 solid waste landfill $125.06 per waste generation unit (PA notice of non-ad valorem assessments); the universal waste collection rate is not yet captured.
+- Broward: fees are city-specific (the Tax Collector lists fire, solid waste and stormwater by city, e.g. Davie: fire, solid waste and stormwater).
+- Brevard: county solid waste disposal, stormwater by commission district, and city fees (e.g. Palm Bay fire).
+
+Structural finding: fees vary by city, service area and often by parcel (stormwater by impervious area, fire by square footage, special districts). A per-city table cannot be exact for every home. The only exact source is the parcel's own non-ad valorem line on the current tax roll, which needs the address lookup.
+
+Existing app capability: the optional "Projected annual property tax for this buyer" input already tells buyers to include solid waste, stormwater, streetlight and other non-ad valorem charges.
+
+Decision needed from A2 (see the report to A2 dated 2026-11-27).
